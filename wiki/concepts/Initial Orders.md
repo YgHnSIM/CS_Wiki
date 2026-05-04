@@ -4,7 +4,7 @@ aliases: [초기 명령, EDSAC Initial Orders]
 tags: [type/concept, domain/computer-history, domain/software-engineering, status/active]
 created: 2026-05-04
 updated: 2026-05-04
-sources: ["초기 소프트웨어의 탄생.md", "초기 소프트웨어의 탄생_해설.md"]
+sources: ["초기 소프트웨어의 탄생.md", "초기 소프트웨어의 탄생_해설.md", "EDSAC과 Initial Orders.md", "EDSAC과 Initial Orders_해설.md"]
 status: active
 ---
 
@@ -19,6 +19,14 @@ status: active
 - 프로그램을 메모리에 배치해 실행 가능한 상태로 만들었다.
 - 더 작은 절차가 더 큰 절차를 불러오는 [[부트스트랩]] 구조를 형성했다.
 
+## Initial Orders 1
+
+Initial Orders 1은 고정 주소 기반의 작은 [[로더]]이자 [[어셈블러]]였다. 입력된 opcode, 십진수 주소, S/L 길이 정보를 조립해 사용자 프로그램을 메모리에 저장했으며, 저장 위치는 `m[25]`의 저장 명령을 직접 고치는 [[자기 수정 코드]]로 갱신했다.
+
+## Initial Orders 2
+
+Initial Orders 2는 `θ`를 현재 서브루틴의 기준 적재 주소로 사용해 주소를 보정했다. 이 [[재배치]] 기능 덕분에 서브루틴을 고정 주소에 묶지 않고 여러 위치에 올릴 수 있었고, 여러 루틴을 순차적으로 결합하는 원시적 [[링커]] 기능도 일부 갖게 되었다.
+
 ## 현대적 대응
 
 Initial Orders는 오늘날의 부트로더, 로더, 어셈블러, 초기 번역기의 성격을 기초적 형태로 함께 갖는다. 중요한 점은 사용자가 기계 내부 상태를 직접 조작하는 대신, 더 높은 수준의 표현을 작성하고 다른 절차가 이를 해석해 실행하게 했다는 것이다.
@@ -26,11 +34,17 @@ Initial Orders는 오늘날의 부트로더, 로더, 어셈블러, 초기 번역
 ## 출처
 
 - [[초기 소프트웨어의 탄생]]
+- [[EDSAC과 Initial Orders]]
 
 ## 관련 항목
 
 - [[EDSAC]]
 - [[저장 프로그램 컴퓨터]]
 - [[부트스트랩]]
+- [[로더]]
+- [[어셈블러]]
+- [[자기 수정 코드]]
+- [[재배치]]
+- [[링커]]
 - [[프로그래밍 언어]]
 - [[초기 소프트웨어의 계층화]]
