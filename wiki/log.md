@@ -511,6 +511,59 @@ Dijkstra의 `A Case against the GO TO Statement`, Böhm-Jacopini의 `Flow Diagra
 - [[목적 프로그램]]
 - [[컴파일러 최적화]]
 
+## [2026-07-10] reference | 소프트웨어 재사용의 역사
+
+McIlroy의 `Mass Produced Software Components`, Parnas의 `On the Criteria To Be Used in Decomposing Systems into Modules`, Krueger의 `Software Reuse`, Frakes와 Fox의 `Sixteen Questions about Software Reuse`를 참고 자료로 읽고, 소프트웨어 재사용이 서브루틴 라이브러리에서 컴포넌트, 모듈화, 정보 은닉, 재사용 연구로 확장되는 과정을 위키에 추가했다.
+
+변경된 페이지:
+
+- 생성: [[Mass Produced Software Components]]
+- 생성: [[On the Criteria To Be Used in Decomposing Systems into Modules]]
+- 생성: [[Software Reuse]]
+- 생성: [[Sixteen Questions about Software Reuse]]
+- 생성: [[더글러스 매킬로이]]
+- 생성: [[데이비드 파나스]]
+- 생성: [[찰스 W. 크루거]]
+- 생성: [[소프트웨어 재사용]]
+- 생성: [[소프트웨어 컴포넌트]]
+- 생성: [[모듈화]]
+- 생성: [[정보 은닉]]
+- 생성: [[소프트웨어 재사용의 역사]]
+- 갱신: [[라이브러리]]
+- 갱신: [[API]]
+- 갱신: [[소프트웨어 공학]]
+- 갱신: [[초기 소프트웨어의 계층화]]
+- 갱신: [[index]]
+- 갱신: [[overview]]
+- 갱신: [[log]]
+
+처리 메모:
+
+- EDSAC 서브루틴 라이브러리를 재사용의 초기 형태로 두고, McIlroy의 컴포넌트 제품군과 카탈로그 구상을 그 다음 단계로 연결했다.
+- Parnas의 모듈 분해 기준을 통해 재사용이 작은 함수의 수가 아니라 변경 가능한 설계 결정을 감추는 경계 설계와 관련됨을 정리했다.
+- Krueger의 조사 논문을 바탕으로 재사용을 추상화, 선택, 특수화, 통합의 문제로 정리했다.
+- Frakes와 Fox의 논문을 바탕으로 재사용과 이식성을 구분하고, 체계적 재사용이 조직과 경험적 실천의 문제이기도 하다는 점을 반영했다.
+- `raw/` 원본은 수정하지 않고 외부 참고 자료 링크를 출처로 기록했다.
+
+## 출처
+
+- [Mass Produced Software Components - Douglas McIlroy](https://www.cs.dartmouth.edu/~doug/components.txt)
+- [On the Criteria To Be Used in Decomposing Systems into Modules - ACM DOI](https://dl.acm.org/doi/10.1145/361598.361623)
+- [On the Criteria To Be Used in Decomposing Systems into Modules - PDF copy](https://wstomv.win.tue.nl/edu/2ip30/references/criteria_for_modularization.pdf)
+- [Software Reuse - ACM DOI](https://dl.acm.org/doi/10.1145/130844.130856)
+- [Software Reuse - PDF copy](https://grosskurth.ca/bib/1992/krueger.pdf)
+- [Sixteen questions about software reuse - ACM DOI](https://dl.acm.org/doi/10.1145/203241.203260)
+- [Sixteen Questions About Software Reuse - ResearchGate metadata](https://www.researchgate.net/publication/220425619_Sixteen_Questions_About_Software_Reuse)
+
+## 관련 항목
+
+- [[소프트웨어 재사용의 역사]]
+- [[소프트웨어 재사용]]
+- [[소프트웨어 컴포넌트]]
+- [[모듈화]]
+- [[정보 은닉]]
+- [[소프트웨어 공학]]
+
 ## [2026-07-10] reference | Unix와 C
 
 Ritchie와 Thompson의 `The UNIX Time-Sharing System`, Ritchie의 `The Development of the C Language`와 `The Evolution of the Unix Time-sharing System`, Johnson과 Ritchie의 `Portability of C Programs and the UNIX System`을 참고 자료로 읽고, Unix와 C가 운영체제·시스템 프로그래밍·이식성의 축에서 서로를 강화한 과정을 위키에 추가했다.
