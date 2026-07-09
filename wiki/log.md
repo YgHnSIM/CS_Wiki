@@ -3,7 +3,7 @@ title: 작업 로그
 aliases: [log, 변경 기록, 작업 기록]
 tags: [type/meta, status/active]
 created: 2026-05-03
-updated: 2026-07-09
+updated: 2026-07-10
 sources: []
 status: active
 ---
@@ -252,3 +252,49 @@ Internet Archive의 `The Preparation of Programs for an Electronic Digital Compu
 - [[서브루틴 라이브러리에서 API로]]
 - [[API]]
 - [[라이브러리 카탈로그]]
+
+## [2026-07-10] reference | 저장 프로그램 컴퓨터의 계보 정리
+
+EDVAC 보고서, Manchester Baby 자료, EDSAC의 실용적 운영 자료를 바탕으로 저장 프로그램 컴퓨터의 최초성 기준을 설계·실행·실용 운영으로 분리해 정리했다.
+
+변경된 페이지:
+
+- 생성: [[First Draft of a Report on the EDVAC]]
+- 생성: [[The Manchester Small Scale Experimental Machine - The Baby]]
+- 생성: [[EDVAC]]
+- 생성: [[폰 노이만 구조]]
+- 생성: [[Manchester Baby]]
+- 생성: [[존 폰 노이만]]
+- 생성: [[저장 프로그램 개념의 여러 기원]]
+- 생성: [[EDSAC은 무엇의 최초인가]]
+- 갱신: [[저장 프로그램 컴퓨터]]
+- 갱신: [[EDSAC]]
+- 갱신: [[계산기와 컴퓨터의 차이]]
+- 갱신: [[모리스 윌크스]]
+- 갱신: [[index]]
+- 갱신: [[overview]]
+- 갱신: [[log]]
+
+처리 메모:
+
+- EDVAC은 "처음 설계된 현대적 전자식 저장 프로그램 컴퓨터" 기준으로 정리했다.
+- Manchester Baby는 "처음 저장 프로그램을 실행한 전자식 디지털 컴퓨터" 기준으로 정리했다.
+- EDSAC은 "처음 실용적으로 운영된 범용 저장 프로그램 전자식 컴퓨터" 기준으로 정리했다.
+- "폰 노이만 구조"라는 명칭은 사용하되, 저장 프로그램 개념의 형성을 한 개인의 단독 발명으로 축소하지 않도록 주의점을 남겼다.
+- `raw/` 원본은 수정하지 않고 외부 참고 자료 링크를 출처로 기록했다.
+
+## 출처
+
+- [First draft of a report on the EDVAC](https://archive.org/details/firstdraftofrepo00vonn)
+- [The Origins, Uses, and Fate of the EDVAC](https://web2.qatar.cmu.edu/~mhhammou/15346-s13/resources/OriginsOfComputers/Origins%20Fate%20of%20EDVAC.pdf)
+- [The Manchester Small Scale Experimental Machine -- The Baby](https://curation.cs.manchester.ac.uk/computer50/www.computer50.org/mark1/new.baby.html)
+- [70 years since the first computer designed for practical everyday use](https://www.cst.cam.ac.uk/news/70-years-first-computer-designed-practical-everyday-use)
+- [EDSAC - Electronic Delay Storage Automatic Calculator](https://www.tnmoc.org/edsac)
+
+## 관련 항목
+
+- [[저장 프로그램 개념의 여러 기원]]
+- [[EDSAC은 무엇의 최초인가]]
+- [[EDVAC]]
+- [[Manchester Baby]]
+- [[폰 노이만 구조]]
