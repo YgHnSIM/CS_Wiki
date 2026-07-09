@@ -394,3 +394,64 @@ Turing의 `On Computable Numbers with an Application to the Entscheidungsproblem
 - [[튜링 기계]]
 - [[정지 문제]]
 - [[처치-튜링 논제]]
+
+## [2026-07-10] reference | goto와 구조적 프로그래밍
+
+Dijkstra의 `A Case against the GO TO Statement`, Böhm-Jacopini의 `Flow Diagrams, Turing Machines and Languages with Only Two Formation Rules`, Dahl·Dijkstra·Hoare의 `Structured Programming`, Knuth의 `Structured Programming with go to Statements`를 참고 자료로 읽고, 점프·`goto`·제어 흐름·구조적 프로그래밍의 연결을 위키에 추가했다.
+
+변경된 페이지:
+
+- 생성: [[A Case against the GO TO Statement]]
+- 생성: [[Flow Diagrams, Turing Machines and Languages with Only Two Formation Rules]]
+- 생성: [[Structured Programming]]
+- 생성: [[Structured Programming with go to Statements]]
+- 생성: [[에츠허르 데이크스트라]]
+- 생성: [[코라도 뵘]]
+- 생성: [[주세페 야코피니]]
+- 생성: [[도널드 커누스]]
+- 생성: [[올레요한 달]]
+- 생성: [[토니 호어]]
+- 생성: [[GOTO 문]]
+- 생성: [[제어 흐름]]
+- 생성: [[제어 구조]]
+- 생성: [[구조적 프로그래밍]]
+- 생성: [[구조화 프로그램 정리]]
+- 생성: [[단계적 정제]]
+- 생성: [[goto와 점프에서 구조적 프로그래밍으로]]
+- 갱신: [[Wheeler Jump]]
+- 갱신: [[스택]]
+- 갱신: [[프로그래밍 언어]]
+- 갱신: [[소프트웨어 공학]]
+- 갱신: [[알고리즘적 사고]]
+- 갱신: [[초기 소프트웨어의 계층화]]
+- 갱신: [[index]]
+- 갱신: [[overview]]
+- 갱신: [[log]]
+
+처리 메모:
+
+- Wheeler Jump 같은 저수준 점프는 호출과 복귀를 구현하는 장치이고, 고급 언어의 `goto`는 프로그램 구조를 흐릴 수 있는 제어문으로 구분했다.
+- Dijkstra의 비판을 "goto 금지" 구호가 아니라 프로그램 텍스트와 실행 과정 사이의 좌표계를 유지하려는 주장으로 정리했다.
+- Böhm-Jacopini 정리는 `goto` 없는 표현 가능성을 보여주지만, 기계적 변환이 곧 읽기 좋은 프로그램을 보장하지는 않는다는 한계를 함께 기록했다.
+- Knuth의 논문을 통해 구조적 프로그래밍을 교조적 금지가 아니라 더 좋은 반복·오류 탈출 구문과 프로그램 변환 방법론으로 해석했다.
+- `raw/` 원본은 수정하지 않고 외부 참고 자료 링크를 출처로 기록했다.
+
+## 출처
+
+- [E.W. Dijkstra Archive: A Case against the GO TO Statement](https://www.cs.utexas.edu/~EWD/transcriptions/EWD02xx/EWD215.html)
+- [Go To Statement Considered Harmful - ACM DOI](https://dl.acm.org/doi/10.1145/362929.362947)
+- [Flow diagrams, turing machines and languages with only two formation rules - CACM](https://cacm.acm.org/research/flow-diagrams-turing-machines-and-languages-with-only-two-formation-rules/)
+- [Flow Diagrams, Turing Machines and Languages with Only Two Formation Rules - PDF copy](https://www.cs.unibo.it/~martini/PP/bohm-jac.pdf)
+- [Structured Programming - Internet Archive](https://archive.org/details/Structured_Programming__Dahl_Dijkstra_Hoare)
+- [Structured Programming - ACM Guide books](https://dl.acm.org/doi/book/10.5555/1243380)
+- [Structured Programming with go to Statements - ACM DOI](https://dl.acm.org/doi/10.1145/356635.356640)
+- [Structured Programming with go to Statements - OpenAIRE](https://oamonitor.ireland.openaire.eu/national/search/publication?pid=10.1145%2F356635.356640)
+
+## 관련 항목
+
+- [[goto와 점프에서 구조적 프로그래밍으로]]
+- [[GOTO 문]]
+- [[제어 흐름]]
+- [[제어 구조]]
+- [[구조적 프로그래밍]]
+- [[단계적 정제]]

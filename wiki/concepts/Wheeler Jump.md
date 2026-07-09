@@ -3,8 +3,8 @@ title: Wheeler Jump
 aliases: [휠러 점프, Wheeler jump]
 tags: [type/concept, domain/computer-history, domain/software-engineering, status/active]
 created: 2026-05-04
-updated: 2026-05-04
-sources: ["초기 소프트웨어의 탄생.md", "초기 소프트웨어의 탄생_해설.md", "EDSAC과 Initial Orders.md", "EDSAC과 Initial Orders_해설.md", "서브루틴과 스택(Stack)의 원리.md", "폐쇄형 서브루틴과 Wheeler Jump.md"]
+updated: 2026-07-10
+sources: ["초기 소프트웨어의 탄생.md", "초기 소프트웨어의 탄생_해설.md", "EDSAC과 Initial Orders.md", "EDSAC과 Initial Orders_해설.md", "서브루틴과 스택(Stack)의 원리.md", "폐쇄형 서브루틴과 Wheeler Jump.md", "A Case against the GO TO Statement"]
 status: active
 ---
 
@@ -36,12 +36,19 @@ Wheeler Jump는 같은 서브루틴을 여러 위치에서 호출할 수 있게 
 
 한계도 뚜렷했다. 복귀 점프를 저장하는 위치가 하나뿐이면 중첩 호출이나 재귀 호출에서 복귀 정보가 덮어써질 수 있다. 이 문제는 이후 [[스택]] 기반 호출 구조가 중요해지는 이유를 설명한다.
 
+## goto와의 구분
+
+Wheeler Jump는 기계 수준에서 [[제어 흐름]]을 구현하기 위한 호출 기법이다. 이에 비해 [[GOTO 문]]은 고급 언어의 표면에서 프로그래머가 임의 라벨로 실행을 이동시키는 제어문이다. 둘 다 점프를 사용하지만, Wheeler Jump의 목적은 [[복귀 주소]]를 보존해 루틴을 재사용하는 데 있고, `goto` 논쟁의 초점은 프로그램 텍스트와 실행 과정 사이의 대응을 사람이 추적할 수 있느냐에 있다.
+
+이 구분은 [[goto와 점프에서 구조적 프로그래밍으로]]에서 더 넓게 다룬다.
+
 ## 출처
 
 - [[초기 소프트웨어의 탄생]]
 - [[EDSAC과 Initial Orders]]
 - [[서브루틴과 스택(Stack)의 원리]]
 - [[폐쇄형 서브루틴과 Wheeler Jump]]
+- [[A Case against the GO TO Statement]]
 
 ## 관련 항목
 
@@ -50,3 +57,5 @@ Wheeler Jump는 같은 서브루틴을 여러 위치에서 호출할 수 있게 
 - [[복귀 주소]]
 - [[자기 수정 코드]]
 - [[스택]]
+- [[GOTO 문]]
+- [[구조적 프로그래밍]]
