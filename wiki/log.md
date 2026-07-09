@@ -3,7 +3,7 @@ title: 작업 로그
 aliases: [log, 변경 기록, 작업 기록]
 tags: [type/meta, status/active]
 created: 2026-05-03
-updated: 2026-05-12
+updated: 2026-07-09
 sources: []
 status: active
 ---
@@ -184,3 +184,26 @@ status: active
 - [[index]]
 - [[overview]]
 - [[데이터 표현과 인코딩]]
+
+## [2026-07-09] update | CS_Wiki 운영 문서 정리
+
+`AGENTS.md`의 일반 템플릿 명칭과 예시 태그를 실제 프로젝트 성격에 맞게 정리했다.
+
+변경된 페이지:
+
+- 갱신: `AGENTS.md`
+- 갱신: [[log]]
+
+처리 메모:
+
+- 문서 제목과 디렉터리 트리 이름을 `CS_Wiki` 기준으로 바꾸었다.
+- `domain/` 태그 예시를 현재 위키에서 쓰는 컴퓨터 과학·컴퓨팅사 중심 태그로 교체했다.
+- 작성 원칙과 커밋 메시지 예시에서 LLM 위키 템플릿 흔적을 줄였다.
+
+## 출처
+
+- `AGENTS.md`
+
+## 관련 항목
+
+- [[log]]

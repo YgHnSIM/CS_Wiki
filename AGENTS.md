@@ -1,6 +1,6 @@
-# LLM Wiki — Schema & Operating Instructions
+# CS_Wiki — 운영 스키마 & 작업 지침
 
-이 문서는 LLM이 위키를 유지·관리할 때 따라야 할 규칙, 구조, 워크플로를 정의합니다.
+이 문서는 CS_Wiki를 유지·관리할 때 따라야 할 규칙, 구조, 워크플로를 정의합니다.
 사용자가 소스를 추가하거나, 질문을 던지거나, 위키를 점검하라고 요청할 때 이 스키마를 참조합니다.
 
 ---
@@ -8,12 +8,12 @@
 ## 1. 디렉토리 구조
 
 ```
-ObsidianWiki/
+CS_Wiki/
 ├── AGENTS.md              # 이 파일 (스키마 & 운영 지침)
-├── raw/                   # 원본 소스 (불변, LLM이 수정하지 않음)
+├── raw/                   # 원본 소스 (불변, 작업자가 수정하지 않음)
 │   ├── assets/            # 이미지, PDF 등 첨부파일
 │   └── ...                # 사용자가 추가하는 원본 문서들
-├── wiki/                  # LLM이 생성·관리하는 위키 페이지
+├── wiki/                  # 작업자가 생성·관리하는 위키 페이지
 │   ├── index.md           # 전체 페이지 카탈로그
 │   ├── log.md             # 작업 시간순 기록
 │   ├── overview.md        # 위키 홈페이지 / 전체 개요
@@ -52,11 +52,11 @@ status: draft | active | review | archived
 | 접두사       | 용도     | 예시                                                                              |
 | --------- | ------ | ------------------------------------------------------------------------------- |
 | `type/`   | 페이지 유형 | `type/source`, `type/reference`, `type/entity`, `type/concept`, `type/analysis` |
-| `domain/` | 주제 영역  | `domain/ai`, `domain/geopolitics`, `domain/economics`                           |
+| `domain/` | 주제 영역  | `domain/computer-history`, `domain/software-engineering`, `domain/computer-architecture` |
 | `status/` | 상태     | `status/draft`, `status/active`, `status/review`                                |
 
 ### 2.4 작성 원칙
-- **한국어** 기본, 고유명사·전문용어는 원어 병기 (예: 대규모 언어 모델(Large Language Model, LLM))
+- **한국어** 기본, 고유명사·전문용어는 원어 병기 (예: 저장 프로그램 컴퓨터(Stored-program computer))
 - 중립적·백과사전적 톤
 - 일반 주장은 프론트매터 `sources`와 하단 `## 출처` 섹션으로 근거를 표시
 - 본문 중 반복적인 `[[소스 페이지]]` 인용은 피하고, 직접 인용·논쟁적 주장·모순·여러 소스 비교처럼 근거 위치가 특히 중요한 경우에만 짧은 각주 또는 `[[소스 페이지|출처]]` 표기를 사용
@@ -64,8 +64,8 @@ status: draft | active | review | archived
 - 각 페이지 하단에는 `## 출처` 섹션과 `## 관련 항목` 섹션을 두되, `## 관련 항목`이 마지막에 오도록 배치
 - 깃 커밋 메세지는 영어로 작성하며, `ingest: number_title` 형식을 따름
 	- 예시 
-		- `ingest: 001_Claude Shannon's N-gram Model` 
-		- `ingest: 002_Alan Turing's Imitation Game`
+		- `ingest: 001_Computing Origins - Babbage and Lovelace`
+		- `ingest: 002_Early Software`
 	- 정규 번호 소스가 아닌 참고 자료 보강은 `reference: short_title` 형식을 사용
 
 ## 3. 핵심 워크플로
@@ -155,7 +155,7 @@ status: draft | active | review | archived
 - **최신성**: 새 소스 수집 시 관련 페이지 모두 갱신
 - **가독성**: 구조적이고 스캔 가능한 형식
 
-## 6. LLM 행동 원칙
+## 6. 작업자 행동 원칙
 
 1. `raw/` 디렉토리의 파일은 **절대 수정하지 않는다**
 2. `wiki/` 디렉토리의 파일은 자유롭게 생성·수정·삭제한다
