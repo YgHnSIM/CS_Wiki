@@ -298,3 +298,49 @@ EDVAC 보고서, Manchester Baby 자료, EDSAC의 실용적 운영 자료를 바
 - [[EDVAC]]
 - [[Manchester Baby]]
 - [[폰 노이만 구조]]
+
+## [2026-07-10] reference | 논리 회로와 이진 표현
+
+Claude Shannon의 `A Symbolic Analysis of Relay and Switching Circuits`를 참고 자료로 읽고, 릴레이·스위칭 회로와 이진 표현의 연결을 위키에 추가했다.
+
+변경된 페이지:
+
+- 생성: [[A Symbolic Analysis of Relay and Switching Circuits]]
+- 생성: [[클로드 섀넌]]
+- 생성: [[불 대수]]
+- 생성: [[릴레이 회로]]
+- 생성: [[스위칭 회로]]
+- 생성: [[논리 게이트]]
+- 생성: [[이진 덧셈 회로]]
+- 생성: [[논리 회로와 이진 표현]]
+- 갱신: [[이진법]]
+- 갱신: [[비트와 바이트]]
+- 갱신: [[비트 연산]]
+- 갱신: [[데이터 표현]]
+- 갱신: [[비트 패턴과 해석 규칙]]
+- 갱신: [[기호 조작]]
+- 갱신: [[index]]
+- 갱신: [[overview]]
+- 갱신: [[log]]
+
+처리 메모:
+
+- Shannon의 핵심 기여를 릴레이 접점의 열림/닫힘 상태와 불 대수의 0/1 값 사이의 대응으로 정리했다.
+- 이진법을 수 표현뿐 아니라 회로의 물리적 두 상태와 논리 게이트의 입력·출력으로 연결했다.
+- 비트 연산의 AND, OR, NOT, XOR가 불 대수와 논리 게이트의 구조를 공유한다는 점을 기존 페이지에 반영했다.
+- 이진 덧셈 회로를 통해 0/1 자릿값과 carry 규칙이 실제 회로로 구현될 수 있음을 정리했다.
+- `raw/` 원본은 수정하지 않고 외부 참고 자료 링크를 출처로 기록했다.
+
+## 출처
+
+- [A symbolic analysis of relay and switching circuits - MIT DSpace](https://dspace.mit.edu/entities/publication/2dffdeb7-2862-4575-8a8e-b29fb59319e5)
+- [A Symbolic Analysis of Relay and Switching Circuits - PDF copy](https://harrymoreno.com/assets/greatPapersInCompSci/3.2_-_A_Symbolic_analysis_of_rela_and_switching_circuits-Claude_E._Shannon.pdf)
+- [IEEE Xplore record](https://ieeexplore.ieee.org/document/5057767/)
+
+## 관련 항목
+
+- [[논리 회로와 이진 표현]]
+- [[불 대수]]
+- [[스위칭 회로]]
+- [[논리 게이트]]
+- [[이진법]]
