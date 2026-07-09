@@ -627,3 +627,62 @@ Ritchie와 Thompson의 `The UNIX Time-Sharing System`, Ritchie의 `The Developme
 - [[시스템 프로그래밍]]
 - [[이식성]]
 - [[운영체제]]
+
+## [2026-07-10] reference | 인코딩 심화
+
+Unicode 17.0.0, RFC 3629, UAX #15, UAX #29, WHATWG Encoding Standard, UTS #39를 참고 자료로 읽고, 기존 [[데이터 표현과 인코딩]] 축을 유니코드 텍스트 처리의 내부 층위까지 확장했다.
+
+변경된 페이지:
+
+- 생성: [[The Unicode Standard 17.0.0]]
+- 생성: [[RFC 3629 UTF-8]]
+- 생성: [[Unicode Normalization Forms]]
+- 생성: [[Unicode Text Segmentation]]
+- 생성: [[WHATWG Encoding Standard]]
+- 생성: [[Unicode Security Mechanisms]]
+- 생성: [[코드 포인트]]
+- 생성: [[코드 유닛]]
+- 생성: [[UTF-8]]
+- 생성: [[UTF-16]]
+- 생성: [[바이트 순서 표식]]
+- 생성: [[유니코드 정규화]]
+- 생성: [[그래핌 클러스터]]
+- 생성: [[인코딩 오류]]
+- 생성: [[동형이의 문자]]
+- 생성: [[인코딩 심화]]
+- 갱신: [[인코딩]]
+- 갱신: [[유니코드]]
+- 갱신: [[ASCII]]
+- 갱신: [[데이터 표현]]
+- 갱신: [[비트 패턴과 해석 규칙]]
+- 갱신: [[index]]
+- 갱신: [[overview]]
+- 갱신: [[log]]
+
+처리 메모:
+
+- "문자"를 코드 포인트, scalar value, 코드 유닛, 바이트 시퀀스, 그래핌 클러스터로 나누어 설명했다.
+- UTF-8은 ASCII와 호환되는 가변 길이 바이트 인코딩으로, UTF-16은 16비트 코드 유닛과 surrogate pair가 필요한 인코딩으로 정리했다.
+- 정규화, 텍스트 분할, 디코딩 오류 처리, BOM, 동형이의 문자 문제를 데이터 표현과 보안 경계의 문제로 연결했다.
+- `raw/` 원본은 수정하지 않았고, 외부 표준·RFC 링크를 출처로 기록했다.
+
+## 출처
+
+- [The Unicode Standard, Version 17.0.0](https://www.unicode.org/versions/Unicode17.0.0/)
+- [Chapter 3, Conformance](https://www.unicode.org/versions/Unicode17.0.0/core-spec/chapter-3/)
+- [RFC 3629 - UTF-8](https://datatracker.ietf.org/doc/html/rfc3629)
+- [UAX #15: Unicode Normalization Forms](https://www.unicode.org/reports/tr15/)
+- [UAX #29: Unicode Text Segmentation](https://www.unicode.org/reports/tr29/)
+- [WHATWG Encoding Standard](https://encoding.spec.whatwg.org/)
+- [UTS #39: Unicode Security Mechanisms](https://www.unicode.org/reports/tr39/)
+
+## 관련 항목
+
+- [[인코딩 심화]]
+- [[인코딩]]
+- [[유니코드]]
+- [[UTF-8]]
+- [[UTF-16]]
+- [[유니코드 정규화]]
+- [[그래핌 클러스터]]
+- [[동형이의 문자]]
