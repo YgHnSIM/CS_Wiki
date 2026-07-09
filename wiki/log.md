@@ -510,3 +510,67 @@ Dijkstra의 `A Case against the GO TO Statement`, Böhm-Jacopini의 `Flow Diagra
 - [[소스 프로그램]]
 - [[목적 프로그램]]
 - [[컴파일러 최적화]]
+
+## [2026-07-10] reference | Unix와 C
+
+Ritchie와 Thompson의 `The UNIX Time-Sharing System`, Ritchie의 `The Development of the C Language`와 `The Evolution of the Unix Time-sharing System`, Johnson과 Ritchie의 `Portability of C Programs and the UNIX System`을 참고 자료로 읽고, Unix와 C가 운영체제·시스템 프로그래밍·이식성의 축에서 서로를 강화한 과정을 위키에 추가했다.
+
+변경된 페이지:
+
+- 생성: [[The UNIX Time-Sharing System]]
+- 생성: [[The Development of the C Language]]
+- 생성: [[The Evolution of the Unix Time-sharing System]]
+- 생성: [[Portability of C Programs and the UNIX System]]
+- 생성: [[데니스 리치]]
+- 생성: [[켄 톰프슨]]
+- 생성: [[스티븐 C. 존슨]]
+- 생성: [[Unix]]
+- 생성: [[C 언어]]
+- 생성: [[운영체제]]
+- 생성: [[시스템 프로그래밍]]
+- 생성: [[이식성]]
+- 생성: [[PDP-11]]
+- 생성: [[파일 시스템]]
+- 생성: [[시스템 호출]]
+- 생성: [[유닉스 파이프]]
+- 생성: [[Unix와 C]]
+- 갱신: [[C 문자열]]
+- 갱신: [[메모리 안전성]]
+- 갱신: [[비트와 바이트]]
+- 갱신: [[데이터 표현]]
+- 갱신: [[프로그래밍 언어]]
+- 갱신: [[컴파일러]]
+- 갱신: [[소프트웨어 공학]]
+- 갱신: [[API]]
+- 갱신: [[초기 소프트웨어의 계층화]]
+- 갱신: [[index]]
+- 갱신: [[overview]]
+- 갱신: [[log]]
+
+처리 메모:
+
+- Unix를 파일 시스템, 프로세스, 셸, 파이프, 시스템 호출이 결합된 대화형 운영체제로 정리했다.
+- C를 Unix 구현 요구에서 발전한 시스템 프로그래밍 언어로 정리하고, B에서 C로의 전환을 PDP-11의 바이트 주소 지정과 타입 구조 문제와 연결했다.
+- 1973년 Unix 커널의 C 재작성을 Unix와 C가 서로를 강화한 전환점으로 기록했다.
+- Johnson과 Ritchie의 이식성 논의를 바탕으로 C/Unix의 성공을 언어 문법만이 아니라 컴파일러, 전처리기, 공통 헤더, 정적 검사 도구, 기계 의존 코드 분리의 결과로 정리했다.
+- C 문자열과 메모리 안전성 문서를 C의 저수준 표현 모델과 연결했다.
+- `raw/` 원본은 수정하지 않고 외부 참고 자료 링크를 출처로 기록했다.
+
+## 출처
+
+- [The UNIX Time-Sharing System - ACM DOI](https://dl.acm.org/doi/10.1145/361011.361061)
+- [The UNIX Time-Sharing System - PDF copy](https://dsf.berkeley.edu/cs262/unix.pdf)
+- [The Development of the C Language - Nokia Bell Labs](https://www.nokia.com/bell-labs/about/dennis-m-ritchie/chist.html)
+- [The development of the C programming language - ACM DOI](https://dl.acm.org/doi/10.1145/234286.1057834)
+- [The Evolution of the Unix Time-sharing System - Nokia Bell Labs](https://www.nokia.com/bell-labs/about/dennis-m-ritchie/hist.pdf)
+- [Portability of C Programs and the UNIX System - Nokia Bell Labs](https://www.nokia.com/bell-labs/about/dennis-m-ritchie/portpap.pdf)
+- [Portability of C Programs and the UNIX System - Wiley](https://onlinelibrary.wiley.com/doi/abs/10.1002/j.1538-7305.1978.tb02141.x)
+
+## 관련 항목
+
+- [[Unix와 C]]
+- [[Unix]]
+- [[C 언어]]
+- [[시스템 프로그래밍]]
+- [[이식성]]
+- [[운영체제]]
