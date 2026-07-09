@@ -455,3 +455,58 @@ Dijkstra의 `A Case against the GO TO Statement`, Böhm-Jacopini의 `Flow Diagra
 - [[제어 구조]]
 - [[구조적 프로그래밍]]
 - [[단계적 정제]]
+
+## [2026-07-10] reference | Fortran과 컴파일러
+
+1956년 IBM 704 FORTRAN 매뉴얼, 1957년 `The FORTRAN Automatic Coding System`, Backus의 1978년 Fortran 회고를 참고 자료로 읽고, Fortran을 고급 언어와 효율적 컴파일러가 결합된 시스템으로 정리했다.
+
+변경된 페이지:
+
+- 생성: [[FORTRAN Automatic Coding System for the IBM 704 EDPM]]
+- 생성: [[The FORTRAN Automatic Coding System]]
+- 생성: [[The History of FORTRAN I, II, and III]]
+- 생성: [[존 배커스]]
+- 생성: [[IBM 704]]
+- 생성: [[소스 프로그램]]
+- 생성: [[목적 프로그램]]
+- 생성: [[컴파일러]]
+- 생성: [[컴파일러 최적화]]
+- 생성: [[Fortran과 컴파일러]]
+- 갱신: [[Fortran]]
+- 갱신: [[자동 프로그래밍]]
+- 갱신: [[프로그래밍 언어]]
+- 갱신: [[기호 조작]]
+- 갱신: [[소프트웨어 공학]]
+- 갱신: [[초기 소프트웨어의 계층화]]
+- 갱신: [[어셈블러]]
+- 갱신: [[링커]]
+- 갱신: [[index]]
+- 갱신: [[overview]]
+- 갱신: [[log]]
+
+처리 메모:
+
+- Fortran을 단순한 언어 문법이 아니라 IBM 704에서 소스 프로그램을 목적 프로그램으로 번역하는 자동 코딩 시스템으로 정리했다.
+- 컴파일러를 어셈블러보다 높은 수준의 번역 계층으로 분리하고, Fortran의 번역기가 산술식뿐 아니라 반복, 첨자, 입출력, 제어 흐름, 인덱스 레지스터 제약을 처리했다는 점을 기록했다.
+- 고급 언어가 실용화되려면 목적 프로그램의 효율이 중요했다는 관점에서 컴파일러 최적화 페이지를 추가했다.
+- 자동 프로그래밍을 주소 보정과 서브루틴 조립에서 Fortran 컴파일러로 이어지는 흐름으로 확장했다.
+- `raw/` 원본은 수정하지 않고 외부 참고 자료 링크를 출처로 기록했다.
+
+## 출처
+
+- [The FORTRAN Automatic Coding System for the IBM 704 EDPM - Computer History Museum](https://archive.computerhistory.org/resources/text/Fortran/102649787.05.01.acc.pdf)
+- [704 Fortran Programmer's Reference Manual - Bitsavers](https://bitsavers.informatik.uni-stuttgart.de/pdf/ibm/704/704_FortranProgRefMan_Oct56.pdf)
+- [IBM: Fortran](https://www.ibm.com/history/fortran)
+- [The FORTRAN Automatic Coding System - Computer History Museum](https://archive.computerhistory.org/resources/text/Fortran/102663113.05.01.acc.pdf)
+- [The FORTRAN Automatic Coding System - ACM DOI](https://dl.acm.org/doi/10.1145/1455567.1455599)
+- [The history of Fortran I, II, and III - IBM Research](https://research.ibm.com/publications/the-history-of-fortran-i-ii-and-iii)
+- [The history of Fortran I, II, and III - ACM DOI](https://dl.acm.org/doi/10.1145/800025.1198345)
+
+## 관련 항목
+
+- [[Fortran과 컴파일러]]
+- [[Fortran]]
+- [[컴파일러]]
+- [[소스 프로그램]]
+- [[목적 프로그램]]
+- [[컴파일러 최적화]]
