@@ -1,11 +1,11 @@
 ---
 title: 찰스 W. 크루거
 aliases: [Charles W. Krueger, Charles Krueger, C. W. Krueger]
-tags: [type/entity, domain/software-engineering, domain/computer-history, status/active]
+tags: [type/entity, domain/software-engineering, domain/computer-history, status/draft]
 created: 2026-07-10
 updated: 2026-07-10
 sources: ["Software Reuse"]
-status: active
+status: draft
 ---
 
 ## 개요

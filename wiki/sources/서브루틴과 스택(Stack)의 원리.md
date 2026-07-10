@@ -3,8 +3,16 @@ title: 서브루틴과 스택(Stack)의 원리
 aliases: [서브루틴과 스택, Subroutine and Stack]
 tags: [type/source, domain/software-engineering, domain/computer-architecture, domain/computer-history, status/active]
 created: 2026-05-04
-updated: 2026-05-04
+updated: 2026-07-10
 sources: ["서브루틴과 스택(Stack)의 원리.md"]
+source_id: src-004
+source_kind: raw
+primary_sources: ["서브루틴과 스택(Stack)의 원리.md"]
+supporting_sources: []
+source_urls: []
+retrieved: 2026-07-10
+version: null
+snapshot_status: local
 status: active
 ---
 

@@ -5,6 +5,14 @@ tags: [type/reference, domain/software-engineering, domain/computer-history, sta
 created: 2026-07-10
 updated: 2026-07-10
 sources: ["NATO Software Engineering Conference 1968", "Dartmouth text copy"]
+source_id: ref-002
+source_kind: external
+primary_sources: ["NATO Software Engineering Conference 1968"]
+supporting_sources: ["Dartmouth text copy"]
+source_urls: ["https://www.cs.dartmouth.edu/~doug/components.txt"]
+retrieved: 2026-07-10
+version: null
+snapshot_status: external-only
 status: active
 ---
 

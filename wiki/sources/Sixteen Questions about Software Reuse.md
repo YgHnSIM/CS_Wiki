@@ -5,6 +5,14 @@ tags: [type/reference, domain/software-engineering, domain/computer-history, sta
 created: 2026-07-10
 updated: 2026-07-10
 sources: ["Communications of the ACM 1995", "ACM DOI", "ResearchGate metadata"]
+source_id: ref-005
+source_kind: external
+primary_sources: ["Communications of the ACM 1995"]
+supporting_sources: ["ACM DOI", "ResearchGate metadata"]
+source_urls: ["https://dl.acm.org/doi/10.1145/203241.203260", "https://www.researchgate.net/publication/220425619_Sixteen_Questions_About_Software_Reuse"]
+retrieved: 2026-07-10
+version: null
+snapshot_status: external-only
 status: active
 ---
 

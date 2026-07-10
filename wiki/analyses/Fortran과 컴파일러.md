@@ -4,7 +4,7 @@ aliases: [FORTRAN과 컴파일러, Fortran compiler, Fortran and compiler]
 tags: [type/analysis, domain/programming-languages, domain/software-engineering, domain/computer-history, status/active]
 created: 2026-07-10
 updated: 2026-07-10
-sources: ["FORTRAN Automatic Coding System for the IBM 704 EDPM", "The FORTRAN Automatic Coding System", "The History of FORTRAN I, II, and III"]
+sources: ["The Preparation of Programs for an Electronic Digital Computer", "FORTRAN Automatic Coding System for the IBM 704 EDPM", "The FORTRAN Automatic Coding System", "The History of FORTRAN I, II, and III"]
 status: active
 ---
 
@@ -38,6 +38,7 @@ Fortran 이후 프로그래밍의 중심은 사람이 기계 명령을 직접 �
 
 ## 출처
 
+- [[The Preparation of Programs for an Electronic Digital Computer]]
 - [[FORTRAN Automatic Coding System for the IBM 704 EDPM]]
 - [[The FORTRAN Automatic Coding System]]
 - [[The History of FORTRAN I, II, and III]]
@@ -54,3 +55,4 @@ Fortran 이후 프로그래밍의 중심은 사람이 기계 명령을 직접 �
 - [[자동 프로그래밍]]
 - [[프로그래밍 언어]]
 - [[소프트웨어 공학]]
+- [[초기 소프트웨어의 계층화]]

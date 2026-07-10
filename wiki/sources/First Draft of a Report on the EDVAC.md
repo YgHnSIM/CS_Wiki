@@ -5,6 +5,14 @@ tags: [type/reference, domain/computer-history, domain/computer-architecture, st
 created: 2026-07-10
 updated: 2026-07-10
 sources: ["Internet Archive: firstdraftofrepo00vonn", "Williams 1993", "Godfrey and Hendry 1993"]
+source_id: ref-006
+source_kind: external
+primary_sources: ["First Draft of a Report on the EDVAC (1945)"]
+supporting_sources: ["Internet Archive: firstdraftofrepo00vonn", "Williams 1993", "Godfrey and Hendry 1993"]
+source_urls: ["https://archive.org/details/firstdraftofrepo00vonn", "https://archive.org/stream/firstdraftofrepo00vonn/firstdraftofrepo00vonn_djvu.txt", "https://web.mit.edu/sts.035/www/PDFs/edvac.pdf", "https://web2.qatar.cmu.edu/~mhhammou/15346-s13/resources/OriginsOfComputers/Origins%20Fate%20of%20EDVAC.pdf", "https://web2.qatar.cmu.edu/~mhhammou/15346-s13/resources/OriginsOfComputers/The%20Computer%20as%20von%20Neumann%20planned%20it.pdf"]
+retrieved: 2026-07-10
+version: null
+snapshot_status: external-only
 status: active
 ---
 

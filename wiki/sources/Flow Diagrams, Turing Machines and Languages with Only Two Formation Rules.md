@@ -1,10 +1,18 @@
 ---
 title: Flow Diagrams, Turing Machines and Languages with Only Two Formation Rules
-aliases: [Böhm-Jacopini 1966, Bohm-Jacopini theorem, structured program theorem]
+aliases: [Böhm-Jacopini 1966]
 tags: [type/reference, domain/computer-science, domain/programming-languages, status/active]
 created: 2026-07-10
 updated: 2026-07-10
 sources: ["Communications of the ACM 1966"]
+source_id: ref-012
+source_kind: external
+primary_sources: ["Communications of the ACM 1966"]
+supporting_sources: ["ACM DOI", "PDF copy"]
+source_urls: ["https://cacm.acm.org/research/flow-diagrams-turing-machines-and-languages-with-only-two-formation-rules/", "https://dl.acm.org/doi/10.1145/355592.365646", "https://www.cs.unibo.it/~martini/PP/bohm-jac.pdf"]
+retrieved: 2026-07-10
+version: null
+snapshot_status: external-only
 status: active
 ---
 

@@ -5,6 +5,14 @@ tags: [type/reference, domain/programming-languages, domain/software-engineering
 created: 2026-07-10
 updated: 2026-07-10
 sources: ["IBM 704 Programmer's Reference Manual 1956", "Computer History Museum archive"]
+source_id: ref-015
+source_kind: external
+primary_sources: ["IBM 704 Programmer's Reference Manual 1956"]
+supporting_sources: ["Computer History Museum archive", "IBM history page"]
+source_urls: ["https://archive.computerhistory.org/resources/text/Fortran/102649787.05.01.acc.pdf", "https://www.ibm.com/history/fortran"]
+retrieved: 2026-07-10
+version: "1956-10-15"
+snapshot_status: external-only
 status: active
 ---
 
@@ -29,7 +37,6 @@ status: active
 ## 출처
 
 - Computer History Museum, [The FORTRAN Automatic Coding System for the IBM 704 EDPM](https://archive.computerhistory.org/resources/text/Fortran/102649787.05.01.acc.pdf)
-- Bitsavers, [704 Fortran Programmer's Reference Manual](https://bitsavers.informatik.uni-stuttgart.de/pdf/ibm/704/704_FortranProgRefMan_Oct56.pdf)
 - IBM, [Fortran](https://www.ibm.com/history/fortran)
 
 ## 관련 항목

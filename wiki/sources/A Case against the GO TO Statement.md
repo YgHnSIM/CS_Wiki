@@ -5,6 +5,14 @@ tags: [type/reference, domain/software-engineering, domain/programming-languages
 created: 2026-07-10
 updated: 2026-07-10
 sources: ["EWD Archive EWD215", "Communications of the ACM 1968"]
+source_id: ref-011
+source_kind: external
+primary_sources: ["Communications of the ACM 1968"]
+supporting_sources: ["EWD Archive EWD215", "PDF copy"]
+source_urls: ["https://www.cs.utexas.edu/~EWD/transcriptions/EWD02xx/EWD215.html", "https://dl.acm.org/doi/10.1145/362929.362947", "https://homepages.cwi.nl/~storm/teaching/reader/Dijkstra68.pdf"]
+retrieved: 2026-07-10
+version: null
+snapshot_status: external-only
 status: active
 ---
 

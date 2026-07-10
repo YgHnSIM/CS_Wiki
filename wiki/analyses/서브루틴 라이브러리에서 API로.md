@@ -3,7 +3,7 @@ title: 서브루틴 라이브러리에서 API로
 aliases: [EDSAC API, API의 전사, 서브루틴과 API]
 tags: [type/analysis, domain/software-engineering, domain/computer-history, status/active]
 created: 2026-07-09
-updated: 2026-07-09
+updated: 2026-07-10
 sources: ["The Preparation of Programs for an Electronic Digital Computer"]
 status: active
 ---
@@ -53,3 +53,6 @@ EDSAC 라이브러리를 현대 API와 그대로 동일시하면 안 된다. 당
 - [[포스트모템 루틴]]
 - [[소프트웨어 공학]]
 - [[초기 소프트웨어의 계층화]]
+- [[소프트웨어 재사용]]
+- [[소프트웨어 재사용의 역사]]
+- [[스탠리 길]]

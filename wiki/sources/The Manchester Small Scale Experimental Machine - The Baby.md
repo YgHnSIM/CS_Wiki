@@ -1,10 +1,18 @@
 ---
 title: The Manchester Small Scale Experimental Machine - The Baby
-aliases: [Manchester Baby source, Small Scale Experimental Machine, SSEM source]
+aliases: [Manchester Baby source, SSEM source]
 tags: [type/reference, domain/computer-history, domain/computer-architecture, status/active]
 created: 2026-07-10
 updated: 2026-07-10
 sources: ["University of Manchester Computer50"]
+source_id: ref-007
+source_kind: external
+primary_sources: ["University of Manchester Computer50"]
+supporting_sources: ["University of Cambridge historical account", "The National Museum of Computing EDSAC page"]
+source_urls: ["https://curation.cs.manchester.ac.uk/computer50/www.computer50.org/mark1/new.baby.html", "https://www.cst.cam.ac.uk/news/70-years-first-computer-designed-practical-everyday-use", "https://www.tnmoc.org/edsac"]
+retrieved: 2026-07-10
+version: null
+snapshot_status: external-only
 status: active
 ---
 

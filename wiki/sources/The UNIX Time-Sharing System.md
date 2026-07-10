@@ -5,6 +5,14 @@ tags: [type/reference, domain/computer-history, domain/operating-systems, domain
 created: 2026-07-10
 updated: 2026-07-10
 sources: ["Communications of the ACM 1974", "Bell System Technical Journal reprint"]
+source_id: ref-018
+source_kind: external
+primary_sources: ["Communications of the ACM 1974"]
+supporting_sources: ["Bell System Technical Journal reprint", "PDF copy", "Wiley record"]
+source_urls: ["https://dl.acm.org/doi/10.1145/361011.361061", "https://dsf.berkeley.edu/cs262/unix.pdf", "https://onlinelibrary.wiley.com/doi/abs/10.1002/j.1538-7305.1978.tb02136.x"]
+retrieved: 2026-07-10
+version: null
+snapshot_status: external-only
 status: active
 ---
 

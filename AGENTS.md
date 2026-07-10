@@ -42,6 +42,35 @@ status: draft | active | review | archived
 ---
 ```
 
+`type/source`와 `type/reference` 페이지에는 다음 출처 재현성 필드를 추가합니다. 기존 `sources`는 호환성을 위해 유지하며, `primary_sources`와 `supporting_sources`의 합집합을 사람이 읽기 쉬운 이름으로 요약합니다.
+
+```yaml
+source_id: src-NNN | ref-NNN
+source_kind: raw | external
+primary_sources: [주장의 직접 근거인 원본 파일명 또는 원 출판물]
+supporting_sources: [해설, 보조 문헌, 메타데이터 또는 접근용 사본]
+source_urls: ["https://example.org/source"]
+retrieved: YYYY-MM-DD
+version: null | 판본·개정 번호
+snapshot_status: local | external-only | archived
+```
+
+- `source_id`는 위키 전체에서 고유하며, 정규 소스는 `src-NNN`, 참고 자료는 `ref-NNN` 형식을 사용합니다.
+- `source_kind: raw`는 `raw/`에 보존된 원본을 직접 처리한 정규 소스, `source_kind: external`은 URL로 접근한 외부 참고 자료를 뜻합니다.
+- `primary_sources`에는 논문·표준·원문 등 직접 근거만, `supporting_sources`에는 해설 파일·2차 문헌·메타데이터·미러를 기록합니다. 값이 없으면 빈 배열 `[]`을 사용합니다.
+- `source_urls`에는 본문 `## 출처`에 제시한 모든 외부 URL을 중복 없이 기록합니다. URL에 `#`이 있으면 반드시 따옴표로 감쌉니다.
+- `retrieved`는 로컬 원본을 확인하거나 외부 URL을 마지막으로 검증한 날짜입니다. `version`을 확인할 수 없으면 `null`로 둡니다.
+- `snapshot_status: local`은 불변 `raw/` 원본이 있는 경우, `external-only`는 로컬 스냅샷 없이 외부 URL에만 의존하는 경우, `archived`는 외부 자료의 보존용 스냅샷을 `raw/`에 수집한 경우입니다. `archived` 스냅샷도 수집 후에는 수정하지 않습니다.
+
+### 2.1.1 상태 전이 기준
+
+- `draft`: 기본 구조와 출처 후보를 갖췄지만 사실 검증, 출처 필드 또는 교차 링크가 아직 미완성인 상태
+- `review`: 본문 작성과 출처 매핑을 마쳤고, 원문 대조·모순 점검·링크 및 프론트매터 검사를 기다리는 상태
+- `active`: 원문 대조를 통과하고, 출처 재현성 필드·내부 링크·index 반영·lint가 모두 확인되었으며 해결되지 않은 중대 정확성 문제가 없는 상태
+- `archived`: 대체되었거나 더 이상 유지하지 않는 페이지로, 보존은 하되 활성 지식으로 사용하지 않는 상태
+
+새 페이지는 원칙적으로 `draft → review → active` 순서로 승격합니다. 내용이 바뀌어 재검토가 필요하면 `active`에서 `review`로 되돌리고, `tags`의 `status/*` 값도 `status` 필드와 항상 일치시킵니다.
+
 ### 2.2 내부 링크
 - 옵시디언 `[[위키링크]]` 형식 사용
 - 처음 언급될 때 링크, 이후 반복은 링크 없이
@@ -92,13 +121,17 @@ status: draft | active | review | archived
 
 ### 3.1.1 참고 자료 보강 (Reference)
 
-사용자가 정규 번호 소스가 아닌 보충 참고 자료를 `raw/`에 추가하고 처리를 요청하면:
+사용자가 정규 번호 소스가 아닌 보충 참고 자료를 `raw/`에 추가하거나 외부 URL 자료의 처리를 요청하면:
 
 1. **정규 Ingest와 분리** — `NNN_연도_인물_주제` 번호를 새로 만들지 않음
-2. **참고 요약 페이지 작성** — `wiki/sources/ref_slug.md` 형식으로 생성
+2. **참고 요약 페이지 작성** — `wiki/sources/<원문 제목 또는 안전한 slug>.md` 형식으로 생성
+   - 파일명에 `ref_` 접두사는 강제하지 않으며, 참고 자료 여부는 `source_id: ref-NNN`과 `type/reference` 태그로 판별
    - 프론트매터 `tags`에는 `type/reference` 포함
-   - `sources`에는 원본 raw 파일명을 그대로 기록
-   - 본문 하단 `## 출처`에는 raw 파일 경로를 표시
+   - 로컬 자료는 `source_kind: raw`, 외부 자료는 `source_kind: external`로 구분
+   - 직접 근거와 보조 자료를 `primary_sources`, `supporting_sources`로 분리하고 기존 `sources`도 호환용으로 유지
+   - 외부 자료는 모든 출처 URL, 접근일, 확인 가능한 판본을 `source_urls`, `retrieved`, `version`에 기록
+   - 로컬 원본은 `snapshot_status: local`, 로컬 사본 없는 외부 자료는 `external-only`, 보존용 스냅샷을 수집한 외부 자료는 `archived`로 기록
+   - 본문 하단 `## 출처`에는 raw 파일 경로나 외부 URL을 표시
 3. **기존 페이지 보강 중심** — 새 지식이 주로 보충하는 기존 개체·개념·분석 페이지를 갱신
 4. **필요시 새 페이지 생성** — 참고 자료가 독립 개념을 충분히 제공할 때만 새 페이지 생성
 5. **index.md 업데이트** — 정규 `소스 (Sources)`와 별도로 `참고 자료 (References)` 섹션에 추가
@@ -127,11 +160,15 @@ status: draft | active | review | archived
 6. **제안** — 추가로 조사할 만한 질문이나 찾아볼 소스 제안
 7. **결과를 log.md에 기록**
 
+자동 점검은 저장소 루트에서 `python scripts/wiki_lint.py`로 실행합니다. 프론트매터, provenance, 링크·섹션, 고아 페이지, 별칭 충돌, 상호 링크, 색인 수치, 출처 일치, 로그 계층을 함께 검사하며 오류가 있으면 종료 코드 1을 반환합니다. 기계 판독 결과는 `--json`으로 출력합니다.
+
+기계적으로 안전한 정리는 `python scripts/wiki_maintenance.py --check`로 먼저 확인한 뒤 필요한 `--fix-*` 옵션을 사용합니다. 이 도구는 `raw/`를 수정하지 않으며 반복 실행해도 결과가 달라지지 않아야 합니다.
+
 ## 4. 특수 파일
 
 ### 4.1 index.md
-- 카테고리별로 모든 위키 페이지 나열
-- 각 항목: `- [[페이지명]] — 한 줄 요약 (소스 N개)`
+- 카테고리별로 `index.md` 자기 자신을 제외한 모든 위키 페이지 나열
+- 정규 소스는 `(raw 파일 N개)`, 참고 자료는 `(핵심 문헌 N개)`, 개체·개념·분석은 중복을 제거한 `(근거 N개)`로 표기
 - 새 페이지 생성/삭제 시 반드시 갱신
 
 ### 4.2 log.md
@@ -140,6 +177,7 @@ status: draft | active | review | archived
   - 작업유형: `ingest`, `query`, `lint`, `create`, `update`
   - 참고 자료 보강은 `reference` 사용
 - 각 항목에 변경된 페이지 목록 포함
+- 작업 항목 내부의 출처와 관련 항목은 `### 출처`, `### 관련 항목`을 사용하고, 페이지 전체 하단에만 전역 `## 출처`, `## 관련 항목` 한 쌍을 둠
 
 ### 4.3 overview.md
 - 위키 홈페이지

@@ -5,6 +5,14 @@ tags: [type/reference, domain/programming-languages, domain/software-engineering
 created: 2026-07-10
 updated: 2026-07-10
 sources: ["Western Computer Proceedings 1957", "Computer History Museum archive"]
+source_id: ref-016
+source_kind: external
+primary_sources: ["Western Computer Proceedings 1957"]
+supporting_sources: ["Computer History Museum archive", "ACM DOI", "Bitsavers copy"]
+source_urls: ["https://archive.computerhistory.org/resources/text/Fortran/102663113.05.01.acc.pdf", "https://dl.acm.org/doi/10.1145/1455567.1455599", "https://bitsavers.trailing-edge.com/pdf/ibm/704/FORTRAN_paper_1957.pdf"]
+retrieved: 2026-07-10
+version: null
+snapshot_status: external-only
 status: active
 ---
 

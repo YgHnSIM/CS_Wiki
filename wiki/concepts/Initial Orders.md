@@ -3,7 +3,7 @@ title: Initial Orders
 aliases: [초기 명령, EDSAC Initial Orders]
 tags: [type/concept, domain/computer-history, domain/software-engineering, status/active]
 created: 2026-05-04
-updated: 2026-05-04
+updated: 2026-07-10
 sources: ["초기 소프트웨어의 탄생.md", "초기 소프트웨어의 탄생_해설.md", "EDSAC과 Initial Orders.md", "EDSAC과 Initial Orders_해설.md"]
 status: active
 ---
@@ -48,3 +48,10 @@ Initial Orders는 오늘날의 부트로더, 로더, 어셈블러, 초기 번역
 - [[링커]]
 - [[프로그래밍 언어]]
 - [[초기 소프트웨어의 계층화]]
+- [[EDSAC은 무엇의 최초인가]]
+- [[EDVAC]]
+- [[기호 조작]]
+- [[모리스 윌크스]]
+- [[자동 프로그래밍]]
+- [[저장 프로그램 개념의 여러 기원]]
+- [[폰 노이만 구조]]

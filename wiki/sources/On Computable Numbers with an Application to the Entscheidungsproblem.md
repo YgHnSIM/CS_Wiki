@@ -5,6 +5,14 @@ tags: [type/reference, domain/computer-history, domain/computer-science, status/
 created: 2026-07-10
 updated: 2026-07-10
 sources: ["Proceedings of the London Mathematical Society 1937", "Turing Digital Archive AMT-B-12"]
+source_id: ref-009
+source_kind: external
+primary_sources: ["Proceedings of the London Mathematical Society 1937"]
+supporting_sources: ["Turing Digital Archive AMT-B-12", "Wiley record", "PDF copy"]
+source_urls: ["https://turingarchive.kings.cam.ac.uk/publications-lectures-and-talks-amtb/amt-b-12", "https://londmathsoc.onlinelibrary.wiley.com/doi/10.1112/plms/s2-42.1.230", "https://www.cs.virginia.edu/~robins/Turing_Paper_1936.pdf"]
+retrieved: 2026-07-10
+version: null
+snapshot_status: external-only
 status: active
 ---
 
@@ -19,7 +27,7 @@ status: active
 - 계산은 사람이 직관적으로 수행하는 무한히 다양한 활동이 아니라, 유한한 상태와 유한한 규칙으로 분석될 수 있다.
 - [[튜링 기계]]는 무한한 테이프, 현재 읽는 칸, 내부 상태, 전이 규칙을 통해 계산 절차를 형식화한다.
 - [[보편 튜링 기계]]는 다른 기계의 기술(description)을 입력으로 받아 그 기계의 동작을 흉내낼 수 있다.
-- 모든 잘 정의된 질문에 대해 정답을 주는 일반 기계는 존재하지 않는다.
+- 잘 정의된 문제 중에도 정답을 산출하는 일반 판정 절차가 존재하지 않는 문제가 있다.
 - 이 논증은 Hilbert의 [[Entscheidungsproblem]]이 일반적으로 풀릴 수 없다는 결론으로 이어진다.
 
 ## 위키 반영

@@ -3,8 +3,16 @@ title: The Preparation of Programs for an Electronic Digital Computer
 aliases: [WWG, Preparation of Programs, 프로그램 준비, EDSAC programming textbook]
 tags: [type/reference, domain/computer-history, domain/software-engineering, status/active]
 created: 2026-07-09
-updated: 2026-07-09
+updated: 2026-07-10
 sources: ["Internet Archive: programsforelect00wilk"]
+source_id: ref-001
+source_kind: external
+primary_sources: ["The Preparation of Programs for an Electronic Digital Computer (1951)"]
+supporting_sources: ["Internet Archive: programsforelect00wilk"]
+source_urls: ["https://archive.org/details/programsforelect00wilk", "https://archive.org/stream/programsforelect00wilk/programsforelect00wilk_djvu.txt"]
+retrieved: 2026-07-10
+version: null
+snapshot_status: external-only
 status: active
 ---
 

@@ -5,6 +5,14 @@ tags: [type/reference, domain/software-engineering, domain/programming-languages
 created: 2026-07-10
 updated: 2026-07-10
 sources: ["Bell System Technical Journal 1978"]
+source_id: ref-021
+source_kind: external
+primary_sources: ["Bell System Technical Journal 1978"]
+supporting_sources: ["Nokia Bell Labs copy", "Wiley record", "Bell System Technical Journal copy"]
+source_urls: ["https://www.nokia.com/bell-labs/about/dennis-m-ritchie/portpap.pdf", "https://onlinelibrary.wiley.com/doi/abs/10.1002/j.1538-7305.1978.tb02141.x", "https://vtda.org/pubs/BSTJ/vol57-1978/articles/bstj57-6-2021.pdf"]
+retrieved: 2026-07-10
+version: null
+snapshot_status: external-only
 status: active
 ---
 

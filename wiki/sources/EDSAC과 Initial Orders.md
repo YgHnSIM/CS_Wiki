@@ -1,10 +1,18 @@
 ---
 title: EDSAC과 Initial Orders
-aliases: [EDSAC Initial Orders, 최초의 로더와 어셈블러]
+aliases: [EDSAC Initial Orders source]
 tags: [type/source, domain/computer-history, domain/software-engineering, status/active]
 created: 2026-05-04
-updated: 2026-05-04
+updated: 2026-07-10
 sources: ["EDSAC과 Initial Orders.md", "EDSAC과 Initial Orders_해설.md"]
+source_id: src-003
+source_kind: raw
+primary_sources: ["EDSAC과 Initial Orders.md"]
+supporting_sources: ["EDSAC과 Initial Orders_해설.md"]
+source_urls: []
+retrieved: 2026-07-10
+version: null
+snapshot_status: local
 status: active
 ---
 

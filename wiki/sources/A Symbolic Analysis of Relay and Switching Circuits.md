@@ -5,6 +5,14 @@ tags: [type/reference, domain/computer-history, domain/computer-architecture, do
 created: 2026-07-10
 updated: 2026-07-10
 sources: ["MIT DSpace: 34541425-MIT.pdf", "Transactions AIEE 1938"]
+source_id: ref-008
+source_kind: external
+primary_sources: ["Transactions AIEE 1938"]
+supporting_sources: ["MIT DSpace: 34541425-MIT.pdf", "IEEE Xplore record", "PDF copy"]
+source_urls: ["https://dspace.mit.edu/entities/publication/2dffdeb7-2862-4575-8a8e-b29fb59319e5", "https://harrymoreno.com/assets/greatPapersInCompSci/3.2_-_A_Symbolic_analysis_of_rela_and_switching_circuits-Claude_E._Shannon.pdf", "https://ieeexplore.ieee.org/document/5057767/"]
+retrieved: 2026-07-10
+version: null
+snapshot_status: external-only
 status: active
 ---
 

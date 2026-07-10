@@ -5,6 +5,14 @@ tags: [type/reference, domain/software-engineering, domain/programming-languages
 created: 2026-07-10
 updated: 2026-07-10
 sources: ["Academic Press 1972", "Internet Archive: Structured_Programming__Dahl_Dijkstra_Hoare"]
+source_id: ref-013
+source_kind: external
+primary_sources: ["Academic Press 1972"]
+supporting_sources: ["Internet Archive: Structured_Programming__Dahl_Dijkstra_Hoare", "ACM Guide record", "PDF copy"]
+source_urls: ["https://archive.org/details/Structured_Programming__Dahl_Dijkstra_Hoare", "https://dl.acm.org/doi/book/10.5555/1243380", "https://www.dcs.gla.ac.uk/~pat/cpM/choco4/nqueens/cb-sp-dahl.pdf"]
+retrieved: 2026-07-10
+version: null
+snapshot_status: external-only
 status: active
 ---
 

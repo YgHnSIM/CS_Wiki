@@ -5,6 +5,14 @@ tags: [type/reference, domain/computer-science, domain/text-processing, status/a
 created: 2026-07-10
 updated: 2026-07-10
 sources: ["Unicode Standard Annex #29"]
+source_id: ref-025
+source_kind: external
+primary_sources: ["Unicode Standard Annex #29, Unicode 17.0.0, Revision 47"]
+supporting_sources: ["Unicode Standard Annex #29 latest-version pointer"]
+source_urls: ["https://www.unicode.org/reports/tr29/tr29-47.html", "https://www.unicode.org/reports/tr29/"]
+retrieved: 2026-07-10
+version: "Unicode 17.0.0 / Revision 47"
+snapshot_status: external-only
 status: active
 ---
 
@@ -27,7 +35,8 @@ status: active
 
 ## 출처
 
-- Unicode Consortium, [UAX #29: Unicode Text Segmentation](https://www.unicode.org/reports/tr29/)
+- Unicode Consortium, [UAX #29 Revision 47 — Unicode 17.0.0](https://www.unicode.org/reports/tr29/tr29-47.html)
+- Unicode Consortium, [UAX #29 최신 판본 포인터](https://www.unicode.org/reports/tr29/)
 
 ## 관련 항목
 

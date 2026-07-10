@@ -5,6 +5,14 @@ tags: [type/reference, domain/computer-history, domain/operating-systems, domain
 created: 2026-07-10
 updated: 2026-07-10
 sources: ["AT&T Bell Laboratories Technical Journal 1984"]
+source_id: ref-020
+source_kind: external
+primary_sources: ["AT&T Bell Laboratories Technical Journal 1984"]
+supporting_sources: ["Nokia Bell Labs copy", "Harvard SEAS copy", "Wiley record"]
+source_urls: ["https://www.nokia.com/bell-labs/about/dennis-m-ritchie/hist.pdf", "https://www.read.seas.harvard.edu/~kohler/class/aosref/ritchie84evolution.pdf", "https://onlinelibrary.wiley.com/doi/abs/10.1002/j.1538-7305.1984.tb00054.x"]
+retrieved: 2026-07-10
+version: null
+snapshot_status: external-only
 status: active
 ---
 

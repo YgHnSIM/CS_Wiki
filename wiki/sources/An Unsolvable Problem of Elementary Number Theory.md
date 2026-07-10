@@ -5,6 +5,14 @@ tags: [type/reference, domain/computer-history, domain/computer-science, status/
 created: 2026-07-10
 updated: 2026-07-10
 sources: ["American Journal of Mathematics 1936"]
+source_id: ref-010
+source_kind: external
+primary_sources: ["American Journal of Mathematics 1936"]
+supporting_sources: ["PDF copy", "Cambridge University Press record"]
+source_urls: ["https://www.ics.uci.edu/~lopes/teaching/inf212W12/readings/church.pdf", "https://www.cambridge.org/core/journals/journal-of-symbolic-logic/article/alonzo-church-an-unsolvable-problem-of-elementary-number-theory-american-journal-of-mathematics-vol-58-1936-pp-345363/CF193EF55C779CCD1D42C3333721E166"]
+retrieved: 2026-07-10
+version: null
+snapshot_status: external-only
 status: active
 ---
 

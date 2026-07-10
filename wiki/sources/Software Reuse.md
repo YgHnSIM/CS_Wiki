@@ -5,6 +5,14 @@ tags: [type/reference, domain/software-engineering, domain/computer-history, sta
 created: 2026-07-10
 updated: 2026-07-10
 sources: ["ACM Computing Surveys 1992", "ACM DOI", "PDF copy"]
+source_id: ref-004
+source_kind: external
+primary_sources: ["ACM Computing Surveys 1992"]
+supporting_sources: ["ACM DOI", "PDF copy"]
+source_urls: ["https://dl.acm.org/doi/10.1145/130844.130856", "https://grosskurth.ca/bib/1992/krueger.pdf"]
+retrieved: 2026-07-10
+version: null
+snapshot_status: external-only
 status: active
 ---
 

@@ -1,11 +1,11 @@
 ---
 title: PDP-11
 aliases: [DEC PDP-11, PDP-11/40, PDP-11/45]
-tags: [type/concept, domain/computer-history, domain/computer-architecture, status/active]
+tags: [type/concept, domain/computer-history, domain/computer-architecture, status/draft]
 created: 2026-07-10
 updated: 2026-07-10
 sources: ["The UNIX Time-Sharing System", "The Development of the C Language", "The Evolution of the Unix Time-sharing System", "Portability of C Programs and the UNIX System"]
-status: active
+status: draft
 ---
 
 ## 개요

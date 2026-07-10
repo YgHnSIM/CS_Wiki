@@ -5,6 +5,14 @@ tags: [type/reference, domain/computer-science, domain/internet, domain/text-pro
 created: 2026-07-10
 updated: 2026-07-10
 sources: ["RFC 3629"]
+source_id: ref-023
+source_kind: external
+primary_sources: ["RFC 3629"]
+supporting_sources: []
+source_urls: ["https://datatracker.ietf.org/doc/html/rfc3629"]
+retrieved: 2026-07-10
+version: "RFC 3629"
+snapshot_status: external-only
 status: active
 ---
 

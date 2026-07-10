@@ -5,6 +5,14 @@ tags: [type/reference, domain/software-engineering, domain/computer-history, sta
 created: 2026-07-10
 updated: 2026-07-10
 sources: ["Communications of the ACM 1972", "ACM DOI", "PDF copy"]
+source_id: ref-003
+source_kind: external
+primary_sources: ["Communications of the ACM 1972"]
+supporting_sources: ["ACM DOI", "PDF copy"]
+source_urls: ["https://dl.acm.org/doi/10.1145/361598.361623", "https://wstomv.win.tue.nl/edu/2ip30/references/criteria_for_modularization.pdf"]
+retrieved: 2026-07-10
+version: null
+snapshot_status: external-only
 status: active
 ---
 

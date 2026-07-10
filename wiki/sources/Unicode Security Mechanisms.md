@@ -5,6 +5,14 @@ tags: [type/reference, domain/computer-science, domain/security, domain/text-pro
 created: 2026-07-10
 updated: 2026-07-10
 sources: ["Unicode Technical Standard #39"]
+source_id: ref-027
+source_kind: external
+primary_sources: ["Unicode Technical Standard #39, Version 17.0.0, Revision 32"]
+supporting_sources: ["Unicode Technical Standard #39 latest-version pointer"]
+source_urls: ["https://www.unicode.org/reports/tr39/tr39-32.html", "https://www.unicode.org/reports/tr39/"]
+retrieved: 2026-07-10
+version: "17.0.0 / Revision 32"
+snapshot_status: external-only
 status: active
 ---
 
@@ -27,7 +35,8 @@ Unicode는 다양한 문자 체계를 포괄하기 때문에, 서로 다른 코�
 
 ## 출처
 
-- Unicode Consortium, [UTS #39: Unicode Security Mechanisms](https://www.unicode.org/reports/tr39/)
+- Unicode Consortium, [UTS #39 Revision 32 — Version 17.0.0](https://www.unicode.org/reports/tr39/tr39-32.html)
+- Unicode Consortium, [UTS #39 최신 판본 포인터](https://www.unicode.org/reports/tr39/)
 
 ## 관련 항목
 

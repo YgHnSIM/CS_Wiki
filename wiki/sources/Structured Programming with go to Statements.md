@@ -5,6 +5,14 @@ tags: [type/reference, domain/software-engineering, domain/programming-languages
 created: 2026-07-10
 updated: 2026-07-10
 sources: ["ACM Computing Surveys 1974"]
+source_id: ref-014
+source_kind: external
+primary_sources: ["ACM Computing Surveys 1974"]
+supporting_sources: ["OpenAIRE metadata", "PDF copy"]
+source_urls: ["https://dl.acm.org/doi/10.1145/356635.356640", "https://oamonitor.ireland.openaire.eu/national/search/publication?pid=10.1145%2F356635.356640", "https://pic.plover.com/knuth-GOTO.pdf"]
+retrieved: 2026-07-10
+version: null
+snapshot_status: external-only
 status: active
 ---
 

@@ -1,10 +1,18 @@
 ---
 title: WHATWG Encoding Standard
-aliases: [Encoding Standard, WHATWG Encoding, Web Encoding Standard]
+aliases: [WHATWG Encoding, Web Encoding Standard]
 tags: [type/reference, domain/computer-science, domain/web, domain/text-processing, status/active]
 created: 2026-07-10
 updated: 2026-07-10
 sources: ["WHATWG Encoding Standard"]
+source_id: ref-026
+source_kind: external
+primary_sources: ["WHATWG Encoding Living Standard"]
+supporting_sources: ["Commit snapshot a985b62a9b45c17da3e17a9f0a0b4e30c34c4a8a"]
+source_urls: ["https://encoding.spec.whatwg.org/", "https://encoding.spec.whatwg.org/commit-snapshots/a985b62a9b45c17da3e17a9f0a0b4e30c34c4a8a/"]
+retrieved: 2026-07-10
+version: "Living Standard / snapshot 2026-05-21 (a985b62a)"
+snapshot_status: external-only
 status: active
 ---
 
@@ -28,7 +36,8 @@ status: active
 
 ## 출처
 
-- WHATWG, [Encoding Standard](https://encoding.spec.whatwg.org/)
+- WHATWG, [Encoding Living Standard](https://encoding.spec.whatwg.org/)
+- WHATWG, [2026-05-21 commit snapshot](https://encoding.spec.whatwg.org/commit-snapshots/a985b62a9b45c17da3e17a9f0a0b4e30c34c4a8a/)
 
 ## 관련 항목
 

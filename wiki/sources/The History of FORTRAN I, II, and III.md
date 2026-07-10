@@ -5,6 +5,14 @@ tags: [type/reference, domain/programming-languages, domain/software-engineering
 created: 2026-07-10
 updated: 2026-07-10
 sources: ["ACM SIGPLAN Notices 1978", "IBM Research publication record"]
+source_id: ref-017
+source_kind: external
+primary_sources: ["ACM SIGPLAN Notices 1978"]
+supporting_sources: ["IBM Research publication record", "ACM DOI", "PDF copy"]
+source_urls: ["https://research.ibm.com/publications/the-history-of-fortran-i-ii-and-iii", "https://dl.acm.org/doi/10.1145/800025.1198345", "https://www.cs.toronto.edu/~bor/199y08/backus-fortran-copy.pdf"]
+retrieved: 2026-07-10
+version: null
+snapshot_status: external-only
 status: active
 ---
 

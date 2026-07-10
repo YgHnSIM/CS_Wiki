@@ -1,10 +1,18 @@
 ---
 title: The Unicode Standard 17.0.0
-aliases: [Unicode 17.0.0, The Unicode Standard, Unicode Standard]
+aliases: [Unicode 17.0.0, The Unicode Standard]
 tags: [type/reference, domain/computer-science, domain/systems, domain/text-processing, status/active]
 created: 2026-07-10
 updated: 2026-07-10
 sources: ["Unicode 17.0.0 Core Specification"]
+source_id: ref-022
+source_kind: external
+primary_sources: ["Unicode 17.0.0 Core Specification"]
+supporting_sources: ["Unicode 17.0.0 Chapter 3: Conformance"]
+source_urls: ["https://www.unicode.org/versions/Unicode17.0.0/", "https://www.unicode.org/versions/Unicode17.0.0/core-spec/chapter-3/"]
+retrieved: 2026-07-10
+version: "17.0.0"
+snapshot_status: external-only
 status: active
 ---
 

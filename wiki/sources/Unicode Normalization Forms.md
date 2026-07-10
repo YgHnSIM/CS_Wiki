@@ -5,6 +5,14 @@ tags: [type/reference, domain/computer-science, domain/text-processing, domain/s
 created: 2026-07-10
 updated: 2026-07-10
 sources: ["Unicode Standard Annex #15"]
+source_id: ref-024
+source_kind: external
+primary_sources: ["Unicode Standard Annex #15, Unicode 17.0.0, Revision 57"]
+supporting_sources: ["Unicode Standard Annex #15 latest-version pointer"]
+source_urls: ["https://www.unicode.org/reports/tr15/tr15-57.html", "https://www.unicode.org/reports/tr15/"]
+retrieved: 2026-07-10
+version: "Unicode 17.0.0 / Revision 57"
+snapshot_status: external-only
 status: active
 ---
 
@@ -28,7 +36,8 @@ status: active
 
 ## 출처
 
-- Unicode Consortium, [UAX #15: Unicode Normalization Forms](https://www.unicode.org/reports/tr15/)
+- Unicode Consortium, [UAX #15 Revision 57 — Unicode 17.0.0](https://www.unicode.org/reports/tr15/tr15-57.html)
+- Unicode Consortium, [UAX #15 최신 판본 포인터](https://www.unicode.org/reports/tr15/)
 
 ## 관련 항목
 

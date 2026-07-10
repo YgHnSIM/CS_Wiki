@@ -5,6 +5,14 @@ tags: [type/reference, domain/programming-languages, domain/software-engineering
 created: 2026-07-10
 updated: 2026-07-10
 sources: ["HOPL-II 1993", "Bell Labs/Lucent electronic reprint"]
+source_id: ref-019
+source_kind: external
+primary_sources: ["HOPL-II 1993"]
+supporting_sources: ["Bell Labs/Lucent electronic reprint", "ACM DOI", "PDF copy"]
+source_urls: ["https://www.nokia.com/bell-labs/about/dennis-m-ritchie/chist.html", "https://dl.acm.org/doi/10.1145/234286.1057834", "https://brent.hailpern.com/wp-content/uploads/2020/02/p671-ritchie.pdf"]
+retrieved: 2026-07-10
+version: null
+snapshot_status: external-only
 status: active
 ---
 

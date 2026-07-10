@@ -1,11 +1,11 @@
 ---
 title: 스티븐 C. 존슨
 aliases: [Stephen C. Johnson, S. C. Johnson, Steve Johnson]
-tags: [type/entity, domain/software-engineering, domain/programming-languages, domain/operating-systems, status/active]
+tags: [type/entity, domain/software-engineering, domain/programming-languages, domain/operating-systems, status/draft]
 created: 2026-07-10
 updated: 2026-07-10
 sources: ["The Development of the C Language", "Portability of C Programs and the UNIX System"]
-status: active
+status: draft
 ---
 
 ## 개요
