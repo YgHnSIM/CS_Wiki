@@ -25,3 +25,7 @@ npm run build
 - 위키 문서는 `wiki/`에서 관리합니다.
 - 내부 링크는 Obsidian의 `[[위키링크]]` 문법을 그대로 사용합니다.
 - 콘텐츠 작업 규칙과 검증 절차는 `AGENTS.md`를 따릅니다.
+
+## 글꼴
+
+본문에는 네이버의 [D2Coding Ver 1.3.2](https://github.com/naver/d2codingfont/releases/tag/VER1.3.2)를 사용합니다. D2Coding은 OFL(Open Font License)로 배포됩니다.

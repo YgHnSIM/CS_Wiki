@@ -783,6 +783,26 @@ Unicode 17.0.0, RFC 3629, UAX #15, UAX #29, WHATWG Encoding Standard, UTS #39를
 - [[overview]]
 - [[index]]
 
+## [2026-07-11] update | 웹사이트 본문 글꼴 D2Coding 적용
+
+웹사이트의 주요 본문과 탐색 UI 글꼴을 D2Coding Ver 1.3.2로 교체했다. 디스플레이 제목의 Space Mono와 Retro-Futuristic 시각 방향은 유지하고, 한글 본문의 고정폭 가독성을 높였다. 웹 환경에서 동일하게 표시되도록 regular·bold WOFF2 파일을 프로젝트에 포함했다.
+
+변경된 페이지 및 파일:
+
+- 갱신: [[log]]
+- 갱신: `site/assets/site.css`, `site/assets/site.js`, `site/build.mjs`
+- 생성: `site/assets/fonts/D2Coding.woff2`, `site/assets/fonts/D2Coding-Bold.woff2`
+- 갱신: `README.md`
+
+### 출처
+
+- [D2Coding Ver 1.3.2](https://github.com/naver/d2codingfont/releases/tag/VER1.3.2)
+
+### 관련 항목
+
+- [[overview]]
+- [[index]]
+
 <!-- wiki-maintenance: global-sections -->
 ## 출처
 

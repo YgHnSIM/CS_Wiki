@@ -250,7 +250,7 @@ function layout({ title, description, content, canonicalPath = "/", bodyClass = 
   ${canonical ? `<link rel="canonical" href="${canonical}"><meta property="og:url" content="${canonical}">` : ""}
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <link rel="icon" href="${withBase("/assets/favicon.svg")}" type="image/svg+xml">
   <link rel="stylesheet" href="${withBase("/assets/site.css")}">
 </head>

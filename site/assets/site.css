@@ -1,3 +1,19 @@
+@font-face {
+  font-family: "D2Coding";
+  src: url("./fonts/D2Coding.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "D2Coding";
+  src: url("./fonts/D2Coding-Bold.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+}
+
 :root {
   --void: #0a0014;
   --void-raised: #120021;
@@ -9,7 +25,8 @@
   --line-strong: rgba(0, 255, 65, 0.58);
   --amber-line: rgba(255, 176, 0, 0.45);
   --page: min(1520px, calc(100vw - 48px));
-  --mono: "Space Mono", "IBM Plex Mono", "Nanum Gothic Coding", ui-monospace, monospace;
+  --mono: "D2Coding", "IBM Plex Mono", "Nanum Gothic Coding", ui-monospace, monospace;
+  --display: "Space Mono", "D2Coding", ui-monospace, monospace;
 }
 
 * {
@@ -128,7 +145,7 @@ button {
 
 .brand-mark {
   color: var(--phosphor);
-  font-family: "Space Mono", monospace;
+  font-family: var(--display);
   font-size: 18px;
   font-weight: 700;
   letter-spacing: 0.12em;
@@ -245,7 +262,7 @@ kbd {
 .hero h1 {
   max-width: 940px;
   margin: 0;
-  font-family: "Space Mono", monospace;
+  font-family: var(--display);
   font-size: clamp(45px, 6.1vw, 96px);
   line-height: 1.08;
   letter-spacing: -0.07em;
@@ -325,7 +342,7 @@ kbd {
 .hero-stats dd {
   margin: 3px 0 0;
   color: var(--phosphor);
-  font-family: "Space Mono", monospace;
+  font-family: var(--display);
   font-size: 22px;
   font-variant-numeric: tabular-nums;
 }
@@ -580,7 +597,7 @@ kbd {
   right: 5%;
   bottom: 14%;
   color: rgba(0, 255, 65, 0.07);
-  font-family: "Space Mono", monospace;
+  font-family: var(--display);
   font-size: clamp(100px, 18vw, 280px);
   font-weight: 700;
   line-height: 0.8;
@@ -752,6 +769,7 @@ kbd {
 
 .article-header h1 {
   margin: 0;
+  font-family: var(--display);
   font-size: clamp(40px, 5vw, 72px);
   line-height: 1.18;
   letter-spacing: -0.06em;

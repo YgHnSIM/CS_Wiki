@@ -223,7 +223,7 @@ function initializeGraph() {
       context.fill();
       context.shadowBlur = 0;
 
-      context.font = `${hovered ? "600" : "400"} 10px "IBM Plex Mono", monospace`;
+      context.font = `${hovered ? "700" : "400"} 10px "D2Coding", monospace`;
       context.fillStyle = hovered ? "#ffb000" : "rgba(231,255,233,0.86)";
       context.textAlign = node.x > width * 0.68 ? "right" : "left";
       context.textBaseline = "middle";
