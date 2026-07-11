@@ -1,3 +1,5 @@
 .obsidian/
 __pycache__/
 *.py[cod]
+node_modules/
+dist/

@@ -1,0 +1,15 @@
+{
+  "name": "cs-wiki-site",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node site/build.mjs",
+    "dev": "npm run build && node site/serve.mjs",
+    "lint:wiki": "python scripts/wiki_lint.py"
+  },
+  "dependencies": {
+    "markdown-it": "^14.1.0",
+    "markdown-it-anchor": "^9.2.0"
+  }
+}
