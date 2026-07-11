@@ -340,7 +340,7 @@ function homePage() {
   <section class="hero section-frame">
     <div class="hero-copy">
       <p class="eyebrow">source-driven computer science wiki</p>
-      <h1>컴퓨팅의 역사를<br><span>연결해서 읽는다.</span></h1>
+      <h1><span class="hero-title-line">컴퓨팅의 역사를</span><span class="hero-title-line hero-title-accent">연결해서 읽는다.</span></h1>
       <p class="hero-intro">배비지와 러브레이스에서 저장 프로그램 컴퓨터, 구조적 프로그래밍, Unix와 C, 유니코드까지. 원본 문헌에서 출발해 개념과 분석을 잇는 기술 위키입니다.</p>
       <div class="hero-actions">
         <button type="button" class="primary-action" data-open-search>문서 검색</button>

@@ -803,6 +803,24 @@ Unicode 17.0.0, RFC 3629, UAX #15, UAX #29, WHATWG Encoding Standard, UTS #39를
 - [[overview]]
 - [[index]]
 
+## [2026-07-11] update | 홈페이지 히어로 제목 줄바꿈 보정
+
+D2Coding 적용 후 데스크톱 히어로 제목에서 `컴퓨팅의 역사를`이 두 줄로 갈라지던 문제를 보정했다. 제목의 두 구절을 각각 독립된 줄로 묶고 데스크톱 글자 크기를 조정해, 첫 구절이 항상 한 줄로 표시되도록 했다.
+
+변경된 페이지 및 파일:
+
+- 갱신: [[log]]
+- 갱신: `site/build.mjs`, `site/assets/site.css`
+
+### 출처
+
+- 홈페이지 히어로 렌더링 화면
+
+### 관련 항목
+
+- [[overview]]
+- [[index]]
+
 <!-- wiki-maintenance: global-sections -->
 ## 출처
 

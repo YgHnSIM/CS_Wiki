@@ -263,13 +263,17 @@ kbd {
   max-width: 940px;
   margin: 0;
   font-family: var(--display);
-  font-size: clamp(45px, 6.1vw, 96px);
+  font-size: clamp(45px, 4.7vw, 76px);
   line-height: 1.08;
   letter-spacing: -0.07em;
-  text-wrap: balance;
 }
 
-.hero h1 span {
+.hero-title-line {
+  display: block;
+  white-space: nowrap;
+}
+
+.hero h1 .hero-title-accent {
   color: var(--phosphor);
   text-shadow: 0 0 24px rgba(0, 255, 65, 0.42);
 }
