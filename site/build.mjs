@@ -1,6 +1,7 @@
 import { cp, mkdir, readdir, readFile, rm, writeFile } from "node:fs/promises";
 import { existsSync } from "node:fs";
 import { basename, dirname, extname, join, relative, sep } from "node:path";
+import { createHash } from "node:crypto";
 import MarkdownIt from "markdown-it";
 import anchor from "markdown-it-anchor";
 
@@ -11,6 +12,11 @@ const rawAssets = join(root, "raw", "assets");
 const siteBase = normalizeBase(process.env.SITE_BASE || "");
 const siteUrl = (process.env.SITE_URL || "").replace(/\/$/, "");
 const repositoryUrl = "https://github.com/YgHnSIM/CS_Wiki";
+const assetVersion = createHash("sha256")
+  .update(await readFile(join(root, "site", "assets", "site.css")))
+  .update(await readFile(join(root, "site", "assets", "site.js")))
+  .digest("hex")
+  .slice(0, 12);
 
 const categoryMeta = {
   sources: { label: "소스", description: "원본과 핵심 문헌을 바탕으로 정리한 소스 노트" },
@@ -252,7 +258,7 @@ function layout({ title, description, content, canonicalPath = "/", bodyClass = 
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <link rel="icon" href="${withBase("/assets/favicon.svg")}" type="image/svg+xml">
-  <link rel="stylesheet" href="${withBase("/assets/site.css")}">
+  <link rel="stylesheet" href="${withBase("/assets/site.css")}?v=${assetVersion}">
 </head>
 <body class="${escapeHtml(bodyClass)}">
   <a class="skip-link" href="#content">본문으로 이동</a>
@@ -284,8 +290,8 @@ function layout({ title, description, content, canonicalPath = "/", bodyClass = 
     <div class="search-results" data-search-results></div>
   </dialog>
   ${graphData ? `<script type="application/json" id="graph-data">${JSON.stringify(graphData).replaceAll("<", "\\u003c")}</script>` : ""}
-  <script>window.CS_WIKI_BASE=${JSON.stringify(siteBase)};</script>
-  <script src="${withBase("/assets/site.js")}" defer></script>
+  <script>window.CS_WIKI_BASE=${JSON.stringify(siteBase)};window.CS_WIKI_ASSET_VERSION=${JSON.stringify(assetVersion)};</script>
+  <script src="${withBase("/assets/site.js")}?v=${assetVersion}" defer></script>
 </body>
 </html>`;
 }
@@ -340,7 +346,7 @@ function homePage() {
   <section class="hero section-frame">
     <div class="hero-copy">
       <p class="eyebrow">source-driven computer science wiki</p>
-      <h1><span class="hero-title-line">컴퓨팅의 역사를</span><span class="hero-title-line hero-title-accent">연결해서 읽는다.</span></h1>
+      <h1><span class="hero-title-line hero-title-primary">컴퓨팅의 역사를</span><span class="hero-title-line hero-title-accent">연결해서 읽는다.</span></h1>
       <p class="hero-intro">배비지와 러브레이스에서 저장 프로그램 컴퓨터, 구조적 프로그래밍, Unix와 C, 유니코드까지. 원본 문헌에서 출발해 개념과 분석을 잇는 기술 위키입니다.</p>
       <div class="hero-actions">
         <button type="button" class="primary-action" data-open-search>문서 검색</button>

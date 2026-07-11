@@ -260,17 +260,27 @@ kbd {
 }
 
 .hero h1 {
+  display: grid;
+  justify-items: start;
   max-width: 940px;
   margin: 0;
   font-family: var(--display);
   font-size: clamp(45px, 4.7vw, 76px);
   line-height: 1.08;
   letter-spacing: -0.07em;
+  text-align: left;
 }
 
 .hero-title-line {
   display: block;
+  width: max-content;
+  max-width: 100%;
   white-space: nowrap;
+}
+
+.hero h1 .hero-title-primary {
+  color: var(--text);
+  text-shadow: none;
 }
 
 .hero h1 .hero-title-accent {

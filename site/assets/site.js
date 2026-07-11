@@ -1,4 +1,5 @@
 const base = window.CS_WIKI_BASE || "";
+const assetVersion = window.CS_WIKI_ASSET_VERSION || "";
 const dialog = document.querySelector("[data-search-dialog]");
 const searchInput = document.querySelector("[data-search-input]");
 const searchResults = document.querySelector("[data-search-results]");
@@ -15,7 +16,7 @@ function normalize(value) {
 
 async function loadSearchIndex() {
   if (!searchIndex) {
-    const response = await fetch(`${base}/search.json`);
+    const response = await fetch(`${base}/search.json?v=${assetVersion}`);
     if (!response.ok) throw new Error("검색 색인을 불러오지 못했습니다.");
     searchIndex = await response.json();
   }

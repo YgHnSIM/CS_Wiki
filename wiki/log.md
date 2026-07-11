@@ -821,6 +821,25 @@ D2Coding 적용 후 데스크톱 히어로 제목에서 `컴퓨팅의 역사를`
 - [[overview]]
 - [[index]]
 
+## [2026-07-11] fix | 히어로 제목 색상·정렬 및 배포 캐시 보정
+
+새 히어로 제목 HTML과 이전 CSS가 브라우저 캐시에서 섞이며 두 구절이 모두 녹색으로 표시되고 세 줄로 재배치되던 문제를 수정했다. 첫 줄은 흰색, 둘째 줄은 phosphor green으로 명시하고 두 줄의 왼쪽 기준선을 CSS grid로 고정했다. CSS·JavaScript URL에는 콘텐츠 해시를 추가해 배포 후 이전 자산이 새 HTML과 조합되지 않도록 했다.
+
+변경된 페이지 및 파일:
+
+- 갱신: [[log]]
+- 갱신: `site/build.mjs`, `site/assets/site.css`, `site/assets/site.js`
+
+### 출처
+
+- 데스크톱 홈페이지 렌더링 화면
+- GitHub Pages 응답 헤더 `Cache-Control: max-age=600`
+
+### 관련 항목
+
+- [[overview]]
+- [[index]]
+
 <!-- wiki-maintenance: global-sections -->
 ## 출처
 
