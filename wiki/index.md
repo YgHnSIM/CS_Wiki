@@ -3,7 +3,7 @@ title: 위키 색인
 aliases: [index, 색인, 카탈로그]
 tags: [type/meta, status/active]
 created: 2026-05-03
-updated: 2026-07-10
+updated: 2026-07-11
 sources: []
 status: active
 ---
@@ -27,6 +27,7 @@ status: active
 - [[First Draft of a Report on the EDVAC]] — EDVAC 설계 보고서를 중심으로 저장 프로그램 컴퓨터의 논리 구조, 폰 노이만 구조, 설계상 최초성을 정리한 참고 자료. (핵심 문헌 1개)
 - [[The Manchester Small Scale Experimental Machine - The Baby]] — Manchester Baby의 저장 프로그램 실행, Williams-Kilburn tube, EDSAC과의 최초성 기준 차이를 정리한 참고 자료. (핵심 문헌 1개)
 - [[A Symbolic Analysis of Relay and Switching Circuits]] — Shannon의 릴레이·스위칭 회로 논문을 바탕으로 불 대수, 논리 게이트, 이진 덧셈 회로, 이진 표현의 회로적 기반을 정리한 참고 자료. (핵심 문헌 1개)
+- [[An Investigation of the Laws of Thought]] — Boole의 1854년 저작을 바탕으로 논리를 기호와 연산의 체계로 다루는 관점과 Boolean이라는 명칭의 기원을 정리한 참고 자료. (핵심 문헌 1개)
 - [[On Computable Numbers with an Application to the Entscheidungsproblem]] — Turing의 1936년 논문을 바탕으로 튜링 기계, 보편 튜링 기계, 계산 가능성, 정지 문제, Entscheidungsproblem을 정리한 참고 자료. (핵심 문헌 1개)
 - [[An Unsolvable Problem of Elementary Number Theory]] — Church의 1936년 논문을 바탕으로 효과적 계산 가능성, 람다 정의 가능성, 재귀 함수, 처치-튜링 논제를 보강한 참고 자료. (핵심 문헌 1개)
 - [[A Case against the GO TO Statement]] — Dijkstra의 `goto` 비판을 바탕으로 프로그램 텍스트와 실행 과정의 대응, 제어 흐름의 추적 가능성을 정리한 참고 자료. (핵심 문헌 1개)
@@ -72,6 +73,7 @@ status: active
 - [[도널드 커누스]] — `goto` 논쟁을 언어 설계와 프로그램 변환의 관점에서 균형 있게 재검토한 컴퓨터 과학자. (근거 1개)
 - [[올레요한 달]] — Structured Programming의 공저자로 계층적 프로그램 구조와 데이터 구조 설계 흐름에 기여한 컴퓨터 과학자. (근거 1개)
 - [[토니 호어]] — Structured Programming의 공저자로 데이터 구조화와 프로그램 검증 관점을 구조적 프로그래밍 논의에 연결한 컴퓨터 과학자. (근거 2개)
+- [[조지 불]] — 논리 명제를 기호와 연산으로 다루는 대수적 논리의 전통을 세워 불 대수의 역사적 기반을 마련한 수학자·논리학자. (근거 2개)
 - [[클로드 섀넌]] — 불 대수와 릴레이 회로의 대응을 정식화해 논리 회로와 이진 표현의 수학적 연결을 보여준 전기공학자·수학자. (근거 1개)
 - [[그레이스 호퍼]] — FLOW-MATIC을 통해 사람이 읽고 협업할 수 있는 프로그래밍 언어 표현의 중요성을 보여준 초기 언어 설계 인물. (근거 1개)
 
@@ -111,7 +113,7 @@ status: active
 - [[인코딩 오류]] — 잘못된 바이트열, 부적절한 디코딩, 대체 문자 처리 때문에 생기는 텍스트 해석 오류. (근거 3개)
 - [[동형이의 문자]] — 서로 다른 코드 포인트가 시각적으로 비슷해 식별자와 보안 경계에서 혼동을 일으키는 문자 문제. (근거 2개)
 - [[비트 연산]] — 시프팅과 마스킹으로 특정 비트를 이동·추출·제어하는 저수준 데이터 조작 기법. (근거 3개)
-- [[불 대수]] — 두 값만 갖는 대상을 논리 연산으로 다루며 논리 게이트와 비트 연산의 기본 언어가 되는 대수 체계. (근거 1개)
+- [[불 대수]] — 두 값과 논리 연산이 만족하는 법칙을 통해 기호식을 변형하며 논리 게이트와 비트 연산의 기본 언어가 되는 대수 체계. (근거 2개)
 - [[릴레이 회로]] — 접점의 열림과 닫힘으로 전류 흐름을 제어하며 스위칭 회로와 디지털 논리의 전사를 보여주는 회로. (근거 1개)
 - [[스위칭 회로]] — 스위치나 릴레이의 두 상태를 조합해 논리 함수를 구현하는 회로 체계. (근거 1개)
 - [[논리 게이트]] — AND, OR, NOT, XOR 같은 불 대수 연산을 물리 회로로 구현하는 이진 회로 단위. (근거 1개)

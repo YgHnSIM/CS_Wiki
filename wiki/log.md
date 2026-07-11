@@ -840,6 +840,32 @@ D2Coding 적용 후 데스크톱 히어로 제목에서 `컴퓨팅의 역사를`
 - [[overview]]
 - [[index]]
 
+## [2026-07-11] update | 불 대수의 명칭과 대수 구조 보강
+
+사용자가 제공한 설명을 기존 [[불 대수]] 페이지의 백과사전적 구조에 맞춰 재구성했다. 숫자 계산이 아닌 연산과 법칙의 체계라는 `대수`의 의미, 두 값과 핵심 연산, 교환·결합·분배·항등·여원 법칙, Boolean이라는 명칭의 역사적 배경을 추가했다. George Boole의 1854년 원저를 별도 참고 자료로 확인하고 [[조지 불]] 페이지를 생성해 역사 서술의 근거와 교차 링크를 보강했다.
+
+변경된 페이지:
+
+- 갱신: [[불 대수]]
+- 생성: [[An Investigation of the Laws of Thought]]
+- 생성: [[조지 불]]
+- 갱신: [[기호 조작]], [[논리 게이트]], [[스위칭 회로]], [[클로드 섀넌]]의 상호 링크
+- 갱신: [[index]]
+- 갱신: [[overview]]
+- 갱신: [[log]]
+
+### 출처
+
+- [[An Investigation of the Laws of Thought]]
+- [[A Symbolic Analysis of Relay and Switching Circuits]]
+
+### 관련 항목
+
+- [[불 대수]]
+- [[조지 불]]
+- [[기호 조작]]
+- [[논리 회로와 이진 표현]]
+
 <!-- wiki-maintenance: global-sections -->
 ## 출처
 
