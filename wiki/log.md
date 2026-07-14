@@ -4,7 +4,7 @@ aliases: [log, 변경 기록, 작업 기록]
 summary: "CS Wiki의 소스 수집, 질의, 점검, 콘텐츠·웹사이트 변경을 시간순으로 남긴 운영 기록."
 tags: [type/meta, status/active]
 created: 2026-05-03
-updated: 2026-07-14
+updated: 2026-07-15
 sources: []
 status: active
 ---
@@ -902,6 +902,54 @@ D2Coding 적용 후 데스크톱 히어로 제목에서 `컴퓨팅의 역사를`
 - [[overview]]
 - [[index]]
 - [[log]]
+
+## [2026-07-15] reference | 컴퓨팅 능력의 최소 참고 자료
+
+“컴퓨팅 능력이란 무엇인가” 페이지의 근거를 마련하기 위해 계산 복잡도, 표준 CPU 벤치마크, LINPACK, Roofline 모델, 병렬 가속의 한계, 성능당 전력 측정 자료를 수집했다. PDF 5개와 공식 웹 문서 스냅샷 3개를 `raw/assets/`에 보존하고, 원 출판물·접근용 사본·공식 URL을 구분해 여섯 참고 페이지로 처리했다.
+
+기존 Turing 논문의 로컬 보존본을 연결해 `snapshot_status`를 `archived`로 바꾸고, [[계산 가능성]]에 계산 가능성과 시간 복잡도를 구분하는 설명을 보강했다. Green500 문서는 2007년판 역사 자료로 한정해 현재 규정으로 오해하지 않도록 명시했다.
+
+변경된 페이지 및 파일:
+
+- 생성: [[On the Computational Complexity of Algorithms]]
+- 생성: [[SPEC CPU 2026 Overview]]
+- 생성: [[The Linpack Benchmark]]
+- 생성: [[Roofline An Insightful Visual Performance Model]]
+- 생성: [[Validity of the Single Processor Approach to Achieving Large Scale Computing Capabilities]]
+- 생성: [[Power Measurement Tutorial for the Green500 List]]
+- 갱신: [[On Computable Numbers with an Application to the Entscheidungsproblem]], [[계산 가능성]]
+- 갱신: [[index]], [[overview]], [[log]]
+- 보존: `raw/assets/1936_Turing_On_Computable_Numbers.pdf`
+- 보존: `raw/assets/1965_Hartmanis_Stearns_Computational_Complexity.pdf`
+- 보존: `raw/assets/1967_Amdahl_Single_Processor_Approach.pdf`
+- 보존: `raw/assets/2009_Williams_Waterman_Patterson_Roofline.pdf`
+- 보존: `raw/assets/Green500_Power_Measurement_Tutorial.pdf`
+- 보존: `raw/assets/SPEC_CPU_2026_Overview.html`
+- 보존: `raw/assets/TOP500_Linpack_Benchmark.html`, `raw/assets/TOP500_Linpack_FAQ.html`
+
+### 검증
+
+- PDF 5개: Poppler 텍스트 추출과 대표 페이지 렌더링으로 제목·본문·수식·표 가독성 확인
+- HTML 3개: 공식 페이지 내용과 다운로드 스냅샷 대조
+- `python scripts/wiki_lint.py --json`: 169개 페이지, 4,125개 링크, 오류 0건, 경고 0건
+- `python scripts/wiki_maintenance.py --check`: 변경 필요 항목 0건
+- `npm run build`: 169개 페이지 빌드 성공
+
+### 출처
+
+- [[On Computable Numbers with an Application to the Entscheidungsproblem]]
+- [[On the Computational Complexity of Algorithms]]
+- [[SPEC CPU 2026 Overview]]
+- [[The Linpack Benchmark]]
+- [[Roofline An Insightful Visual Performance Model]]
+- [[Validity of the Single Processor Approach to Achieving Large Scale Computing Capabilities]]
+- [[Power Measurement Tutorial for the Green500 List]]
+
+### 관련 항목
+
+- [[계산 가능성]]
+- [[overview]]
+- [[index]]
 
 <!-- wiki-maintenance: global-sections -->
 ## 출처

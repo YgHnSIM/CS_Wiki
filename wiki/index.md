@@ -4,7 +4,7 @@ aliases: [index, 색인, 카탈로그]
 summary: "위키 전체 페이지를 유형별로 정리하고 각 페이지의 근거 수를 표시하는 카탈로그."
 tags: [type/meta, status/active]
 created: 2026-05-03
-updated: 2026-07-11
+updated: 2026-07-15
 sources: []
 status: active
 ---
@@ -50,6 +50,12 @@ status: active
 - [[Unicode Security Mechanisms]] — UTS #39를 바탕으로 동형이의 문자, mixed-script 탐지, Unicode 식별자 보안 문제를 정리한 참고 자료. (핵심 문헌 1개)
 - [[Cambridge Computer Laboratory - The History of the Computer Lab]] — EDSAC I의 운영과 EDSAC II의 마이크로프로그램 제어부 계보를 구분하는 케임브리지 공식 역사 자료. (핵심 문헌 1개)
 - [[C Integer and Shift Semantics]] — WG14 문서를 바탕으로 C의 unsigned 래핑, signed overflow, 시프트 연산 조건을 정리한 참고 자료. (핵심 문헌 1개)
+- [[On the Computational Complexity of Algorithms]] — 계산 가능한 대상 사이의 시간 자원 차이를 형식화하고 계산 가능성과 계산 복잡도를 구분한 1965년 논문. (핵심 문헌 1개)
+- [[SPEC CPU 2026 Overview]] — 표준 벤치마크의 조건과 한계를 설명하고 실행 시간 중심 성능과 처리량 중심 성능을 구분한 SPEC 공식 자료. (핵심 문헌 1개)
+- [[The Linpack Benchmark]] — 고밀도 선형방정식 풀이를 통해 부동소수점 성능을 측정하고 Rmax·Rpeak와 단일 지표의 한계를 설명한 TOP500 자료. (핵심 문헌 2개)
+- [[Roofline An Insightful Visual Performance Model]] — 연산 집약도와 메모리 대역폭을 결합해 계산·메모리 병목과 달성 가능한 성능 상한을 시각화한 논문. (핵심 문헌 1개)
+- [[Validity of the Single Processor Approach to Achieving Large Scale Computing Capabilities]] — 순차 작업과 데이터 관리 오버헤드가 병렬 가속을 제한한다는 암달의 논문. (핵심 문헌 1개)
+- [[Power Measurement Tutorial for the Green500 List]] — LINPACK 달성 성능과 같은 구간의 평균 전력을 결합해 GFLOPS/W를 산출하는 2007년 측정 지침. (핵심 문헌 1개)
 
 ## 인물 (Entities)
 
@@ -85,7 +91,7 @@ status: active
 - [[유한 차분법]] — 다항식 계산을 반복 덧셈으로 환원해 기계식 계산에 적합하게 만드는 방법. (근거 1개)
 - [[알고리즘적 사고]] — 문제를 단계, 데이터, 반복, 조건, 관찰, 재사용 가능한 단위로 분해해 기계가 수행할 수 있게 만드는 사고방식. (근거 4개)
 - [[기호 조작]] — 숫자, 데이터, 프로그램 표기를 관계와 의미의 표현으로 보고 규칙에 따라 변환하는 컴퓨팅 관점. (근거 6개)
-- [[계산 가능성]] — 어떤 함수나 문제가 유한한 규칙적 절차로 해결될 수 있는지를 다루는 이론적 개념. (근거 2개)
+- [[계산 가능성]] — 어떤 함수나 문제가 유한한 규칙적 절차로 해결될 수 있는지를 다루는 이론적 개념. (근거 3개)
 - [[튜링 기계]] — 테이프, 상태, 기호, 전이 규칙으로 계산 절차를 형식화한 추상 기계 모델. (근거 1개)
 - [[보편 튜링 기계]] — 다른 튜링 기계의 기술을 입력으로 받아 그 동작을 흉내낼 수 있는 추상 기계. (근거 1개)
 - [[정지 문제]] — 임의의 프로그램과 입력에 대해 실행이 멈출지 일반적으로 판정할 수 있는지를 묻는 문제. (근거 1개)

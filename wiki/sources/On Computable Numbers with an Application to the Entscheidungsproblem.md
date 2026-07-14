@@ -4,16 +4,16 @@ aliases: [On Computable Numbers, Turing 1936, computable numbers]
 summary: "Turing의 1936년 논문을 바탕으로 튜링 기계, 보편 튜링 기계, 계산 가능성, 정지 문제, Entscheidungsproblem을 정리한 참고 자료."
 tags: [type/reference, domain/computer-history, domain/computer-science, status/active]
 created: 2026-07-10
-updated: 2026-07-10
-sources: ["Proceedings of the London Mathematical Society 1937", "Turing Digital Archive AMT-B-12"]
+updated: 2026-07-15
+sources: ["1936_Turing_On_Computable_Numbers.pdf", "Proceedings of the London Mathematical Society 1937", "Turing Digital Archive AMT-B-12"]
 source_id: ref-009
 source_kind: external
 primary_sources: ["Proceedings of the London Mathematical Society 1937"]
-supporting_sources: ["Turing Digital Archive AMT-B-12", "Wiley record", "PDF copy"]
+supporting_sources: ["1936_Turing_On_Computable_Numbers.pdf", "Turing Digital Archive AMT-B-12", "Wiley record", "PDF copy"]
 source_urls: ["https://turingarchive.kings.cam.ac.uk/publications-lectures-and-talks-amtb/amt-b-12", "https://londmathsoc.onlinelibrary.wiley.com/doi/10.1112/plms/s2-42.1.230", "https://www.cs.virginia.edu/~robins/Turing_Paper_1936.pdf"]
 retrieved: 2026-07-10
 version: null
-snapshot_status: external-only
+snapshot_status: archived
 status: active
 ---
 
@@ -37,6 +37,7 @@ status: active
 
 ## 출처
 
+- 로컬 보존본: `raw/assets/1936_Turing_On_Computable_Numbers.pdf`
 - Turing Digital Archive, [AMT/B/12](https://turingarchive.kings.cam.ac.uk/publications-lectures-and-talks-amtb/amt-b-12)
 - Wiley, [On Computable Numbers, with an Application to the Entscheidungsproblem](https://londmathsoc.onlinelibrary.wiley.com/doi/10.1112/plms/s2-42.1.230)
 - PDF copy, [On Computable Numbers, with an Application to the Entscheidungsproblem](https://www.cs.virginia.edu/~robins/Turing_Paper_1936.pdf)
@@ -51,3 +52,4 @@ status: active
 - [[Entscheidungsproblem]]
 - [[처치-튜링 논제]]
 - [[기계가 계산한다는 말의 이론적 의미]]
+- [[On the Computational Complexity of Algorithms]]

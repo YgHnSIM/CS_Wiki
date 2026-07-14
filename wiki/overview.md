@@ -4,18 +4,18 @@ aliases: [overview, 홈페이지, 전체 개요]
 summary: "CS Wiki의 지식 범위, 검증 상태, 핵심 주제와 웹 탐색 방법을 한눈에 보여주는 홈페이지."
 tags: [type/meta, status/active]
 created: 2026-05-03
-updated: 2026-07-14
+updated: 2026-07-15
 sources: []
 status: active
 ---
 
 ## 현재 상태
 
-이 위키는 컴퓨터 과학과 컴퓨팅사 지식을 원본 소스 기반으로 정리한다. 현재 정규 소스는 6개 묶음, 참고 자료는 30개이며, 주요 주제는 19세기 기계식 계산 장치에서 계산 가능성과 기계 계산의 이론적 의미, 20세기 초기 저장 프로그램 컴퓨터의 계보, 로더, 어셈블러, 서브루틴, 스택 기반 호출 구조, `goto`와 구조적 프로그래밍, Fortran과 컴파일러, Unix와 C, 서브루틴 라이브러리와 API적 사고, 소프트웨어 재사용의 역사, 논리 회로와 이진 표현, 디지털 데이터 표현과 메모리 안전성, 그리고 유니코드 기반 텍스트 인코딩 심화로 이어지는 컴퓨팅 개념의 형성이다.
+이 위키는 컴퓨터 과학과 컴퓨팅사 지식을 원본 소스 기반으로 정리한다. 현재 정규 소스는 6개 묶음, 참고 자료는 36개이며, 주요 주제는 19세기 기계식 계산 장치에서 계산 가능성과 계산 복잡도, 기계 계산의 이론적 의미, 20세기 초기 저장 프로그램 컴퓨터의 계보, 로더, 어셈블러, 서브루틴, 스택 기반 호출 구조, `goto`와 구조적 프로그래밍, Fortran과 컴파일러, Unix와 C, 서브루틴 라이브러리와 API적 사고, 소프트웨어 재사용의 역사, 컴퓨팅 성능과 병목·확장성·전력 효율의 측정, 논리 회로와 이진 표현, 디지털 데이터 표현과 메모리 안전성, 그리고 유니코드 기반 텍스트 인코딩 심화로 이어지는 컴퓨팅 개념의 형성이다.
 
 
 <!-- wiki-maintenance: status-summary -->
-운영 상태: 전체 163개 페이지 중 active 148개, draft 15개, review 0개, archived 0개다.
+운영 상태: 전체 169개 페이지 중 active 154개, draft 15개, review 0개, archived 0개다.
 
 ## 웹 탐색 구조
 
@@ -64,6 +64,10 @@ status: active
 ### Unix와 C
 
 [[The UNIX Time-Sharing System]], [[The Development of the C Language]], [[The Evolution of the Unix Time-sharing System]], [[Portability of C Programs and the UNIX System]]는 [[Unix]]와 [[C 언어]]가 함께 형성된 과정을 정리하는 참고 자료다. 이 축은 [[데니스 리치]], [[켄 톰프슨]], [[PDP-11]], [[운영체제]], [[파일 시스템]], [[시스템 호출]], [[유닉스 파이프]], [[시스템 프로그래밍]], [[이식성]]을 통해 운영체제와 언어가 서로를 강화한 과정을 다룬다. 핵심 분석은 [[Unix와 C]]에 모았다.
+
+### 컴퓨팅 능력과 성능 측정
+
+[[On the Computational Complexity of Algorithms]]는 원리적으로 계산 가능한 것과 주어진 자원으로 계산하기 어려운 것을 구분한다. [[SPEC CPU 2026 Overview]]와 [[The Linpack Benchmark]]는 실행 시간·처리량·달성 성능을 특정 작업 부하와 정확도 조건 아래에서 측정해야 함을 보여준다. [[Validity of the Single Processor Approach to Achieving Large Scale Computing Capabilities]]는 병렬화되지 않는 순차 부분이 전체 가속을 제한한다는 관점을 제시하고, [[Roofline An Insightful Visual Performance Model]]은 연산 성능과 메모리 대역폭 사이의 병목을 시각화한다. [[Power Measurement Tutorial for the Green500 List]]는 여기에 성능당 전력이라는 효율 차원을 더한다.
 
 ### 데이터 표현과 안전성
 
@@ -139,3 +143,9 @@ status: active
 - [[WHATWG Encoding Standard]]
 - [[Unicode Security Mechanisms]]
 - [[인코딩 심화]]
+- [[On the Computational Complexity of Algorithms]]
+- [[SPEC CPU 2026 Overview]]
+- [[The Linpack Benchmark]]
+- [[Roofline An Insightful Visual Performance Model]]
+- [[Validity of the Single Processor Approach to Achieving Large Scale Computing Capabilities]]
+- [[Power Measurement Tutorial for the Green500 List]]

@@ -1,0 +1,1416 @@
+<!DOCTYPE html>
+<!-- You'll want a nice wide screen (132 columns) when editing this ............................................................ -->
+<html lang="en">
+   <head>
+      <meta charset="utf-8">
+      <link rel="STYLESHEET" href="css/cpudocs.css">
+      <link rel="STYLESHEET" href="css/cpudocsNoLinkie.css" media="print" type="text/css">
+
+      <title>Overview - CPU 2026</title>
+
+      <style>
+a.hitch {white-space:nowrap; border-style:solid; border-width:1px 0px; border-color:blue; font-size:12px;
+      font-weight:normal; margin-right:1em;}
+
+td.fineprint { width:20%;font-size:85%; vertical-align:middle;}
+.newterm {font-style:italic; font-weight:bold;}
+.contentsrl1     {padding:2px 8px; margin:12px 0em 5px .1em; font-size:110%; line-height:1.3; font-family:sans-serif; color:#eeeeef; background:#446688; }
+.contentsrl2     {margin:3px 0em 3px 1.8em; text-indent:-1em; line-height:1.3; }
+.question        { margin: 1.5em 1em .2em 3em; text-indent:-1em; }
+.answer          { margin: .2em  1em .5em 3em; text-indent:0;}
+      </style>
+   </head>
+   <body>
+
+
+      <h1>SPEC CPU&reg;2026 Overview / What's New? </h1>
+      <table class="version">
+         <tr>
+            <td>Latest:
+               <a class="external" href="https://www.spec.org/cpu2026/Docs/">www.spec.org/cpu2026/Docs/</a>
+            </td>
+         </tr>
+      </table>
+
+
+
+      <p class="l1">This document introduces the SPEC CPU&reg;2026 Benchmark Suite via a series of questions and answers. The SPEC CPU 2026 Benchmark Suite
+      is a product of the SPEC&reg; non-profit corporation <a href="https://www.spec.org/spec/" class="external">(about SPEC)</a>.
+      </p>
+
+      <table  class="noborder">
+         <tr>
+            <td>
+               <p style="margin-bottom:2px;"><a class="contentsrl1" style="color:white;text-decoration:none;"
+                                                                    href="#AboutBenchmarks">Benchmarks: good, bad, difficult, and standard</a></p>
+               <p class="contentsrl2"><a href="#Q1" >Q1.</a> What is SPEC?                                        </p>
+               <p class="contentsrl2"><a href="#Q2" >Q2.</a> What is a (good) benchmark?                          </p>
+               <p class="contentsrl2"><a href="#Q3" >Q3.</a> What are some common benchmarking mistakes?          </p>
+               <p class="contentsrl2"><a href="#Q4" >Q4.</a> Should I benchmark my own application?               </p>
+               <p class="contentsrl2"><a href="#Q5" >Q5.</a> Should I use a standard benchmark?                   </p>
+
+               <p style="margin-bottom:2px;"><a class="contentsrl1" style="color:white;text-decoration:none;" href="#Basics">
+                  SPEC CPU 2026 Basics</a></p>
+               <p class="contentsrl2"><a href="#Q6" >Q6.</a> What does SPEC CPU 2026 measure?                      </p>
+               <p class="contentsrl2"><a href="#Q7" >Q7.</a> Should I use CPU 2026? Why or why not?                </p>
+               <p class="contentsrl2"><a href="#Q8" >Q8.</a> What does SPEC provide?           </p>
+               <p class="contentsrl2"><a href="#Q9" >Q9.</a> What must I provide?      </p>
+               <p class="contentsrl2"><a href="#Q10">Q10.</a> What are the basic steps to run the SPEC CPU 2026 Benchmark Suite?  </p>
+               <p class="contentsrl2"><a href="#Q11">Q11.</a> How long does it take?  Is it longer than CPU 2017?</p>
+
+               <p style="margin-bottom:2px;"><a class="contentsrl1" style="color:white;text-decoration:none;" href="#SuitesAndBenchmarks">
+                  Suites and Benchmarks</a></p>
+               <p class="contentsrl2"><a href="#Q12">Q12.</a> What is a SPEC CPU 2026 "suite"?              </p>
+               <p class="contentsrl2"><a href="#Q13">Q13.</a> What are the benchmarks?                             </p>
+               <p class="contentsrl2"><a href="#Q14">Q14.</a> Are 7nn.benchmark and 8nn.benchmark different?  </p>
+
+               <p style="margin-bottom:2px;"><a class="contentsrl1" style="color:white;text-decoration:none;"
+                                                                    href="#AboutMetrics">SPEC CPU 2026 Metrics</a></p>
+               <p style="white-space:nowrap;" class="contentsrl2"><a href="#Q15">Q15.</a> What are "SPECspeed" and "SPECrate" metrics? </p>
+               <p class="contentsrl2"><a href="#Q16">Q16.</a> What are  "base" and "peak" metrics?                </p>
+               <p class="contentsrl2"><a href="#Q17">Q17.</a> Which SPEC CPU 2026 metric should I use?             </p>
+               <p class="contentsrl2"><a href="#Q18">Q18:</a> What is a "reference machine"? Why use one?         </p>
+            </td>
+
+            <td style="padding-left:2em;">
+               <p style="margin-bottom:2px;"><a class="contentsrl1" style="color:white;text-decoration:none;" href="#Q19">
+                  Q19. What's new in the SPEC CPU 2026 Benchmark Suite?</a></p>
+
+               <p class="contentsrl2"><a href="#BenchmarksAndMetrics"    > a.</a> Benchmarks and Metrics</p>
+               <p class="contentsrl2"><a href="#SourceCode"              > b.</a> Source Code: C18, Fortran-2018, C++2017</p>
+               <p class="contentsrl2"><a href="#Rules"                   > c.</a>  Rules</p>
+
+
+               <p style="margin-bottom:2px;"><a class="contentsrl1" style="color:white;text-decoration:none;"
+                                                                    href="#Publishing" >Publishing results</a></p>
+               <p class="contentsrl2"><a href="#Q20">Q20:</a> Where can I find SPEC CPU 2026 results? </p>
+               <p class="contentsrl2"><a href="#Q21">Q21:</a> Can I publish elsewhere? Do the rules still apply?      </p>
+
+               <p style="margin-bottom:2px;"><a class="contentsrl1" style="color:white;text-decoration:none;"
+                                                                    href="#Transitions"> Transitions</a></p>
+               <p class="contentsrl2"><a href="#Q22">Q22:</a> What will happen to SPEC CPU 2017?                   </p>
+               <p class="contentsrl2"><a href="#Q23">Q23:</a> Can I convert SPEC CPU 2017 results to SPEC CPU 2026?              </p>
+
+               <p style="margin-bottom:2px;"><a class="contentsrl1" style="color:white;text-decoration:none;"
+                                                                    href="#Selection">SPEC CPU 2026 Benchmark Selection</a></p>
+               <p class="contentsrl2"><a href="#Q24">Q24:</a> What criteria were used?                            </p>
+               <p class="contentsrl2"><a href="#Q25">Q25:</a> Were some benchmarks 'kept' from CPU 2017?</p>
+               <p class="contentsrl2"><a href="#Q26">Q26.</a> Are the benchmarks comparable to other programs?</p>
+
+               <p style="margin-bottom:2px;"><a class="contentsrl1" style="color:white;text-decoration:none;" href="#Misc">
+                  Miscellaneous</a></p>
+               <p class="contentsrl2"><a href="#Q27">Q27:</a> Can I run the benchmarks manually?           </p>
+               <p class="contentsrl2"><a href="#Q28">Q28.</a> How do I contact SPEC?                                </p>
+               <p class="contentsrl2"><a href="#Q29">Q29.</a> What should I do next?                              </p>
+            </td>
+         </tr>
+      </table>
+
+
+      <h2 id="AboutBenchmarks" style="border:solid lightgray; border-width:1px 0px; ">Benchmarks; good, bad, difficult, and standard</h2>
+
+
+      <h3 id="Q1">Q1. What is SPEC?</h3>
+
+      <p class="l1"><var>SPEC</var> is the <var>Standard Performance Evaluation Corporation</var>, a non-profit organization
+      founded in 1988 to establish standardized performance benchmarks that are objective, meaningful, clearly defined, and
+      readily available.  SPEC members include hardware and software vendors, universities, and researchers.  [<a
+         href="https://www.spec.org/spec/" class="external">About SPEC</a>]</p>
+
+      <p class="l1">SPEC was founded on the realization that "An ounce of honest data is worth a pound of marketing hype".  </p>
+
+
+
+      <h3 id="Q2">Q2. What is a (good) benchmark?</h3>
+      <div class="l1">
+         <p>A surveyor's <var>bench&nbsp;mark</var> (two words) defines a known reference point by which other locations
+         may be measured.
+
+         <br>A computer <var>benchmark</var> performs a known set of operations by which computer performance can be
+         measured. </p>
+
+         <table id="table1" class="l1" style="width:800px;">
+            <tr>
+               <td colspan="2"><b>Table 1: Characteristics of useful performance benchmarks</b></td>
+            </tr>
+            <tr>
+               <td>Specifies a <var>workload</var></td>
+               <td>A strictly-defined set of operations to be performed.</td>
+            </tr>
+            <tr>
+               <td class="nb">Produces at least one <var>metric</var></td>
+               <td><p class="snug">A numeric representation of performance.  Common metrics include:</p>
+                  <ul class="snugish">
+                     <li>Time  - For example, seconds to complete the workload.</li>
+                     <li>Throughput - Work completed per unit of time, for example, jobs per hour.</li>
+                  </ul>
+               </td>
+            </tr>
+            <tr>
+               <td>Is <var>reproducible</var></td>
+               <td>If repeated, will report similar <a href="#similar">(*)</a> metrics.</td>
+            </tr>
+            <tr>
+               <td>Is <var>portable</var></td>
+               <td>Can be run on a variety of interesting systems.</td>
+            </tr>
+            <tr>
+               <td>Is <var>comparable</var></td>
+               <td>If the metric is reported for multiple systems, the values are meaningful and useful. </td>
+            </tr>
+            <tr>
+               <td class="nb">Checks for correct operation</td>
+               <td><p class="snug"> Verify that meaningful output is generated and that the work is actually done.</p>
+                  <div class="l2snugish" style="font-family:sans-serif;font-size:90%;font-style:italic;">"I can make it run as
+                     fast as you like if you remove the constraint of getting correct answers." <a href="#who">(**)</a></div> </td>
+            </tr>
+            <tr>
+               <td>Has <var>run rules</var></td>
+               <td>A clear definition of required and forbidden hardware, software, optimization, tuning, and procedures.</td>
+            </tr>
+            <tr>
+               <td colspan="2" style="font-size:90%;font-family:sans-serif;">
+                  <p id="similar" class="hanging1snug">(*) "Similar" performance will depend on context.  The benchmark
+                  should include guidelines as to what variation one should expect if the benchmark is run multiple
+                  times.</p>
+                  <p id="who" class="hanging1snug">(**) Author unknown.  If you know who said it first, <a
+                              href="techsupport.html" class="external">write</a>.</p></td>
+            </tr>
+         </table>
+
+      </div>
+
+
+      <h3 id="Q3">Q3. What are some common benchmarking mistakes?          </h3>
+
+      <p>Creating high-quality benchmarks takes time and effort.  There are some difficulties that need to be avoided.
+      <br>The difficulties listed in the table are based on real examples, and the solutions are what SPEC CPU tries to
+      do about them.</p>
+
+
+      <table>
+         <tr>
+            <th class="reverse">If the benchmark description says:</th>
+            <th class="reverse">There may be potential difficulties:</th>
+               <th class="reverse">Solutions</th>
+         </tr>
+         <tr>
+            <td><p class="hanging1csnug">1. It runs Loop 1 billion times.</p></td>
+            <td>Compiler X runs 1 billion times faster than Compiler Y, because
+               compilers are allowed to skip work that has no effect on program outputs
+               ("dead code elimination").   </td>
+               <td>Benchmarks should print something.
+            </td>
+         </tr>
+         <tr>
+            <td><p class="hanging1csnug">2. Answers are printed, but not checked, because
+               Minor Floating Point Differences are expected.</p></td>
+            <td>
+               <ul class="l0" style="padding-left:1em;">
+                  <li>What if Minor Floating Point Difference sends it down Utterly Different Program Path?
+                  </li>
+                  <li>If the program hits an error condition, it might "finish" twice as fast because half the work was
+                     never attempted.</li>
+               </ul>
+            </td>
+            <td>Answers should be validated, within some sort of tolerance.
+            </td>
+         </tr>
+         <tr>
+            <td><p class="hanging1csnug">3. The benchmark is already compiled.
+               <br>Just download and run.</p></td>
+            <td>You may want to compare new hardware, new operating systems, new compilers.  </td>
+            <td>Source code benchmarks allow a broader range of systems to be tested.</td>
+         </tr>
+         <tr>
+            <td><p class="hanging1csnug">4. The benchmark is portable.
+               <br>Just use compiler&nbsp;X and operating system&nbsp;Y.</p></td>
+            <td>You may want to compare other compilers and other operating systems.</td>
+            <td>Test across multiple compilers and OS versions prior to release.</td>
+         </tr>
+         <tr>
+            <td><p class="hanging1snug">5. The benchmark measures X.</p></td>
+            <td>Has this been checked?
+            <br>If not, measurements may be dominated by benchmark setup time, rather than the intended operations.  </td>
+            <td>Analyze profile data prior to release, verify what it measures.</td>
+         </tr>
+         <tr>
+            <td><p class="hanging1csnug">6. The benchmark is a slightly modified version of Well Known Benchmark.</p></td>
+            <td>
+               <ul class="l0" style="padding-left:1em;">
+                  <li > Is there an exact writeup of the modifications? </li>
+                  <li > Did the modifications break comparability?</li>
+               </ul>
+            </td>
+               <td>Someone should check.
+                  <br>Create a process to do so.</td>
+         </tr>
+         <tr>
+            <td><p class="hanging1csnug">7. The benchmark does not have a Run&nbsp;Rules document, because it is obvious how to run
+               it correctly.</p></td>
+            <td>Although "obvious" now, questions may come up.
+               <br>A change that seems innocent to one person may surprise another.</td>
+            <td>Explicit rules improve the likelihood that results can be meaningfully compared. </td>
+         </tr>
+         <tr>
+            <td><p class="hanging1csnug">8. The benchmark is a collection of low-level operations representing X.</p></td>
+            <td>How do you know that it is representative?  </td>
+            <td>Prefer benchmarks that are derived from real applications.</td>
+         </tr>
+      </table>
+
+
+      <h3 id="Q4">Q4. Should I benchmark my own application?</h3>
+
+      <div class="l1">
+         <p>Yes, if you can; but it may be be difficult.</p>
+
+         <p>Ideally, the best comparison test for systems would be your own application with your own workload.
+         Unfortunately, it is often impractical to get a wide set of comparable system measurements
+         using your own application with your own workload.  For example, it may be difficult to extract the application
+         sections that you want to benchmark, or too difficult to remove confidential information from data sets.</p>
+
+         <p>It takes time and effort to create a <a href="#Q2">good</a> benchmark, and it is easy to fall into common
+         <a href="#Q3">mistakes</a>.</p>
+
+      </div>
+
+      <h3 id="Q5">Q5. Should I use a standard benchmark?</h3>
+
+      <div class="l1">
+         <p>Maybe.  A standardized benchmarks may provide a reference point, if you use it carefully.</p>
+
+         <p>You may find that a standardized benchmark has already been run on systems that you are interested in.  Ideally,
+         that benchmark will provide all the characteristics of <a href="#table1">Table 1</a> while avoiding common benchmark
+         mistakes.</p>
+
+         <p>Before you consider the results of a standardized benchmark, you should consider whether it measures
+         things that are important to your own application characteristics and computing needs.  For example, a benchmark
+         that emphasizes CPU performance will have limited usefulness if your primary concern is network throughput.</p>
+
+         <p>A standardized benchmark can serve as a useful reference point, but SPEC does not claim that any standardized benchmark
+         can replace benchmarking your own actual application when you are selecting vendors or products.</p>
+      </div>
+
+      <h2 id="Basics" style="border:solid lightgray; border-width:1px 0px; ">SPEC CPU 2026 Basics</h2>
+
+      <h3 id="Q6">Q6. What does SPEC CPU 2026 measure?</h3>
+      <div class="l1">
+
+         <p class="snugbot">SPEC CPU 2026 benchmark suites focus on compute intensive performance, which means these benchmarks emphasize the
+         performance of: </p>
+
+         <ul class="l1snugish">
+            <li><b>Processor</b> - The CPU chip(s).</li>
+            <li><b>Memory</b> - The memory hierarchy, including caches and main memory. </li>
+            <li><b>Compilers</b> - C, C++, and Fortran compilers, including optimizers. </li>
+         </ul>
+
+         <p class="snugtop">SPEC CPU 2026 intentionally depends on all three of the above - not just the processor.</p>
+
+
+         <p>SPEC CPU 2026 benchmark suites are not intended to stress other computer components such as networking, graphics, Java libraries, or
+         the I/O system.  Note that there are <a class="external" href="https://www.spec.org/benchmarks.html">other</a> SPEC
+         benchmarks that focus on those areas.</p>
+      </div>
+
+
+      <h3 id="Q7">Q7.Should I use CPU 2026? Why or why not?  </h3>
+
+      <p class="l1">SPEC CPU 2026 benchmark suites provide a comparative measure of integer and/or floating point compute intensive performance.
+      If this matches with the type of workloads you are interested in, SPEC CPU 2026 benchmark suites provide a good reference point.</p>
+
+      <p class="l1">Other advantages to using the SPEC CPU 2026 benchmark suite include:</p>
+
+      <ul class="l1">
+         <li> Most of the benchmark programs are drawn from actual end-user applications, as opposed to being synthetic
+            benchmarks.</li>
+         <li> Multiple vendors use the suite and support it.</li>
+         <li> The SPEC CPU 2026 benchmark suite is highly portable.</li>
+         <li> Results are available
+            at <a class="external" href="https://www.spec.org/cpu2026/results/">https://www.spec.org/cpu2026/results</a>
+         </li>
+         <li> The benchmarks are required to be run and reported according to a set of rules to ensure comparability and
+            repeatability.</li>
+      </ul>
+
+      <p class="l1"><b>Limitations of SPEC CPU 2026:</b> As <a href="#Q4">described above</a>, the ideal benchmark for vendor
+      or product selection would be your own workload on your own application.  Please bear in mind that no standardized
+      benchmark can provide a perfect model of the realities of your particular system and user community.</p>
+
+      <h3 id="Q8">Q8. What does SPEC provide? </h3>
+
+      <p class="l1">The SPEC CPU 2026 benchmark suite is distributed as an ISO image that contains:</p>
+
+      <ul class="l1">
+         <li> Source code for the benchmarks</li>
+         <li> Data sets</li>
+         <li> A tool set for compiling, running, validating and reporting on the benchmarks </li>
+         <li> Pre-compiled tools for a variety of operating systems</li>
+         <li> Source code for the SPEC CPU 2026 tools, for systems not covered by the pre-compiled tools</li>
+         <li> Documentation</li>
+         <li> Run and reporting rules</li>
+      </ul>
+
+      <p class="l1">The documentation is also available at
+         <a class="external" href="https://www.spec.org/cpu2026/Docs/">www.spec.org/cpu2026/Docs/</a>
+         including installation guides for both Unix-like systems (such as Linux, AIX, and macOS) and Microsoft Windows
+         systems.</p>
+
+
+
+
+
+      <h3 id="Q9">Q9. What must I provide?  </h3>
+
+      <div class="l1">
+         <p class="snugbot">Briefly, you will need a computer running Linux, macOS, Unix, or Microsoft Windows with:</p>
+
+         <ul class="snugish">
+            <li id="memory">2 GB of main <a class="external" href="system-requirements.html#memory">memory</a> per copy, if you want to run SPECrate
+               suites;  or
+               <br>64 GB to run SPECspeed suites.</li>
+            <li>250 GB <a class="external" href="system-requirements.html#disk">disk space</a> is recommended; a minimal installation needs 10 GB.</li>
+            <li>C, C++, and Fortran <a class="external" href="system-requirements.html#compilers">compilers</a> (or a set of pre-compiled
+               binaries from another SPEC CPU 2026 user).  </li>
+            <li>A variety of <a class="external" href="system-requirements.html#chips">chips</a> and
+               <a class="external" href="system-requirements.html#operatingSystems">operating systems</a> are supported. </li>
+         </ul>
+
+         <p>The above is only an abbreviated summary.   See detail in the <a class="external" href="system-requirements.html">System
+            Requirements</a> document.</p>
+
+      </div>
+
+      <h3 id="Q10">Q10. What are the basic steps to run the SPEC CPU 2026 Benchmark Suite?</h3>
+
+      <div class="l1">
+         <p class="snugbot">A one-page summary is in <a class="external" href="quick-start.html">SPEC CPU 2026 Quick Start</a>.
+         Here is a summary of the summary:</p>
+
+         <ul class="snugish">
+            <li> Meet the <a class="external" href="system-requirements.html">System Requirements</a>.</li>
+            <li> Install SPEC CPU 2026 [<a class="external" href="install-guide-unix.html">Unix-like systems</a>]
+                 &nbsp; &nbsp;
+                 [<a class="external" href="install-guide-windows.html"> Windows systems</a>] </li>
+            <li>Find a <var>config file</var> -- a file that defines how to build, run, and report on the SPEC CPU benchmarks in
+               a particular environment -- and customize it.  </li>
+            <li>Determine which <a href="#Q12">suite</a> you wish to run. </li>
+            <li>Use the <a href="runcpu.html" class="external">runcpu</a> command.</li>
+            <li>If you wish to generate results suitable for quoting in public, you will need to carefully study and adhere to
+               the <a class="external" href="runrules.html">Run Rules</a>.</li>
+         </ul>
+
+      </div>
+
+      <h3 id="Q11"> Q11: How long does it take to run?   Does CPU 2026 take longer than CPU 2017?</h3>
+      <p class="l1">Run time depends on the system, suite, compiler, tuning, and how many copies or threads are chosen.
+      <br>One example system is shown below; your times will differ.</p>
+
+      <table class="l2">
+         <tr>
+            <td colspan="4"><b>Example run times - simple options chosen</b></td>
+         </tr>
+         <tr>
+            <td style="vertical-align:bottom;">Metric</td>
+            <td style="vertical-align:bottom;">Config Tested</td>
+            <td style="vertical-align:bottom;">Individual<br>Benchmarks</td>
+            <td style="vertical-align:bottom;text-align:right;">Full Run<br>(Reportable)</td>
+         </tr>
+         <tr>
+            <td>SPECrate 2026 Integer</td>
+            <td>&nbsp;1 copy</td>
+            <td>3 to 5 minutes</td>
+            <td style="text-align:right;">5.4 hours (48 copies; base + peak)</td>
+         </tr>
+         <tr>
+            <td>SPECrate 2026 Floating Point</td>
+            <td>&nbsp;1 copy</td>
+            <td>4 to 7 minutes</td>
+            <td style="text-align:right;">9.4 hours (48 copies; base + peak)</td>
+         </tr>
+         <tr>
+            <td>SPECspeed 2026 Integer</td>
+            <td>&nbsp;40 threads</td>
+            <td>5 to 13 minutes</td>
+            <td style="text-align:right;">8.3 hours (48 threads; base + peak)</td>
+         </tr>
+         <tr>
+            <td>SPECspeed 2026 Floating Point</td>
+            <td>40 threads</td>
+            <td>5 to 13 minutes</td>
+            <td style="text-align:right;">6.5 hours (48 threads; base + peak)</td>
+         </tr>
+         <tr>
+            <td colspan="4">One arbitrary example using a year 2019 system.  Your system will differ.
+               <br>2 iterations <a href="#repeatable">chosen</a>, base <a href="#peak">and peak</a>.  Does not include compile time.</td>
+         </tr>
+      </table>
+
+      <p class="l1snugbot"><b>Does SPEC CPU 2026 take longer than CPU 2017?</b> </p>
+      <ul class="l1snug">
+         <li>Maybe, though this depends heavily on the system, compiler, tuning, and other tester choices.</li>
+      </ul>
+
+      <table class="l2">
+         <tr>
+            <td colspan="4"><b>More complicated example: both base + peak, 32 copy rate, 32 thread speed, 3 iterations</b></td>
+         </tr>
+         <tr>
+            <td style="vertical-align:bottom;">Metric</td>
+            <td style="vertical-align:bottom;">Config Tested</td>
+            <td style="vertical-align:bottom;">Full Run<br>CPU 2017</td>
+            <td style="vertical-align:bottom;">Full Run<br>SPEC CPU 2026</td>
+         </tr>
+         <tr>
+            <td>SPECrate Integer</td>
+            <td>32 copies</td>
+            <td><a href="https://www.spec.org/cpu2017/results/res2026q2/cpu2017-20260304-51142.html">14.0</a> hours</td>
+            <td><a href="https://www.spec.org/cpu2026/results/res2026q2/cpu2026-20260210-00014.html">18.2</a> hours</td>
+         </tr>
+         <tr>
+            <td>SPECrate Floating Point</td>
+            <td>32 copies</td>
+            <td><a href="https://www.spec.org/cpu2017/results/res2026q2/cpu2017-20260304-51139.html">31.0</a> hours</td>
+            <td><a href="https://www.spec.org/cpu2026/results/res2026q2/cpu2026-20260210-00013.html">30.0</a> hours</td>
+         </tr>
+         <tr>
+            <td>SPECspeed Integer</td>
+            <td>32 threads</td>
+            <td>&nbsp;<a href="https://www.spec.org/cpu2017/results/res2026q2/cpu2017-20260304-51138.html">13.9</a> hours</td>
+            <td>&nbsp;<a href="https://www.spec.org/cpu2026/results/res2026q2/cpu2026-20260210-00004.html">24.9</a> hours</td>
+         </tr>
+         <tr>
+            <td>SPECspeed Floating Point</td>
+            <td>32 threads</td>
+            <td>&nbsp;<a href="https://www.spec.org/cpu2017/results/res2026q2/cpu2017-20260304-51137.html">9.7</a> hours</td>
+            <td>&nbsp;<a href="https://www.spec.org/cpu2026/results/res2026q2/cpu2026-20260210-00002.html">27.4</a> hours</td>
+         </tr>
+         <tr>
+            <td colspan="4">One arbitrary example using a different year 2019 system.  Your system will differ.
+               <br>3 iterations <a href="#repeatable">chosen</a>, base <a href="#peak">and peak</a>. Does not include compile time.</td>
+         </tr>
+      </table>
+
+<p class="l1">Another example is discussed in the <a class="external" href="faq.html#Run.02">FAQ</a></p>
+
+
+      <h2 id="SuitesAndBenchmarks" style="border:solid lightgray; border-width:1px 0px; ">Suites and Benchmarks </h2>
+
+      <h3 id="Q12">Q12. What is a SPEC CPU 2026 "suite"?
+         <span id="suites"> </span>
+      </h3>
+
+      <div class="l1">
+         <p>A <var>suite</var> is a set of benchmarks that are run as a group to produce one of the overall metrics. </p>
+
+         <p>The SPEC CPU 2026 benchmark product includes four suites that focus on different types of compute intensive performance:</p>
+
+         <!-- ReUsableBegin: benchmarks, tags, and suites -->
+         <!--
+              HEY YOU THERE editing this section: Yes it might be nice if other copies were automatically
+                            sync'd.  Until such time, you need to hunt down all copies.  Verify them
+                            with:
+                               non-dist/bin/checkDocReUsableSections.pl
+         -->
+         <table id="the4suites" class="snugtop">
+            <tr>
+               <td style="font-family:monospace;vertical-align:middle;"><b>Short<br>Tag</b></td>
+               <td style="vertical-align:middle;"><b>Suite</b></td>
+               <td style="vertical-align:middle;"><b>Contents</b></td>
+               <td style="vertical-align:middle;"><b>Metrics</b></td>
+               <td style="font-size:85%;"><b>How many copies?<br>What do Higher Scores Mean?</b></td>
+            </tr>
+            <tr>
+               <td style="font-family:monospace;vertical-align:middle;">intspeed</td>
+               <td style="vertical-align:middle"><a class="external" href="index.html#intspeed">SPECspeed&reg;2026 Integer</a> </td>
+               <td style="vertical-align:middle;">13 integer benchmarks</td>
+               <td style="font-family:monospace;">SPECspeed2026_int_base<br>SPECspeed2026_int_peak</td>
+               <td style="font-size:85%;vertical-align:middle;" rowspan="2">SPECspeed suites always run one copy of each benchmark.
+                  <br>Higher scores indicate that less time is needed.
+               </td>
+            </tr>
+            <tr>
+               <td style="font-family:monospace;vertical-align:middle;">fpspeed</td>
+               <td style="vertical-align:middle"><a class="external" href="index.html#fpspeed">SPECspeed&reg;2026 Floating Point</a> </td>
+               <td style="vertical-align:middle;">13 floating point benchmarks</td>
+               <td style="vertical-align:middle;font-family:monospace;">SPECspeed2026_fp_base<br>SPECspeed2026_fp_peak</td>
+            </tr>
+            <tr>
+               <td style="font-family:monospace;vertical-align:middle;">intrate</td>
+               <td style="vertical-align:middle"><a class="external" href="index.html#intrate">SPECrate&reg;2026 Integer</a> </td>
+               <td style="vertical-align:middle;">14 integer benchmarks</td>
+               <td style="vertical-align:middle;font-family:monospace;">SPECrate2026_int_base<br>SPECrate2026_int_peak</td>
+               <td style="font-size:85%;vertical-align:middle;" rowspan="2">SPECrate suites run multiple concurrent copies of
+                  each benchmark.
+                  <br>The tester selects how many.
+                  <br>Higher scores indicate more <var>throughput</var> (work per unit of time). </td>
+            </tr>
+            <tr>
+               <td style="vertical-align:middle;font-family:monospace;vertical-align:middle;">fprate</td>
+               <td style="vertical-align:middle"><a class="external" href="index.html#fprate">SPECrate&reg;2026 Floating Point</a> </td>
+               <td style="vertical-align:middle;">12 floating point benchmarks</td>
+               <td style="vertical-align:middle;font-family:monospace;">SPECrate2026_fp_base<br>SPECrate2026_fp_peak</td>
+            </tr>
+            <tr>
+               <td colspan="5" style="padding-top:3px;font-size:80%;">
+                  The "Short Tag" is the canonical abbreviation for use with <samp class="snugr">runcpu</samp>, where context
+                  is defined by the tools.  In a published document, context may not be clear.
+                  <br>
+                  To avoid ambiguity in published documents, the Suite Name or the Metrics should be spelled as
+                  shown above.
+               </td>
+            </tr>
+         </table>
+         <!-- ReUsableEnd: benchmarks, tags, and suites -->
+
+      </div>
+
+
+
+      <h3 id="Q13">Q13. What are the benchmarks?
+         <span id="benchmarks"> </span>
+      </h3>
+
+   <!-- ReUsableBegin: benchmarkList -->
+         <!--
+              HEY YOU THERE editing this section: Yes it might be nice if other copies were automatically
+                            sync'd.  Until such time, you need to hunt down all copies.  Verify them
+                            with:
+                               non-dist/bin/checkDocReUsableSections.pl
+         -->
+         <!-- no class="external" here:
+            This section's primary home is the doc index, where nothing gets marked class=external, because that is
+            the point of the index. -->
+<p id="benchmarkList" class="snug">The SPEC CPU 2026 benchmark product has 52 benchmarks, organized into 4 suites:</p>
+<pre class="snugish">
+ SPECrate 2026 Integer            SPECspeed 2026 Integer
+ SPECrate 2026 Floating Point     SPECspeed 2026 Floating Point
+</pre>
+<p class="snug">Benchmark pairs shown as:</p>
+<pre class="snugish">
+ 7nn.benchmark_r / 8nn.benchmark_s
+</pre>
+<p class="snug">are similar to each other.
+Differences include: compile flags; workload sizes; and run rules.
+See: [<a href="config.html#openmp">OpenMP</a>] &nbsp;
+[<a  href="system-requirements.html#memory">memory</a>] &nbsp;
+[<a  href="runrules.html#compilerParallel">rules</a>]
+</p>
+
+<div class="l1">
+
+   <table>
+      <tr>
+         <th id="intrate" class="MajorCent">SPECrate&reg;2026<br>Integer</th>
+         <th id="intspeed" class="MajorCent">SPECspeed&reg;2026<br>Integer</th>
+         <th class="bold" style="text-align:center;">Language<a style="font-size:small;margin-left:2px;" href="#linkNote">[1]</a></th>
+         <th class="bold" style="text-align:right;">KLOC<a style="font-size:small;margin-left:2px;" href="#klocNote">[2]</a></th>
+         <th class="bold">Application Area</th>
+      </tr>
+      <tr>
+         <td>&nbsp;</td>
+         <td><a href="benchmarks/801.xz_s/801.xz_s.html">801.xz_s</a></td>
+         <td class="ttc">CXX,C</td>
+         <td class="ttr">53</td>
+         <td>Data compression</td>
+      </tr>
+      <tr>
+         <td><a href="benchmarks/706.stockfish_r/706.stockfish_r.html">706.stockfish_r</a></td>
+         <td>&nbsp;</td>
+         <td class="ttc">CXX</td>
+         <td class="ttr">13</td>
+         <td>Game / AI (chess) - alpha-beta tree search, neural network</td>
+      </tr>
+      <tr>
+         <td><a href="benchmarks/707.ntest_r/707.ntest_r.html">707.ntest_r</a></td>
+         <td><a href="benchmarks/807.ntest_s/807.ntest_s.html">807.ntest_s</a></td>
+         <td class="ttc">CXX</td>
+         <td class="ttr">16</td>
+         <td>Game / AI (othello)</td>
+      </tr>
+      <tr>
+         <td><a href="benchmarks/708.sqlite_r/708.sqlite_r.html">708.sqlite_r</a></td>
+         <td>&nbsp;</td>
+         <td class="ttc">C</td>
+         <td class="ttr">245</td>
+         <td>SQL compiler/interpreter and database </td>
+      </tr>
+      <tr>
+         <td><a href="benchmarks/710.omnetpp_r/710.omnetpp_r.html">710.omnetpp_r</a></td>
+         <td>&nbsp;</td>
+         <td class="ttc">CXX,C</td>
+         <td class="ttr">224</td>
+         <td>Discrete event modeling - network and queuing simulations</td>
+      </tr>
+      <tr>
+         <td><a href="benchmarks/714.cpython_r/714.cpython_r.html">714.cpython_r</a></td>
+         <td>&nbsp;</td>
+         <td class="ttc">C</td>
+         <td class="ttr">747</td>
+         <td>Python interpreter</td>
+      </tr>
+      <tr>
+         <td>&nbsp;</td>
+         <td><a href="benchmarks/817.flac_s/817.flac_s.html">817.flac_s</a></td>
+         <td class="ttc">CXX,C</td>
+         <td class="ttr">57</td>
+         <td>Lossless audio compression</td>
+      </tr>
+      <tr>
+         <td><a href="benchmarks/721.gcc_r/721.gcc_r.html">721.gcc_r</a></td>
+         <td><a href="benchmarks/821.gcc_s/821.gcc_s.html">821.gcc_s</a></td>
+         <td class="ttc">CXX,C</td>
+         <td class="ttr">3,833</td>
+         <td>C language optimizing compiler</td>
+      </tr>
+      <tr>
+         <td><a href="benchmarks/723.llvm_r/723.llvm_r.html">723.llvm_r</a></td>
+         <td><a href="benchmarks/823.llvm_s/823.llvm_s.html">823.llvm_s</a></td>
+         <td class="ttc">CXX,C</td>
+         <td class="ttr">3,167</td>
+         <td>C/C++ language optimizing compiler</td>
+      </tr>
+      <tr>
+         <td><a href="benchmarks/727.cppcheck_r/727.cppcheck_r.html">727.cppcheck_r</a></td>
+         <td><a href="benchmarks/827.cppcheck_s/827.cppcheck_s.html">827.cppcheck_s</a></td>
+         <td class="ttc">CXX</td>
+         <td class="ttr">287</td>
+         <td>Static analysis of C/C++ code</td>
+      </tr>
+      <tr>
+         <td><a href="benchmarks/729.abc_r/729.abc_r.html">729.abc_r</a></td>
+         <td><a href="benchmarks/829.abc_s/829.abc_s.html">829.abc_s</a></td>
+         <td class="ttc">CXX,C</td>
+         <td class="ttr">989</td>
+         <td>Sequential logic synthesis and formal verification</td>
+      </tr>
+      <tr>
+         <td><a href="benchmarks/734.vpr_r/734.vpr_r.html">734.vpr_r</a></td>
+         <td><a href="benchmarks/834.vpr_s/834.vpr_s.html">834.vpr_s</a></td>
+         <td class="ttc">CXX,C</td>
+         <td class="ttr">210</td>
+         <td>FPGA place and route</td>
+      </tr>
+      <tr>
+         <td><a href="benchmarks/735.gem5_r/735.gem5_r.html">735.gem5_r</a></td>
+         <td><a href="benchmarks/835.gem5_s/835.gem5_s.html">835.gem5_s</a></td>
+         <td class="ttc">CXX,C</td>
+         <td class="ttr">971</td>
+         <td>Computer architecture simulation</td>
+      </tr>
+      <tr>
+         <td>&nbsp;</td>
+         <td><a href="benchmarks/838.diamond_s/838.diamond_s.html">838.diamond_s</a></td>
+         <td class="ttc">CXX,C</td>
+         <td class="ttr">239</td>
+         <td>Bioinformatics - metagenomics and protein sequencing</td>
+      </tr>
+      <tr>
+         <td>&nbsp;</td>
+         <td><a href="benchmarks/846.minizinc_s/846.minizinc_s.html">846.minizinc_s</a></td>
+         <td class="ttc">CXX,C</td>
+         <td class="ttr">372</td>
+         <td>Constraint programming</td>
+      </tr>
+      <tr>
+         <td><a href="benchmarks/750.sealcrypto_r/750.sealcrypto_r.html">750.sealcrypto_r</a></td>
+         <td>&nbsp;</td>
+         <td class="ttc">CXX,C</td>
+         <td class="ttr">39</td>
+         <td>Security and privacy - Homomorphically Encrypted (HE) query</td>
+      </tr>
+      <tr>
+         <td><a href="benchmarks/753.ns3_r/753.ns3_r.html">753.ns3_r</a></td>
+         <td><a href="benchmarks/853.ns3_s/853.ns3_s.html">853.ns3_s</a></td>
+         <td class="ttc">CXX</td>
+         <td class="ttr">942</td>
+         <td>Discrete event network simulator for internet systems</td>
+      </tr>
+      <tr>
+         <td>&nbsp;</td>
+         <td><a href="benchmarks/854.graph500_s/854.graph500_s.html">854.graph500_s</a></td>
+         <td class="ttc">C</td>
+         <td class="ttr">10</td>
+         <td>Graph analytics</td>
+      </tr>
+      <tr>
+         <td><a href="benchmarks/777.zstd_r/777.zstd_r.html">777.zstd_r</a></td>
+         <td>&nbsp;</td>
+         <td class="ttc">C</td>
+         <td class="ttr">58</td>
+         <td>Data compression/decompression</td>
+      </tr>
+
+      <!-- fp -->
+      <tr>
+         <td colspan="5">&nbsp;</td>
+      </tr>
+      <tr>
+         <th id="fprate" class="MajorCent">SPECrate&reg;2026<br>Floating Point</th>
+         <th id="fpspeed" class="MajorCent">SPECspeed&reg;2026<br>Floating Point</th>
+         <th class="bold" style="text-align:center;">Language<a style="font-size:small;margin-left:2px;" href="#linkNote">[1]</a></th>
+         <th class="bold" style="text-align:right;">KLOC<a style="font-size:small;margin-left:2px;" href="#klocNote">[2]</a></th>
+         <th class="bold">Application Area</th>
+      </tr>
+      <tr>
+         <td>&nbsp;</td>
+         <td><a href="benchmarks/800.pot3d_s/800.pot3d_s.html">800.pot3d_s</a></td>
+         <td class="ttc">F</td>
+         <td class="ttr">12</td>
+         <td>Solar physics: finite difference method, conjugate gradient solver</td>
+      </tr>
+      <tr>
+         <td>&nbsp;</td>
+         <td><a href="benchmarks/803.sph_exa_s/803.sph_exa_s.html">803.sph_exa_s</a></td>
+         <td class="ttc">CXX</td>
+         <td class="ttr">3</td>
+         <td>Astrophysics - Smoothed Particle Hydrodynamics (SPH)</td>
+      </tr>
+      <tr>
+         <td><a href="benchmarks/709.cactus_r/709.cactus_r.html">709.cactus_r</a></td>
+         <td><a href="benchmarks/809.cactus_s/809.cactus_s.html">809.cactus_s</a></td>
+         <td class="ttc">CXX,C</td>
+         <td class="ttr">187</td>
+         <td>Astrophysics - relativity, finite difference method, time integration </td>
+      </tr> <tr>
+         <td>&nbsp;</td>
+         <td><a href="benchmarks/811.tealeaf_s/811.tealeaf_s.html">811.tealeaf_s</a></td>
+         <td class="ttc">C</td>
+         <td class="ttr">5</td>
+         <td>High energy physics</td>
+      </tr>
+      <tr>
+         <td>&nbsp;</td>
+         <td><a href="benchmarks/816.nab_s/816.nab_s.html">816.nab_s</a></td>
+         <td class="ttc">C</td>
+         <td class="ttr">26</td>
+         <td>Molecular modeling</td>
+      </tr>
+      <tr>
+         <td>&nbsp;</td>
+         <td><a href="benchmarks/820.cloverleaf_s/820.cloverleaf_s.html">820.cloverleaf_s</a></td>
+         <td class="ttc">F</td>
+         <td class="ttr">10</td>
+         <td>Explicit hydrodynamics</td>
+      </tr>
+      <tr>
+         <td><a href="benchmarks/722.palm_r/722.palm_r.html">722.palm_r</a></td>
+         <td><a href="benchmarks/822.palm_s/822.palm_s.html">822.palm_s</a></td>
+         <td class="ttc">F</td>
+         <td class="ttr">298</td>
+         <td>Atmospheric science</td>
+      </tr>
+      <tr>
+         <td><a href="benchmarks/731.astcenc_r/731.astcenc_r.html">731.astcenc_r</a></td>
+         <td>&nbsp;</td>
+         <td class="ttc">CXX</td>
+         <td class="ttr">43</td>
+         <td>Image compression - Adaptive Scalable Texture Compression (ASTC)</td>
+      </tr>
+      <tr>
+         <td><a href="benchmarks/736.ocio_r/736.ocio_r.html">736.ocio_r</a></td>
+         <td>&nbsp;</td>
+         <td class="ttc">CXX</td>
+         <td class="ttr">183</td>
+         <td>Color management for visual effects and animation</td>
+      </tr>
+      <tr>
+         <td><a href="benchmarks/737.gmsh_r/737.gmsh_r.html">737.gmsh_r</a></td>
+         <td>&nbsp;</td>
+         <td class="ttc">CXX,C</td>
+         <td class="ttr">721</td>
+         <td>Finite element mesh generation</td>
+      </tr>
+      <tr>
+         <td><a href="benchmarks/748.flightdm_r/748.flightdm_r.html">748.flightdm_r</a></td>
+         <td>&nbsp;</td>
+         <td class="ttc">CXX</td>
+         <td class="ttr">100</td>
+         <td>Flight dynamics models for aeronautics</td>
+      </tr>
+      <tr>
+         <td><a href="benchmarks/749.fotonik3d_r/749.fotonik3d_r.html">749.fotonik3d_r</a></td>
+         <td><a href="benchmarks/849.fotonik3d_s/849.fotonik3d_s.html">849.fotonik3d_s</a></td>
+         <td class="ttc">F</td>
+         <td class="ttr">15</td>
+         <td>Computational Electromagnetics (CEM)</td>
+      </tr>
+      <tr>
+         <td>&nbsp;</td>
+         <td><a href="benchmarks/857.namd_s/857.namd_s.html">857.namd_s</a></td>
+         <td class="ttc">CXX</td>
+         <td class="ttr">9</td>
+         <td>Classical molecular dynamics simulation</td>
+      </tr>
+      <tr>
+         <td><a href="benchmarks/765.roms_r/765.roms_r.html">765.roms_r</a></td>
+         <td><a href="benchmarks/865.roms_s/865.roms_s.html">865.roms_s</a></td>
+         <td class="ttc">F</td>
+         <td class="ttr">585</td>
+         <td>Regional ocean modeling</td>
+      </tr>
+      <tr>
+         <td><a href="benchmarks/766.femflow_r/766.femflow_r.html">766.femflow_r</a></td>
+         <td>&nbsp;</td>
+         <td class="ttc">CXX</td>
+         <td class="ttr">2,505</td>
+         <td>Fluid dynamics: high-order finite element method</td>
+      </tr>
+      <tr>
+         <td><a href="benchmarks/767.nest_r/767.nest_r.html">767.nest_r</a></td>
+         <td><a href="benchmarks/867.nest_s/867.nest_s.html">867.nest_s</a></td>
+         <td class="ttc">CXX</td>
+         <td class="ttr">208</td>
+         <td>Neuroscience simulator for spiking neural network models</td>
+      </tr>
+      <tr>
+         <td><a href="benchmarks/772.marian_r/772.marian_r.html">772.marian_r</a></td>
+         <td><a href="benchmarks/872.marian_s/872.marian_s.html">872.marian_s</a></td>
+         <td class="ttc">CXX</td>
+         <td class="ttr">219</td>
+         <td>Neural machine translation for written language</td>
+      </tr>
+      <tr>
+         <td><a href="benchmarks/782.lbm_r/782.lbm_r.html">782.lbm_r</a></td>
+         <td>&nbsp;</td>
+         <td class="ttc">C</td>
+         <td class="ttr">1</td>
+         <td>Computational fluid dynamics, Lattice Boltzmann Method</td>
+      </tr>
+      <tr>
+         <td>&nbsp;</td>
+         <td><a href="benchmarks/881.neutron_s/881.neutron_s.html">881.neutron_s</a></td>
+         <td class="ttc">C</td>
+         <td class="ttr">4</td>
+         <td>Physics simulation of neutron transport in nuclear reactors</td>
+      </tr>
+
+      <!-- footer -->
+      <tr>
+         <td colspan="2">&nbsp;</td>
+         <td colspan="3" style="font-size:85%;" id="linkNote">[1] For multi-language benchmarks, the first one listed
+            determines library and link options (<a class="external" href="makevars.html#linkNote">details</a>)</td>
+      </tr>
+      <tr>
+         <td colspan="3">&nbsp;</td>
+         <td colspan="2" style="font-size:85%;" id="klocNote">[2] KLOC = line count in thousands.  Includes all src/
+            files; includes comments and blank lines.</td>
+      </tr>
+
+   </table>
+   <!-- ReUsableEnd: benchmarkList -->
+
+</div>
+
+      <h3 id="Q14">Q14. Are 7nn.benchmark and 8nn.benchmark different?  </h3>
+
+      <div class="l1">
+
+         <p class="snugbot">Some of the benchmarks in the table above are part of a pair:</p>
+         <pre class="snugish">
+ 7nn.benchmark_r for the SPECrate version
+ 8nn.benchmark_s for the SPECspeed version</pre>
+         <p class="snug">Benchmarks within a pair share (most of) their source code.
+         Differences include:
+         <ul>
+            <li><b>Workloads:</b> The input data sets differ, with the SPECspeed version typically solving a more complex
+               problem.</li>
+            <li><b>Memory:</b> The SPECrate benchmarks are sized to fit within 2 GB (although your system may vary).
+               The SPECspeed benchmarks are designed to fit in 64 GB.</li>
+            <li><b>Threading:</b> SPECrate benchmarks use only one thread per copy; most of the SPECspeed benchmarks
+               use multiple threads.</li>
+         </ul>
+         <p><b>More detail</b>:
+         [<a class="external" href="system-requirements.html#memory">memory</a>] &nbsp;
+         [<a class="external" href="config.html#openmp">OpenMP</a>] &nbsp;
+         [<a class="external" href="runrules.html#compilerParallel">rules</a>]
+         </p>
+
+      </div>
+
+      <h2 id="AboutMetrics" style="border:solid lightgray; border-width:1px 0px; ">
+         <span id="metrics"> </span>
+         <span id="Metrics"> </span>
+         SPEC CPU 2026 Metrics</h2>
+
+      <h3 id="Q15">
+
+         <span id="SpeedAndRate"> </span>           <span id="SpeedVsRate"> </span>
+         <span id="Speed-and-rate"> </span>         <span id="Speed-vs-rate"> </span>
+         <span id="Speed.and.rate"> </span>         <span id="Speed.vs.rate"> </span>
+         <span id="Speed_and_rate"> </span>         <span id="Speed_vs_rate"> </span>
+         <span id="Speedandrate"> </span>           <span id="Speedvsrate"> </span>
+         <span id="speed-and-rate"> </span>         <span id="speed-vs-rate"> </span>
+         <span id="speed.and.rate"> </span>         <span id="speed.vs.rate"> </span>
+         <span id="speedAndRate"> </span>           <span id="speedVsRate"> </span>
+         <span id="speed_and_rate"> </span>         <span id="speed_vs_rate"> </span>
+         <span id="speedandrate"> </span>           <span id="speedvsrate"> </span>
+
+         <span id="SPECspeed-and-SPECrate"> </span>      <span id="SPECspeed-vs-SPECrate"> </span>
+         <span id="SPECspeed.and.SPECrate"> </span>      <span id="SPECspeed.vs.SPECrate"> </span>
+         <span id="SPECspeed_and_SPECrate"> </span>      <span id="SPECspeed_vs_SPECrate"> </span>
+         <span id="SPECspeedandSPECrate"> </span>        <span id="SPECspeedvsSPECrate"> </span>
+         <span id="SpecspeedAndSpecrate"> </span>        <span id="SpecspeedVsSpecrate"> </span>
+         <span id="specspeed-and-specrate"> </span>      <span id="specspeed-vs-specrate"> </span>
+         <span id="specspeed.and.specrate"> </span>      <span id="specspeed.vs.specrate"> </span>
+         <span id="specspeedAndSpecrate"> </span>        <span id="specspeedVsSpecrate"> </span>
+         <span id="specspeed_and_specrate"> </span>      <span id="specspeed_vs_specrate"> </span>
+         <span id="specspeedandspecrate"> </span>        <span id="specspeedvsspecrate"> </span>
+
+         Q15. What are "SPECspeed" and "SPECrate" metrics?
+      </h3>
+
+      <div class="l1">
+         <p class="snugbot">There are many ways to measure computer performance.  Among the most common are:</p>
+         <ul class="snugish">
+            <li>Time  - For example, seconds to complete a workload.</li>
+            <li>Throughput - Work completed per unit of time, for example, jobs per hour.</li>
+         </ul>
+
+         <p class="snugtop">SPECspeed is a time-based metric; SPECrate is a throughput metric. </p>
+
+         <table>
+            <tr>
+               <th class="MajorCent">Calculating SPECspeed&reg; Metrics</th>
+               <th class="MajorCent">Calculating SPECrate&reg; Metrics</th>
+            </tr>
+            <tr>
+               <td>1 copy of each benchmark in a suite is run. </td>
+               <td style="padding-left:1em; border-left:thin solid gray;">
+                  The tester chooses how many concurrent  copies to run</td>
+            </tr>
+            <tr>
+               <td>The tester may choose how the problem is parallelized.</td>
+               <td style="padding-left:1em; border-left:thin solid gray;">
+               One thread is used. OpenMP is disabled.</td>
+            </tr>
+            <tr>
+               <td><p class="snugish">For each benchmark, a performance ratio is calculated as:</p>
+                  <pre class="snugish">
+time on a reference machine / time on the SUT</pre></td>
+                  <td style="padding-left:1em; border-left:thin solid gray;">
+                     <p class="snugish">For each benchmark, a performance ratio is calculated as:</p>
+                     <pre class="snugish">number of copies *
+time on a reference machine / time on the SUT</pre></td>
+            </tr>
+            <tr>
+               <td>Higher scores mean that less time is needed.</td>
+               <td style="padding-left:1em; border-left:thin solid gray;">
+                  Higher scores mean that more work is done per unit of time.</td>
+            </tr>
+            <tr>
+               <td><p class="snugish">Example:</p>
+                  <ul class="snugish">
+                     <li>The reference machine ran 807.ntest_s in 37556 seconds.</li>
+                     <li>A particular SUT took about 1/12 the time, scoring about 12.</li>
+                     <li>More precisely: <samp>37556/2956.313 = 12.70</samp></li>
+                  </ul>
+               </td>
+               <td style="padding-left:1em; border-left:thin solid gray;">
+                  <p class="snugish">Example:</p>
+                  <ul class="snugish">
+                     <li>The reference machine ran 1 copy of 707.ntest_r in 638 seconds.</li>
+                     <li>A particular SUT ran 4 copies in about half the time, scoring about 8. </li>
+                     <li>More precisely: <samp>4*(638/294.95) = 8.65</samp></li>
+                  </ul></td>
+            </tr>
+            <tr>
+               <td id="repeatable" style="padding-left:1em;" colspan="2"><p class="snug">For both SPECspeed and SPECrate, in
+                  order to provide some assurance that results are repeatable, the entire process is repeated.  <br>The
+                  tester may choose:</p>
+                  <ol class="snugish" style="list-style-type:lower-alpha;">
+                     <li>To run the suite of benchmarks three times, in which case the tools select the medians.</li>
+                     <li>Or to run twice, in which case the tools select the lower ratios (i.e. slower).</li>
+                  </ol>
+               </td>
+            </tr>
+            <tr>
+               <td style="padding-left:1em;" colspan="2">
+                  <p class="snugish">For both SPECspeed and SPECrate, the selected ratios are averaged using the Geometric
+                  Mean, which is reported as the overall metric.</p>
+               </td>
+            </tr>
+
+         </table>
+
+         <p>For the energy metrics, the calculations are done the same way, using <samp>energy</samp> instead of
+         <samp>time</samp> in the above formulas.</p>
+
+         <p class="snugbot">The reference times and reference energy may be found in the observations posted with
+         <a class="external" href="https://www.spec.org/cpu2026/results">www.spec.org/cpu2026/results/</a></p>
+         <p class="l2snug">
+         <a class="external" href="https://www.spec.org/cpu2026/results/res2026q2/cpu2026-20260210-00001.html">1</a>,
+         <a class="external" href="https://www.spec.org/cpu2026/results/res2026q2/cpu2026-20260210-00002.html">2</a>,
+         <a class="external" href="https://www.spec.org/cpu2026/results/res2026q2/cpu2026-20260210-00003.html">3</a>, and
+         <a class="external" href="https://www.spec.org/cpu2026/results/res2026q2/cpu2026-20260210-00004.html">4</a></p>
+         <p class="snug">If you would like more than 3 digits for the reference values, see the CSV versions:</p>
+         <p class="l2snugtop">
+         <a class="external" href="https://www.spec.org/cpu2026/results/res2026q2/cpu2026-20260210-00001.csv">1</a>,
+         <a class="external" href="https://www.spec.org/cpu2026/results/res2026q2/cpu2026-20260210-00002.csv">2</a>,
+         <a class="external" href="https://www.spec.org/cpu2026/results/res2026q2/cpu2026-20260210-00003.csv">3</a>, and
+         <a class="external" href="https://www.spec.org/cpu2026/results/res2026q2/cpu2026-20260210-00004.csv">4</a>.
+         </p>
+
+      </div>
+
+
+      <h3 id="Q16">
+         <span id="Base-and-peak"> </span>       <span id="Base-vs-peak"> </span>
+         <span id="Base.and.peak"> </span>       <span id="Base.vs.peak"> </span>
+         <span id="BaseAndPeak"> </span>         <span id="BaseVsPeak"> </span>
+         <span id="Base_and_peak"> </span>       <span id="Base_vs_peak"> </span>
+         <span id="Baseandpeak"> </span>         <span id="Basevspeak"> </span>
+         <span id="base-and-peak"> </span>       <span id="base-vs-peak"> </span>
+         <span id="base.and.peak"> </span>       <span id="base.vs.peak"> </span>
+         <span id="baseAndPeak"> </span>         <span id="baseVsPeak"> </span>
+         <span id="base_and_peak"> </span>       <span id="base_vs_peak"> </span>
+         <span id="baseandpeak"> </span>         <span id="basevspeak"> </span>
+
+         Q16. What are "base" and "peak" metrics?</h3>
+
+      <div class="l1">
+
+         <p class="snugbot">SPEC CPU benchmarks are distributed as source code, and must be compiled, which leads to the question:
+         <br>How should they be compiled? There are many possibilities, ranging from</p>
+         <pre class="snugish">--debug --no-optimize</pre>
+         <p class="snugtop">at a low end through highly customized optimization and even source code re-writing at a high
+         end.  Any point chosen from that range might seem arbitrary to those whose interests lie at a different point.
+         Nevertheless, choices must be made.  </p>
+         <p>For the SPEC CPU 2026 benchmark suites, SPEC has chosen to allow two points in the range.  The first may be of more interest to those
+         who prefer a relatively simple build process; the second may be of more interest to those who are willing to invest
+         more effort in order to achieve better performance.</p>
+
+         <ul>
+            <li><p> The <var>base</var> metrics (such as SPECspeed2026_int_base) require that  all modules of a given language in a
+               suite must be compiled using the same flags, in the same order.  All reported results must include the base
+               metric.</p></li>
+
+            <li id="peak"><p> The optional <var>peak</var> metrics (such as SPECspeed2026_int_peak) allow greater flexibility.
+               Different compiler options may be used for each benchmark, and feedback-directed
+               optimization is allowed.</p></li>
+         </ul>
+
+         <p>Options allowed under the base rules are a subset of those allowed under the peak rules.  A legal base
+         result is also legal under the peak rules but a legal peak result is NOT necessarily legal under the base rules.</p>
+
+         <p>For more information, see the
+         <a class="external" href="runrules.html">SPEC CPU 2026 Run and Reporting Rules</a>.</p>
+      </div>
+
+      <h3 id="Q17">Q17. Which SPEC CPU 2026 metric should I use? </h3>
+
+      <p class="l1snugbot">It depends on your needs; you get to choose, depending on how you use computers, and these choices will
+      differ from person to person.
+      <br>Examples:</p>
+      <ul class="l2snugish">
+         <li>A single user running a variety of generic desktop programs may, perhaps, be interested in SPECspeed2026_int_base.</li>
+         <li>A group of scientists running customized modeling programs may, perhaps, be interested in
+            SPECrate2026_fp_peak.</li>
+      </ul>
+
+
+      <h3 id="Q18"><span id="refSys"> </span>Q18. What is a "reference machine"? Why use one?                      </h3>
+
+      <p class="l1">SPEC uses a reference machine to normalize the performance metrics used in the SPEC CPU 2026 suites. Each
+      benchmark is run and measured on this machine to establish a reference time for that benchmark. These times are then used
+      in the SPEC calculations.</p>
+
+      <p class="l1">The reference machine is a historical
+      Lenovo ThinkSystem HR330A with the Ampere eMAG processor.  The eMAG chip, introduced in 2019, used the ARMv8 ISA and
+      supported up to 32 cores.</p>
+
+      <p class="l1"> Note that when comparing any two systems measured with the SPEC CPU 2026 benchmark suites, their performance relative to each
+      other would remain the same even if a different reference machine was used. This is a consequence of the mathematics
+      involved in calculating the individual and overall (geometric mean) metrics.  </p>
+
+      <h2 id="Q19" style="border:solid lightgray; border-width:1px 0px; ">
+         <span id="New"> </span>
+         <span id="new"> </span>
+         <span id="Whats-new"> </span>
+         <span id="Whats.new"> </span>
+         <span id="WhatsNew"> </span>
+         <span id="Whats_new"> </span>
+         <span id="Whatsnew"> </span>
+         <span id="whats-new"> </span>
+         <span id="whats.new"> </span>
+         <span id="whatsNew"> </span>
+         <span id="whats_new"> </span>
+         <span id="whatsnew"> </span>
+         Q19. What's new in the SPEC CPU 2026 Benchmark Suite?</h2>
+
+      <p>Compared to SPEC CPU 2017, what's new in the SPEC CPU 2026 suites?</p>
+
+      <div class="l1">
+
+         <h3 style="margin-top:.3em;" id="BenchmarksAndMetrics">a.  Benchmarks and Metrics</h3>
+         <div class="l1">
+
+         <p>The recent <a class="external" href="https://www.spec.org/cpuv8/">CPUv8 search program</a> proved remarkably
+         successful, drawing 33 benchmark candidates into consideration. An impressive 29 advanced past Step 3, with 24 of
+         those ultimately integrated into the final suite. Many of the submissions originated from projects with strong
+         open-source community backing, which offered opportunities for collaboration with authors and their communities.
+         The collaboration accelerated cross-system porting and issue resolution as the benchmarks were tested and
+         ported.</p>
+
+         <p>The resulting benchmarks are diverse and meaningful, including flight simulators used by government
+         agencies, drug discovery programs vital to efforts such as the COVID-19 vaccine, and a media application that has
+         won an Academy Award. SPEC's intensive evaluation process didn't just "harden" these benchmarks for SPEC CPU; it also
+         led to valuable fixes and enhancements that were often directly upstreamed back into the original open-source
+         projects. The development process stands as a powerful testament to a strong relationship between SPEC CPU
+         and the open-source world.</p>
+
+            <ul class="snugish">
+               <li>The SPEC CPU 2026 benchmark product includes 4 new <a href="#suites">suites</a>.</li>
+               <li><p class="snugbot">There are 52 new benchmarks. Of these:</p>
+                  <ul class="snug">
+                     <li>38 have never before appeared in a SPEC CPU suite.</li>
+                     <li>14 are updated from their previous appearances (new workload, new source code, or both).</li>
+                  </ul>
+               <li><p>There are new <a href="#metrics">metrics</a>.</p></li>
+               <li><p><a href="#memory">Memory</a> requirements differ vs. previous SPEC CPU suites.</p></li>
+               <li><p class="snugbot">Parallelism can be used for 22 of the 26 SPECspeed
+                  benchmarks.  Four types of parallel processing are used:</p>
+                  <ul class="snugish">
+                     <li>OpenMP (13 benchmarks)</li>
+                     <li>C++ <kbd>std::thread</kbd> (6 benchmarks)</li>
+                     <li>Fortran <kbd class="nbsnugr">DO CONCURRENT</kbd> (1 benchmark)</li>
+                     <li>And, for the 2 compilers (<samp class="nbsnugr">821.gcc_s</samp>
+                        and <samp class="nbsnugr">823.llvm_s</samp>), process-level multi-tasking, because that is how
+                        compilers typically achieve parallelism in real life).</li>
+                  </ul>
+               </li>
+            </ul>
+
+         </div>
+
+
+         <h3 id="SourceCode">b.  Source Code: C18, Fortran-2018, C++2017</h3>
+         <table style="margin:.0em 0em 1em 2em;" class="noborder">
+            <tr class="snugish">
+               <td class="snugish">
+                  <p class="snugish">The total source code has increased, as shown in the graph [<a
+                     href="images/kloc.png">larger version</a>], because most benchmarks are derived from real
+                  applications, including various open source projects.  </p>
+                  <p>During benchmark development, SPEC spends substantial effort working to improve portability, using language standards to
+                  assist in the process.  For SPEC CPU 2026 benchmark suites, the standards referenced are C18, Fortran-2018, and C++2017.  </p>
+                  <p class="snugbot"><span class="caution">Caution: </span> The benchmarks do not always comply perfectly with
+                  ISO/ANSI language standards, because their source code is derived from real applications.  The
+                  <a class="external" href="runrules.html#cater">rules</a> allow optimizers to assume standards *only*
+                  where that does not prevent validation. </p>
+               </td>
+               <td style="vertical-align:bottom;">
+                  <a href="images/kloc.png">
+                     <img src="images/kloc.png" width="350" alt="suite growth graph"></a>
+               </td>
+            </tr>
+            <tr><td colspan="2"><p style="margin-left:50%; text-align:right; font-size:85%;">Note that the graph has
+                  <b>generous source estimates</b>: It includes whitespace and comments; it includes all source files in all
+                  <samp>CPU/nnn.benchmark/src/</samp> directories, irrespective of whether SPEC CPU <samp>Makefiles</samp>
+            reference them.</td></tr>
+         </table>
+
+         <h3 id="Rules">c. Rules</h3>
+         <!-- XXX Would be good to ALSO summarize here, as well as in runrules.html -->
+         <p>Various rules were updated for the CPU 2026 release; see
+            <a class="external" href="runrules.html#highlights">runrules.html#highlights</a>.</p>
+      </div>
+
+
+      <h2 id="Publishing" style="border:solid lightgray; border-width:1px 0px; ">Publishing results </h2>
+
+      <h3 id="Q20">Q20: Where can I find SPEC CPU 2026 results?</h3>
+      <p class="l1">Results for measurements submitted to SPEC are available
+      at <a class="external" href="https://www.spec.org/cpu2026/results/">https://www.spec.org/cpu2026/results/</a>. </p>
+
+      <h3 id="Q21">Q21: Can I publish elsewhere? Do the rules still apply? </h3>
+      <div class="l1">
+         <p>Yes, SPEC CPU 2026 results can be published independently, and Yes, the rules still apply.</p>
+         <ul>
+            <li>The SPEC CPU license requires that published results must follow the
+               <a href="https://www.spec.org/cpu2026/Docs/runrules.html" class="external">SPEC CPU 2026 Run and Reporting Rules</a>.
+
+               <br>Note - the above link goes to the copy on the SPEC web site
+               -- the only official version of the rules with all updates.  Your published results must comply with the
+               latest posted version.
+            </li>
+
+            <li>Any public use of SPEC benchmark results is subject to the <a class="external"
+                  href="https://www.spec.org/fairuse.html">SPEC Fair Use Rule</a>, which requires (among other things) that
+               your statement must be clear; must be correct; must reference public data; must identify data sources; must
+               clearly distinguish between SPEC metrics and other types of data.</li>
+            <li>Any SPEC member may request the rawfile from your result, per
+               <a class="external" href="runrules.html#requiredDisclosure">Rule
+                  5.5</a>.</li>
+         </ul>
+         <p>Although you are allowed to publish indpendently, SPEC encourages results to be submitted for publication on
+         <a class="external" href="https://www.spec.org/cpu2026/">SPEC's web site</a>
+         because it ensures a peer review
+         process and uniform presentation of all results.  </p>
+         <p>The Fair Use rule recognizes that <a class="external" href="https://www.spec.org/fairuse.html#Academic">Academic and
+            Research</a> usage of the benchmarks may be less formal; the key requirement is that non-compliant numbers must be
+         clearly distinguished from rule-compliant results.</p>
+         <p>SPEC CPU performance results may be estimated, but SPEC CPU energy metrics are not
+         allowed to be estimated. Estimates must be clearly marked.  For more information, see the
+         <a class="external" href="https://www.spec.org/cpu2026/Docs/runrules.html#estimates">
+            SPEC CPU 2026 rule on estimates</a> and the CPU 2026 section of the general SPEC
+         <a class="external" href="https://www.spec.org/fairuse.html#CPU2026">Fair Use rule</a>.
+         </p>
+      </div>
+
+
+      <h2 id="Transitions" style="border:solid lightgray; border-width:1px 0px; ">Transitions</h2>
+
+      <h3 id="Q22">Q22. What will happen to SPEC CPU 2017? </h3>
+
+      <p class="l1">Three months after the announcement of the SPEC CPU 2026 benchmark product, SPEC
+      will require all CPU 2017 results submitted for publication on SPEC's web site to be accompanied by SPEC CPU 2026 results. Six
+      months after announcement, SPEC will stop accepting CPU 2017 results for publication on its web site. </p>
+
+      <p class="l1">After that point, you may continue to use SPEC CPU 2017.  You may publish new CPU 2017 results only if you <a
+         class="external" href="https://www.spec.org/fairuse.html#Retired">plainly disclose the retirement</a> (the link
+      includes sample disclosure language).</p>
+
+      <h3 id="Q23">Q23. Can I convert SPEC CPU 2017 results to SPEC CPU 2026?</h3>
+
+      <p class="l1">There is no formula for converting SPEC CPU 2017 results to SPEC CPU 2026 results and vice versa; they are
+      different products. There probably will be some correlation between SPEC CPU 2017 and SPEC CPU 2026 results (that is,
+      machines with higher CPU 2017 results often will have higher SPEC CPU 2026 results), but the correlation will be far
+      from perfect, because of differences in code, data sets, hardware stressed, metric calculations, and run rules.</p>
+
+      <div class="l1">
+      <table class="noborder"><tr>
+            <td><a class="hitch" id="WeakTrends" href="#WeakTrends">Weak Trends</a> The graphs on the right illustrate that
+               although there is some correlation, the correlation is far from perfect. (The graphs are based on testing of
+               real systems, but used pre-release versions of the SPEC CPU 2026 suites, and therefore the systems, metrics,
+               and actual values are intentionally not disclosed.)</td>
+            <td style="padding-right:2em;"> 
+               <img width="200" src="images/weakTrend2.png" alt="Weak Trend example 2"> </td>
+            <td> <img width="200" src="images/weakTrend1.png" alt="Weak Trend example 1"> </td>
+         </tr>
+      </table>
+      </div>
+
+      <p class="l1"><a class="hitch" id="SmallerNumbers" href="#SmallerNumbers">Smaller numbers</a> 
+      For systems that are tested with both the SPEC CPU 2017 and the SPEC CPU 2026
+      benchmark products, it is normal and expected that the SPEC CPU 2026 score will be a smaller number than the
+      corresponding SPEC CPU 2017 score, because the reference machine for the new suite 
+      (<a href="#refSys">Ampere eMAG</a>) is faster than the reference machine for the old suite:</p>
+      <ul class="l2">
+         <li>The eMAG system scores 
+            <a href="https://www.spec.org/cpu2017/results/res2026q2/cpu2017-20260304-51144.pdf">
+            2.78 for SPECrate&reg;2017_int_base</a> (single copy), 
+            and <a href="https://www.spec.org/cpu2017/results/res2026q2/cpu2017-20260304-51141.pdf">
+               2.12 for SPECrate&reg;2017_fp_base</a>  (single copy)
+            vs. the 
+            CPU 2017 reference system which, by definition, scores 1.00.</li>
+         <li>For SPECspeed&reg;2026 (both Integer and Floating Point), the above effects are amplified, because (unlike 
+            SPECspeed&reg;2017) the reference system applies all available cores when running SPECspeed benchmarks.  For
+            example, the eMAG system scores 
+            <a href="https://www.spec.org/cpu2017/results/res2026q2/cpu2017-20260304-51137.pdf">
+            35.0 for SPECspeed&reg;2017_fp_base</a>.</li>
+      </ul>
+
+
+      <h2 id="Selection" style="border:solid lightgray; border-width:1px 0px; ">SPEC CPU 2026 Benchmark Selection</h2>
+
+      <h3 id="Q24"> Q24: What criteria were used to select the benchmarks?</h3>
+
+      <p class="l1snugbot">SPEC considered:</p>
+      <ul class="l1snugish">
+         <li>Representativeness: Is it a well-known application or application area?</li>
+         <li>Availability of workloads that represent real problems.</li>
+         <li>Performance profile: Is the candidate compute bound, spending most of its time in the benchmark source, and little
+            time in IO and system services?</li>
+         <li>Portability to a variety of CPU architectures, including ARM, Power ISA, and x86.</li>
+         <li>Portability to various operating systems, including AIX, Linux, macOS, and Windows.</li>
+         <li>Memory usage: SPECspeed benchmarks should fit within 64 GB of main memory, and SPECrate benchmarks within 2 GB
+            per copy.</li>
+      </ul>
+
+      <h3 id="Q25">Q25. Were some benchmarks 'kept' from SPEC CPU 2017?</h3>
+
+      <p class="l1">Although some of the benchmarks from SPEC CPU 2017 are included in SPEC CPU 2026 suites, they have been given different
+      workloads and/or modified to use newer versions of the source code.  Therefore, for example, the SPEC CPU 2026
+      benchmark 849.fotonik3d_s may perform differently than the SPEC CPU 2017 benchmark 549.fotonik3d_s.</p>
+
+      <p class="l1">Some benchmarks were not retained because it was not possible to update the source or workload.
+      Others were left out because SPEC felt that they did not add significant performance information compared to the
+      other benchmarks under consideration.</p>
+
+      <h3 id="Q26">Q26. Are the benchmarks comparable to other programs?</h3>
+
+      <p class="l1">Many of the SPEC CPU 2026 benchmarks have been derived from publicly available application programs.  The
+      individual benchmarks in this suite may be similar, but are NOT identical to benchmarks or programs with similar names
+      which may be available from sources other than SPEC.   In particular, SPEC has invested significant effort to improve
+      portability and to minimize hardware dependencies, to avoid unfairly favoring one hardware platform over another.  For
+      this reason, the application programs in this distribution may perform differently from commercially available versions of
+      the same application.  </p>
+
+      <p class="l1">Therefore, it is not valid to compare SPEC CPU 2026 benchmark results with anything other than other SPEC
+      CPU 2026 benchmark results.  </p>
+
+      <h2 id="Misc" style="border:solid lightgray; border-width:1px 0px; ">Miscellaneous</h2>
+
+      <h3 id="Q27"> Q27. Can I run the benchmarks manually?</h3>
+
+      <p class="l1">To generate rule-compliant results, an approved toolset must be used.  If several attempts at using the
+      SPEC-provided tools are not successful, you should <a href="#Q28">contact SPEC for technical support</a>. SPEC may be able
+      to help you, but this is not always possible -- for example, if you are attempting to build the tools on a platform that
+      is not available to SPEC.</p>
+
+      <p class="l1">If you just want to work with the benchmarks and do not care to generate publishable results, SPEC provides
+      information about <a class="external" href="runcpu-avoidance.html">how to do so</a>.</p>
+
+
+      <h3 id="Q28">Q28. How do I contact SPEC? </h3>
+
+      <p class="l1">SPEC can be contacted in several ways. For general information, including other means of contacting SPEC,
+      please see SPEC's Web Site at:</p>
+
+      <p class="l2"><a class="external" href="https://www.spec.org/"><b>https://www.spec.org/</b></a></p>
+      <p class="l1">General questions can be emailed to:
+      <a class="external" href="&#109;ailto&#58;info&#64;spec.&#111;rg">info&#64;spec.&#111;rg</a>
+      <br>SPEC CPU 2026 Technical Support Questions can be sent to:
+      <a class="external" href="&#109;ailto&#58;cpu2026support&#64;spec.&#111;rg">cpu2026support&#64;spec.&#111;rg</a></p>
+
+      <h3 id="Q29">Q29. What should I do next?</h3>
+
+      <p class="l1">If you do not have the SPEC CPU 2026 benchmark suite, it is hoped that you will consider <a class="external"
+         href="https://spec.org/order.html">ordering</a> it.
+      <br>If you are ready to get started, please follow one of these two paths:</p>
+
+      <table style="border-top:thin solid lightgray;" class="l2">
+         <tr>
+            <th class="bold">I feel impatient.  <br>Let me dive in.</th>
+            <td style="width:3em;" class="noborder">&nbsp;</td>
+            <th class="bold">I want a clear and complete explanation</th>
+         </tr>
+         <tr>
+            <td style="vertical-align:middle;"><a href="quick-start.html" class="external">Quick Start</a></td>
+            <td style="width:3em;" class="noborder">&nbsp;</td>
+            <td>Read the <a class="external" href="system-requirements.html">System Requirements</a>.
+               <br>Then follow the Install Guide for
+               <a class="external" href="install-guide-unix.html">Unix</a> or
+               <a class="external" href="install-guide-windows.html">Windows</a>.
+            </td>
+         </tr>
+      </table>
+
+
+
+
+<p style="border-top:thin solid black;">
+SPEC CPU&reg;2026 Overview / What's New?:
+Copyright&nbsp;&copy;&nbsp;2017-2026 Standard Performance Evaluation Corporation (SPEC&reg;)</p>
+<!-- this space intentionally left blank: some empty space at the bottom increases the probability that clicking on a link in
+   the table of contents will actually position the desired section at the top of your browser window -->
+<p style="margin:300px 1em;">&nbsp;</p>
+
+
+   </body>
+<!-- vim: set filetype=html syntax=html shiftwidth=3 tabstop=8 expandtab nosmarttab colorcolumn=132: -->
+</html>
+
+
+
