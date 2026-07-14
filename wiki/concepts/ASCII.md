@@ -1,6 +1,7 @@
 ---
 title: ASCII
 aliases: [American Standard Code for Information Interchange, 아스키]
+summary: "문자에 숫자 값을 대응시키는 7비트 문자 인코딩 표준이자 UTF-8 ASCII 범위 호환성의 기반."
 tags: [type/concept, domain/computer-science, domain/systems, status/active]
 created: 2026-05-12
 updated: 2026-07-10

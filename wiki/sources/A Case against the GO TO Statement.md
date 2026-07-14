@@ -1,6 +1,7 @@
 ---
 title: A Case against the GO TO Statement
 aliases: [Go To Statement Considered Harmful, EWD215, GOTO Considered Harmful]
+summary: "Dijkstra의 `goto` 비판을 바탕으로 프로그램 텍스트와 실행 과정의 대응, 제어 흐름의 추적 가능성을 정리한 참고 자료."
 tags: [type/reference, domain/software-engineering, domain/programming-languages, status/active]
 created: 2026-07-10
 updated: 2026-07-10

@@ -1,6 +1,7 @@
 ---
 title: goto와 점프에서 구조적 프로그래밍으로
 aliases: [goto/점프에서 구조적 프로그래밍으로, jump to structured programming, goto에서 구조적 프로그래밍으로]
+summary: "기계 점프와 고급 언어 `goto`의 차이를 구분하고, 제어 흐름이 구조적 프로그래밍으로 정리되는 과정을 분석."
 tags: [type/analysis, domain/software-engineering, domain/programming-languages, domain/computer-history, status/active]
 created: 2026-07-10
 updated: 2026-07-10

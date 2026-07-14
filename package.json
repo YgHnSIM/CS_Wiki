@@ -6,6 +6,7 @@
   "scripts": {
     "build": "node site/build.mjs",
     "dev": "npm run build && node site/serve.mjs",
+    "fonts:subset": "python scripts/subset_fonts.py",
     "lint:wiki": "python scripts/wiki_lint.py"
   },
   "dependencies": {

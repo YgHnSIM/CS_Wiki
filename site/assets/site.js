@@ -1,8 +1,12 @@
 const base = window.CS_WIKI_BASE || "";
 const assetVersion = window.CS_WIKI_ASSET_VERSION || "";
+
 const dialog = document.querySelector("[data-search-dialog]");
 const searchInput = document.querySelector("[data-search-input]");
 const searchResults = document.querySelector("[data-search-results]");
+const searchCategory = document.querySelector("[data-search-category]");
+const searchStatus = document.querySelector("[data-search-status]");
+const searchCount = document.querySelector("[data-search-count]");
 const openSearchButtons = document.querySelectorAll("[data-open-search]");
 const menuButton = document.querySelector(".menu-trigger");
 const mobileMenu = document.querySelector("#mobile-menu");
@@ -12,6 +16,29 @@ let selectedResult = -1;
 
 function normalize(value) {
   return String(value || "").normalize("NFKC").toLocaleLowerCase("ko-KR");
+}
+
+function escapeRegExp(value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+function appendHighlighted(element, value, terms) {
+  const text = String(value || "");
+  const visibleTerms = [...new Set(terms.map((term) => term.trim()).filter(Boolean))];
+  if (!visibleTerms.length) {
+    element.textContent = text;
+    return;
+  }
+  const pattern = new RegExp(`(${visibleTerms.map(escapeRegExp).join("|")})`, "giu");
+  text.split(pattern).filter(Boolean).forEach((part) => {
+    if (visibleTerms.some((term) => normalize(part) === normalize(term))) {
+      const mark = document.createElement("mark");
+      mark.textContent = part;
+      element.append(mark);
+    } else {
+      element.append(document.createTextNode(part));
+    }
+  });
 }
 
 async function loadSearchIndex() {
@@ -24,53 +51,80 @@ async function loadSearchIndex() {
 }
 
 function clearResults(message) {
-  searchResults.replaceChildren();
-  const paragraph = document.createElement("p");
-  paragraph.className = "search-empty";
-  paragraph.textContent = message;
-  searchResults.append(paragraph);
+  searchResults?.replaceChildren();
+  if (searchResults) {
+    const paragraph = document.createElement("p");
+    paragraph.className = "search-empty";
+    paragraph.textContent = message;
+    searchResults.append(paragraph);
+  }
+  if (searchCount) searchCount.textContent = "";
   selectedResult = -1;
 }
 
-function resultElement(item, index) {
+function resultElement(item, index, terms) {
   const anchor = document.createElement("a");
   anchor.className = "search-result";
   anchor.href = item.url;
   anchor.dataset.resultIndex = String(index);
 
+  const meta = document.createElement("span");
+  meta.className = "search-result-meta";
   const category = document.createElement("span");
   category.textContent = item.category;
+  const status = document.createElement("span");
+  status.textContent = item.statusLabel;
+  meta.append(category, status);
 
   const body = document.createElement("div");
   const title = document.createElement("strong");
-  title.textContent = item.title;
+  appendHighlighted(title, item.title, terms);
   const description = document.createElement("p");
-  description.textContent = item.description;
+  appendHighlighted(description, item.description, terms);
   body.append(title, description);
 
   const time = document.createElement("time");
   time.textContent = item.updated;
-  anchor.append(category, body, time);
+  anchor.append(meta, body, time);
   return anchor;
 }
 
 function rankItem(item, terms) {
   const title = normalize(item.title);
+  const aliases = normalize((item.aliases || []).join(" "));
   const description = normalize(item.description);
+  const tags = normalize((item.tags || []).join(" "));
+  const sourceId = normalize(item.sourceId);
   const text = normalize(item.text);
+  const corpus = `${title} ${aliases} ${description} ${tags} ${sourceId} ${text}`;
   let score = 0;
+
   for (const term of terms) {
-    if (title === term) score += 100;
-    else if (title.startsWith(term)) score += 50;
-    else if (title.includes(term)) score += 25;
-    if (description.includes(term)) score += 8;
+    if (!corpus.includes(term)) return -1;
+    if (title === term) score += 120;
+    else if (title.startsWith(term)) score += 60;
+    else if (title.includes(term)) score += 30;
+    if (aliases.includes(term)) score += 24;
+    if (sourceId.includes(term)) score += 20;
+    if (description.includes(term)) score += 10;
+    if (tags.includes(term)) score += 5;
     if (text.includes(term)) score += 2;
   }
   return score;
 }
 
+function updateSearchUrl(query) {
+  const url = new URL(window.location.href);
+  const value = query.trim();
+  if (value) url.searchParams.set("q", value);
+  else url.searchParams.delete("q");
+  window.history.replaceState({}, "", url);
+}
+
 async function renderSearch(query) {
-  const value = normalize(query).trim();
+  const original = String(query || "").trim();
+  const value = normalize(original);
+  updateSearchUrl(original);
   if (!value) {
     clearResults("검색어를 입력하세요.");
     return;
@@ -79,37 +133,49 @@ async function renderSearch(query) {
   try {
     const index = await loadSearchIndex();
     const terms = value.split(/\s+/).filter(Boolean);
-    const results = index
+    const categoryValue = searchCategory?.value || "";
+    const statusValue = searchStatus?.value || "";
+    const matches = index
+      .filter((item) => !categoryValue || item.categoryKey === categoryValue)
+      .filter((item) => !statusValue || item.status === statusValue)
       .map((item) => ({ item, score: rankItem(item, terms) }))
-      .filter(({ score }) => score > 0)
-      .sort((a, b) => b.score - a.score || a.item.title.localeCompare(b.item.title, "ko"))
-      .slice(0, 18)
-      .map(({ item }) => item);
+      .filter(({ score }) => score >= 0)
+      .sort((a, b) => b.score - a.score || a.item.title.localeCompare(b.item.title, "ko"));
+    const results = matches.slice(0, 30).map(({ item }) => item);
 
     if (!results.length) {
-      clearResults(`“${query.trim()}” 검색 결과가 없습니다.`);
+      clearResults(`“${original}” 검색 결과가 없습니다.`);
       return;
     }
 
     selectedResult = -1;
-    searchResults.replaceChildren(...results.map(resultElement));
+    searchResults.replaceChildren(...results.map((item, index) => resultElement(item, index, terms)));
+    searchCount.textContent = matches.length > results.length
+      ? `${matches.length}개 중 ${results.length}개 표시`
+      : `${matches.length}개 결과`;
   } catch (error) {
     clearResults(error.message);
   }
 }
 
-async function openSearch() {
-  if (!dialog) return;
+async function openSearch({ query = "", preserveFilters = false } = {}) {
+  if (!dialog || dialog.open) return;
   dialog.showModal();
-  searchInput.value = "";
-  clearResults("검색어를 입력하세요.");
+  searchInput.value = query;
+  if (!preserveFilters) {
+    searchCategory.value = "";
+    searchStatus.value = "";
+  }
+  if (query) await renderSearch(query);
+  else clearResults("검색어를 입력하세요.");
   requestAnimationFrame(() => searchInput.focus());
   loadSearchIndex().catch(() => {});
 }
 
-openSearchButtons.forEach((button) => button.addEventListener("click", openSearch));
-
+openSearchButtons.forEach((button) => button.addEventListener("click", () => openSearch()));
 searchInput?.addEventListener("input", (event) => renderSearch(event.target.value));
+searchCategory?.addEventListener("change", () => renderSearch(searchInput.value));
+searchStatus?.addEventListener("change", () => renderSearch(searchInput.value));
 
 searchInput?.addEventListener("keydown", (event) => {
   const results = [...searchResults.querySelectorAll(".search-result")];
@@ -130,6 +196,8 @@ searchInput?.addEventListener("keydown", (event) => {
   }
 });
 
+dialog?.addEventListener("close", () => updateSearchUrl(""));
+
 document.addEventListener("keydown", (event) => {
   const target = event.target;
   const isTyping = target instanceof HTMLInputElement || target instanceof HTMLTextAreaElement || target?.isContentEditable;
@@ -142,11 +210,113 @@ document.addEventListener("keydown", (event) => {
   }
 });
 
+const initialQuery = new URL(window.location.href).searchParams.get("q") || "";
+if (initialQuery) openSearch({ query: initialQuery, preserveFilters: true });
+
+function setMenu(open, returnFocus = false) {
+  if (!menuButton || !mobileMenu) return;
+  menuButton.setAttribute("aria-expanded", String(open));
+  mobileMenu.hidden = !open;
+  document.body.classList.toggle("menu-open", open);
+  if (!open && returnFocus) menuButton.focus();
+}
+
 menuButton?.addEventListener("click", () => {
-  const expanded = menuButton.getAttribute("aria-expanded") === "true";
-  menuButton.setAttribute("aria-expanded", String(!expanded));
-  mobileMenu.hidden = expanded;
+  setMenu(menuButton.getAttribute("aria-expanded") !== "true");
 });
+
+mobileMenu?.addEventListener("click", (event) => {
+  if (event.target.closest("a")) setMenu(false);
+});
+
+document.addEventListener("pointerdown", (event) => {
+  if (menuButton?.getAttribute("aria-expanded") !== "true") return;
+  if (!mobileMenu.contains(event.target) && !menuButton.contains(event.target)) setMenu(false);
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && menuButton?.getAttribute("aria-expanded") === "true") {
+    event.preventDefault();
+    setMenu(false, true);
+  }
+});
+
+window.matchMedia("(min-width: 861px)").addEventListener("change", (event) => {
+  if (event.matches) setMenu(false);
+});
+
+const articleMeta = document.querySelector("[data-article-meta]");
+if (articleMeta) {
+  const articleMedia = window.matchMedia("(max-width: 860px)");
+  if (articleMedia.matches) articleMeta.removeAttribute("open");
+  articleMedia.addEventListener("change", (event) => {
+    if (!event.matches) articleMeta.setAttribute("open", "");
+  });
+}
+
+function initializeListings() {
+  document.querySelectorAll("[data-listing]").forEach((listing) => {
+    const queryInput = listing.querySelector("[data-list-query]");
+    const domainSelect = listing.querySelector("[data-list-domain]");
+    const statusSelect = listing.querySelector("[data-list-status]");
+    const sortSelect = listing.querySelector("[data-list-sort]");
+    const count = listing.querySelector("[data-list-count]");
+    const empty = listing.querySelector("[data-list-empty]");
+    const grid = listing.querySelector(".document-grid");
+    const cards = [...listing.querySelectorAll("[data-document-card]")];
+    const url = new URL(window.location.href);
+
+    queryInput.value = url.searchParams.get("filter") || "";
+    domainSelect.value = url.searchParams.get("domain") || "";
+    statusSelect.value = url.searchParams.get("status") || "";
+    sortSelect.value = url.searchParams.get("sort") || "score";
+
+    function updateUrl() {
+      const next = new URL(window.location.href);
+      const values = {
+        filter: queryInput.value.trim(),
+        domain: domainSelect.value,
+        status: statusSelect.value,
+        sort: sortSelect.value === "score" ? "" : sortSelect.value
+      };
+      Object.entries(values).forEach(([name, value]) => value ? next.searchParams.set(name, value) : next.searchParams.delete(name));
+      window.history.replaceState({}, "", next);
+    }
+
+    function applyFilters() {
+      const term = normalize(queryInput.value.trim());
+      const domain = domainSelect.value;
+      const status = statusSelect.value;
+      const sort = sortSelect.value;
+      const visible = cards.filter((card) => {
+        const matchesQuery = !term || normalize(`${card.dataset.title} ${card.dataset.summary}`).includes(term);
+        const matchesDomain = !domain || card.dataset.domains.split(",").includes(domain);
+        const matchesStatus = !status || card.dataset.status === status;
+        card.hidden = !(matchesQuery && matchesDomain && matchesStatus);
+        return !card.hidden;
+      });
+
+      const sorted = [...cards].sort((a, b) => {
+        if (sort === "title") return a.dataset.title.localeCompare(b.dataset.title, "ko");
+        if (sort === "updated") return b.dataset.updated.localeCompare(a.dataset.updated) || a.dataset.title.localeCompare(b.dataset.title, "ko");
+        return Number(b.dataset.score) - Number(a.dataset.score) || a.dataset.title.localeCompare(b.dataset.title, "ko");
+      });
+      sorted.forEach((card) => grid.append(card));
+      count.textContent = `${visible.length}개 문서`;
+      empty.hidden = visible.length > 0;
+      updateUrl();
+    }
+
+    listing.querySelector("[data-list-controls]")?.addEventListener("submit", (event) => event.preventDefault());
+    queryInput.addEventListener("input", applyFilters);
+    domainSelect.addEventListener("change", applyFilters);
+    statusSelect.addEventListener("change", applyFilters);
+    sortSelect.addEventListener("change", applyFilters);
+    applyFilters();
+  });
+}
+
+initializeListings();
 
 function initializeGraph() {
   const canvas = document.querySelector("#knowledge-graph");
@@ -159,9 +329,11 @@ function initializeGraph() {
   let width = 0;
   let height = 0;
   let nodes = [];
-  let pointer = { x: -1000, y: -1000 };
   let activeNode = -1;
   let animationFrame = 0;
+  let animationUntil = 0;
+  let visible = false;
+  let lastPaint = 0;
 
   function positionNodes() {
     const padding = Math.min(width, height) * 0.14;
@@ -184,20 +356,7 @@ function initializeGraph() {
     });
   }
 
-  function resize() {
-    const rect = canvas.getBoundingClientRect();
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    width = rect.width;
-    height = rect.height;
-    canvas.width = Math.floor(width * dpr);
-    canvas.height = Math.floor(height * dpr);
-    context.setTransform(dpr, 0, 0, dpr, 0, 0);
-    positionNodes();
-    cancelAnimationFrame(animationFrame);
-    draw(performance.now());
-  }
-
-  function draw(time) {
+  function draw(time = performance.now()) {
     context.clearRect(0, 0, width, height);
     context.lineWidth = 1;
 
@@ -215,7 +374,7 @@ function initializeGraph() {
 
     nodes.forEach((node, index) => {
       const hovered = index === activeNode;
-      const pulse = prefersReducedMotion ? 0 : Math.sin(time / 700 + index) * 1.2;
+      const pulse = prefersReducedMotion || time >= animationUntil ? 0 : Math.sin(time / 700 + index) * 1.2;
       context.shadowColor = hovered ? "#ffb000" : "#00ff41";
       context.shadowBlur = hovered ? 20 : 10;
       context.fillStyle = hovered ? "#ffb000" : "#00ff41";
@@ -224,34 +383,66 @@ function initializeGraph() {
       context.fill();
       context.shadowBlur = 0;
 
-      context.font = `${hovered ? "700" : "400"} 10px "D2Coding", monospace`;
+      context.font = `${hovered ? "700" : "400"} 11px "D2Coding", monospace`;
       context.fillStyle = hovered ? "#ffb000" : "rgba(231,255,233,0.86)";
       context.textAlign = node.x > width * 0.68 ? "right" : "left";
       context.textBaseline = "middle";
       const label = node.title.length > 24 ? `${node.title.slice(0, 23)}…` : node.title;
       context.fillText(label, node.x + (context.textAlign === "right" ? -14 : 14), node.y);
     });
+  }
 
-    if (!prefersReducedMotion) {
-      animationFrame = requestAnimationFrame(draw);
+  function frame(time) {
+    animationFrame = 0;
+    if (!visible || document.hidden) return;
+    if (time - lastPaint >= 50) {
+      draw(time);
+      lastPaint = time;
     }
+    if (!prefersReducedMotion && time < animationUntil) animationFrame = requestAnimationFrame(frame);
+  }
+
+  function animateFor(duration) {
+    animationUntil = performance.now() + duration;
+    if (prefersReducedMotion || !visible || document.hidden) {
+      draw();
+      return;
+    }
+    if (!animationFrame) animationFrame = requestAnimationFrame(frame);
+  }
+
+  function resize() {
+    const rect = canvas.getBoundingClientRect();
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    width = rect.width;
+    height = rect.height;
+    canvas.width = Math.floor(width * dpr);
+    canvas.height = Math.floor(height * dpr);
+    context.setTransform(dpr, 0, 0, dpr, 0, 0);
+    positionNodes();
+    draw();
+    animateFor(1800);
   }
 
   function findNode(event) {
     const rect = canvas.getBoundingClientRect();
-    pointer = { x: event.clientX - rect.left, y: event.clientY - rect.top };
-    return nodes.findIndex((node) => Math.hypot(node.x - pointer.x, node.y - pointer.y) < node.radius + 14);
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+    return nodes.findIndex((node) => Math.hypot(node.x - x, node.y - y) < node.radius + 18);
   }
 
   canvas.addEventListener("pointermove", (event) => {
-    activeNode = findNode(event);
+    const next = findNode(event);
+    if (next === activeNode) return;
+    activeNode = next;
     canvas.style.cursor = activeNode >= 0 ? "pointer" : "crosshair";
-    if (prefersReducedMotion) draw(performance.now());
+    draw();
+    animateFor(900);
   });
 
   canvas.addEventListener("pointerleave", () => {
     activeNode = -1;
-    if (prefersReducedMotion) draw(performance.now());
+    draw();
   });
 
   canvas.addEventListener("click", (event) => {
@@ -259,6 +450,18 @@ function initializeGraph() {
     if (index >= 0) window.location.href = nodes[index].url;
   });
 
+  new IntersectionObserver((entries) => {
+    visible = entries[0]?.isIntersecting || false;
+    if (visible) animateFor(2400);
+    else if (animationFrame) {
+      cancelAnimationFrame(animationFrame);
+      animationFrame = 0;
+    }
+  }, { threshold: 0.08 }).observe(canvas);
+
+  document.addEventListener("visibilitychange", () => {
+    if (!document.hidden && visible) animateFor(1200);
+  });
   new ResizeObserver(resize).observe(canvas);
 }
 

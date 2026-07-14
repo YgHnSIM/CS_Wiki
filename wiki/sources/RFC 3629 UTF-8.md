@@ -1,6 +1,7 @@
 ---
 title: RFC 3629 UTF-8
 aliases: [RFC 3629, UTF-8 RFC, UTF-8 a transformation format of ISO 10646]
+summary: "IETF의 UTF-8 표준을 바탕으로 ASCII 호환성, 1-4 octet 구조, 잘못된 바이트열 처리 문제를 정리한 참고 자료."
 tags: [type/reference, domain/computer-science, domain/internet, domain/text-processing, status/active]
 created: 2026-07-10
 updated: 2026-07-10

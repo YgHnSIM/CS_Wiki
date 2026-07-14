@@ -1,6 +1,7 @@
 ---
 title: EDSAC
 aliases: [Electronic Delay Storage Automatic Calculator]
+summary: "초기 저장 프로그램 컴퓨터로, 소프트웨어의 입력·적재·디버깅·재사용 계층이 선명하게 드러난 사례."
 tags: [type/concept, domain/computer-history, domain/software-engineering, status/active]
 created: 2026-05-04
 updated: 2026-07-10

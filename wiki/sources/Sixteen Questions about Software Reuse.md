@@ -1,6 +1,7 @@
 ---
 title: Sixteen Questions about Software Reuse
 aliases: [16 Questions about Software Reuse, Frakes Fox software reuse, 소프트웨어 재사용 16문답]
+summary: "Frakes와 Fox의 1995년 논문을 바탕으로 재사용과 이식성의 구분, 체계적 재사용의 실무 질문을 정리한 참고 자료."
 tags: [type/reference, domain/software-engineering, domain/computer-history, status/active]
 created: 2026-07-10
 updated: 2026-07-10

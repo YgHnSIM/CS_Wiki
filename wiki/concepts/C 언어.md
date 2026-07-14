@@ -1,6 +1,7 @@
 ---
 title: C 언어
 aliases: [C, C programming language, C language]
+summary: "Unix 구현을 위해 발전한 시스템 프로그래밍 언어로, 포인터와 바이트 단위 제어를 고급 언어 구조와 결합한 언어."
 tags: [type/concept, domain/programming-languages, domain/software-engineering, domain/computer-history, status/active]
 created: 2026-07-10
 updated: 2026-07-10

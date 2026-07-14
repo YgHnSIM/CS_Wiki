@@ -1,6 +1,7 @@
 ---
 title: API
 aliases: [Application Programming Interface, 응용 프로그래밍 인터페이스, 인터페이스]
+summary: "기능 제공자와 사용자 사이의 동작, 호출 규약, 비용, 전제 조건을 정리한 프로그래밍 인터페이스."
 tags: [type/concept, domain/software-engineering, status/active]
 created: 2026-07-09
 updated: 2026-07-10

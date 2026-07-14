@@ -1,6 +1,7 @@
 ---
 title: 폐쇄형 서브루틴과 Wheeler Jump
 aliases: [Closed Subroutine and Wheeler Jump]
+summary: "EDSAC의 폐쇄형 서브루틴과 Wheeler Jump의 호출·복귀 구조를 단계별로 설명한 소스."
 tags: [type/source, domain/computer-history, domain/software-engineering, status/active]
 created: 2026-05-04
 updated: 2026-07-10

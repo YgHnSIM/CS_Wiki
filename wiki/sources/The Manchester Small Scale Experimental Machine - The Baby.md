@@ -1,6 +1,7 @@
 ---
 title: The Manchester Small Scale Experimental Machine - The Baby
 aliases: [Manchester Baby source, SSEM source]
+summary: "Manchester Baby의 저장 프로그램 실행, Williams-Kilburn tube, EDSAC과의 최초성 기준 차이를 정리한 참고 자료."
 tags: [type/reference, domain/computer-history, domain/computer-architecture, status/active]
 created: 2026-07-10
 updated: 2026-07-10

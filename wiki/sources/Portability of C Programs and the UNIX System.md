@@ -1,6 +1,7 @@
 ---
 title: Portability of C Programs and the UNIX System
 aliases: [C and Unix portability, Johnson Ritchie portability paper]
+summary: "Johnson과 Ritchie의 1978년 논문을 바탕으로 C 프로그램과 Unix 시스템의 이식성, 도구, 기계 의존성 관리를 정리한 참고 자료."
 tags: [type/reference, domain/software-engineering, domain/programming-languages, domain/operating-systems, status/active]
 created: 2026-07-10
 updated: 2026-07-10

@@ -1,6 +1,7 @@
 ---
 title: On the Criteria To Be Used in Decomposing Systems into Modules
 aliases: [Criteria for Modularization, 모듈 분해 기준, Parnas modularization paper]
+summary: "Parnas의 1972년 논문을 바탕으로 모듈화, 정보 은닉, 변경 가능한 설계 결정 중심의 분해 기준을 정리한 참고 자료."
 tags: [type/reference, domain/software-engineering, domain/computer-history, status/active]
 created: 2026-07-10
 updated: 2026-07-10

@@ -1,6 +1,7 @@
 ---
 title: FORTRAN Automatic Coding System for the IBM 704 EDPM
 aliases: [FORTRAN Programmer's Reference Manual, IBM 704 FORTRAN Manual, FORTRAN 704 Reference Manual]
+summary: "1956년 IBM 704 FORTRAN 매뉴얼을 바탕으로 소스 프로그램, 목적 프로그램, DO 문, 최적화 힌트를 정리한 참고 자료."
 tags: [type/reference, domain/programming-languages, domain/software-engineering, domain/computer-history, status/active]
 created: 2026-07-10
 updated: 2026-07-10

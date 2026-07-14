@@ -1,6 +1,7 @@
 ---
 title: UTF-8
 aliases: [Unicode Transformation Format 8-bit, UTF8]
+summary: "Unicode scalar value를 1-4개의 8비트 코드 유닛으로 표현하는 ASCII 호환 가변 길이 인코딩."
 tags: [type/concept, domain/computer-science, domain/internet, domain/text-processing, status/active]
 created: 2026-07-10
 updated: 2026-07-10

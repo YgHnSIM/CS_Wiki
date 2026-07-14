@@ -1,6 +1,7 @@
 ---
 title: Mass Produced Software Components
 aliases: [Mass-Produced Software Components, 대량 생산 소프트웨어 컴포넌트, McIlroy software components]
+summary: "McIlroy의 1968년 발표를 바탕으로 소프트웨어 컴포넌트 제품군, 카탈로그, 재사용 산업화 구상을 정리한 참고 자료."
 tags: [type/reference, domain/software-engineering, domain/computer-history, status/active]
 created: 2026-07-10
 updated: 2026-07-10

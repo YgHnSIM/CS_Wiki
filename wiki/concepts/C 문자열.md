@@ -1,6 +1,7 @@
 ---
 title: C 문자열
 aliases: [C string, C-style string, Null terminator, 널 종단 문자열]
+summary: "Null terminator로 문자열 경계를 표시하는 C 스타일 문자열 표현."
 tags: [type/concept, domain/software-engineering, domain/security, status/active]
 created: 2026-05-12
 updated: 2026-07-10

@@ -102,7 +102,8 @@ def fix_index_counts(root: Path, pages, fix: bool) -> tuple[int, int]:
         return replaced
 
     index_page.text = re.sub(r"^-\s+\[\[([^\]]+)\]\].*$", replace_item, index_page.text, flags=re.MULTILINE)
-    index_page.text = set_updated(index_page.text, TODAY, index_page.newline)
+    if index_page.text != original:
+        index_page.text = set_updated(index_page.text, TODAY, index_page.newline)
     changed_files = 1 if write_if_changed(index_page, original, fix) else 0
 
     overview_page = next(page for page in pages if page.path == root / "wiki" / "overview.md")
@@ -133,7 +134,8 @@ def fix_index_counts(root: Path, pages, fix: bool) -> tuple[int, int]:
             overview_page.newline * 2 + status_block + overview_page.newline * 2 + "## 주요 주제",
             1,
         )
-    overview_page.text = set_updated(overview_page.text, TODAY, overview_page.newline)
+    if overview_page.text != overview_original:
+        overview_page.text = set_updated(overview_page.text, TODAY, overview_page.newline)
     if write_if_changed(overview_page, overview_original, fix):
         changed_files += 1
     return changed_files, changed_items
@@ -168,7 +170,9 @@ def fix_log_headings(root: Path, pages, fix: bool) -> tuple[int, int]:
         + "- [[overview]]"
         + log_page.newline
     )
-    log_page.text = set_updated(text + global_sections, TODAY, log_page.newline)
+    log_page.text = text + global_sections
+    if log_page.text != original:
+        log_page.text = set_updated(log_page.text, TODAY, log_page.newline)
     changed = 1 if write_if_changed(log_page, original, fix) else 0
     return changed, replacements
 

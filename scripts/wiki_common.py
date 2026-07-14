@@ -1,13 +1,14 @@
 from __future__ import annotations
 
 import csv
+import json
 import re
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Iterable
 
 
-BASE_REQUIRED = {"title", "aliases", "tags", "created", "updated", "sources", "status"}
+BASE_REQUIRED = {"title", "summary", "aliases", "tags", "created", "updated", "sources", "status"}
 VALID_STATUSES = {"draft", "active", "review", "archived"}
 CONTENT_DIRS = {"concepts", "entities", "analyses"}
 SPECIAL_FILES = {"index.md", "log.md", "overview.md"}
@@ -31,8 +32,13 @@ def parse_scalar(value: str | None) -> str | None:
     value = value.strip()
     if value in {"", "null", "~"}:
         return None
-    if len(value) >= 2 and value[0] == value[-1] and value[0] in {'"', "'"}:
-        return value[1:-1]
+    if len(value) >= 2 and value[0] == value[-1] == '"':
+        try:
+            return json.loads(value)
+        except json.JSONDecodeError:
+            return value[1:-1]
+    if len(value) >= 2 and value[0] == value[-1] == "'":
+        return value[1:-1].replace("''", "'")
     return value
 
 

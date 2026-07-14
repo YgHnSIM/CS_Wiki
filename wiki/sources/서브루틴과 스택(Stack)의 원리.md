@@ -1,6 +1,7 @@
 ---
 title: 서브루틴과 스택(Stack)의 원리
 aliases: [서브루틴과 스택, Subroutine and Stack]
+summary: "서브루틴의 본질을 복귀 주소 관리로 설명하고 Wheeler Jump에서 스택 프레임까지의 발전을 정리한 소스."
 tags: [type/source, domain/software-engineering, domain/computer-architecture, domain/computer-history, status/active]
 created: 2026-05-04
 updated: 2026-07-10

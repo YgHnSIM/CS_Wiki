@@ -1,6 +1,7 @@
 ---
 title: C Integer and Shift Semantics
 aliases: [C 정수와 시프트 의미론, C integer overflow rules, WG14 integer semantics]
+summary: "WG14 문서를 바탕으로 C의 unsigned 래핑, signed overflow, 시프트 연산 조건을 정리한 참고 자료."
 tags: [type/reference, domain/programming-languages, domain/systems, domain/security, status/active]
 created: 2026-07-10
 updated: 2026-07-10

@@ -1,6 +1,7 @@
 ---
 title: WHATWG Encoding Standard
 aliases: [WHATWG Encoding, Web Encoding Standard]
+summary: "웹 플랫폼의 바이트-문자 변환 알고리즘, 인코딩 라벨, BOM, 오류 대체 정책을 정리한 참고 자료."
 tags: [type/reference, domain/computer-science, domain/web, domain/text-processing, status/active]
 created: 2026-07-10
 updated: 2026-07-10

@@ -1,6 +1,7 @@
 ---
 title: The Evolution of the Unix Time-sharing System
 aliases: [Ritchie Unix evolution, Unix evolution, Evolution of Unix]
+summary: "Ritchie의 Unix 초기 진화 회고를 바탕으로 파일 시스템, 프로세스 제어, 파이프라인 명령, C 재작성을 정리한 참고 자료."
 tags: [type/reference, domain/computer-history, domain/operating-systems, domain/software-engineering, status/active]
 created: 2026-07-10
 updated: 2026-07-10

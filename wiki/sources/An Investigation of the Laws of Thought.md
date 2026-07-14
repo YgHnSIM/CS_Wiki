@@ -1,6 +1,7 @@
 ---
 title: An Investigation of the Laws of Thought
 aliases: [The Laws of Thought, Boole 1854, Laws of Thought]
+summary: "Boole의 1854년 저작을 바탕으로 논리를 기호와 연산의 체계로 다루는 관점과 Boolean이라는 명칭의 기원을 정리한 참고 자료."
 tags: [type/reference, domain/computer-history, domain/computer-science, status/active]
 created: 2026-07-11
 updated: 2026-07-11

@@ -1,9 +1,10 @@
 ---
 title: 작업 로그
 aliases: [log, 변경 기록, 작업 기록]
+summary: "CS Wiki의 소스 수집, 질의, 점검, 콘텐츠·웹사이트 변경을 시간순으로 남긴 운영 기록."
 tags: [type/meta, status/active]
 created: 2026-05-03
-updated: 2026-07-11
+updated: 2026-07-14
 sources: []
 status: active
 ---
@@ -865,6 +866,42 @@ D2Coding 적용 후 데스크톱 히어로 제목에서 `컴퓨팅의 역사를`
 - [[조지 불]]
 - [[기호 조작]]
 - [[논리 회로와 이진 표현]]
+
+## [2026-07-14] update | 콘텐츠 중심 탐색·근거 추적 UI 전면 개선
+
+전체 163개 위키 페이지에 명시적 `summary`를 추가하고 이를 프론트매터 필수 필드로 편입했다. 정규 소스와 외부 참고 자료를 웹 경로와 탐색 메뉴에서 분리했으며, 제목·별칭·태그·본문·출처 ID 통합 검색, 자료 유형·상태 필터, 목록 검색·주제·상태·정렬과 URL 상태 보존을 구현했다.
+
+10개의 실제 콘텐츠 기반 학습 경로와 문서별 이전·다음 진행 링크를 추가했다. 문서 화면에는 직접 근거, 보조 자료, 소스 ID, 자료 유형, 보존 상태, 판본, 확인일과 외부 URL을 잇는 근거 추적 영역, 문서 목차와 연결 문서 레일을 구성했다. 모바일에서는 메뉴와 문서 메타데이터를 접을 수 있게 하고, 키보드 포커스·검색 탐색·모션 감소 설정을 보강했다.
+
+홈 연결망은 정적 대체 목록을 제공하고 화면에 보일 때만 제한된 프레임으로 움직이도록 바꿨다. 목록 하단 카드에는 `content-visibility`를 적용했고, D2Coding 배포 파일은 현재 말뭉치 기반 서브셋으로 만들어 3,065,416바이트에서 193,760바이트로 93.7% 줄였다. 유지보수 도구가 변경 없는 파일의 `updated` 날짜를 바꾸던 문제도 수정했다.
+
+변경된 페이지 및 파일:
+
+- 갱신: 전체 `wiki/**/*.md`의 `summary`, [[overview]], [[log]]
+- 갱신: `AGENTS.md`, `README.md`, `package.json`
+- 생성: `site/catalog.mjs`, `scripts/wiki_summaries.py`, `scripts/subset_fonts.py`, `site/font-sources/README.md`
+- 갱신: `site/build.mjs`, `site/assets/site.css`, `site/assets/site.js`
+- 이동·경량화: `site/font-sources/*.woff2`, `site/assets/fonts/*.woff2`
+- 갱신: `scripts/wiki_common.py`, `scripts/wiki_maintenance.py`
+
+### 검증
+
+- `python scripts/wiki_lint.py --json`: 163개 페이지, 4,051개 링크, 오류 0건, 경고 0건
+- `python scripts/wiki_maintenance.py --check`: 변경 필요 항목 0건
+- `npm run build`: 163개 페이지 빌드 성공
+- Chromium 1440×1000 및 390×844: 검색·필터·학습 경로·근거 추적·모바일 메뉴·이전 URL 리디렉션 확인, 콘솔 오류·경고 0건
+
+### 출처
+
+- `AGENTS.md`
+- `wiki/index.md`
+- 로컬 정적 사이트 빌드와 Chromium 렌더링 결과
+
+### 관련 항목
+
+- [[overview]]
+- [[index]]
+- [[log]]
 
 <!-- wiki-maintenance: global-sections -->
 ## 출처

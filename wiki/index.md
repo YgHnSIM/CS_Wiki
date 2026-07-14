@@ -1,6 +1,7 @@
 ---
 title: 위키 색인
 aliases: [index, 색인, 카탈로그]
+summary: "위키 전체 페이지를 유형별로 정리하고 각 페이지의 근거 수를 표시하는 카탈로그."
 tags: [type/meta, status/active]
 created: 2026-05-03
 updated: 2026-07-11

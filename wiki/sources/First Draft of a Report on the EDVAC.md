@@ -1,6 +1,7 @@
 ---
 title: First Draft of a Report on the EDVAC
 aliases: [EDVAC 보고서, First Draft, von Neumann report]
+summary: "EDVAC 설계 보고서를 중심으로 저장 프로그램 컴퓨터의 논리 구조, 폰 노이만 구조, 설계상 최초성을 정리한 참고 자료."
 tags: [type/reference, domain/computer-history, domain/computer-architecture, status/active]
 created: 2026-07-10
 updated: 2026-07-10

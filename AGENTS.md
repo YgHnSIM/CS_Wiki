@@ -34,6 +34,7 @@ CS_Wiki/
 ---
 title: 페이지 제목
 aliases: [대안 이름, 약어]
+summary: 목록·검색·웹 메타 설명에 사용하는 1-2문장 요약
 tags: [카테고리태그]
 created: YYYY-MM-DD
 updated: YYYY-MM-DD
@@ -41,6 +42,8 @@ sources: [관련 소스 파일명]
 status: draft | active | review | archived
 ---
 ```
+
+- `summary`는 본문 첫 문단을 기계적으로 잘라 쓰지 않고 페이지의 범위와 핵심을 독립적으로 설명한다. 목록과 검색 결과에서 단독으로 읽어도 의미가 통하도록 작성하며, Markdown 링크나 각주를 넣지 않는다.
 
 `type/source`와 `type/reference` 페이지에는 다음 출처 재현성 필드를 추가합니다. 기존 `sources`는 호환성을 위해 유지하며, `primary_sources`와 `supporting_sources`의 합집합을 사람이 읽기 쉬운 이름으로 요약합니다.
 

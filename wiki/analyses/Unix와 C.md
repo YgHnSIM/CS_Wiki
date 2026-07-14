@@ -1,6 +1,7 @@
 ---
 title: Unix와 C
 aliases: [UNIX와 C, Unix and C]
+summary: "Unix 운영체제와 C 언어가 시스템 프로그래밍, 이식성, 도구 생태계 안에서 서로를 강화한 과정을 분석."
 tags: [type/analysis, domain/operating-systems, domain/programming-languages, domain/software-engineering, domain/computer-history, status/active]
 created: 2026-07-10
 updated: 2026-07-10

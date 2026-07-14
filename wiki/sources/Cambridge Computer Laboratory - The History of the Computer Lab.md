@@ -1,6 +1,7 @@
 ---
 title: Cambridge Computer Laboratory - The History of the Computer Lab
 aliases: [Cambridge Computer Lab history, 케임브리지 컴퓨터 연구소 역사]
+summary: "EDSAC I의 운영과 EDSAC II의 마이크로프로그램 제어부 계보를 구분하는 케임브리지 공식 역사 자료."
 tags: [type/reference, domain/computer-history, domain/computer-architecture, status/active]
 created: 2026-07-10
 updated: 2026-07-10

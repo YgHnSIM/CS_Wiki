@@ -1,6 +1,7 @@
 ---
 title: EDSAC과 Initial Orders
 aliases: [EDSAC Initial Orders source]
+summary: "Initial Orders를 초기 로더·어셈블러·재배치 로더·원시적 링커로 해석하고 EDSAC의 실행 계층을 정리한 소스."
 tags: [type/source, domain/computer-history, domain/software-engineering, status/active]
 created: 2026-05-04
 updated: 2026-07-10

@@ -1,6 +1,7 @@
 ---
 title: Entscheidungsproblem
 aliases: [결정 문제, decision problem, Hilbert's Entscheidungsproblem, 힐베르트 결정 문제]
+summary: "수학 명제의 증명 가능성을 일반 기계 절차로 판정할 수 있는지를 묻는 결정 문제."
 tags: [type/concept, domain/computer-science, domain/computer-history, status/active]
 created: 2026-07-10
 updated: 2026-07-10

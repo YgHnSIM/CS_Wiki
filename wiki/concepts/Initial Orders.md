@@ -1,6 +1,7 @@
 ---
 title: Initial Orders
 aliases: [초기 명령, EDSAC Initial Orders]
+summary: "EDSAC에서 종이 테이프 프로그램을 읽고 해석해 메모리에 적재한 초기 로더·어셈블러 절차."
 tags: [type/concept, domain/computer-history, domain/software-engineering, status/active]
 created: 2026-05-04
 updated: 2026-07-10

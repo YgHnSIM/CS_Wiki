@@ -1,6 +1,7 @@
 ---
 title: Flow Diagrams, Turing Machines and Languages with Only Two Formation Rules
 aliases: [Böhm-Jacopini 1966]
+summary: "Böhm-Jacopini의 흐름도 정규화와 구조화 프로그램 정리를 바탕으로 `goto` 없는 표현 가능성을 정리한 참고 자료."
 tags: [type/reference, domain/computer-science, domain/programming-languages, status/active]
 created: 2026-07-10
 updated: 2026-07-10

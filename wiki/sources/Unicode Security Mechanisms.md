@@ -1,6 +1,7 @@
 ---
 title: Unicode Security Mechanisms
 aliases: [UTS #39, Unicode Technical Standard #39, 유니코드 보안 메커니즘]
+summary: "UTS #39를 바탕으로 동형이의 문자, mixed-script 탐지, Unicode 식별자 보안 문제를 정리한 참고 자료."
 tags: [type/reference, domain/computer-science, domain/security, domain/text-processing, status/active]
 created: 2026-07-10
 updated: 2026-07-10

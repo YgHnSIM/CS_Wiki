@@ -1,6 +1,7 @@
 ---
 title: Software Reuse
 aliases: [Krueger Software Reuse, ACM Computing Surveys Software Reuse, 소프트웨어 재사용 Krueger]
+summary: "Krueger의 1992년 조사 논문을 바탕으로 재사용을 추상화, 선택, 특수화, 통합의 문제로 정리한 참고 자료."
 tags: [type/reference, domain/software-engineering, domain/computer-history, status/active]
 created: 2026-07-10
 updated: 2026-07-10

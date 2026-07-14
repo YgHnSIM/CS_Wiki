@@ -1,6 +1,7 @@
 ---
 title: Manchester Baby
 aliases: [Small Scale Experimental Machine, SSEM, Baby, 맨체스터 베이비]
+summary: "1948년 저장된 프로그램을 전자식 디지털 컴퓨터에서 실제로 실행한 실험 장치."
 tags: [type/concept, domain/computer-history, domain/computer-architecture, status/active]
 created: 2026-07-10
 updated: 2026-07-10

@@ -1,6 +1,7 @@
 ---
 title: Fortran과 컴파일러
 aliases: [FORTRAN과 컴파일러, Fortran compiler, Fortran and compiler]
+summary: "Fortran을 고급 언어와 효율적 컴파일러가 결합된 시스템으로 보고, 소스 프로그램에서 목적 프로그램으로의 전환을 분석."
 tags: [type/analysis, domain/programming-languages, domain/software-engineering, domain/computer-history, status/active]
 created: 2026-07-10
 updated: 2026-07-10

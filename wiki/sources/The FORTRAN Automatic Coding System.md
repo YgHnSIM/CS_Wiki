@@ -1,6 +1,7 @@
 ---
 title: The FORTRAN Automatic Coding System
 aliases: [Backus 1957 FORTRAN paper, FORTRAN automatic coding paper]
+summary: "Backus 팀의 1957년 논문을 바탕으로 Fortran 언어와 번역기, 제어 흐름 분석, 인덱스 레지스터 최적화를 정리한 참고 자료."
 tags: [type/reference, domain/programming-languages, domain/software-engineering, domain/computer-history, status/active]
 created: 2026-07-10
 updated: 2026-07-10

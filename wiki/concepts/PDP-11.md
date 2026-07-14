@@ -1,6 +1,7 @@
 ---
 title: PDP-11
 aliases: [DEC PDP-11, PDP-11/40, PDP-11/45]
+summary: "초기 Unix와 C 언어가 실용화된 DEC 미니컴퓨터 계열."
 tags: [type/concept, domain/computer-history, domain/computer-architecture, status/draft]
 created: 2026-07-10
 updated: 2026-07-10

@@ -1,6 +1,7 @@
 ---
 title: EDSAC은 무엇의 최초인가
 aliases: [EDSAC 최초성, EDSAC first, first practical stored-program computer]
+summary: "EDSAC의 최초성을 절대적 최초가 아니라 실용적 범용 저장 프로그램 컴퓨터 기준으로 정리한 분석."
 tags: [type/analysis, domain/computer-history, domain/computer-architecture, status/active]
 created: 2026-07-10
 updated: 2026-07-10

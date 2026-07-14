@@ -1,6 +1,7 @@
 ---
 title: 서브루틴 라이브러리에서 API로
 aliases: [EDSAC API, API의 전사, 서브루틴과 API]
+summary: "EDSAC 서브루틴 라이브러리의 카탈로그, 사용 규약, 비용 정보, 오류 진단을 현대 API의 전사로 해석한 분석."
 tags: [type/analysis, domain/software-engineering, domain/computer-history, status/active]
 created: 2026-07-09
 updated: 2026-07-10

@@ -1,6 +1,7 @@
 ---
 title: The Preparation of Programs for an Electronic Digital Computer
 aliases: [WWG, Preparation of Programs, 프로그램 준비, EDSAC programming textbook]
+summary: "Wilkes, Wheeler, Gill의 EDSAC 프로그래밍 문헌을 바탕으로 서브루틴 라이브러리, 카탈로그, 오류 진단, 자동 프로그래밍을 API의 전사로 정리한 참고 자료."
 tags: [type/reference, domain/computer-history, domain/software-engineering, status/active]
 created: 2026-07-09
 updated: 2026-07-10

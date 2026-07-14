@@ -1,6 +1,7 @@
 ---
 title: On Computable Numbers with an Application to the Entscheidungsproblem
 aliases: [On Computable Numbers, Turing 1936, computable numbers]
+summary: "Turing의 1936년 논문을 바탕으로 튜링 기계, 보편 튜링 기계, 계산 가능성, 정지 문제, Entscheidungsproblem을 정리한 참고 자료."
 tags: [type/reference, domain/computer-history, domain/computer-science, status/active]
 created: 2026-07-10
 updated: 2026-07-10

@@ -1,6 +1,7 @@
 ---
 title: GOTO 문
 aliases: [goto, go to statement, 점프 문, 무조건 분기]
+summary: "프로그램 실행을 지정된 라벨이나 주소로 직접 이동시키는 제어문."
 tags: [type/concept, domain/programming-languages, domain/software-engineering, status/active]
 created: 2026-07-10
 updated: 2026-07-10

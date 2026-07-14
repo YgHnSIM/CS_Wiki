@@ -1,6 +1,7 @@
 ---
 title: Unicode Normalization Forms
 aliases: [UAX #15, Unicode Standard Annex #15, 유니코드 정규화 형식]
+summary: "UAX #15를 바탕으로 NFC, NFD, NFKC, NFKD와 문자열 동등성 문제를 정리한 참고 자료."
 tags: [type/reference, domain/computer-science, domain/text-processing, domain/security, status/active]
 created: 2026-07-10
 updated: 2026-07-10

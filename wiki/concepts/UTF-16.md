@@ -1,6 +1,7 @@
 ---
 title: UTF-16
 aliases: [Unicode Transformation Format 16-bit, surrogate pair, 서로게이트 페어]
+summary: "Unicode scalar value를 16비트 코드 유닛 하나 또는 surrogate pair 두 개로 표현하는 인코딩 형식."
 tags: [type/concept, domain/computer-science, domain/text-processing, status/active]
 created: 2026-07-10
 updated: 2026-07-10

@@ -1,6 +1,7 @@
 ---
 title: Wheeler Jump
 aliases: [휠러 점프, Wheeler jump]
+summary: "호출부 명령을 이용해 복귀 점프를 만들어내는 EDSAC의 초기 서브루틴 호출 기법."
 tags: [type/concept, domain/computer-history, domain/software-engineering, status/active]
 created: 2026-05-04
 updated: 2026-07-10

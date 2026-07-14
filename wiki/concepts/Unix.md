@@ -1,6 +1,7 @@
 ---
 title: Unix
 aliases: [UNIX, 유닉스]
+summary: "파일, 프로세스, 셸, 파이프, 시스템 호출을 중심으로 구성된 Bell Labs의 다중 사용자 대화형 운영체제."
 tags: [type/concept, domain/operating-systems, domain/computer-history, domain/software-engineering, status/active]
 created: 2026-07-10
 updated: 2026-07-10

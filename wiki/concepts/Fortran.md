@@ -1,6 +1,7 @@
 ---
 title: Fortran
 aliases: [FORTRAN, Formula Translation, 포트란]
+summary: "수학적 수식과 과학 계산 표현을 IBM 704 목적 프로그램으로 번역하려 한 초기 고급 프로그래밍 언어."
 tags: [type/concept, domain/programming-languages, domain/computer-history, status/active]
 created: 2026-05-04
 updated: 2026-07-10
