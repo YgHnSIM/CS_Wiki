@@ -15,7 +15,7 @@ status: active
 
 
 <!-- wiki-maintenance: status-summary -->
-운영 상태: 전체 169개 페이지 중 active 154개, draft 15개, review 0개, archived 0개다.
+운영 상태: 전체 170개 페이지 중 active 155개, draft 15개, review 0개, archived 0개다.
 
 ## 웹 탐색 구조
 
@@ -67,7 +67,7 @@ status: active
 
 ### 컴퓨팅 능력과 성능 측정
 
-[[On the Computational Complexity of Algorithms]]는 원리적으로 계산 가능한 것과 주어진 자원으로 계산하기 어려운 것을 구분한다. [[SPEC CPU 2026 Overview]]와 [[The Linpack Benchmark]]는 실행 시간·처리량·달성 성능을 특정 작업 부하와 정확도 조건 아래에서 측정해야 함을 보여준다. [[Validity of the Single Processor Approach to Achieving Large Scale Computing Capabilities]]는 병렬화되지 않는 순차 부분이 전체 가속을 제한한다는 관점을 제시하고, [[Roofline An Insightful Visual Performance Model]]은 연산 성능과 메모리 대역폭 사이의 병목을 시각화한다. [[Power Measurement Tutorial for the Green500 List]]는 여기에 성능당 전력이라는 효율 차원을 더한다.
+[[컴퓨팅 능력이란 무엇인가]]는 컴퓨팅 능력을 계산 가능성, 알고리즘 복잡도, 실제 성능, 확장성, 에너지 효율의 다섯 층위로 종합하고 비교 가능한 측정 조건을 정리한다. [[On the Computational Complexity of Algorithms]]는 원리적으로 계산 가능한 것과 주어진 자원으로 계산하기 어려운 것을 구분한다. [[SPEC CPU 2026 Overview]]와 [[The Linpack Benchmark]]는 실행 시간·처리량·달성 성능을 특정 작업 부하와 정확도 조건 아래에서 측정해야 함을 보여준다. [[Validity of the Single Processor Approach to Achieving Large Scale Computing Capabilities]]는 병렬화되지 않는 순차 부분이 전체 가속을 제한한다는 관점을 제시하고, [[Roofline An Insightful Visual Performance Model]]은 연산 성능과 메모리 대역폭 사이의 병목을 시각화한다. [[Power Measurement Tutorial for the Green500 List]]는 여기에 성능당 전력이라는 효율 차원을 더한다.
 
 ### 데이터 표현과 안전성
 

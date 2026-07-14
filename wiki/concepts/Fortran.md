@@ -4,7 +4,7 @@ aliases: [FORTRAN, Formula Translation, 포트란]
 summary: "수학적 수식과 과학 계산 표현을 IBM 704 목적 프로그램으로 번역하려 한 초기 고급 프로그래밍 언어."
 tags: [type/concept, domain/programming-languages, domain/computer-history, status/active]
 created: 2026-05-04
-updated: 2026-07-10
+updated: 2026-07-15
 sources: ["초기 소프트웨어의 탄생.md", "초기 소프트웨어의 탄생_해설.md", "FORTRAN Automatic Coding System for the IBM 704 EDPM", "The FORTRAN Automatic Coding System", "The History of FORTRAN I, II, and III"]
 status: active
 ---
@@ -51,3 +51,4 @@ Fortran은 [[Initial Orders]]에서 보이던 인간 표기와 기계 실행 사
 - [[소프트웨어 공학]]
 - [[초기 소프트웨어의 계층화]]
 - [[Fortran과 컴파일러]]
+- [[컴퓨팅 능력이란 무엇인가]]

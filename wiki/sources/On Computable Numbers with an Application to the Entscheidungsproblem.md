@@ -53,3 +53,4 @@ status: active
 - [[처치-튜링 논제]]
 - [[기계가 계산한다는 말의 이론적 의미]]
 - [[On the Computational Complexity of Algorithms]]
+- [[컴퓨팅 능력이란 무엇인가]]

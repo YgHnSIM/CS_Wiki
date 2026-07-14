@@ -53,3 +53,4 @@ status: active
 - [[SPEC CPU 2026 Overview]]
 - [[Roofline An Insightful Visual Performance Model]]
 - [[Power Measurement Tutorial for the Green500 List]]
+- [[컴퓨팅 능력이란 무엇인가]]

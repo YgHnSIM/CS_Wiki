@@ -951,6 +951,41 @@ D2Coding 적용 후 데스크톱 히어로 제목에서 `컴퓨팅의 역사를`
 - [[overview]]
 - [[index]]
 
+## [2026-07-15] create | 컴퓨팅 능력이란 무엇인가
+
+앞서 수집한 이론·벤치마크·성능 모델 자료를 종합해 [[컴퓨팅 능력이란 무엇인가]] 페이지를 작성했다. 컴퓨팅 능력을 원리적 계산 가능성, 알고리즘 복잡도, 실제 시스템의 실현 성능, 병렬 확장성, 자원 효율의 다섯 층위로 구분하고, 작업 부하·정확성·시스템 경계·실행 조건·지표를 함께 명시해야 비교가 성립한다는 정의를 제시했다.
+
+SPEC의 지연 시간·처리량 구분, LINPACK의 `Rpeak`·`Rmax`, Roofline의 연산 성능·메모리 대역폭 상한, 암달의 법칙에 따른 가속 한계, Green500의 성능당 전력을 하나의 측정 틀로 연결했다. 관련 개념과 일곱 참고 자료에 상호 링크를 추가하고 색인과 개요를 갱신했다.
+
+변경된 페이지:
+
+- 생성: [[컴퓨팅 능력이란 무엇인가]]
+- 교차 링크: [[계산 가능성]], [[튜링 기계]], [[컴파일러]], [[컴파일러 최적화]], [[Fortran]], [[비트와 바이트]], [[제어 흐름]]
+- 자료 역링크: [[On Computable Numbers with an Application to the Entscheidungsproblem]], [[On the Computational Complexity of Algorithms]], [[SPEC CPU 2026 Overview]], [[The Linpack Benchmark]], [[Roofline An Insightful Visual Performance Model]], [[Validity of the Single Processor Approach to Achieving Large Scale Computing Capabilities]], [[Power Measurement Tutorial for the Green500 List]]
+- 갱신: [[index]], [[overview]], [[log]]
+
+### 검증
+
+- `python scripts/wiki_lint.py --json`: 170개 페이지, 4,193개 링크, 오류 0건, 경고 0건
+- `python scripts/wiki_maintenance.py --check`: 변경 필요 항목 0건
+- `npm run build`: 170개 페이지 빌드 성공
+
+### 출처
+
+- [[On Computable Numbers with an Application to the Entscheidungsproblem]]
+- [[On the Computational Complexity of Algorithms]]
+- [[SPEC CPU 2026 Overview]]
+- [[The Linpack Benchmark]]
+- [[Roofline An Insightful Visual Performance Model]]
+- [[Validity of the Single Processor Approach to Achieving Large Scale Computing Capabilities]]
+- [[Power Measurement Tutorial for the Green500 List]]
+
+### 관련 항목
+
+- [[계산 가능성]]
+- [[overview]]
+- [[index]]
+
 <!-- wiki-maintenance: global-sections -->
 ## 출처
 

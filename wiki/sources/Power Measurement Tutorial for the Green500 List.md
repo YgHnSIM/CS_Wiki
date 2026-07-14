@@ -51,3 +51,4 @@ status: active
 ## 관련 항목
 
 - [[The Linpack Benchmark]]
+- [[컴퓨팅 능력이란 무엇인가]]

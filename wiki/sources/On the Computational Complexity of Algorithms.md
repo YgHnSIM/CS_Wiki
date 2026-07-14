@@ -51,3 +51,4 @@ status: active
 
 - [[On Computable Numbers with an Application to the Entscheidungsproblem]]
 - [[계산 가능성]]
+- [[컴퓨팅 능력이란 무엇인가]]

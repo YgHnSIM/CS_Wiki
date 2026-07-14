@@ -54,3 +54,4 @@ Roofline은 원래 부동소수점 연산과 DRAM 트래픽을 사용하지만, 
 
 - [[The Linpack Benchmark]]
 - [[Validity of the Single Processor Approach to Achieving Large Scale Computing Capabilities]]
+- [[컴퓨팅 능력이란 무엇인가]]
