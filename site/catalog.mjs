@@ -207,5 +207,28 @@ export const learningPaths = [
       "비트 패턴과 해석 규칙",
       "인코딩 심화"
     ]
+  },
+  {
+    slug: "computing-capability-history",
+    title: "컴퓨팅 능력의 발달사",
+    description: "계산 가능성에서 집적과 축소, 메모리·전력 장벽, 병렬·분산 시스템과 도메인 특화 가속기로 이어진 흐름을 읽는다.",
+    pages: [
+      "On Computable Numbers with an Application to the Entscheidungsproblem",
+      "On the Computational Complexity of Algorithms",
+      "Cramming More Components onto Integrated Circuits",
+      "Design of Ion-Implanted MOSFET's with Very Small Physical Dimensions",
+      "무어의 법칙",
+      "Dennard 스케일링",
+      "Hitting the Memory Wall",
+      "메모리 장벽",
+      "Validity of the Single Processor Approach to Achieving Large Scale Computing Capabilities",
+      "The Landscape of Parallel Computing Research - A View from Berkeley",
+      "Roofline An Insightful Visual Performance Model",
+      "The Datacenter as a Computer",
+      "In-Datacenter Performance Analysis of a Tensor Processing Unit",
+      "도메인 특화 가속기",
+      "컴퓨팅 능력이란 무엇인가",
+      "컴퓨팅 능력의 발달사"
+    ]
   }
 ];

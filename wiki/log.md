@@ -1018,6 +1018,44 @@ Node 기본 테스트와 Python `unittest` 회귀 테스트를 추가하고, 로
 - [[overview]]
 - [[index]]
 
+## [2026-07-16] reference | 컴퓨팅 능력의 발달사 보강
+
+컴퓨팅 능력의 발전을 단순한 연산 속도의 증가가 아니라 병목과 시스템 경계가 이동한 역사로 보강했다. Moore의 1965년 집적도 전망, Dennard 등의 1974년 일정 전계 축소, Wulf와 McKee의 메모리 장벽, Berkeley의 병렬 컴퓨팅 전환 보고서, 창고 규모 컴퓨팅, 1세대 TPU 평가를 외부 참고 자료 `ref-037`부터 `ref-042`까지 등록했다. 로컬 스냅샷이 없는 자료는 `source_kind: external`, `snapshot_status: external-only`로 명시하고 직접 근거와 접근용 자료를 분리했다.
+
+[[무어의 법칙]], [[Dennard 스케일링]], [[메모리 장벽]], [[도메인 특화 가속기]]를 독립 개념으로 작성했다. [[컴퓨팅 능력의 발달사]]에서는 계산 가능성과 복잡도, 집적·축소, 메모리·전력·병렬성의 장벽, 창고 규모 시스템, 도메인 특화 구조와 성능 측정의 변화를 하나의 흐름으로 종합했다. [[컴퓨팅 능력이란 무엇인가]]는 측정 중심의 정의를 유지하면서 새 역사 분석으로 연결했고, 색인·개요와 웹 학습 경로를 갱신했다.
+
+변경된 페이지:
+
+- 참고 자료: [[Cramming More Components onto Integrated Circuits]], [[Design of Ion-Implanted MOSFET's with Very Small Physical Dimensions]], [[Hitting the Memory Wall]], [[The Landscape of Parallel Computing Research - A View from Berkeley]], [[The Datacenter as a Computer]], [[In-Datacenter Performance Analysis of a Tensor Processing Unit]]
+- 개념: [[무어의 법칙]], [[Dennard 스케일링]], [[메모리 장벽]], [[도메인 특화 가속기]]
+- 분석: [[컴퓨팅 능력의 발달사]]
+- 갱신: [[컴퓨팅 능력이란 무엇인가]], [[index]], [[overview]], [[log]]
+- 웹 탐색: `site/catalog.mjs`의 11번째 학습 경로
+
+### 검증
+
+- `npm run check`: 위키 lint, 유지보수 dry-run, Node·Python 테스트, 181개 페이지 빌드 통과
+- `python scripts/wiki_lint.py --json`: 오류 0건, 경고 0건
+- `python scripts/wiki_maintenance.py --check`: 변경 필요 항목 0건
+- `git diff --check`: 공백 오류 없음
+- `raw/` 원본 변경 없음
+
+### 출처
+
+- [[Cramming More Components onto Integrated Circuits]]
+- [[Design of Ion-Implanted MOSFET's with Very Small Physical Dimensions]]
+- [[Hitting the Memory Wall]]
+- [[The Landscape of Parallel Computing Research - A View from Berkeley]]
+- [[The Datacenter as a Computer]]
+- [[In-Datacenter Performance Analysis of a Tensor Processing Unit]]
+
+### 관련 항목
+
+- [[컴퓨팅 능력이란 무엇인가]]
+- [[컴퓨팅 능력의 발달사]]
+- [[index]]
+- [[overview]]
+
 <!-- wiki-maintenance: global-sections -->
 ## 출처
 
