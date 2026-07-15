@@ -10,16 +10,38 @@ from pathlib import Path
 from wiki_common import (
     Resolver,
     append_related_link,
-    effective_source_pages,
+    expected_count,
     links_in_section,
     load_pages,
-    parse_flow_list,
+    parse_scalar,
     set_updated,
+    source_maps,
 )
 
 
 TODAY = date.today().isoformat()
 GLOBAL_MARKER = "<!-- wiki-maintenance: global-sections -->"
+
+
+def _managed_log_block(newline: str) -> str:
+    return (
+        GLOBAL_MARKER
+        + newline
+        + "## 출처"
+        + newline * 2
+        + "- `AGENTS.md`"
+        + newline
+        + "- `wiki/` 및 `raw/` 작업 이력"
+        + newline
+        + "- Git 커밋 이력"
+        + newline * 2
+        + "## 관련 항목"
+        + newline * 2
+        + "- [[index]]"
+        + newline
+        + "- [[overview]]"
+        + newline
+    )
 
 
 def write_if_changed(page, original: str, fix: bool) -> bool:
@@ -64,18 +86,9 @@ def fix_related(pages, fix: bool) -> tuple[int, int]:
     return changed_files, added_links
 
 
-def expected_count(page, pages) -> tuple[str, int] | None:
-    if page.page_type == "type/source":
-        return "raw 파일", len(page.sources)
-    if page.page_type == "type/reference":
-        return "핵심 문헌", len(parse_flow_list(page.meta.get("primary_sources")))
-    if page.is_content:
-        return "근거", len(effective_source_pages(page, pages))
-    return None
-
-
 def fix_index_counts(root: Path, pages, fix: bool) -> tuple[int, int]:
     resolver = Resolver(pages)
+    sources = source_maps(pages)
     index_page = next(page for page in pages if page.path == root / "wiki" / "index.md")
     original = index_page.text
     changed_items = 0
@@ -88,7 +101,7 @@ def fix_index_counts(root: Path, pages, fix: bool) -> tuple[int, int]:
         target, _ = resolver.resolve(target_name)
         if not target:
             return line
-        count = expected_count(target, pages)
+        count = expected_count(target, sources)
         if not count:
             return line
         label, number = count
@@ -116,7 +129,7 @@ def fix_index_counts(root: Path, pages, fix: bool) -> tuple[int, int]:
         overview_page.text,
         count=1,
     )
-    status_counts = Counter(page.meta.get("status", "unknown") for page in pages)
+    status_counts = Counter(parse_scalar(page.meta.get("status")) or "unknown" for page in pages)
     summary = (
         f"운영 상태: 전체 {len(pages)}개 페이지 중 "
         f"active {status_counts['active']}개, draft {status_counts['draft']}개, "
@@ -147,30 +160,21 @@ def fix_log_headings(root: Path, pages, fix: bool) -> tuple[int, int]:
     text = log_page.text
     marker_index = text.find(GLOBAL_MARKER)
     if marker_index >= 0:
-        text = text[:marker_index].rstrip("\r\n") + log_page.newline
-    replacements = len(re.findall(r"^##\s+(?:출처|관련 항목)\s*$", text, re.MULTILINE))
-    text = re.sub(r"^##\s+(출처|관련 항목)\s*$", r"### \1", text, flags=re.MULTILINE)
+        managed = _managed_log_block(log_page.newline)
+        if not text.startswith(managed, marker_index):
+            raise ValueError(f"{log_page.rel}: managed log block was edited; refusing to discard unknown content")
+        suffix = text[marker_index + len(managed) :].strip("\r\n")
+        prefix = text[:marker_index].rstrip("\r\n")
+        # Preserve content appended after the old managed block and move it
+        # before the regenerated final sections. The previous implementation
+        # silently truncated everything from the marker to EOF.
+        text = prefix
+        if suffix:
+            text += log_page.newline * 2 + suffix
+    replacements = len(re.findall(r"^##[ \t]+(?:출처|관련 항목)[ \t]*$", text, re.MULTILINE))
+    text = re.sub(r"^##[ \t]+(출처|관련 항목)[ \t]*$", r"### \1", text, flags=re.MULTILINE)
     text = text.rstrip("\r\n")
-    global_sections = (
-        log_page.newline * 2
-        + GLOBAL_MARKER
-        + log_page.newline
-        + "## 출처"
-        + log_page.newline * 2
-        + "- `AGENTS.md`"
-        + log_page.newline
-        + "- `wiki/` 및 `raw/` 작업 이력"
-        + log_page.newline
-        + "- Git 커밋 이력"
-        + log_page.newline * 2
-        + "## 관련 항목"
-        + log_page.newline * 2
-        + "- [[index]]"
-        + log_page.newline
-        + "- [[overview]]"
-        + log_page.newline
-    )
-    log_page.text = text + global_sections
+    log_page.text = text + log_page.newline * 2 + _managed_log_block(log_page.newline)
     if log_page.text != original:
         log_page.text = set_updated(log_page.text, TODAY, log_page.newline)
     changed = 1 if write_if_changed(log_page, original, fix) else 0

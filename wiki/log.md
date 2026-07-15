@@ -986,6 +986,38 @@ SPEC의 지연 시간·처리량 구분, LINPACK의 `Rpeak`·`Rmax`, Roofline의
 - [[overview]]
 - [[index]]
 
+## [2026-07-15] update | 프로젝트 리팩터링과 검증 체계 정비
+
+정적 사이트 빌드의 콘텐츠 파싱·링크 모델·그래프 생성을 `site/core.mjs`로 분리하고, 로컬 정적 서버의 경로 해석과 응답 처리를 `site/server.mjs`로 분리했다. 모든 링크를 집계하기 전에 연결 점수를 확정하던 순서 의존 문제를 바로잡고, 자기 링크를 점수에서 제외했으며, 링크 방향 때문에 지식 그래프 간선이 누락되지 않도록 무방향 간선을 중복 없이 생성한다. 검색 색인은 하나의 요청을 공유하고 오래된 비동기 검색 결과가 최신 결과를 덮지 않게 했다.
+
+Python 위키 도구에서는 소스 맵과 색인 근거 수 계산을 공통화했다. 로컬 참고 자료의 `source_kind: raw` 규칙, 중복 파일 stem, 필수 메타 파일 누락, `wiki/meta/` 색인 범위를 lint가 정확히 다루도록 고쳤다. 프론트매터 수정의 CRLF 보존과 flow-list 따옴표·역슬래시 왕복을 보장하고, 유지보수 도구가 관리 블록 뒤의 로그를 삭제하지 않도록 안전장치를 추가했다.
+
+Node 기본 테스트와 Python `unittest` 회귀 테스트를 추가하고, 로컬과 GitHub Actions가 동일한 `npm run check` 명령으로 lint, 유지보수 dry-run, 테스트, 빌드를 수행하게 통합했다. Pull request는 검증만 수행하고 Pages 배포는 `main` 푸시와 수동 실행에만 유지한다.
+
+변경된 파일:
+
+- 사이트: `site/build.mjs`, `site/core.mjs`, `site/serve.mjs`, `site/server.mjs`, `site/assets/site.js`
+- 위키 도구: `scripts/wiki_common.py`, `scripts/wiki_lint.py`, `scripts/wiki_maintenance.py`, `scripts/wiki_summaries.py`
+- 검증: `tests/`, `package.json`, `package-lock.json`, `.github/workflows/pages.yml`
+- 문서: `README.md`, [[log]]
+
+### 검증
+
+- `npm run check`: 위키 lint, 유지보수 dry-run, Node·Python 테스트, 170개 페이지 빌드 통과
+- 정적 서버 회귀 검사: 정상 파일, 404 fallback, HEAD, 잘못된 URI, 경로 이탈, 허용하지 않는 메서드, 스트림 오류 처리 확인
+- `git diff --check`: 공백 오류 없음
+- `raw/` 원본 변경 없음
+
+### 출처
+
+- `AGENTS.md`
+- `scripts/`, `site/` 기존 구현과 회귀 재현 결과
+
+### 관련 항목
+
+- [[overview]]
+- [[index]]
+
 <!-- wiki-maintenance: global-sections -->
 ## 출처
 

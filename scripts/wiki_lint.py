@@ -15,6 +15,7 @@ from wiki_common import (
     VALID_STATUSES,
     Resolver,
     effective_source_pages,
+    expected_count,
     links_in_section,
     load_pages,
     normalize_heading,
@@ -61,22 +62,23 @@ def index_sections(text: str) -> dict[str, str]:
     return result
 
 
-def expected_count(page, pages) -> tuple[str, int] | None:
-    if page.page_type == "type/source":
-        return "raw 파일", len(page.sources)
-    if page.page_type == "type/reference":
-        return "핵심 문헌", len(parse_flow_list(page.meta.get("primary_sources")))
-    if page.is_content:
-        return "근거", len(effective_source_pages(page, pages))
-    return None
-
-
 def lint(root: Path) -> tuple[list[Issue], dict[str, int]]:
     pages = load_pages(root)
     resolver = Resolver(pages)
     issues: list[Issue] = []
     raw_files = {path.name.casefold() for path in (root / "raw").rglob("*") if path.is_file()}
-    source_by_stem, source_by_id, raw_to_source = source_maps(pages)
+    sources = source_maps(pages)
+
+    special_pages = {
+        name: next(
+            (page for page in pages if page.path.name == name and page.path.parent == root / "wiki"),
+            None,
+        )
+        for name in ("index.md", "log.md", "overview.md")
+    }
+    for name, page in special_pages.items():
+        if page is None:
+            add(issues, "error", "structure.special_missing", f"wiki/{name}", 1, f"필수 파일 누락: wiki/{name}")
 
     type_for_dir = {
         "analyses": "type/analysis",
@@ -133,13 +135,25 @@ def lint(root: Path) -> tuple[list[Issue], dict[str, int]]:
             elif page.page_type == "type/reference":
                 if source_id and not re.fullmatch(r"ref-\d{3}", source_id):
                     add(issues, "error", "provenance.source_id_format", page.rel, field_line(page.text, "source_id"), "참고 자료 ID는 ref-NNN 형식이어야 함")
-                if source_kind != "external":
-                    add(issues, "error", "provenance.kind", page.rel, field_line(page.text, "source_kind"), "참고 자료는 source_kind: external이어야 함")
+                if source_kind not in {"raw", "external"}:
+                    add(issues, "error", "provenance.kind", page.rel, field_line(page.text, "source_kind"), "참고 자료의 source_kind는 raw 또는 external이어야 함")
                 if not parse_flow_list(page.meta.get("primary_sources")):
                     add(issues, "error", "provenance.primary", page.rel, field_line(page.text, "primary_sources"), "primary_sources가 비어 있음")
-                urls = parse_flow_list(page.meta.get("source_urls"))
-                if not urls or any(not re.match(r"^https?://", url) for url in urls):
-                    add(issues, "error", "provenance.urls", page.rel, field_line(page.text, "source_urls"), "유효한 source_urls가 필요함")
+                if source_kind == "raw":
+                    missing_raw = [item for item in page.sources if Path(item).name.casefold() not in raw_files]
+                    if missing_raw:
+                        add(issues, "error", "provenance.raw_missing", page.rel, field_line(page.text, "sources"), f"없는 raw 파일: {missing_raw}")
+                    provenance_raw = parse_flow_list(page.meta.get("primary_sources")) + parse_flow_list(page.meta.get("supporting_sources"))
+                    if set(provenance_raw) != set(page.sources):
+                        add(issues, "error", "provenance.raw_partition", page.rel, field_line(page.text, "primary_sources"), "primary/supporting_sources가 sources의 raw 파일을 정확히 분할해야 함")
+                    if parse_scalar(page.meta.get("snapshot_status")) != "local":
+                        add(issues, "error", "provenance.snapshot_kind", page.rel, field_line(page.text, "snapshot_status"), "source_kind: raw는 snapshot_status: local이어야 함")
+                elif source_kind == "external":
+                    urls = parse_flow_list(page.meta.get("source_urls"))
+                    if not urls or any(not re.match(r"^https?://", url) for url in urls):
+                        add(issues, "error", "provenance.urls", page.rel, field_line(page.text, "source_urls"), "유효한 source_urls가 필요함")
+                    if parse_scalar(page.meta.get("snapshot_status")) == "local":
+                        add(issues, "error", "provenance.snapshot_kind", page.rel, field_line(page.text, "snapshot_status"), "source_kind: external은 external-only 또는 archived여야 함")
                 retrieved = parse_scalar(page.meta.get("retrieved"))
                 try:
                     if not retrieved:
@@ -147,8 +161,6 @@ def lint(root: Path) -> tuple[list[Issue], dict[str, int]]:
                     date.fromisoformat(retrieved)
                 except ValueError:
                     add(issues, "error", "provenance.retrieved", page.rel, field_line(page.text, "retrieved"), "retrieved는 YYYY-MM-DD여야 함")
-                if parse_scalar(page.meta.get("snapshot_status")) == "local":
-                    add(issues, "error", "provenance.snapshot_kind", page.rel, field_line(page.text, "snapshot_status"), "source_kind: external은 external-only 또는 archived여야 함")
             snapshot_status = parse_scalar(page.meta.get("snapshot_status"))
             if snapshot_status not in {"local", "external-only", "archived"}:
                 add(issues, "error", "provenance.snapshot_status", page.rel, field_line(page.text, "snapshot_status"), f"허용되지 않은 snapshot_status: {snapshot_status}")
@@ -175,6 +187,18 @@ def lint(root: Path) -> tuple[list[Issue], dict[str, int]]:
         expected_numbers = list(range(1, len(numbers) + 1))
         if numbers != expected_numbers:
             add(issues, "error", "provenance.source_id_sequence", "wiki/sources", 1, f"{prefix} ID 연속성 오류: actual={numbers}, expected={expected_numbers}")
+
+    for stem, matches in resolver.duplicate_stems.items():
+        locations = sorted(page.rel for page in matches)
+        for page in matches:
+            add(
+                issues,
+                "error",
+                "links.stem_duplicate",
+                page.rel,
+                1,
+                f"중복 파일 stem '{stem}': {locations}",
+            )
 
     # Alias collisions are risky even when current exact-stem links resolve safely.
     for alias, matches in resolver.by_alias.items():
@@ -232,11 +256,11 @@ def lint(root: Path) -> tuple[list[Issue], dict[str, int]]:
                 add(issues, "error", "links.related_asymmetric", page.rel, 1, f"{target.rel}의 관련 항목에 역링크가 없음")
 
     # Source metadata, source section, and explicit body source links must agree.
-    source_pages = set(source_by_stem.values())
+    source_pages = sources.pages
     for page in pages:
         if not page.is_content:
             continue
-        expected_sources = effective_source_pages(page, pages)
+        expected_sources = effective_source_pages(page, sources)
         cited_sources = section_links_resolved(page, "출처", resolver) & source_pages
         if expected_sources != cited_sources:
             add(
@@ -260,53 +284,61 @@ def lint(root: Path) -> tuple[list[Issue], dict[str, int]]:
             add(issues, "error", "sources.body_missing_metadata", page.rel, 1, f"본문 소스가 metadata에 없음: {sorted(p.stem for p in extra)}")
 
     # Index coverage and generated count labels.
-    index_page = next(page for page in pages if page.path.name == "index.md" and page.path.parent.name == "wiki")
-    sections = index_sections(index_page.text)
-    expected_sections = {
-        "소스 (Sources)": {page for page in pages if page.page_type == "type/source"},
-        "참고 자료 (References)": {page for page in pages if page.page_type == "type/reference"},
-        "인물 (Entities)": {page for page in pages if page.path.parent.name == "entities"},
-        "개념 (Concepts)": {page for page in pages if page.path.parent.name == "concepts"},
-        "분석 (Analyses)": {page for page in pages if page.path.parent.name == "analyses"},
-        "메타 (Meta)": {page for page in pages if page.is_special and page.path.name != "index.md"},
-    }
-    for heading, expected_pages in expected_sections.items():
-        chunk = sections.get(heading)
-        if chunk is None:
-            add(issues, "error", "index.section", index_page.rel, 1, f"색인 섹션 누락: {heading}")
-            continue
-        listed = set()
-        for match in re.finditer(r"^-\s+\[\[([^\]]+)\]\].*$", chunk, re.MULTILINE):
-            raw = match.group(1)
-            name = raw.split("|", 1)[0].split("#", 1)[0].strip()
-            target, _ = resolver.resolve(name)
-            if target:
-                listed.add(target)
-                count = expected_count(target, pages)
-                if count:
-                    label, number = count
-                    line = match.group(0)
-                    if f"({label} {number}개)" not in line:
-                        add(issues, "error", "index.count", index_page.rel, index_page.text.count("\n", 0, index_page.text.find(line)) + 1, f"{target.stem}: ({label} {number}개) 필요")
-        missing = expected_pages - listed
-        extra = listed - expected_pages
-        if missing or extra:
-            add(issues, "error", "index.coverage", index_page.rel, 1, f"{heading}: 누락={sorted(p.stem for p in missing)}, 초과={sorted(p.stem for p in extra)}")
+    index_page = special_pages["index.md"]
+    if index_page:
+        sections = index_sections(index_page.text)
+        expected_sections = {
+            "소스 (Sources)": {page for page in pages if page.page_type == "type/source"},
+            "참고 자료 (References)": {page for page in pages if page.page_type == "type/reference"},
+            "인물 (Entities)": {page for page in pages if page.path.parent.name == "entities"},
+            "개념 (Concepts)": {page for page in pages if page.path.parent.name == "concepts"},
+            "분석 (Analyses)": {page for page in pages if page.path.parent.name == "analyses"},
+            "메타 (Meta)": {
+                page
+                for page in pages
+                if page.path.parent.name == "meta" or (page.is_special and page.path.name != "index.md")
+            },
+        }
+        for heading, expected_pages in expected_sections.items():
+            chunk = sections.get(heading)
+            if chunk is None:
+                add(issues, "error", "index.section", index_page.rel, 1, f"색인 섹션 누락: {heading}")
+                continue
+            listed = set()
+            for match in re.finditer(r"^-\s+\[\[([^\]]+)\]\].*$", chunk, re.MULTILINE):
+                raw = match.group(1)
+                name = raw.split("|", 1)[0].split("#", 1)[0].strip()
+                target, _ = resolver.resolve(name)
+                if target:
+                    listed.add(target)
+                    count = expected_count(target, sources)
+                    if count:
+                        label, number = count
+                        line = match.group(0)
+                        if f"({label} {number}개)" not in line:
+                            line_offset = index_page.text.find(line)
+                            add(issues, "error", "index.count", index_page.rel, index_page.text.count("\n", 0, line_offset) + 1, f"{target.stem}: ({label} {number}개) 필요")
+            missing = expected_pages - listed
+            extra = listed - expected_pages
+            if missing or extra:
+                add(issues, "error", "index.coverage", index_page.rel, 1, f"{heading}: 누락={sorted(p.stem for p in missing)}, 초과={sorted(p.stem for p in extra)}")
 
-    log_page = next(page for page in pages if page.path.name == "log.md" and page.path.parent.name == "wiki")
-    h2 = [name for level, name, _ in log_page.headings if level == 2]
-    if h2.count("출처") != 1 or h2.count("관련 항목") != 1 or not h2 or h2[-1] != "관련 항목":
-        add(issues, "error", "log.heading_hierarchy", log_page.rel, 1, "log는 전역 H2 출처/관련 항목 1쌍만 가져야 함")
+    log_page = special_pages["log.md"]
+    if log_page:
+        h2 = [name for level, name, _ in log_page.headings if level == 2]
+        if h2.count("출처") != 1 or h2.count("관련 항목") != 1 or not h2 or h2[-1] != "관련 항목":
+            add(issues, "error", "log.heading_hierarchy", log_page.rel, 1, "log는 전역 H2 출처/관련 항목 1쌍만 가져야 함")
 
-    overview_page = next(page for page in pages if page.path.name == "overview.md" and page.path.parent.name == "wiki")
-    status_counts = Counter(parse_scalar(page.meta.get("status")) or "unknown" for page in pages)
-    expected_status_summary = (
-        f"운영 상태: 전체 {len(pages)}개 페이지 중 active {status_counts['active']}개, "
-        f"draft {status_counts['draft']}개, review {status_counts['review']}개, "
-        f"archived {status_counts['archived']}개다."
-    )
-    if expected_status_summary not in overview_page.text:
-        add(issues, "error", "overview.status_summary", overview_page.rel, 1, "자동 운영 상태 통계가 실제 페이지 상태와 다름")
+    overview_page = special_pages["overview.md"]
+    if overview_page:
+        status_counts = Counter(parse_scalar(page.meta.get("status")) or "unknown" for page in pages)
+        expected_status_summary = (
+            f"운영 상태: 전체 {len(pages)}개 페이지 중 active {status_counts['active']}개, "
+            f"draft {status_counts['draft']}개, review {status_counts['review']}개, "
+            f"archived {status_counts['archived']}개다."
+        )
+        if expected_status_summary not in overview_page.text:
+            add(issues, "error", "overview.status_summary", overview_page.rel, 1, "자동 운영 상태 통계가 실제 페이지 상태와 다름")
 
     shallow = 0
     for page in pages:

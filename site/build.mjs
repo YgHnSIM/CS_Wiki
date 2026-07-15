@@ -5,6 +5,24 @@ import { createHash } from "node:crypto";
 import MarkdownIt from "markdown-it";
 import anchor from "markdown-it-anchor";
 import { domainMeta, learningPaths, statusMeta } from "./catalog.mjs";
+import {
+  buildGraphPayload,
+  buildPageLookup,
+  cleanInline,
+  describe,
+  escapeHtml,
+  key,
+  normalizeBase,
+  parseDocument,
+  parseFlowList,
+  parseScalar,
+  resolvePageLinks,
+  safeExternalUrl,
+  slugify,
+  sourceTarget as resolveSourceTarget,
+  validateUniquePageOutputs,
+  withBase as addBase
+} from "./core.mjs";
 
 const root = process.cwd();
 const wikiRoot = join(root, "wiki");
@@ -13,6 +31,7 @@ const rawAssets = join(root, "raw", "assets");
 const siteBase = normalizeBase(process.env.SITE_BASE || "");
 const siteUrl = (process.env.SITE_URL || "").replace(/\/$/, "");
 const repositoryUrl = "https://github.com/YgHnSIM/CS_Wiki";
+const withBase = (pathname = "/") => addBase(pathname, siteBase);
 const assetVersion = createHash("sha256")
   .update(await readFile(join(root, "site", "assets", "site.css")))
   .update(await readFile(join(root, "site", "assets", "site.js")))
@@ -28,99 +47,6 @@ const categoryMeta = {
   meta: { label: "메타", description: "위키의 운영 상태와 전체 지식 구조" }
 };
 const navCategories = ["sources", "references", "concepts", "entities", "analyses"];
-
-function normalizeBase(value) {
-  if (!value || value === "/") return "";
-  return `/${value.replace(/^\/+|\/+$/g, "")}`;
-}
-
-function withBase(pathname = "/") {
-  const path = pathname.startsWith("/") ? pathname : `/${pathname}`;
-  return `${siteBase}${path}`;
-}
-
-function escapeHtml(value = "") {
-  return String(value)
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#039;");
-}
-
-function slugify(value = "") {
-  return String(value)
-    .normalize("NFKC")
-    .toLowerCase()
-    .replace(/[^\p{Letter}\p{Number}]+/gu, "-")
-    .replace(/^-+|-+$/g, "") || "page";
-}
-
-function parseScalar(value = "") {
-  const trimmed = String(value).trim();
-  if (!trimmed || trimmed === "null" || trimmed === "~") return "";
-  if (trimmed.startsWith('"') && trimmed.endsWith('"')) {
-    try {
-      return JSON.parse(trimmed);
-    } catch {
-      return trimmed.slice(1, -1);
-    }
-  }
-  if (trimmed.startsWith("'") && trimmed.endsWith("'")) {
-    return trimmed.slice(1, -1).replaceAll("''", "'");
-  }
-  return trimmed;
-}
-
-function parseFlowList(value = "") {
-  const input = String(value).trim();
-  if (!input.startsWith("[") || !input.endsWith("]")) return input ? [parseScalar(input)] : [];
-  const items = [];
-  let current = "";
-  let quote = "";
-  for (const character of input.slice(1, -1)) {
-    if ((character === '"' || character === "'") && (!quote || quote === character)) {
-      quote = quote ? "" : character;
-      current += character;
-    } else if (character === "," && !quote) {
-      if (current.trim()) items.push(parseScalar(current));
-      current = "";
-    } else {
-      current += character;
-    }
-  }
-  if (current.trim()) items.push(parseScalar(current));
-  return items;
-}
-
-function parseDocument(raw) {
-  const match = raw.match(/^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n|$)/);
-  if (!match) return { data: {}, content: raw };
-  const data = {};
-  for (const line of match[1].split(/\r?\n/)) {
-    const field = line.match(/^([A-Za-z_][\w-]*):\s*(.*)$/);
-    if (field) data[field[1]] = field[2].trim();
-  }
-  return { data, content: raw.slice(match[0].length) };
-}
-
-function cleanInline(value = "") {
-  return String(value)
-    .replace(/!?(?:\[\[)([^\]|#]+)(?:#[^\]|]+)?(?:\|([^\]]+))?\]\]/g, (_, target, label) => label || target)
-    .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1")
-    .replace(/[`*_>#\[\]]/g, "")
-    .replace(/\s+/g, " ")
-    .trim();
-}
-
-function describe(body = "") {
-  const paragraph = body
-    .split(/\r?\n\r?\n/)
-    .map((part) => part.trim())
-    .find((part) => part && !part.startsWith("#") && !part.startsWith("-") && !part.startsWith("<!--"));
-  const value = cleanInline(paragraph || "출처 기반으로 정리한 CS Wiki 문서");
-  return value.length > 160 ? `${value.slice(0, 157)}...` : value;
-}
 
 async function markdownFiles(directory) {
   const entries = await readdir(directory, { withFileTypes: true });
@@ -141,10 +67,6 @@ function getCategory(filePath, tags = []) {
 function extractWikiTargets(body) {
   return [...body.matchAll(/(?<!!)\[\[([^\]|#]+)(?:#[^\]|]+)?(?:\|[^\]]+)?\]\]/g)]
     .map((match) => match[1].trim());
-}
-
-function key(value) {
-  return String(value || "").normalize("NFKC").trim().toLocaleLowerCase("ko-KR");
 }
 
 const files = await markdownFiles(wikiRoot);
@@ -185,21 +107,11 @@ const pages = await Promise.all(files.map(async (filePath) => {
 }));
 
 pages.sort((a, b) => a.title.localeCompare(b.title, "ko"));
-
-const lookup = new Map();
-for (const page of pages) {
-  const filename = basename(page.filePath, ".md");
-  [page.title, filename, ...page.aliases].forEach((name) => {
-    const normalized = key(name);
-    if (normalized && !lookup.has(normalized)) lookup.set(normalized, page);
-  });
-}
-
-for (const page of pages) {
-  page.links = [...new Set(page.targets.map((target) => lookup.get(key(target))).filter(Boolean))];
-  for (const linked of page.links) linked.incoming += 1;
-  page.score = page.incoming + page.links.length;
-}
+validateUniquePageOutputs(pages, {
+  additionalOutputs: (page) => page.category === "references" ? [`sources/${page.slug}`] : []
+});
+const lookup = buildPageLookup(pages);
+resolvePageLinks(pages, lookup);
 
 const resolvedLearningPaths = learningPaths.map((path) => ({
   ...path,
@@ -385,7 +297,7 @@ function statusLabel(status) {
 }
 
 function sourceTarget(value) {
-  return lookup.get(key(value)) || lookup.get(key(basename(value, extname(value))));
+  return resolveSourceTarget(lookup, value);
 }
 
 function effectiveSources(page) {
@@ -408,21 +320,7 @@ function pageCard(page, { compact = false, step = "" } = {}) {
 }
 
 function graphPayload() {
-  const graphPages = [...pages]
-    .filter((page) => page.category !== "meta")
-    .sort((a, b) => b.score - a.score || a.title.localeCompare(b.title, "ko"))
-    .slice(0, 12);
-  const ids = new Map(graphPages.map((page, index) => [page, index]));
-  const edges = [];
-  for (const page of graphPages) {
-    for (const linked of page.links) {
-      if (ids.has(linked) && ids.get(page) < ids.get(linked)) edges.push([ids.get(page), ids.get(linked)]);
-    }
-  }
-  return {
-    nodes: graphPages.map((page) => ({ title: page.title, url: withBase(page.url), category: page.category, score: page.score })),
-    edges
-  };
+  return buildGraphPayload(pages, { urlFor: withBase });
 }
 
 function graphNodeList(graph) {
@@ -526,6 +424,7 @@ function evidenceTrace(page) {
   const isSource = page.category === "sources" || page.category === "references";
   const direct = isSource ? page.primarySources : page.sources;
   const supporting = isSource ? page.supportingSources : [];
+  const sourceUrls = page.sourceUrls.map(safeExternalUrl).filter(Boolean);
   const evidenceLabel = isSource ? "직접 근거" : "연결된 근거";
   const snapshotLabels = { local: "로컬 원본", "external-only": "외부 링크", archived: "보존 스냅샷" };
   return `<details class="evidence-trace">
@@ -540,7 +439,7 @@ function evidenceTrace(page) {
         <div><dt>보존 상태</dt><dd>${escapeHtml(snapshotLabels[page.snapshotStatus] || page.snapshotStatus || "미기록")}</dd></div>
         <div><dt>판본</dt><dd>${escapeHtml(page.version || "확인되지 않음")}</dd></div>
         <div><dt>확인일</dt><dd>${escapeHtml(page.retrieved || "미기록")}</dd></div>
-      </dl>${page.sourceUrls.length ? `<div class="trace-urls">${page.sourceUrls.map((url, index) => `<a href="${escapeHtml(url)}" rel="noreferrer">외부 출처 ${index + 1}</a>`).join("")}</div>` : ""}</div></section>` : ""}
+      </dl>${sourceUrls.length ? `<div class="trace-urls">${sourceUrls.map((url, index) => `<a href="${escapeHtml(url)}" rel="noreferrer">외부 출처 ${index + 1}</a>`).join("")}</div>` : ""}</div></section>` : ""}
     </div>
   </details>`;
 }

@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import csv
 import json
 import re
 from dataclasses import dataclass, field
@@ -23,7 +22,40 @@ def parse_flow_list(value: str | None) -> list[str]:
     inner = value[1:-1].strip()
     if not inner:
         return []
-    return [item.strip().strip("'") for item in next(csv.reader([inner], skipinitialspace=True))]
+
+    items: list[str] = []
+    current: list[str] = []
+    quote = ""
+    index = 0
+    while index < len(inner):
+        character = inner[index]
+        if quote == '"' and character == "\\" and index + 1 < len(inner):
+            current.extend((character, inner[index + 1]))
+            index += 2
+            continue
+        if quote == "'" and character == "'" and index + 1 < len(inner) and inner[index + 1] == "'":
+            current.extend((character, character))
+            index += 2
+            continue
+        if quote and character == quote:
+            quote = ""
+            current.append(character)
+        elif not quote and character in {'"', "'"} and not "".join(current).strip():
+            quote = character
+            current.append(character)
+        elif character == "," and not quote:
+            token = "".join(current).strip()
+            if token:
+                items.append(parse_scalar(token) or "")
+            current = []
+        else:
+            current.append(character)
+        index += 1
+
+    token = "".join(current).strip()
+    if token:
+        items.append(parse_scalar(token) or "")
+    return items
 
 
 def parse_scalar(value: str | None) -> str | None:
@@ -168,7 +200,15 @@ class Resolver:
     pages: list[Page]
 
     def __post_init__(self) -> None:
-        self.by_stem: dict[str, Page] = {page.stem.casefold(): page for page in self.pages}
+        self.stem_candidates: dict[str, list[Page]] = {}
+        for page in self.pages:
+            self.stem_candidates.setdefault(page.stem.casefold(), []).append(page)
+        self.by_stem: dict[str, Page] = {
+            stem: matches[0] for stem, matches in self.stem_candidates.items() if len(matches) == 1
+        }
+        self.duplicate_stems: dict[str, list[Page]] = {
+            stem: matches for stem, matches in self.stem_candidates.items() if len(matches) > 1
+        }
         self.by_alias: dict[str, list[Page]] = {}
         for page in self.pages:
             for alias in page.aliases:
@@ -176,8 +216,11 @@ class Resolver:
 
     def resolve(self, name: str) -> tuple[Page | None, str]:
         key = name.casefold()
-        if key in self.by_stem:
-            return self.by_stem[key], "stem"
+        stem_matches = self.stem_candidates.get(key, [])
+        if len(stem_matches) == 1:
+            return stem_matches[0], "stem"
+        if stem_matches:
+            return None, "ambiguous"
         candidates = list(dict.fromkeys(self.by_alias.get(key, [])))
         if len(candidates) == 1:
             return candidates[0], "alias"
@@ -216,7 +259,10 @@ def set_frontmatter_field(text: str, key: str, value: str, newline: str) -> str:
     if not frontmatter:
         raise ValueError("missing frontmatter")
     body = frontmatter.group(1)
-    pattern = re.compile(rf"^{re.escape(key)}:\s*.*$", re.MULTILINE)
+    # Avoid consuming the carriage return in CRLF documents. A ``.*$``
+    # replacement changes only the edited line to LF and creates mixed-newline
+    # files on Windows.
+    pattern = re.compile(rf"^{re.escape(key)}:[^\r\n]*", re.MULTILINE)
     replacement = f"{key}: {value}"
     if pattern.search(body):
         body = pattern.sub(replacement, body, count=1)
@@ -244,32 +290,64 @@ def append_related_link(page: Page, target: str, date: str) -> str:
     return set_updated(page.text[:start] + new_chunk + page.text[end:], date, page.newline)
 
 
-def source_maps(pages: list[Page]) -> tuple[dict[str, Page], dict[str, Page], dict[str, Page]]:
-    source_by_stem: dict[str, Page] = {}
-    source_by_id: dict[str, Page] = {}
-    raw_to_source: dict[str, Page] = {}
+@dataclass
+class SourceMaps:
+    by_stem: dict[str, list[Page]]
+    by_id: dict[str, list[Page]]
+    by_raw_name: dict[str, list[Page]]
+    pages: set[Page]
+
+    def resolve(self, value: str) -> Page | None:
+        """Resolve source metadata without choosing arbitrarily on collisions."""
+        keys = (value.casefold(), Path(value).name.casefold())
+        for mapping, key in (
+            (self.by_stem, keys[0]),
+            (self.by_id, keys[0]),
+            (self.by_raw_name, keys[1]),
+        ):
+            matches = mapping.get(key, [])
+            if len(matches) == 1:
+                return matches[0]
+            if matches:
+                return None
+        return None
+
+
+def source_maps(pages: list[Page]) -> SourceMaps:
+    source_by_stem: dict[str, list[Page]] = {}
+    source_by_id: dict[str, list[Page]] = {}
+    raw_to_source: dict[str, list[Page]] = {}
+    source_pages: set[Page] = set()
     for page in pages:
         if page.path.parent.name != "sources":
             continue
-        source_by_stem[page.stem.casefold()] = page
+        source_pages.add(page)
+        source_by_stem.setdefault(page.stem.casefold(), []).append(page)
         source_id = parse_scalar(page.meta.get("source_id"))
         if source_id:
-            source_by_id[source_id.casefold()] = page
-        if page.page_type == "type/source":
+            source_by_id.setdefault(source_id.casefold(), []).append(page)
+        # Local reference pages are raw-backed sources too. Restricting this
+        # map to type/source made their raw filenames impossible to resolve.
+        if parse_scalar(page.meta.get("source_kind")) == "raw":
             for item in page.sources:
-                raw_to_source[Path(item).name.casefold()] = page
-    return source_by_stem, source_by_id, raw_to_source
+                raw_to_source.setdefault(Path(item).name.casefold(), []).append(page)
+    return SourceMaps(source_by_stem, source_by_id, raw_to_source, source_pages)
 
 
-def effective_source_pages(page: Page, pages: list[Page]) -> set[Page]:
-    source_by_stem, source_by_id, raw_to_source = source_maps(pages)
+def effective_source_pages(page: Page, sources: SourceMaps) -> set[Page]:
     result: set[Page] = set()
     for item in page.sources:
-        key = item.casefold()
-        if key in source_by_stem:
-            result.add(source_by_stem[key])
-        elif key in source_by_id:
-            result.add(source_by_id[key])
-        elif Path(item).name.casefold() in raw_to_source:
-            result.add(raw_to_source[Path(item).name.casefold()])
+        resolved = sources.resolve(item)
+        if resolved:
+            result.add(resolved)
     return result
+
+
+def expected_count(page: Page, sources: SourceMaps) -> tuple[str, int] | None:
+    if page.page_type == "type/source":
+        return "raw 파일", len(page.sources)
+    if page.page_type == "type/reference":
+        return "핵심 문헌", len(parse_flow_list(page.meta.get("primary_sources")))
+    if page.is_content:
+        return "근거", len(effective_source_pages(page, sources))
+    return None

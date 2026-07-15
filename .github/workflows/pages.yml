@@ -3,6 +3,7 @@ name: Deploy CS Wiki
 on:
   push:
     branches: [main]
+  pull_request:
   workflow_dispatch:
 
 permissions:
@@ -11,7 +12,7 @@ permissions:
   id-token: write
 
 concurrency:
-  group: pages
+  group: pages-${{ github.event_name == 'pull_request' && github.event.pull_request.number || 'deploy' }}
   cancel-in-progress: true
 
 jobs:
@@ -27,24 +28,32 @@ jobs:
           node-version: 22
           cache: npm
 
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
       - name: Install dependencies
         run: npm ci
 
-      - name: Build static site
-        run: npm run build
+      - name: Check and build static site
+        run: npm run check
         env:
           SITE_BASE: /${{ github.event.repository.name }}
           SITE_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}
 
       - name: Configure Pages
+        if: github.event_name != 'pull_request'
         uses: actions/configure-pages@v6
 
       - name: Upload Pages artifact
+        if: github.event_name != 'pull_request'
         uses: actions/upload-pages-artifact@v5
         with:
           path: dist
 
   deploy:
+    if: github.event_name != 'pull_request'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}

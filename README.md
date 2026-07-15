@@ -4,8 +4,10 @@
 
 ## 로컬 실행
 
+Node.js 22 이상과 Python 3.12 이상을 사용합니다. 저장소의 잠금 파일과 동일한 의존성을 설치한 뒤 개발 서버를 시작합니다.
+
 ```bash
-npm install
+npm ci
 npm run dev
 ```
 
@@ -34,12 +36,23 @@ npm run build
 - 내부 링크는 Obsidian의 `[[위키링크]]` 문법을 그대로 사용합니다.
 - 콘텐츠 작업 규칙과 검증 절차는 `AGENTS.md`를 따릅니다.
 
-점검과 안전한 유지보수 확인은 저장소 루트에서 실행합니다.
+전체 검증은 저장소 루트에서 한 번에 실행합니다. 위키 구조 검사, 유지보수 dry-run, 사이트·Python 테스트와 정적 사이트 빌드를 순서대로 수행합니다.
+
+```bash
+npm run check
+```
+
+개별 검증이 필요할 때는 다음 스크립트를 사용할 수 있습니다.
 
 ```bash
 npm run lint:wiki
-python scripts/wiki_maintenance.py --check
+npm run maintenance:check
+npm run test:site
+npm run test:python
+npm test
 ```
+
+Pull request에서는 같은 통합 검증을 실행하되 배포하지 않으며, `main` 브랜치 푸시와 수동 실행에서만 GitHub Pages 배포를 이어서 수행합니다.
 
 ## 글꼴
 

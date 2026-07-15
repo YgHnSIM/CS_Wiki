@@ -3,11 +3,19 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
     "build": "node site/build.mjs",
     "dev": "npm run build && node site/serve.mjs",
     "fonts:subset": "python scripts/subset_fonts.py",
-    "lint:wiki": "python scripts/wiki_lint.py"
+    "lint:wiki": "python scripts/wiki_lint.py",
+    "maintenance:check": "python scripts/wiki_maintenance.py --check",
+    "test:site": "node --test tests/*.test.mjs",
+    "test:python": "python -m unittest discover -s tests -p \"test_*.py\"",
+    "test": "npm run test:site && npm run test:python",
+    "check": "npm run lint:wiki && npm run maintenance:check && npm test && npm run build"
   },
   "dependencies": {
     "markdown-it": "^14.1.0",

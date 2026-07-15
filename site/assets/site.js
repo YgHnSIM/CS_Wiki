@@ -12,7 +12,9 @@ const menuButton = document.querySelector(".menu-trigger");
 const mobileMenu = document.querySelector("#mobile-menu");
 
 let searchIndex = null;
+let searchIndexPromise = null;
 let selectedResult = -1;
+let searchRenderVersion = 0;
 
 function normalize(value) {
   return String(value || "").normalize("NFKC").toLocaleLowerCase("ko-KR");
@@ -42,12 +44,23 @@ function appendHighlighted(element, value, terms) {
 }
 
 async function loadSearchIndex() {
-  if (!searchIndex) {
-    const response = await fetch(`${base}/search.json?v=${assetVersion}`);
-    if (!response.ok) throw new Error("검색 색인을 불러오지 못했습니다.");
-    searchIndex = await response.json();
+  if (searchIndex) return searchIndex;
+  if (!searchIndexPromise) {
+    searchIndexPromise = fetch(`${base}/search.json?v=${assetVersion}`)
+      .then((response) => {
+        if (!response.ok) throw new Error("검색 색인을 불러오지 못했습니다.");
+        return response.json();
+      })
+      .then((index) => {
+        searchIndex = index;
+        return index;
+      })
+      .catch((error) => {
+        searchIndexPromise = null;
+        throw error;
+      });
   }
-  return searchIndex;
+  return searchIndexPromise;
 }
 
 function clearResults(message) {
@@ -122,6 +135,7 @@ function updateSearchUrl(query) {
 }
 
 async function renderSearch(query) {
+  const renderVersion = ++searchRenderVersion;
   const original = String(query || "").trim();
   const value = normalize(original);
   updateSearchUrl(original);
@@ -132,6 +146,7 @@ async function renderSearch(query) {
 
   try {
     const index = await loadSearchIndex();
+    if (renderVersion !== searchRenderVersion) return;
     const terms = value.split(/\s+/).filter(Boolean);
     const categoryValue = searchCategory?.value || "";
     const statusValue = searchStatus?.value || "";
@@ -154,7 +169,7 @@ async function renderSearch(query) {
       ? `${matches.length}개 중 ${results.length}개 표시`
       : `${matches.length}개 결과`;
   } catch (error) {
-    clearResults(error.message);
+    if (renderVersion === searchRenderVersion) clearResults(error.message);
   }
 }
 
@@ -168,7 +183,9 @@ async function openSearch({ query = "", preserveFilters = false } = {}) {
   }
   if (query) await renderSearch(query);
   else clearResults("검색어를 입력하세요.");
-  requestAnimationFrame(() => searchInput.focus());
+  requestAnimationFrame(() => {
+    if (dialog.open) searchInput.focus();
+  });
   loadSearchIndex().catch(() => {});
 }
 
@@ -196,7 +213,10 @@ searchInput?.addEventListener("keydown", (event) => {
   }
 });
 
-dialog?.addEventListener("close", () => updateSearchUrl(""));
+dialog?.addEventListener("close", () => {
+  searchRenderVersion += 1;
+  updateSearchUrl("");
+});
 
 document.addEventListener("keydown", (event) => {
   const target = event.target;

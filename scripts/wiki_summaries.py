@@ -5,7 +5,7 @@ import re
 import sys
 from pathlib import Path
 
-from wiki_common import Resolver, load_pages, parse_scalar, yaml_quote
+from wiki_common import Resolver, load_pages, set_frontmatter_field, yaml_quote
 
 
 SPECIAL_SUMMARIES = {
@@ -50,14 +50,7 @@ def clean_fallback(page) -> str:
 
 
 def set_summary(text: str, summary: str, newline: str) -> str:
-    encoded = yaml_quote(summary)
-    pattern = re.compile(r"^summary:[^\r\n]*", re.MULTILINE)
-    if pattern.search(text):
-        return pattern.sub(f"summary: {encoded}", text, count=1)
-    aliases = re.search(r"^aliases:[^\r\n]*", text, re.MULTILINE)
-    if not aliases:
-        raise ValueError("aliases field is required before adding summary")
-    return text[: aliases.end()] + newline + f"summary: {encoded}" + text[aliases.end() :]
+    return set_frontmatter_field(text, "summary", yaml_quote(summary), newline)
 
 
 def main() -> int:
