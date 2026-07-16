@@ -1100,6 +1100,47 @@ Node 기본 테스트와 Python `unittest` 회귀 테스트를 추가하고, 로
 - [[index]]
 - [[overview]]
 
+## [2026-07-16] reference | 캐시와 RISC로 본 실현 성능의 조건
+
+컴퓨팅 능력 주제의 단계적 보강 가운데 2단계를 수행했다. [[Slave Memories and Dynamic Storage Allocation]]과 [[Design and Implementation of RISC I]]을 `ref-043`, `ref-044`로 등록하고, 빠른 기억장치와 단순한 명령어 집합이 실제 프로그램을 자동으로 빠르게 만들지는 않는다는 관점을 보강했다.
+
+Wilkes의 1965년 논문은 캐시의 단독 최초 발명으로 서술하지 않고, 참조 패턴·주소 사상·교체·쓰기 정책을 이른 시기에 명시한 기초 문헌으로 한정했다. RISC I은 “명령어 수가 적으면 빠르다”는 표어가 아니라 ISA·마이크로아키텍처·컴파일러·메모리 사이의 복잡성 배분으로 정리했다. 보고서의 400ns 실행 시간은 시뮬레이션 가정이고 실제 칩은 놓친 임계 경로 때문에 그 목표에 미치지 못했다는 증거 유형의 차이도 명시했다.
+
+새 개념 [[캐시 메모리]]와 [[축소 명령어 집합 컴퓨터]], 새 분석 [[더 빠른 프로세서는 왜 더 빠른 프로그램을 보장하지 않는가]]를 작성했다. 분석은 실현 성능을 `작업 부하 × 컴파일러 × ISA × 마이크로아키텍처 × 메모리 계층`의 합성 결과로 보고, 캐시와 RISC를 하나의 직접 계보가 아니라 서로 다른 병목 대응으로 비교한다. 웹에는 13번째 학습 경로 `더 빠른 프로세서의 조건`을 추가했다.
+
+변경된 페이지:
+
+- 참고 자료: [[Slave Memories and Dynamic Storage Allocation]], [[Design and Implementation of RISC I]]
+- 개념: [[캐시 메모리]], [[축소 명령어 집합 컴퓨터]]
+- 분석: [[더 빠른 프로세서는 왜 더 빠른 프로그램을 보장하지 않는가]]
+- 보강: [[컴퓨팅 능력이란 무엇인가]], [[컴퓨팅 능력의 발달사]], [[메모리 장벽]], [[컴파일러 최적화]], [[무어의 법칙]]
+- 갱신: [[index]], [[overview]], [[log]]
+- 웹 탐색: `site/catalog.mjs`의 13번째 학습 경로
+
+### 검증
+
+- RISC I 25쪽 스캔 원문을 페이지 이미지로 대조하고 임시 렌더링 파일을 제거함
+- `npm run check`: 위키 lint, 유지보수 dry-run, Node 8개·Python 11개 테스트, 188개 페이지 빌드 통과
+- `python scripts/wiki_lint.py --json`: 188개 페이지·4,665개 링크, 오류 0건, 경고 0건
+- `python scripts/wiki_maintenance.py --check`: 변경 필요 항목 0건
+- `git diff --check`: 공백 오류 없음
+- `raw/` 원본 변경 없음
+
+### 출처
+
+- [[Slave Memories and Dynamic Storage Allocation]]
+- [[Design and Implementation of RISC I]]
+- [[Hitting the Memory Wall]]
+- [[SPEC CPU 2026 Overview]]
+- [[Roofline An Insightful Visual Performance Model]]
+
+### 관련 항목
+
+- [[컴퓨팅 능력이란 무엇인가]]
+- [[컴퓨팅 능력의 발달사]]
+- [[index]]
+- [[overview]]
+
 <!-- wiki-maintenance: global-sections -->
 ## 출처
 

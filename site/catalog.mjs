@@ -259,5 +259,25 @@ export const learningPaths = [
       "컴퓨팅 능력이란 무엇인가",
       "범용성은 어떻게 컴퓨팅 능력이 되었는가"
     ]
+  },
+  {
+    slug: "faster-processor-conditions",
+    title: "더 빠른 프로세서의 조건",
+    description: "트랜지스터와 클럭의 잠재력이 메모리 계층, 명령어 집합, 컴파일러와 작업 부하를 거쳐 실제 프로그램 성능으로 전환되는 조건을 읽는다.",
+    pages: [
+      "Cramming More Components onto Integrated Circuits",
+      "무어의 법칙",
+      "Slave Memories and Dynamic Storage Allocation",
+      "캐시 메모리",
+      "Design and Implementation of RISC I",
+      "축소 명령어 집합 컴퓨터",
+      "컴파일러 최적화",
+      "Hitting the Memory Wall",
+      "메모리 장벽",
+      "SPEC CPU 2026 Overview",
+      "Roofline An Insightful Visual Performance Model",
+      "컴퓨팅 능력이란 무엇인가",
+      "더 빠른 프로세서는 왜 더 빠른 프로그램을 보장하지 않는가"
+    ]
   }
 ];
