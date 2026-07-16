@@ -279,5 +279,19 @@ export const learningPaths = [
       "컴퓨팅 능력이란 무엇인가",
       "더 빠른 프로세서는 왜 더 빠른 프로그램을 보장하지 않는가"
     ]
+  },
+  {
+    slug: "parallel-scalability",
+    title: "병렬 확장성의 두 질문",
+    description: "고정된 문제의 시간 단축과 고정된 시간의 문제 규모 확대를 암달과 Gustafson의 원전, 현대 병렬 공동 설계 맥락으로 비교한다.",
+    pages: [
+      "Validity of the Single Processor Approach to Achieving Large Scale Computing Capabilities",
+      "Reevaluating Amdahl's Law",
+      "병렬 확장성",
+      "The Landscape of Parallel Computing Research - A View from Berkeley",
+      "컴퓨팅 능력이란 무엇인가",
+      "컴퓨팅 능력의 발달사",
+      "병렬 컴퓨팅은 시간을 줄이는가 문제를 키우는가"
+    ]
   }
 ];
