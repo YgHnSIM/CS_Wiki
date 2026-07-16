@@ -211,10 +211,13 @@ export const learningPaths = [
   {
     slug: "computing-capability-history",
     title: "컴퓨팅 능력의 발달사",
-    description: "계산 가능성에서 집적과 축소, 수치 정확성의 표준화, 메모리·전력 장벽, 병렬·분산 서비스와 도메인 특화 가속기로 이어진 흐름을 읽는다.",
+    description: "독서 지도에서 출발해 계산 가능성과 프로그래밍 가능성, 집적과 축소, 수치 정확성, 메모리·전력 장벽, 병렬·분산 서비스와 도메인 특화로 이어진 흐름을 읽는다.",
     pages: [
+      "컴퓨팅 능력 독서 지도",
       "On Computable Numbers with an Application to the Entscheidungsproblem",
       "On the Computational Complexity of Algorithms",
+      "프로그래밍 가능성",
+      "범용성은 어떻게 컴퓨팅 능력이 되었는가",
       "Cramming More Components onto Integrated Circuits",
       "Design of Ion-Implanted MOSFET's with Very Small Physical Dimensions",
       "무어의 법칙",
@@ -225,8 +228,10 @@ export const learningPaths = [
       "Hitting the Memory Wall",
       "메모리 장벽",
       "Validity of the Single Processor Approach to Achieving Large Scale Computing Capabilities",
+      "Reevaluating Amdahl's Law",
       "The Landscape of Parallel Computing Research - A View from Berkeley",
       "Roofline An Insightful Visual Performance Model",
+      "전력 장벽은 성능 향상의 의미를 어떻게 바꾸었는가",
       "The Datacenter as a Computer",
       "The Tail at Scale",
       "꼬리 지연 시간",
@@ -288,6 +293,26 @@ export const learningPaths = [
     ]
   },
   {
+    slug: "floating-point-correctness",
+    title: "부동소수점 성능과 정확성",
+    description: "유한 정밀도 표현과 IEEE 754의 연산 규범에서 컴파일러 최적화, LINPACK·SPEC의 결과 검증까지 따라가며 같은 계산의 성능 향상을 성립시키는 정확성 계약을 읽는다.",
+    pages: [
+      "What Every Computer Scientist Should Know About Floating-Point Arithmetic",
+      "IEEE 754-2019 Standard for Floating-Point Arithmetic",
+      "부동소수점 정확성",
+      "The FORTRAN Automatic Coding System",
+      "컴파일러 최적화",
+      "Fortran과 컴파일러",
+      "SPEC CPU 2026 Overview",
+      "The Linpack Benchmark",
+      "Roofline An Insightful Visual Performance Model",
+      "더 빠른 프로세서는 왜 더 빠른 프로그램을 보장하지 않는가",
+      "컴퓨팅 능력이란 무엇인가",
+      "컴퓨팅 능력의 발달사",
+      "더 빠른 계산은 같은 답을 내는가"
+    ]
+  },
+  {
     slug: "parallel-scalability",
     title: "병렬 확장성의 두 질문",
     description: "고정된 문제의 시간 단축과 고정된 시간의 문제 규모 확대를 암달과 Gustafson의 원전, 현대 병렬 공동 설계 맥락으로 비교한다.",
@@ -341,26 +366,6 @@ export const learningPaths = [
       "컴퓨팅 능력이란 무엇인가",
       "컴퓨팅 능력의 발달사",
       "평균 성능은 왜 서비스의 컴퓨팅 능력을 설명하지 못하는가"
-    ]
-  },
-  {
-    slug: "floating-point-correctness",
-    title: "부동소수점 성능과 정확성",
-    description: "유한 정밀도 표현과 IEEE 754의 연산 규범에서 컴파일러 최적화, LINPACK·SPEC의 결과 검증까지 따라가며 같은 계산의 성능 향상을 성립시키는 정확성 계약을 읽는다.",
-    pages: [
-      "What Every Computer Scientist Should Know About Floating-Point Arithmetic",
-      "IEEE 754-2019 Standard for Floating-Point Arithmetic",
-      "부동소수점 정확성",
-      "The FORTRAN Automatic Coding System",
-      "컴파일러 최적화",
-      "Fortran과 컴파일러",
-      "SPEC CPU 2026 Overview",
-      "The Linpack Benchmark",
-      "Roofline An Insightful Visual Performance Model",
-      "더 빠른 프로세서는 왜 더 빠른 프로그램을 보장하지 않는가",
-      "컴퓨팅 능력이란 무엇인가",
-      "컴퓨팅 능력의 발달사",
-      "더 빠른 계산은 같은 답을 내는가"
     ]
   }
 ];

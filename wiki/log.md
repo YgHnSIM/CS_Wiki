@@ -1310,6 +1310,57 @@ LINPACK은 64비트 전체 정밀도와 잔차 검증을 요구하지만 IEEE 75
 - [[index]]
 - [[overview]]
 
+## [2026-07-16] update | 컴퓨팅 능력 독서 지도와 핵심 분석 시리즈
+
+컴퓨팅 능력 주제의 단계적 보강 가운데 7단계 통합 작업을 수행했다. 새 메타 페이지 [[컴퓨팅 능력 독서 지도]]를 작성해 정의 허브, 핵심 분석, 원전과 기존 17개 학습 경로를 하나의 읽기 체계로 연결했다. 새 선형 경로를 추가하지 않고 빠른 진입, `가능성에서 서비스 능력까지` 핵심 분석 시리즈, 일곱 층위의 17개 원전 코어, 목적별 기존 경로 조합을 분리했다.
+
+원전 코어는 계산 가능성 1편, 알고리즘 복잡도 1편, 프로그래밍 가능성·실현 성능·확장성·자원 효율·신뢰 가능한 결과 각 3편의 `1+1+3+3+3+3+3` 구조로 구성했다. 독자가 각 문서에서 작업, 규모, 결과 계약, 시스템 경계, 고정 조건과 지표를 기록하도록 읽기 완료 기준을 제시하고, 마지막에는 조건이 빠진 “컴퓨팅 능력 두 배” 주장을 비교 가능한 문장으로 다시 쓰게 했다. 후속 조사는 알고리즘 복잡도의 실용적 의미, 결함 허용과 가용성, 근사·혼합 정밀도, 프로그래밍 노력의 측정으로 분리했다.
+
+[[컴퓨팅 능력이란 무엇인가]]에는 핵심 분석 순서를 추가하되 일곱 층위와 분석이 1:1로 대응하지 않음을 명시했다. 알고리즘 복잡도는 연결 절이고, 신뢰 가능한 결과는 수치와 서비스 계약의 두 분석으로 나뉜다. [[컴퓨팅 능력의 발달사]]에는 기존에 빠져 있던 해석 기관, 저장 프로그램, EDSAC 서브루틴·카탈로그, Fortran 컴파일러와 Unix 운영 환경의 전환을 `범용성에서 프로그래밍 가능성으로` 절로 보강했다. 설계·최초 실행·실용 운영, 재배선·외부 설정·내부 기억장치 변경을 구분하고 발달사 근거를 22개에서 27개로 확장했다.
+
+웹의 `컴퓨팅 능력의 발달사` 우산 경로는 독서 지도를 첫 단계로 배치하고 프로그래밍 가능성, Gustafson의 확대 크기 관점과 전력 장벽 분석을 직접 포함하도록 보강했다. 전체 학습 경로 수는 17개로 유지했으며, 메뉴 순서는 더 빠른 프로세서 → 부동소수점 정확성 → 병렬 확장성 → 전력 → 서비스의 논리적 순서로 정렬했다. README의 오래된 10개 경로 표기도 17개와 독서 지도로 수정했다.
+
+새 문서는 `draft → review → active` 순서로 승격했다. 초안과 검토 상태에서 각각 페이지 구조, 출처 매핑, 관련 항목의 상호 링크와 카탈로그 해석을 검사했고, 최종 감사에서 *The Preparation*의 판본 표현, 층위–분석 대응, 발달사 연대 순서와 저장 프로그램 전환의 과도한 일반화를 교정했다.
+
+변경된 페이지:
+
+- 새 메타: [[컴퓨팅 능력 독서 지도]]
+- 보강: [[컴퓨팅 능력이란 무엇인가]], [[컴퓨팅 능력의 발달사]]
+- 갱신: [[index]], [[overview]], [[log]]
+- 웹 탐색: `site/catalog.mjs`의 컴퓨팅 능력 우산 경로와 학습 경로 순서
+- 프로젝트 안내: `README.md`
+
+### 검증
+
+- `npm.cmd run check`: 위키 lint, 유지보수 dry-run, Node 8개·Python 11개 테스트, 206개 페이지 빌드 통과
+- `python scripts/wiki_lint.py --json`: 206개 페이지, 위키링크 5,338개, 오류 0건, 경고 0건
+- `python scripts/wiki_maintenance.py --check`: 변경 필요 항목 0건
+- `git diff --check`: 공백 오류 없음
+- `raw/` 원본 변경 없음
+
+### 출처
+
+- [[On Computable Numbers with an Application to the Entscheidungsproblem]]
+- [[On the Computational Complexity of Algorithms]]
+- [[First Draft of a Report on the EDVAC]]
+- [[The Preparation of Programs for an Electronic Digital Computer]]
+- [[The FORTRAN Automatic Coding System]]
+- [[Design and Implementation of RISC I]]
+- [[Validity of the Single Processor Approach to Achieving Large Scale Computing Capabilities]]
+- [[Reevaluating Amdahl's Law]]
+- [[Dark Silicon and the End of Multicore Scaling]]
+- [[What Every Computer Scientist Should Know About Floating-Point Arithmetic]]
+- [[IEEE 754-2019 Standard for Floating-Point Arithmetic]]
+- [[The Tail at Scale]]
+
+### 관련 항목
+
+- [[컴퓨팅 능력 독서 지도]]
+- [[컴퓨팅 능력이란 무엇인가]]
+- [[컴퓨팅 능력의 발달사]]
+- [[index]]
+- [[overview]]
+
 <!-- wiki-maintenance: global-sections -->
 ## 출처
 
