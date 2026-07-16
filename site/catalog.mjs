@@ -211,7 +211,7 @@ export const learningPaths = [
   {
     slug: "computing-capability-history",
     title: "컴퓨팅 능력의 발달사",
-    description: "계산 가능성에서 집적과 축소, 메모리·전력 장벽, 병렬·분산 시스템과 도메인 특화 가속기로 이어진 흐름을 읽는다.",
+    description: "계산 가능성에서 집적과 축소, 메모리·전력 장벽, 병렬·분산 서비스의 꼬리 지연과 도메인 특화 가속기로 이어진 흐름을 읽는다.",
     pages: [
       "On Computable Numbers with an Application to the Entscheidungsproblem",
       "On the Computational Complexity of Algorithms",
@@ -225,9 +225,12 @@ export const learningPaths = [
       "The Landscape of Parallel Computing Research - A View from Berkeley",
       "Roofline An Insightful Visual Performance Model",
       "The Datacenter as a Computer",
+      "The Tail at Scale",
+      "꼬리 지연 시간",
       "In-Datacenter Performance Analysis of a Tensor Processing Unit",
       "도메인 특화 가속기",
       "컴퓨팅 능력이란 무엇인가",
+      "평균 성능은 왜 서비스의 컴퓨팅 능력을 설명하지 못하는가",
       "컴퓨팅 능력의 발달사"
     ]
   },
@@ -315,6 +318,25 @@ export const learningPaths = [
       "컴퓨팅 능력이란 무엇인가",
       "컴퓨팅 능력의 발달사",
       "전력 장벽은 성능 향상의 의미를 어떻게 바꾸었는가"
+    ]
+  },
+  {
+    slug: "service-tail-latency",
+    title: "서비스 성능과 꼬리 지연",
+    description: "단일 작업의 시간·처리량에서 창고 규모 서비스의 팬아웃과 종단 백분위로 측정 경계를 넓히고, 짧은 꼬리와 자원·에너지·결과 품질의 교환을 읽는다.",
+    pages: [
+      "SPEC CPU 2026 Overview",
+      "더 빠른 프로세서는 왜 더 빠른 프로그램을 보장하지 않는가",
+      "The Datacenter as a Computer",
+      "The Tail at Scale",
+      "꼬리 지연 시간",
+      "The Case for Energy-Proportional Computing",
+      "에너지 비례 컴퓨팅",
+      "In-Datacenter Performance Analysis of a Tensor Processing Unit",
+      "도메인 특화 가속기",
+      "컴퓨팅 능력이란 무엇인가",
+      "컴퓨팅 능력의 발달사",
+      "평균 성능은 왜 서비스의 컴퓨팅 능력을 설명하지 못하는가"
     ]
   }
 ];
