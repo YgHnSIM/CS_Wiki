@@ -5,7 +5,7 @@ summary: "MOSFET의 치수와 전압을 함께 축소해 회로 속도와 집적
 tags: [type/concept, domain/computer-history, domain/computer-architecture, status/active]
 created: 2026-07-16
 updated: 2026-07-16
-sources: ["Design of Ion-Implanted MOSFET's with Very Small Physical Dimensions", "Cramming More Components onto Integrated Circuits", "The Landscape of Parallel Computing Research - A View from Berkeley"]
+sources: ["Design of Ion-Implanted MOSFET's with Very Small Physical Dimensions", "Cramming More Components onto Integrated Circuits", "The Landscape of Parallel Computing Research - A View from Berkeley", "Implications of Historical Trends in the Electrical Efficiency of Computing", "Dark Silicon and the End of Multicore Scaling"]
 status: active
 ---
 
@@ -38,13 +38,23 @@ status: active
 
 이 변화는 단일 코어 클럭 상승의 둔화와 멀티코어 전환의 배경이다. [[The Landscape of Parallel Computing Research - A View from Berkeley]]가 기록하듯, 더 많은 트랜지스터를 복잡한 단일 코어에 투입하는 방식의 수익이 줄면서 병렬 하드웨어, 에너지 효율과 소프트웨어 공동 설계가 중심 과제가 되었다.
 
+## 장기 효율과 활성 면적
+
+[[Implications of Historical Trends in the Electrical Efficiency of Computing]]에서 유래한 [[Koomey의 법칙]]은 여러 종류의 완성 시스템에서 최고 부하 계산/J가 장기간 개선된 경험적 결과다. Dennard 스케일링은 그 개선을 뒷받침한 중요한 소자 수준 기제였지만 같은 명제는 아니다. Koomey 표본은 진공관에서 트랜지스터로의 전환도 포함하고, 시스템 구조와 구성요소의 변화까지 합친 결과다.
+
+전압 축소가 약해진 뒤에는 칩 면적과 전력 예산이 독립적인 제약이 되었다. [[Dark Silicon and the End of Multicore Scaling]]의 [[다크 실리콘]]은 트랜지스터를 구현할 면적이 있어도 전력·열과 프로그램의 병렬성 때문에 일부 회로를 동시에 유용하게 사용하지 못하는 간극을 모델링했다. 이는 Dennard 스케일링의 약화를 “더 이상 작게 만들 수 없다”보다 “작게 만든 회로를 모두 같은 방식으로 켤 수 없다”는 문제로 구체화한다.
+
 ## 출처
 
 - [[Design of Ion-Implanted MOSFET's with Very Small Physical Dimensions]]
 - [[Cramming More Components onto Integrated Circuits]]
 - [[The Landscape of Parallel Computing Research - A View from Berkeley]]
+- [[Implications of Historical Trends in the Electrical Efficiency of Computing]]
+- [[Dark Silicon and the End of Multicore Scaling]]
 
 ## 관련 항목
 
 - [[컴퓨팅 능력이란 무엇인가]]
 - [[컴퓨팅 능력의 발달사]]
+- [[Koomey의 법칙]]
+- [[다크 실리콘]]

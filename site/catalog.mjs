@@ -293,5 +293,28 @@ export const learningPaths = [
       "컴퓨팅 능력의 발달사",
       "병렬 컴퓨팅은 시간을 줄이는가 문제를 키우는가"
     ]
+  },
+  {
+    slug: "power-energy-barrier",
+    title: "전력 장벽과 에너지 효율",
+    description: "집적도와 소자 축소의 결합이 약해진 뒤 성능 향상이 세대 간 환산 계산량/에너지, 실제 부하의 전력 곡선과 칩의 활성 면적을 관리하는 문제로 바뀐 과정을 읽는다.",
+    pages: [
+      "Cramming More Components onto Integrated Circuits",
+      "무어의 법칙",
+      "Design of Ion-Implanted MOSFET's with Very Small Physical Dimensions",
+      "Dennard 스케일링",
+      "The Landscape of Parallel Computing Research - A View from Berkeley",
+      "Implications of Historical Trends in the Electrical Efficiency of Computing",
+      "Koomey의 법칙",
+      "The Case for Energy-Proportional Computing",
+      "에너지 비례 컴퓨팅",
+      "Dark Silicon and the End of Multicore Scaling",
+      "다크 실리콘",
+      "도메인 특화 가속기",
+      "Power Measurement Tutorial for the Green500 List",
+      "컴퓨팅 능력이란 무엇인가",
+      "컴퓨팅 능력의 발달사",
+      "전력 장벽은 성능 향상의 의미를 어떻게 바꾸었는가"
+    ]
   }
 ];
