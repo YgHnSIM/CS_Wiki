@@ -1056,6 +1056,50 @@ Node 기본 테스트와 Python `unittest` 회귀 테스트를 추가하고, 로
 - [[index]]
 - [[overview]]
 
+## [2026-07-16] create | 범용 기계와 프로그래밍 가능성
+
+컴퓨팅 능력 주제의 단계적 보강 가운데 1단계를 수행했다. [[컴퓨팅 능력이란 무엇인가]]를 계산 가능성, 복잡도, 프로그래밍 가능성, 실현 성능, 확장성, 자원 효율, 신뢰 가능한 결과의 일곱 층위로 확장했다. 하드웨어의 잠재적 기능이 실제 사용 능력이 되려면 계산을 표현하고 변경하는 인간 노력과 소프트웨어 계층을 함께 봐야 한다는 관점을 추가했다.
+
+새 개념 [[프로그래밍 가능성]]은 이론적 보편성과 실제 프로그램 작성 가능성을 구분하고, 해석 기관의 카드, 저장 프로그램, EDSAC의 로더·라이브러리, Fortran 컴파일러, Unix/C의 운영 환경과 이식성으로 이어진 층위를 정리한다. 새 분석 [[범용성은 어떻게 컴퓨팅 능력이 되었는가]]는 이 흐름을 기계에 새로운 일을 부여하는 변경 단위와 비용이 낮아진 역사로 종합한다. 보편 튜링 기계와 저장 프로그램 컴퓨터는 개념적으로 비교하되 직접 인과 계보로 단정하지 않았고, 해석 기관은 물리적 직접 조상이 아닌 개념적 선구로 한정했다.
+
+웹에는 12번째 학습 경로 `범용 기계와 프로그래밍 가능성`을 추가했다. 계산기와 범용 컴퓨터의 차이, 형식적 보편성, 저장 프로그램, 초기 소프트웨어 계층, Fortran과 컴파일러, Unix/C를 거쳐 새 개념과 분석으로 도달하도록 구성했다.
+
+변경된 페이지:
+
+- 생성: [[프로그래밍 가능성]], [[범용성은 어떻게 컴퓨팅 능력이 되었는가]]
+- 주제 허브: [[컴퓨팅 능력이란 무엇인가]]
+- 분석 역링크: [[기계가 계산한다는 말의 이론적 의미]], [[저장 프로그램 개념의 여러 기원]], [[초기 소프트웨어의 계층화]], [[Fortran과 컴파일러]], [[Unix와 C]]
+- 갱신: [[index]], [[overview]], [[log]]
+- 웹 탐색: `site/catalog.mjs`의 12번째 학습 경로
+
+### 검증
+
+- `npm run check`: 위키 lint, 유지보수 dry-run, Node·Python 테스트, 183개 페이지 빌드 통과
+- `python scripts/wiki_lint.py --json`: 오류 0건, 경고 0건
+- `python scripts/wiki_maintenance.py --check`: 변경 필요 항목 0건
+- `git diff --check`: 공백 오류 없음
+- `raw/` 원본 변경 없음
+
+### 출처
+
+- [[컴퓨팅의 기원 - 배비지와 러브레이스]]
+- [[On Computable Numbers with an Application to the Entscheidungsproblem]]
+- [[First Draft of a Report on the EDVAC]]
+- [[The Manchester Small Scale Experimental Machine - The Baby]]
+- [[초기 소프트웨어의 탄생]]
+- [[The Preparation of Programs for an Electronic Digital Computer]]
+- [[FORTRAN Automatic Coding System for the IBM 704 EDPM]]
+- [[The FORTRAN Automatic Coding System]]
+- [[The UNIX Time-Sharing System]]
+- [[Portability of C Programs and the UNIX System]]
+
+### 관련 항목
+
+- [[컴퓨팅 능력이란 무엇인가]]
+- [[컴퓨팅 능력의 발달사]]
+- [[index]]
+- [[overview]]
+
 <!-- wiki-maintenance: global-sections -->
 ## 출처
 

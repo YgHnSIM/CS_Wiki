@@ -230,5 +230,34 @@ export const learningPaths = [
       "컴퓨팅 능력이란 무엇인가",
       "컴퓨팅 능력의 발달사"
     ]
+  },
+  {
+    slug: "generality-programmability",
+    title: "범용 기계와 프로그래밍 가능성",
+    description: "특수 목적 계산 장치에서 보편 기계, 저장 프로그램, 라이브러리·컴파일러와 이식 가능한 운영 환경으로 이어진 흐름을 읽는다.",
+    pages: [
+      "컴퓨팅의 기원 - 배비지와 러브레이스",
+      "해석 기관",
+      "계산기와 컴퓨터의 차이",
+      "On Computable Numbers with an Application to the Entscheidungsproblem",
+      "보편 튜링 기계",
+      "기계가 계산한다는 말의 이론적 의미",
+      "First Draft of a Report on the EDVAC",
+      "저장 프로그램 컴퓨터",
+      "저장 프로그램 개념의 여러 기원",
+      "EDSAC과 Initial Orders",
+      "Initial Orders",
+      "The Preparation of Programs for an Electronic Digital Computer",
+      "초기 소프트웨어의 계층화",
+      "FORTRAN Automatic Coding System for the IBM 704 EDPM",
+      "The FORTRAN Automatic Coding System",
+      "컴파일러",
+      "컴파일러 최적화",
+      "Fortran과 컴파일러",
+      "Unix와 C",
+      "프로그래밍 가능성",
+      "컴퓨팅 능력이란 무엇인가",
+      "범용성은 어떻게 컴퓨팅 능력이 되었는가"
+    ]
   }
 ];
