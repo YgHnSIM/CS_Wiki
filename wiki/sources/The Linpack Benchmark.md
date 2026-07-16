@@ -4,7 +4,7 @@ aliases: [TOP500 Linpack benchmark page, LINPACK benchmark overview]
 summary: "고밀도 선형방정식 풀이를 통해 부동소수점 실행률을 측정하는 LINPACK의 범위와 Rmax·Rpeak의 차이, 단일 벤치마크 수치의 한계를 설명하는 TOP500 공식 자료."
 tags: [type/reference, domain/computer-architecture, domain/computer-science, status/active]
 created: 2026-07-15
-updated: 2026-07-15
+updated: 2026-07-16
 sources: ["TOP500_Linpack_Benchmark.html", "TOP500_Linpack_FAQ.html", "TOP500 The Linpack Benchmark page", "TOP500 Linpack FAQ"]
 source_id: ref-033
 source_kind: external
@@ -25,10 +25,13 @@ status: active
 
 그러나 LINPACK은 규칙적인 고밀도 선형대수 작업에 특화되어 있다. TOP500 자체도 이 수치가 시스템 전체 성능을 대표하지 않으며, 응용 프로그램, 알고리즘, 문제 크기, 언어, 구현, 컴파일러, 운영체제, 메모리와 하드웨어 특성이 실제 성능을 함께 결정한다고 설명한다. 정확도와 64비트 정밀도 조건도 충족해야 하므로 단순히 연산 횟수만 빠르게 보고하는 시험이 아니다.
 
+TOP500 FAQ는 결과가 정해진 정확도 잔차를 만족해야 하고 계산에는 일반적으로 64비트 이상의 전체 정밀도를 사용해야 한다고 설명한다. IEEE 기계의 정밀도 값은 이 조건을 표현하는 대표 사례지만, LINPACK이 IEEE 754의 모든 형식·반올림·예외 규칙을 시험한다는 뜻은 아니다. `Rmax`는 전체 IEEE 적합성 점수가 아니라 **64비트 정밀도와 잔차 검증을 통과한 특정 선형대수 작업의 달성 성능**이다.
+
 ## 주요 인사이트
 
 - 이론적 최고 성능 Rpeak와 실제 달성 성능 Rmax는 구분해야 한다.
 - 벤치마크 점수는 특정 작업 부하와 정확도·정밀도 규칙 아래에서만 의미가 있다.
+- LINPACK의 잔차 검증은 계산된 해의 수치 유효성을 확인하지만 IEEE 754 전체 적합성 시험은 아니다.
 - 동일한 프로세서도 컴파일러 옵션, 캐시, 메모리 대역폭과 시스템 부하에 따라 결과가 달라질 수 있다.
 - LINPACK은 고밀도 선형대수 성능의 기준점이지 컴퓨터 전체 능력의 단일 척도가 아니다.
 - 성능 비교에는 실행한 알고리즘, 문제 크기, 소프트웨어와 측정 조건을 함께 기록해야 한다.
@@ -54,3 +57,6 @@ status: active
 - [[Roofline An Insightful Visual Performance Model]]
 - [[Power Measurement Tutorial for the Green500 List]]
 - [[컴퓨팅 능력이란 무엇인가]]
+- [[IEEE 754-2019 Standard for Floating-Point Arithmetic]]
+- [[부동소수점 정확성]]
+- [[더 빠른 계산은 같은 답을 내는가]]

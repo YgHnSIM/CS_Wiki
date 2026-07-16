@@ -4,15 +4,15 @@ aliases: [SPEC CPU2026 overview]
 summary: "표준 성능 벤치마크의 조건과 한계를 설명하고, 실행 시간 중심 SPECspeed와 처리량 중심 SPECrate를 구분하는 SPEC 공식 개요."
 tags: [type/reference, domain/computer-architecture, domain/computer-science, status/active]
 created: 2026-07-15
-updated: 2026-07-15
-sources: ["SPEC_CPU_2026_Overview.html", "SPEC official CPU 2026 overview webpage"]
+updated: 2026-07-16
+sources: ["SPEC_CPU_2026_Overview.html", "SPEC official CPU 2026 overview webpage", "SPEC CPU 2026 Run and Reporting Rules"]
 source_id: ref-032
 source_kind: external
-primary_sources: ["SPEC official CPU 2026 overview webpage"]
+primary_sources: ["SPEC official CPU 2026 overview webpage", "SPEC CPU 2026 Run and Reporting Rules"]
 supporting_sources: ["SPEC_CPU_2026_Overview.html"]
-source_urls: ["https://www.spec.org/cpu2026/docs/overview.html"]
+source_urls: ["https://www.spec.org/cpu2026/docs/overview.html", "https://www.spec.org/cpu2026/docs/runrules.html#rule_2.3.3"]
 retrieved: 2026-07-15
-version: "SPEC CPU 2026"
+version: "SPEC CPU 2026 overview and run rules retrieved 2026-07-16"
 snapshot_status: archived
 status: active
 ---
@@ -25,6 +25,8 @@ SPEC CPU 2026은 프로세서만 고립해서 측정하지 않는다. 계산 집
 
 문서는 실행 시간과 처리량을 분리한다. SPECspeed는 한 작업을 마치는 시간에 초점을 맞추며, SPECrate는 여러 작업을 동시에 실행했을 때 단위 시간당 완료한 작업량을 측정한다. 동일한 시스템도 사용자의 작업 방식에 따라 적합한 지표가 달라지며, 표준 벤치마크는 실제 사용자의 응용 프로그램을 직접 측정하는 일을 완전히 대체하지 못한다.
 
+실행 규칙은 SPEC CPU 2026이 IEEE 754 준수를 요구하지 않는다고 명시한다. 다른 부동소수점 구현도 원칙상 가능하지만, 실제 응용에서 가져온 프로그램이 binary32·binary64 환경에서 개발되어 검증을 통과하기 어려울 수 있다. SPEC은 언어 일반의 수치 정확도 규격을 대신 정하지 않으며, 정해진 출력 검증을 통과하는 범위에서 일부 산술 재배열을 허용한다. 따라서 SPEC 결과는 IEEE 754 적합성이나 비트 단위 재현성의 시험이 아니라, 공개된 규칙 아래 허용 가능한 결과를 낸 응용·컴파일러·메모리·CPU 구성의 성능 관측이다.
+
 ## 주요 인사이트
 
 - 벤치마크에는 작업 부하, 지표, 정답 검증, 재현성, 비교 가능성, 실행 규칙이 함께 필요하다.
@@ -32,6 +34,7 @@ SPEC CPU 2026은 프로세서만 고립해서 측정하지 않는다. 계산 집
 - CPU 벤치마크 결과에는 프로세서뿐 아니라 메모리 계층과 컴파일러 최적화가 반영된다.
 - 특정 구성요소에 초점을 맞춘 벤치마크는 네트워크나 입출력처럼 측정하지 않은 능력을 대표하지 않는다.
 - 서로 다른 세대의 SPEC 제품은 코드·데이터·규칙이 다르므로 점수를 직접 변환할 수 없다.
+- SPEC의 출력 검증은 성능 결과의 유효 조건이지만 IEEE 754 전체 준수나 보편적인 수치 정확도를 증명하지 않는다.
 
 ## 인용할 만한 구절
 
@@ -45,8 +48,12 @@ SPEC CPU 2026은 프로세서만 고립해서 측정하지 않는다. 계산 집
 
 - 로컬 보존본: `raw/assets/SPEC_CPU_2026_Overview.html`
 - SPEC, [SPEC CPU 2026 Overview](https://www.spec.org/cpu2026/docs/overview.html)
+- SPEC, [SPEC CPU 2026 Run and Reporting Rules](https://www.spec.org/cpu2026/docs/runrules.html#rule_2.3.3)
 
 ## 관련 항목
 
 - [[The Linpack Benchmark]]
 - [[컴퓨팅 능력이란 무엇인가]]
+- [[IEEE 754-2019 Standard for Floating-Point Arithmetic]]
+- [[부동소수점 정확성]]
+- [[더 빠른 계산은 같은 답을 내는가]]

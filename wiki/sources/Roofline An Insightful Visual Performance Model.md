@@ -4,7 +4,7 @@ aliases: [Williams-Waterman-Patterson 2009, Roofline performance model paper]
 summary: "연산 집약도와 메모리 대역폭을 결합해 프로그램의 달성 가능한 성능 상한과 계산·메모리 병목을 시각화한 Roofline 모델 논문."
 tags: [type/reference, domain/computer-architecture, domain/computer-science, status/active]
 created: 2026-07-15
-updated: 2026-07-15
+updated: 2026-07-16
 sources: ["2009_Williams_Waterman_Patterson_Roofline.pdf", "Communications of the ACM 52(4), 2009"]
 source_id: ref-034
 source_kind: external
@@ -26,6 +26,8 @@ status: active
 논문은 단일 최고 FLOPS가 실제 프로그램 성능을 설명하지 못한다는 점을 네 종류의 멀티코어와 네 계산 커널로 보여준다. 같은 기계에서도 메모리 접근 패턴, 캐시 미스, SIMD 사용, 명령 수준 병렬성, 메모리 배치와 프리페칭에 따라 달성 성능이 달라진다. 모델에 여러 최적화 ceiling을 추가하면 어떤 최적화가 다음 성능 상한을 열어 주는지도 비교할 수 있다.
 
 Roofline은 원래 부동소수점 연산과 DRAM 트래픽을 사용하지만, 논문은 작업에 맞는 계산 지표와 데이터 이동 지표로 축을 바꾸면 다른 종류의 커널에도 확장할 수 있다고 설명한다. 따라서 이 자료의 더 일반적인 의미는 컴퓨팅 능력이 연산기 하나의 속도가 아니라 계산과 데이터 이동의 균형이라는 점이다.
+
+다만 Roofline의 FLOP/s 축은 계산 결과의 [[부동소수점 정확성|정확성]]을 직접 측정하지 않는다. 같은 연산 집약도와 달성 연산률도 정밀도, 연산 순서와 알고리즘 안정성이 다르면 결과 계약이 다를 수 있다. Roofline은 유효한 결과를 낸 실행 안에서 계산·메모리 병목을 분석하는 모델이지, 더 높은 FLOP/s만으로 같은 답을 보증하는 모델이 아니다.
 
 ## 주요 인사이트
 
@@ -55,3 +57,5 @@ Roofline은 원래 부동소수점 연산과 DRAM 트래픽을 사용하지만, 
 - [[The Linpack Benchmark]]
 - [[Validity of the Single Processor Approach to Achieving Large Scale Computing Capabilities]]
 - [[컴퓨팅 능력이란 무엇인가]]
+- [[부동소수점 정확성]]
+- [[더 빠른 계산은 같은 답을 내는가]]

@@ -211,7 +211,7 @@ export const learningPaths = [
   {
     slug: "computing-capability-history",
     title: "컴퓨팅 능력의 발달사",
-    description: "계산 가능성에서 집적과 축소, 메모리·전력 장벽, 병렬·분산 서비스의 꼬리 지연과 도메인 특화 가속기로 이어진 흐름을 읽는다.",
+    description: "계산 가능성에서 집적과 축소, 수치 정확성의 표준화, 메모리·전력 장벽, 병렬·분산 서비스와 도메인 특화 가속기로 이어진 흐름을 읽는다.",
     pages: [
       "On Computable Numbers with an Application to the Entscheidungsproblem",
       "On the Computational Complexity of Algorithms",
@@ -219,6 +219,9 @@ export const learningPaths = [
       "Design of Ion-Implanted MOSFET's with Very Small Physical Dimensions",
       "무어의 법칙",
       "Dennard 스케일링",
+      "What Every Computer Scientist Should Know About Floating-Point Arithmetic",
+      "IEEE 754-2019 Standard for Floating-Point Arithmetic",
+      "부동소수점 정확성",
       "Hitting the Memory Wall",
       "메모리 장벽",
       "Validity of the Single Processor Approach to Achieving Large Scale Computing Capabilities",
@@ -230,6 +233,7 @@ export const learningPaths = [
       "In-Datacenter Performance Analysis of a Tensor Processing Unit",
       "도메인 특화 가속기",
       "컴퓨팅 능력이란 무엇인가",
+      "더 빠른 계산은 같은 답을 내는가",
       "평균 성능은 왜 서비스의 컴퓨팅 능력을 설명하지 못하는가",
       "컴퓨팅 능력의 발달사"
     ]
@@ -337,6 +341,26 @@ export const learningPaths = [
       "컴퓨팅 능력이란 무엇인가",
       "컴퓨팅 능력의 발달사",
       "평균 성능은 왜 서비스의 컴퓨팅 능력을 설명하지 못하는가"
+    ]
+  },
+  {
+    slug: "floating-point-correctness",
+    title: "부동소수점 성능과 정확성",
+    description: "유한 정밀도 표현과 IEEE 754의 연산 규범에서 컴파일러 최적화, LINPACK·SPEC의 결과 검증까지 따라가며 같은 계산의 성능 향상을 성립시키는 정확성 계약을 읽는다.",
+    pages: [
+      "What Every Computer Scientist Should Know About Floating-Point Arithmetic",
+      "IEEE 754-2019 Standard for Floating-Point Arithmetic",
+      "부동소수점 정확성",
+      "The FORTRAN Automatic Coding System",
+      "컴파일러 최적화",
+      "Fortran과 컴파일러",
+      "SPEC CPU 2026 Overview",
+      "The Linpack Benchmark",
+      "Roofline An Insightful Visual Performance Model",
+      "더 빠른 프로세서는 왜 더 빠른 프로그램을 보장하지 않는가",
+      "컴퓨팅 능력이란 무엇인가",
+      "컴퓨팅 능력의 발달사",
+      "더 빠른 계산은 같은 답을 내는가"
     ]
   }
 ];
