@@ -5,6 +5,7 @@ import { createHash } from "node:crypto";
 import MarkdownIt from "markdown-it";
 import anchor from "markdown-it-anchor";
 import { domainMeta, learningPaths, statusMeta } from "./catalog.mjs";
+import { buildKnowledgeGraph, extractWikiLinks } from "./graph/model.mjs";
 import {
   buildGraphPayload,
   buildPageLookup,
@@ -64,11 +65,6 @@ function getCategory(filePath, tags = []) {
   return rel.length > 1 && categoryMeta[rel[0]] ? rel[0] : "meta";
 }
 
-function extractWikiTargets(body) {
-  return [...body.matchAll(/(?<!!)\[\[([^\]|#]+)(?:#[^\]|]+)?(?:\|[^\]]+)?\]\]/g)]
-    .map((match) => match[1].trim());
-}
-
 const files = await markdownFiles(wikiRoot);
 const pages = await Promise.all(files.map(async (filePath) => {
   const raw = await readFile(filePath, "utf8");
@@ -89,6 +85,13 @@ const pages = await Promise.all(files.map(async (filePath) => {
     created: parseScalar(parsed.data.created),
     updated: parseScalar(parsed.data.updated),
     sourceId: parseScalar(parsed.data.source_id),
+    graphId: parseScalar(parsed.data.graph_id),
+    graphVisibility: parseScalar(parsed.data.graph_visibility),
+    publicationYear: parseScalar(parsed.data.publication_year),
+    eventStart: parseScalar(parsed.data.event_start),
+    eventEnd: parseScalar(parsed.data.event_end),
+    historicalLayer: parseScalar(parsed.data.historical_layer),
+    capabilityLayers: parseFlowList(parsed.data.capability_layers),
     sourceKind: parseScalar(parsed.data.source_kind),
     primarySources: parseFlowList(parsed.data.primary_sources),
     supportingSources: parseFlowList(parsed.data.supporting_sources),
@@ -101,7 +104,7 @@ const pages = await Promise.all(files.map(async (filePath) => {
     category,
     slug,
     url: `/${category}/${slug}/`,
-    targets: extractWikiTargets(parsed.content),
+    targets: extractWikiLinks(parsed.content).map((link) => link.target),
     incoming: 0
   };
 }));
@@ -129,6 +132,11 @@ for (const path of resolvedLearningPaths) {
     pathsByPage.get(page).push({ path, index });
   });
 }
+
+const knowledgeGraph = buildKnowledgeGraph(pages, resolvedLearningPaths, {
+  lookup,
+  urlFor: withBase
+});
 
 const headingSlugs = new Map();
 const md = new MarkdownIt({ html: false, linkify: true, typographer: false })
@@ -620,6 +628,7 @@ const searchIndex = pages.map((page) => ({
   text: cleanInline(page.body).slice(0, 1600)
 }));
 await output("search.json", JSON.stringify(searchIndex));
+await output(join("data", "knowledge-graph.json"), JSON.stringify(knowledgeGraph));
 await output(".nojekyll", "");
 await output("404.html", layout({
   title: "문서를 찾을 수 없습니다",

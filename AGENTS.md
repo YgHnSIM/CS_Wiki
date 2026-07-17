@@ -74,6 +74,41 @@ snapshot_status: local | external-only | archived
 
 새 페이지는 원칙적으로 `draft → review → active` 순서로 승격합니다. 내용이 바뀌어 재검토가 필요하면 `active`에서 `review`로 되돌리고, `tags`의 `status/*` 값도 `status` 필드와 항상 일치시킵니다.
 
+### 2.1.2 지식 그래프 메타데이터
+
+웹 지식 지도는 기존 위키링크와 학습 경로를 자동으로 관계화한다. 앞으로 추가하는 문서는 제목이나 파일명이 바뀌어도 탐색 이력이 유지되도록 다음 선택 필드를 사용할 수 있다.
+
+```yaml
+graph_id: concept-computing-capability
+graph_visibility: public
+publication_year: 1936
+event_start: 1936
+event_end: 1945
+historical_layer: theory
+capability_layers: [computability, complexity]
+```
+
+- `graph_id`는 위키 전체에서 고유한 소문자 ASCII slug이며 한 번 배정한 뒤 제목이나 파일명이 바뀌어도 수정하지 않는다. 새 개념·개체·분석·메타 페이지에는 작성을 권장한다. 값이 없으면 빌드가 `source_id` 또는 최초 파일명을 기준으로 호환 ID를 만든다.
+- `graph_visibility`는 `public | context | hidden` 중 하나다. `public`은 일반 지도에 표시하고, `context`는 다른 문서의 관계 문맥에서만 표시하며, `hidden`은 운영 문서처럼 지도에서 숨긴다. `index.md`, `overview.md`, `log.md`는 기본적으로 `hidden`이다.
+- `publication_year`, `event_start`, `event_end`는 출판물이나 역사적 사건의 연도를 뜻한다. 위키 작성·수정일인 `created`, `updated`를 역사 연표에 사용하지 않는다. 기간은 시작 연도가 종료 연도보다 늦을 수 없다.
+- `historical_layer`는 `theory | machine | architecture | software | system | service | measurement` 중 하나다.
+- `capability_layers`는 `computability | complexity | programmability | realized-performance | scalability | resource-efficiency | reliable-results` 가운데 해당하는 값을 배열로 기록한다.
+
+편집자의 해석이 필요한 의미 관계는 본문의 `## 관계` 표에 기록한다. 이 절은 `## 출처`와 마지막 `## 관련 항목`보다 앞에 둔다.
+
+```markdown
+## 관계
+
+| 관계 | 대상 | 설명 | 근거 |
+|---|---|---|---|
+| enables | [[저장 프로그램 컴퓨터]] | 프로그램 교체 비용을 물리적 재배선에서 기억장치 갱신으로 바꾼다. | [[First Draft of a Report on the EDVAC]] |
+```
+
+- 한 행은 `현재 문서 → 대상` 방향으로 읽는다. `대상`은 반드시 위키링크이며 `설명`은 관계가 성립하는 이유를 한 문장으로 적는다. `근거`에는 관계를 직접 뒷받침하는 위키 소스·참고 자료를 연결한다.
+- 허용 관계는 `related`, `supports`, `broader`, `narrower`, `prerequisite_for`, `enables`, `constrains`, `measures`, `implements`, `exemplifies`, `precedes`, `responds_to`, `contradicts`, `synthesizes`다.
+- 단순 본문 언급, `## 관련 항목`, 프론트매터 `sources`, 학습 경로의 인접 단계는 각각 `mentions`, `related`, `supports`, `path_next`로 자동 생성하므로 표에 반복하지 않는다.
+- 같은 도메인이라는 이유만으로 문서 쌍을 간선으로 만들지 않는다. 도메인은 문서 수가 늘어도 폭증하지 않는 군집 속성으로만 사용한다.
+
 ### 2.2 내부 링크
 - 옵시디언 `[[위키링크]]` 형식 사용
 - 처음 언급될 때 링크, 이후 반복은 링크 없이

@@ -134,6 +134,64 @@ class ResolverAndSourceTests(unittest.TestCase):
 
 
 class LintRegressionTests(unittest.TestCase):
+    def test_graph_metadata_and_relation_table_are_validated(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            bad = base_frontmatter(
+                "Bad Graph",
+                "type/concept",
+                extra=(
+                    "graph_id: Bad ID\n"
+                    "graph_visibility: orbital\n"
+                    "event_start: 2000\n"
+                    "event_end: 1900\n"
+                    "historical_layer: unknown\n"
+                    "capability_layers: [speed]\n"
+                ),
+            ) + (
+                "## 관계\n\n"
+                "| 관계 | 대상 | 설명 | 근거 |\n"
+                "|---|---|---|---|\n"
+                "| invented | [[Missing]] | | [[Missing Evidence]] |\n\n"
+                "## 출처\n\n"
+                "## 관련 항목\n"
+            )
+            write_page(root, "wiki/concepts/Bad Graph.md", bad)
+            issues, _ = lint(root)
+            codes = {issue.code for issue in issues if issue.path == "wiki/concepts/Bad Graph.md"}
+            self.assertTrue(
+                {
+                    "graph.id_format",
+                    "graph.visibility",
+                    "graph.year_range",
+                    "graph.historical_layer",
+                    "graph.capability_layer",
+                    "graph.relation_kind",
+                    "graph.relation_target",
+                    "graph.relation_note",
+                    "graph.relation_evidence",
+                }.issubset(codes)
+            )
+
+    def test_valid_relation_alias_pipes_and_duplicate_graph_ids(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            target = base_frontmatter("Target", "type/concept", extra="graph_id: shared-id\n") + "## 출처\n\n## 관련 항목\n"
+            source = base_frontmatter("Source", "type/concept", extra="graph_id: shared-id\n") + (
+                "## 관계\n\n"
+                "| 관계 | 대상 | 설명 | 근거 |\n"
+                "|---|---|---|---|\n"
+                "| enables | [[Target|표시 이름]] | 새 작업을 가능하게 한다. | |\n\n"
+                "## 출처\n\n"
+                "## 관련 항목\n"
+            )
+            write_page(root, "wiki/concepts/Target.md", target)
+            write_page(root, "wiki/concepts/Source.md", source)
+            issues, _ = lint(root)
+            graph_issues = [issue for issue in issues if issue.code.startswith("graph.")]
+            self.assertEqual(2, sum(issue.code == "graph.id_duplicate" for issue in graph_issues))
+            self.assertFalse(any(issue.code.startswith("graph.relation_") for issue in graph_issues))
+
     def test_local_raw_reference_is_allowed(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

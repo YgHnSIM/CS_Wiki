@@ -26,6 +26,35 @@ from wiki_common import (
 )
 
 
+GRAPH_VISIBILITIES = {"public", "context", "hidden"}
+HISTORICAL_LAYERS = {"theory", "machine", "architecture", "software", "system", "service", "measurement"}
+CAPABILITY_LAYERS = {
+    "computability",
+    "complexity",
+    "programmability",
+    "realized-performance",
+    "scalability",
+    "resource-efficiency",
+    "reliable-results",
+}
+CURATED_RELATIONS = {
+    "related",
+    "supports",
+    "broader",
+    "narrower",
+    "prerequisite_for",
+    "enables",
+    "constrains",
+    "measures",
+    "implements",
+    "exemplifies",
+    "precedes",
+    "responds_to",
+    "contradicts",
+    "synthesizes",
+}
+
+
 @dataclass
 class Issue:
     severity: str
@@ -62,6 +91,100 @@ def index_sections(text: str) -> dict[str, str]:
     return result
 
 
+def split_table_row(line: str) -> list[str]:
+    value = line.strip().removeprefix("|").removesuffix("|")
+    cells: list[str] = []
+    current: list[str] = []
+    wiki_depth = 0
+    in_code = False
+    index = 0
+    while index < len(value):
+        pair = value[index : index + 2]
+        if not in_code and pair == "[[":
+            wiki_depth += 1
+            current.extend(pair)
+            index += 2
+        elif not in_code and pair == "]]" and wiki_depth:
+            wiki_depth -= 1
+            current.extend(pair)
+            index += 2
+        elif value[index] == "`":
+            in_code = not in_code
+            current.append(value[index])
+            index += 1
+        elif value[index] == "|" and not wiki_depth and not in_code:
+            cells.append("".join(current).strip())
+            current = []
+            index += 1
+        else:
+            current.append(value[index])
+            index += 1
+    cells.append("".join(current).strip())
+    return cells
+
+
+def lint_relation_table(page, resolver: Resolver, issues: list[Issue]) -> None:
+    lines = page.text.splitlines()
+    start: int | None = None
+    end = len(lines)
+    in_fence = False
+    for index, line in enumerate(lines):
+        if re.match(r"^\s*(```|~~~)", line):
+            in_fence = not in_fence
+            continue
+        if in_fence:
+            continue
+        heading = re.match(r"^#{1,2}\s+(.+?)\s*$", line)
+        if not heading:
+            continue
+        if start is None and heading.group(1).strip() == "관계" and line.startswith("## "):
+            start = index + 1
+        elif start is not None:
+            end = index
+            break
+    if start is None:
+        return
+    columns: dict[str, int] | None = None
+    for offset, line in enumerate(lines[start:end]):
+        if not line.strip().startswith("|"):
+            continue
+        cells = split_table_row(line)
+        if cells and all(re.fullmatch(r":?-{3,}:?", cell) for cell in cells):
+            continue
+        line_no = start + offset + 1
+        if columns is None:
+            names = [re.sub(r"[`*_]", "", cell).strip() for cell in cells]
+            columns = {name: names.index(name) for name in ("관계", "대상", "설명", "근거") if name in names}
+            missing = {"관계", "대상", "설명"} - set(columns)
+            if missing:
+                add(issues, "error", "graph.relation_columns", page.rel, line_no, f"관계 표 필수 열 누락: {sorted(missing)}")
+                return
+            continue
+
+        kind = re.sub(r"[`*_]", "", cells[columns["관계"]] if columns["관계"] < len(cells) else "").strip().replace("-", "_")
+        if not kind:
+            continue
+        if kind not in CURATED_RELATIONS:
+            add(issues, "error", "graph.relation_kind", page.rel, line_no, f"허용되지 않은 관계: {kind}")
+        target_cell = cells[columns["대상"]] if columns["대상"] < len(cells) else ""
+        target_match = re.search(r"\[\[([^\]|#]+)", target_cell)
+        if not target_match:
+            add(issues, "error", "graph.relation_target", page.rel, line_no, "관계 대상은 위키링크여야 함")
+        else:
+            target_name = target_match.group(1).strip()
+            target, target_kind = resolver.resolve(target_name)
+            if not target or target_kind not in {"stem", "alias"}:
+                add(issues, "error", "graph.relation_target", page.rel, line_no, f"관계 대상 문서를 찾을 수 없음: {target_name}")
+        note = cells[columns["설명"]] if columns["설명"] < len(cells) else ""
+        if not re.sub(r"[`*_]", "", note).strip():
+            add(issues, "error", "graph.relation_note", page.rel, line_no, "관계 설명이 비어 있음")
+        if "근거" in columns and columns["근거"] < len(cells):
+            for evidence_name in re.findall(r"\[\[([^\]|#]+)", cells[columns["근거"]]):
+                evidence, evidence_kind = resolver.resolve(evidence_name.strip())
+                if not evidence or evidence_kind not in {"stem", "alias"}:
+                    add(issues, "error", "graph.relation_evidence", page.rel, line_no, f"관계 근거 문서를 찾을 수 없음: {evidence_name.strip()}")
+
+
 def lint(root: Path) -> tuple[list[Issue], dict[str, int]]:
     pages = load_pages(root)
     resolver = Resolver(pages)
@@ -87,6 +210,7 @@ def lint(root: Path) -> tuple[list[Issue], dict[str, int]]:
     }
 
     source_ids: dict[str, list] = defaultdict(list)
+    graph_node_ids: dict[str, list] = defaultdict(list)
     for page in pages:
         missing = sorted(BASE_REQUIRED - set(page.meta))
         if missing:
@@ -108,6 +232,37 @@ def lint(root: Path) -> tuple[list[Issue], dict[str, int]]:
                     date.fromisoformat(value)
             except ValueError:
                 add(issues, "error", "frontmatter.date", page.rel, field_line(page.text, key), f"잘못된 날짜: {value}")
+
+        graph_id = parse_scalar(page.meta.get("graph_id"))
+        source_id_for_graph = parse_scalar(page.meta.get("source_id"))
+        if graph_id and not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", graph_id):
+            add(issues, "error", "graph.id_format", page.rel, field_line(page.text, "graph_id"), "graph_id는 소문자 ASCII slug여야 함")
+        effective_graph_id = source_id_for_graph or graph_id
+        if effective_graph_id:
+            graph_node_ids[effective_graph_id.casefold()].append(page)
+        visibility = parse_scalar(page.meta.get("graph_visibility"))
+        if visibility and visibility not in GRAPH_VISIBILITIES:
+            add(issues, "error", "graph.visibility", page.rel, field_line(page.text, "graph_visibility"), f"허용되지 않은 graph_visibility: {visibility}")
+        years: dict[str, int] = {}
+        for key_name in ("publication_year", "event_start", "event_end"):
+            raw_year = parse_scalar(page.meta.get(key_name))
+            if not raw_year:
+                continue
+            try:
+                year = int(raw_year)
+                if year < -9999 or year > 9999:
+                    raise ValueError
+                years[key_name] = year
+            except ValueError:
+                add(issues, "error", "graph.year", page.rel, field_line(page.text, key_name), f"잘못된 역사 연도: {raw_year}")
+        if "event_start" in years and "event_end" in years and years["event_start"] > years["event_end"]:
+            add(issues, "error", "graph.year_range", page.rel, field_line(page.text, "event_end"), "event_end는 event_start보다 이를 수 없음")
+        historical_layer = parse_scalar(page.meta.get("historical_layer"))
+        if historical_layer and historical_layer not in HISTORICAL_LAYERS:
+            add(issues, "error", "graph.historical_layer", page.rel, field_line(page.text, "historical_layer"), f"허용되지 않은 historical_layer: {historical_layer}")
+        for layer in parse_flow_list(page.meta.get("capability_layers")):
+            if layer not in CAPABILITY_LAYERS:
+                add(issues, "error", "graph.capability_layer", page.rel, field_line(page.text, "capability_layers"), f"허용되지 않은 capability_layers 값: {layer}")
 
         if page.path.parent.name == "sources":
             source_id = parse_scalar(page.meta.get("source_id"))
@@ -173,6 +328,12 @@ def lint(root: Path) -> tuple[list[Issue], dict[str, int]]:
         if page.path.name != "log.md":
             if heading_names.count("출처") != 1 or heading_names.count("관련 항목") != 1 or not heading_names or heading_names[-1] != "관련 항목":
                 add(issues, "error", "sections.bottom", page.rel, 1, "출처 1개와 마지막 관련 항목 1개가 필요함")
+        lint_relation_table(page, resolver, issues)
+
+    for graph_id, matches in graph_node_ids.items():
+        if len(matches) > 1:
+            for page in matches:
+                add(issues, "error", "graph.id_duplicate", page.rel, field_line(page.text, "graph_id"), f"중복 그래프 노드 ID: {graph_id}")
 
     for source_id, matches in source_ids.items():
         if len(matches) > 1:
