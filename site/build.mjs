@@ -6,6 +6,8 @@ import MarkdownIt from "markdown-it";
 import anchor from "markdown-it-anchor";
 import { domainMeta, learningPaths, statusMeta } from "./catalog.mjs";
 import { buildKnowledgeGraph, extractWikiLinks } from "./graph/model.mjs";
+import { graphNodeId } from "./graph/schema.mjs";
+import { describeRelationship, indexGraphEdges, relationLabel, selectLocalGraph } from "./graph/selectors.mjs";
 import {
   buildGraphPayload,
   buildPageLookup,
@@ -36,6 +38,7 @@ const withBase = (pathname = "/") => addBase(pathname, siteBase);
 const assetVersion = createHash("sha256")
   .update(await readFile(join(root, "site", "assets", "site.css")))
   .update(await readFile(join(root, "site", "assets", "site.js")))
+  .update(await readFile(join(root, "site", "assets", "article-relationships.js")))
   .digest("hex")
   .slice(0, 12);
 
@@ -137,6 +140,7 @@ const knowledgeGraph = buildKnowledgeGraph(pages, resolvedLearningPaths, {
   lookup,
   urlFor: withBase
 });
+const knowledgeGraphEdgesByNodeId = indexGraphEdges(knowledgeGraph);
 
 const headingSlugs = new Map();
 const md = new MarkdownIt({ html: false, linkify: true, typographer: false })
@@ -225,7 +229,7 @@ function navLinks(canonicalPath) {
   </a>`;
 }
 
-function layout({ title, description, content, canonicalPath = "/", bodyClass = "", graphData = null }) {
+function layout({ title, description, content, canonicalPath = "/", bodyClass = "", graphData = null, localGraphData = null }) {
   const fullTitle = title === "CS Wiki" ? title : `${title} · CS Wiki`;
   const canonical = siteUrl ? `${siteUrl}${canonicalPath}` : "";
   const nav = navLinks(canonicalPath);
@@ -290,8 +294,10 @@ function layout({ title, description, content, canonicalPath = "/", bodyClass = 
     <div class="search-results" data-search-results aria-live="polite"></div>
   </dialog>
   ${graphData ? `<script type="application/json" id="graph-data">${JSON.stringify(graphData).replaceAll("<", "\\u003c")}</script>` : ""}
+  ${localGraphData ? `<script type="application/json" id="local-graph-data">${JSON.stringify(localGraphData).replaceAll("<", "\\u003c")}</script>` : ""}
   <script>window.CS_WIKI_BASE=${JSON.stringify(siteBase)};window.CS_WIKI_ASSET_VERSION=${JSON.stringify(assetVersion)};</script>
   <script src="${withBase("/assets/site.js")}?v=${assetVersion}" defer></script>
+  ${localGraphData ? `<script src="${withBase("/assets/article-relationships.js")}?v=${assetVersion}" defer></script>` : ""}
 </body>
 </html>`;
 }
@@ -468,10 +474,219 @@ function pathProgress(page) {
   </nav>`;
 }
 
+const relationshipBucketMeta = {
+  curated: { label: "편집 관계", description: "인과·구조·역사 관계" },
+  evidence: { label: "근거", description: "문서와 원전의 증거 연결" },
+  learning: { label: "학습", description: "권장 읽기 순서" },
+  related: { label: "관련 항목", description: "편집자가 함께 읽도록 지정" },
+  mentions: { label: "본문 언급", description: "본문에서 직접 언급" }
+};
+
+function shortGraphLabel(value, limit = 16) {
+  const text = String(value || "");
+  return text.length > limit ? `${text.slice(0, limit - 1)}…` : text;
+}
+
+function localGraphPositions(records) {
+  const populated = Object.keys(relationshipBucketMeta).filter((bucket) => records.some((record) => record.bucket === bucket));
+  const positions = new Map();
+  if (populated.length === 1) {
+    records.forEach((record, index) => {
+      const angle = (-90 + index * (360 / records.length)) * Math.PI / 180;
+      positions.set(record.neighborId, { x: 380 + Math.cos(angle) * 238, y: 230 + Math.sin(angle) * 158 });
+    });
+    return positions;
+  }
+  const centers = populated.length === 2
+    ? { [populated[0]]: 180, [populated[1]]: 0 }
+    : { curated: -40, evidence: 180, learning: -100, related: 40, mentions: 100 };
+  for (const bucket of Object.keys(relationshipBucketMeta)) {
+    const group = records.filter((record) => record.bucket === bucket);
+    group.forEach((record, index) => {
+      const spread = group.length > 4 ? 18 : 26;
+      const offset = (index - (group.length - 1) / 2) * spread;
+      const angle = (centers[bucket] + offset) * Math.PI / 180;
+      const radiusX = 244 + (index % 2) * 10;
+      const radiusY = 162 + (index % 2) * 8;
+      positions.set(record.neighborId, {
+        x: 380 + Math.cos(angle) * radiusX,
+        y: 230 + Math.sin(angle) * radiusY
+      });
+    });
+  }
+  return positions;
+}
+
+function compactLocalGraphPositions(records) {
+  const slots = [
+    { x: 68, y: 52 }, { x: 312, y: 52 },
+    { x: 58, y: 160 }, { x: 322, y: 160 },
+    { x: 68, y: 268 }, { x: 312, y: 268 }
+  ];
+  return new Map(records.slice(0, slots.length).map((record, index) => [record.neighborId, slots[index]]));
+}
+
+function graphNodeShape(node, x, y, { focus = false, compact = false } = {}) {
+  const width = compact ? (focus ? 146 : 108) : (focus ? 170 : 112);
+  const height = compact ? (focus ? 54 : 52) : (focus ? 62 : 46);
+  const category = node.category || "meta";
+  let shape = `<rect x="${x - width / 2}" y="${y - height / 2}" width="${width}" height="${height}"></rect>`;
+  if (category === "concepts") {
+    shape = `<ellipse cx="${x}" cy="${y}" rx="${width / 2}" ry="${height / 2}"></ellipse>`;
+  } else if (category === "entities") {
+    shape = `<polygon points="${x},${y - height / 2} ${x + width / 2},${y} ${x},${y + height / 2} ${x - width / 2},${y}"></polygon>`;
+  } else if (category === "analyses") {
+    const inset = 18;
+    shape = `<polygon points="${x - width / 2 + inset},${y - height / 2} ${x + width / 2 - inset},${y - height / 2} ${x + width / 2},${y} ${x + width / 2 - inset},${y + height / 2} ${x - width / 2 + inset},${y + height / 2} ${x - width / 2},${y}"></polygon>`;
+  }
+  return `<g class="local-node-shape category-${escapeHtml(category)}${focus ? " is-focus" : ""}">${shape}</g>`;
+}
+
+function localGraphSvg(local, focusId, { compact = false } = {}) {
+  const records = compact ? local.visibleRecords.slice(0, 6) : local.visibleRecords;
+  if (!records.length) return `<p class="relationship-empty">시각화할 직접 관계가 없습니다.</p>`;
+  const positions = compact ? compactLocalGraphPositions(records) : localGraphPositions(records);
+  const center = compact ? { x: 190, y: 160 } : { x: 380, y: 230 };
+  const focusRadius = compact ? { x: 75, y: 29 } : { x: 86, y: 34 };
+  const neighborRadius = compact ? { x: 58, y: 30 } : { x: 68, y: 27 };
+  const markerPrefix = compact ? "compact" : "desktop";
+  const edges = records.map((record) => {
+    const position = positions.get(record.neighborId);
+    const edge = record.primaryEdge;
+    const dx = position.x - center.x;
+    const dy = position.y - center.y;
+    const length = Math.max(1, Math.hypot(dx, dy));
+    const ux = dx / length;
+    const uy = dy / length;
+    const focusPoint = { x: center.x + ux * focusRadius.x, y: center.y + uy * focusRadius.y };
+    const neighborPoint = { x: position.x - ux * neighborRadius.x, y: position.y - uy * neighborRadius.y };
+    const outgoing = edge.directed && edge.source === focusId;
+    const incoming = edge.directed && edge.target === focusId;
+    const start = incoming ? neighborPoint : focusPoint;
+    const end = incoming ? focusPoint : neighborPoint;
+    const marker = edge.directed ? ` marker-end="url(#arrow-${markerPrefix}-${record.bucket})"` : "";
+    return `<g class="local-edge" data-local-edge data-neighbor-id="${escapeHtml(record.neighborId)}" data-bucket="${record.bucket}">
+      <line x1="${start.x.toFixed(1)}" y1="${start.y.toFixed(1)}" x2="${end.x.toFixed(1)}" y2="${end.y.toFixed(1)}"${marker}></line>
+      <title>${escapeHtml(relationLabel(knowledgeGraph, edge, focusId))}${outgoing ? " · 나가는 관계" : incoming ? " · 들어오는 관계" : ""}</title>
+    </g>`;
+  }).join("");
+  const nodes = records.map((record) => {
+    const position = positions.get(record.neighborId);
+    return `<g class="local-node" data-local-node data-neighbor-id="${escapeHtml(record.neighborId)}" data-bucket="${record.bucket}" role="presentation">
+      ${compact ? `<rect class="local-node-hit" x="${position.x - 56}" y="${position.y - 32}" width="112" height="64"></rect>` : ""}
+      ${graphNodeShape(record.node, position.x, position.y, { compact })}
+      <text x="${position.x}" y="${position.y + 4}" text-anchor="middle">${escapeHtml(shortGraphLabel(record.node.title, compact ? 10 : 13))}</text>
+      <title>${escapeHtml(record.node.title)} · ${escapeHtml(record.labels.join(", "))}</title>
+    </g>`;
+  }).join("");
+  const markerDefs = Object.keys(relationshipBucketMeta).map((bucket) => `<marker id="arrow-${markerPrefix}-${bucket}" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z"></path></marker>`).join("");
+  return `<svg class="local-graph local-graph--${compact ? "compact" : "desktop"}" viewBox="0 0 ${compact ? "380 320" : "760 460"}" aria-hidden="true" focusable="false" data-testid="local-graph">
+    <defs>${markerDefs}</defs>
+    <g class="local-edges">${edges}</g>
+    <g class="local-focus-node">${graphNodeShape(local.focus, center.x, center.y, { focus: true, compact })}<text x="${center.x}" y="${center.y + 4}" text-anchor="middle">${escapeHtml(shortGraphLabel(local.focus.title, compact ? 14 : 20))}</text></g>
+    <g class="local-nodes">${nodes}</g>
+  </svg>`;
+}
+
+function localGraphVisual(local, focusId) {
+  return `${localGraphSvg(local, focusId)}${localGraphSvg(local, focusId, { compact: true })}`;
+}
+
+function relationshipRecord(record, focusId) {
+  const primary = record.primaryEdge;
+  const primaryDescription = describeRelationship(knowledgeGraph, primary);
+  const primaryLabel = relationLabel(knowledgeGraph, primary, focusId);
+  const otherEdges = record.edges.slice(1);
+  return `<li class="relationship-record" data-relationship-record data-neighbor-id="${escapeHtml(record.neighborId)}" data-bucket="${record.bucket}" data-buckets="${escapeHtml(record.availableBuckets.join(" "))}">
+    <div class="relationship-record-heading">
+      <div><span class="relation-chip ${record.bucket}">${escapeHtml(primaryLabel)}</span><a href="${escapeHtml(record.node.url)}">${escapeHtml(record.node.title)}</a></div>
+      <button type="button" hidden data-relationship-select data-neighbor-id="${escapeHtml(record.neighborId)}" aria-pressed="false">지도에서 강조</button>
+    </div>
+    <p>${escapeHtml(primaryDescription.detail)}</p>
+    ${otherEdges.length ? `<details class="relationship-edge-details"><summary>다른 직접 관계 ${otherEdges.length}개</summary><ul>${otherEdges.map((edge) => {
+      const description = describeRelationship(knowledgeGraph, edge);
+      return `<li><strong>${escapeHtml(relationLabel(knowledgeGraph, edge, focusId))}</strong><span>${escapeHtml(description.detail)}</span></li>`;
+    }).join("")}</ul></details>` : ""}
+  </li>`;
+}
+
+function relationshipExplorer(page, local) {
+  if (local.focus.visibility === "hidden") return { html: "", data: null };
+  if (!local.totalNeighbors) return `<section id="relationships" class="relationship-explorer"><p class="relationship-empty">이 문서에는 해석 가능한 직접 관계가 없습니다.</p></section>`;
+  const focusId = local.focus.id;
+  const first = local.visibleRecords[0];
+  const initialDescription = describeRelationship(knowledgeGraph, first.primaryEdge);
+  const populatedBuckets = Object.keys(relationshipBucketMeta).filter((bucket) => local.records.some((record) => record.bucket === bucket));
+  const openBucket = populatedBuckets.find((bucket) => local.records.filter((record) => record.bucket === bucket).length <= 8) || populatedBuckets[0];
+  const groups = Object.entries(relationshipBucketMeta).map(([bucket, meta]) => {
+    const records = local.records.filter((record) => record.bucket === bucket);
+    if (!records.length) return "";
+    const open = bucket === openBucket;
+    return `<details class="relationship-group" data-relationship-group data-bucket="${bucket}"${open ? " open" : ""}>
+      <summary><span><strong>${meta.label}</strong>${meta.description}</span><span>${records.length}</span></summary>
+      <ol>${records.map((record) => relationshipRecord(record, focusId)).join("")}</ol>
+    </details>`;
+  }).join("");
+  const clientRecord = (record) => {
+    const description = describeRelationship(knowledgeGraph, record.primaryEdge);
+    return {
+      id: record.neighborId,
+      title: record.node.title,
+      url: record.node.url,
+      category: record.node.category,
+      bucket: record.bucket,
+      label: relationLabel(knowledgeGraph, record.primaryEdge, focusId),
+      statement: description.statement,
+      detail: description.detail,
+      relationCount: record.edges.length
+    };
+  };
+  const payload = {
+    focus: { id: local.focus.id, title: local.focus.title, url: local.focus.url },
+    views: Object.fromEntries(Object.entries(local.views).map(([view, records]) => [view, records.map(clientRecord)]))
+  };
+  const viewTemplates = Object.entries(local.views)
+    .map(([view, records]) => `<template data-local-graph-view="${view}">${localGraphVisual({ ...local, visibleRecords: records }, focusId)}</template>`)
+    .join("");
+  return {
+    data: payload,
+    html: `<section id="relationships" class="relationship-explorer" data-relationship-explorer data-focus-id="${escapeHtml(focusId)}" aria-labelledby="relationships-title">
+      <header class="relationship-header">
+        <div><p>1-HOP RELATIONSHIPS</p><h2 id="relationships-title">이 문서와 직접 연결된 지식</h2><p>${local.totalNeighbors}개 문서 · ${local.totalEdges}개 유형 관계 · 지도에는 ${local.visibleRecords.length}개 표시</p></div>
+        <label hidden data-relationship-filter-control>지도 렌즈<select data-relationship-filter><option value="">전체 관계</option>${Object.entries(relationshipBucketMeta).filter(([bucket]) => local.counts[bucket]).map(([bucket, meta]) => `<option value="${bucket}">${meta.label} ${local.counts[bucket]}</option>`).join("")}</select></label>
+      </header>
+      <details class="relationship-map-disclosure" data-relationship-map open>
+        <summary>관계 지도와 선택 해설</summary>
+        <div class="relationship-map-layout">
+          <div class="relationship-visual" data-relationship-visual>${localGraphVisual(local, focusId)}</div>${viewTemplates}
+          <aside class="relationship-inspector" data-relationship-inspector>
+            <span data-inspector-label>${escapeHtml(relationLabel(knowledgeGraph, first.primaryEdge, focusId))}</span>
+            <h3 data-inspector-statement>${escapeHtml(initialDescription.statement)}</h3>
+            <p data-inspector-detail>${escapeHtml(initialDescription.detail)}</p>
+            <a data-inspector-link href="${escapeHtml(first.node.url)}">${escapeHtml(first.node.title)} 읽기</a>
+          </aside>
+        </div>
+      </details>
+      <div class="relationship-list-heading"><div><h3>대표 관계별 전체 이웃</h3><p>각 문서는 가장 강한 관계 아래 한 번만 표시합니다. 지도 렌즈는 한 문서가 가진 모든 관계를 함께 계산합니다.</p></div><output data-relationship-status aria-live="polite">${local.totalNeighbors}개 문서</output></div>
+      <div class="relationship-groups">${groups}</div>
+    </section>`
+  };
+}
+
+function relationshipRail(local) {
+  if (local.focus.visibility === "hidden") return "";
+  if (!local.totalNeighbors) return "";
+  return `<section class="related-documents relationship-jump"><h2>관계 탐색</h2>
+    <a class="relationship-jump-summary" href="#relationships"><strong>${local.totalNeighbors}</strong><span>개 직접 이웃 · ${local.totalEdges}개 관계</span></a>
+    <ol>${local.visibleRecords.slice(0, 6).map((record) => `<li><a href="${escapeHtml(record.node.url)}"><span>${escapeHtml(relationLabel(knowledgeGraph, record.primaryEdge, local.focus.id))}</span>${escapeHtml(record.node.title)}</a></li>`).join("")}</ol>
+    <a class="relationship-jump-link" href="#relationships">관계 지도에서 보기</a>
+  </section>`;
+}
+
 function articlePage(page) {
-  const outgoing = page.links.slice(0, 8);
-  const incoming = pages.filter((candidate) => candidate.links.includes(page)).slice(0, 8);
-  const related = [...new Set([...outgoing, ...incoming])].filter((item) => item !== page).slice(0, 10);
+  const local = selectLocalGraph(knowledgeGraph, graphNodeId(page), { limit: 12, edgesByNodeId: knowledgeGraphEdgesByNodeId });
+  const relationships = relationshipExplorer(page, local);
+  const relationshipsHtml = typeof relationships === "string" ? relationships : relationships.html;
   const sources = effectiveSources(page);
   const sourceLabel = page.sources.length ? `${sources.length || page.sources.length}개 근거` : "메타 문서";
   const headings = pageHeadings(page);
@@ -485,7 +700,7 @@ function articlePage(page) {
           <div><dt>상태</dt><dd><span class="status-dot ${escapeHtml(page.status)}"></span>${escapeHtml(statusLabel(page.status))}</dd></div>
           <div><dt>갱신</dt><dd>${page.updated || "날짜 미기록"}</dd></div>
           <div><dt>근거</dt><dd>${sourceLabel}</dd></div>
-          <div><dt>연결</dt><dd>${page.score}</dd></div>
+          <div><dt>직접 이웃</dt><dd>${local.totalNeighbors}</dd></div>
         </dl>
         <a class="source-file" href="${repositoryUrl}/blob/main/${encodeURI(page.relativePath)}">GitHub에서 원문 보기</a>
       </details>
@@ -498,12 +713,12 @@ function articlePage(page) {
       </header>
       ${evidenceTrace(page)}
       <div class="prose">${renderMarkdown(page)}</div>
+      ${relationshipsHtml}
       ${pathProgress(page)}
     </article>
     <aside class="related-rail">
       ${headings.length ? `<nav class="article-toc" aria-label="문서 목차"><h2>이 문서에서</h2><ol>${headings.map((heading) => `<li><a href="#${heading.id}">${escapeHtml(heading.title)}</a></li>`).join("")}</ol></nav>` : ""}
-      <section class="related-documents"><h2>연결된 문서</h2>
-      ${related.length ? `<ol>${related.map((item) => `<li><a href="${withBase(item.url)}"><span>${categoryMeta[item.category].label}</span>${escapeHtml(item.title)}</a></li>`).join("")}</ol>` : "<p>직접 연결된 문서가 없습니다.</p>"}</section>
+      ${relationshipRail(local)}
     </aside>
   </div>`;
   return layout({
@@ -511,7 +726,8 @@ function articlePage(page) {
     description: page.description,
     content,
     canonicalPath: page.url,
-    bodyClass: "article-page"
+    bodyClass: "article-page",
+    localGraphData: typeof relationships === "string" ? null : relationships.data
   });
 }
 

@@ -1487,6 +1487,573 @@ kbd {
   }
 }
 
+/* Document-local relationship atlas */
+.relationship-explorer {
+  margin-top: 88px;
+  border: 1px solid var(--line-strong);
+  background:
+    linear-gradient(rgba(0, 255, 65, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 65, 0.025) 1px, transparent 1px),
+    var(--void);
+  background-size: 24px 24px;
+}
+
+.relationship-header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(180px, 220px);
+  gap: 24px;
+  align-items: end;
+  padding: 22px;
+  border-bottom: 1px solid var(--line-strong);
+}
+
+.relationship-header > div > p:first-child {
+  margin: 0 0 8px;
+  color: var(--amber);
+  font-family: var(--display);
+  font-size: 9px;
+  letter-spacing: 0.13em;
+}
+
+.relationship-header h2 {
+  margin: 0;
+  color: var(--phosphor);
+  font-size: 22px;
+  line-height: 1.35;
+}
+
+.relationship-header > div > p:last-child,
+.relationship-list-heading p {
+  margin: 7px 0 0;
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.relationship-header label {
+  display: grid;
+  gap: 7px;
+  color: var(--muted);
+  font-size: 9px;
+}
+
+.relationship-header [data-relationship-filter-control][hidden] {
+  display: none;
+}
+
+.relationship-header select {
+  min-height: 44px;
+  padding: 9px 10px;
+  border: 1px solid var(--amber-line);
+  border-radius: 0;
+  background: var(--void-raised);
+  color: var(--amber);
+  font: inherit;
+}
+
+.relationship-map-disclosure > summary {
+  min-height: 48px;
+  padding: 13px 20px;
+  border-bottom: 1px solid var(--line);
+  color: var(--amber);
+  font-size: 10px;
+  cursor: pointer;
+}
+
+.relationship-map-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.65fr) minmax(220px, 0.75fr);
+  min-height: 440px;
+  border-bottom: 1px solid var(--line-strong);
+}
+
+.relationship-visual {
+  display: grid;
+  min-width: 0;
+  min-height: 440px;
+  place-items: center;
+  overflow: hidden;
+  border-right: 1px solid var(--line);
+  background: radial-gradient(circle at center, rgba(0, 255, 65, 0.08), transparent 47%);
+}
+
+.relationship-visual svg {
+  display: block;
+  width: 100%;
+  height: 440px;
+  overflow: visible;
+}
+
+.relationship-visual .local-graph--compact {
+  display: none;
+}
+
+.local-edge line {
+  stroke: rgba(0, 255, 65, 0.28);
+  stroke-width: 1.35;
+  transition: opacity 140ms ease, stroke-width 140ms ease, stroke 140ms ease;
+}
+
+.local-edge[data-bucket="evidence"] line {
+  stroke: rgba(255, 176, 0, 0.72);
+  stroke-width: 1.8;
+}
+
+.local-edge[data-bucket="learning"] line {
+  stroke: rgba(0, 255, 65, 0.72);
+  stroke-dasharray: 9 5;
+}
+
+.local-edge[data-bucket="curated"] line {
+  stroke: var(--phosphor);
+  stroke-width: 2.4;
+}
+
+.local-edge[data-bucket="related"] line {
+  stroke: rgba(0, 255, 65, 0.5);
+}
+
+.local-edge[data-bucket="mentions"] line {
+  stroke: rgba(140, 179, 147, 0.42);
+  stroke-dasharray: 2 7;
+}
+
+marker[id^="arrow-"] path {
+  fill: var(--phosphor);
+}
+
+marker[id$="-evidence"] path,
+marker[id$="-history"] path {
+  fill: var(--amber);
+}
+
+.local-node {
+  cursor: pointer;
+  transition: opacity 140ms ease, filter 140ms ease;
+}
+
+.local-node-hit {
+  fill: transparent;
+  pointer-events: all;
+}
+
+.local-node-shape > * {
+  fill: rgba(18, 0, 33, 0.96);
+  stroke: rgba(0, 255, 65, 0.72);
+  stroke-width: 1.25;
+  vector-effect: non-scaling-stroke;
+}
+
+.local-node-shape.category-sources > *,
+.local-node-shape.category-references > * {
+  stroke: var(--amber);
+}
+
+.local-node-shape.category-references > * {
+  stroke-dasharray: 5 3;
+}
+
+.local-node-shape.category-entities > * {
+  stroke-width: 1.8;
+}
+
+.local-node-shape.category-analyses > * {
+  fill: rgba(0, 255, 65, 0.08);
+}
+
+.local-node-shape.is-focus > * {
+  fill: var(--void-raised);
+  stroke: var(--phosphor);
+  stroke-width: 2.4;
+  filter: drop-shadow(0 0 9px rgba(0, 255, 65, 0.38));
+}
+
+.local-node text,
+.local-focus-node text {
+  fill: var(--text);
+  font-family: var(--mono);
+  font-size: 10px;
+  pointer-events: none;
+}
+
+.local-focus-node text {
+  fill: var(--phosphor);
+  font-weight: 700;
+}
+
+.relationship-explorer.has-relationship-selection .local-node:not(.is-active),
+.relationship-explorer.has-relationship-selection .local-edge:not(.is-active) {
+  opacity: 0.42;
+}
+
+.local-node.is-active {
+  filter: drop-shadow(0 0 10px rgba(255, 176, 0, 0.68));
+}
+
+.local-node.is-active .local-node-shape > * {
+  stroke: var(--amber);
+  stroke-width: 2.6;
+}
+
+.local-edge.is-active line {
+  stroke: var(--amber);
+  stroke-width: 3;
+  opacity: 1;
+}
+
+.relationship-inspector {
+  display: flex;
+  min-width: 0;
+  padding: 26px 22px;
+  flex-direction: column;
+  justify-content: center;
+  background: rgba(10, 0, 20, 0.88);
+}
+
+.relationship-inspector > span {
+  color: var(--amber);
+  font-size: 9px;
+  letter-spacing: 0.08em;
+}
+
+.relationship-inspector h3 {
+  margin: 18px 0;
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+
+.relationship-inspector p {
+  margin: 0 0 24px;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.relationship-inspector a {
+  align-self: flex-start;
+  min-height: 44px;
+  padding: 9px 0;
+  color: var(--phosphor);
+  font-size: 11px;
+  overflow-wrap: anywhere;
+}
+
+.relationship-list-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 22px;
+  border-bottom: 1px solid var(--line);
+}
+
+.relationship-list-heading h3 {
+  margin: 0;
+  color: var(--text);
+  font-size: 14px;
+}
+
+.relationship-list-heading output {
+  color: var(--amber);
+  font-size: 10px;
+  text-align: right;
+}
+
+.relationship-group + .relationship-group {
+  border-top: 1px solid var(--line-strong);
+}
+
+.relationship-group > summary {
+  display: flex;
+  min-height: 54px;
+  padding: 13px 20px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  cursor: pointer;
+}
+
+.relationship-group > summary > span:first-child {
+  display: flex;
+  flex-direction: column;
+  color: var(--muted);
+  font-size: 9px;
+}
+
+.relationship-group > summary strong {
+  color: var(--phosphor);
+  font-size: 12px;
+}
+
+.relationship-group > summary > span:last-child {
+  color: var(--amber);
+  font-family: var(--display);
+  font-size: 13px;
+}
+
+.relationship-group > ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--line);
+}
+
+.relationship-record {
+  padding: 17px 20px;
+  border-bottom: 1px solid var(--line);
+  transition: background 140ms ease;
+}
+
+.relationship-record:last-child {
+  border-bottom: 0;
+}
+
+.relationship-record.is-active {
+  background: rgba(255, 176, 0, 0.07);
+  box-shadow: inset 3px 0 var(--amber);
+}
+
+.relationship-record-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.relationship-record-heading > div {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+}
+
+.relationship-record-heading a {
+  color: var(--text);
+  font-size: 12px;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.relation-chip {
+  display: inline-flex;
+  min-height: 24px;
+  padding: 2px 7px;
+  align-items: center;
+  border: 1px solid currentColor;
+  color: var(--phosphor);
+  font-size: 8px;
+  line-height: 1.25;
+}
+
+.relation-chip.evidence {
+  color: var(--amber);
+}
+
+.relation-chip.learning {
+  border-style: dashed;
+}
+
+.relation-chip.mentions {
+  color: var(--muted);
+  border-style: dotted;
+}
+
+.relationship-record-heading button {
+  min-height: 44px;
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: 0;
+  background: transparent;
+  color: var(--muted);
+  font-size: 9px;
+  cursor: pointer;
+}
+
+.relationship-record-heading button[aria-pressed="true"] {
+  border-color: var(--amber);
+  color: var(--amber);
+}
+
+.relationship-record > p {
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.relationship-edge-details {
+  margin-top: 12px;
+  border-top: 1px dashed var(--line);
+}
+
+.relationship-edge-details > summary {
+  min-height: 40px;
+  padding: 9px 0;
+  color: var(--amber);
+  font-size: 9px;
+  cursor: pointer;
+}
+
+.relationship-edge-details ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.relationship-edge-details li {
+  display: grid;
+  grid-template-columns: minmax(120px, 0.35fr) minmax(0, 1fr);
+  gap: 14px;
+  padding: 9px 0;
+  border-top: 1px solid rgba(0, 255, 65, 0.12);
+  color: var(--muted);
+  font-size: 9px;
+}
+
+.relationship-edge-details strong {
+  color: var(--phosphor);
+}
+
+.relationship-empty {
+  margin: 0;
+  padding: 30px 22px;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.relationship-jump-summary {
+  display: grid !important;
+  grid-template-columns: 46px minmax(0, 1fr);
+  align-items: baseline;
+  padding: 15px 0 !important;
+  border-bottom: 1px solid var(--line);
+}
+
+.relationship-jump-summary strong {
+  color: var(--phosphor);
+  font-family: var(--display);
+  font-size: 24px;
+}
+
+.relationship-jump-summary span {
+  color: var(--muted) !important;
+  font-size: 8px !important;
+}
+
+.relationship-jump-link {
+  display: block !important;
+  min-height: 44px;
+  padding: 13px 0 !important;
+  color: var(--amber);
+}
+
+@media (max-width: 860px) {
+  .relationship-header {
+    grid-template-columns: 1fr;
+    align-items: stretch;
+  }
+
+  .relationship-map-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .relationship-visual {
+    min-height: 360px;
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .relationship-visual svg {
+    height: 360px;
+  }
+
+  .relationship-visual .local-graph--desktop {
+    display: none;
+  }
+
+  .relationship-visual .local-graph--compact {
+    display: block;
+    height: 320px;
+  }
+
+  .local-graph--compact .local-node text,
+  .local-graph--compact .local-focus-node text {
+    font-size: 10px;
+  }
+
+  .relationship-inspector {
+    min-height: 230px;
+  }
+
+  .relationship-record-heading button {
+    flex: 0 0 auto;
+  }
+}
+
+@media (max-width: 580px) {
+  .relationship-explorer {
+    margin-inline: -2px;
+    margin-top: 64px;
+  }
+
+  .relationship-header,
+  .relationship-list-heading {
+    align-items: stretch;
+    flex-direction: column;
+    padding: 18px 14px;
+  }
+
+  .relationship-header h2 {
+    font-size: 18px;
+  }
+
+  .relationship-map-disclosure > summary {
+    padding-inline: 14px;
+  }
+
+  .relationship-visual {
+    min-height: 300px;
+  }
+
+  .relationship-visual svg {
+    height: 300px;
+  }
+
+  .relationship-visual .local-graph--compact {
+    height: 300px;
+  }
+
+  .relationship-inspector,
+  .relationship-record {
+    padding-inline: 14px;
+  }
+
+  .relationship-record-heading {
+    flex-direction: column;
+  }
+
+  .relationship-record-heading button {
+    width: 100%;
+  }
+
+  .relationship-edge-details li {
+    grid-template-columns: 1fr;
+    gap: 3px;
+  }
+
+  .relationship-list-heading output {
+    text-align: left;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .local-edge line,
+  .local-node,
+  .relationship-record {
+    transition: none;
+  }
+}
+
 /* Content-led archive enhancements */
 
 @view-transition {

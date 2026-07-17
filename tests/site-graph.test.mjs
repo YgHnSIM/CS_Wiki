@@ -6,6 +6,7 @@ import {
   extractWikiLinks,
   parseCuratedRelations
 } from "../site/graph/model.mjs";
+import { describeRelationship, indexGraphEdges, relationLabel, selectLocalGraph } from "../site/graph/selectors.mjs";
 
 function page(title, extra = {}) {
   const category = extra.category || "concepts";
@@ -128,4 +129,72 @@ test("invalid stable IDs, metadata, relations, and duplicate IDs fail loudly", (
     page("Bad", { body: "## 관계\n\n| 관계 | 대상 | 설명 |\n|---|---|---|\n| enables | [[Missing]] | 설명 |" }),
     target
   ]), /references missing page/);
+});
+
+test("local graph selection balances relation families and excludes hidden operational nodes", () => {
+  const evidence = page("Evidence", { category: "references", sourceId: "ref-001" });
+  const learner = page("Learner");
+  const related = page("Related", { body: "## 관련 항목\n\n- [[Focus]]" });
+  const mentioned = page("Mentioned");
+  const hidden = page("Hidden", { graphVisibility: "hidden" });
+  const focus = page("Focus", {
+    graphId: "concept-focus",
+    sources: ["Evidence"],
+    body: "[[Mentioned]]와 [[Hidden]]을 설명한다.\n\n## 관련 항목\n\n- [[Related]]"
+  });
+  const route = { slug: "route", title: "Route", description: "A route", pages: [focus, learner] };
+  const result = graph([focus, evidence, learner, related, mentioned, hidden], [route]);
+  const local = selectLocalGraph(result, "concept-focus", { limit: 4 });
+
+  assert.deepEqual(local.visibleRecords.map((record) => record.bucket), ["evidence", "learning", "related", "mentions"]);
+  assert.equal(local.records.some((record) => record.node.title === "Hidden"), false);
+  assert.equal(local.totalNeighbors, 4);
+  assert.equal(local.totalEdges, 4);
+
+  const evidenceRecord = local.records.find((record) => record.node.title === "Evidence");
+  assert.equal(evidenceRecord.direction, "incoming");
+  assert.equal(relationLabel(result, evidenceRecord.primaryEdge, "concept-focus"), "근거를 받음");
+  assert.equal(relationLabel(result, evidenceRecord.primaryEdge, "ref-001"), "근거로 뒷받침");
+  assert.match(describeRelationship(result, evidenceRecord.primaryEdge).detail, /sources/);
+});
+
+test("local graph bundles multiple edge kinds for the same neighbor", () => {
+  const focus = page("Focus", { graphId: "concept-focus", body: "[[Neighbor]]\n\n## 관련 항목\n\n- [[Neighbor]]" });
+  const neighbor = page("Neighbor", { body: "## 관련 항목\n\n- [[Focus]]" });
+  const route = { slug: "route", title: "Route", description: "A route", pages: [focus, neighbor] };
+  const result = graph([focus, neighbor], [route]);
+  const local = selectLocalGraph(result, "concept-focus");
+
+  assert.equal(local.totalNeighbors, 1);
+  assert.deepEqual(local.records[0].edges.map((edge) => edge.kind), ["path_next", "related", "mentions"]);
+  assert.deepEqual(local.records[0].labels, ["학습 경로의 다음 단계", "관련 항목", "본문에서 언급"]);
+  assert.deepEqual(local.records[0].availableBuckets, ["learning", "related", "mentions"]);
+  assert.equal(local.views.learning[0].primaryEdge.kind, "path_next");
+  assert.equal(local.views.related[0].primaryEdge.kind, "related");
+  assert.equal(local.views.mentions[0].primaryEdge.kind, "mentions");
+});
+
+test("family views keep weaker relations that share a neighbor with stronger evidence", () => {
+  const evidence = page("Evidence", { category: "references", sourceId: "ref-001" });
+  const focus = page("Focus", { graphId: "concept-focus", sources: ["Evidence"] });
+  const route = { slug: "route", title: "Route", description: "A route", pages: [evidence, focus] };
+  const result = graph([focus, evidence], [route]);
+  const local = selectLocalGraph(result, "concept-focus");
+
+  assert.equal(local.records[0].primaryEdge.kind, "supports");
+  assert.equal(local.views.evidence[0].primaryEdge.kind, "supports");
+  assert.equal(local.views.learning[0].primaryEdge.kind, "path_next");
+});
+
+test("the reusable edge index preserves local graph results as the wiki grows", () => {
+  const focus = page("Focus", { graphId: "concept-focus", body: "[[One]]과 [[Two]]" });
+  const one = page("One");
+  const two = page("Two", { body: "## 관련 항목\n\n- [[Focus]]" });
+  const result = graph([focus, one, two]);
+  const edgesByNodeId = indexGraphEdges(result);
+  const scanned = selectLocalGraph(result, "concept-focus", { limit: 12 });
+  const indexed = selectLocalGraph(result, "concept-focus", { limit: 12, edgesByNodeId });
+
+  assert.deepEqual(indexed, scanned);
+  assert.equal(edgesByNodeId.get("concept-focus").length, scanned.totalEdges);
 });
