@@ -367,8 +367,9 @@ export function buildKnowledgeGraph(pages, learningPaths, { lookup, urlFor = (ur
     },
     nodes,
     edges: finalizedEdges,
-    paths: learningPaths.map((path) => ({
+    paths: learningPaths.map((path, order) => ({
       id: path.slug,
+      order,
       title: path.title,
       description: path.description,
       nodeIds: path.pages.map((page) => pageIds.get(page))

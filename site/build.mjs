@@ -5,6 +5,7 @@ import { createHash } from "node:crypto";
 import MarkdownIt from "markdown-it";
 import anchor from "markdown-it-anchor";
 import { connectionSummary, createConnectionIndex, findConnectionPaths } from "./assets/connection-paths.js";
+import { buildLearningMap } from "./assets/learning-lines.js";
 import { domainMeta, learningPaths, statusMeta } from "./catalog.mjs";
 import { buildKnowledgeGraph, extractWikiLinks } from "./graph/model.mjs";
 import { graphNodeId } from "./graph/schema.mjs";
@@ -36,15 +37,15 @@ const siteBase = normalizeBase(process.env.SITE_BASE || "");
 const siteUrl = (process.env.SITE_URL || "").replace(/\/$/, "");
 const repositoryUrl = "https://github.com/YgHnSIM/CS_Wiki";
 const withBase = (pathname = "/") => addBase(pathname, siteBase);
-const assetVersion = createHash("sha256")
+const assetHash = createHash("sha256")
   .update(await readFile(join(root, "site", "assets", "site.css")))
   .update(await readFile(join(root, "site", "assets", "site.js")))
   .update(await readFile(join(root, "site", "assets", "article-relationships.js")))
   .update(await readFile(join(root, "site", "assets", "connection-paths.js")))
   .update(await readFile(join(root, "site", "assets", "connection-explorer.js")))
   .update(await readFile(join(root, "site", "assets", "connection-worker.js")))
-  .digest("hex")
-  .slice(0, 12);
+  .update(await readFile(join(root, "site", "assets", "learning-lines.js")))
+  .update(await readFile(join(root, "site", "assets", "learning-map.js")));
 
 const categoryMeta = {
   sources: { label: "정규 소스", description: "raw에 보존한 원본을 직접 처리한 정규 소스 노트" },
@@ -145,6 +146,7 @@ const knowledgeGraph = buildKnowledgeGraph(pages, resolvedLearningPaths, {
   urlFor: withBase
 });
 const knowledgeGraphEdgesByNodeId = indexGraphEdges(knowledgeGraph);
+const learningMap = buildLearningMap(knowledgeGraph);
 
 function connectionContext(context = {}) {
   const compact = {};
@@ -192,6 +194,15 @@ function buildConnectionGraph(graph) {
 
 const connectionGraph = buildConnectionGraph(knowledgeGraph);
 const connectionIndex = createConnectionIndex(connectionGraph);
+const assetVersion = assetHash
+  .update(JSON.stringify({
+    pages: pages.map(({ filePath, incoming, links, score, ...page }) => page),
+    knowledgeGraph,
+    connectionGraph,
+    learningMap
+  }))
+  .digest("hex")
+  .slice(0, 12);
 
 const headingSlugs = new Map();
 const md = new MarkdownIt({ html: false, linkify: true, typographer: false })
@@ -283,7 +294,7 @@ function navLinks(canonicalPath) {
   </a>`;
 }
 
-function layout({ title, description, content, canonicalPath = "/", bodyClass = "", graphData = null, localGraphData = null, connectionExplorer = false }) {
+function layout({ title, description, content, canonicalPath = "/", bodyClass = "", graphData = null, localGraphData = null, pageModules = [] }) {
   const fullTitle = title === "CS Wiki" ? title : `${title} · CS Wiki`;
   const canonical = siteUrl ? `${siteUrl}${canonicalPath}` : "";
   const nav = navLinks(canonicalPath);
@@ -352,7 +363,7 @@ function layout({ title, description, content, canonicalPath = "/", bodyClass = 
   <script>window.CS_WIKI_BASE=${JSON.stringify(siteBase)};window.CS_WIKI_ASSET_VERSION=${JSON.stringify(assetVersion)};</script>
   <script src="${withBase("/assets/site.js")}?v=${assetVersion}" defer></script>
   ${localGraphData ? `<script src="${withBase("/assets/article-relationships.js")}?v=${assetVersion}" defer></script>` : ""}
-  ${connectionExplorer ? `<script type="module" src="${withBase("/assets/connection-explorer.js")}?v=${assetVersion}"></script>` : ""}
+  ${pageModules.map((asset) => `<script type="module" src="${withBase(`/assets/${asset}`)}?v=${assetVersion}"></script>`).join("\n  ")}
 </body>
 </html>`;
 }
@@ -437,6 +448,7 @@ function homePage() {
       <div class="hero-actions">
         <button type="button" class="primary-action" data-open-search>문서 검색</button>
         <a href="${withBase("/paths/")}">학습 경로 보기</a>
+        <a href="${withBase("/map/learning/")}">학습 노선 지도</a>
         <a href="${withBase("/map/")}">지식 연결 찾기</a>
       </div>
       <dl class="hero-stats">
@@ -521,7 +533,7 @@ function pathProgress(page) {
   const previous = path.pages[index - 1];
   const next = path.pages[index + 1];
   return `<nav class="path-progress" aria-label="학습 경로 진행">
-    <div><span>학습 경로 ${index + 1}/${path.pages.length}</span><a href="${withBase(`/paths/${path.slug}/`)}">${escapeHtml(path.title)}</a></div>
+    <div><span>학습 경로 ${index + 1}/${path.pages.length}</span><a href="${withBase(`/paths/${path.slug}/`)}">${escapeHtml(path.title)}</a><a class="path-map-link" href="${learningMapHref(path, page)}">노선 지도에서 보기</a></div>
     <div class="path-progress-links">
       ${previous ? `<a rel="prev" href="${withBase(previous.url)}"><span>이전</span>${escapeHtml(previous.title)}</a>` : "<span></span>"}
       ${next ? `<a rel="next" href="${withBase(next.url)}"><span>다음</span>${escapeHtml(next.title)}</a>` : ""}
@@ -828,6 +840,7 @@ function pathsIndexPage() {
     <h1>학습 경로</h1>
     <p>원문, 개념, 인물과 분석을 한 질문의 흐름으로 묶어 순서대로 읽습니다.</p>
     <strong>${resolvedLearningPaths.length}개 경로</strong>
+    <a class="path-map-entry" href="${withBase("/map/learning/")}">노선·역·환승 지도로 보기 →</a>
     <span class="listing-watermark" aria-hidden="true">${resolvedLearningPaths.length}</span>
   </section>
   <section class="content-section"><div class="learning-path-grid">${resolvedLearningPaths.map((path, index) => pathCard(path, index)).join("")}</div></section>`;
@@ -841,10 +854,12 @@ function pathsIndexPage() {
 }
 
 function learningPathPage(path) {
+  const firstStationId = graphNodeId(path.pages[0]);
   const content = `<section class="path-detail-hero section-frame">
     <p class="eyebrow"><a href="${withBase("/paths/")}">학습 경로</a> / ${path.pages.length}단계</p>
     <h1>${escapeHtml(path.title)}</h1>
     <p>${escapeHtml(path.description)}</p>
+    <a class="path-map-entry" href="${learningMapHref(path.slug, firstStationId)}">이 경로를 노선 지도에서 보기 →</a>
   </section>
   <section class="path-steps section-frame">${path.pages.map((page, index) => `<div class="path-step"><span>${String(index + 1).padStart(2, "0")}</span>${pageCard(page, { step: `${index + 1}/${path.pages.length}` })}</div>`).join("")}</section>`;
   return layout({
@@ -911,7 +926,7 @@ function connectionExplorerPage() {
       <div><p class="eyebrow"><a href="${withBase("/")}">홈</a> / KNOWLEDGE ROUTER</p><h1>두 문서는 어떻게 연결되는가</h1><p>두 지식 사이의 최단 선만 보여주지 않습니다. 각 중간 문서와 관계의 방향, 그 연결을 선택한 이유를 읽을 수 있는 경로로 번역합니다.</p></div>
       <dl><div><dt>탐색 문서</dt><dd>${selectable.length}</dd></div><div><dt>경유 가능 문서</dt><dd>${connectionGraph.stats.nodes}</dd></div><div><dt>유형 관계</dt><dd>${connectionGraph.stats.edges.toLocaleString("ko-KR")}</dd></div></dl>
     </section>
-    <nav class="map-mode-nav" aria-label="지식 지도 보기"><a aria-current="page" href="${withBase("/map/")}">연결 경로</a><span>학습 노선 · 다음 단계</span><span>전체 의미 지도 · 다음 단계</span></nav>
+    <nav class="map-mode-nav" aria-label="지식 지도 보기"><a aria-current="page" href="${withBase("/map/")}">연결 경로</a><a href="${withBase("/map/learning/")}">학습 노선</a><span>전체 의미 지도 · 다음 단계</span></nav>
     <section class="connection-builder" aria-labelledby="connection-builder-title">
       <div class="connection-builder-intro"><p>SELECT TWO DOCUMENTS</p><h2 id="connection-builder-title">관계가 번역되는 경로 찾기</h2><p>기본 렌즈는 관련 항목과 학습 순서를 우선하고, 원전 허브와 자동 본문 언급을 지름길로 과대평가하지 않습니다.</p></div>
       <form class="connection-form" data-connection-form hidden>
@@ -938,7 +953,131 @@ function connectionExplorerPage() {
     content,
     canonicalPath: "/map/",
     bodyClass: "knowledge-map-page-body",
-    connectionExplorer: true
+    pageModules: ["connection-explorer.js"]
+  });
+}
+
+function learningLineCode(pathId) {
+  const index = resolvedLearningPaths.findIndex((path) => path.slug === pathId);
+  return `L${String(Math.max(0, index) + 1).padStart(2, "0")}`;
+}
+
+function learningTransferCount(path) {
+  return path.pages.filter((page) => (pathsByPage.get(page)?.length || 0) > 1).length;
+}
+
+function learningLineSamples(path, limit = 10) {
+  if (path.pages.length <= limit) return path.pages;
+  return Array.from({ length: limit }, (_, index) => path.pages[Math.round(index * (path.pages.length - 1) / (limit - 1))]);
+}
+
+function learningMapHref(pathOrId, stationOrId) {
+  const lineId = typeof pathOrId === "string" ? pathOrId : pathOrId.slug;
+  const stationId = typeof stationOrId === "string" ? stationOrId : graphNodeId(stationOrId);
+  const encodedLine = encodeURIComponent(lineId);
+  const encodedStation = encodeURIComponent(stationId);
+  return withBase(`/map/learning/${encodedLine}/?line=${encodedLine}&station=${encodedStation}#station-${encodedStation}`);
+}
+
+function learningLineBoardHtml(activePath, activeStation) {
+  const activeMemberships = new Set((pathsByPage.get(activeStation) || []).map(({ path }) => path.slug));
+  return `<ol class="learning-line-list" data-learning-lines>${resolvedLearningPaths.map((path) => {
+    const active = path.slug === activePath.slug;
+    const illuminated = activeMemberships.has(path.slug);
+    const transferCount = learningTransferCount(path);
+    const targetStation = illuminated ? activeStation : path.pages[0];
+    return `<li data-learning-line-item="${escapeHtml(path.slug)}" class="${active ? "is-active " : ""}${illuminated ? "has-selected-station" : ""}">
+      <a href="${learningMapHref(path, targetStation)}" data-learning-line="${escapeHtml(path.slug)}"${active ? ' aria-current="true"' : ""}>
+        <span class="learning-line-code">${learningLineCode(path.slug)}</span>
+        <strong>${escapeHtml(path.title)}</strong>
+        <span class="learning-line-meta">${path.pages.length}역 · 환승역 ${transferCount}</span>
+        <span class="learning-line-track" aria-hidden="true">${learningLineSamples(path).map((page) => `<i class="${(pathsByPage.get(page)?.length || 0) > 1 ? "is-transfer" : ""}"></i>`).join("")}</span>
+      </a>
+    </li>`;
+  }).join("")}</ol>`;
+}
+
+function learningStationsHtml(path, selectedStation) {
+  const selectedId = graphNodeId(selectedStation);
+  return `<ol class="learning-strip" data-learning-stations>${path.pages.map((page, index) => {
+    const id = graphNodeId(page);
+    const memberships = pathsByPage.get(page) || [];
+    const selected = id === selectedId;
+    return `<li id="station-${escapeHtml(id)}" class="learning-station${memberships.length > 1 ? " is-transfer" : ""}${selected ? " is-selected" : ""}" data-learning-station-item="${escapeHtml(id)}">
+      <a href="${learningMapHref(path, page)}" data-learning-station="${escapeHtml(id)}"${selected ? ' aria-current="step"' : ""}>
+        <span class="learning-station-marker" aria-hidden="true"><i></i></span>
+        <span class="learning-station-order">${String(index + 1).padStart(2, "0")}</span>
+        <strong>${escapeHtml(page.title)}</strong>
+        <span>${escapeHtml(categoryMeta[page.category]?.label || page.category)}${memberships.length > 1 ? ` · 환승 ${memberships.length}개 노선` : ""}</span>
+      </a>
+    </li>`;
+  }).join("")}</ol>`;
+}
+
+function learningInspectorHtml(path, station) {
+  const stationId = graphNodeId(station);
+  const index = path.pages.indexOf(station);
+  const memberships = pathsByPage.get(station) || [];
+  const previous = path.pages[index - 1];
+  const next = path.pages[index + 1];
+  const connectionHref = withBase(`/map/?from=${encodeURIComponent(stationId)}`);
+  return `<section class="learning-station-inspector" data-learning-inspector aria-labelledby="learning-station-title">
+    <div class="learning-station-copy">
+      <p data-learning-station-position>STATION ${String(index + 1).padStart(2, "0")} / ${String(path.pages.length).padStart(2, "0")}</p>
+      <span data-learning-station-category>${escapeHtml(categoryMeta[station.category]?.label || station.category)}</span>
+      <h2 id="learning-station-title" data-learning-station-title>${escapeHtml(station.title)}</h2>
+      <p data-learning-station-summary>${escapeHtml(station.summary)}</p>
+      <div class="learning-station-flags" data-learning-station-flags><span>${memberships.length > 1 ? `환승역 · ${memberships.length}개 노선` : "일반역"}</span><span>${escapeHtml(statusLabel(station.status))}</span></div>
+      <div class="learning-station-actions"><a data-learning-station-read href="${withBase(station.url)}">문서 읽기 →</a><a data-learning-station-connect href="${connectionHref}">이 역에서 연결 찾기 ↔</a></div>
+    </div>
+    <nav class="learning-adjacent" aria-label="현재 노선의 이전·다음 역">
+      ${previous ? `<a href="${learningMapHref(path, previous)}" data-learning-adjacent="${escapeHtml(graphNodeId(previous))}"><span>이전 역</span>${escapeHtml(previous.title)}</a>` : `<span><span>이전 역</span>노선의 시작</span>`}
+      ${next ? `<a href="${learningMapHref(path, next)}" data-learning-adjacent="${escapeHtml(graphNodeId(next))}"><span>다음 역</span>${escapeHtml(next.title)}</a>` : `<span><span>다음 역</span>노선의 끝</span>`}
+    </nav>
+    <aside class="learning-transfers" aria-labelledby="learning-transfer-title">
+      <h3 id="learning-transfer-title">이 역의 노선</h3>
+      <p>${memberships.length > 1 ? "같은 역을 유지한 채 다른 학습 흐름으로 갈아탑니다." : "현재는 이 노선에만 포함된 역입니다."}</p>
+      <ol data-learning-transfer-lines>${memberships.map(({ path: memberPath, index: memberIndex }) => `<li><a href="${learningMapHref(memberPath, station)}" data-learning-transfer-line="${escapeHtml(memberPath.slug)}"${memberPath.slug === path.slug ? ' aria-current="true"' : ""}><span>${learningLineCode(memberPath.slug)}</span><strong>${escapeHtml(memberPath.title)}</strong><small>${memberIndex + 1}/${memberPath.pages.length}</small></a></li>`).join("")}</ol>
+    </aside>
+  </section>`;
+}
+
+function learningMapPage({ defaultPath, defaultStation, canonicalPath = "/map/learning/" }) {
+  const { stations, stationOccurrences, transferStations } = learningMap.stats;
+  const content = `<div class="learning-map-page section-frame" data-learning-map
+    data-learning-map-url="${withBase("/data/learning-map.json")}?v=${assetVersion}"
+    data-default-line="${escapeHtml(defaultPath.slug)}" data-default-station="${escapeHtml(graphNodeId(defaultStation))}">
+    <section class="learning-map-hero">
+      <div><p class="eyebrow"><a href="${withBase("/")}">홈</a> / LEARNING TRANSIT</p><h1>지식을 노선으로 읽는다</h1><p>각 학습 경로는 읽는 순서를 가진 노선이고, 여러 질문에 다시 등장하는 문서는 갈아탈 수 있는 환승역입니다.</p></div>
+      <dl><div><dt>노선</dt><dd>${resolvedLearningPaths.length}</dd></div><div><dt>고유 역</dt><dd>${stations}</dd></div><div><dt>환승역</dt><dd>${transferStations}</dd></div><div><dt>경로 밖 문서</dt><dd>${Math.max(0, pages.length - stations)}</dd></div></dl>
+    </section>
+    <nav class="map-mode-nav" aria-label="지식 지도 보기"><a href="${withBase("/map/")}">연결 경로</a><a aria-current="page" href="${withBase("/map/learning/")}">학습 노선</a><span>전체 의미 지도 · 다음 단계</span></nav>
+    <section class="learning-transit-shell">
+      <aside class="learning-line-board" aria-labelledby="learning-lines-title">
+        <header><p>LINE BOARD</p><h2 id="learning-lines-title">학습 노선 ${resolvedLearningPaths.length}개</h2><span>${stationOccurrences}개 역 출현</span></header>
+        ${learningLineBoardHtml(defaultPath, defaultStation)}
+      </aside>
+      <div class="learning-line-workspace">
+        <header class="learning-line-heading">
+          <div><p data-learning-line-code>${learningLineCode(defaultPath.slug)}</p><h2 data-learning-line-title>${escapeHtml(defaultPath.title)}</h2><p data-learning-line-description>${escapeHtml(defaultPath.description)}</p></div>
+          <dl><div><dt>역</dt><dd data-learning-line-stations>${defaultPath.pages.length}</dd></div><div><dt>환승역</dt><dd data-learning-line-transfers>${learningTransferCount(defaultPath)}</dd></div></dl>
+        </header>
+        <div class="learning-strip-viewport" data-learning-strip-viewport aria-label="선택한 학습 노선의 역 순서">
+          ${learningStationsHtml(defaultPath, defaultStation)}
+        </div>
+        <div class="learning-map-status-row"><output id="learning-map-status" data-learning-map-status aria-live="polite">${escapeHtml(defaultPath.title)} 노선의 ${escapeHtml(defaultStation.title)} 역을 선택했습니다.</output><span>← → / ↑ ↓ 역 이동 · Home End 처음/마지막</span></div>
+        ${learningInspectorHtml(defaultPath, defaultStation)}
+      </div>
+    </section>
+    <noscript><p class="learning-map-noscript">노선과 역 링크는 그대로 읽을 수 있습니다. 환승 동시 점등과 URL 상태 복원에는 자바스크립트가 필요합니다.</p></noscript>
+  </div>`;
+  return layout({
+    title: "학습 노선 지도",
+    description: "CS Wiki의 학습 경로를 노선, 역과 환승 관계로 탐색하는 순서 중심 지식 지도.",
+    content,
+    canonicalPath,
+    bodyClass: "learning-map-page-body",
+    pageModules: ["learning-map.js"]
   });
 }
 
@@ -966,6 +1105,19 @@ for (const path of resolvedLearningPaths) {
   await output(join("paths", path.slug, "index.html"), learningPathPage(path));
 }
 await output(join("map", "index.html"), connectionExplorerPage());
+const featuredLearningPath = resolvedLearningPaths.find((path) => path.slug === "computing-capability-history") || resolvedLearningPaths[0];
+const featuredLearningStation = featuredLearningPath.pages.find((page) => graphNodeId(page) === "computing-capability") || featuredLearningPath.pages[0];
+await output(join("map", "learning", "index.html"), learningMapPage({
+  defaultPath: featuredLearningPath,
+  defaultStation: featuredLearningStation
+}));
+for (const path of resolvedLearningPaths) {
+  await output(join("map", "learning", path.slug, "index.html"), learningMapPage({
+    defaultPath: path,
+    defaultStation: path.pages[0],
+    canonicalPath: `/map/learning/${path.slug}/`
+  }));
+}
 for (const page of pages) {
   await output(join(page.category, page.slug, "index.html"), articlePage(page));
   if (page.category === "references") {
@@ -990,6 +1142,7 @@ const searchIndex = pages.map((page) => ({
 await output("search.json", JSON.stringify(searchIndex));
 await output(join("data", "knowledge-graph.json"), JSON.stringify(knowledgeGraph));
 await output(join("data", "connection-graph.json"), JSON.stringify(connectionGraph));
+await output(join("data", "learning-map.json"), JSON.stringify(learningMap));
 await output(".nojekyll", "");
 await output("404.html", layout({
   title: "문서를 찾을 수 없습니다",
@@ -1004,6 +1157,8 @@ if (siteUrl) {
     ...Object.keys(categoryMeta).map(categoryUrl),
     "/paths/",
     "/map/",
+    "/map/learning/",
+    ...resolvedLearningPaths.map((path) => `/map/learning/${path.slug}/`),
     ...resolvedLearningPaths.map((path) => `/paths/${path.slug}/`),
     ...pages.map((page) => page.url)
   ];
