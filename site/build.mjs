@@ -4,6 +4,7 @@ import { basename, dirname, extname, join, relative, sep } from "node:path";
 import { createHash } from "node:crypto";
 import MarkdownIt from "markdown-it";
 import anchor from "markdown-it-anchor";
+import { connectionSummary, createConnectionIndex, findConnectionPaths } from "./assets/connection-paths.js";
 import { domainMeta, learningPaths, statusMeta } from "./catalog.mjs";
 import { buildKnowledgeGraph, extractWikiLinks } from "./graph/model.mjs";
 import { graphNodeId } from "./graph/schema.mjs";
@@ -39,6 +40,9 @@ const assetVersion = createHash("sha256")
   .update(await readFile(join(root, "site", "assets", "site.css")))
   .update(await readFile(join(root, "site", "assets", "site.js")))
   .update(await readFile(join(root, "site", "assets", "article-relationships.js")))
+  .update(await readFile(join(root, "site", "assets", "connection-paths.js")))
+  .update(await readFile(join(root, "site", "assets", "connection-explorer.js")))
+  .update(await readFile(join(root, "site", "assets", "connection-worker.js")))
   .digest("hex")
   .slice(0, 12);
 
@@ -142,6 +146,53 @@ const knowledgeGraph = buildKnowledgeGraph(pages, resolvedLearningPaths, {
 });
 const knowledgeGraphEdgesByNodeId = indexGraphEdges(knowledgeGraph);
 
+function connectionContext(context = {}) {
+  const compact = {};
+  for (const keyName of ["pageId", "section", "label", "pathId", "pathTitle", "step", "note"]) {
+    if (context[keyName] !== undefined && context[keyName] !== null && context[keyName] !== "") compact[keyName] = context[keyName];
+  }
+  if (context.excerpt) compact.excerpt = String(context.excerpt).slice(0, 180);
+  return compact;
+}
+
+function buildConnectionGraph(graph) {
+  const nodes = graph.nodes.filter((node) => node.visibility !== "hidden").map((node) => ({
+    id: node.id,
+    title: node.title,
+    aliases: node.aliases,
+    url: node.url,
+    category: node.category,
+    domains: node.domains,
+    status: node.status,
+    summary: node.summary,
+    visibility: node.visibility
+  }));
+  const nodeIds = new Set(nodes.map((node) => node.id));
+  const edges = graph.edges.filter((edge) => nodeIds.has(edge.source) && nodeIds.has(edge.target)).map((edge) => ({
+    id: edge.id,
+    source: edge.source,
+    target: edge.target,
+    kind: edge.kind,
+    origin: edge.origin,
+    weight: edge.weight,
+    cost: edge.cost,
+    ...(edge.occurrences > 1 ? { occurrences: edge.occurrences } : {}),
+    ...(edge.reciprocal ? { reciprocal: true } : {}),
+    contexts: edge.contexts.slice(0, 1).map(connectionContext)
+  }));
+  return {
+    schemaVersion: graph.schemaVersion,
+    contentVersion: graph.contentVersion,
+    nodes,
+    edges,
+    legend: graph.legend,
+    stats: { nodes: nodes.length, edges: edges.length }
+  };
+}
+
+const connectionGraph = buildConnectionGraph(knowledgeGraph);
+const connectionIndex = createConnectionIndex(connectionGraph);
+
 const headingSlugs = new Map();
 const md = new MarkdownIt({ html: false, linkify: true, typographer: false })
   .use(anchor, {
@@ -224,12 +275,15 @@ function navLinks(canonicalPath) {
     </a>`;
   }).join("");
   const pathActive = canonicalPath.startsWith("/paths/");
+  const mapActive = canonicalPath.startsWith("/map/");
   return `${categoryLinks}<a class="nav-link path-nav" href="${withBase("/paths/")}"${pathActive ? ' aria-current="page"' : ""}>
     <span>학습 경로</span><span class="nav-count">${resolvedLearningPaths.length}</span>
+  </a><a class="nav-link map-nav" href="${withBase("/map/")}"${mapActive ? ' aria-current="page"' : ""}>
+    <span>지식 지도</span><span class="nav-count" aria-hidden="true">↔</span>
   </a>`;
 }
 
-function layout({ title, description, content, canonicalPath = "/", bodyClass = "", graphData = null, localGraphData = null }) {
+function layout({ title, description, content, canonicalPath = "/", bodyClass = "", graphData = null, localGraphData = null, connectionExplorer = false }) {
   const fullTitle = title === "CS Wiki" ? title : `${title} · CS Wiki`;
   const canonical = siteUrl ? `${siteUrl}${canonicalPath}` : "";
   const nav = navLinks(canonicalPath);
@@ -298,6 +352,7 @@ function layout({ title, description, content, canonicalPath = "/", bodyClass = 
   <script>window.CS_WIKI_BASE=${JSON.stringify(siteBase)};window.CS_WIKI_ASSET_VERSION=${JSON.stringify(assetVersion)};</script>
   <script src="${withBase("/assets/site.js")}?v=${assetVersion}" defer></script>
   ${localGraphData ? `<script src="${withBase("/assets/article-relationships.js")}?v=${assetVersion}" defer></script>` : ""}
+  ${connectionExplorer ? `<script type="module" src="${withBase("/assets/connection-explorer.js")}?v=${assetVersion}"></script>` : ""}
 </body>
 </html>`;
 }
@@ -382,6 +437,7 @@ function homePage() {
       <div class="hero-actions">
         <button type="button" class="primary-action" data-open-search>문서 검색</button>
         <a href="${withBase("/paths/")}">학습 경로 보기</a>
+        <a href="${withBase("/map/")}">지식 연결 찾기</a>
       </div>
       <dl class="hero-stats">
         <div><dt>전체 문서</dt><dd>${pages.length}</dd></div>
@@ -680,6 +736,7 @@ function relationshipRail(local) {
     <a class="relationship-jump-summary" href="#relationships"><strong>${local.totalNeighbors}</strong><span>개 직접 이웃 · ${local.totalEdges}개 관계</span></a>
     <ol>${local.visibleRecords.slice(0, 6).map((record) => `<li><a href="${escapeHtml(record.node.url)}"><span>${escapeHtml(relationLabel(knowledgeGraph, record.primaryEdge, local.focus.id))}</span>${escapeHtml(record.node.title)}</a></li>`).join("")}</ol>
     <a class="relationship-jump-link" href="#relationships">관계 지도에서 보기</a>
+    <a class="relationship-jump-link" href="${withBase(`/map/?from=${encodeURIComponent(local.focus.id)}`)}">다른 문서와 연결 찾기</a>
   </section>`;
 }
 
@@ -799,6 +856,92 @@ function learningPathPage(path) {
   });
 }
 
+function connectionNodeHtml(node, position, step) {
+  return `<li class="connection-step">
+    <div class="connection-node">
+      <span class="connection-node-index">${String(position + 1).padStart(2, "0")}</span>
+      <div><span>${escapeHtml(categoryMeta[node.category]?.label || node.category)}</span><a href="${escapeHtml(node.url)}">${escapeHtml(node.title)}</a><p>${escapeHtml(node.summary || "요약이 아직 없습니다.")}</p></div>
+    </div>
+    ${step ? connectionRelationHtml(step) : ""}
+  </li>`;
+}
+
+function connectionRelationHtml(step) {
+  const from = connectionIndex.nodes.get(step.from);
+  const to = connectionIndex.nodes.get(step.to);
+  const recordedSource = connectionIndex.nodes.get(step.edge.source);
+  const recordedTarget = connectionIndex.nodes.get(step.edge.target);
+  return `<div class="connection-relation" data-family="${escapeHtml(step.edge.family)}">
+    <span class="connection-relation-line" aria-hidden="true"></span>
+    <div class="connection-relation-card">
+      <span>${escapeHtml(step.label)}</span>
+      <p>${escapeHtml(step.detail)}</p>
+      ${step.alternativeLabels.length ? `<div class="connection-relation-alternatives"><span>같은 두 문서의 다른 관계</span>${step.alternativeLabels.map((label) => `<span>${escapeHtml(label)}</span>`).join("")}</div>` : ""}
+      <details><summary>이동과 기록 방향</summary><p>이동: ${escapeHtml(from?.title || step.from)} → ${escapeHtml(to?.title || step.to)}</p><p>${step.edge.directed ? `기록: ${escapeHtml(recordedSource?.title || step.edge.source)} → ${escapeHtml(recordedTarget?.title || step.edge.target)}` : "기록: 방향 없는 관계"}</p></details>
+    </div>
+  </div>`;
+}
+
+function connectionRouteHtml(path, routeCount = 1, routeIndex = 0) {
+  if (!path) return `<div class="connection-empty"><h2>예시 경로를 만들 수 없습니다.</h2><p>문서가 추가되거나 관계가 보강되면 이 영역에 경로가 나타납니다.</p></div>`;
+  const chain = path.nodes.map((nodeId, index) => {
+    const node = connectionIndex.nodes.get(nodeId);
+    return connectionNodeHtml(node, index, path.steps[index]);
+  }).join("");
+  return `<article class="connection-route-card" data-connection-route>
+    <header class="connection-route-heading">
+      <div><p>ROUTE ${String(routeIndex + 1).padStart(2, "0")} / ${String(routeCount).padStart(2, "0")}</p><h2 tabindex="-1" data-connection-result-title>${escapeHtml(connectionSummary(connectionIndex, path))}</h2>${path.truncated ? `<p class="connection-route-limit">기본 경로는 확인했지만 계산 한도 안에서 일부 대안만 찾았습니다.</p>` : ""}</div>
+      <dl><div><dt>단계</dt><dd>${path.hops}</dd></div><div><dt>판독</dt><dd>${escapeHtml(path.quality.label)}</dd></div></dl>
+    </header>
+    <ol class="connection-chain">${chain}</ol>
+  </article>`;
+}
+
+function connectionExplorerPage() {
+  const selectable = connectionGraph.nodes.filter((node) => node.visibility === "public")
+    .sort((a, b) => a.title.localeCompare(b.title, "ko"));
+  const defaultFrom = connectionIndex.nodes.get("src-001") || selectable[0];
+  const defaultTo = connectionIndex.nodes.get("ref-049") || selectable.find((node) => node.id !== defaultFrom.id);
+  const initialPaths = findConnectionPaths(connectionIndex, defaultFrom.id, defaultTo.id, { mode: "explain", limit: 3, maxHops: 6 });
+  const options = selectable.map((node) => `<option value="${escapeHtml(node.title)}">${escapeHtml(categoryMeta[node.category]?.label || node.category)}</option>`).join("");
+  const content = `<div class="knowledge-map-page section-frame" data-connection-explorer
+    data-connection-graph-url="${withBase("/data/connection-graph.json")}?v=${assetVersion}"
+    data-default-from="${escapeHtml(defaultFrom.id)}" data-default-to="${escapeHtml(defaultTo.id)}">
+    <section class="connection-hero">
+      <div><p class="eyebrow"><a href="${withBase("/")}">홈</a> / KNOWLEDGE ROUTER</p><h1>두 문서는 어떻게 연결되는가</h1><p>두 지식 사이의 최단 선만 보여주지 않습니다. 각 중간 문서와 관계의 방향, 그 연결을 선택한 이유를 읽을 수 있는 경로로 번역합니다.</p></div>
+      <dl><div><dt>탐색 문서</dt><dd>${selectable.length}</dd></div><div><dt>경유 가능 문서</dt><dd>${connectionGraph.stats.nodes}</dd></div><div><dt>유형 관계</dt><dd>${connectionGraph.stats.edges.toLocaleString("ko-KR")}</dd></div></dl>
+    </section>
+    <nav class="map-mode-nav" aria-label="지식 지도 보기"><a aria-current="page" href="${withBase("/map/")}">연결 경로</a><span>학습 노선 · 다음 단계</span><span>전체 의미 지도 · 다음 단계</span></nav>
+    <section class="connection-builder" aria-labelledby="connection-builder-title">
+      <div class="connection-builder-intro"><p>SELECT TWO DOCUMENTS</p><h2 id="connection-builder-title">관계가 번역되는 경로 찾기</h2><p>기본 렌즈는 관련 항목과 학습 순서를 우선하고, 원전 허브와 자동 본문 언급을 지름길로 과대평가하지 않습니다.</p></div>
+      <form class="connection-form" data-connection-form hidden>
+        <label><span>출발 문서</span><input type="search" list="connection-documents" required autocomplete="off" aria-describedby="connection-status" value="${escapeHtml(defaultFrom.title)}" data-connection-from></label>
+        <button class="connection-swap" type="button" data-connection-swap><span aria-hidden="true">⇄</span> 두 문서 바꾸기</button>
+        <label><span>도착 문서</span><input type="search" list="connection-documents" required autocomplete="off" aria-describedby="connection-status" value="${escapeHtml(defaultTo.title)}" data-connection-to></label>
+        <label><span>관계 렌즈</span><select data-connection-mode><option value="explain">핵심 연결</option><option value="concept">개념·학습</option><option value="evidence">근거 계보</option><option value="shortest">본문 언급 포함</option></select></label>
+        <button class="connection-submit" type="submit">연결 설명 만들기</button>
+      </form>
+      <datalist id="connection-documents">${options}</datalist>
+      <div class="connection-state-row"><output id="connection-status" data-connection-status aria-live="polite">연결 그래프를 불러오는 중입니다.</output><button type="button" hidden disabled data-connection-copy>현재 경로 주소 복사</button></div>
+    </section>
+    <section class="connection-results" aria-label="연결 경로 결과">
+      <div class="connection-route-tabs" data-connection-route-tabs hidden></div>
+      <div data-connection-results>
+        <div class="connection-loading" data-connection-loading><span aria-hidden="true"></span><h2>관계 그래프를 준비하고 있습니다</h2><p>요청한 두 문서에 맞는 연결을 계산하면 이 영역이 바뀝니다.</p></div>
+        <noscript><style>.connection-loading{display:none}</style><p class="connection-example-label">자바스크립트 없이 읽을 수 있는 빌드 시 예시 경로입니다.</p>${connectionRouteHtml(initialPaths[0], initialPaths.length)}</noscript>
+      </div>
+    </section>
+  </div>`;
+  return layout({
+    title: "두 문서는 어떻게 연결되는가",
+    description: "CS Wiki의 두 문서 사이에서 의미 있는 중간 개념과 관계의 방향을 설명하는 지식 경로 탐색기.",
+    content,
+    canonicalPath: "/map/",
+    bodyClass: "knowledge-map-page-body",
+    connectionExplorer: true
+  });
+}
+
 function redirectPage(target) {
   return `<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="robots" content="noindex"><meta http-equiv="refresh" content="0;url=${escapeHtml(withBase(target))}"><link rel="canonical" href="${escapeHtml(withBase(target))}"><title>이동 중 · CS Wiki</title></head><body><p><a href="${escapeHtml(withBase(target))}">새 주소로 이동</a></p></body></html>`;
 }
@@ -822,6 +965,7 @@ await output(join("paths", "index.html"), pathsIndexPage());
 for (const path of resolvedLearningPaths) {
   await output(join("paths", path.slug, "index.html"), learningPathPage(path));
 }
+await output(join("map", "index.html"), connectionExplorerPage());
 for (const page of pages) {
   await output(join(page.category, page.slug, "index.html"), articlePage(page));
   if (page.category === "references") {
@@ -845,6 +989,7 @@ const searchIndex = pages.map((page) => ({
 }));
 await output("search.json", JSON.stringify(searchIndex));
 await output(join("data", "knowledge-graph.json"), JSON.stringify(knowledgeGraph));
+await output(join("data", "connection-graph.json"), JSON.stringify(connectionGraph));
 await output(".nojekyll", "");
 await output("404.html", layout({
   title: "문서를 찾을 수 없습니다",
@@ -858,6 +1003,7 @@ if (siteUrl) {
     "/",
     ...Object.keys(categoryMeta).map(categoryUrl),
     "/paths/",
+    "/map/",
     ...resolvedLearningPaths.map((path) => `/paths/${path.slug}/`),
     ...pages.map((page) => page.url)
   ];
