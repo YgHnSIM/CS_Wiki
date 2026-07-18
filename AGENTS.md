@@ -81,16 +81,18 @@ snapshot_status: local | external-only | archived
 ```yaml
 graph_id: concept-computing-capability
 graph_visibility: public
-publication_year: 1936
+publication_year: 1937
 event_start: 1936
 event_end: 1945
+historical_note: "1936년 제출, 1937년 출판"
 historical_layer: theory
 capability_layers: [computability, complexity]
 ```
 
 - `graph_id`는 위키 전체에서 고유한 소문자 ASCII slug이며 한 번 배정한 뒤 제목이나 파일명이 바뀌어도 수정하지 않는다. 새 개념·개체·분석·메타 페이지에는 작성을 권장한다. 값이 없으면 빌드가 `source_id` 또는 최초 파일명을 기준으로 호환 ID를 만든다.
 - `graph_visibility`는 `public | context | hidden` 중 하나다. `public`은 일반 지도에 표시하고, `context`는 다른 문서의 관계 문맥에서만 표시하며, `hidden`은 운영 문서처럼 지도에서 숨긴다. `index.md`, `overview.md`, `log.md`는 기본적으로 `hidden`이다.
-- `publication_year`, `event_start`, `event_end`는 출판물이나 역사적 사건의 연도를 뜻한다. 위키 작성·수정일인 `created`, `updated`를 역사 연표에 사용하지 않는다. 기간은 시작 연도가 종료 연도보다 늦을 수 없다.
+- `publication_year`, `event_start`, `event_end`는 출판물이나 역사적 사건의 검증된 연도를 뜻한다. 제목·파일명이나 위키 작성·수정일인 `created`, `updated`에서 역사 연도를 추정하지 않는다. `event_end`는 `event_start` 없이 단독으로 기록할 수 없고, 기간의 시작은 종료보다 늦을 수 없다.
+- 출판 시점과 사건·관찰 기간이 다르면 두 값을 함께 기록하고, `historical_note`에 제출·출판, 초판·확인 판본 같은 구분을 300자 이내로 설명한다. 확인할 수 없는 연도는 비워 두어 역사 지도에서 `연도 미상`으로 보존한다.
 - `historical_layer`는 `theory | machine | architecture | software | system | service | measurement` 중 하나다.
 - `capability_layers`는 `computability | complexity | programmability | realized-performance | scalability | resource-efficiency | reliable-results` 가운데 해당하는 값을 배열로 기록한다.
 
@@ -104,7 +106,7 @@ capability_layers: [computability, complexity]
 | enables | [[저장 프로그램 컴퓨터]] | 프로그램 교체 비용을 물리적 재배선에서 기억장치 갱신으로 바꾼다. | [[First Draft of a Report on the EDVAC]] |
 ```
 
-- 한 행은 `현재 문서 → 대상` 방향으로 읽는다. `대상`은 반드시 위키링크이며 `설명`은 관계가 성립하는 이유를 한 문장으로 적는다. `근거`에는 관계를 직접 뒷받침하는 위키 소스·참고 자료를 연결한다.
+- 한 행은 `현재 문서 → 대상` 방향으로 읽는다. `대상`은 반드시 위키링크이며 `설명`은 관계가 성립하는 이유를 한 문장으로 적는다. `근거`에는 관계를 직접 뒷받침하는 위키 소스·참고 자료를 연결한다. 역사·인과 렌즈에 쓰이는 `responds_to`, `enables`, `precedes`, `constrains`는 근거를 비워 둘 수 없다.
 - 허용 관계는 `related`, `supports`, `broader`, `narrower`, `prerequisite_for`, `enables`, `constrains`, `measures`, `implements`, `exemplifies`, `precedes`, `responds_to`, `contradicts`, `synthesizes`다.
 - 단순 본문 언급, `## 관련 항목`, 프론트매터 `sources`, 학습 경로의 인접 단계는 각각 `mentions`, `related`, `supports`, `path_next`로 자동 생성하므로 표에 반복하지 않는다.
 - 같은 도메인이라는 이유만으로 문서 쌍을 간선으로 만들지 않는다. 도메인은 문서 수가 늘어도 폭증하지 않는 군집 속성으로만 사용한다.

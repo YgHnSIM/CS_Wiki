@@ -4,7 +4,13 @@ aliases: [Koomey et al. 2011, Koomey의 법칙 원전, Computing energy efficien
 summary: "1946–2009년 여러 종류의 컴퓨터에서 최고 부하의 계산량을 전력으로 나눈 장기 자료를 분석해 계산의 전기 효율이 약 1.57년마다 배가했다는 역사적 추세를 보고한 논문."
 tags: [type/reference, domain/computer-history, domain/computer-architecture, status/active]
 created: 2026-07-16
-updated: 2026-07-16
+updated: 2026-07-18
+publication_year: 2011
+event_start: 1946
+event_end: 2009
+historical_layer: measurement
+historical_note: "1946–2009년 표본을 분석한 2011년 출판물이다. 관측 기간과 출판 시점을 구분한다."
+capability_layers: [resource-efficiency]
 sources: ["IEEE Annals of the History of Computing 33(3), 2011", "Web Extra Appendix", "koomeycomputertrendsreleaseversion-v36.xlsx", "Gwern access copy"]
 source_id: ref-047
 source_kind: external

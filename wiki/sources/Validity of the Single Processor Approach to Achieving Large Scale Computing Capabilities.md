@@ -4,7 +4,10 @@ aliases: [Amdahl 1967, Amdahl single processor paper]
 summary: "병렬화되지 않는 순차 작업과 데이터 관리 오버헤드가 다중 프로세서의 전체 가속을 제한한다는 주장을 제시해 암달의 법칙의 기원이 된 1967년 논문."
 tags: [type/reference, domain/computer-architecture, domain/computer-history, status/active]
 created: 2026-07-15
-updated: 2026-07-16
+updated: 2026-07-18
+publication_year: 1967
+historical_layer: theory
+capability_layers: [scalability]
 sources: ["1967_Amdahl_Single_Processor_Approach.pdf", "AFIPS Spring Joint Computer Conference 1967"]
 source_id: ref-035
 source_kind: external

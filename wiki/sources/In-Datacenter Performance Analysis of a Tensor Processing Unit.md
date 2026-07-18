@@ -4,7 +4,10 @@ aliases: [TPU paper, Jouppi et al. 2017, Tensor Processing Unit performance]
 summary: "Google의 1세대 TPU를 실제 데이터센터 신경망 추론 작업으로 평가해 도메인 특화 하드웨어의 성능·에너지·꼬리 지연 이점을 분석한 2017년 논문."
 tags: [type/reference, domain/computer-architecture, domain/machine-learning, status/active]
 created: 2026-07-16
-updated: 2026-07-16
+updated: 2026-07-18
+publication_year: 2017
+historical_layer: architecture
+capability_layers: [realized-performance, resource-efficiency, reliable-results]
 sources: ["ISCA 2017 proceedings paper", "arXiv:1704.04760", "Google Research publication page"]
 source_id: ref-042
 source_kind: external

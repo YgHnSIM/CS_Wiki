@@ -4,7 +4,10 @@ aliases: [Dennard scaling paper, Dennard et al. 1974, 작은 MOSFET 설계]
 summary: "MOSFET의 치수와 전압을 함께 축소할 때 회로 지연과 전력은 낮추면서 전력 밀도를 일정하게 유지할 수 있음을 분석한 1974년 논문."
 tags: [type/reference, domain/computer-architecture, domain/computer-history, status/active]
 created: 2026-07-16
-updated: 2026-07-16
+updated: 2026-07-18
+publication_year: 1974
+historical_layer: architecture
+capability_layers: [realized-performance, resource-efficiency]
 sources: ["IEEE Journal of Solid-State Circuits 9(5), 1974", "Stanford University access copy"]
 source_id: ref-038
 source_kind: external

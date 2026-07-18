@@ -57,14 +57,16 @@ test("wiki links retain section context while images and fenced examples are ign
 });
 
 test("curated relation tables preserve wiki-link aliases containing pipes", () => {
-  const relations = parseCuratedRelations(`## 관계\n\n| 관계 | 대상 | 설명 | 근거 |\n|---|---|---|---|\n| enables | [[Target|표시 이름]] | 새 작업을 표현하게 한다. | [[Evidence|원전]] |`, { pageTitle: "Source" });
-  assert.deepEqual(relations, [{
+  const relations = parseCuratedRelations(`## 관계\n\n| 관계 | 대상 | 설명 | 근거 |\n|---|---|---|---|\n| enables | [[Target|표시 이름]] | 새 작업을 표현하게 한다. | [[Evidence|원전]] |\n| responds_to | [[Problem]] | 문제에 대응한다. | [[Evidence]] |`, { pageTitle: "Source" });
+  assert.deepEqual(relations[0], {
     kind: "enables",
     target: "Target",
     note: "새 작업을 표현하게 한다.",
     evidence: ["Evidence"],
     line: 5
-  }]);
+  });
+  assert.equal(relations[1].kind, "responds_to");
+  assert.equal(relations[1].target, "Problem");
   assert.deepEqual(parseCuratedRelations("```markdown\n## 관계\n\n| 관계 | 대상 | 설명 |\n|---|---|---|\n| enables | [[Target]] | 예시 |\n```"), []);
 });
 
@@ -90,7 +92,7 @@ test("the normalized graph distinguishes evidence, related, mentions, paths, and
   const alphaNode = result.nodes.find((node) => node.title === "Alpha");
   assert.equal(alphaNode.id, "concept-alpha");
   assert.equal(alphaNode.url, "/base/concepts/alpha/");
-  assert.deepEqual(alphaNode.historical, { publicationYear: 1936, eventStart: 1936, eventEnd: 1945, layer: "theory" });
+  assert.deepEqual(alphaNode.historical, { publicationYear: 1936, eventStart: 1936, eventEnd: 1945, layer: "theory", note: null });
   assert.deepEqual(alphaNode.pathMemberships.map((membership) => membership.id), ["route"]);
 
   assert.equal(result.edges.filter((edge) => edge.kind === "supports").length, 1);
@@ -117,6 +119,8 @@ test("invalid stable IDs, metadata, relations, and duplicate IDs fail loudly", (
   assert.throws(() => graph([page("Bad", { eventStart: "2000", eventEnd: "1900" })]), /event_start/);
   assert.throws(() => graph([page("Bad", { historicalLayer: "unknown" })]), /historical_layer/);
   assert.throws(() => graph([page("Bad", { capabilityLayers: ["speed"] })]), /capability_layers/);
+  assert.throws(() => graph([page("Bad", { eventStart: "", eventEnd: "1945" })]), /event_end requires event_start/);
+  assert.throws(() => graph([page("Bad", { historicalNote: "x".repeat(301) })]), /historical_note/);
   assert.throws(() => graph([
     page("One", { graphId: "shared-id" }),
     page("Two", { graphId: "shared-id" })
@@ -126,9 +130,13 @@ test("invalid stable IDs, metadata, relations, and duplicate IDs fail loudly", (
     target
   ]), /Unknown curated relation/);
   assert.throws(() => graph([
-    page("Bad", { body: "## 관계\n\n| 관계 | 대상 | 설명 |\n|---|---|---|\n| enables | [[Missing]] | 설명 |" }),
+    page("Bad", { body: "## 관계\n\n| 관계 | 대상 | 설명 | 근거 |\n|---|---|---|---|\n| enables | [[Missing]] | 설명 | [[Target]] |" }),
     target
   ]), /references missing page/);
+  assert.throws(() => graph([
+    page("Bad", { body: "## 관계\n\n| 관계 | 대상 | 설명 | 근거 |\n|---|---|---|---|\n| responds_to | [[Target]] | 확인된 제약에 대응한다. | |" }),
+    target
+  ]), /needs direct evidence/);
 });
 
 test("local graph selection balances relation families and excludes hidden operational nodes", () => {

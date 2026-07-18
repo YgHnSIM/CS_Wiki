@@ -4,7 +4,10 @@ aliases: [Green500 power tutorial 2007]
 summary: "LINPACK 달성 성능과 같은 실행 구간의 평균 전력을 결합해 GFLOPS/W를 산출하는 Green500의 2007년 전력 측정 지침."
 tags: [type/reference, domain/computer-architecture, domain/computer-science, status/active]
 created: 2026-07-15
-updated: 2026-07-15
+updated: 2026-07-18
+publication_year: 2007
+historical_layer: measurement
+capability_layers: [resource-efficiency]
 sources: ["Green500_Power_Measurement_Tutorial.pdf", "Power Measurement Tutorial for the Green500 List (2007)"]
 source_id: ref-036
 source_kind: external

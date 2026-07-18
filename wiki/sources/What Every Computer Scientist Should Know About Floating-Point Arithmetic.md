@@ -4,7 +4,10 @@ aliases: [Goldberg 1991, What Every Computer Scientist Should Know About Floatin
 summary: "부동소수점의 표현·반올림 오차·상쇄·정확한 반올림과 IEEE 754-1985의 시스템적 의미를 연결한 David Goldberg의 1991년 해설 논문."
 tags: [type/reference, domain/computer-architecture, domain/mathematics, status/active]
 created: 2026-07-16
-updated: 2026-07-16
+updated: 2026-07-18
+publication_year: 1991
+historical_layer: measurement
+capability_layers: [reliable-results]
 sources: ["David Goldberg, What Every Computer Scientist Should Know About Floating-Point Arithmetic, ACM Computing Surveys 23(1), 1991, pp. 5-48", "Corrigendum, ACM Computing Surveys 23(3), 1991, p. 413", "Internet Archive access copy of the corrigendum", "Oracle Numerical Computation Guide edited reprint", "IEEE 754 Working Group background addendum on implementation differences"]
 source_id: ref-050
 source_kind: external

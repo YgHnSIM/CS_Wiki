@@ -4,7 +4,10 @@ aliases: [Moore 1965, 무어의 법칙 원 논문, Cramming More Components]
 summary: "Gordon Moore가 집적 회로의 최소 비용 지점에서 부품 수가 빠르게 증가할 것이라고 관찰하고 집적도의 경제적·기술적 효과를 전망한 1965년 논문."
 tags: [type/reference, domain/computer-history, domain/computer-architecture, status/active]
 created: 2026-07-16
-updated: 2026-07-16
+updated: 2026-07-18
+publication_year: 1965
+historical_layer: architecture
+capability_layers: [realized-performance, scalability]
 sources: ["Electronics 38(8), 19 April 1965", "Carnegie Mellon University access copy", "Intel Moore's Law retrospective"]
 source_id: ref-037
 source_kind: external

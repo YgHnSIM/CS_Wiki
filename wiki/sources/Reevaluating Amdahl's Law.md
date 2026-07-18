@@ -4,7 +4,10 @@ aliases: [Gustafson 1988, Gustafson's law paper, Gustafson-Barsis law, 구스타
 summary: "고정된 문제를 더 빨리 푸는 대신 병렬 자원에 맞춰 문제 크기를 늘리면 같은 시간에 더 많은 계산을 수행할 수 있다는 확대 크기 가속 관점을 제시한 1988년 논문."
 tags: [type/reference, domain/computer-architecture, domain/computer-history, status/active]
 created: 2026-07-16
-updated: 2026-07-16
+updated: 2026-07-18
+publication_year: 1988
+historical_layer: theory
+capability_layers: [scalability]
 sources: ["Communications of the ACM 31(5), 1988", "Carnegie Mellon University access copy", "John L. Gustafson author retrospective"]
 source_id: ref-045
 source_kind: external
@@ -73,6 +76,13 @@ Gustafson은 원문에서 암달 식의 오용이 대규모 병렬성에 대한 
 ## 위키 반영
 
 이 자료는 [[병렬 확장성]]을 자원 수와 가속비 하나로 설명하지 않고 고정한 조건에 따라 나누는 직접 근거다. [[병렬 컴퓨팅은 시간을 줄이는가 문제를 키우는가]]에서는 암달과 Gustafson을 승패 관계가 아니라 고정 작업량과 고정 시간이라는 두 반사실적 비교로 해석한다.
+
+## 관계
+
+| 관계 | 대상 | 설명 | 근거 |
+|---|---|---|---|
+| responds_to | [[Validity of the Single Processor Approach to Achieving Large Scale Computing Capabilities]] | 고정 크기 문제의 가속 상한에 문제 크기를 자원과 함께 늘리는 고정 시간 관점으로 응답한다. | [[Reevaluating Amdahl's Law]] |
+| enables | [[병렬 확장성]] | 지연 시간 감소와 동일 시간 안의 문제 규모 확대를 서로 다른 확장 능력으로 비교하게 한다. | [[Reevaluating Amdahl's Law]] |
 
 ## 출처
 

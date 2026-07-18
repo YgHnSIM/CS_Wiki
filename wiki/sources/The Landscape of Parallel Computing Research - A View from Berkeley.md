@@ -4,7 +4,10 @@ aliases: [Berkeley View, Berkeley parallel computing report, 병렬 컴퓨팅의
 summary: "전력·명령 수준 병렬성·메모리 병목으로 단일 프로세서 성능 향상의 수익이 감소한 상황에서 병렬 하드웨어와 소프트웨어를 함께 재설계해야 한다고 제안한 2006년 보고서."
 tags: [type/reference, domain/computer-architecture, domain/computer-science, status/active]
 created: 2026-07-16
-updated: 2026-07-16
+updated: 2026-07-18
+publication_year: 2006
+historical_layer: system
+capability_layers: [scalability, resource-efficiency]
 sources: ["UC Berkeley Technical Report EECS-2006-183", "UC Berkeley report page"]
 source_id: ref-040
 source_kind: external

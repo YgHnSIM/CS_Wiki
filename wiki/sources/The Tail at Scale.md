@@ -4,7 +4,10 @@ aliases: [Dean and Barroso 2013, Tail at Scale, 규모에서의 꼬리 지연]
 summary: "대규모 온라인 서비스에서 드문 구성요소 지연이 모든 응답을 기다리는 팬아웃을 통해 흔한 서비스 지연으로 증폭되는 원리와 꼬리 내성 기법을 정리한 2013년 논문."
 tags: [type/reference, domain/systems, status/active]
 created: 2026-07-16
-updated: 2026-07-16
+updated: 2026-07-18
+publication_year: 2013
+historical_layer: service
+capability_layers: [realized-performance, scalability, reliable-results]
 sources: ["Jeffrey Dean and Luiz André Barroso, The Tail at Scale, Communications of the ACM 56(2), 2013, pp. 74-80", "Google Research publication page", "University of Utah access copy"]
 source_id: ref-049
 source_kind: external
@@ -64,6 +67,12 @@ status: active
 ## 위키 반영
 
 이 자료는 [[꼬리 지연 시간]]을 평균과 분리된 서비스 성능 개념으로 정리하는 직접 근거다. [[The Datacenter as a Computer]]가 컴퓨팅의 경계를 시설과 서비스로 넓혔다면, 이 논문은 그 경계에서 구성요소의 분포가 어떻게 종단 능력으로 합성되는지를 보여준다. [[평균 성능은 왜 서비스의 컴퓨팅 능력을 설명하지 못하는가]]에서는 팬아웃, 백분위, 품질·자원 조건을 함께 분석한다.
+
+## 관계
+
+| 관계 | 대상 | 설명 | 근거 |
+|---|---|---|---|
+| responds_to | [[꼬리 지연 시간]] | 많은 구성요소에 팬아웃하는 서비스에서 드문 느린 응답이 종단 지연을 지배하는 문제에 중복·분산 기법으로 대응한다. | [[The Tail at Scale]] |
 
 ## 출처
 

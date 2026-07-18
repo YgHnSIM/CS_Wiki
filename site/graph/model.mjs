@@ -118,7 +118,7 @@ export function parseCuratedRelations(body = "", { pageTitle = "문서" } = {}) 
       return;
     }
 
-    const kind = cleanText(cells[columns.kind] || "").replaceAll("-", "_");
+    const kind = String(cells[columns.kind] || "").replace(/[`*]/g, "").trim().replaceAll("-", "_");
     if (!kind) return;
     if (!CURATED_RELATION_KINDS.includes(kind)) {
       throw new Error(`Unknown curated relation '${kind}' on '${pageTitle}' line ${lineIndex + 1}`);
@@ -131,11 +131,15 @@ export function parseCuratedRelations(body = "", { pageTitle = "문서" } = {}) 
     if (!note) {
       throw new Error(`Relation '${kind}' on '${pageTitle}' line ${lineIndex + 1} needs an explanation`);
     }
+    const evidence = columns.evidence >= 0 ? wikiTargets(cells[columns.evidence] || "") : [];
+    if (["responds_to", "enables", "precedes", "constrains"].includes(kind) && evidence.length === 0) {
+      throw new Error(`Historical relation '${kind}' on '${pageTitle}' line ${lineIndex + 1} needs direct evidence`);
+    }
     relations.push({
       kind,
       target,
       note,
-      evidence: columns.evidence >= 0 ? wikiTargets(cells[columns.evidence] || "") : [],
+      evidence,
       line: lineIndex + 1
     });
   });
@@ -203,7 +207,8 @@ export function buildKnowledgeGraph(pages, learningPaths, { lookup, urlFor = (ur
       publicationYear: parseYear(page.publicationYear),
       eventStart: parseYear(page.eventStart),
       eventEnd: parseYear(page.eventEnd),
-      layer: page.historicalLayer || null
+      layer: page.historicalLayer || null,
+      note: page.historicalNote || null
     },
     capabilityLayers: page.capabilityLayers || [],
     provenance: {

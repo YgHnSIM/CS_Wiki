@@ -157,6 +157,15 @@ class LintRegressionTests(unittest.TestCase):
                 "## 관련 항목\n"
             )
             write_page(root, "wiki/concepts/Bad Graph.md", bad)
+            missing_start = base_frontmatter(
+                "Missing Start",
+                "type/concept",
+                extra=(
+                    "event_end: 1959\n"
+                    f"historical_note: {'x' * 301}\n"
+                ),
+            ) + "## 출처\n\n## 관련 항목\n"
+            write_page(root, "wiki/concepts/Missing Start.md", missing_start)
             issues, _ = lint(root)
             codes = {issue.code for issue in issues if issue.path == "wiki/concepts/Bad Graph.md"}
             self.assertTrue(
@@ -172,6 +181,12 @@ class LintRegressionTests(unittest.TestCase):
                     "graph.relation_evidence",
                 }.issubset(codes)
             )
+            missing_start_codes = {
+                issue.code
+                for issue in issues
+                if issue.path == "wiki/concepts/Missing Start.md"
+            }
+            self.assertTrue({"graph.year_range", "graph.historical_note"}.issubset(missing_start_codes))
 
     def test_valid_relation_alias_pipes_and_duplicate_graph_ids(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
@@ -181,7 +196,8 @@ class LintRegressionTests(unittest.TestCase):
                 "## 관계\n\n"
                 "| 관계 | 대상 | 설명 | 근거 |\n"
                 "|---|---|---|---|\n"
-                "| enables | [[Target|표시 이름]] | 새 작업을 가능하게 한다. | |\n\n"
+                "| enables | [[Target|표시 이름]] | 새 작업을 가능하게 한다. | [[Target]] |\n\n"
+                "| responds_to | [[Target]] | 확인된 제약에 대응한다. | [[Target]] |\n\n"
                 "## 출처\n\n"
                 "## 관련 항목\n"
             )
@@ -191,6 +207,23 @@ class LintRegressionTests(unittest.TestCase):
             graph_issues = [issue for issue in issues if issue.code.startswith("graph.")]
             self.assertEqual(2, sum(issue.code == "graph.id_duplicate" for issue in graph_issues))
             self.assertFalse(any(issue.code.startswith("graph.relation_") for issue in graph_issues))
+
+    def test_historical_relation_requires_direct_evidence(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            target = base_frontmatter("Target", "type/concept") + "## 출처\n\n## 관련 항목\n"
+            source = base_frontmatter("Source", "type/concept") + (
+                "## 관계\n\n"
+                "| 관계 | 대상 | 설명 | 근거 |\n"
+                "|---|---|---|---|\n"
+                "| responds_to | [[Target]] | 확인된 제약에 대응한다. | |\n\n"
+                "## 출처\n\n"
+                "## 관련 항목\n"
+            )
+            write_page(root, "wiki/concepts/Target.md", target)
+            write_page(root, "wiki/concepts/Source.md", source)
+            issues, _ = lint(root)
+            self.assertTrue(any(issue.code == "graph.relation_evidence" for issue in issues))
 
     def test_local_raw_reference_is_allowed(self) -> None:
         with tempfile.TemporaryDirectory() as directory:

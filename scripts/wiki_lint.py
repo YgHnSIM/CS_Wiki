@@ -53,6 +53,7 @@ CURATED_RELATIONS = {
     "contradicts",
     "synthesizes",
 }
+HISTORICAL_RELATIONS = {"responds_to", "enables", "precedes", "constrains"}
 
 
 @dataclass
@@ -161,7 +162,7 @@ def lint_relation_table(page, resolver: Resolver, issues: list[Issue]) -> None:
                 return
             continue
 
-        kind = re.sub(r"[`*_]", "", cells[columns["관계"]] if columns["관계"] < len(cells) else "").strip().replace("-", "_")
+        kind = re.sub(r"[`*]", "", cells[columns["관계"]] if columns["관계"] < len(cells) else "").strip().replace("-", "_")
         if not kind:
             continue
         if kind not in CURATED_RELATIONS:
@@ -178,11 +179,14 @@ def lint_relation_table(page, resolver: Resolver, issues: list[Issue]) -> None:
         note = cells[columns["설명"]] if columns["설명"] < len(cells) else ""
         if not re.sub(r"[`*_]", "", note).strip():
             add(issues, "error", "graph.relation_note", page.rel, line_no, "관계 설명이 비어 있음")
-        if "근거" in columns and columns["근거"] < len(cells):
-            for evidence_name in re.findall(r"\[\[([^\]|#]+)", cells[columns["근거"]]):
-                evidence, evidence_kind = resolver.resolve(evidence_name.strip())
-                if not evidence or evidence_kind not in {"stem", "alias"}:
-                    add(issues, "error", "graph.relation_evidence", page.rel, line_no, f"관계 근거 문서를 찾을 수 없음: {evidence_name.strip()}")
+        evidence_cell = cells[columns["근거"]] if "근거" in columns and columns["근거"] < len(cells) else ""
+        evidence_names = re.findall(r"\[\[([^\]|#]+)", evidence_cell)
+        if kind in HISTORICAL_RELATIONS and not evidence_names:
+            add(issues, "error", "graph.relation_evidence", page.rel, line_no, f"역사 관계 {kind}에는 직접 근거 위키링크가 필요함")
+        for evidence_name in evidence_names:
+            evidence, evidence_kind = resolver.resolve(evidence_name.strip())
+            if not evidence or evidence_kind not in {"stem", "alias"}:
+                add(issues, "error", "graph.relation_evidence", page.rel, line_no, f"관계 근거 문서를 찾을 수 없음: {evidence_name.strip()}")
 
 
 def lint(root: Path) -> tuple[list[Issue], dict[str, int]]:
@@ -257,12 +261,17 @@ def lint(root: Path) -> tuple[list[Issue], dict[str, int]]:
                 add(issues, "error", "graph.year", page.rel, field_line(page.text, key_name), f"잘못된 역사 연도: {raw_year}")
         if "event_start" in years and "event_end" in years and years["event_start"] > years["event_end"]:
             add(issues, "error", "graph.year_range", page.rel, field_line(page.text, "event_end"), "event_end는 event_start보다 이를 수 없음")
+        if "event_end" in years and "event_start" not in years:
+            add(issues, "error", "graph.year_range", page.rel, field_line(page.text, "event_end"), "event_end에는 event_start가 필요함")
         historical_layer = parse_scalar(page.meta.get("historical_layer"))
         if historical_layer and historical_layer not in HISTORICAL_LAYERS:
             add(issues, "error", "graph.historical_layer", page.rel, field_line(page.text, "historical_layer"), f"허용되지 않은 historical_layer: {historical_layer}")
         for layer in parse_flow_list(page.meta.get("capability_layers")):
             if layer not in CAPABILITY_LAYERS:
                 add(issues, "error", "graph.capability_layer", page.rel, field_line(page.text, "capability_layers"), f"허용되지 않은 capability_layers 값: {layer}")
+        historical_note = parse_scalar(page.meta.get("historical_note")) or ""
+        if len(historical_note) > 300:
+            add(issues, "error", "graph.historical_note", page.rel, field_line(page.text, "historical_note"), "historical_note는 300자 이하여야 함")
 
         if page.path.parent.name == "sources":
             source_id = parse_scalar(page.meta.get("source_id"))

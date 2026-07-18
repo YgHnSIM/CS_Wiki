@@ -59,6 +59,13 @@ export const CURATED_RELATION_KINDS = Object.freeze([
   "synthesizes"
 ]);
 
+export const HISTORICAL_RELATION_KINDS = Object.freeze([
+  "responds_to",
+  "enables",
+  "precedes",
+  "constrains"
+]);
+
 export function parseYear(value) {
   if (value === undefined || value === null || value === "") return null;
   const year = Number(value);
@@ -97,8 +104,14 @@ export function validateGraphMetadata(page) {
   }
   const start = parseYear(page.eventStart);
   const end = parseYear(page.eventEnd);
+  if (end !== null && start === null) {
+    throw new Error(`event_end requires event_start on '${page.title}'`);
+  }
   if (start !== null && end !== null && start > end) {
     throw new Error(`event_start must not be later than event_end on '${page.title}'`);
+  }
+  if (page.historicalNote && String(page.historicalNote).length > 300) {
+    throw new Error(`historical_note must be 300 characters or fewer on '${page.title}'`);
   }
 }
 
@@ -119,6 +132,9 @@ export function validateKnowledgeGraph(graph) {
       throw new Error(`Graph edge '${edge.id}' references a missing node`);
     }
     if (!RELATION_META[edge.kind]) throw new Error(`Unknown graph relation '${edge.kind}'`);
+    if (edge.origin === "curated" && HISTORICAL_RELATION_KINDS.includes(edge.kind) && !(edge.evidence || []).length) {
+      throw new Error(`Historical graph edge '${edge.id}' requires direct evidence`);
+    }
   }
   return graph;
 }

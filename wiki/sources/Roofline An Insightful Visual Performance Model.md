@@ -4,7 +4,10 @@ aliases: [Williams-Waterman-Patterson 2009, Roofline performance model paper]
 summary: "연산 집약도와 메모리 대역폭을 결합해 프로그램의 달성 가능한 성능 상한과 계산·메모리 병목을 시각화한 Roofline 모델 논문."
 tags: [type/reference, domain/computer-architecture, domain/computer-science, status/active]
 created: 2026-07-15
-updated: 2026-07-16
+updated: 2026-07-18
+publication_year: 2009
+historical_layer: measurement
+capability_layers: [realized-performance, resource-efficiency]
 sources: ["2009_Williams_Waterman_Patterson_Roofline.pdf", "Communications of the ACM 52(4), 2009"]
 source_id: ref-034
 source_kind: external

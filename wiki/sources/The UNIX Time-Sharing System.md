@@ -4,7 +4,10 @@ aliases: [UNIX Time-Sharing System, Unix 1974, Ritchie Thompson Unix paper]
 summary: "Ritchie와 Thompson의 1974년 논문을 바탕으로 Unix의 파일 시스템, 셸, 프로세스, 파이프, 시스템 호출을 정리한 참고 자료."
 tags: [type/reference, domain/computer-history, domain/operating-systems, domain/software-engineering, status/active]
 created: 2026-07-10
-updated: 2026-07-10
+updated: 2026-07-18
+publication_year: 1974
+historical_layer: system
+capability_layers: [programmability]
 sources: ["Communications of the ACM 1974", "Bell System Technical Journal reprint"]
 source_id: ref-018
 source_kind: external

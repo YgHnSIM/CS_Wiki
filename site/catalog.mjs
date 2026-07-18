@@ -21,6 +21,75 @@ export const domainMeta = {
   "domain/web": "웹"
 };
 
+// Editorial periods for the historical lens. Numeric boundaries are stable
+// data contracts; titles and questions may evolve without changing URLs.
+export const historyPeriods = [
+  {
+    id: "before-1800",
+    start: null,
+    end: 1799,
+    title: "1800년 이전 · 형식화의 전사",
+    question: "수와 규칙을 반복 가능한 기호 절차로 어떻게 고정했는가?"
+  },
+  {
+    id: "1800-1935",
+    start: 1800,
+    end: 1935,
+    title: "1800–1935 · 기계와 기호",
+    question: "계산 절차를 기계와 논리 기호로 어떻게 옮겼는가?"
+  },
+  {
+    id: "1936-1945",
+    start: 1936,
+    end: 1945,
+    title: "1936–1945 · 계산 가능성과 저장 구상",
+    question: "기계적 절차의 경계와 프로그램 저장을 어떻게 정의했는가?"
+  },
+  {
+    id: "1946-1959",
+    start: 1946,
+    end: 1959,
+    title: "1946–1959 · 작동하는 기계와 자동 프로그래밍",
+    question: "범용 설계를 반복 가능한 프로그램 작성 능력으로 어떻게 바꿨는가?"
+  },
+  {
+    id: "1960-1979",
+    start: 1960,
+    end: 1979,
+    title: "1960–1979 · 집적, 복잡도와 시스템",
+    question: "늘어난 회로와 자원을 실제 프로그램 능력으로 어떻게 전환했는가?"
+  },
+  {
+    id: "1980-1999",
+    start: 1980,
+    end: 1999,
+    title: "1980–1999 · 아키텍처와 결과 계약",
+    question: "잠재 성능, 데이터 이동과 같은 답의 조건을 어떻게 함께 다뤘는가?"
+  },
+  {
+    id: "2000-2014",
+    start: 2000,
+    end: 2014,
+    title: "2000–2014 · 병렬성, 전력과 서비스 규모",
+    question: "코어와 서버를 늘릴 때 전력·통신·꼬리 지연을 어떻게 통제했는가?"
+  },
+  {
+    id: "2015-plus",
+    start: 2015,
+    end: null,
+    title: "2015+ · 특화와 조건부 성능",
+    question: "범용성을 조절하면서 특정 작업의 성능과 효율을 어떻게 높였는가?"
+  },
+  {
+    id: "undated",
+    start: null,
+    end: null,
+    title: "연도 미상 · 배치 대기와 시대 횡단",
+    question: "연도를 추정하지 않고 어떤 층위와 질문에 연결해 읽을 수 있는가?",
+    undated: true
+  }
+];
+
 export const learningPaths = [
   {
     slug: "computing-origins",

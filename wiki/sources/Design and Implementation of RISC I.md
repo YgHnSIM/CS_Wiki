@@ -4,7 +4,10 @@ aliases: [RISC I report, UCB/CSD-82-106, Berkeley RISC I]
 summary: "초기 VLSI 제약에서 단순하고 규칙적인 명령어 집합, 레지스터 윈도, 컴파일러와 구현 도구를 함께 설계하고 시뮬레이션과 실제 칩의 차이까지 보고한 1982년 기술 보고서."
 tags: [type/reference, domain/computer-architecture, domain/computer-history, status/active]
 created: 2026-07-16
-updated: 2026-07-16
+updated: 2026-07-18
+publication_year: 1982
+historical_layer: architecture
+capability_layers: [realized-performance, resource-efficiency]
 sources: ["UC Berkeley Technical Report UCB/CSD-82-106", "UC Berkeley EECS report page", "UC Berkeley Digital Collections record"]
 source_id: ref-044
 source_kind: external

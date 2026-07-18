@@ -4,7 +4,10 @@ aliases: [Wulf-McKee 1995, 메모리 장벽 논문, Memory wall paper]
 summary: "프로세서 속도와 DRAM 속도의 격차가 커지면 전체 실행 시간이 메모리 접근에 지배될 수 있다고 경고하며 메모리 장벽이라는 문제를 제기한 논문."
 tags: [type/reference, domain/computer-architecture, domain/computer-history, status/active]
 created: 2026-07-16
-updated: 2026-07-16
+updated: 2026-07-18
+publication_year: 1995
+historical_layer: architecture
+capability_layers: [realized-performance, scalability]
 sources: ["ACM SIGARCH Computer Architecture News 23(1), 1995", "University of Virginia repository record"]
 source_id: ref-039
 source_kind: external

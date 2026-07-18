@@ -4,7 +4,11 @@ aliases: [WWG, Preparation of Programs, 프로그램 준비, EDSAC programming t
 summary: "Wilkes, Wheeler, Gill의 EDSAC 프로그래밍 문헌을 바탕으로 서브루틴 라이브러리, 카탈로그, 오류 진단, 자동 프로그래밍을 API의 전사로 정리한 참고 자료."
 tags: [type/reference, domain/computer-history, domain/software-engineering, status/active]
 created: 2026-07-09
-updated: 2026-07-10
+updated: 2026-07-18
+publication_year: 1951
+historical_layer: software
+historical_note: "초판은 1951년이며 위키가 직접 대조한 접근 사본은 1957년 제2판이다."
+capability_layers: [programmability]
 sources: ["Internet Archive: programsforelect00wilk"]
 source_id: ref-001
 source_kind: external
@@ -36,6 +40,14 @@ status: active
 ## 위키 반영
 
 이 자료는 기존 [[서브루틴]], [[Wheeler Jump]], [[라이브러리]], [[디버깅]] 페이지를 현대 [[API]] 개념과 연결하는 데 쓰인다. 새 분석 페이지 [[서브루틴 라이브러리에서 API로]]는 이 자료를 중심으로, EDSAC의 서브루틴 체계가 어떻게 구현 은닉, 문서화, 호출 규약, 비용 정보, 오류 관찰성으로 확장되는지 정리한다.
+
+## 관계
+
+| 관계 | 대상 | 설명 | 근거 |
+|---|---|---|---|
+| responds_to | [[프로그래밍 가능성]] | 주소와 명령을 직접 관리해야 하는 초기 저장 프로그램 기계의 작성 비용에 체계적인 프로그램 준비법으로 대응한다. | [[The Preparation of Programs for an Electronic Digital Computer]] |
+| enables | [[서브루틴]] | 매개변수·복귀 규약을 갖춘 폐쇄형 서브루틴을 반복 가능한 작성 단위로 만든다. | [[The Preparation of Programs for an Electronic Digital Computer]] |
+| enables | [[라이브러리]] | 검증된 루틴을 카탈로그로 축적하고 다시 불러 쓰는 공용 프로그램 기반을 제시한다. | [[The Preparation of Programs for an Electronic Digital Computer]] |
 
 ## 출처
 

@@ -6,9 +6,10 @@ import MarkdownIt from "markdown-it";
 import anchor from "markdown-it-anchor";
 import { connectionSummary, createConnectionIndex, findConnectionPaths } from "./assets/connection-paths.js";
 import { buildLearningMap } from "./assets/learning-lines.js";
-import { domainMeta, learningPaths, statusMeta } from "./catalog.mjs";
+import { domainMeta, historyPeriods, learningPaths, statusMeta } from "./catalog.mjs";
 import { buildKnowledgeGraph, extractWikiLinks } from "./graph/model.mjs";
 import { buildSemanticAtlas } from "./graph/atlas.mjs";
+import { buildHistoricalLens } from "./graph/history.mjs";
 import { graphNodeId } from "./graph/schema.mjs";
 import { describeRelationship, indexGraphEdges, relationLabel, selectLocalGraph } from "./graph/selectors.mjs";
 import {
@@ -50,7 +51,9 @@ const assetHash = createHash("sha256")
   .update(await readFile(join(root, "site", "assets", "atlas-renderer.js")))
   .update(await readFile(join(root, "site", "assets", "atlas-state.js")))
   .update(await readFile(join(root, "site", "assets", "atlas-worker.js")))
-  .update(await readFile(join(root, "site", "assets", "semantic-atlas.js")));
+  .update(await readFile(join(root, "site", "assets", "semantic-atlas.js")))
+  .update(await readFile(join(root, "site", "assets", "history-state.js")))
+  .update(await readFile(join(root, "site", "assets", "history-lens.js")));
 
 const categoryMeta = {
   sources: { label: "정규 소스", description: "raw에 보존한 원본을 직접 처리한 정규 소스 노트" },
@@ -124,6 +127,7 @@ const pages = await Promise.all(files.map(async (filePath) => {
     eventStart: parseScalar(parsed.data.event_start),
     eventEnd: parseScalar(parsed.data.event_end),
     historicalLayer: parseScalar(parsed.data.historical_layer),
+    historicalNote: parseScalar(parsed.data.historical_note),
     capabilityLayers: parseFlowList(parsed.data.capability_layers),
     sourceKind: parseScalar(parsed.data.source_kind),
     primarySources: parseFlowList(parsed.data.primary_sources),
@@ -173,6 +177,7 @@ const knowledgeGraph = buildKnowledgeGraph(pages, resolvedLearningPaths, {
 const knowledgeGraphEdgesByNodeId = indexGraphEdges(knowledgeGraph);
 const learningMap = buildLearningMap(knowledgeGraph);
 const semanticAtlas = buildSemanticAtlas(knowledgeGraph, { domainLabels: domainMeta });
+const historicalLens = buildHistoricalLens(knowledgeGraph, { periods: historyPeriods });
 
 function connectionContext(context = {}) {
   const compact = {};
@@ -230,6 +235,11 @@ const assetVersion = assetHash
       contentVersion: semanticAtlas.manifest.contentVersion,
       limits: semanticAtlas.manifest.limits,
       stats: semanticAtlas.manifest.stats
+    },
+    historicalLens: {
+      contentVersion: historicalLens.manifest.contentVersion,
+      limits: historicalLens.manifest.limits,
+      stats: historicalLens.manifest.stats
     }
   }))
   .digest("hex")
@@ -241,7 +251,12 @@ for (const payload of [
   semanticAtlas.lookup,
   ...Object.values(semanticAtlas.shards),
   ...Object.values(semanticAtlas.corridors),
-  ...Object.values(semanticAtlas.focusShards)
+  ...Object.values(semanticAtlas.focusShards),
+  historicalLens.manifest,
+  historicalLens.overview,
+  ...Object.values(historicalLens.lookupShards),
+  ...Object.values(historicalLens.shards),
+  ...Object.values(historicalLens.transitionDetails)
 ]) payload.contentVersion = assetVersion;
 
 const headingSlugs = new Map();
@@ -491,6 +506,7 @@ function homePage() {
         <a href="${withBase("/map/learning/")}">학습 노선 지도</a>
         <a href="${withBase("/map/")}">지식 연결 찾기</a>
         <a href="${withBase("/map/atlas/")}">전체 의미 지도</a>
+        <a href="${withBase("/map/history/")}">역사·인과 렌즈</a>
       </div>
       <dl class="hero-stats">
         <div><dt>전체 문서</dt><dd>${pages.length}</dd></div>
@@ -791,6 +807,7 @@ function relationshipRail(local) {
     <a class="relationship-jump-link" href="#relationships">관계 지도에서 보기</a>
     <a class="relationship-jump-link" href="${withBase(`/map/?from=${encodeURIComponent(local.focus.id)}`)}">다른 문서와 연결 찾기</a>
     <a class="relationship-jump-link" href="${withBase(`/map/atlas/?focus=${encodeURIComponent(local.focus.id)}`)}">전체 지도에서 이 문서 보기</a>
+    <a class="relationship-jump-link" href="${withBase(`/map/history/?event=${encodeURIComponent(local.focus.id)}`)}">역사 렌즈에서 이 문서 보기</a>
   </section>`;
 }
 
@@ -968,7 +985,7 @@ function connectionExplorerPage() {
       <div><p class="eyebrow"><a href="${withBase("/")}">홈</a> / KNOWLEDGE ROUTER</p><h1>두 문서는 어떻게 연결되는가</h1><p>두 지식 사이의 최단 선만 보여주지 않습니다. 각 중간 문서와 관계의 방향, 그 연결을 선택한 이유를 읽을 수 있는 경로로 번역합니다.</p></div>
       <dl><div><dt>탐색 문서</dt><dd>${selectable.length}</dd></div><div><dt>경유 가능 문서</dt><dd>${connectionGraph.stats.nodes}</dd></div><div><dt>유형 관계</dt><dd>${connectionGraph.stats.edges.toLocaleString("ko-KR")}</dd></div></dl>
     </section>
-    <nav class="map-mode-nav" aria-label="지식 지도 보기"><a aria-current="page" href="${withBase("/map/")}">연결 경로</a><a href="${withBase("/map/learning/")}">학습 노선</a><a href="${withBase("/map/atlas/")}">전체 의미 지도</a></nav>
+    <nav class="map-mode-nav" aria-label="지식 지도 보기"><a aria-current="page" href="${withBase("/map/")}">연결 경로</a><a href="${withBase("/map/learning/")}">학습 노선</a><a href="${withBase("/map/atlas/")}">전체 의미 지도</a><a href="${withBase("/map/history/")}">역사·인과</a></nav>
     <section class="connection-builder" aria-labelledby="connection-builder-title">
       <div class="connection-builder-intro"><p>SELECT TWO DOCUMENTS</p><h2 id="connection-builder-title">관계가 번역되는 경로 찾기</h2><p>기본 렌즈는 관련 항목과 학습 순서를 우선하고, 원전 허브와 자동 본문 언급을 지름길로 과대평가하지 않습니다.</p></div>
       <form class="connection-form" data-connection-form hidden>
@@ -1093,7 +1110,7 @@ function learningMapPage({ defaultPath, defaultStation, canonicalPath = "/map/le
       <div><p class="eyebrow"><a href="${withBase("/")}">홈</a> / LEARNING TRANSIT</p><h1>지식을 노선으로 읽는다</h1><p>각 학습 경로는 읽는 순서를 가진 노선이고, 여러 질문에 다시 등장하는 문서는 갈아탈 수 있는 환승역입니다.</p></div>
       <dl><div><dt>노선</dt><dd>${resolvedLearningPaths.length}</dd></div><div><dt>고유 역</dt><dd>${stations}</dd></div><div><dt>환승역</dt><dd>${transferStations}</dd></div><div><dt>경로 밖 문서</dt><dd>${Math.max(0, pages.length - stations)}</dd></div></dl>
     </section>
-    <nav class="map-mode-nav" aria-label="지식 지도 보기"><a href="${withBase("/map/")}">연결 경로</a><a aria-current="page" href="${withBase("/map/learning/")}">학습 노선</a><a href="${withBase("/map/atlas/")}">전체 의미 지도</a></nav>
+    <nav class="map-mode-nav" aria-label="지식 지도 보기"><a href="${withBase("/map/")}">연결 경로</a><a aria-current="page" href="${withBase("/map/learning/")}">학습 노선</a><a href="${withBase("/map/atlas/")}">전체 의미 지도</a><a href="${withBase("/map/history/")}">역사·인과</a></nav>
     <section class="learning-transit-shell">
       <aside class="learning-line-board" aria-labelledby="learning-lines-title">
         <header><p>LINE BOARD</p><h2 id="learning-lines-title">학습 노선 ${resolvedLearningPaths.length}개</h2><span>${stationOccurrences}개 역 출현</span></header>
@@ -1275,7 +1292,7 @@ function semanticAtlasPage({ clusterId = "", canonicalPath = "/map/atlas/" } = {
       <div><p class="eyebrow"><a href="${withBase("/")}">홈</a> / SEMANTIC ATLAS</p><h1>지식의 구조를 <span>군집과 회랑으로<br>읽는다.</span></h1><p>전체 문서를 한 화면에 흩뿌리는 대신 의미가 모이는 지역, 지역을 잇는 관계, 한 문서의 직접·간접 맥락을 단계적으로 확대합니다.</p></div>
       <dl><div><dt>탐색 문서</dt><dd>${documentCount}</dd></div><div><dt>의미 군집</dt><dd>${clusters.length}</dd></div><div><dt>군집 회랑</dt><dd>${overviewEdges.length}</dd></div><div><dt>유형 관계</dt><dd>${relationCount.toLocaleString("ko-KR")}</dd></div></dl>
     </section>
-    <nav class="map-mode-nav" aria-label="지식 지도 보기"><a href="${withBase("/map/")}">연결 경로</a><a href="${withBase("/map/learning/")}">학습 노선</a><a aria-current="page" href="${withBase("/map/atlas/")}">전체 의미 지도</a></nav>
+    <nav class="map-mode-nav" aria-label="지식 지도 보기"><a href="${withBase("/map/")}">연결 경로</a><a href="${withBase("/map/learning/")}">학습 노선</a><a aria-current="page" href="${withBase("/map/atlas/")}">전체 의미 지도</a><a href="${withBase("/map/history/")}">역사·인과</a></nav>
     <form class="atlas-controls" data-atlas-controls hidden>
       <div class="atlas-search-shell"><label>문서 찾기<input type="search" data-atlas-search autocomplete="off" role="combobox" aria-autocomplete="list" aria-haspopup="listbox" aria-expanded="false" aria-controls="atlas-search-results" placeholder="제목·별칭·설명 검색"></label><div id="atlas-search-results" class="atlas-search-results" data-atlas-search-results aria-live="polite"></div></div>
       ${atlasFacetControl("domain", "주제")}
@@ -1311,6 +1328,163 @@ function semanticAtlasPage({ clusterId = "", canonicalPath = "/map/atlas/" } = {
   });
 }
 
+const historyNodesById = new Map(knowledgeGraph.nodes.map((node) => [node.id, node]));
+const historyRangeCount = Object.values(historicalLens.lookupShards)
+  .flatMap((shard) => shard.entries)
+  .filter((event) => event.time?.shape === "range").length;
+
+function historyTimeText(event = {}) {
+  const time = event.time || {};
+  const status = time.status || event.timeStatus || "undated";
+  const anchorYear = time.anchorYear ?? event.anchorYear ?? null;
+  if (status === "undated" || anchorYear === null) return "연도 미상";
+  const publication = time.publicationYear ? `출판 ${time.publicationYear}` : "";
+  if (time.eventStart !== null && time.eventStart !== undefined) {
+    const range = time.eventEnd && time.eventEnd !== time.eventStart
+      ? `${time.eventStart}–${time.eventEnd}`
+      : time.openEnd ? `${time.eventStart}–` : `${time.eventStart}`;
+    return publication && time.publicationYear !== time.eventStart ? `사건 ${range} · ${publication}` : `사건 ${range}`;
+  }
+  return publication || `${anchorYear}`;
+}
+
+function historyPeriodRoute(period, page = 1) {
+  return page > 1 ? `/map/history/${period.id}/${page}/` : `/map/history/${period.id}/`;
+}
+
+function historyEraListHtml(activePeriodId = "") {
+  return `<ol class="history-era-list">${historicalLens.manifest.periods.map((period) => `<li><a href="${withBase(historyPeriodRoute(period))}"${period.id === activePeriodId ? ' aria-current="page"' : ""}><span>${escapeHtml(period.label || period.title || period.id)}</span><strong>${period.eventCount}</strong><small>${period.transitionCount || 0}개 전환 · ${period.pageCount}개 조각</small></a></li>`).join("")}</ol>`;
+}
+
+function historyEventListHtml(events = []) {
+  if (!events.length) return '<p class="history-empty">이 조각에는 배치된 문서가 없습니다.</p>';
+  return `<ol class="history-event-ledger">${events.map((event) => `<li class="history-event-card" data-history-lane="${escapeHtml(event.lane || "unclassified")}" data-history-year="${event.time?.anchorYear ?? ""}"><button type="button" data-history-action="event" data-history-id="${escapeHtml(event.id)}"><time>${escapeHtml(historyTimeText(event))}</time><strong>${escapeHtml(event.title)}</strong><span>${escapeHtml(atlasFacetMeta.historical[event.lane] || "층위 미분류")}${event.capabilityLayers?.length ? ` · ${event.capabilityLayers.map((layer) => atlasFacetMeta.capability[layer] || layer).join(" · ")}` : ""}</span></button><a href="${escapeHtml(event.url)}">문서 읽기</a>${event.time?.note ? `<p>${escapeHtml(event.time.note)}</p>` : ""}</li>`).join("")}</ol>`;
+}
+
+function historyRoleRecords(transition, key) {
+  const value = transition?.roles?.[key];
+  return Array.isArray(value) ? value : value ? [value] : [];
+}
+
+function historyRoleInline(records, fallback) {
+  if (!records.length) return `<span>${escapeHtml(fallback)}</span>`;
+  return records.map((record) => {
+    const full = historyNodesById.get(record.id);
+    const url = record.url || full?.url || withBase(`/map/history/?event=${encodeURIComponent(record.id)}`);
+    return `<a href="${escapeHtml(url)}">${escapeHtml(record.title || full?.title || record.id)}</a>`;
+  }).join(", ");
+}
+
+function historyTransitionRolesHtml(transition = {}) {
+  if (transition.type === "response" || transition.type === "enablement") {
+    return `<div class="history-transition-roles"><div><span>한계</span><p>${historyRoleInline(historyRoleRecords(transition, "limitation"), "아직 연결되지 않음")}</p></div><i aria-hidden="true">→</i><div><span>대응</span><p>${historyRoleInline(historyRoleRecords(transition, "response"), "아직 연결되지 않음")}</p></div><i aria-hidden="true">→</i><div><span>새 능력</span><p>${historyRoleInline(historyRoleRecords(transition, "capability"), "아직 연결되지 않음")}</p></div></div>`;
+  }
+  if (transition.type === "precedes") {
+    return `<div class="history-transition-roles history-transition-roles--two"><div><span>선행</span><p>${historyRoleInline(historyRoleRecords(transition, "before"), "선행 문서")}</p></div><i aria-hidden="true">→</i><div><span>후행</span><p>${historyRoleInline(historyRoleRecords(transition, "after"), "후행 문서")}</p></div></div>`;
+  }
+  return `<div class="history-transition-roles history-transition-roles--two"><div><span>제약</span><p>${historyRoleInline(historyRoleRecords(transition, "constraint"), "제약 문서")}</p></div><i aria-hidden="true">→</i><div><span>제약 대상</span><p>${historyRoleInline(historyRoleRecords(transition, "constrained"), "제약 대상")}</p></div></div>`;
+}
+
+function historyTransitionKindText(transition = {}) {
+  if (transition.type === "precedes") return "검토된 선후";
+  if (transition.type === "constraint") return "다음 제약";
+  if (transition.type === "enablement") return "대응 → 새 능력";
+  return transition.completeness === "complete" ? "한계 → 대응 → 새 능력" : "한계 → 대응";
+}
+
+function historyTransitionEvidenceHtml(transition = {}) {
+  const notes = [...new Set((transition.edges || []).flatMap((edge) => edge.notes || (edge.note ? [edge.note] : [])).filter(Boolean))];
+  const evidenceIds = [...new Set((transition.edges || []).flatMap((edge) => edge.evidence || []))];
+  const evidence = evidenceIds.map((id) => historyNodesById.get(id)).filter(Boolean);
+  if (!notes.length && !evidence.length) return "";
+  return `<div class="history-transition-evidence">${notes.map((note) => `<p>${escapeHtml(note)}</p>`).join("")}${evidence.length ? `<p><span>근거</span> ${evidence.map((node) => `<a href="${escapeHtml(node.url)}">${escapeHtml(node.title)}</a>`).join(", ")}</p>` : ""}</div>`;
+}
+
+function historyTransitionTruncationHtml(transition = {}) {
+  const detail = transition.detail;
+  if (detail?.kind !== "paginated" || !detail.truncated) return "";
+  const response = historyRoleRecords(transition, "response")[0];
+  const fallback = response?.url
+    ? `<a href="${escapeHtml(response.url)}">${escapeHtml(response.title || "대응 문서")}의 관계 표에서 전체 읽기</a>`
+    : "연결된 문서의 관계 표에서 전체 내용을 확인할 수 있습니다.";
+  return `<p class="history-transition-truncation" data-history-transition-detail
+    data-detail-route="${escapeHtml(detail.route || "")}"
+    data-detail-pages="${Number(detail.pageCount || 0)}"
+    data-detail-items="${Number(detail.itemCount || 0)}"
+    data-detail-roles="${Number(detail.roleNodeCount || 0)}"
+    data-detail-edges="${Number(detail.edgeCount || 0)}">대표 ${Number(transition.edges?.length || 0)}개 관계만 표시합니다. 전체 ${Number(detail.edgeCount || 0)}개 관계는 ${Number(detail.pageCount || 0)}개 상세 조각으로 나뉩니다. ${fallback}</p>`;
+}
+
+function historyTransitionText(transition = {}) {
+  if (transition.type === "response" || transition.type === "enablement") {
+    const limit = historyRoleRecords(transition, "limitation").map((item) => item.title).join(", ") || "한계 미기록";
+    const response = historyRoleRecords(transition, "response").map((item) => item.title).join(", ") || "대응 미기록";
+    const capability = historyRoleRecords(transition, "capability").map((item) => item.title).join(", ") || "새 능력 미기록";
+    return `${limit} → ${response} → ${capability}`;
+  }
+  if (transition.type === "precedes") {
+    return `${historyRoleRecords(transition, "before")[0]?.title || "선행 문서"} → ${historyRoleRecords(transition, "after")[0]?.title || "후행 문서"}`;
+  }
+  return `${historyRoleRecords(transition, "constraint")[0]?.title || "제약"} → ${historyRoleRecords(transition, "constrained")[0]?.title || "제약 대상"}`;
+}
+
+function historyTransitionListHtml(transitions = []) {
+  if (!transitions.length) return '<p class="history-empty">검토된 인과·역사 전환이 아직 없습니다.</p>';
+  return `<ol class="history-transition-list">${transitions.map((transition) => {
+    const note = transition.edges?.map((edge) => edge.note).find(Boolean) || "편집 관계의 방향과 근거를 확인합니다.";
+    return `<li><button type="button" data-history-action="transition" data-history-id="${escapeHtml(transition.id)}"><span>${escapeHtml(historyTransitionKindText(transition))}</span><strong>${escapeHtml(historyTransitionText(transition))}</strong><small>${escapeHtml(note)}</small></button>${historyTransitionRolesHtml(transition)}${historyTransitionEvidenceHtml(transition)}${historyTransitionTruncationHtml(transition)}</li>`;
+  }).join("")}</ol>`;
+}
+
+function historyPaginationHtml(period, page = 1) {
+  if (!period || period.pageCount <= 1) return "";
+  return `<nav class="history-pagination" aria-label="${escapeHtml(period.label)} 문서 조각">${Array.from({ length: period.pageCount }, (_, index) => index + 1).map((number) => `<a href="${withBase(historyPeriodRoute(period, number))}"${number === page ? ' aria-current="page"' : ""}>${number}</a>`).join("")}</nav>`;
+}
+
+function historicalLensPage({ periodId = "", page = 1, canonicalPath = "/map/history/" } = {}) {
+  const period = periodId ? historicalLens.manifest.periods.find((record) => record.id === periodId) : null;
+  if (periodId && !period) throw new Error(`History route references missing period '${periodId}'`);
+  const shardId = period ? `${period.id}--page-${String(page).padStart(4, "0")}` : "";
+  const shard = shardId ? historicalLens.shards[shardId] : null;
+  if (period && (!shard || page < 1 || page > period.pageCount)) throw new Error(`History route references missing shard '${shardId}'`);
+  const events = shard?.events || historicalLens.overview.periods.flatMap((record) => record.sampleEvents || []);
+  const transitions = shard?.transitions || historicalLens.overview.transitions || [];
+  const title = period?.title || period?.label || "전체 시대와 병목 이동";
+  const summary = period?.question || "시대가 바뀔 때 사라진 병목보다 새로 드러난 병목과 대응을 함께 읽습니다.";
+  const rangeCount = historyRangeCount;
+  const content = `<div class="history-lens-page section-frame" data-history-lens
+    data-history-manifest-url="${withBase("/data/history/manifest.json")}?v=${assetVersion}"
+    data-history-root-url="${withBase("/map/history/")}"${period ? ` data-default-era="${escapeHtml(period.id)}" data-default-era-path="${withBase(canonicalPath)}" data-default-part="${escapeHtml(shardId)}" data-default-part-path="${withBase(canonicalPath)}"` : ""}>
+    <section class="history-hero"><div><p class="eyebrow"><a href="${withBase("/")}">홈</a> / HISTORICAL CAUSAL LENS</p><h1>컴퓨팅 능력은 <span>병목의 이동으로<br>발달했다.</span></h1><p>연도만 나열하지 않습니다. 어떤 한계가 어떤 대응을 낳았고, 그 대응이 새 능력과 다음 제약을 어떻게 만들었는지 원전 관계로 읽습니다.</p></div><dl><div><dt>연도 기록 문서</dt><dd>${historicalLens.manifest.stats.datedDocuments}</dd></div><div><dt>기간 사건</dt><dd>${rangeCount}</dd></div><div><dt>검토 전환</dt><dd>${historicalLens.manifest.stats.transitions}</dd></div><div><dt>연도 미기록</dt><dd>${historicalLens.manifest.stats.undatedDocuments}</dd></div></dl></section>
+    <nav class="map-mode-nav" aria-label="지식 지도 보기"><a href="${withBase("/map/")}">연결 경로</a><a href="${withBase("/map/learning/")}">학습 노선</a><a href="${withBase("/map/atlas/")}">전체 의미 지도</a><a aria-current="page" href="${withBase("/map/history/")}">역사·인과</a></nav>
+    <form class="history-controls" data-history-controls hidden>
+      <div class="history-search-shell"><label>문서 찾기<input type="search" data-history-search autocomplete="off" role="combobox" aria-autocomplete="list" aria-haspopup="listbox" aria-expanded="false" aria-controls="history-search-results" placeholder="문서·전환·연도 검색"></label><div id="history-search-results" class="history-search-results" data-history-search-results role="listbox" aria-label="역사 문서와 전환 검색 결과" aria-live="polite"></div></div>
+      <label>시기<select data-history-era><option value="">전체 시대</option>${historicalLens.manifest.periods.map((record) => `<option value="${escapeHtml(record.id)}"${record.id === periodId ? " selected" : ""}>${escapeHtml(record.label || record.title || record.id)}</option>`).join("")}</select></label>
+      <label>역사 층위<select data-history-layer><option value="">전체 층위</option>${historicalLens.manifest.lanes.map((lane) => `<option value="${escapeHtml(lane.id)}">${escapeHtml(lane.label)}</option>`).join("")}</select></label>
+      <label>능력 층위<select data-history-capability><option value="">전체 능력</option>${historicalLens.manifest.facets.capabilities.map((capability) => `<option value="${escapeHtml(capability)}">${escapeHtml(atlasFacetMeta.capability[capability] || capability)}</option>`).join("")}</select></label>
+      <label>표시<select data-history-display><option value="all">문서와 전환</option><option value="events">문서만</option><option value="transitions">전환만</option></select></label>
+      <button type="button" data-history-reset>초기화</button>
+    </form>
+    <div class="history-state-bar"><nav data-history-breadcrumb aria-label="역사 렌즈 위치"><a href="${withBase("/map/history/")}">전체 시대</a>${period ? `<span aria-hidden="true">/</span><span>${escapeHtml(period.label || period.id)}</span>${page > 1 ? `<span aria-hidden="true">/</span><span>${page}번째 조각</span>` : ""}` : ""}</nav><output data-history-status aria-live="polite">${period ? `${events.length}개 문서와 ${transitions.length}개 전환` : `${historicalLens.manifest.periods.length}개 시대와 ${historicalLens.manifest.stats.transitions}개 검토 전환`}</output></div>
+    <div class="history-workspace">
+      <aside class="history-era-board"><header><p>ERA BOARD</p><h2>시대와 질문</h2></header><div data-history-era-list>${historyEraListHtml(periodId)}</div></aside>
+      <main class="history-stage" data-history-stage aria-labelledby="history-stage-title"><header><div><p data-history-stage-kicker>${period ? "ERA SWIMLANES" : "HISTORY OVERVIEW"}</p><h2 id="history-stage-title" data-history-stage-title>${escapeHtml(title)}</h2><p data-history-stage-summary>${escapeHtml(summary)}</p></div></header><div class="history-time-axis" aria-hidden="true"><span>한계</span><i>→</i><span>대응</span><i>→</i><span>새 능력</span><i>→</i><span>다음 제약</span></div><section class="history-events" aria-labelledby="history-events-title"><h3 id="history-events-title">${period ? "연도 × 역사 층위" : "시대별 대표 문서"}</h3><div data-history-event-list>${historyEventListHtml(events)}</div></section><section class="history-transitions" aria-labelledby="history-transitions-title"><h3 id="history-transitions-title">검토된 인과 전환</h3><div data-history-transition-list>${historyTransitionListHtml(transitions)}</div></section>${historyPaginationHtml(period, page)}</main>
+      <aside class="history-inspector" data-history-inspector aria-labelledby="history-inspector-title"><p>HOW TO READ</p><h2 id="history-inspector-title">${escapeHtml(title)}</h2><p>${escapeHtml(summary)}</p><dl><div><dt>문서</dt><dd>${events.length}</dd></div><div><dt>전환</dt><dd>${transitions.length}</dd></div></dl><p>문서를 선택하면 사건·출판 시점과 층위를, 전환을 선택하면 저장된 방향·설명·근거를 읽습니다.</p></aside>
+    </div>
+    <div class="history-error" data-history-error hidden role="alert"><h2>역사 지도 조각을 불러오지 못했습니다</h2><p>현재 정적 문서와 시대 링크는 계속 사용할 수 있습니다.</p><button type="button" data-history-retry>다시 시도</button></div>
+    <details class="history-static-disclosure"><summary>텍스트 연대기와 전환 목록으로 읽기</summary><div class="history-static-view"><section><h2>문서</h2>${historyEventListHtml(events)}</section><section><h2>전환</h2>${historyTransitionListHtml(transitions)}</section>${historyPaginationHtml(period, page)}</div></details>
+    <noscript><p class="history-noscript">자바스크립트 없이도 시대별 경로, 문서 링크와 검토된 관계 설명을 읽을 수 있습니다.</p></noscript>
+  </div>`;
+  return layout({
+    title: period ? `${period.label || period.id} · 역사·인과 렌즈` : "컴퓨팅 능력의 역사·인과 렌즈",
+    description: period ? `${period.label || period.id}의 컴퓨팅사 문서와 검토된 인과 전환.` : "컴퓨팅 능력의 발전을 연도, 역사 층위와 한계-대응-새 능력의 인과 전환으로 읽는 지도.",
+    content,
+    canonicalPath,
+    bodyClass: "history-lens-page-body",
+    pageModules: ["history-lens.js"]
+  });
+}
+
 function redirectPage(target) {
   return `<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="robots" content="noindex"><meta http-equiv="refresh" content="0;url=${escapeHtml(withBase(target))}"><link rel="canonical" href="${escapeHtml(withBase(target))}"><title>이동 중 · CS Wiki</title></head><body><p><a href="${escapeHtml(withBase(target))}">새 주소로 이동</a></p></body></html>`;
 }
@@ -1330,6 +1504,17 @@ function atlasDataOutputPath(url, label) {
     throw new Error(`Unsafe semantic atlas ${label} path '${url}'`);
   }
   return join("data", "atlas", ...parts);
+}
+
+function historyDataOutputPath(url, label) {
+  const pathname = String(url || "").split(/[?#]/, 1)[0].replaceAll("\\", "/");
+  const parts = pathname.split("/");
+  let decodedParts = [];
+  try { decodedParts = parts.map((part) => decodeURIComponent(part)); } catch { decodedParts = [".."]; }
+  if (!pathname || pathname.startsWith("/") || decodedParts.includes("..") || decodedParts.includes(".") || parts.some((part) => !part)) {
+    throw new Error(`Unsafe historical lens ${label} path '${url}'`);
+  }
+  return join("data", "history", ...parts);
 }
 
 await rm(distRoot, { recursive: true, force: true });
@@ -1366,6 +1551,18 @@ for (const cluster of atlasClusterEntries()) {
     clusterId: cluster.id,
     canonicalPath: `/map/atlas/${cluster.id}/`
   }));
+}
+await output(join("map", "history", "index.html"), historicalLensPage());
+for (const period of historicalLens.manifest.periods) {
+  if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(period.id)) throw new Error(`Unsafe history period id '${period.id}'`);
+  for (let page = 1; page <= period.pageCount; page += 1) {
+    const route = historyPeriodRoute(period, page);
+    await output(join(...route.split("/").filter(Boolean), "index.html"), historicalLensPage({
+      periodId: period.id,
+      page,
+      canonicalPath: route
+    }));
+  }
 }
 for (const page of pages) {
   await output(join(page.category, page.slug, "index.html"), articlePage(page));
@@ -1410,6 +1607,28 @@ for (const [id, payload] of Object.entries(semanticAtlas.focusShards)) {
   const url = semanticAtlas.manifest.routes.focus.replace("{shard}", encodeURIComponent(payload.shardId || id));
   await output(atlasDataOutputPath(url, `focus '${id}'`), JSON.stringify(payload));
 }
+await output(join("data", "history", "manifest.json"), JSON.stringify(historicalLens.manifest));
+await output(historyDataOutputPath(historicalLens.manifest.overview.url, "overview"), JSON.stringify(historicalLens.overview));
+for (const [bucket, payload] of Object.entries(historicalLens.lookupShards)) {
+  if (!/^\d+$/.test(bucket)) throw new Error(`Unsafe history lookup bucket '${bucket}'`);
+  const url = historicalLens.manifest.lookup.route.replaceAll("{bucket}", bucket);
+  await output(historyDataOutputPath(url, `lookup bucket '${bucket}'`), JSON.stringify(payload));
+}
+for (const record of historicalLens.manifest.shards) {
+  const payload = historicalLens.shards[record.id];
+  if (!payload) throw new Error(`History manifest references missing shard '${record.id}'`);
+  await output(historyDataOutputPath(record.url, `shard '${record.id}'`), JSON.stringify(payload));
+}
+for (const payload of Object.values(historicalLens.transitionDetails)) {
+  if (!/^(?:node-transition|precedes|constraint)-[a-f0-9]{16}$/.test(payload.transitionId || "")) {
+    throw new Error(`Unsafe history transition detail id '${payload.transitionId}'`);
+  }
+  const page = String(Number(payload.page)).padStart(Number(historicalLens.manifest.transitionDetails.pageWidth || 4), "0");
+  const url = historicalLens.manifest.transitionDetails.route
+    .replaceAll("{transition}", encodeURIComponent(payload.transitionId))
+    .replaceAll("{page}", page);
+  await output(historyDataOutputPath(url, `transition detail '${payload.id}'`), JSON.stringify(payload));
+}
 await output(".nojekyll", "");
 await output("404.html", layout({
   title: "문서를 찾을 수 없습니다",
@@ -1426,7 +1645,9 @@ if (siteUrl) {
     "/map/",
     "/map/learning/",
     "/map/atlas/",
+    "/map/history/",
     ...atlasClusterEntries().map((cluster) => `/map/atlas/${cluster.id}/`),
+    ...historicalLens.manifest.shards.map((record) => record.route),
     ...resolvedLearningPaths.map((path) => `/map/learning/${path.slug}/`),
     ...resolvedLearningPaths.map((path) => `/paths/${path.slug}/`),
     ...pages.map((page) => page.url)

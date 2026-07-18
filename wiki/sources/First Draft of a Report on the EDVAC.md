@@ -4,7 +4,10 @@ aliases: [EDVAC 보고서, First Draft, von Neumann report]
 summary: "EDVAC 설계 보고서를 중심으로 저장 프로그램 컴퓨터의 논리 구조, 폰 노이만 구조, 설계상 최초성을 정리한 참고 자료."
 tags: [type/reference, domain/computer-history, domain/computer-architecture, status/active]
 created: 2026-07-10
-updated: 2026-07-10
+updated: 2026-07-18
+publication_year: 1945
+historical_layer: architecture
+capability_layers: [programmability]
 sources: ["Internet Archive: firstdraftofrepo00vonn", "Williams 1993", "Godfrey and Hendry 1993"]
 source_id: ref-006
 source_kind: external
@@ -34,6 +37,13 @@ status: active
 ## 위키 반영
 
 이 참고 자료는 [[EDVAC]], [[폰 노이만 구조]], [[저장 프로그램 개념의 여러 기원]], [[EDSAC은 무엇의 최초인가]]를 정리하는 근거로 사용한다. 특히 "최초" 표현은 설계, 첫 실행, 실용적 운영, 일반 사용자 서비스라는 기준을 분리해 다룬다.
+
+## 관계
+
+| 관계 | 대상 | 설명 | 근거 |
+|---|---|---|---|
+| responds_to | [[프로그래밍 가능성]] | 새 작업을 외부 배선과 장치 설정으로 부여하던 변경 비용을 내부 기억장치의 기호 변경 문제로 옮긴다. | [[First Draft of a Report on the EDVAC]] |
+| enables | [[저장 프로그램 컴퓨터]] | 명령과 수를 같은 고속 기억장치에 두는 구조를 명시해 저장 프로그램 설계를 구체화한다. | [[First Draft of a Report on the EDVAC]] |
 
 ## 출처
 

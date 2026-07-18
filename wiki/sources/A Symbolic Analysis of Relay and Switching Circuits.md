@@ -4,7 +4,9 @@ aliases: [Shannon 1938, Symbolic Analysis, relay and switching circuits]
 summary: "Shannon의 릴레이·스위칭 회로 논문을 바탕으로 불 대수, 논리 게이트, 이진 덧셈 회로, 이진 표현의 회로적 기반을 정리한 참고 자료."
 tags: [type/reference, domain/computer-history, domain/computer-architecture, domain/computer-science, status/active]
 created: 2026-07-10
-updated: 2026-07-10
+updated: 2026-07-18
+publication_year: 1938
+historical_layer: architecture
 sources: ["MIT DSpace: 34541425-MIT.pdf", "Transactions AIEE 1938"]
 source_id: ref-008
 source_kind: external
