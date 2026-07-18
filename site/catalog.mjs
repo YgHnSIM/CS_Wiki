@@ -17,6 +17,7 @@ export const domainMeta = {
   "domain/systems": "시스템",
   "domain/internet": "인터넷",
   "domain/mathematics": "수학",
+  "domain/machine-learning": "기계 학습",
   "domain/web": "웹"
 };
 
