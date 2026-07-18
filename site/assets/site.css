@@ -244,6 +244,7 @@ kbd {
 
 .hero-copy {
   display: flex;
+  min-width: 0;
   flex-direction: column;
   justify-content: center;
   padding: clamp(72px, 8vw, 130px) clamp(30px, 6vw, 100px);
@@ -305,9 +306,11 @@ kbd {
 }
 
 .hero-actions {
-  display: flex;
-  gap: 22px;
-  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(132px, 1fr));
+  gap: 14px;
+  align-items: stretch;
+  width: min(100%, 760px);
   margin-top: 36px;
 }
 
@@ -322,6 +325,18 @@ kbd {
   text-align: center;
   text-decoration: none;
   cursor: pointer;
+}
+
+.hero-actions > a,
+.hero-actions > button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  min-height: 56px;
+  padding: 6px 12px;
+  line-height: 1.45;
+  word-break: keep-all;
 }
 
 .primary-action:hover,
@@ -455,7 +470,7 @@ kbd {
 
 .route-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   border-top: 1px solid var(--line-strong);
   border-left: 1px solid var(--line-strong);
 }
@@ -463,6 +478,7 @@ kbd {
 .route-card {
   position: relative;
   display: flex;
+  min-width: 0;
   flex-direction: column;
   min-height: 330px;
   padding: 26px;
@@ -1178,7 +1194,7 @@ kbd {
   }
 
   .route-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .split-section {
@@ -1382,8 +1398,7 @@ kbd {
   }
 
   .hero-actions {
-    align-items: stretch;
-    flex-direction: column;
+    grid-template-columns: 1fr;
   }
 
   .hero-stats {
@@ -3938,7 +3953,7 @@ marker[id$="-history"] path {
 }
 
 .route-grid {
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(5, minmax(0, 1fr));
 }
 
 .route-card {
@@ -4409,7 +4424,7 @@ marker[id$="-history"] path {
 
 @media (max-width: 1180px) {
   .route-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .listing-controls {
@@ -4510,7 +4525,7 @@ marker[id$="-history"] path {
   }
 
   .route-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .scope-grid div {
