@@ -8,6 +8,7 @@ import {
   parseFlowList,
   resolvePageLinks,
   safeExternalUrl,
+  selectSiteDiscoveryPages,
   validateUniquePageOutputs,
   withBase
 } from "../site/core.mjs";
@@ -80,6 +81,15 @@ test("graph edges survive reverse-only links and mutual links are deduplicated",
 
   assert.deepEqual(graph.nodes.map((node) => node.title), ["First", "Second", "Third"]);
   assert.deepEqual(graph.edges, [[0, 1], [0, 2]]);
+});
+
+test("context pages stay out of global site discovery while direct and operational pages remain addressable", () => {
+  const publicPage = page("Public", [], { graphVisibility: "public" });
+  const contextPage = page("Context", [], { graphVisibility: "context" });
+  const hiddenPage = page("Hidden", [], { graphVisibility: "hidden" });
+  const selected = selectSiteDiscoveryPages([publicPage, contextPage, hiddenPage]);
+  assert.deepEqual(selected.map((item) => item.title), ["Public", "Hidden"]);
+  assert.throws(() => selectSiteDiscoveryPages(null), /must be an array/);
 });
 
 test("lookup and output collisions fail the build instead of silently winning", () => {

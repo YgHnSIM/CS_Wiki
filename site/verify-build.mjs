@@ -1,9 +1,10 @@
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
-import { readFile } from "node:fs/promises";
+import { readFile, readdir } from "node:fs/promises";
 import { join } from "node:path";
 import { gzipSync } from "node:zlib";
 import { historyPeriods, learningPaths } from "./catalog.mjs";
+import { escapeHtml, selectSiteDiscoveryPages } from "./core.mjs";
 import { ATLAS_LIMITS, ATLAS_SCHEMA_VERSION } from "./graph/atlas.mjs";
 import {
   HISTORY_LIMITS,
@@ -11,6 +12,17 @@ import {
   HISTORY_SCHEMA_VERSION,
   historyLookupBucket
 } from "./graph/history.mjs";
+import {
+  EVIDENCE_LIMITS,
+  EVIDENCE_LOOKUP_HASH,
+  EVIDENCE_SCHEMA_VERSION,
+  EVIDENCE_SEARCH_PREFIX_LEVELS,
+  buildEvidenceLens,
+  evidenceLookupBucket,
+  evidenceLookupKey,
+  evidenceStaticPageCount,
+  evidenceStaticPageNumbers
+} from "./graph/evidence.mjs";
 
 const root = process.cwd();
 const dist = join(root, "dist");
@@ -849,3 +861,856 @@ for (const [control, values] of Object.entries(historyControls)) {
 }
 
 console.log(`Verified historical lens: ${historyManifest.stats.documents} public documents, ${historyManifest.stats.transitions} curated transitions, ${historyManifest.stats.shards} bounded shards including ${historyManifest.stats.undatedDocuments} undated documents`);
+
+const EVIDENCE_SOURCE_CATEGORIES = new Set(["sources", "references"]);
+const EVIDENCE_STATIC_PAGE_SIZE = EVIDENCE_LIMITS.staticPageRecords;
+const EVIDENCE_DELIVERY_BUDGETS = Object.freeze({
+  rootHtmlBytes: 128 * 1024,
+  rootHtmlGzipBytes: 32 * 1024,
+  clientBytes: 64 * 1024,
+  clientGzipBytes: 20 * 1024,
+  initialDataBytes: 96 * 1024,
+  initialDataGzipBytes: 24 * 1024
+});
+const evidenceManifestPath = join("data", "evidence", "manifest.json");
+const evidenceManifestBytes = await readBytes(evidenceManifestPath);
+const evidenceManifest = JSON.parse(evidenceManifestBytes.toString("utf8"));
+const evidenceRootPath = join("map", "evidence", "index.html");
+const evidenceRootBytes = await readBytes(evidenceRootPath);
+const evidenceRootHtml = evidenceRootBytes.toString("utf8");
+const evidenceManifestVersion = evidenceRootHtml.match(/data-evidence-manifest-url="[^"]*manifest\.json\?v=([a-f0-9]{12})"/)?.[1];
+const evidenceAssetVersion = evidenceRootHtml.match(/CS_WIKI_ASSET_VERSION="([a-f0-9]{12})"/)?.[1];
+const evidenceRootUrl = evidenceRootHtml.match(/data-evidence-root-url="([^"]*\/map\/evidence\/)"/)?.[1];
+
+assert.equal(evidenceManifest.schemaVersion, EVIDENCE_SCHEMA_VERSION, "evidence manifest schema is unsupported");
+assert.equal(evidenceManifest.kind, "evidence-manifest", "evidence manifest kind is unsupported");
+assert.ok(evidenceManifestVersion, "evidence manifest URL must be content-versioned");
+assert.equal(evidenceManifestVersion, evidenceAssetVersion, "evidence data and client assets must share one content fingerprint");
+assert.equal(evidenceAssetVersion, assetVersion, "evidence and the other map lenses must share one build fingerprint");
+assert.equal(evidenceManifest.contentVersion, evidenceAssetVersion, "evidence manifest must carry the full build fingerprint");
+assert.deepEqual(evidenceManifest.limits, EVIDENCE_LIMITS, "evidence manifest limits differ from the supported contract");
+assert.ok(evidenceRootUrl, "evidence root must declare its stable root URL");
+const evidenceSitePrefix = evidenceRootUrl.slice(0, -"/map/evidence/".length);
+
+function evidenceSiteRoute(route) {
+  assert.match(route, /^\//, "evidence site routes must be root-relative");
+  return evidenceSitePrefix + route;
+}
+
+function expandEvidenceRoute(template, replacements, label) {
+  assert.equal(typeof template, "string", label + " must declare a route template");
+  let route = template;
+  for (const [key, value] of Object.entries(replacements)) route = route.replaceAll("{" + key + "}", String(value));
+  assert.doesNotMatch(route, /[{}]/, label + " has unresolved route placeholders");
+  return route;
+}
+
+function cleanEvidenceDataPath(url, label) {
+  assert.equal(typeof url, "string", label + " must be a string path");
+  assert.ok(url && !/^[a-z][a-z0-9+.-]*:/i.test(url), label + " must not be an absolute URL");
+  assert.ok(!url.startsWith("/") && !url.startsWith("\\") && !/[?#]/.test(url), label + " must be a relative path without query or fragment");
+  const parts = url.split("/");
+  assert.ok(parts.length && parts.every(Boolean), label + " contains an empty path segment");
+  for (const rawPart of parts) {
+    const part = decodeURIComponent(rawPart);
+    assert.ok(part !== "." && part !== "..", label + " contains traversal");
+    assert.ok(!/[\\/\u0000-\u001f\u007f]/.test(part), label + " contains an unsafe path character");
+    assert.match(part, /^[a-z0-9][a-z0-9._-]*$/i, label + " contains a non-portable data path segment");
+  }
+  return join("data", "evidence", ...parts);
+}
+
+async function readEvidencePayload(url, label) {
+  const path = cleanEvidenceDataPath(url, label);
+  const bytes = await readBytes(path);
+  const record = JSON.parse(bytes.toString("utf8"));
+  assert.equal(record.schemaVersion, EVIDENCE_SCHEMA_VERSION, label + " has an unsupported schema version");
+  assert.equal(record.contentVersion, evidenceAssetVersion, label + " belongs to another build");
+  return { path, bytes, record };
+}
+
+function withEvidenceBuildVersion(record) {
+  return { ...record, contentVersion: evidenceAssetVersion };
+}
+
+async function relativeFiles(directory, prefix = "") {
+  const entries = await readdir(directory, { withFileTypes: true });
+  const files = [];
+  for (const entry of entries) {
+    const relative = prefix ? prefix + "/" + entry.name : entry.name;
+    if (entry.isDirectory()) files.push(...await relativeFiles(join(directory, entry.name), relative));
+    else if (entry.isFile()) files.push(relative);
+  }
+  return files.sort();
+}
+
+function assertExactlyOnce(actualIds, expectedIds, label) {
+  assert.equal(actualIds.length, new Set(actualIds).size, label + " contains duplicate records");
+  assert.deepEqual([...actualIds].sort(), [...expectedIds].sort(), label + " does not contain the graph-derived record set exactly once");
+}
+
+function assertEvidenceProvenance(record, label) {
+  assert.ok(record && typeof record === "object", label + " is missing evidence metadata");
+  for (const key of ["id", "sourceId", "title", "summary", "url", "category", "status", "visibility", "usedByCount", "shardId", "provenance"]) {
+    assert.ok(Object.hasOwn(record, key), label + " is missing '" + key + "'");
+  }
+  assert.ok(EVIDENCE_SOURCE_CATEGORIES.has(record.category), label + " is not a source/reference document");
+  const provenance = record.provenance;
+  assert.ok(provenance && typeof provenance === "object", label + " is missing provenance");
+  for (const key of ["sources", "primarySources", "supportingSources", "sourceUrls"]) {
+    assert.ok(Object.hasOwn(provenance, key) && Array.isArray(provenance[key]), label + " provenance is missing array '" + key + "'");
+  }
+  for (const key of ["sourceKind", "retrieved", "version", "snapshotStatus"]) {
+    assert.ok(Object.hasOwn(provenance, key), label + " provenance is missing '" + key + "'");
+  }
+}
+
+function assertEvidenceAssertion(record, graphNodesById, label) {
+  assert.ok(record && typeof record === "object", label + " is missing assertion metadata");
+  assert.ok(["document", "relation"].includes(record.scope), label + " has an unsupported scope");
+  if (record.scope === "document") {
+    for (const key of ["id", "nodeId", "title", "summary", "url", "category", "domains", "status", "evidenceCount", "shardId"]) {
+      assert.ok(Object.hasOwn(record, key), label + " is missing '" + key + "'");
+    }
+    assert.ok(graphNodesById.has(record.nodeId), label + " references a missing document");
+    return;
+  }
+  for (const key of ["id", "edgeId", "title", "kind", "statement", "statements", "source", "target", "evidenceCount", "shardId"]) {
+    assert.ok(Object.hasOwn(record, key), label + " is missing '" + key + "'");
+  }
+  for (const endpointName of ["source", "target"]) {
+    const endpoint = record[endpointName];
+    for (const key of ["id", "title", "url", "category", "visibility"]) {
+      assert.ok(Object.hasOwn(endpoint, key), label + " " + endpointName + " endpoint is missing '" + key + "'");
+    }
+    const graphNode = graphNodesById.get(endpoint.id);
+    assert.ok(graphNode, label + " " + endpointName + " endpoint is absent from the graph");
+    assert.deepEqual(endpoint, {
+      id: String(graphNode.id),
+      title: String(graphNode.title || graphNode.id),
+      url: String(graphNode.url || ""),
+      category: String(graphNode.category || ""),
+      visibility: String(graphNode.visibility || "public")
+    }, label + " " + endpointName + " endpoint differs from the normalized graph");
+  }
+}
+
+const evidenceGraph = JSON.parse(await read(join("data", "knowledge-graph.json")));
+const evidenceGraphNodesById = new Map(evidenceGraph.nodes.map((node) => [node.id, node]));
+const syntheticDiscoveryPages = [
+  { id: "synthetic-public", graphVisibility: "public" },
+  { id: "synthetic-context", graphVisibility: "context" },
+  { id: "synthetic-hidden", graphVisibility: "hidden" }
+];
+assert.deepEqual(
+  selectSiteDiscoveryPages(syntheticDiscoveryPages).map((page) => page.id),
+  ["synthetic-public", "synthetic-hidden"],
+  "site discovery must exclude context while retaining directly addressable public/operational pages"
+);
+const expectedSiteDiscoveryNodes = selectSiteDiscoveryPages(evidenceGraph.nodes, {
+  visibilityFor: (node) => node.visibility || "public"
+});
+const expectedSiteDiscoveryUrls = expectedSiteDiscoveryNodes.map((node) => node.url);
+const expectedSiteDiscoveryByUrl = new Map(expectedSiteDiscoveryNodes.map((node) => [node.url, node]));
+const contextSiteNodes = evidenceGraph.nodes.filter((node) => node.visibility === "context");
+const searchIndex = JSON.parse(await read("search.json"));
+assert.ok(Array.isArray(searchIndex), "global search index must be an array");
+assertExactlyOnce(searchIndex.map((record) => record.url), expectedSiteDiscoveryUrls, "global site search discovery");
+for (const record of searchIndex) {
+  const node = expectedSiteDiscoveryByUrl.get(record.url);
+  assert.ok(node, "global search contains undiscoverable article '" + record.url + "'");
+  assert.equal(record.title, node.title, "global search article '" + node.id + "' has a conflicting title");
+  assert.equal(record.categoryKey, node.category, "global search article '" + node.id + "' has a conflicting category");
+  assert.equal(record.status, node.status, "global search article '" + node.id + "' has a conflicting status");
+  assert.equal(record.description, node.summary, "global search article '" + node.id + "' has a conflicting summary");
+  assert.deepEqual(record.aliases, node.aliases, "global search article '" + node.id + "' has conflicting aliases");
+}
+
+function cleanDiscoveryArticlePath(url, label) {
+  assert.equal(typeof url, "string", label + " must declare a site URL");
+  assert.ok(url.startsWith(evidenceSitePrefix + "/"), label + " must stay below the configured site base");
+  const local = url.slice(evidenceSitePrefix.length);
+  assert.ok(local.startsWith("/") && local.endsWith("/") && !/[?#]/.test(local), label + " must be a canonical directory URL");
+  const parts = local.split("/").filter(Boolean).map((rawPart) => decodeURIComponent(rawPart));
+  assert.ok(parts.length, label + " has no article path");
+  for (const part of parts) {
+    assert.ok(part !== "." && part !== ".." && !/[\\/\u0000-\u001f\u007f]/.test(part), label + " contains an unsafe article path segment");
+  }
+  return join(...parts, "index.html");
+}
+
+const discoveryHomeHtml = await read("index.html");
+const discoveryCategoryHtml = new Map();
+for (const node of contextSiteNodes) {
+  const label = "context article '" + node.id + "'";
+  const articleHtml = await read(cleanDiscoveryArticlePath(node.url, label));
+  assert.ok(articleHtml.includes("<h1>" + escapeHtml(node.title) + "</h1>"), label + " direct article route is missing its escaped title");
+  assert.ok(!searchIndex.some((record) => record.url === node.url), label + " must stay out of global search");
+  assert.ok(!discoveryHomeHtml.includes('href="' + node.url + '"'), label + " must stay out of home featured/recent discovery");
+  if (!discoveryCategoryHtml.has(node.category)) discoveryCategoryHtml.set(node.category, await read(join(node.category, "index.html")));
+  assert.ok(!discoveryCategoryHtml.get(node.category).includes('href="' + node.url + '"'), label + " must stay out of its category listing");
+}
+const sitemapXml = await read("sitemap.xml").catch((error) => {
+  if (error?.code === "ENOENT") return null;
+  throw error;
+});
+if (sitemapXml !== null) {
+  const sitemapLocations = [...sitemapXml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
+  assert.ok(sitemapLocations.length, "sitemap must contain URL locations");
+  const sitemapPaths = sitemapLocations.map((location) => decodeURI(new URL(location).pathname));
+  const allArticleUrls = new Set(evidenceGraph.nodes.map((node) => node.url));
+  const sitemapArticleUrls = sitemapPaths.filter((path) => allArticleUrls.has(path));
+  assertExactlyOnce(sitemapArticleUrls, expectedSiteDiscoveryUrls, "sitemap article discovery");
+  for (const node of contextSiteNodes) assert.ok(!sitemapPaths.includes(node.url), "context article '" + node.id + "' must stay out of sitemap discovery");
+}
+const graphPublicDocuments = evidenceGraph.nodes.filter((node) => node.visibility === "public" && !EVIDENCE_SOURCE_CATEGORIES.has(node.category));
+const graphPublicEvidence = evidenceGraph.nodes.filter((node) => node.visibility === "public" && EVIDENCE_SOURCE_CATEGORIES.has(node.category));
+const graphPublicDocumentIds = new Set(graphPublicDocuments.map((node) => node.id));
+const graphDocumentEvidenceEdges = evidenceGraph.edges.filter((edge) => {
+  const source = evidenceGraphNodesById.get(edge.source);
+  return edge.kind === "supports"
+    && edge.origin === "derived"
+    && graphPublicDocumentIds.has(edge.target)
+    && source
+    && EVIDENCE_SOURCE_CATEGORIES.has(source.category)
+    && source.visibility !== "hidden";
+});
+const graphLinkedDocumentIds = new Set(graphDocumentEvidenceEdges.map((edge) => edge.target));
+const graphCuratedRelations = evidenceGraph.edges.filter((edge) => {
+  const source = evidenceGraphNodesById.get(edge.source);
+  const target = evidenceGraphNodesById.get(edge.target);
+  return edge.origin === "curated"
+    && Array.isArray(edge.evidence)
+    && edge.evidence.length > 0
+    && source?.visibility === "public"
+    && target?.visibility === "public";
+});
+const graphRelationEvidence = new Map();
+for (const edge of graphCuratedRelations) {
+  const ids = [...new Set(edge.evidence.map(String))].sort().filter((id) => {
+    const node = evidenceGraphNodesById.get(id);
+    return node && EVIDENCE_SOURCE_CATEGORIES.has(node.category) && node.visibility !== "hidden";
+  });
+  if (ids.length) graphRelationEvidence.set(edge.id, ids);
+}
+const usedEvidenceIds = new Set([
+  ...graphDocumentEvidenceEdges.map((edge) => edge.source),
+  ...[...graphRelationEvidence.values()].flat()
+]);
+const graphContextEvidence = evidenceGraph.nodes.filter((node) => (
+  node.visibility === "context"
+  && EVIDENCE_SOURCE_CATEGORIES.has(node.category)
+  && usedEvidenceIds.has(node.id)
+));
+const graphRoutableEvidence = [...graphPublicEvidence, ...graphContextEvidence];
+const graphRoutableEvidenceIds = new Set(graphRoutableEvidence.map((node) => node.id));
+const expectedEvidenceLens = buildEvidenceLens(evidenceGraph);
+const expectedEvidenceManifest = withEvidenceBuildVersion(expectedEvidenceLens.manifest);
+assert.deepEqual(evidenceManifest, expectedEvidenceManifest, "evidence manifest differs from the normalized graph");
+
+const independentEvidenceStats = {
+  documentAssertions: graphPublicDocuments.length,
+  relationAssertions: graphRelationEvidence.size,
+  evidenceDocuments: graphPublicEvidence.length,
+  contextEvidenceDocuments: graphContextEvidence.length,
+  documentEvidenceLinks: graphDocumentEvidenceEdges.length,
+  relationEvidenceLinks: [...graphRelationEvidence.values()].reduce((total, ids) => total + ids.length, 0),
+  unlinkedDocuments: graphPublicDocuments.filter((node) => !graphLinkedDocumentIds.has(node.id)).length,
+  lookupRecords: graphPublicDocuments.length + graphRelationEvidence.size + graphPublicEvidence.length,
+  lookupShards: Object.keys(expectedEvidenceLens.lookupShards).length,
+  searchEntries: Object.values(expectedEvidenceLens.searchShards).reduce((total, page) => total + page.entries.length, 0),
+  searchShards: Object.keys(expectedEvidenceLens.searchShards).length,
+  assertionFocusShards: Object.keys(expectedEvidenceLens.assertionShards).length,
+  assertionDetailPages: Object.keys(expectedEvidenceLens.assertionDetails).length,
+  evidenceFocusShards: Object.keys(expectedEvidenceLens.evidenceShards).length,
+  evidenceDetailPages: Object.keys(expectedEvidenceLens.evidenceDetails).length
+};
+assert.deepEqual(evidenceManifest.stats, independentEvidenceStats, "evidence manifest statistics do not exactly match the normalized graph");
+
+const evidenceOverviewAsset = await readEvidencePayload(evidenceManifest.overview.url, "evidence overview");
+assert.deepEqual(evidenceOverviewAsset.record, withEvidenceBuildVersion(expectedEvidenceLens.overview), "evidence overview differs from the normalized graph");
+assert.ok(evidenceManifestBytes.length <= EVIDENCE_LIMITS.manifestBytes, "evidence manifest exceeds its declared byte ceiling");
+assert.ok(evidenceOverviewAsset.bytes.length <= EVIDENCE_LIMITS.overviewBytes, "evidence overview exceeds its declared byte ceiling");
+
+const expectedEvidenceFiles = new Set(["manifest.json", evidenceManifest.overview.url]);
+for (const bucketId of Object.keys(expectedEvidenceLens.lookupShards)) {
+  expectedEvidenceFiles.add(expandEvidenceRoute(evidenceManifest.lookup.route, { bucket: bucketId }, "evidence lookup route"));
+}
+for (const page of Object.values(expectedEvidenceLens.searchShards)) expectedEvidenceFiles.add(page.route);
+for (const shardId of Object.keys(expectedEvidenceLens.assertionShards)) {
+  expectedEvidenceFiles.add(expandEvidenceRoute(evidenceManifest.routes.assertion, { shard: shardId }, "evidence assertion route"));
+}
+for (const page of Object.values(expectedEvidenceLens.assertionDetails)) expectedEvidenceFiles.add(page.route);
+for (const shardId of Object.keys(expectedEvidenceLens.evidenceShards)) {
+  expectedEvidenceFiles.add(expandEvidenceRoute(evidenceManifest.routes.evidence, { shard: shardId }, "evidence source route"));
+}
+for (const page of Object.values(expectedEvidenceLens.evidenceDetails)) expectedEvidenceFiles.add(page.route);
+for (const route of expectedEvidenceFiles) cleanEvidenceDataPath(route, "evidence output '" + route + "'");
+assert.deepEqual(
+  await relativeFiles(join(dist, "data", "evidence")),
+  [...expectedEvidenceFiles].sort(),
+  "evidence data directory contains a missing or stale output"
+);
+
+assert.equal(evidenceManifest.lookup.kind, "sharded", "evidence lookup must be sharded");
+assert.equal(evidenceManifest.lookup.hash, EVIDENCE_LOOKUP_HASH, "evidence lookup hash is unsupported");
+assert.deepEqual(evidenceManifest.lookup.compositeTypes, ["document", "evidence", "relation"], "evidence lookup composite types are unsupported");
+assert.ok(
+  Number.isSafeInteger(evidenceManifest.lookup.bucketCount)
+    && evidenceManifest.lookup.bucketCount > 0
+    && (evidenceManifest.lookup.bucketCount & (evidenceManifest.lookup.bucketCount - 1)) === 0,
+  "evidence lookup bucket count must be a power of two"
+);
+const expectedLookupComposites = new Set([
+  ...graphPublicDocuments.map((node) => "document\u0000" + node.id),
+  ...[...graphRelationEvidence.keys()].map((id) => "relation\u0000" + id),
+  ...graphPublicEvidence.map((node) => "evidence\u0000" + node.id)
+]);
+const lookupRecordsByKey = new Map();
+const lookupCompositeOccurrences = [];
+let lookupRecordCount = 0;
+for (const [bucketId, expectedShard] of Object.entries(expectedEvidenceLens.lookupShards).sort(([left], [right]) => left.localeCompare(right))) {
+  const route = expandEvidenceRoute(evidenceManifest.lookup.route, { bucket: bucketId }, "evidence lookup route");
+  const asset = await readEvidencePayload(route, "evidence lookup bucket '" + bucketId + "'");
+  assert.ok(asset.bytes.length <= evidenceManifest.lookup.byteLimit, "evidence lookup bucket '" + bucketId + "' exceeds its byte ceiling");
+  assert.deepEqual(asset.record, withEvidenceBuildVersion(expectedShard), "evidence lookup bucket '" + bucketId + "' differs from the normalized graph");
+  assert.ok(asset.record.records.length <= evidenceManifest.lookup.recordLimit, "evidence lookup bucket '" + bucketId + "' exceeds its record ceiling");
+  assert.equal(asset.record.stats.records, asset.record.records.length, "evidence lookup bucket '" + bucketId + "' has conflicting statistics");
+  for (const record of asset.record.records) {
+    const composite = record.type + "\u0000" + record.id;
+    lookupCompositeOccurrences.push(composite);
+    assert.equal(record.key, evidenceLookupKey(record.type, record.id, evidenceManifest.lookup.maxIdLength), "evidence lookup record '" + composite + "' has an unstable composite key");
+    const address = evidenceLookupBucket(record.key, evidenceManifest.lookup.bucketCount, evidenceManifest.lookup.bucketWidth, {
+      maxBuckets: evidenceManifest.lookup.maxBuckets,
+      maxIdLength: evidenceManifest.lookup.maxIdLength
+    });
+    assert.equal(address.id, bucketId, "evidence lookup record '" + record.key + "' is assigned to the wrong bucket");
+    assert.ok(!lookupRecordsByKey.has(record.key), "evidence lookup key '" + record.key + "' occurs more than once");
+    lookupRecordsByKey.set(record.key, record);
+    lookupRecordCount += 1;
+  }
+}
+assertExactlyOnce(lookupCompositeOccurrences, expectedLookupComposites, "evidence direct lookup");
+assert.equal(lookupRecordCount, evidenceManifest.stats.lookupRecords, "evidence lookup record count differs from the manifest");
+assert.equal(Object.keys(expectedEvidenceLens.lookupShards).length, evidenceManifest.stats.lookupShards, "evidence lookup shard count differs from the manifest");
+const expectedEvidenceById = new Map(expectedEvidenceLens.evidenceDocuments.map((record) => [record.id, record]));
+for (const node of graphContextEvidence) {
+  const contextRecord = expectedEvidenceById.get(node.id);
+  assert.ok(contextRecord, "directly used context evidence '" + node.id + "' is missing its focus record");
+  assert.ok(expectedEvidenceLens.evidenceShards[contextRecord.shardId], "directly used context evidence '" + node.id + "' is missing its direct focus shard");
+  assert.ok(!lookupRecordsByKey.has(evidenceLookupKey("evidence", node.id, evidenceManifest.lookup.maxIdLength)), "context evidence '" + node.id + "' must stay out of global lookup/search");
+}
+const syntheticContextLens = buildEvidenceLens({
+  schemaVersion: evidenceGraph.schemaVersion,
+  nodes: [
+    { id: "synthetic-document-a", title: "Synthetic A", url: "/synthetic/a/", category: "concepts", visibility: "public" },
+    { id: "synthetic-document-b", title: "Synthetic B", url: "/synthetic/b/", category: "concepts", visibility: "public" },
+    { id: "synthetic-context-source", title: "Synthetic Context", url: "/synthetic/context/", category: "references", visibility: "context", sourceId: "ref-synthetic", provenance: {} },
+    { id: "synthetic-hidden-source", title: "Synthetic Hidden", url: "/synthetic/hidden/", category: "sources", visibility: "hidden", sourceId: "src-hidden", provenance: {} }
+  ],
+  edges: [
+    { id: "synthetic-support", kind: "supports", origin: "derived", source: "synthetic-context-source", target: "synthetic-document-a" },
+    { id: "synthetic-curated-support", kind: "supports", origin: "curated", source: "synthetic-context-source", target: "synthetic-document-b" },
+    { id: "synthetic-hidden-support", kind: "supports", origin: "derived", source: "synthetic-hidden-source", target: "synthetic-document-b" },
+    { id: "synthetic-relation", kind: "enables", origin: "curated", source: "synthetic-document-a", target: "synthetic-document-b", evidence: ["synthetic-context-source"], contexts: [{ note: "Synthetic relation evidence" }] }
+  ]
+});
+assert.equal(syntheticContextLens.manifest.stats.evidenceDocuments, 0, "context evidence must stay out of public evidence statistics");
+assert.equal(syntheticContextLens.manifest.stats.contextEvidenceDocuments, 1, "directly used context evidence must have a direct focus record");
+assert.equal(syntheticContextLens.manifest.stats.documentEvidenceLinks, 1, "hidden evidence must not create a document attestation");
+assert.equal(syntheticContextLens.manifest.stats.relationEvidenceLinks, 1, "context relation evidence must retain its explicit attestation");
+assert.ok(!syntheticContextLens.attestations.some((record) => record.edgeId === "synthetic-curated-support"), "curated supports must never be reclassified as frontmatter document attestations");
+const syntheticLookupRecords = Object.values(syntheticContextLens.lookupShards).flatMap((shard) => shard.records);
+assert.ok(!syntheticLookupRecords.some((record) => record.type === "evidence"), "context/hidden evidence must stay out of global lookup and prefix search");
+const syntheticContextRecord = syntheticContextLens.evidenceDocuments.find((record) => record.id === "synthetic-context-source");
+assert.ok(syntheticContextRecord, "directly used context evidence must remain directly addressable");
+assert.equal(syntheticContextLens.evidenceShards[syntheticContextRecord.shardId].detail.itemCount, 2, "context evidence reverse focus must retain document and relation uses exactly once");
+
+assert.equal(evidenceManifest.search.kind, "prefix-sharded", "evidence search must use prefix shards");
+assert.equal(evidenceManifest.search.hash, EVIDENCE_LOOKUP_HASH, "evidence search hash is unsupported");
+assert.deepEqual(evidenceManifest.search.prefixLevels, EVIDENCE_SEARCH_PREFIX_LEVELS, "evidence search prefix levels are unsupported");
+assert.equal(evidenceManifest.search.minimumCodePoints, EVIDENCE_LIMITS.searchPrefixMin, "evidence search minimum prefix length is unsupported");
+assert.equal(evidenceManifest.search.maximumCodePoints, EVIDENCE_LIMITS.searchPrefixMax, "evidence search maximum prefix length is unsupported");
+const seenSearchEntries = [];
+const searchBucketPages = new Map();
+let searchEntryCount = 0;
+for (const expectedPage of Object.values(expectedEvidenceLens.searchShards).sort((left, right) => left.id.localeCompare(right.id))) {
+  const paddedPage = String(expectedPage.page).padStart(evidenceManifest.search.pageWidth, "0");
+  const route = expandEvidenceRoute(evidenceManifest.search.route, {
+    level: expectedPage.level,
+    bucket: expectedPage.bucket.id,
+    page: paddedPage
+  }, "evidence search route");
+  assert.equal(route, expectedPage.route, "evidence search page '" + expectedPage.id + "' has a conflicting route");
+  const asset = await readEvidencePayload(route, "evidence search page '" + expectedPage.id + "'");
+  assert.ok(asset.bytes.length <= evidenceManifest.search.byteLimit, "evidence search page '" + expectedPage.id + "' exceeds its byte ceiling");
+  assert.deepEqual(asset.record, withEvidenceBuildVersion(expectedPage), "evidence search page '" + expectedPage.id + "' differs from the normalized graph");
+  assert.ok(asset.record.entries.length <= evidenceManifest.search.recordLimit, "evidence search page '" + expectedPage.id + "' exceeds its record ceiling");
+  assert.equal(asset.record.stats.records, asset.record.entries.length, "evidence search page '" + expectedPage.id + "' has conflicting statistics");
+  const groupKey = expectedPage.level + ":" + expectedPage.bucket.id;
+  if (!searchBucketPages.has(groupKey)) searchBucketPages.set(groupKey, []);
+  searchBucketPages.get(groupKey).push(expectedPage);
+  for (const entry of asset.record.entries) {
+    assert.equal(Array.from(entry.prefix).length, expectedPage.level, "evidence search entry '" + entry.id + "' has a prefix of the wrong length");
+    assert.ok(lookupRecordsByKey.has(entry.key), "evidence search entry '" + entry.id + "' points to a missing lookup record");
+    const lookupRecord = lookupRecordsByKey.get(entry.key);
+    assert.equal(entry.type, lookupRecord.type, "evidence search entry '" + entry.id + "' has a conflicting type");
+    assert.equal(entry.recordId, lookupRecord.id, "evidence search entry '" + entry.id + "' has a conflicting record id");
+    const address = evidenceLookupBucket("search:" + expectedPage.level + ":" + entry.prefix, evidenceManifest.search.bucketCount, evidenceManifest.search.bucketWidth, {
+      maxBuckets: evidenceManifest.search.maxBuckets,
+      maxIdLength: evidenceManifest.search.maxIdLength
+    });
+    assert.equal(address.id, expectedPage.bucket.id, "evidence search entry '" + entry.id + "' is assigned to the wrong prefix bucket");
+    seenSearchEntries.push(entry.id);
+    searchEntryCount += 1;
+  }
+}
+assert.equal(seenSearchEntries.length, new Set(seenSearchEntries).size, "evidence search contains duplicate prefix entries");
+for (const [groupKey, pages] of searchBucketPages) {
+  const sortedPages = [...pages].sort((left, right) => left.page - right.page);
+  const expectedPageNumbers = Array.from({ length: sortedPages[0].pageCount }, (_, index) => index + 1);
+  assert.deepEqual(sortedPages.map((page) => page.page), expectedPageNumbers, "evidence search bucket '" + groupKey + "' is missing a page");
+  const totalRecords = sortedPages.reduce((total, page) => total + page.entries.length, 0);
+  for (const page of sortedPages) assert.equal(page.stats.totalRecords, totalRecords, "evidence search bucket '" + groupKey + "' has conflicting total statistics");
+}
+assert.equal(
+  searchBucketPages.size,
+  evidenceManifest.search.bucketCount * evidenceManifest.search.prefixLevels.length,
+  "evidence search must publish every level/bucket pair without a monolithic fallback"
+);
+assert.equal(searchEntryCount, evidenceManifest.stats.searchEntries, "evidence search entry count differs from the manifest");
+assert.equal(Object.keys(expectedEvidenceLens.searchShards).length, evidenceManifest.stats.searchShards, "evidence search page count differs from the manifest");
+
+const evidenceClientSource = await read(join("assets", "evidence-lens.js"));
+const evidenceStateSource = await read(join("assets", "evidence-state.js"));
+assert.match(evidenceClientSource, /evidencePrefixBucket\(query,\s*descriptor\.bucketCount/, "evidence client search must address one prefix bucket from the query");
+assert.match(evidenceClientSource, /bucket:\s*address\.bucket/, "evidence client search must request only the addressed bucket");
+assert.match(evidenceClientSource, /while \(page <= pageCount[\s\S]*matches\.size < limit\)/, "evidence client search must stop after bounded pages/results");
+assert.doesNotMatch(evidenceClientSource, /for\s*\([^)]*bucketCount/, "evidence client must not enumerate every search bucket at runtime");
+assert.doesNotMatch(evidenceClientSource, /Array\.from\(\s*\{\s*length:\s*[^}]*bucketCount/, "evidence client must not materialize every search bucket at runtime");
+assert.match(evidenceStateSource, /evidenceManifestAssetUrl/, "evidence client state helper is not the supported version");
+
+const expectedAttestationIds = expectedEvidenceLens.attestations.map((record) => record.id);
+const expectedAttestationsById = new Map(expectedEvidenceLens.attestations.map((record) => [record.id, record]));
+let assertionFocusCount = 0;
+for (const [shardId, expectedFocus] of Object.entries(expectedEvidenceLens.assertionShards).sort(([left], [right]) => left.localeCompare(right))) {
+  const route = expandEvidenceRoute(evidenceManifest.routes.assertion, { shard: shardId }, "evidence assertion focus route");
+  const asset = await readEvidencePayload(route, "evidence assertion focus '" + shardId + "'");
+  assert.ok(asset.bytes.length <= EVIDENCE_LIMITS.focusBytes, "evidence assertion focus '" + shardId + "' exceeds its byte ceiling");
+  assert.deepEqual(asset.record, withEvidenceBuildVersion(expectedFocus), "evidence assertion focus '" + shardId + "' differs from the normalized graph");
+  assertEvidenceAssertion(asset.record.assertion, evidenceGraphNodesById, "evidence assertion focus '" + shardId + "'");
+  assert.ok(asset.record.preview.records.length <= evidenceManifest.details.assertion.previewRecordLimit, "evidence assertion focus '" + shardId + "' preview exceeds its record ceiling");
+  assert.ok(Buffer.byteLength(JSON.stringify(asset.record.preview)) <= evidenceManifest.details.assertion.previewByteLimit, "evidence assertion focus '" + shardId + "' preview exceeds its byte ceiling");
+  assert.equal(asset.record.preview.displayedRecords, asset.record.preview.records.length, "evidence assertion focus '" + shardId + "' has conflicting preview statistics");
+  assert.equal(asset.record.detail.itemCount, asset.record.preview.totalRecords, "evidence assertion focus '" + shardId + "' has conflicting detail statistics");
+  assert.equal(asset.record.detail.recordLimit, evidenceManifest.details.assertion.recordLimit, "evidence assertion focus '" + shardId + "' has a conflicting detail record limit");
+  assert.equal(asset.record.detail.byteLimit, evidenceManifest.details.assertion.byteLimit, "evidence assertion focus '" + shardId + "' has a conflicting detail byte limit");
+  assertionFocusCount += 1;
+}
+assert.equal(assertionFocusCount, evidenceManifest.stats.assertionFocusShards, "evidence assertion focus count differs from the manifest");
+
+const assertionDetailAttestations = [];
+for (const expectedPage of Object.values(expectedEvidenceLens.assertionDetails).sort((left, right) => left.id.localeCompare(right.id))) {
+  assert.equal(
+    expectedPage.route,
+    expandEvidenceRoute(evidenceManifest.routes.assertionDetail, {
+      shard: expectedPage.shardId,
+      page: String(expectedPage.page).padStart(evidenceManifest.details.assertion.pageWidth, "0")
+    }, "evidence assertion detail route"),
+    "evidence assertion detail page '" + expectedPage.id + "' has a conflicting route"
+  );
+  const asset = await readEvidencePayload(expectedPage.route, "evidence assertion detail page '" + expectedPage.id + "'");
+  assert.ok(asset.bytes.length <= evidenceManifest.details.assertion.byteLimit, "evidence assertion detail page '" + expectedPage.id + "' exceeds its byte ceiling");
+  assert.deepEqual(asset.record, withEvidenceBuildVersion(expectedPage), "evidence assertion detail page '" + expectedPage.id + "' differs from the normalized graph");
+  assert.ok(asset.record.records.length <= evidenceManifest.details.assertion.recordLimit, "evidence assertion detail page '" + expectedPage.id + "' exceeds its record ceiling");
+  assert.equal(asset.record.stats.records, asset.record.records.length, "evidence assertion detail page '" + expectedPage.id + "' has conflicting statistics");
+  for (const record of asset.record.records) {
+    assert.deepEqual(record.attestation, expectedAttestationsById.get(record.id), "evidence assertion detail record '" + record.id + "' has conflicting attestation metadata");
+    assertEvidenceAssertion(record.assertion, evidenceGraphNodesById, "evidence assertion detail record '" + record.id + "'");
+    assertEvidenceProvenance(record.evidence, "evidence assertion detail record '" + record.id + "'");
+    assertionDetailAttestations.push(record.id);
+  }
+}
+assertExactlyOnce(assertionDetailAttestations, expectedAttestationIds, "evidence assertion details");
+assert.equal(Object.keys(expectedEvidenceLens.assertionDetails).length, evidenceManifest.stats.assertionDetailPages, "evidence assertion detail page count differs from the manifest");
+
+let evidenceFocusCount = 0;
+for (const [shardId, expectedFocus] of Object.entries(expectedEvidenceLens.evidenceShards).sort(([left], [right]) => left.localeCompare(right))) {
+  const route = expandEvidenceRoute(evidenceManifest.routes.evidence, { shard: shardId }, "evidence source focus route");
+  const asset = await readEvidencePayload(route, "evidence source focus '" + shardId + "'");
+  assert.ok(asset.bytes.length <= EVIDENCE_LIMITS.focusBytes, "evidence source focus '" + shardId + "' exceeds its byte ceiling");
+  assert.deepEqual(asset.record, withEvidenceBuildVersion(expectedFocus), "evidence source focus '" + shardId + "' differs from the normalized graph");
+  assertEvidenceProvenance(asset.record.evidence, "evidence source focus '" + shardId + "'");
+  assert.ok(asset.record.preview.records.length <= evidenceManifest.details.evidence.previewRecordLimit, "evidence source focus '" + shardId + "' preview exceeds its record ceiling");
+  assert.ok(Buffer.byteLength(JSON.stringify(asset.record.preview)) <= evidenceManifest.details.evidence.previewByteLimit, "evidence source focus '" + shardId + "' preview exceeds its byte ceiling");
+  assert.equal(asset.record.preview.displayedRecords, asset.record.preview.records.length, "evidence source focus '" + shardId + "' has conflicting preview statistics");
+  assert.equal(asset.record.detail.itemCount, asset.record.preview.totalRecords, "evidence source focus '" + shardId + "' has conflicting detail statistics");
+  assert.equal(asset.record.detail.recordLimit, evidenceManifest.details.evidence.recordLimit, "evidence source focus '" + shardId + "' has a conflicting detail record limit");
+  assert.equal(asset.record.detail.byteLimit, evidenceManifest.details.evidence.byteLimit, "evidence source focus '" + shardId + "' has a conflicting detail byte limit");
+  evidenceFocusCount += 1;
+}
+assert.equal(evidenceFocusCount, evidenceManifest.stats.evidenceFocusShards, "evidence source focus count differs from the manifest");
+
+const reverseDetailAttestations = [];
+for (const expectedPage of Object.values(expectedEvidenceLens.evidenceDetails).sort((left, right) => left.id.localeCompare(right.id))) {
+  assert.equal(
+    expectedPage.route,
+    expandEvidenceRoute(evidenceManifest.routes.evidenceDetail, {
+      shard: expectedPage.shardId,
+      page: String(expectedPage.page).padStart(evidenceManifest.details.evidence.pageWidth, "0")
+    }, "evidence reverse detail route"),
+    "evidence reverse detail page '" + expectedPage.id + "' has a conflicting route"
+  );
+  const asset = await readEvidencePayload(expectedPage.route, "evidence reverse detail page '" + expectedPage.id + "'");
+  assert.ok(asset.bytes.length <= evidenceManifest.details.evidence.byteLimit, "evidence reverse detail page '" + expectedPage.id + "' exceeds its byte ceiling");
+  assert.deepEqual(asset.record, withEvidenceBuildVersion(expectedPage), "evidence reverse detail page '" + expectedPage.id + "' differs from the normalized graph");
+  assert.ok(asset.record.records.length <= evidenceManifest.details.evidence.recordLimit, "evidence reverse detail page '" + expectedPage.id + "' exceeds its record ceiling");
+  assert.equal(asset.record.stats.records, asset.record.records.length, "evidence reverse detail page '" + expectedPage.id + "' has conflicting statistics");
+  for (const record of asset.record.records) {
+    assert.deepEqual(record.attestation, expectedAttestationsById.get(record.id), "evidence reverse detail record '" + record.id + "' has conflicting attestation metadata");
+    assertEvidenceAssertion(record.assertion, evidenceGraphNodesById, "evidence reverse detail record '" + record.id + "'");
+    assertEvidenceProvenance(record.evidence, "evidence reverse detail record '" + record.id + "'");
+    reverseDetailAttestations.push(record.id);
+  }
+}
+assertExactlyOnce(reverseDetailAttestations, expectedAttestationIds, "evidence reverse details");
+assert.equal(Object.keys(expectedEvidenceLens.evidenceDetails).length, evidenceManifest.stats.evidenceDetailPages, "evidence reverse detail page count differs from the manifest");
+
+function evidenceStaticPath(scope, id, page = 1) {
+  const stableId = String(id);
+  assert.ok(stableId && stableId !== "." && stableId !== ".." && !/[\\/?#]/.test(stableId), "unsafe evidence static id '" + stableId + "'");
+  assert.ok(["document", "source", "relation"].includes(scope), "unsupported evidence static scope '" + scope + "'");
+  return join("map", "evidence", scope, stableId, ...(page > 1 ? [String(page)] : []), "index.html");
+}
+
+function evidenceStaticRoute(scope, id, page = 1) {
+  const segment = encodeURIComponent(String(id));
+  return evidenceSiteRoute("/map/evidence/" + scope + "/" + segment + "/" + (page > 1 ? page + "/" : ""));
+}
+
+function expectedEvidencePagerPages(page, pageCount) {
+  return evidenceStaticPageNumbers(page, pageCount, EVIDENCE_LIMITS.staticPagerRadius);
+}
+
+const syntheticHighDegreeItems = EVIDENCE_STATIC_PAGE_SIZE * 1_000 + 1;
+const syntheticHighDegreePages = evidenceStaticPageCount(syntheticHighDegreeItems, EVIDENCE_STATIC_PAGE_SIZE * 500);
+assert.equal(syntheticHighDegreePages, Math.ceil(syntheticHighDegreeItems / EVIDENCE_STATIC_PAGE_SIZE), "high-degree static pagination must remain proportional to the largest rail");
+for (const page of [1, Math.ceil(syntheticHighDegreePages / 2), syntheticHighDegreePages]) {
+  const numbers = expectedEvidencePagerPages(page, syntheticHighDegreePages);
+  assert.ok(numbers.length <= 9, "high-degree static pagination must remain bounded to nine links");
+  assert.equal(numbers.length, new Set(numbers).size, "high-degree static pagination must remove duplicate destinations");
+  assert.ok(numbers.includes(1) && numbers.includes(page) && numbers.includes(syntheticHighDegreePages), "high-degree static pagination must retain first/current/last access");
+}
+
+function assertEvidencePager(html, { scope, id, page, pageCount, rootPage = false }, label) {
+  const navigation = html.match(/<nav class="evidence-pagination"[^>]*>([\s\S]*?)<\/nav>/)?.[1] || "";
+  if (pageCount <= 1) {
+    assert.equal(navigation, "", label + " must not render pagination for one page");
+    return;
+  }
+  assert.ok(navigation, label + " is missing bounded pagination");
+  const expectedPages = expectedEvidencePagerPages(page, pageCount);
+  const hrefToPage = new Map(expectedPages.map((number) => [
+    rootPage && number === 1 ? evidenceRootUrl : evidenceStaticRoute(scope, id, number),
+    number
+  ]));
+  const anchors = [...navigation.matchAll(/<a([^>]*)>[\s\S]*?<\/a>/g)].map((match) => {
+    const href = match[1].match(/href="([^"]+)"/)?.[1] || "";
+    return { attributes: match[1], href, number: hrefToPage.get(href) };
+  });
+  assert.ok(anchors.length <= 9, label + " renders more than nine pagination links");
+  assert.equal(anchors.length, new Set(anchors.map((anchor) => anchor.href)).size, label + " renders duplicate pagination destinations");
+  assert.ok(anchors.every((anchor) => Number.isInteger(anchor.number)), label + " links outside the bounded pagination window");
+  assert.deepEqual(anchors.map((anchor) => anchor.number).sort((left, right) => left - right), expectedPages, label + " pagination window is unsupported");
+  for (const anchor of anchors) {
+    const expectedHref = rootPage && anchor.number === 1
+      ? evidenceRootUrl
+      : evidenceStaticRoute(scope, id, anchor.number);
+    assert.equal(anchor.href, expectedHref, label + " page " + anchor.number + " has a conflicting pagination route");
+  }
+  const current = anchors.filter((anchor) => /\baria-current="page"/.test(anchor.attributes));
+  assert.deepEqual(current.map((anchor) => anchor.number), [page], label + " must mark only the current pagination link");
+}
+
+function evidenceRelationCardIds(html, label) {
+  const routePrefix = evidenceSiteRoute("/map/evidence/relation/");
+  const ids = [];
+  for (const match of html.matchAll(/<article class="evidence-relation-card[^"]*"[^>]*>([\s\S]*?)<\/article>/g)) {
+    const hrefs = [...match[1].matchAll(/href="([^"]+)"/g)].map((hrefMatch) => hrefMatch[1]);
+    const focusHref = hrefs.find((href) => href.startsWith(routePrefix));
+    assert.ok(focusHref, label + " contains a relation card without a static focus route");
+    const shardId = decodeURIComponent(focusHref.slice(routePrefix.length).split("/", 1)[0]);
+    assert.ok(shardId, label + " contains a relation card with an empty focus id");
+    ids.push(shardId);
+  }
+  return ids;
+}
+
+function evidenceEntityCardIds(html, cardClass, scope, label) {
+  const routePrefix = evidenceSiteRoute("/map/evidence/" + scope + "/");
+  const ids = [];
+  const pattern = new RegExp('<article class="' + cardClass + '[^"]*"[^>]*>([\\s\\S]*?)<\\/article>', "g");
+  for (const match of html.matchAll(pattern)) {
+    const hrefs = [...match[1].matchAll(/href="([^"]+)"/g)].map((hrefMatch) => hrefMatch[1]);
+    const focusHref = hrefs.find((href) => href.startsWith(routePrefix));
+    assert.ok(focusHref, label + " contains a " + scope + " card without a static focus route");
+    ids.push(decodeURIComponent(focusHref.slice(routePrefix.length).split("/", 1)[0]));
+  }
+  return ids;
+}
+
+function assertFocusRelations(html, expectedEdges, relationAssertionsByEdgeId, label) {
+  const expectedIds = expectedEdges.map((edge) => relationAssertionsByEdgeId.get(edge.id)?.shardId);
+  assert.ok(expectedIds.every(Boolean), label + " has a relation without an assertion route");
+  const actualIds = evidenceRelationCardIds(html, label);
+  assert.ok(actualIds.length <= EVIDENCE_STATIC_PAGE_SIZE, label + " exceeds the per-page relation ceiling");
+  assertExactlyOnce(actualIds, expectedIds, label + " relation cards");
+  return actualIds;
+}
+
+function assertEvidenceStaticHtml(html, label, scope = null, id = null) {
+  for (const marker of [
+    "data-evidence-lens",
+    "data-evidence-manifest-url=",
+    "data-evidence-root-url=",
+    "data-evidence-controls hidden",
+    "data-evidence-search",
+    "data-evidence-scope",
+    "data-evidence-preservation",
+    "data-evidence-reset",
+    "data-evidence-status",
+    "data-evidence-provenance-list",
+    "data-evidence-source-list",
+    "data-evidence-assertion-list",
+    "data-evidence-error hidden",
+    "data-evidence-retry",
+    "evidence-noscript"
+  ]) assert.ok(html.includes(marker), label + " is missing marker '" + marker + "'");
+  assert.match(html, /<noscript>[\s\S]*evidence-noscript/, label + " needs a no-JS explanation");
+  assert.doesNotMatch(html, /href="[^"]*\.json(?:[?#][^"]*)?"/, label + " must not require a JSON link for no-JS navigation");
+  assert.ok(html.includes("manifest.json?v=" + evidenceAssetVersion), label + " references another evidence build");
+  assert.ok(Buffer.byteLength(html) <= EVIDENCE_DELIVERY_BUDGETS.rootHtmlBytes, label + " exceeds the bounded static HTML budget");
+  assert.ok(gzipSync(html).length <= EVIDENCE_DELIVERY_BUDGETS.rootHtmlGzipBytes, label + " exceeds the bounded compressed HTML budget");
+  if (scope) assert.ok(html.includes('data-evidence-focus-scope="' + scope + '"'), label + " has a conflicting focus scope");
+  if (id) assert.ok(html.includes('data-evidence-focus-id="' + id + '"'), label + " has a conflicting focus id");
+}
+
+assertEvidenceStaticHtml(evidenceRootHtml, "evidence root");
+assert.match(evidenceRootHtml, /class="evidence-boundary"/, "evidence root must state the interpretation boundary");
+assert.ok(evidenceRootBytes.length <= EVIDENCE_DELIVERY_BUDGETS.rootHtmlBytes, "evidence root HTML exceeds its initial byte budget");
+assert.ok(gzipSync(evidenceRootBytes).length <= EVIDENCE_DELIVERY_BUDGETS.rootHtmlGzipBytes, "evidence root HTML exceeds its compressed budget");
+const evidenceClientBytes = await readBytes(join("assets", "evidence-lens.js"));
+const evidenceStateBytes = await readBytes(join("assets", "evidence-state.js"));
+const evidenceClients = Buffer.concat([evidenceClientBytes, evidenceStateBytes]);
+assert.ok(evidenceClients.length <= EVIDENCE_DELIVERY_BUDGETS.clientBytes, "evidence client exceeds its initial byte budget");
+assert.ok(gzipSync(evidenceClients).length <= EVIDENCE_DELIVERY_BUDGETS.clientGzipBytes, "evidence client exceeds its compressed budget");
+const evidenceInitialData = Buffer.concat([evidenceManifestBytes, evidenceOverviewAsset.bytes]);
+assert.ok(evidenceInitialData.length <= EVIDENCE_DELIVERY_BUDGETS.initialDataBytes, "evidence manifest/overview exceed their initial byte budget");
+assert.ok(gzipSync(evidenceInitialData).length <= EVIDENCE_DELIVERY_BUDGETS.initialDataGzipBytes, "evidence manifest/overview exceed their compressed budget");
+assert.ok(evidenceRootHtml.includes("evidence-lens.js?v=" + evidenceAssetVersion), "evidence root client must be content-versioned");
+
+const mapLensRoots = [
+  join("map", "index.html"),
+  join("map", "learning", "index.html"),
+  join("map", "atlas", "index.html"),
+  join("map", "history", "index.html"),
+  join("map", "evidence", "index.html")
+];
+const mapLensRoutes = ["/map/", "/map/learning/", "/map/atlas/", "/map/history/", "/map/evidence/"];
+for (const lensRoot of mapLensRoots) {
+  const html = await read(lensRoot);
+  assert.match(html, /class="map-mode-nav"/, "map lens root '" + lensRoot + "' is missing the shared mode navigation");
+  for (const route of mapLensRoutes) {
+    assert.ok(html.includes('href="' + evidenceSiteRoute(route) + '"'), "map lens root '" + lensRoot + "' is missing tab '" + route + "'");
+  }
+}
+
+const graphStaticDocumentEdges = evidenceGraph.edges.filter((edge) => {
+  const source = evidenceGraphNodesById.get(edge.source);
+  return edge.kind === "supports"
+    && edge.origin === "derived"
+    && graphPublicDocumentIds.has(edge.target)
+    && source
+    && source.visibility !== "hidden"
+    && EVIDENCE_SOURCE_CATEGORIES.has(source.category);
+}).sort((left, right) => left.target.localeCompare(right.target, "ko") || left.source.localeCompare(right.source, "ko"));
+for (const edge of graphStaticDocumentEdges) {
+  assert.ok(graphRoutableEvidenceIds.has(edge.source), "static document evidence '" + edge.id + "' has no public/direct-context source route");
+}
+const graphStaticRelations = graphCuratedRelations
+  .filter((edge) => graphRelationEvidence.has(edge.id))
+  .sort((left, right) => left.id.localeCompare(right.id, "ko"));
+const relationAssertionsByEdgeId = new Map(expectedEvidenceLens.relationAssertions.map((record) => [record.edgeId, record]));
+const staticEdgesByDocument = new Map(graphPublicDocuments.map((node) => [node.id, []]));
+const staticEdgesBySource = new Map(graphRoutableEvidence.map((node) => [node.id, []]));
+const staticRelationsByDocument = new Map(graphPublicDocuments.map((node) => [node.id, []]));
+const staticRelationsByEvidence = new Map(graphRoutableEvidence.map((node) => [node.id, []]));
+for (const edge of graphStaticDocumentEdges) {
+  staticEdgesByDocument.get(edge.target)?.push(edge);
+  staticEdgesBySource.get(edge.source)?.push(edge);
+}
+for (const edge of graphStaticRelations) {
+  staticRelationsByDocument.get(edge.source)?.push(edge);
+  if (edge.target !== edge.source) staticRelationsByDocument.get(edge.target)?.push(edge);
+  for (const evidenceId of graphRelationEvidence.get(edge.id)) staticRelationsByEvidence.get(evidenceId)?.push(edge);
+}
+const expectedStaticEvidenceFiles = new Set(["index.html"]);
+function expectedStaticEvidenceFile(scope, id, page = 1) {
+  return [scope, String(id), ...(page > 1 ? [String(page)] : []), "index.html"].join("/");
+}
+
+let staticDocumentPages = 0;
+for (const node of graphPublicDocuments) {
+  const edges = staticEdgesByDocument.get(node.id) || [];
+  const focusRelations = staticRelationsByDocument.get(node.id) || [];
+  const pageCount = evidenceStaticPageCount(edges.length, focusRelations.length);
+  const seenRelationCards = [];
+  for (let page = 1; page <= pageCount; page += 1) {
+    expectedStaticEvidenceFiles.add(expectedStaticEvidenceFile("document", node.id, page));
+    const label = "static evidence document '" + node.id + "' page " + page;
+    const html = await read(evidenceStaticPath("document", node.id, page));
+    assertEvidenceStaticHtml(html, label, "document", node.id);
+    assert.ok(html.includes('href="' + node.url + '"'), label + " is missing the readable knowledge document link");
+    const members = edges.slice((page - 1) * EVIDENCE_STATIC_PAGE_SIZE, page * EVIDENCE_STATIC_PAGE_SIZE);
+    assertExactlyOnce(
+      evidenceEntityCardIds(html, "evidence-source-card", "source", label),
+      members.map((edge) => edge.source),
+      label + " evidence source cards"
+    );
+    for (const edge of members) {
+      const source = evidenceGraphNodesById.get(edge.source);
+      assert.ok(html.includes('href="' + source.url + '"'), label + " is missing evidence document '" + source.id + "'");
+      assert.ok(html.includes('href="' + evidenceStaticRoute("source", source.id) + '"'), label + " is missing the no-JS source pivot '" + source.id + "'");
+    }
+    const relationMembers = focusRelations.slice((page - 1) * EVIDENCE_STATIC_PAGE_SIZE, page * EVIDENCE_STATIC_PAGE_SIZE);
+    seenRelationCards.push(...assertFocusRelations(html, relationMembers, relationAssertionsByEdgeId, label));
+    assertEvidencePager(html, { scope: "document", id: node.id, page, pageCount }, label);
+    staticDocumentPages += 1;
+  }
+  assertExactlyOnce(
+    seenRelationCards,
+    focusRelations.map((edge) => relationAssertionsByEdgeId.get(edge.id).shardId),
+    "static evidence document '" + node.id + "' relations across pages"
+  );
+}
+
+let staticSourcePages = 0;
+for (const node of graphRoutableEvidence) {
+  const edges = staticEdgesBySource.get(node.id) || [];
+  const focusRelations = staticRelationsByEvidence.get(node.id) || [];
+  const pageCount = evidenceStaticPageCount(edges.length, focusRelations.length);
+  const seenRelationCards = [];
+  for (let page = 1; page <= pageCount; page += 1) {
+    expectedStaticEvidenceFiles.add(expectedStaticEvidenceFile("source", node.id, page));
+    const label = "static evidence source '" + node.id + "' page " + page;
+    const html = await read(evidenceStaticPath("source", node.id, page));
+    assertEvidenceStaticHtml(html, label, "source", node.id);
+    assertExactlyOnce(evidenceEntityCardIds(html, "evidence-source-card", "source", label), [node.id], label + " focused source card");
+    assert.ok(html.includes('href="' + node.url + '"'), label + " is missing the readable source document link");
+    const members = edges.slice((page - 1) * EVIDENCE_STATIC_PAGE_SIZE, page * EVIDENCE_STATIC_PAGE_SIZE);
+    assertExactlyOnce(
+      evidenceEntityCardIds(html, "evidence-document-card", "document", label),
+      members.map((edge) => edge.target),
+      label + " downstream document cards"
+    );
+    for (const edge of members) {
+      const document = evidenceGraphNodesById.get(edge.target);
+      assert.ok(html.includes('href="' + document.url + '"'), label + " is missing downstream document '" + document.id + "'");
+      assert.ok(html.includes('href="' + evidenceStaticRoute("document", document.id) + '"'), label + " is missing the no-JS document pivot '" + document.id + "'");
+    }
+    const relationMembers = focusRelations.slice((page - 1) * EVIDENCE_STATIC_PAGE_SIZE, page * EVIDENCE_STATIC_PAGE_SIZE);
+    seenRelationCards.push(...assertFocusRelations(html, relationMembers, relationAssertionsByEdgeId, label));
+    assertEvidencePager(html, { scope: "source", id: node.id, page, pageCount }, label);
+    staticSourcePages += 1;
+  }
+  assertExactlyOnce(
+    seenRelationCards,
+    focusRelations.map((edge) => relationAssertionsByEdgeId.get(edge.id).shardId),
+    "static evidence source '" + node.id + "' relations across pages"
+  );
+}
+
+let staticRelationPages = 0;
+for (const edge of graphStaticRelations) {
+  const evidenceIds = graphRelationEvidence.get(edge.id);
+  for (const evidenceId of evidenceIds) {
+    assert.ok(graphRoutableEvidenceIds.has(evidenceId), "static relation '" + edge.id + "' evidence '" + evidenceId + "' has no public/direct-context source route");
+  }
+  const assertion = relationAssertionsByEdgeId.get(edge.id);
+  assert.ok(assertion, "static relation '" + edge.id + "' has no dynamic assertion record");
+  const pageCount = evidenceStaticPageCount(evidenceIds.length);
+  for (let page = 1; page <= pageCount; page += 1) {
+    expectedStaticEvidenceFiles.add(expectedStaticEvidenceFile("relation", assertion.shardId, page));
+    const label = "static evidence relation '" + edge.id + "' page " + page;
+    const html = await read(evidenceStaticPath("relation", assertion.shardId, page));
+    assertEvidenceStaticHtml(html, label, "relation", assertion.shardId);
+    assert.doesNotMatch(html, /class="evidence-reviewed-relations"/, label + " must not duplicate the focused relation in a reviewed section");
+    assertFocusRelations(html, [edge], relationAssertionsByEdgeId, label);
+    for (const endpointId of [edge.source, edge.target]) {
+      const endpoint = evidenceGraphNodesById.get(endpointId);
+      const scope = EVIDENCE_SOURCE_CATEGORIES.has(endpoint.category) ? "source" : "document";
+      assert.ok(html.includes('href="' + evidenceStaticRoute(scope, endpoint.id) + '"'), label + " is missing endpoint pivot '" + endpoint.id + "'");
+    }
+    const members = evidenceIds.slice((page - 1) * EVIDENCE_STATIC_PAGE_SIZE, page * EVIDENCE_STATIC_PAGE_SIZE);
+    assertExactlyOnce(
+      evidenceEntityCardIds(html, "evidence-source-card", "source", label),
+      members,
+      label + " evidence source cards"
+    );
+    for (const evidenceId of members) {
+      const source = evidenceGraphNodesById.get(evidenceId);
+      assert.ok(html.includes('href="' + source.url + '"'), label + " is missing relation evidence '" + evidenceId + "'");
+      assert.ok(html.includes('href="' + evidenceStaticRoute("source", evidenceId) + '"'), label + " is missing relation evidence pivot '" + evidenceId + "'");
+    }
+    assertEvidencePager(html, { scope: "relation", id: assertion.shardId, page, pageCount }, label);
+    staticRelationPages += 1;
+  }
+}
+
+assert.deepEqual(
+  await relativeFiles(join(dist, "map", "evidence")),
+  [...expectedStaticEvidenceFiles].sort(),
+  "evidence static route tree contains a missing, hidden, or stale page"
+);
+
+const evidenceRootFocusScope = evidenceRootHtml.match(/data-evidence-focus-scope="([^"]+)"/)?.[1];
+const evidenceRootFocusId = evidenceRootHtml.match(/data-evidence-focus-id="([^"]+)"/)?.[1];
+assert.equal(evidenceRootFocusScope, "document", "evidence root must start from a public document");
+assert.ok(graphPublicDocumentIds.has(evidenceRootFocusId), "evidence root starts from a missing document");
+const evidenceRootEdges = staticEdgesByDocument.get(evidenceRootFocusId) || [];
+const evidenceRootRelations = staticRelationsByDocument.get(evidenceRootFocusId) || [];
+const evidenceRootPageCount = evidenceStaticPageCount(evidenceRootEdges.length, evidenceRootRelations.length);
+assertFocusRelations(
+  evidenceRootHtml,
+  evidenceRootRelations.slice(0, EVIDENCE_STATIC_PAGE_SIZE),
+  relationAssertionsByEdgeId,
+  "evidence root"
+);
+assertEvidencePager(evidenceRootHtml, {
+  scope: "document",
+  id: evidenceRootFocusId,
+  page: 1,
+  pageCount: evidenceRootPageCount,
+  rootPage: true
+}, "evidence root");
+
+assert.ok(
+  graphPublicDocuments.some((node) => evidenceRootHtml.includes('href="' + evidenceStaticRoute("document", node.id) + '"')),
+  "evidence root needs at least one no-JS document entry point"
+);
+assert.ok(
+  graphPublicEvidence.some((node) => evidenceRootHtml.includes('href="' + evidenceStaticRoute("source", node.id) + '"')),
+  "evidence root needs at least one no-JS source entry point"
+);
+
+console.log(
+  "Verified evidence lens: "
+  + evidenceManifest.stats.documentAssertions + " document assertions, "
+  + evidenceManifest.stats.relationAssertions + " curated relation assertions, "
+  + evidenceManifest.stats.documentEvidenceLinks + " document links, "
+  + evidenceManifest.stats.relationEvidenceLinks + " explicit relation links, "
+  + evidenceManifest.stats.lookupShards + " lookup buckets, "
+  + evidenceManifest.stats.searchShards + " bounded prefix pages, "
+  + staticDocumentPages + "/" + staticSourcePages + "/" + staticRelationPages
+  + " no-JS document/source/relation pages"
+);

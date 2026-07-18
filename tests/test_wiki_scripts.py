@@ -192,21 +192,135 @@ class LintRegressionTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             target = base_frontmatter("Target", "type/concept", extra="graph_id: shared-id\n") + "## 출처\n\n## 관련 항목\n"
+            evidence = base_frontmatter(
+                "Evidence",
+                "type/reference",
+                sources='["Paper"]',
+                extra=(
+                    "source_id: ref-001\n"
+                    "source_kind: external\n"
+                    'primary_sources: ["Paper"]\n'
+                    "supporting_sources: []\n"
+                    'source_urls: ["https://example.com/paper"]\n'
+                    "retrieved: 2026-07-15\n"
+                    "version: null\n"
+                    "snapshot_status: external-only\n"
+                ),
+            ) + "## 출처\n\n- [Paper](https://example.com/paper)\n\n## 관련 항목\n"
             source = base_frontmatter("Source", "type/concept", extra="graph_id: shared-id\n") + (
                 "## 관계\n\n"
                 "| 관계 | 대상 | 설명 | 근거 |\n"
                 "|---|---|---|---|\n"
-                "| enables | [[Target|표시 이름]] | 새 작업을 가능하게 한다. | [[Target]] |\n\n"
-                "| responds_to | [[Target]] | 확인된 제약에 대응한다. | [[Target]] |\n\n"
+                "| enables | [[Target|표시 이름]] | 새 작업을 가능하게 한다. | [[Evidence]] |\n\n"
+                "| responds_to | [[Target]] | 확인된 제약에 대응한다. | [[Evidence]] |\n\n"
                 "## 출처\n\n"
                 "## 관련 항목\n"
             )
             write_page(root, "wiki/concepts/Target.md", target)
+            write_page(root, "wiki/sources/Evidence.md", evidence)
             write_page(root, "wiki/concepts/Source.md", source)
             issues, _ = lint(root)
             graph_issues = [issue for issue in issues if issue.code.startswith("graph.")]
             self.assertEqual(2, sum(issue.code == "graph.id_duplicate" for issue in graph_issues))
             self.assertFalse(any(issue.code.startswith("graph.relation_") for issue in graph_issues))
+
+    def test_relation_evidence_accepts_sources_and_references_but_rejects_concepts(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "raw").mkdir()
+            (root / "raw" / "primary.md").write_text("source", encoding="utf-8")
+            primary = base_frontmatter(
+                "Primary Source",
+                "type/source",
+                sources='["primary.md"]',
+                extra=(
+                    "source_id: src-001\n"
+                    "source_kind: raw\n"
+                    'primary_sources: ["primary.md"]\n'
+                    "supporting_sources: []\n"
+                    "source_urls: []\n"
+                    "retrieved: 2026-07-15\n"
+                    "version: null\n"
+                    "snapshot_status: local\n"
+                ),
+            ) + "## 출처\n\n- `raw/primary.md`\n\n## 관련 항목\n"
+            reference = base_frontmatter(
+                "External Reference",
+                "type/reference",
+                sources='["Paper"]',
+                extra=(
+                    "source_id: ref-001\n"
+                    "source_kind: external\n"
+                    'primary_sources: ["Paper"]\n'
+                    "supporting_sources: []\n"
+                    'source_urls: ["https://example.com/paper"]\n'
+                    "retrieved: 2026-07-15\n"
+                    "version: null\n"
+                    "snapshot_status: external-only\n"
+                ),
+            ) + "## 출처\n\n- [Paper](https://example.com/paper)\n\n## 관련 항목\n"
+            concept_evidence = base_frontmatter("Concept Evidence", "type/concept") + "## 출처\n\n## 관련 항목\n"
+            owner = base_frontmatter("Owner", "type/concept") + (
+                "## 관계\n\n"
+                "| 관계 | 대상 | 설명 | 근거 |\n"
+                "|---|---|---|---|\n"
+                "| enables | [[Target One]] | 첫 능력을 가능하게 한다. | [[Primary Source]] |\n"
+                "| constrains | [[Target Two]] | 두 번째 능력을 제약한다. | [[External Reference]] |\n"
+                "| measures | [[Target Three]] | 세 번째 능력을 측정한다. | [[Concept Evidence]] |\n\n"
+                "## 출처\n\n"
+                "## 관련 항목\n"
+            )
+            write_page(root, "wiki/sources/Primary Source.md", primary)
+            write_page(root, "wiki/sources/External Reference.md", reference)
+            write_page(root, "wiki/concepts/Concept Evidence.md", concept_evidence)
+            for name in ("Target One", "Target Two", "Target Three"):
+                write_page(root, f"wiki/concepts/{name}.md", base_frontmatter(name, "type/concept") + "## 출처\n\n## 관련 항목\n")
+            write_page(root, "wiki/concepts/Owner.md", owner)
+
+            issues, _ = lint(root)
+            evidence_type_issues = [
+                issue
+                for issue in issues
+                if issue.path == "wiki/concepts/Owner.md" and issue.code == "graph.relation_evidence_type"
+            ]
+            self.assertEqual(1, len(evidence_type_issues))
+            self.assertIn("Concept Evidence", evidence_type_issues[0].message)
+
+    def test_duplicate_curated_relation_rows_are_rejected_after_alias_resolution(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            target = base_frontmatter("Target", "type/concept").replace(
+                "aliases: []", "aliases: [Target Alias]"
+            ) + "## 출처\n\n## 관련 항목\n"
+            first_evidence = base_frontmatter("First Evidence", "type/reference") + "## 출처\n\n## 관련 항목\n"
+            second_evidence = base_frontmatter("Second Evidence", "type/reference") + "## 출처\n\n## 관련 항목\n"
+            owner = base_frontmatter("Owner", "type/concept") + (
+                "## 관계\n\n"
+                "| 관계 | 대상 | 설명 | 근거 |\n"
+                "|---|---|---|---|\n"
+                "| supports | [[Target]] | 첫 설명이다. | [[First Evidence]] |\n"
+                "\n## 관계 메모\n\n두 번째 표도 같은 문서의 관계 계약에 속한다.\n\n"
+                "## 관계\n\n"
+                "| 관계 | 대상 | 설명 | 근거 |\n"
+                "|---|---|---|---|\n"
+                "| supports | [[Target Alias]] | 다른 근거를 단 두 번째 설명이다. | [[Second Evidence]] |\n"
+                "| contradicts | [[Target]] | 관계 종류가 다르면 별도 주장이다. | [[Second Evidence]] |\n\n"
+                "## 출처\n\n"
+                "## 관련 항목\n"
+            )
+            write_page(root, "wiki/concepts/Target.md", target)
+            write_page(root, "wiki/sources/First Evidence.md", first_evidence)
+            write_page(root, "wiki/sources/Second Evidence.md", second_evidence)
+            write_page(root, "wiki/concepts/Owner.md", owner)
+
+            issues, _ = lint(root)
+            duplicates = [
+                issue
+                for issue in issues
+                if issue.path == "wiki/concepts/Owner.md" and issue.code == "graph.relation_duplicate"
+            ]
+            self.assertEqual(1, len(duplicates))
+            self.assertIn("supports → Target", duplicates[0].message)
 
     def test_historical_relation_requires_direct_evidence(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
@@ -262,6 +376,45 @@ class LintRegressionTests(unittest.TestCase):
                     "provenance.urls",
                 }
             )
+
+    def test_public_knowledge_sources_must_resolve_without_linting_raw_source_filenames(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "raw").mkdir()
+            (root / "raw" / "source.md").write_text("source", encoding="utf-8")
+            source = base_frontmatter(
+                "Raw Source",
+                "type/source",
+                sources='["source.md"]',
+                extra=(
+                    "source_id: src-001\n"
+                    "source_kind: raw\n"
+                    'primary_sources: ["source.md"]\n'
+                    "supporting_sources: []\n"
+                    "source_urls: []\n"
+                    "retrieved: 2026-07-15\n"
+                    "version: null\n"
+                    "snapshot_status: local\n"
+                ),
+            ) + "## 출처\n\n- `raw/source.md`\n\n## 관련 항목\n"
+            valid = base_frontmatter("Valid", "type/concept", sources='["Raw Source"]') + (
+                "## 출처\n\n- [[Raw Source]]\n\n## 관련 항목\n"
+            )
+            valid_raw_name = base_frontmatter("Valid Raw Name", "type/concept", sources='["source.md"]') + (
+                "## 출처\n\n- [[Raw Source]]\n\n## 관련 항목\n"
+            )
+            invalid = base_frontmatter("Invalid", "type/concept", sources='["Missing Source"]') + (
+                "## 출처\n\n## 관련 항목\n"
+            )
+            write_page(root, "wiki/sources/Raw Source.md", source)
+            write_page(root, "wiki/concepts/Valid.md", valid)
+            write_page(root, "wiki/concepts/Valid Raw Name.md", valid_raw_name)
+            write_page(root, "wiki/concepts/Invalid.md", invalid)
+
+            issues, _ = lint(root)
+            unresolved = [issue for issue in issues if issue.code == "sources.frontmatter_unresolved"]
+            self.assertEqual(["wiki/concepts/Invalid.md"], [issue.path for issue in unresolved])
+            self.assertIn("Missing Source", unresolved[0].message)
 
     def test_external_reference_is_still_allowed(self) -> None:
         with tempfile.TemporaryDirectory() as directory:

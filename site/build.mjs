@@ -10,6 +10,7 @@ import { domainMeta, historyPeriods, learningPaths, statusMeta } from "./catalog
 import { buildKnowledgeGraph, extractWikiLinks } from "./graph/model.mjs";
 import { buildSemanticAtlas } from "./graph/atlas.mjs";
 import { buildHistoricalLens } from "./graph/history.mjs";
+import { EVIDENCE_LIMITS, buildEvidenceLens, evidenceStaticPageCount, evidenceStaticPageNumbers } from "./graph/evidence.mjs";
 import { graphNodeId } from "./graph/schema.mjs";
 import { describeRelationship, indexGraphEdges, relationLabel, selectLocalGraph } from "./graph/selectors.mjs";
 import {
@@ -25,6 +26,7 @@ import {
   parseScalar,
   resolvePageLinks,
   safeExternalUrl,
+  selectSiteDiscoveryPages,
   slugify,
   sourceTarget as resolveSourceTarget,
   validateUniquePageOutputs,
@@ -53,7 +55,9 @@ const assetHash = createHash("sha256")
   .update(await readFile(join(root, "site", "assets", "atlas-worker.js")))
   .update(await readFile(join(root, "site", "assets", "semantic-atlas.js")))
   .update(await readFile(join(root, "site", "assets", "history-state.js")))
-  .update(await readFile(join(root, "site", "assets", "history-lens.js")));
+  .update(await readFile(join(root, "site", "assets", "history-lens.js")))
+  .update(await readFile(join(root, "site", "assets", "evidence-state.js")))
+  .update(await readFile(join(root, "site", "assets", "evidence-lens.js")));
 
 const categoryMeta = {
   sources: { label: "정규 소스", description: "raw에 보존한 원본을 직접 처리한 정규 소스 노트" },
@@ -84,6 +88,18 @@ const atlasFacetMeta = Object.freeze({
     "reliable-results": "결과 신뢰성"
   }
 });
+
+const mapModes = Object.freeze([
+  { id: "connection", label: "연결 경로", url: "/map/" },
+  { id: "learning", label: "학습 노선", url: "/map/learning/" },
+  { id: "atlas", label: "전체 의미 지도", url: "/map/atlas/" },
+  { id: "history", label: "역사·인과", url: "/map/history/" },
+  { id: "evidence", label: "근거 계보", url: "/map/evidence/" }
+]);
+
+function mapModeNav(activeMode) {
+  return `<nav class="map-mode-nav" aria-label="지식 지도 보기">${mapModes.map((mode) => `<a${mode.id === activeMode ? ' aria-current="page"' : ""} href="${withBase(mode.url)}">${mode.label}</a>`).join("")}</nav>`;
+}
 
 async function markdownFiles(directory) {
   const entries = await readdir(directory, { withFileTypes: true });
@@ -178,6 +194,69 @@ const knowledgeGraphEdgesByNodeId = indexGraphEdges(knowledgeGraph);
 const learningMap = buildLearningMap(knowledgeGraph);
 const semanticAtlas = buildSemanticAtlas(knowledgeGraph, { domainLabels: domainMeta });
 const historicalLens = buildHistoricalLens(knowledgeGraph, { periods: historyPeriods });
+const evidenceLens = buildEvidenceLens(knowledgeGraph);
+const evidenceNodesById = new Map(knowledgeGraph.nodes.map((node) => [node.id, node]));
+const siteDiscoveryPages = selectSiteDiscoveryPages(pages, {
+  visibilityFor: (page) => evidenceNodesById.get(graphNodeId(page))?.visibility || "public"
+});
+const publicGraphPages = pages.filter((page) => evidenceNodesById.get(graphNodeId(page))?.visibility === "public");
+const evidenceDocumentNodes = knowledgeGraph.nodes
+  .filter((node) => node.visibility === "public" && !["sources", "references"].includes(node.category))
+  .sort((left, right) => left.title.localeCompare(right.title, "ko") || left.id.localeCompare(right.id, "ko"));
+const evidenceSourceNodes = knowledgeGraph.nodes
+  .filter((node) => node.visibility === "public" && ["sources", "references"].includes(node.category))
+  .sort((left, right) => left.title.localeCompare(right.title, "ko") || left.id.localeCompare(right.id, "ko"));
+const documentEvidenceEdges = knowledgeGraph.edges
+  .filter((edge) => edge.kind === "supports"
+    && edge.origin === "derived"
+    && evidenceNodesById.get(edge.target)?.visibility === "public"
+    && !["sources", "references"].includes(evidenceNodesById.get(edge.target)?.category)
+    && evidenceNodesById.get(edge.source)?.visibility !== "hidden"
+    && ["sources", "references"].includes(evidenceNodesById.get(edge.source)?.category))
+  .sort((left, right) => left.target.localeCompare(right.target, "ko") || left.source.localeCompare(right.source, "ko"));
+const evidencedRelationEdges = knowledgeGraph.edges
+  .filter((edge) => edge.origin === "curated"
+    && edge.evidence?.some((evidenceId) => {
+      const node = evidenceNodesById.get(evidenceId);
+      return node?.visibility !== "hidden" && ["sources", "references"].includes(node?.category);
+    })
+    && evidenceNodesById.get(edge.source)?.visibility === "public"
+    && evidenceNodesById.get(edge.target)?.visibility === "public")
+  .sort((left, right) => left.id.localeCompare(right.id, "ko"));
+const evidenceRoutableSourceIds = new Set(evidenceLens.evidenceDocuments.map((record) => record.id));
+const evidenceRoutableSourceNodes = knowledgeGraph.nodes
+  .filter((node) => evidenceRoutableSourceIds.has(node.id))
+  .sort((left, right) => left.title.localeCompare(right.title, "ko") || left.id.localeCompare(right.id, "ko"));
+const evidenceEdgesByDocument = new Map(evidenceDocumentNodes.map((node) => [node.id, []]));
+const evidenceEdgesBySource = new Map(evidenceRoutableSourceNodes.map((node) => [node.id, []]));
+for (const edge of documentEvidenceEdges) {
+  evidenceEdgesByDocument.get(edge.target)?.push(edge);
+  evidenceEdgesBySource.get(edge.source)?.push(edge);
+}
+const relationEdgesByEvidence = new Map(evidenceRoutableSourceNodes.map((node) => [node.id, []]));
+const relationEdgesByEndpoint = new Map(evidenceDocumentNodes.map((node) => [node.id, []]));
+for (const edge of evidencedRelationEdges) {
+  for (const evidenceId of edge.evidence) relationEdgesByEvidence.get(evidenceId)?.push(edge);
+  relationEdgesByEndpoint.get(edge.source)?.push(edge);
+  if (edge.target !== edge.source) relationEdgesByEndpoint.get(edge.target)?.push(edge);
+}
+const EVIDENCE_STATIC_PAGE_SIZE = EVIDENCE_LIMITS.staticPageRecords;
+
+function evidenceRelationRouteId(edgeId) {
+  return `relation-${createHash("sha256").update(`relation\0${String(edgeId)}`).digest("hex").slice(0, 16)}`;
+}
+
+function evidenceFocusRoute(scope, id, page = 1) {
+  const safeScope = scope === "source" ? "source" : scope === "relation" ? "relation" : "document";
+  const segment = encodeURIComponent(String(id));
+  return `/map/evidence/${safeScope}/${segment}/${page > 1 ? `${page}/` : ""}`;
+}
+
+function evidenceRouteForNode(node, page = 1) {
+  if (!node) return "/map/evidence/";
+  const scope = ["sources", "references"].includes(node.category) ? "source" : "document";
+  return evidenceFocusRoute(scope, node.id, page);
+}
 
 function connectionContext(context = {}) {
   const compact = {};
@@ -240,6 +319,11 @@ const assetVersion = assetHash
       contentVersion: historicalLens.manifest.contentVersion,
       limits: historicalLens.manifest.limits,
       stats: historicalLens.manifest.stats
+    },
+    evidenceLens: {
+      contentVersion: evidenceLens.manifest.contentVersion,
+      limits: evidenceLens.manifest.limits,
+      stats: evidenceLens.manifest.stats
     }
   }))
   .digest("hex")
@@ -256,7 +340,15 @@ for (const payload of [
   historicalLens.overview,
   ...Object.values(historicalLens.lookupShards),
   ...Object.values(historicalLens.shards),
-  ...Object.values(historicalLens.transitionDetails)
+  ...Object.values(historicalLens.transitionDetails),
+  evidenceLens.manifest,
+  evidenceLens.overview,
+  ...Object.values(evidenceLens.lookupShards),
+  ...Object.values(evidenceLens.searchShards),
+  ...Object.values(evidenceLens.assertionShards),
+  ...Object.values(evidenceLens.assertionDetails),
+  ...Object.values(evidenceLens.evidenceShards),
+  ...Object.values(evidenceLens.evidenceDetails)
 ]) payload.contentVersion = assetVersion;
 
 const headingSlugs = new Map();
@@ -317,15 +409,15 @@ function categoryUrl(category) {
 
 const counts = Object.fromEntries(Object.keys(categoryMeta).map((category) => [
   category,
-  pages.filter((page) => page.category === category).length
+  siteDiscoveryPages.filter((page) => page.category === category).length
 ]));
 
-const statusCounts = pages.reduce((acc, page) => {
+const statusCounts = siteDiscoveryPages.reduce((acc, page) => {
   acc[page.status] = (acc[page.status] || 0) + 1;
   return acc;
 }, {});
 
-const domainCounts = pages.reduce((acc, page) => {
+const domainCounts = siteDiscoveryPages.reduce((acc, page) => {
   page.tags.filter((tag) => tag.startsWith("domain/")).forEach((tag) => {
     acc[tag] = (acc[tag] || 0) + 1;
   });
@@ -391,7 +483,7 @@ function layout({ title, description, content, canonicalPath = "/", bodyClass = 
   <main id="content">${content}</main>
   <footer class="footer">
     <p>원본 소스에 근거해 연결하는 컴퓨터 과학 위키</p>
-    <div><a href="${withBase("/meta/")}">운영 정보</a><a href="${repositoryUrl}">GitHub 저장소</a><span>${pages.length}개 문서</span><span>검증됨 ${statusCounts.active || 0}</span></div>
+    <div><a href="${withBase("/meta/")}">운영 정보</a><a href="${repositoryUrl}">GitHub 저장소</a><span>${siteDiscoveryPages.length}개 문서</span><span>검증됨 ${statusCounts.active || 0}</span></div>
   </footer>
   <dialog class="search-dialog" data-search-dialog>
     <form method="dialog" class="search-header">
@@ -455,7 +547,7 @@ function pageCard(page, { compact = false, step = "" } = {}) {
 }
 
 function graphPayload() {
-  return buildGraphPayload(pages, { urlFor: withBase });
+  return buildGraphPayload(publicGraphPages, { urlFor: withBase });
 }
 
 function graphNodeList(graph) {
@@ -476,16 +568,16 @@ function pathCard(path, index, compact = false) {
 
 function homePage() {
   const graph = graphPayload();
-  const featured = [...pages]
+  const featured = [...siteDiscoveryPages]
     .filter((page) => page.category === "analyses")
     .sort((a, b) => b.score - a.score || b.updated.localeCompare(a.updated))
     .slice(0, 4);
-  const recent = [...pages]
+  const recent = [...siteDiscoveryPages]
     .filter((page) => page.category !== "meta")
     .sort((a, b) => b.updated.localeCompare(a.updated) || b.score - a.score)
     .slice(0, 6);
   const routes = ["sources", "references", "concepts", "entities", "analyses"].map((category, routeIndex) => {
-    const top = [...pages].filter((page) => page.category === category).sort((a, b) => b.score - a.score)[0];
+    const top = [...siteDiscoveryPages].filter((page) => page.category === category).sort((a, b) => b.score - a.score)[0];
     return `<a class="route-card" href="${withBase(categoryUrl(category))}">
       <span class="route-index">${String(routeIndex + 1).padStart(2, "0")}</span>
       <h3>${categoryMeta[category].label}</h3>
@@ -507,16 +599,17 @@ function homePage() {
         <a href="${withBase("/map/")}">지식 연결 찾기</a>
         <a href="${withBase("/map/atlas/")}">전체 의미 지도</a>
         <a href="${withBase("/map/history/")}">역사·인과 렌즈</a>
+        <a href="${withBase("/map/evidence/")}">근거 계보 보기</a>
       </div>
       <dl class="hero-stats">
-        <div><dt>전체 문서</dt><dd>${pages.length}</dd></div>
+        <div><dt>전체 문서</dt><dd>${siteDiscoveryPages.length}</dd></div>
         <div><dt>개념</dt><dd>${counts.concepts}</dd></div>
         <div><dt>학습 경로</dt><dd>${resolvedLearningPaths.length}</dd></div>
         <div><dt>핵심 분석</dt><dd>${counts.analyses}</dd></div>
       </dl>
     </div>
     <div class="graph-panel">
-      <div class="panel-heading"><h2>지식 연결망</h2><span>연결이 많은 문서 ${Math.min(12, pages.length)}개</span></div>
+      <div class="panel-heading"><h2>지식 연결망</h2><span>연결이 많은 문서 ${Math.min(12, publicGraphPages.length)}개</span></div>
       <canvas id="knowledge-graph" aria-hidden="true"></canvas>
       <details class="graph-list-disclosure"><summary>문서 목록 보기</summary>${graphNodeList(graph)}</details>
     </div>
@@ -561,17 +654,18 @@ function evidenceItem(value) {
 
 function evidenceTrace(page) {
   const isSource = page.category === "sources" || page.category === "references";
+  const graphNode = evidenceNodesById.get(graphNodeId(page));
   const direct = isSource ? page.primarySources : page.sources;
   const supporting = isSource ? page.supportingSources : [];
   const sourceUrls = page.sourceUrls.map(safeExternalUrl).filter(Boolean);
-  const evidenceLabel = isSource ? "직접 근거" : "연결된 근거";
+  const evidenceLabel = isSource ? "원자료로 기록" : "문서 단위 근거";
   const snapshotLabels = { local: "로컬 원본", "external-only": "외부 링크", archived: "보존 스냅샷" };
   return `<details class="evidence-trace">
     <summary><span>근거 추적</span><strong>${direct.length}개 ${evidenceLabel}</strong></summary>
     <div class="trace-grid">
       <section class="trace-stage"><span>01</span><div><h2>현재 문서</h2><p>${escapeHtml(page.title)} · ${escapeHtml(statusLabel(page.status))}</p></div></section>
       <section class="trace-stage"><span>02</span><div><h2>${evidenceLabel}</h2>${direct.length ? `<ul>${direct.map(evidenceItem).join("")}</ul>` : "<p>메타 문서에는 연결된 근거가 없습니다.</p>"}</div></section>
-      ${supporting.length ? `<section class="trace-stage"><span>03</span><div><h2>보조 자료</h2><ul>${supporting.map(evidenceItem).join("")}</ul></div></section>` : ""}
+      ${supporting.length ? `<section class="trace-stage"><span>03</span><div><h2>보조·접근 자료</h2><ul>${supporting.map(evidenceItem).join("")}</ul></div></section>` : ""}
       ${isSource ? `<section class="trace-stage"><span>${supporting.length ? "04" : "03"}</span><div><h2>재현 정보</h2><dl>
         <div><dt>소스 ID</dt><dd>${escapeHtml(page.sourceId || "미기록")}</dd></div>
         <div><dt>자료 유형</dt><dd>${page.sourceKind === "raw" ? "raw 원본" : "외부 자료"}</dd></div>
@@ -580,6 +674,7 @@ function evidenceTrace(page) {
         <div><dt>확인일</dt><dd>${escapeHtml(page.retrieved || "미기록")}</dd></div>
       </dl>${sourceUrls.length ? `<div class="trace-urls">${sourceUrls.map((url, index) => `<a href="${escapeHtml(url)}" rel="noreferrer">외부 출처 ${index + 1}</a>`).join("")}</div>` : ""}</div></section>` : ""}
     </div>
+    ${graphNode?.visibility === "public" || evidenceRoutableSourceIds.has(graphNode?.id) ? `<p class="trace-map-link"><a href="${withBase(evidenceRouteForNode(graphNode))}">근거 계보에서 이 문서의 연결 펼쳐보기 →</a></p>` : ""}
   </details>`;
 }
 
@@ -808,6 +903,7 @@ function relationshipRail(local) {
     <a class="relationship-jump-link" href="${withBase(`/map/?from=${encodeURIComponent(local.focus.id)}`)}">다른 문서와 연결 찾기</a>
     <a class="relationship-jump-link" href="${withBase(`/map/atlas/?focus=${encodeURIComponent(local.focus.id)}`)}">전체 지도에서 이 문서 보기</a>
     <a class="relationship-jump-link" href="${withBase(`/map/history/?event=${encodeURIComponent(local.focus.id)}`)}">역사 렌즈에서 이 문서 보기</a>
+    ${local.focus.visibility === "public" ? `<a class="relationship-jump-link" href="${withBase(evidenceRouteForNode(local.focus))}">근거 계보에서 이 문서 보기</a>` : ""}
   </section>`;
 }
 
@@ -860,7 +956,7 @@ function articlePage(page) {
 }
 
 function listingPage(category) {
-  const categoryPages = pages
+  const categoryPages = siteDiscoveryPages
     .filter((page) => page.category === category)
     .sort((a, b) => b.score - a.score || a.title.localeCompare(b.title, "ko"));
   const domains = [...new Set(categoryPages.flatMap(pageDomains))]
@@ -985,7 +1081,7 @@ function connectionExplorerPage() {
       <div><p class="eyebrow"><a href="${withBase("/")}">홈</a> / KNOWLEDGE ROUTER</p><h1>두 문서는 어떻게 연결되는가</h1><p>두 지식 사이의 최단 선만 보여주지 않습니다. 각 중간 문서와 관계의 방향, 그 연결을 선택한 이유를 읽을 수 있는 경로로 번역합니다.</p></div>
       <dl><div><dt>탐색 문서</dt><dd>${selectable.length}</dd></div><div><dt>경유 가능 문서</dt><dd>${connectionGraph.stats.nodes}</dd></div><div><dt>유형 관계</dt><dd>${connectionGraph.stats.edges.toLocaleString("ko-KR")}</dd></div></dl>
     </section>
-    <nav class="map-mode-nav" aria-label="지식 지도 보기"><a aria-current="page" href="${withBase("/map/")}">연결 경로</a><a href="${withBase("/map/learning/")}">학습 노선</a><a href="${withBase("/map/atlas/")}">전체 의미 지도</a><a href="${withBase("/map/history/")}">역사·인과</a></nav>
+    ${mapModeNav("connection")}
     <section class="connection-builder" aria-labelledby="connection-builder-title">
       <div class="connection-builder-intro"><p>SELECT TWO DOCUMENTS</p><h2 id="connection-builder-title">관계가 번역되는 경로 찾기</h2><p>기본 렌즈는 관련 항목과 학습 순서를 우선하고, 원전 허브와 자동 본문 언급을 지름길로 과대평가하지 않습니다.</p></div>
       <form class="connection-form" data-connection-form hidden>
@@ -1108,9 +1204,9 @@ function learningMapPage({ defaultPath, defaultStation, canonicalPath = "/map/le
     data-default-line="${escapeHtml(defaultPath.slug)}" data-default-station="${escapeHtml(graphNodeId(defaultStation))}">
     <section class="learning-map-hero">
       <div><p class="eyebrow"><a href="${withBase("/")}">홈</a> / LEARNING TRANSIT</p><h1>지식을 노선으로 읽는다</h1><p>각 학습 경로는 읽는 순서를 가진 노선이고, 여러 질문에 다시 등장하는 문서는 갈아탈 수 있는 환승역입니다.</p></div>
-      <dl><div><dt>노선</dt><dd>${resolvedLearningPaths.length}</dd></div><div><dt>고유 역</dt><dd>${stations}</dd></div><div><dt>환승역</dt><dd>${transferStations}</dd></div><div><dt>경로 밖 문서</dt><dd>${Math.max(0, pages.length - stations)}</dd></div></dl>
+      <dl><div><dt>노선</dt><dd>${resolvedLearningPaths.length}</dd></div><div><dt>고유 역</dt><dd>${stations}</dd></div><div><dt>환승역</dt><dd>${transferStations}</dd></div><div><dt>경로 밖 문서</dt><dd>${Math.max(0, siteDiscoveryPages.length - stations)}</dd></div></dl>
     </section>
-    <nav class="map-mode-nav" aria-label="지식 지도 보기"><a href="${withBase("/map/")}">연결 경로</a><a aria-current="page" href="${withBase("/map/learning/")}">학습 노선</a><a href="${withBase("/map/atlas/")}">전체 의미 지도</a><a href="${withBase("/map/history/")}">역사·인과</a></nav>
+    ${mapModeNav("learning")}
     <section class="learning-transit-shell">
       <aside class="learning-line-board" aria-labelledby="learning-lines-title">
         <header><p>LINE BOARD</p><h2 id="learning-lines-title">학습 노선 ${resolvedLearningPaths.length}개</h2><span>${stationOccurrences}개 역 출현</span></header>
@@ -1292,7 +1388,7 @@ function semanticAtlasPage({ clusterId = "", canonicalPath = "/map/atlas/" } = {
       <div><p class="eyebrow"><a href="${withBase("/")}">홈</a> / SEMANTIC ATLAS</p><h1>지식의 구조를 <span>군집과 회랑으로<br>읽는다.</span></h1><p>전체 문서를 한 화면에 흩뿌리는 대신 의미가 모이는 지역, 지역을 잇는 관계, 한 문서의 직접·간접 맥락을 단계적으로 확대합니다.</p></div>
       <dl><div><dt>탐색 문서</dt><dd>${documentCount}</dd></div><div><dt>의미 군집</dt><dd>${clusters.length}</dd></div><div><dt>군집 회랑</dt><dd>${overviewEdges.length}</dd></div><div><dt>유형 관계</dt><dd>${relationCount.toLocaleString("ko-KR")}</dd></div></dl>
     </section>
-    <nav class="map-mode-nav" aria-label="지식 지도 보기"><a href="${withBase("/map/")}">연결 경로</a><a href="${withBase("/map/learning/")}">학습 노선</a><a aria-current="page" href="${withBase("/map/atlas/")}">전체 의미 지도</a><a href="${withBase("/map/history/")}">역사·인과</a></nav>
+    ${mapModeNav("atlas")}
     <form class="atlas-controls" data-atlas-controls hidden>
       <div class="atlas-search-shell"><label>문서 찾기<input type="search" data-atlas-search autocomplete="off" role="combobox" aria-autocomplete="list" aria-haspopup="listbox" aria-expanded="false" aria-controls="atlas-search-results" placeholder="제목·별칭·설명 검색"></label><div id="atlas-search-results" class="atlas-search-results" data-atlas-search-results aria-live="polite"></div></div>
       ${atlasFacetControl("domain", "주제")}
@@ -1456,7 +1552,7 @@ function historicalLensPage({ periodId = "", page = 1, canonicalPath = "/map/his
     data-history-manifest-url="${withBase("/data/history/manifest.json")}?v=${assetVersion}"
     data-history-root-url="${withBase("/map/history/")}"${period ? ` data-default-era="${escapeHtml(period.id)}" data-default-era-path="${withBase(canonicalPath)}" data-default-part="${escapeHtml(shardId)}" data-default-part-path="${withBase(canonicalPath)}"` : ""}>
     <section class="history-hero"><div><p class="eyebrow"><a href="${withBase("/")}">홈</a> / HISTORICAL CAUSAL LENS</p><h1>컴퓨팅 능력은 <span>병목의 이동으로<br>발달했다.</span></h1><p>연도만 나열하지 않습니다. 어떤 한계가 어떤 대응을 낳았고, 그 대응이 새 능력과 다음 제약을 어떻게 만들었는지 원전 관계로 읽습니다.</p></div><dl><div><dt>연도 기록 문서</dt><dd>${historicalLens.manifest.stats.datedDocuments}</dd></div><div><dt>기간 사건</dt><dd>${rangeCount}</dd></div><div><dt>검토 전환</dt><dd>${historicalLens.manifest.stats.transitions}</dd></div><div><dt>연도 미기록</dt><dd>${historicalLens.manifest.stats.undatedDocuments}</dd></div></dl></section>
-    <nav class="map-mode-nav" aria-label="지식 지도 보기"><a href="${withBase("/map/")}">연결 경로</a><a href="${withBase("/map/learning/")}">학습 노선</a><a href="${withBase("/map/atlas/")}">전체 의미 지도</a><a aria-current="page" href="${withBase("/map/history/")}">역사·인과</a></nav>
+    ${mapModeNav("history")}
     <form class="history-controls" data-history-controls hidden>
       <div class="history-search-shell"><label>문서 찾기<input type="search" data-history-search autocomplete="off" role="combobox" aria-autocomplete="list" aria-haspopup="listbox" aria-expanded="false" aria-controls="history-search-results" placeholder="문서·전환·연도 검색"></label><div id="history-search-results" class="history-search-results" data-history-search-results role="listbox" aria-label="역사 문서와 전환 검색 결과" aria-live="polite"></div></div>
       <label>시기<select data-history-era><option value="">전체 시대</option>${historicalLens.manifest.periods.map((record) => `<option value="${escapeHtml(record.id)}"${record.id === periodId ? " selected" : ""}>${escapeHtml(record.label || record.title || record.id)}</option>`).join("")}</select></label>
@@ -1482,6 +1578,229 @@ function historicalLensPage({ periodId = "", page = 1, canonicalPath = "/map/his
     canonicalPath,
     bodyClass: "history-lens-page-body",
     pageModules: ["history-lens.js"]
+  });
+}
+
+const evidenceSnapshotLabels = Object.freeze({
+  local: "로컬 원본",
+  archived: "보존 스냅샷",
+  "external-only": "외부 링크 의존"
+});
+
+function evidenceRelationStatement(edge = {}) {
+  const notes = [...new Set((edge.contexts || []).map((context) => context.note).filter(Boolean))];
+  return notes.join(" · ") || "편집자가 관계의 방향과 근거를 명시했습니다.";
+}
+
+function evidenceRelationLabel(edge = {}) {
+  return knowledgeGraph.legend?.[edge.kind]?.label || edge.kind || "관계";
+}
+
+function evidenceSourceProvenanceHtml(node, { selected = false } = {}) {
+  const provenance = node.provenance || {};
+  const primary = provenance.primarySources || [];
+  const supporting = provenance.supportingSources || [];
+  const urls = (provenance.sourceUrls || []).map(safeExternalUrl).filter(Boolean);
+  const snapshot = evidenceSnapshotLabels[provenance.snapshotStatus] || provenance.snapshotStatus || "미기록";
+  return `<article class="evidence-provenance-card${selected ? " is-selected" : ""}" data-evidence-card data-source-kind="${escapeHtml(provenance.sourceKind || "unknown")}" data-snapshot-status="${escapeHtml(provenance.snapshotStatus || "unknown")}">
+    <header><span>REPRODUCIBILITY</span><strong>${escapeHtml(snapshot)}</strong></header>
+    <h3>${escapeHtml(node.title)}</h3>
+    <dl><div><dt>소스 ID</dt><dd>${escapeHtml(node.sourceId || node.id)}</dd></div><div><dt>자료 위치</dt><dd>${provenance.sourceKind === "raw" ? "raw 원본" : "외부 자료"}</dd></div><div><dt>판본</dt><dd>${escapeHtml(provenance.version || "판본 미확인")}</dd></div><div><dt>확인일</dt><dd>${escapeHtml(provenance.retrieved || "미기록")}</dd></div></dl>
+    <section><h4>원자료로 기록</h4>${primary.length ? `<ul>${primary.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>` : "<p>기록 없음</p>"}</section>
+    <section><h4>보조·접근 자료</h4>${supporting.length ? `<ul>${supporting.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>` : "<p>기록 없음</p>"}</section>
+    ${urls.length ? `<div class="evidence-external-links">${urls.map((url, index) => `<a href="${escapeHtml(url)}" rel="noreferrer">외부 출처 ${index + 1}</a>`).join("")}</div>` : ""}
+  </article>`;
+}
+
+function evidenceSourceCardHtml(node, { selected = false } = {}) {
+  const provenance = node.provenance || {};
+  const usedBy = evidenceEdgesBySource.get(node.id)?.length || 0;
+  const relationUses = relationEdgesByEvidence.get(node.id)?.length || 0;
+  return `<article class="evidence-source-card${selected ? " is-selected" : ""}" data-evidence-card data-source-kind="${escapeHtml(provenance.sourceKind || "unknown")}" data-snapshot-status="${escapeHtml(provenance.snapshotStatus || "unknown")}">
+    <div class="evidence-card-kicker"><span>${node.category === "sources" ? "정규 소스" : "참고 자료"}</span><span>${escapeHtml(evidenceSnapshotLabels[provenance.snapshotStatus] || provenance.snapshotStatus || "보존 미기록")}</span></div>
+    <h3><a href="${withBase(evidenceRouteForNode(node))}"${selected ? ' aria-current="page"' : ""}>${escapeHtml(node.title)}</a></h3>
+    <p>${escapeHtml(node.summary)}</p>
+    <dl><div><dt>문서 등록</dt><dd>${usedBy}</dd></div><div><dt>관계 근거</dt><dd>${relationUses}</dd></div></dl>
+    <div class="evidence-card-actions"><a href="${escapeHtml(node.url)}">근거 문서 읽기</a><a href="${withBase(evidenceRouteForNode(node))}">계보로 피벗</a></div>
+  </article>`;
+}
+
+function evidenceDocumentCardHtml(node, { selected = false, sharedCount = 0, evidenceCount = null } = {}) {
+  const count = evidenceCount ?? evidenceEdgesByDocument.get(node.id)?.length ?? 0;
+  return `<article class="evidence-document-card${selected ? " is-selected" : ""}">
+    <div class="evidence-card-kicker"><span>${escapeHtml(categoryMeta[node.category]?.label || node.category)}</span><span>${escapeHtml(statusLabel(node.status))}</span></div>
+    <h3><a href="${withBase(evidenceRouteForNode(node))}"${selected ? ' aria-current="page"' : ""}>${escapeHtml(node.title)}</a></h3>
+    <p>${escapeHtml(node.summary)}</p>
+    <dl><div><dt>등록 근거</dt><dd>${count}</dd></div>${sharedCount ? `<div><dt>현재 문서와 공유</dt><dd>${sharedCount}</dd></div>` : ""}</dl>
+    <div class="evidence-card-actions"><a href="${escapeHtml(node.url)}">지식 문서 읽기</a><a href="${withBase(evidenceRouteForNode(node))}">이 문서로 피벗</a></div>
+  </article>`;
+}
+
+function evidenceRelationCardHtml(edge, { selected = false } = {}) {
+  const source = evidenceNodesById.get(edge.source);
+  const target = evidenceNodesById.get(edge.target);
+  const routeId = evidenceRelationRouteId(edge.id);
+  return `<article class="evidence-relation-card${selected ? " is-selected" : ""}">
+    <div class="evidence-card-kicker"><span>검토된 관계</span><span>${escapeHtml(evidenceRelationLabel(edge))}</span></div>
+    <h3><a href="${withBase(evidenceFocusRoute("relation", routeId))}"${selected ? ' aria-current="page"' : ""}>${escapeHtml(source?.title || edge.source)} <span>→</span> ${escapeHtml(target?.title || edge.target)}</a></h3>
+    <p>${escapeHtml(evidenceRelationStatement(edge))}</p>
+    <div class="evidence-relation-direction"><a href="${withBase(evidenceRouteForNode(source))}">${escapeHtml(source?.title || edge.source)}</a><i aria-hidden="true">${escapeHtml(evidenceRelationLabel(edge))} →</i><a href="${withBase(evidenceRouteForNode(target))}">${escapeHtml(target?.title || edge.target)}</a></div>
+    <p class="evidence-relation-count">직접 연결된 관계 근거 ${evidenceRelationEvidenceNodes(edge).length}개</p>
+  </article>`;
+}
+
+function sharedEvidenceNeighbors(documentId, limit = 12) {
+  const shared = new Map();
+  for (const edge of evidenceEdgesByDocument.get(documentId) || []) {
+    for (const other of evidenceEdgesBySource.get(edge.source) || []) {
+      if (other.target === documentId) continue;
+      if (!shared.has(other.target)) shared.set(other.target, new Set());
+      shared.get(other.target).add(edge.source);
+    }
+  }
+  return [...shared.entries()].map(([id, sourceIds]) => ({ node: evidenceNodesById.get(id), sourceIds: [...sourceIds].sort() }))
+    .filter((record) => record.node)
+    .sort((left, right) => right.sourceIds.length - left.sourceIds.length || left.node.title.localeCompare(right.node.title, "ko"))
+    .slice(0, limit);
+}
+
+function evidenceRelationEvidenceNodes(edge = {}) {
+  return [...new Set(edge.evidence || [])]
+    .map((evidenceId) => evidenceNodesById.get(evidenceId))
+    .filter((node) => node && evidenceRoutableSourceIds.has(node.id));
+}
+
+function evidenceDocumentStaticPageCount(documentId) {
+  return evidenceStaticPageCount(
+    evidenceEdgesByDocument.get(documentId)?.length || 0,
+    relationEdgesByEndpoint.get(documentId)?.length || 0
+  );
+}
+
+function evidenceSourceStaticPageCount(sourceId) {
+  return evidenceStaticPageCount(
+    evidenceEdgesBySource.get(sourceId)?.length || 0,
+    relationEdgesByEvidence.get(sourceId)?.length || 0
+  );
+}
+
+function evidenceRelationStaticPageCount(edge) {
+  return evidenceStaticPageCount(evidenceRelationEvidenceNodes(edge).length);
+}
+
+function evidencePaginationHtml({ scope, id, page, pageCount, root = false }) {
+  if (pageCount <= 1) return "";
+  const numbers = evidenceStaticPageNumbers(page, pageCount);
+  const links = [];
+  for (const [index, number] of numbers.entries()) {
+    if (index && number - numbers[index - 1] > 1) links.push('<span class="evidence-pagination-gap" aria-hidden="true">…</span>');
+    const route = root && number === 1 ? "/map/evidence/" : evidenceFocusRoute(scope, id, number);
+    const position = number === page ? "현재" : number === 1 ? "첫" : number === pageCount ? "마지막" : number === page - 1 ? "이전" : number === page + 1 ? "다음" : "이동";
+    links.push(`<a href="${withBase(route)}" aria-label="${position} 조각, ${number}/${pageCount}"${number === page ? ' aria-current="page"' : ""}>${number}</a>`);
+  }
+  return `<nav class="evidence-pagination" aria-label="근거 계보 조각">${links.join("")}</nav>`;
+}
+
+function evidenceEntryPointsHtml() {
+  const documents = [...evidenceDocumentNodes]
+    .sort((left, right) => (evidenceEdgesByDocument.get(right.id)?.length || 0) - (evidenceEdgesByDocument.get(left.id)?.length || 0) || left.title.localeCompare(right.title, "ko"))
+    .slice(0, 6);
+  const sources = [...evidenceSourceNodes]
+    .sort((left, right) => (evidenceEdgesBySource.get(right.id)?.length || 0) - (evidenceEdgesBySource.get(left.id)?.length || 0) || left.title.localeCompare(right.title, "ko"))
+    .slice(0, 6);
+  return `<details class="evidence-entry-points"><summary>대표 문서와 근거 허브에서 시작하기</summary><div><section><h2>근거가 넓게 등록된 문서</h2><ol>${documents.map((node) => `<li><a href="${withBase(evidenceRouteForNode(node))}"><span>${evidenceEdgesByDocument.get(node.id)?.length || 0}</span>${escapeHtml(node.title)}</a></li>`).join("")}</ol></section><section><h2>여러 문서가 등록한 자료</h2><ol>${sources.map((node) => `<li><a href="${withBase(evidenceRouteForNode(node))}"><span>${evidenceEdgesBySource.get(node.id)?.length || 0}</span>${escapeHtml(node.title)}</a></li>`).join("")}</ol></section></div></details>`;
+}
+
+function evidenceLensPage({ scope = "document", id = "", page = 1, rootPage = false, canonicalPath = "/map/evidence/" } = {}) {
+  const defaultDocument = evidenceNodesById.get("computing-capability") || [...evidenceDocumentNodes]
+    .sort((left, right) => (evidenceEdgesByDocument.get(right.id)?.length || 0) - (evidenceEdgesByDocument.get(left.id)?.length || 0))[0];
+  let focus = null;
+  let relation = null;
+  if (scope === "relation") {
+    relation = evidencedRelationEdges.find((edge) => evidenceRelationRouteId(edge.id) === id);
+    if (!relation) throw new Error(`Evidence route references missing relation '${id}'`);
+  } else {
+    focus = id ? evidenceNodesById.get(id) : defaultDocument;
+    const valid = scope === "source"
+      ? focus && evidenceRoutableSourceIds.has(focus.id)
+      : focus?.visibility === "public" && !["sources", "references"].includes(focus.category);
+    if (!valid) throw new Error(`Evidence route references missing ${scope} '${id}'`);
+  }
+
+  let evidenceSources = [];
+  let downstreamDocuments = [];
+  let focusRelations = [];
+  let neighbors = [];
+  let totalItems = 0;
+  if (scope === "document") {
+    evidenceSources = (evidenceEdgesByDocument.get(focus.id) || []).map((edge) => evidenceNodesById.get(edge.source)).filter(Boolean);
+    focusRelations = relationEdgesByEndpoint.get(focus.id) || [];
+    neighbors = sharedEvidenceNeighbors(focus.id);
+    totalItems = Math.max(evidenceSources.length, focusRelations.length);
+  } else if (scope === "source") {
+    evidenceSources = [focus];
+    downstreamDocuments = (evidenceEdgesBySource.get(focus.id) || []).map((edge) => evidenceNodesById.get(edge.target)).filter(Boolean);
+    focusRelations = relationEdgesByEvidence.get(focus.id) || [];
+    totalItems = Math.max(downstreamDocuments.length, focusRelations.length);
+  } else {
+    evidenceSources = evidenceRelationEvidenceNodes(relation);
+    totalItems = evidenceSources.length;
+  }
+
+  const pageCount = evidenceStaticPageCount(totalItems);
+  if (!Number.isInteger(page) || page < 1 || page > pageCount) throw new Error(`Evidence route references missing page '${page}'`);
+  const start = (page - 1) * EVIDENCE_STATIC_PAGE_SIZE;
+  const pageEvidenceSources = scope === "source" ? evidenceSources : evidenceSources.slice(start, start + EVIDENCE_STATIC_PAGE_SIZE);
+  const pageDocuments = scope === "source" ? downstreamDocuments.slice(start, start + EVIDENCE_STATIC_PAGE_SIZE) : downstreamDocuments;
+  const pageRelations = scope === "relation" ? [] : focusRelations.slice(start, start + EVIDENCE_STATIC_PAGE_SIZE);
+  const focusTitle = relation ? `${evidenceNodesById.get(relation.source)?.title || relation.source} → ${evidenceNodesById.get(relation.target)?.title || relation.target}` : focus.title;
+  const focusSummary = relation ? evidenceRelationStatement(relation) : focus.summary;
+  const routeId = relation ? evidenceRelationRouteId(relation.id) : focus.id;
+  const scopeLabel = scope === "source" ? "근거 문서" : scope === "relation" ? "검토 관계" : "지식 문서";
+  const provenanceCards = pageEvidenceSources.map((node) => evidenceSourceProvenanceHtml(node, { selected: scope === "source" })).join("") || '<p class="evidence-empty">등록된 근거 문서가 없습니다.</p>';
+  const sourceCards = pageEvidenceSources.map((node) => evidenceSourceCardHtml(node, { selected: scope === "source" })).join("") || '<p class="evidence-empty">등록된 근거 문서가 없습니다.</p>';
+  const assertionCards = scope === "document"
+    ? `${evidenceDocumentCardHtml(focus, { selected: true })}${neighbors.length ? `<section class="evidence-neighbor-list"><header><h3>같은 자료를 등록한 다른 문서</h3><p>공통 근거는 합의나 같은 결론을 뜻하지 않습니다.</p></header><ol>${neighbors.map(({ node, sourceIds }) => `<li>${evidenceDocumentCardHtml(node, { sharedCount: sourceIds.length })}</li>`).join("")}</ol></section>` : ""}`
+    : scope === "source"
+      ? `<section class="evidence-downstream-list"><header><h3>이 자료를 등록한 지식 문서</h3><p>${downstreamDocuments.length}개 문서 가운데 ${pageDocuments.length}개를 표시합니다.</p></header><ol>${pageDocuments.map((node) => `<li>${evidenceDocumentCardHtml(node)}</li>`).join("")}</ol></section>`
+      : evidenceRelationCardHtml(relation, { selected: true });
+  const preservationCounts = Object.fromEntries(["local", "archived", "external-only"].map((status) => [status, evidenceSourceNodes.filter((node) => node.provenance?.snapshotStatus === status).length]));
+  const relationEvidenceLinks = evidencedRelationEdges.reduce((total, edge) => total + evidenceRelationEvidenceNodes(edge).length, 0);
+  const content = `<div class="evidence-lens-page section-frame" data-evidence-lens
+    data-evidence-manifest-url="${withBase("/data/evidence/manifest.json")}?v=${assetVersion}"
+    data-evidence-root-url="${withBase("/map/evidence/")}"
+    data-evidence-focus-scope="${escapeHtml(scope)}" data-evidence-focus-id="${escapeHtml(routeId)}">
+    <section class="evidence-hero"><div><p class="eyebrow"><a href="${withBase("/")}">홈</a> / DOCUMENT EVIDENCE LINEAGE</p><h1>근거가 지식 문서로 <span>이어지는 경로를 읽는다.</span></h1><p>링크를 점으로 흩뿌리지 않습니다. 원자료와 재현 정보, 정규 소스·참고 자료, 그 자료를 등록한 지식 문서와 검토 관계를 방향이 있는 계보로 펼칩니다.</p></div><dl><div><dt>지식 문서</dt><dd>${evidenceDocumentNodes.length}</dd></div><div><dt>문서 근거 연결</dt><dd>${documentEvidenceEdges.length}</dd></div><div><dt>근거 문서</dt><dd>${evidenceSourceNodes.length}</dd></div><div><dt>직접 근거 관계</dt><dd>${relationEvidenceLinks}</dd></div></dl></section>
+    ${mapModeNav("evidence")}
+    <aside class="evidence-boundary" aria-label="이 렌즈가 보여 주는 범위"><strong>해석 경계</strong><p>이 렌즈는 문장별 진위나 신뢰도를 판정하지 않습니다. 프론트매터에 등록된 문서 단위 근거와 관계 표에 직접 연결된 관계 근거를 구분해 보여 줍니다.</p></aside>
+    <form class="evidence-controls" data-evidence-controls hidden>
+      <div class="evidence-search-shell"><label>문서·근거 찾기<input type="search" data-evidence-search autocomplete="off" role="combobox" aria-autocomplete="list" aria-haspopup="listbox" aria-expanded="false" aria-controls="evidence-search-results" placeholder="제목·별칭 앞부분 2자 이상"></label><div id="evidence-search-results" class="evidence-search-results" data-evidence-search-results role="listbox" aria-label="근거 계보 검색 결과" aria-live="polite"></div></div>
+      <label>검색 범위<select data-evidence-scope><option value="all">전체</option><option value="document">지식 문서</option><option value="source">근거 문서</option><option value="relation">검토 관계</option></select></label>
+      <label>현재 근거 표시<select data-evidence-preservation><option value="">전체 보존 상태</option><option value="local">로컬 원본</option><option value="archived">보존 스냅샷</option><option value="external-only">외부 링크 의존</option></select></label>
+      <button type="button" data-evidence-reset>초기화</button>
+    </form>
+    <div class="evidence-state-bar"><nav aria-label="근거 계보 위치"><a href="${withBase("/map/evidence/")}">근거 계보</a><span aria-hidden="true">/</span><span>${escapeHtml(scopeLabel)}</span><span aria-hidden="true">/</span><span>${escapeHtml(focusTitle)}</span>${page > 1 ? `<span aria-hidden="true">/</span><span>${page}번째 조각</span>` : ""}</nav><output data-evidence-status aria-live="polite">${scope === "source" ? `${downstreamDocuments.length}개 지식 문서가 이 자료를 등록했습니다.` : `${evidenceSources.length}개 근거 문서가 연결되어 있습니다.`}</output></div>
+    <header class="evidence-focus-heading"><p>${escapeHtml(scopeLabel.toUpperCase())}</p><h2>${escapeHtml(focusTitle)}</h2><p>${escapeHtml(focusSummary)}</p></header>
+    <div class="evidence-braid" aria-label="원자료에서 지식 문서로 이어지는 근거 계보">
+      <div class="evidence-braid-labels" aria-hidden="true"><span>01 · 원자료와 재현 정보</span><i>→</i><span>02 · 정규 소스·참고 자료</span><i>→</i><span>03 · 지식 문서·검토 관계</span></div>
+      <section class="evidence-braid-rail evidence-provenance-rail" aria-labelledby="evidence-provenance-title"><header><span>01</span><div><h2 id="evidence-provenance-title">원자료와 재현 정보</h2><p>원자료·보조 자료, 판본, 확인일과 보존 상태</p></div></header><div data-evidence-provenance-list>${provenanceCards}</div></section>
+      <section class="evidence-braid-rail evidence-source-rail" aria-labelledby="evidence-source-title"><header><span>02</span><div><h2 id="evidence-source-title">정규 소스·참고 자료</h2><p>지식 문서가 근거로 등록한 위키의 자료 페이지</p></div></header><div data-evidence-source-list>${sourceCards}</div></section>
+      <section class="evidence-braid-rail evidence-assertion-rail" aria-labelledby="evidence-assertion-title"><header><span>03</span><div><h2 id="evidence-assertion-title">지식 문서·검토 관계</h2><p>문서 단위 근거 묶음과 직접 근거가 명시된 관계</p></div></header><div data-evidence-assertion-list>${assertionCards}</div></section>
+    </div>
+    ${pageRelations.length ? `<section class="evidence-reviewed-relations" aria-labelledby="evidence-reviewed-title"><header><p>RELATION ASSERTIONS</p><h2 id="evidence-reviewed-title">근거가 직접 명시된 검토 관계</h2><span>${pageRelations.length}/${focusRelations.length}개 표시</span></header><ol>${pageRelations.map((edge) => `<li>${evidenceRelationCardHtml(edge)}</li>`).join("")}</ol></section>` : ""}
+    ${evidencePaginationHtml({ scope, id: routeId, page, pageCount, root: rootPage })}
+    <section class="evidence-preservation-summary" aria-label="전체 근거 문서의 보존 상태"><div><span>로컬 원본</span><strong>${preservationCounts.local}</strong></div><div><span>보존 스냅샷</span><strong>${preservationCounts.archived}</strong></div><div><span>외부 링크 의존</span><strong>${preservationCounts["external-only"]}</strong></div><p>보존 상태는 자료의 품질 점수가 아니라 다시 확인할 수 있는 조건을 뜻합니다.</p></section>
+    ${evidenceEntryPointsHtml()}
+    <div class="evidence-error" data-evidence-error hidden role="alert"><h2>검색 조각을 불러오지 못했습니다</h2><p>현재 계보와 정적 링크는 계속 사용할 수 있습니다.</p><button type="button" data-evidence-retry>다시 시도</button></div>
+    <noscript><p class="evidence-noscript">자바스크립트 없이도 현재 근거 계보, 문서·자료 링크와 다음 조각을 모두 읽을 수 있습니다.</p></noscript>
+  </div>`;
+  return layout({
+    title: rootPage ? "문서·근거 계보" : `${focusTitle} · 근거 계보`,
+    description: "원자료와 재현 정보에서 정규 소스·참고 자료를 거쳐 지식 문서와 검토 관계로 이어지는 문서 단위 근거 계보.",
+    content,
+    canonicalPath,
+    bodyClass: "evidence-lens-page-body",
+    pageModules: ["evidence-lens.js"]
   });
 }
 
@@ -1515,6 +1834,17 @@ function historyDataOutputPath(url, label) {
     throw new Error(`Unsafe historical lens ${label} path '${url}'`);
   }
   return join("data", "history", ...parts);
+}
+
+function evidenceDataOutputPath(url, label) {
+  const pathname = String(url || "").split(/[?#]/, 1)[0].replaceAll("\\", "/");
+  const parts = pathname.split("/");
+  let decodedParts = [];
+  try { decodedParts = parts.map((part) => decodeURIComponent(part)); } catch { decodedParts = [".."]; }
+  if (!pathname || pathname.startsWith("/") || decodedParts.includes("..") || decodedParts.includes(".") || parts.some((part) => !part)) {
+    throw new Error(`Unsafe evidence lens ${label} path '${url}'`);
+  }
+  return join("data", "evidence", ...parts);
 }
 
 await rm(distRoot, { recursive: true, force: true });
@@ -1564,6 +1894,43 @@ for (const period of historicalLens.manifest.periods) {
     }));
   }
 }
+await output(join("map", "evidence", "index.html"), evidenceLensPage({ rootPage: true }));
+for (const node of evidenceDocumentNodes) {
+  if (!node.id || /[\\/?#]/.test(node.id) || node.id === "." || node.id === "..") throw new Error(`Unsafe evidence document id '${node.id}'`);
+  const pageCount = evidenceDocumentStaticPageCount(node.id);
+  for (let page = 1; page <= pageCount; page += 1) {
+    await output(join("map", "evidence", "document", node.id, ...(page > 1 ? [String(page)] : []), "index.html"), evidenceLensPage({
+      scope: "document",
+      id: node.id,
+      page,
+      canonicalPath: evidenceFocusRoute("document", node.id, page)
+    }));
+  }
+}
+for (const node of evidenceRoutableSourceNodes) {
+  if (!node.id || /[\\/?#]/.test(node.id) || node.id === "." || node.id === "..") throw new Error(`Unsafe evidence source id '${node.id}'`);
+  const pageCount = evidenceSourceStaticPageCount(node.id);
+  for (let page = 1; page <= pageCount; page += 1) {
+    await output(join("map", "evidence", "source", node.id, ...(page > 1 ? [String(page)] : []), "index.html"), evidenceLensPage({
+      scope: "source",
+      id: node.id,
+      page,
+      canonicalPath: evidenceFocusRoute("source", node.id, page)
+    }));
+  }
+}
+for (const edge of evidencedRelationEdges) {
+  const routeId = evidenceRelationRouteId(edge.id);
+  const pageCount = evidenceRelationStaticPageCount(edge);
+  for (let page = 1; page <= pageCount; page += 1) {
+    await output(join("map", "evidence", "relation", routeId, ...(page > 1 ? [String(page)] : []), "index.html"), evidenceLensPage({
+      scope: "relation",
+      id: routeId,
+      page,
+      canonicalPath: evidenceFocusRoute("relation", routeId, page)
+    }));
+  }
+}
 for (const page of pages) {
   await output(join(page.category, page.slug, "index.html"), articlePage(page));
   if (page.category === "references") {
@@ -1571,7 +1938,7 @@ for (const page of pages) {
   }
 }
 
-const searchIndex = pages.map((page) => ({
+const searchIndex = siteDiscoveryPages.map((page) => ({
   title: page.title,
   url: withBase(page.url),
   category: categoryMeta[page.category].label,
@@ -1629,6 +1996,35 @@ for (const payload of Object.values(historicalLens.transitionDetails)) {
     .replaceAll("{page}", page);
   await output(historyDataOutputPath(url, `transition detail '${payload.id}'`), JSON.stringify(payload));
 }
+await output(join("data", "evidence", "manifest.json"), JSON.stringify(evidenceLens.manifest));
+await output(evidenceDataOutputPath(evidenceLens.manifest.overview.url, "overview"), JSON.stringify(evidenceLens.overview));
+for (const [bucket, payload] of Object.entries(evidenceLens.lookupShards)) {
+  if (!/^\d+$/.test(bucket)) throw new Error(`Unsafe evidence lookup bucket '${bucket}'`);
+  const url = evidenceLens.manifest.lookup.route.replaceAll("{bucket}", bucket);
+  await output(evidenceDataOutputPath(url, `lookup bucket '${bucket}'`), JSON.stringify(payload));
+}
+for (const payload of Object.values(evidenceLens.searchShards)) {
+  if (!payload.route) throw new Error(`Evidence search shard '${payload.id}' is missing its route`);
+  await output(evidenceDataOutputPath(payload.route, `search shard '${payload.id}'`), JSON.stringify(payload));
+}
+for (const [shardId, payload] of Object.entries(evidenceLens.assertionShards)) {
+  if (!/^(?:document|relation)-[a-f0-9]{16}$/.test(shardId)) throw new Error(`Unsafe evidence assertion shard '${shardId}'`);
+  const url = evidenceLens.manifest.routes.assertion.replaceAll("{shard}", shardId);
+  await output(evidenceDataOutputPath(url, `assertion focus '${shardId}'`), JSON.stringify(payload));
+}
+for (const payload of Object.values(evidenceLens.assertionDetails)) {
+  if (!payload.route) throw new Error(`Evidence assertion detail '${payload.id}' is missing its route`);
+  await output(evidenceDataOutputPath(payload.route, `assertion detail '${payload.id}'`), JSON.stringify(payload));
+}
+for (const [shardId, payload] of Object.entries(evidenceLens.evidenceShards)) {
+  if (!/^evidence-[a-f0-9]{16}$/.test(shardId)) throw new Error(`Unsafe evidence source shard '${shardId}'`);
+  const url = evidenceLens.manifest.routes.evidence.replaceAll("{shard}", shardId);
+  await output(evidenceDataOutputPath(url, `evidence focus '${shardId}'`), JSON.stringify(payload));
+}
+for (const payload of Object.values(evidenceLens.evidenceDetails)) {
+  if (!payload.route) throw new Error(`Evidence source detail '${payload.id}' is missing its route`);
+  await output(evidenceDataOutputPath(payload.route, `evidence detail '${payload.id}'`), JSON.stringify(payload));
+}
 await output(".nojekyll", "");
 await output("404.html", layout({
   title: "문서를 찾을 수 없습니다",
@@ -1646,11 +2042,15 @@ if (siteUrl) {
     "/map/learning/",
     "/map/atlas/",
     "/map/history/",
+    "/map/evidence/",
     ...atlasClusterEntries().map((cluster) => `/map/atlas/${cluster.id}/`),
     ...historicalLens.manifest.shards.map((record) => record.route),
+    ...evidenceDocumentNodes.flatMap((node) => Array.from({ length: evidenceDocumentStaticPageCount(node.id) }, (_, index) => evidenceFocusRoute("document", node.id, index + 1))),
+    ...evidenceSourceNodes.flatMap((node) => Array.from({ length: evidenceSourceStaticPageCount(node.id) }, (_, index) => evidenceFocusRoute("source", node.id, index + 1))),
+    ...evidencedRelationEdges.flatMap((edge) => Array.from({ length: evidenceRelationStaticPageCount(edge) }, (_, index) => evidenceFocusRoute("relation", evidenceRelationRouteId(edge.id), index + 1))),
     ...resolvedLearningPaths.map((path) => `/map/learning/${path.slug}/`),
     ...resolvedLearningPaths.map((path) => `/paths/${path.slug}/`),
-    ...pages.map((page) => page.url)
+    ...siteDiscoveryPages.map((page) => page.url)
   ];
   await output("sitemap.xml", `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${sitemapUrls.map((url) => `  <url><loc>${siteUrl}${url}</loc></url>`).join("\n")}\n</urlset>`);
   await output("robots.txt", `User-agent: *\nAllow: /\nSitemap: ${siteUrl}/sitemap.xml\n`);

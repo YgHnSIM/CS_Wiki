@@ -186,6 +186,12 @@ export function buildGraphPayload(pages, { limit = 12, urlFor = (url) => url } =
   };
 }
 
+export function selectSiteDiscoveryPages(pages, { visibilityFor = (page) => page.graphVisibility || "public" } = {}) {
+  if (!Array.isArray(pages)) throw new Error("Site discovery pages must be an array");
+  if (typeof visibilityFor !== "function") throw new Error("Site discovery visibility resolver must be a function");
+  return pages.filter((page) => visibilityFor(page) !== "context");
+}
+
 export function safeExternalUrl(value) {
   const candidate = String(value || "").trim();
   try {

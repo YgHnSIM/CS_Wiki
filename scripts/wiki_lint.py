@@ -126,8 +126,8 @@ def split_table_row(line: str) -> list[str]:
 
 def lint_relation_table(page, resolver: Resolver, issues: list[Issue]) -> None:
     lines = page.text.splitlines()
-    start: int | None = None
-    end = len(lines)
+    relation_spans: list[tuple[int, int]] = []
+    active_start: int | None = None
     in_fence = False
     for index, line in enumerate(lines):
         if re.match(r"^\s*(```|~~~)", line):
@@ -138,55 +138,89 @@ def lint_relation_table(page, resolver: Resolver, issues: list[Issue]) -> None:
         heading = re.match(r"^#{1,2}\s+(.+?)\s*$", line)
         if not heading:
             continue
-        if start is None and heading.group(1).strip() == "관계" and line.startswith("## "):
-            start = index + 1
-        elif start is not None:
-            end = index
-            break
-    if start is None:
+        if active_start is not None:
+            relation_spans.append((active_start, index))
+            active_start = None
+        if heading.group(1).strip() == "관계" and line.startswith("## "):
+            active_start = index + 1
+    if active_start is not None:
+        relation_spans.append((active_start, len(lines)))
+    if not relation_spans:
         return
-    columns: dict[str, int] | None = None
-    for offset, line in enumerate(lines[start:end]):
-        if not line.strip().startswith("|"):
-            continue
-        cells = split_table_row(line)
-        if cells and all(re.fullmatch(r":?-{3,}:?", cell) for cell in cells):
-            continue
-        line_no = start + offset + 1
-        if columns is None:
-            names = [re.sub(r"[`*_]", "", cell).strip() for cell in cells]
-            columns = {name: names.index(name) for name in ("관계", "대상", "설명", "근거") if name in names}
-            missing = {"관계", "대상", "설명"} - set(columns)
-            if missing:
-                add(issues, "error", "graph.relation_columns", page.rel, line_no, f"관계 표 필수 열 누락: {sorted(missing)}")
-                return
-            continue
+    seen_relations: dict[tuple[str, str], int] = {}
+    for start, end in relation_spans:
+        columns: dict[str, int] | None = None
+        for offset, line in enumerate(lines[start:end]):
+            if not line.strip().startswith("|"):
+                continue
+            cells = split_table_row(line)
+            if cells and all(re.fullmatch(r":?-{3,}:?", cell) for cell in cells):
+                continue
+            line_no = start + offset + 1
+            if columns is None:
+                names = [re.sub(r"[`*_]", "", cell).strip() for cell in cells]
+                columns = {name: names.index(name) for name in ("관계", "대상", "설명", "근거") if name in names}
+                missing = {"관계", "대상", "설명"} - set(columns)
+                if missing:
+                    add(issues, "error", "graph.relation_columns", page.rel, line_no, f"관계 표 필수 열 누락: {sorted(missing)}")
+                    break
+                continue
 
-        kind = re.sub(r"[`*]", "", cells[columns["관계"]] if columns["관계"] < len(cells) else "").strip().replace("-", "_")
-        if not kind:
-            continue
-        if kind not in CURATED_RELATIONS:
-            add(issues, "error", "graph.relation_kind", page.rel, line_no, f"허용되지 않은 관계: {kind}")
-        target_cell = cells[columns["대상"]] if columns["대상"] < len(cells) else ""
-        target_match = re.search(r"\[\[([^\]|#]+)", target_cell)
-        if not target_match:
-            add(issues, "error", "graph.relation_target", page.rel, line_no, "관계 대상은 위키링크여야 함")
-        else:
-            target_name = target_match.group(1).strip()
-            target, target_kind = resolver.resolve(target_name)
-            if not target or target_kind not in {"stem", "alias"}:
-                add(issues, "error", "graph.relation_target", page.rel, line_no, f"관계 대상 문서를 찾을 수 없음: {target_name}")
-        note = cells[columns["설명"]] if columns["설명"] < len(cells) else ""
-        if not re.sub(r"[`*_]", "", note).strip():
-            add(issues, "error", "graph.relation_note", page.rel, line_no, "관계 설명이 비어 있음")
-        evidence_cell = cells[columns["근거"]] if "근거" in columns and columns["근거"] < len(cells) else ""
-        evidence_names = re.findall(r"\[\[([^\]|#]+)", evidence_cell)
-        if kind in HISTORICAL_RELATIONS and not evidence_names:
-            add(issues, "error", "graph.relation_evidence", page.rel, line_no, f"역사 관계 {kind}에는 직접 근거 위키링크가 필요함")
-        for evidence_name in evidence_names:
-            evidence, evidence_kind = resolver.resolve(evidence_name.strip())
-            if not evidence or evidence_kind not in {"stem", "alias"}:
-                add(issues, "error", "graph.relation_evidence", page.rel, line_no, f"관계 근거 문서를 찾을 수 없음: {evidence_name.strip()}")
+            kind = re.sub(r"[`*]", "", cells[columns["관계"]] if columns["관계"] < len(cells) else "").strip().replace("-", "_")
+            if not kind:
+                continue
+            if kind not in CURATED_RELATIONS:
+                add(issues, "error", "graph.relation_kind", page.rel, line_no, f"허용되지 않은 관계: {kind}")
+            target_cell = cells[columns["대상"]] if columns["대상"] < len(cells) else ""
+            target_match = re.search(r"\[\[([^\]|#]+)", target_cell)
+            target = None
+            target_name = ""
+            target_key = ""
+            if not target_match:
+                add(issues, "error", "graph.relation_target", page.rel, line_no, "관계 대상은 위키링크여야 함")
+            else:
+                target_name = target_match.group(1).strip()
+                target, target_kind = resolver.resolve(target_name)
+                if not target or target_kind not in {"stem", "alias"}:
+                    add(issues, "error", "graph.relation_target", page.rel, line_no, f"관계 대상 문서를 찾을 수 없음: {target_name}")
+                    target_key = target_name.casefold()
+                else:
+                    target_key = target.rel.casefold()
+            if kind in CURATED_RELATIONS and target_key:
+                relation_key = (kind, target_key)
+                first_line = seen_relations.get(relation_key)
+                if first_line is not None:
+                    target_label = target.stem if target else target_name
+                    add(
+                        issues,
+                        "error",
+                        "graph.relation_duplicate",
+                        page.rel,
+                        line_no,
+                        f"중복 관계 행: {kind} → {target_label} (첫 행 {first_line})",
+                    )
+                else:
+                    seen_relations[relation_key] = line_no
+            note = cells[columns["설명"]] if columns["설명"] < len(cells) else ""
+            if not re.sub(r"[`*_]", "", note).strip():
+                add(issues, "error", "graph.relation_note", page.rel, line_no, "관계 설명이 비어 있음")
+            evidence_cell = cells[columns["근거"]] if "근거" in columns and columns["근거"] < len(cells) else ""
+            evidence_names = re.findall(r"\[\[([^\]|#]+)", evidence_cell)
+            if kind in HISTORICAL_RELATIONS and not evidence_names:
+                add(issues, "error", "graph.relation_evidence", page.rel, line_no, f"역사 관계 {kind}에는 직접 근거 위키링크가 필요함")
+            for evidence_name in evidence_names:
+                evidence, evidence_kind = resolver.resolve(evidence_name.strip())
+                if not evidence or evidence_kind not in {"stem", "alias"}:
+                    add(issues, "error", "graph.relation_evidence", page.rel, line_no, f"관계 근거 문서를 찾을 수 없음: {evidence_name.strip()}")
+                elif evidence.page_type not in {"type/source", "type/reference"}:
+                    add(
+                        issues,
+                        "error",
+                        "graph.relation_evidence_type",
+                        page.rel,
+                        line_no,
+                        f"관계 근거는 type/source 또는 type/reference 문서여야 함: {evidence_name.strip()}",
+                    )
 
 
 def lint(root: Path) -> tuple[list[Issue], dict[str, int]]:
@@ -332,6 +366,24 @@ def lint(root: Path) -> tuple[list[Issue], dict[str, int]]:
             body_urls = set(re.findall(r"\]\((https?://[^)\s]+)\)", page.text))
             if metadata_urls != body_urls:
                 add(issues, "error", "provenance.url_mismatch", page.rel, field_line(page.text, "source_urls"), f"source_urls와 본문 URL 불일치: metadata_only={sorted(metadata_urls - body_urls)}, body_only={sorted(body_urls - metadata_urls)}")
+
+        # Public knowledge pages cite wiki source/reference pages. Source pages
+        # themselves keep raw filenames in this field and are intentionally
+        # validated by the provenance rules above instead.
+        effective_visibility = visibility or ("hidden" if page.is_special else "public")
+        is_source_page = page.path.parent.name == "sources" or page.page_type in {"type/source", "type/reference"}
+        if not is_source_page and not page.is_special and effective_visibility == "public":
+            for source_value in page.sources:
+                source_page = sources.resolve(source_value)
+                if source_page is None or source_page.page_type not in {"type/source", "type/reference"}:
+                    add(
+                        issues,
+                        "error",
+                        "sources.frontmatter_unresolved",
+                        page.rel,
+                        field_line(page.text, "sources"),
+                        f"frontmatter sources가 유일한 소스·참고 자료 문서로 해석되지 않음: {source_value}",
+                    )
 
         heading_names = [name for _, name, _ in page.headings]
         if page.path.name != "log.md":
