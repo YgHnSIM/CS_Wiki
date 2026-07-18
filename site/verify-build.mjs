@@ -4,7 +4,7 @@ import { readFile, readdir } from "node:fs/promises";
 import { join } from "node:path";
 import { gzipSync } from "node:zlib";
 import { historyPeriods, learningPaths } from "./catalog.mjs";
-import { escapeHtml, selectSiteDiscoveryPages } from "./core.mjs";
+import { escapeHtml, selectSiteDiscoveryPages, withBase } from "./core.mjs";
 import { ATLAS_LIMITS, ATLAS_SCHEMA_VERSION } from "./graph/atlas.mjs";
 import {
   HISTORY_LIMITS,
@@ -825,10 +825,11 @@ for (const record of historyManifest.shards) {
   }
 
   const staticHtml = await read(cleanHistoryRoute(record.route));
+  const deployedRoute = withBase(record.route, process.env.SITE_BASE || "");
   assert.ok(staticHtml.includes(`data-default-era="${record.periodId}"`), `history route '${record.route}' does not restore era '${record.periodId}'`);
   assert.ok(staticHtml.includes(`data-default-part="${record.id}"`), `history route '${record.route}' does not restore part '${record.id}'`);
-  assert.ok(staticHtml.includes(`data-default-era-path="${record.route}"`), `history route '${record.route}' has a conflicting era path`);
-  assert.ok(staticHtml.includes(`data-default-part-path="${record.route}"`), `history route '${record.route}' has a conflicting part path`);
+  assert.ok(staticHtml.includes(`data-default-era-path="${deployedRoute}"`), `history route '${record.route}' has a conflicting era path`);
+  assert.ok(staticHtml.includes(`data-default-part-path="${deployedRoute}"`), `history route '${record.route}' has a conflicting part path`);
   assert.match(staticHtml, /<details class="history-static-disclosure">/, `history route '${record.route}' needs a text chronology`);
   assert.match(staticHtml, /<noscript>[\s\S]*history-noscript/, `history route '${record.route}' needs a no-JS explanation`);
   for (const event of shard.events) {

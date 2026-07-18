@@ -1653,6 +1653,32 @@ Canvas는 보조 시각화로 두고 같은 상태의 군집·문서·관계 목
 - [[컴퓨팅 능력의 발달사]]
 - [[overview]]
 
+## [2026-07-18] update | GitHub Pages 기본 경로 검증 복구
+
+GitHub Pages 배포 환경의 `SITE_BASE=/CS_Wiki`를 반영해 생성된 역사 렌즈 정적 경로를 산출물 검증기가 기본 경로 없이 비교하던 불일치를 수정했다. 생성기의 공개 URL 계약은 유지하고, 검증기 역시 공통 `withBase` 규칙으로 시대·조각 복원 경로를 확인하도록 통일했다.
+
+변경된 페이지와 코드:
+
+- Pages 산출물 경로 검증: `site/verify-build.mjs`
+- 운영 기록: [[log]]
+
+### 검증
+
+- GitHub Pages와 같은 `SITE_BASE=/CS_Wiki`, `SITE_URL=https://YgHnSIM.github.io/CS_Wiki` 환경에서 전체 검사와 정적 빌드·산출물 검증
+- 기본 경로가 없는 로컬 환경에서 전체 검사와 정적 빌드·산출물 검증
+- `raw/` 원본 변경 없음
+
+### 출처
+
+- `.github/workflows/pages.yml`
+- `site/build.mjs`
+- `site/verify-build.mjs`
+
+### 관련 항목
+
+- [[overview]]
+- [[지식 그래프 관계 스키마]]
+
 <!-- wiki-maintenance: global-sections -->
 ## 출처
 
