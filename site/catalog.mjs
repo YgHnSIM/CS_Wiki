@@ -94,10 +94,12 @@ export const learningPaths = [
   {
     slug: "computing-origins",
     title: "컴퓨팅의 기원",
-    description: "수학 표라는 계산 인프라에서 기계식 자동화, 범용 프로그램 가능성과 기호 조작의 발상까지 따라간다.",
+    description: "수학 표와 인간 계산 조직이라는 계산 인프라에서 기계식 자동화, 범용 프로그램 가능성과 기호 조작의 발상까지 따라간다.",
     pages: [
       "컴퓨팅의 기원 - 배비지와 러브레이스",
       "수학 표",
+      "인간 계산자",
+      "인간 계산자와 계산 공장",
       "찰스 배비지",
       "유한 차분법",
       "차분 기관",
@@ -284,7 +286,7 @@ export const learningPaths = [
   {
     slug: "computing-capability-history",
     title: "컴퓨팅 능력의 발달사",
-    description: "독서 지도에서 출발해 계산 가능성과 프로그래밍 가능성, 집적과 축소, 수치 정확성, 메모리·전력 장벽, 병렬·분산 서비스와 도메인 특화로 이어진 흐름을 읽는다.",
+    description: "독서 지도에서 출발해 기계 이전의 계산 조직, 계산 가능성과 프로그래밍 가능성, 집적과 축소, 수치 정확성, 메모리·전력 장벽, 병렬·분산 서비스와 도메인 특화로 이어진 흐름을 읽는다.",
     pages: [
       "컴퓨팅 능력 독서 지도",
       "On Computable Numbers with an Application to the Entscheidungsproblem",
@@ -292,6 +294,7 @@ export const learningPaths = [
       "프로그래밍 가능성",
       "범용성은 어떻게 컴퓨팅 능력이 되었는가",
       "계산 결과에서 실행 가능한 절차로",
+      "인간 계산자와 계산 공장",
       "Cramming More Components onto Integrated Circuits",
       "Design of Ion-Implanted MOSFET's with Very Small Physical Dimensions",
       "무어의 법칙",
