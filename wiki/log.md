@@ -1965,6 +1965,48 @@ VisiCalc는 기관 기록이 뒷받침하는 “개인용 컴퓨터용 최초의
 - [[수학 표의 검산에서 수치 결과 계약으로]]
 - [[수학 표에서 스프레드시트로]]
 
+## [2026-07-20] update | 수학 표 문서군 원문 대조와 active 승격
+
+수학 표 확장 작업에서 작성·보강한 참고 자료 11개, 개념 4개, 분석 4개를 원 출판물·기관 기록·공식 매뉴얼과 다시 대조하고 총 19개 문서를 `active`로 승격했다. 직접 근거, 보조·접근 자료, URL, 판본, 접근일과 스냅샷 상태를 점검했으며, 각 문서의 `status`와 `status/*` 태그를 일치시켰다. 승격 뒤 위키 상태는 전체 226개 문서 중 `active` 211개, `draft` 15개, `review` 0개다.
+
+대조 과정에서 찰스 허턴 표의 *logistic logarithm*을 물류 의미가 아닌 로지스틱·비례 로그로 바로잡고, 고대 메소포타미아의 교육용 표와 근대 이전 전문 계산에서 널리 쓰인 로그·삼각함수 표의 적용 범위를 구분했다. 배비지의 1822년 논문은 유한 차분 예시와 계산·조판 자동화 주장까지 원문으로 확인했다. 드 프로니 계산 공장의 삼단 조직, Mathematical Tables Project의 WPA 운영과 NBS 지원, ENIAC 계산자 진 제닝스 바틱의 역할, SEAC의 정식 명칭과 가동 시점도 기관 기록에 맞춰 표현을 좁혔다.
+
+현대 부분은 VisiCalc 1.0의 행·열 순서 전체 재계산과 수동 모드, 전방 참조·순환 참조의 제약을 원 매뉴얼에 맞춰 보정하고, 이를 현대 Excel의 의존 관계 기반 재계산 및 변경 추적과 분리했다. DLMF Tables의 엄밀 구간과 반올림·절단을 허용하는 확장 구간도 구별했다. 고대 수학 표에서 스프레드시트로 이어지는 설명은 직접 기술 계보가 아니라, 완성된 값의 배포에서 입력과 실행 가능한 절차의 배포로 바뀌는 기능적 비교임을 명시했다.
+
+변경된 페이지:
+
+- 참고 자료: [[The History of Mathematical Tables: From Sumer to Spreadsheets]], [[A Note respecting the Application of Machinery to the Calculation of Astronomical Tables]], [[Handbook of Mathematical Functions with Formulas, Graphs, and Mathematical Tables]], [[Mathematical Tables: Containing the Common, Hyperbolic, and Logistic Logarithms]], [[The computation factory: de Prony's project for making tables in the 1790s]], [[Prehistory: The Math Tables Project]], [[Human Computer Project]], [[Standards Eastern Automatic Computer]], [[DLMF Standard Reference Tables on Demand]], [[VisiCalc Apple II Version 1.0 Manual]], [[Excel formula recalculation and dependencies]]
+- 개념: [[수학 표]], [[인간 계산자]], [[검산]], [[스프레드시트]]
+- 분석: [[계산 결과에서 실행 가능한 절차로]], [[인간 계산자와 계산 공장]], [[수학 표의 검산에서 수치 결과 계약으로]], [[수학 표에서 스프레드시트로]]
+- 연결·운영: [[차분 기관]], [[유한 차분법]], [[index]], [[overview]], [[log]]
+
+### 검증
+
+- 위키 lint: 구조·출처 재현성·상태·내부 링크·관계 오류와 경고 0건
+- 유지보수 검사: 관련 링크·색인 근거 수·로그 제목과 순서에서 자동 수정 필요 0건
+- 전체 테스트: 사이트 테스트 145개와 Python 테스트 17개 통과
+- 정적 사이트: 226개 문서 빌드 및 검증 통과, 학습 경로 17개·고유 문서 170개 확인
+- 의미 지도 8개 군집·21개 회랑·222개 초점 조각, 역사 렌즈 222개 공개 문서·17개 검토 전환, 근거 계보 154개 지식 문서·45개 관계 주장 검증
+- `raw/` 원본 변경 없음
+
+### 출처
+
+- [[The History of Mathematical Tables: From Sumer to Spreadsheets]]
+- [[A Note respecting the Application of Machinery to the Calculation of Astronomical Tables]]
+- [[Prehistory: The Math Tables Project]]
+- [[Human Computer Project]]
+- [[Standards Eastern Automatic Computer]]
+- [[DLMF Standard Reference Tables on Demand]]
+- [[VisiCalc Apple II Version 1.0 Manual]]
+- [[Excel formula recalculation and dependencies]]
+
+### 관련 항목
+
+- [[수학 표]]
+- [[인간 계산자와 계산 공장]]
+- [[수학 표의 검산에서 수치 결과 계약으로]]
+- [[수학 표에서 스프레드시트로]]
+
 <!-- wiki-maintenance: global-sections -->
 ## 출처
 

@@ -2,7 +2,7 @@
 title: A Note respecting the Application of Machinery to the Calculation of Astronomical Tables
 aliases: [Babbage 1822, 배비지 1822년 차분 기관 발표문, A Note respecting the Application of Machinery]
 summary: "찰스 배비지가 1822년 차분법 기반 기계로 수학 표를 계산하고 계산 결과에 따라 활자를 자동 배치하려 한 구상을 직접 보고한 발표문."
-tags: [type/reference, domain/computer-history, domain/mathematics, status/draft]
+tags: [type/reference, domain/computer-history, domain/mathematics, status/active]
 created: 2026-07-20
 updated: 2026-07-20
 publication_year: 1822
@@ -17,7 +17,7 @@ source_urls: ["https://en.wikisource.org/wiki/Page%3AMemoirs_of_Royal_Astronomic
 retrieved: 2026-07-20
 version: "Read 14 June 1822; Memoirs of the Astronomical Society of London, vol. 1, article XXVI"
 snapshot_status: external-only
-status: draft
+status: active
 ---
 
 ## 개요

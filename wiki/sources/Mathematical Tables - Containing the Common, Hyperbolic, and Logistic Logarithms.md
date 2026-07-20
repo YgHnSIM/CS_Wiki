@@ -2,7 +2,7 @@
 title: "Mathematical Tables: Containing the Common, Hyperbolic, and Logistic Logarithms"
 aliases: ["Mathematical Tables: Containing the Common, Hyperbolic, and Logistic Logarithms", Hutton's Mathematical Tables, Hutton and Gregory Mathematical Tables, 허턴과 그레고리의 수학 표]
 summary: "Charles Hutton의 로그·삼각함수표를 Olinthus Gregory의 보충과 함께 수록한 1858년 제7판으로, 컴퓨터 이전 전문 계산에서 표의 중요성과 정확성 문제를 보여주는 참고 자료."
-tags: [type/reference, domain/computer-history, domain/mathematics, status/draft]
+tags: [type/reference, domain/computer-history, domain/mathematics, status/active]
 created: 2026-07-20
 updated: 2026-07-20
 publication_year: 1858
@@ -18,12 +18,12 @@ source_urls: ["https://www.cambridge.org/core/books/mathematical-tables/37FE51CE
 retrieved: 2026-07-20
 version: "Seventh edition, 1858; Cambridge Library Collection paperback reissue 2012 and digital edition 2013"
 snapshot_status: external-only
-status: draft
+status: active
 ---
 
 ## 개요
 
-[[Mathematical Tables - Containing the Common, Hyperbolic, and Logistic Logarithms|Mathematical Tables: Containing the Common, Hyperbolic, and Logistic Logarithms]]는 Charles Hutton의 표에 Olinthus Gregory의 보충 자료를 더한 1858년 제7판이다. 상용로그, 쌍곡로그와 물류로그(logistic logarithms)를 비롯한 계산표를 수록한다. Cambridge University Press는 이 판본을 Cambridge Library Collection으로 재발행했으며, 공식 기록은 종이책을 2012년, 디지털 판본을 2013년으로 표시한다.
+[[Mathematical Tables - Containing the Common, Hyperbolic, and Logistic Logarithms|Mathematical Tables: Containing the Common, Hyperbolic, and Logistic Logarithms]]는 Charles Hutton의 표에 Olinthus Gregory의 보충 자료를 더한 1858년 제7판이다. 상용로그, 쌍곡로그(hyperbolic logarithms, 오늘날의 자연로그)와 로지스틱 로그(logistic 또는 proportional logarithms)를 비롯한 계산표를 수록한다. Cambridge University Press는 이 판본을 Cambridge Library Collection으로 재발행했으며, 공식 기록은 종이책을 2012년, 디지털 판본을 2013년으로 표시한다.
 
 ## 전문 계산에서의 역할
 

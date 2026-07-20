@@ -2,7 +2,7 @@
 title: Handbook of Mathematical Functions with Formulas, Graphs, and Mathematical Tables
 aliases: [Handbook of Mathematical Functions, Abramowitz and Stegun, A&S, 수학 함수 편람]
 summary: "미국 국립표준국이 1964년 발행한 함수·공식·그래프·수학 표 편람으로, 손 계산용 표 제작과 전자 컴퓨터 기반 함수 계산이 공존하던 전환기를 보여주는 참고 자료."
-tags: [type/reference, domain/computer-history, domain/mathematics, status/draft]
+tags: [type/reference, domain/computer-history, domain/mathematics, status/active]
 created: 2026-07-20
 updated: 2026-07-20
 publication_year: 1964
@@ -20,7 +20,7 @@ source_urls: ["https://www.nist.gov/mathematics-statistics/handbook-mathematical
 retrieved: 2026-07-20
 version: "NBS Applied Mathematics Series 55, June 1964, 1046 pages"
 snapshot_status: external-only
-status: draft
+status: active
 ---
 
 ## 개요

@@ -2,7 +2,7 @@
 title: DLMF Standard Reference Tables on Demand
 aliases: [DLMF Tables, DLMF 표준 참조표, DLMF on-demand tables]
 summary: "NIST가 특수함수 값을 요청 시 생성하고 보증된 오차 경계와 비교 기능을 제공해 수치 소프트웨어의 시험 기준으로 삼으려 한 DLMF Tables 프로젝트를 정리한 공식 보고서 자료."
-tags: [type/reference, domain/mathematics, domain/software-engineering, status/draft]
+tags: [type/reference, domain/mathematics, domain/software-engineering, status/active]
 created: 2026-07-20
 updated: 2026-07-20
 publication_year: 2015
@@ -16,9 +16,9 @@ primary_sources: ["NISTIR 8056 - Applied and Computational Mathematics Division 
 supporting_sources: ["DLMF - Possible Errors in DLMF"]
 source_urls: ["https://nvlpubs.nist.gov/nistpubs/ir/2015/nist.ir.8056.pdf", "https://dlmf.nist.gov/help/errors"]
 retrieved: 2026-07-20
-version: "NISTIR 8056, April 2015; DLMF Version 1.2.7, 2026-06-15"
+version: "NISTIR 8056, April 2015; supporting DLMF error page Version 1.2.7, 2026-06-15"
 snapshot_status: external-only
-status: draft
+status: active
 ---
 
 ## 자료 개요
@@ -27,7 +27,7 @@ status: draft
 
 이 자료의 역사적 중요성은 인쇄된 [[수학 표]]의 역할이 사라진 것이 아니라 달라졌음을 보여주는 데 있다. 사용자가 일상 계산을 위해 책에서 값을 찾는 방식은 함수 라이브러리와 온라인 계산으로 옮겨갔지만, 신뢰할 수 있는 고정밀 참조값은 다른 프로그램의 결과를 시험하는 기준으로 계속 필요했다.
 
-## 값이 아니라 오차 경계를 제공하다
+## 값과 함께 오차 경계를 제공하다
 
 보고서가 설명한 기본 출력 모드는 각 함수값을 하한과 상한 사이에 엄밀하게 포함하는 구간 방식이었다. 사용자는 요구 자릿수를 정하고, 출력된 추가 자릿수와 오차 경계를 바탕으로 원하는 반올림·절단 규칙을 선택할 수 있었다. 또는 최근접 짝수, 양·음의 무한대 방향, 0 방향 등 명시된 반올림 모드를 요청할 수 있었다.
 
@@ -35,7 +35,7 @@ status: draft
 
 ## 수치 소프트웨어의 시험 기준
 
-비교 모드에서는 사용자가 함수값 파일을 올리면 시스템이 계산한 참조값과 번갈아 표시하고 근사 상대 오차를 제시했다. 업로드한 값이 허용 구간 밖이면 오류로, 구간 안이지만 최근접 반올림값과 다르면 경고로 구분했다.
+비교 모드에서는 사용자가 함수값 파일을 올리면 시스템이 계산한 참조값과 번갈아 표시하고 근사 상대 오차를 제시했다. 이때 원래의 엄밀한 참조 구간은 업로드 값에 적용됐을 수 있는 반올림·절단을 수용하도록 요청 자릿수에서 바깥쪽으로 확장됐다. 업로드한 값이 이 확장 구간 밖이면 오류로, 구간 안이지만 최근접 짝수 반올림값과 다르면 경고로 구분했다.
 
 따라서 표는 더 이상 사람의 계산을 생략하는 조회 도구에만 머물지 않는다. 프로그램이 계산한 결과를 독립적인 고정밀 값과 비교하는 시험 오라클(test oracle)에 가까운 역할을 맡는다. 다만 참조 시스템과 시험 대상이 같은 알고리즘·구현 결함을 공유하면 비교만으로 오류를 발견하지 못할 수 있으므로, 계산 방법과 오류 경계의 독립적인 분석이 중요하다.
 
