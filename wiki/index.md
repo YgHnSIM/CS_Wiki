@@ -4,7 +4,7 @@ aliases: [index, 색인, 카탈로그]
 summary: "위키 전체 페이지를 유형별로 정리하고 각 페이지의 근거 수를 표시하는 카탈로그."
 tags: [type/meta, status/active]
 created: 2026-05-03
-updated: 2026-07-18
+updated: 2026-07-20
 sources: []
 status: active
 ---
@@ -71,6 +71,10 @@ status: active
 - [[Dark Silicon and the End of Multicore Scaling]] — 전압 축소가 둔화한 고정 전력 칩에서 집적 자원과 동시 활성 자원의 간극을 2011년의 멀티코어 모델로 전망한 논문. (핵심 문헌 2개)
 - [[What Every Computer Scientist Should Know About Floating-Point Arithmetic]] — 유한 정밀도 표현, 반올림 오차, 상쇄, 정확한 반올림과 시스템 지원을 연결한 Goldberg의 1991년 해설 논문. (핵심 문헌 2개)
 - [[IEEE 754-2019 Standard for Floating-Point Arithmetic]] — 현행 IEEE 부동소수점 표준의 공개 범위, 규정 연산의 결정 조건과 진행 중인 P754 개정 상태를 정리한 공식 자료. (핵심 문헌 3개)
+- [[The History of Mathematical Tables: From Sumer to Spreadsheets]] — OUP의 2003년 연구서와 Robson의 고대 메소포타미아 장, CDLI 유물 기록을 바탕으로 수학 표와 표 형식의 역사를 정리한 참고 자료. (핵심 문헌 3개)
+- [[A Note respecting the Application of Machinery to the Calculation of Astronomical Tables]] — 배비지의 1822년 발표문을 바탕으로 차분법 계산과 자동 조판 구상, 원문 사실과 시스템적 해석의 경계를 정리한 참고 자료. (핵심 문헌 1개)
+- [[Handbook of Mathematical Functions with Formulas, Graphs, and Mathematical Tables]] — NBS가 1964년 발행한 함수 편람의 제작·배포와 손 계산에서 전자식 함수 계산으로의 전환을 정리한 참고 자료. (핵심 문헌 2개)
+- [[Mathematical Tables: Containing the Common, Hyperbolic, and Logistic Logarithms]] — Hutton과 Gregory의 1858년 로그·삼각함수표와 Cambridge 재발행 서지를 바탕으로 근대 전문 계산에서 표의 역할을 정리한 참고 자료. (핵심 문헌 1개)
 
 ## 인물 (Entities)
 
@@ -101,6 +105,7 @@ status: active
 
 ## 개념 (Concepts)
 
+- [[수학 표]] — 반복 계산의 결과를 미리 구해 저장·배포한 참조 도구와 고대 면적표부터 배비지의 표 제작 자동화까지의 역사를 설명한 개념. (근거 5개)
 - [[차분 기관]] — 유한 차분법을 이용해 수학 표 계산과 인쇄를 자동화하려 한 특수 목적 기계. (근거 1개)
 - [[해석 기관]] — Mill, Store, 천공 카드, 반복, 조건 분기를 포함한 범용 기계식 계산 장치 설계. (근거 1개)
 - [[유한 차분법]] — 다항식 계산을 반복 덧셈으로 환원해 기계식 계산에 적합하게 만드는 방법. (근거 1개)

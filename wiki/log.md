@@ -4,7 +4,7 @@ aliases: [log, 변경 기록, 작업 기록]
 summary: "CS Wiki의 소스 수집, 질의, 점검, 콘텐츠·웹사이트 변경을 시간순으로 남긴 운영 기록."
 tags: [type/meta, status/active]
 created: 2026-05-03
-updated: 2026-07-18
+updated: 2026-07-20
 sources: []
 status: active
 ---
@@ -1705,6 +1705,99 @@ GitHub Pages 배포 환경의 `SITE_BASE=/CS_Wiki`를 반영해 생성된 역사
 
 - [[overview]]
 - [[지식 그래프 관계 스키마]]
+
+## [2026-07-20] reference | The History of Mathematical Tables: From Sumer to Spreadsheets
+
+고대 메소포타미아부터 근현대까지 수학 표와 표 형식의 역사를 검토할 외부 참고 자료를 등록했다. Oxford University Press의 2003년 연구서, Eleanor Robson의 고대 메소포타미아 장과 CDLI의 `SF 082` 유물 기록을 원자료로, Robson 장의 접근용 사본을 보조 자료로 구분했다.
+
+Oxford 연구서의 전체 장별 원문 대조가 남아 있으므로 새 참고 자료는 `draft`, 로컬 보존 사본이 없으므로 `snapshot_status: external-only`로 기록했다.
+
+변경된 페이지:
+
+- 생성: [[The History of Mathematical Tables: From Sumer to Spreadsheets]]
+- 갱신: [[컴퓨팅의 기원 - 배비지와 러브레이스]], [[index]], [[overview]], [[log]]
+
+### 출처
+
+- *The History of Mathematical Tables: From Sumer to Spreadsheets*
+- Eleanor Robson, “Tables and tabular formatting in Sumer, Babylonia, and Assyria, 2500 BCE–50 CE”
+- CDLI, `SF 082` artifact entry (`P010678`, `VAT 12593`)
+
+### 관련 항목
+
+- [[수학 표]]
+- [[차분 기관]]
+
+## [2026-07-20] create | 수학 표
+
+`컴퓨팅의 기원 - 배비지와 러브레이스`에서 차분 기관의 배경으로 언급한 수학 표를 독립 개념 페이지로 작성했다. 수학 표를 반복 계산의 결과를 저장·배포하는 참조 도구로 정의하고, 기원전 약 2600년 슈루팍 VAT 12593을 “연대를 확실하게 정할 수 있는 가장 이른 현존 사례”로 제한해 서술했다.
+
+“가장 흔히 쓰인 표”는 단일 순위를 제시하지 않고 기초 교육의 곱셈표, 과학·공학의 상용로그표와 삼각함수표, 천문학·항해의 전문 표, 20세기의 특수함수표로 사용 범위를 나눴다. 계산·검산·전사·조판·인쇄·사용 단계의 오류를 구분하고, 배비지의 차분 기관을 계산과 인쇄를 연결한 표 제작 시스템으로 설명했다.
+
+새 개념과 외부 참고 자료는 원문 대조와 승격 검토가 남아 있어 `draft`로 유지했다.
+
+변경된 페이지:
+
+- 생성: [[수학 표]]
+- 교차 링크 보강: [[차분 기관]], [[유한 차분법]], [[컴퓨팅의 기원 - 배비지와 러브레이스]]
+- 카탈로그·홈·기록 갱신: [[index]], [[overview]], [[log]]
+
+### 검증
+
+- 위키 lint: 209개 페이지, 위키링크 5,503개, 오류 0건, 경고 0건
+- 유지보수 검사: 관련 링크·색인 근거 수·로그 제목과 순서에서 자동 수정 필요 0건
+- 프론트매터와 출처 절의 근거 문서 일치 확인
+- 관련 항목 상호 링크와 관계 표의 직접 근거 확인
+- 외부 참고 자료의 URL·접근일·보존 상태 기록
+- `raw/` 원본 변경 없음
+
+### 출처
+
+- [[컴퓨팅의 기원 - 배비지와 러브레이스]]
+- [[The History of Mathematical Tables: From Sumer to Spreadsheets]]
+
+### 관련 항목
+
+- [[차분 기관]]
+- [[유한 차분법]]
+- [[찰스 배비지]]
+
+## [2026-07-20] reference | 수학 표 출처 계보와 문서 연결 보완
+
+수학 표 초안의 출처와 기존 문서 연결을 검토해, 서로 다른 시기와 역할의 자료를 하나의 2003년 근거 노드에 묶었던 구조를 분리했다. Cambridge 자료는 왕립군사학교 수학교육 연구가 아니라 Charles Hutton과 Olinthus Gregory의 1858년 로그·삼각함수표 제7판임을 바로잡고, 배비지의 1822년 발표문과 NBS의 1964년 함수 편람도 각각 독립 참고 자료로 등록했다.
+
+[[수학 표]]의 정의는 계산값의 규칙적인 목록과 행·열 표 형식을 모두 포괄하도록 고쳤다. 가장 이른 현존 사례에는 `SF 082`, `P010678`, `VAT 12593`, 초기 왕조 IIIa기라는 식별 정보를 추가하고 출토 맥락과 실제 용도의 불확실성을 명시했다. 널리 쓰인 표는 전 지구적 단일 순위 대신 교육·일상 산술, 근대 후기 전문 계산, 천문·항해, 20세기 응용수학의 모집단별 사례로 한정했다. 배비지의 1822년 원문이 직접 보고한 소형 기계·시험 표·자동 조판 구상과 표 제작 시스템에 대한 후대의 해석도 구분했다.
+
+관계 방향은 장기 개념인 수학 표가 차분 기관에 앞선다는 포괄적 `precedes` 대신, [[차분 기관]]이 표의 계산·전사·인쇄 오류 문제에 대응했다는 `responds_to`로 바꿨다. 기존 인물·개념·분석 페이지의 첫 언급과 관련 항목을 연결하고, 컴퓨팅의 기원 학습 경로에 수학 표와 유한 차분법을 추가했다. 새 참고 자료와 관계를 반영해 색인·홈페이지의 상태, 학습 지도, 역사 렌즈와 근거 계보 수치를 다시 계산했다.
+
+변경된 페이지와 코드:
+
+- 출처 분리·정정: [[The History of Mathematical Tables: From Sumer to Spreadsheets]], [[A Note respecting the Application of Machinery to the Calculation of Astronomical Tables]], [[Handbook of Mathematical Functions with Formulas, Graphs, and Mathematical Tables]], [[Mathematical Tables: Containing the Common, Hyperbolic, and Logistic Logarithms]]
+- 개념·관계 보완: [[수학 표]], [[차분 기관]], [[유한 차분법]], [[해석 기관]], [[알고리즘적 사고]]
+- 인물·분석 연결: [[찰스 배비지]], [[범용성은 어떻게 컴퓨팅 능력이 되었는가]], [[계산기와 컴퓨터의 차이]]
+- 원 소스·탐색 구조: [[컴퓨팅의 기원 - 배비지와 러브레이스]], `site/catalog.mjs`, [[index]], [[overview]], [[log]]
+
+### 검증
+
+- 위키 lint: 212개 페이지, 위키링크 5,574개, 오류 0건, 경고 0건
+- 수동 그래프 통계: 공개 문서 208개, 학습 경로 고유 문서 162개, 역사 연도 문서 32개, 검토 전환 16개
+- 근거 계보: 공개 지식 문서 147개, 정규 소스·참고 자료 61개, 문서–근거 연결 533개, 검토 관계 25개
+- 출처 ID `ref-052`–`ref-055`, 원자료·보조 자료·URL·접근일·판본·보존 상태 대조
+- `raw/` 원본 변경 없음
+
+### 출처
+
+- [[The History of Mathematical Tables: From Sumer to Spreadsheets]]
+- [[A Note respecting the Application of Machinery to the Calculation of Astronomical Tables]]
+- [[Handbook of Mathematical Functions with Formulas, Graphs, and Mathematical Tables]]
+- [[Mathematical Tables: Containing the Common, Hyperbolic, and Logistic Logarithms]]
+
+### 관련 항목
+
+- [[수학 표]]
+- [[차분 기관]]
+- [[찰스 배비지]]
+- [[overview]]
 
 <!-- wiki-maintenance: global-sections -->
 ## 출처
