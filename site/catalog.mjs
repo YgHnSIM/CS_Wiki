@@ -238,7 +238,9 @@ export const learningPaths = [
       "정보 은닉",
       "서브루틴 라이브러리에서 API로",
       "소프트웨어 재사용의 역사",
-      "계산 결과에서 실행 가능한 절차로"
+      "계산 결과에서 실행 가능한 절차로",
+      "스프레드시트",
+      "수학 표에서 스프레드시트로"
     ]
   },
   {
@@ -297,6 +299,7 @@ export const learningPaths = [
       "범용성은 어떻게 컴퓨팅 능력이 되었는가",
       "계산 결과에서 실행 가능한 절차로",
       "인간 계산자와 계산 공장",
+      "수학 표에서 스프레드시트로",
       "Cramming More Components onto Integrated Circuits",
       "Design of Ion-Implanted MOSFET's with Very Small Physical Dimensions",
       "무어의 법칙",
