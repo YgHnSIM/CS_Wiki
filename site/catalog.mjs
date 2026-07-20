@@ -94,12 +94,14 @@ export const learningPaths = [
   {
     slug: "computing-origins",
     title: "컴퓨팅의 기원",
-    description: "수학 표와 인간 계산 조직이라는 계산 인프라에서 기계식 자동화, 범용 프로그램 가능성과 기호 조작의 발상까지 따라간다.",
+    description: "수학 표와 인간 계산 조직의 제작·검산에서 기계식 자동화, 범용 프로그램 가능성과 기호 조작의 발상까지 따라간다.",
     pages: [
       "컴퓨팅의 기원 - 배비지와 러브레이스",
       "수학 표",
       "인간 계산자",
       "인간 계산자와 계산 공장",
+      "검산",
+      "수학 표의 검산에서 수치 결과 계약으로",
       "찰스 배비지",
       "유한 차분법",
       "차분 기관",
@@ -372,10 +374,12 @@ export const learningPaths = [
   {
     slug: "floating-point-correctness",
     title: "부동소수점 성능과 정확성",
-    description: "유한 정밀도 표현과 IEEE 754의 연산 규범에서 컴파일러 최적화, LINPACK·SPEC의 결과 검증까지 따라가며 같은 계산의 성능 향상을 성립시키는 정확성 계약을 읽는다.",
+    description: "수학 표의 검산과 고정밀 참조값에서 IEEE 754의 연산 규범, 컴파일러 최적화, LINPACK·SPEC의 결과 검증까지 따라가며 정확성 계약을 읽는다.",
     pages: [
       "What Every Computer Scientist Should Know About Floating-Point Arithmetic",
       "IEEE 754-2019 Standard for Floating-Point Arithmetic",
+      "DLMF Standard Reference Tables on Demand",
+      "검산",
       "부동소수점 정확성",
       "The FORTRAN Automatic Coding System",
       "컴파일러 최적화",
@@ -386,6 +390,7 @@ export const learningPaths = [
       "더 빠른 프로세서는 왜 더 빠른 프로그램을 보장하지 않는가",
       "컴퓨팅 능력이란 무엇인가",
       "컴퓨팅 능력의 발달사",
+      "수학 표의 검산에서 수치 결과 계약으로",
       "더 빠른 계산은 같은 답을 내는가"
     ]
   },
