@@ -219,7 +219,7 @@ export const learningPaths = [
   {
     slug: "reuse-api",
     title: "라이브러리에서 API와 재사용으로",
-    description: "서브루틴 카탈로그에서 컴포넌트·모듈화·정보 은닉으로 확장된 재사용의 역사를 읽는다.",
+    description: "계산 결과와 실행 절차의 재사용을 구분하고, 서브루틴 카탈로그에서 컴포넌트·모듈화·정보 은닉으로 확장된 역사를 읽는다.",
     pages: [
       "The Preparation of Programs for an Electronic Digital Computer",
       "Mass Produced Software Components",
@@ -233,7 +233,8 @@ export const learningPaths = [
       "모듈화",
       "정보 은닉",
       "서브루틴 라이브러리에서 API로",
-      "소프트웨어 재사용의 역사"
+      "소프트웨어 재사용의 역사",
+      "계산 결과에서 실행 가능한 절차로"
     ]
   },
   {
@@ -290,6 +291,7 @@ export const learningPaths = [
       "On the Computational Complexity of Algorithms",
       "프로그래밍 가능성",
       "범용성은 어떻게 컴퓨팅 능력이 되었는가",
+      "계산 결과에서 실행 가능한 절차로",
       "Cramming More Components onto Integrated Circuits",
       "Design of Ion-Implanted MOSFET's with Very Small Physical Dimensions",
       "무어의 법칙",

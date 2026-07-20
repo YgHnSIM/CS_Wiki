@@ -4,7 +4,7 @@ aliases: [EDSAC API, API의 전사, 서브루틴과 API]
 summary: "EDSAC 서브루틴 라이브러리의 카탈로그, 사용 규약, 비용 정보, 오류 진단을 현대 API의 전사로 해석한 분석."
 tags: [type/analysis, domain/software-engineering, domain/computer-history, status/active]
 created: 2026-07-09
-updated: 2026-07-10
+updated: 2026-07-20
 sources: ["The Preparation of Programs for an Electronic Digital Computer"]
 status: active
 ---
@@ -56,4 +56,5 @@ EDSAC 라이브러리를 현대 API와 그대로 동일시하면 안 된다. 당
 - [[초기 소프트웨어의 계층화]]
 - [[소프트웨어 재사용]]
 - [[소프트웨어 재사용의 역사]]
+- [[계산 결과에서 실행 가능한 절차로]]
 - [[스탠리 길]]
