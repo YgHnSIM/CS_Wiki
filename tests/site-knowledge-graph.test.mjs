@@ -4,14 +4,17 @@ import {
   GRAPH_SETTINGS_DEFAULTS,
   attachmentAssetHref,
   computeVisibleGraphNodeIds,
+  createClusterOverviewLayout,
   createDeterministicLayout,
+  createFocusedOrbitLayout,
   createGraphAdjacency,
   fitFocusedGraphCamera,
   fitGraphCamera,
   graphSearchResults,
   matchGraphQuery,
   normalizeGraphSettings,
-  normalizeKnowledgeGraph
+  normalizeKnowledgeGraph,
+  shortestGraphPath
 } from "../site/assets/knowledge-graph.js";
 import { EXPLORER_LIMITS, buildConceptEntityGraph } from "../site/graph/explorer.mjs";
 
@@ -43,13 +46,14 @@ test("concept/entity projection keeps public documents and collapses parallel re
       }),
       node("person-b", "entities", { title: "인물 B" }),
       node("concept-isolated", "concepts", { tags: ["custom/z", "custom/a", "custom/z"] }),
+      node("source-x", "sources", { title: "근거 X", url: "/sources/source-x/" }),
       node("analysis-c", "analyses"),
       node("context-d", "concepts", { visibility: "context" }),
       node("hidden-e", "entities", { visibility: "hidden" })
     ],
     edges: [
       { source: "concept-a", target: "person-b", kind: "mentions", directed: true, weight: 1, occurrences: 2 },
-      { source: "person-b", target: "concept-a", kind: "implements", directed: true, weight: 1, occurrences: 1 },
+      { source: "person-b", target: "concept-a", kind: "implements", directed: true, weight: 1, occurrences: 1, origin: "curated", contexts: [{ note: "인물 B가 개념 A를 구현했다." }], evidence: ["source-x"] },
       { source: "person-b", target: "concept-a", kind: "related", directed: false, weight: 1, occurrences: 3 },
       { source: "concept-a", target: "analysis-c", kind: "mentions", weight: 1 },
       { source: "concept-a", target: "context-d", kind: "related", weight: 2 }
@@ -64,6 +68,15 @@ test("concept/entity projection keeps public documents and collapses parallel re
     kinds: ["implements", "mentions", "related"],
     weight: 3,
     occurrences: 6,
+    relations: [
+      {
+        kind: "implements",
+        direction: "reverse",
+        origin: "curated",
+        note: "인물 B가 개념 A를 구현했다.",
+        evidence: [{ id: "source-x", title: "근거 X", url: "/sources/source-x/" }]
+      }
+    ],
     direction: "both",
     directions: {
       forward: { kinds: ["mentions"], occurrences: 2 },
@@ -230,6 +243,41 @@ test("focused camera keeps the selection centered and every direct neighbor insi
     assert.ok(screen.y >= padding - 0.001 && screen.y <= viewport.height - padding + 0.001);
   }
   assert.deepEqual(camera, fitFocusedGraphCamera(selected, neighbors, viewport, padding));
+});
+
+test("semantic layouts create stable clusters and relation sectors", () => {
+  const nodes = [
+    node("architecture-a", "concepts", { domains: ["domain/computer-architecture"], degree: 3 }),
+    node("architecture-b", "entities", { domains: ["domain/computer-architecture"], degree: 1 }),
+    node("software-c", "concepts", { domains: ["domain/software-engineering"], degree: 2 })
+  ];
+  const edges = [
+    { source: "architecture-a", target: "architecture-b", kinds: ["related"] },
+    { source: "architecture-a", target: "software-c", kinds: ["enables"] }
+  ];
+  const overview = createClusterOverviewLayout(nodes, edges);
+  assert.equal(overview.clusters.length, 2);
+  assert.equal(overview.corridors.length, 1);
+  assert.equal(overview.corridors[0].count, 1);
+  assert.deepEqual(overview, createClusterOverviewLayout([...nodes].reverse(), [...edges].reverse()));
+
+  const focus = createFocusedOrbitLayout(nodes[0], nodes.slice(1), edges);
+  assert.deepEqual(focus.positions.get("architecture-a"), { x: 0, y: 0 });
+  assert.ok(focus.positions.get("software-c").x > 0, "implementation neighbor belongs on the right");
+  assert.ok(focus.positions.get("architecture-b").y > 0, "related neighbor belongs below the focus");
+});
+
+test("path exploration returns a deterministic shortest route", () => {
+  const adjacency = new Map([
+    ["a", new Set(["c", "b"])],
+    ["b", new Set(["a", "d"])],
+    ["c", new Set(["a", "d"])],
+    ["d", new Set(["b", "c"])],
+    ["isolated", new Set()]
+  ]);
+  assert.deepEqual(shortestGraphPath(adjacency, "a", "d"), ["a", "b", "d"]);
+  assert.deepEqual(shortestGraphPath(adjacency, "a", "isolated"), []);
+  assert.deepEqual(shortestGraphPath(adjacency, "a", "a"), ["a"]);
 });
 
 test("force controls produce finite deterministic but distinct layouts", () => {

@@ -644,33 +644,31 @@ function knowledgeGraphPage() {
   const conceptNodes = conceptEntityGraph.nodes.filter((node) => node.category === "concepts");
   const entityNodes = conceptEntityGraph.nodes.filter((node) => node.category === "entities");
   const content = `<div class="knowledge-graph-page section-frame" data-knowledge-graph data-graph-asset-root="${withBase("/assets/raw/")}">
-    <header class="knowledge-graph-hero">
+    <header class="knowledge-graph-masthead">
       <div>
         <p class="eyebrow">개념 ${conceptNodes.length} · 인물 ${entityNodes.length} · 직접 연결 ${conceptEntityGraph.stats.edges}</p>
         <h1>지식 그래프</h1>
-        <p>개념과 인물 문서 사이의 위키 관계를 한 화면에서 탐색합니다. 검색·그룹·표시·장력 옵션을 조절하고, 노드를 선택해 모든 직접 연결을 한 프레임에서 비교할 수 있습니다.</p>
+        <p>주제 군집을 살펴보고, 한 문서의 직접 연결이나 두 문서 사이의 경로에 집중할 수 있습니다.</p>
       </div>
-      <dl aria-label="지식 그래프 범위">
-        <div><dt>전체 노드</dt><dd>${conceptEntityGraph.stats.nodes}</dd></div>
-        <div><dt>개념</dt><dd>${conceptNodes.length}</dd></div>
-        <div><dt>인물</dt><dd>${entityNodes.length}</dd></div>
-        <div><dt>연결</dt><dd>${conceptEntityGraph.stats.edges}</dd></div>
-      </dl>
     </header>
     ${mapModeNav("graph")}
     <section class="knowledge-graph-toolbar" aria-label="그래프 탐색 도구">
       <div class="knowledge-graph-search">
-        <label for="knowledge-graph-search">노드 검색</label>
+        <label for="knowledge-graph-search">검색</label>
         <input id="knowledge-graph-search" type="search" data-graph-search autocomplete="off" placeholder="개념 또는 인물 이름" aria-controls="knowledge-graph-search-results">
         <div id="knowledge-graph-search-results" class="knowledge-graph-search-results" data-graph-search-results hidden></div>
+      </div>
+      <div class="knowledge-graph-modes" role="group" aria-label="탐색 방식">
+        <button type="button" data-graph-mode="overview" aria-pressed="true">군집 개요</button>
+        <button type="button" data-graph-mode="focus" aria-pressed="false">선택 집중</button>
+        <button type="button" data-graph-mode="path" aria-pressed="false">두 문서 경로</button>
       </div>
       <div class="knowledge-graph-filters" role="group" aria-label="문서 유형">
         <button type="button" data-graph-filter="all" aria-pressed="true">전체 <span>${conceptEntityGraph.stats.nodes}</span></button>
         <button type="button" data-graph-filter="concepts" aria-pressed="false">개념 <span>${conceptNodes.length}</span></button>
         <button type="button" data-graph-filter="entities" aria-pressed="false">인물 <span>${entityNodes.length}</span></button>
       </div>
-      <button class="knowledge-graph-settings-toggle" type="button" data-graph-settings-toggle aria-controls="knowledge-graph-settings" aria-expanded="false">그래프 설정</button>
-      <output class="knowledge-graph-status" data-graph-status aria-live="polite">개념과 인물 ${conceptEntityGraph.stats.nodes}개, 연결 ${conceptEntityGraph.stats.edges}개를 표시합니다.</output>
+      <button class="knowledge-graph-settings-toggle" type="button" data-graph-settings-toggle aria-controls="knowledge-graph-settings" aria-expanded="false">보기</button>
     </section>
     <div class="knowledge-graph-workspace">
       <section class="knowledge-graph-stage" aria-label="개념과 인물 지식 그래프">
@@ -678,117 +676,61 @@ function knowledgeGraphPage() {
         <div class="knowledge-graph-legend" aria-label="노드 범례">
           <span><i class="concept" aria-hidden="true"></i>개념</span>
           <span><i class="entity" aria-hidden="true"></i>인물</span>
-          <span><i class="relation" aria-hidden="true"></i>문서 관계</span>
+          <span><i class="relation" aria-hidden="true"></i>주제 경계</span>
         </div>
         <div class="knowledge-graph-camera" aria-label="그래프 화면 조절">
           <button type="button" data-graph-zoom-out>축소</button>
           <button type="button" data-graph-reset>맞춤</button>
           <button type="button" data-graph-zoom-in>확대</button>
         </div>
-        <p class="knowledge-graph-hint" id="knowledge-graph-hint">드래그: 이동 · 휠 또는 +/−: 확대/축소 · 방향키: 노드 이동 · Enter: 선택 · 0: 맞춤 · Escape: 선택 해제</p>
+        <div class="knowledge-graph-context">
+          <p data-graph-trail>전체 지식</p>
+          <output class="knowledge-graph-status" data-graph-status aria-live="polite">개념과 인물 ${conceptEntityGraph.stats.nodes}개를 주제별로 표시합니다.</output>
+        </div>
+        <p class="knowledge-graph-hint" id="knowledge-graph-hint">드래그로 이동하고 휠로 확대합니다. 노드를 선택하면 직접 연결에 집중합니다.</p>
         <aside class="knowledge-graph-settings" id="knowledge-graph-settings" data-graph-settings-panel aria-labelledby="knowledge-graph-settings-title" hidden>
           <header>
-            <h2 id="knowledge-graph-settings-title">그래프 설정</h2>
-            <button type="button" data-graph-settings-close aria-controls="knowledge-graph-settings" aria-label="그래프 설정 닫기">닫기</button>
+            <h2 id="knowledge-graph-settings-title">보기</h2>
+            <button type="button" data-graph-settings-close aria-controls="knowledge-graph-settings" aria-label="보기 설정 닫기">닫기</button>
           </header>
           <div class="knowledge-graph-settings-body">
             <details open>
-              <summary>필터</summary>
+              <summary>연결</summary>
               <fieldset>
-                <legend>표시할 파일과 노드</legend>
-                <label class="knowledge-graph-setting-query" for="knowledge-graph-file-query">
-                  <span>파일 검색</span>
-                  <input id="knowledge-graph-file-query" type="search" data-graph-file-query autocomplete="off" placeholder="경로 또는 파일 이름">
-                </label>
-                <label class="knowledge-graph-switch"><span>태그</span><input type="checkbox" data-graph-toggle-tags><i aria-hidden="true"></i></label>
-                <label class="knowledge-graph-switch"><span>첨부 파일</span><input type="checkbox" data-graph-toggle-attachments><i aria-hidden="true"></i></label>
-                <label class="knowledge-graph-switch"><span>존재하는 파일만</span><input type="checkbox" data-graph-toggle-existing-only checked><i aria-hidden="true"></i></label>
-                <label class="knowledge-graph-switch"><span>고립된 노드</span><input type="checkbox" data-graph-toggle-show-orphans checked><i aria-hidden="true"></i></label>
+                <legend>관계의 흐름을 화살표로 표시합니다.</legend>
+                <label class="knowledge-graph-switch"><span>관계 방향</span><input type="checkbox" data-graph-toggle-show-arrows checked><i aria-hidden="true"></i></label>
               </fieldset>
             </details>
             <details open>
-              <summary>그룹</summary>
+              <summary>레이블</summary>
               <fieldset>
-                <legend>검색 규칙에 따른 노드 색상</legend>
-                <div class="knowledge-graph-group-list" data-graph-group-list></div>
-                <button class="knowledge-graph-group-add" type="button" data-graph-group-add>그룹 추가</button>
-              </fieldset>
-            </details>
-            <details open>
-              <summary>표시</summary>
-              <fieldset>
-                <legend>노드와 연결선 표시 방식</legend>
-                <label class="knowledge-graph-switch"><span>연결선 화살표</span><input type="checkbox" data-graph-toggle-show-arrows><i aria-hidden="true"></i></label>
-                <label class="knowledge-graph-range" for="knowledge-graph-text-fade">
-                  <span>텍스트 흐림 임계값</span>
-                  <output for="knowledge-graph-text-fade" data-setting-value="text-fade">25%</output>
-                  <input id="knowledge-graph-text-fade" type="range" data-graph-text-fade min="0" max="1" step="0.05" value="0.25">
-                </label>
-                <label class="knowledge-graph-range" for="knowledge-graph-node-size">
-                  <span>노드 크기</span>
-                  <output for="knowledge-graph-node-size" data-setting-value="node-size">1.0배</output>
-                  <input id="knowledge-graph-node-size" type="range" data-graph-node-size min="0.5" max="2" step="0.1" value="1">
-                </label>
-                <label class="knowledge-graph-range" for="knowledge-graph-link-thickness">
-                  <span>연결선 굵기</span>
-                  <output for="knowledge-graph-link-thickness" data-setting-value="link-thickness">1.0배</output>
-                  <input id="knowledge-graph-link-thickness" type="range" data-graph-link-thickness min="0.5" max="2" step="0.1" value="1">
-                </label>
-                <div class="knowledge-graph-animation">
-                  <span>그래프 애니메이션</span>
-                  <button type="button" data-graph-animate aria-pressed="false">재생</button>
-                  <progress data-graph-animation-progress min="0" max="1" value="1" aria-label="애니메이션 진행률">100%</progress>
+                <legend>화면에 항상 표시할 문서 이름의 양을 선택합니다.</legend>
+                <div class="knowledge-graph-density" role="group" aria-label="레이블 밀도">
+                  <button type="button" data-graph-label-density="low" aria-pressed="false">핵심만</button>
+                  <button type="button" data-graph-label-density="medium" aria-pressed="true">균형</button>
+                  <button type="button" data-graph-label-density="high" aria-pressed="false">많이</button>
                 </div>
               </fieldset>
             </details>
-            <details open>
-              <summary>장력</summary>
-              <fieldset>
-                <legend>그래프 배치에 작용하는 힘</legend>
-                <label class="knowledge-graph-range" for="knowledge-graph-center-force">
-                  <span>중앙으로 모으기</span>
-                  <output for="knowledge-graph-center-force" data-setting-value="center-force">35%</output>
-                  <input id="knowledge-graph-center-force" type="range" data-graph-center-force min="0" max="2" step="0.05" value="0.35">
-                </label>
-                <label class="knowledge-graph-range" for="knowledge-graph-repel-force">
-                  <span>노드 밀어내기</span>
-                  <output for="knowledge-graph-repel-force" data-setting-value="repel-force">1.0배</output>
-                  <input id="knowledge-graph-repel-force" type="range" data-graph-repel-force min="0.25" max="2.5" step="0.05" value="1">
-                </label>
-                <label class="knowledge-graph-range" for="knowledge-graph-link-force">
-                  <span>연결선 당기기</span>
-                  <output for="knowledge-graph-link-force" data-setting-value="link-force">65%</output>
-                  <input id="knowledge-graph-link-force" type="range" data-graph-link-force min="0" max="2" step="0.05" value="0.65">
-                </label>
-                <label class="knowledge-graph-range" for="knowledge-graph-link-distance">
-                  <span>연결 거리</span>
-                  <output for="knowledge-graph-link-distance" data-setting-value="link-distance">1.0배</output>
-                  <input id="knowledge-graph-link-distance" type="range" data-graph-link-distance min="0.5" max="2" step="0.05" value="1">
-                </label>
-              </fieldset>
-            </details>
           </div>
-          <footer><button type="button" data-graph-settings-reset>기본값 복원</button></footer>
         </aside>
       </section>
-      <aside class="knowledge-graph-sidebar" aria-label="선택한 노드 정보">
-        <section class="knowledge-graph-inspector" data-graph-inspector hidden>
+      <section class="knowledge-graph-inspector" data-graph-inspector hidden aria-label="선택한 문서 정보">
           <p data-inspector-kind>개념</p>
           <h2 data-inspector-title></h2>
           <p data-inspector-summary></p>
           <strong data-inspector-degree></strong>
-          <div class="knowledge-graph-neighbors"><h3>직접 연결</h3><div data-inspector-neighbors></div></div>
+          <div class="knowledge-graph-relation" data-inspector-relation hidden>
+            <h3>선택한 연결</h3>
+            <strong data-inspector-relation-title></strong>
+            <p data-inspector-relation-kinds></p>
+            <p data-inspector-relation-direction></p>
+            <p data-inspector-relation-note hidden></p>
+            <div data-inspector-relation-evidence hidden><span>근거</span><div></div></div>
+          </div>
+          <div class="knowledge-graph-neighbors"><h3>관계별 직접 연결</h3><div data-inspector-neighbors></div></div>
           <a data-inspector-link href="#">문서 열기</a>
-        </section>
-        <section class="knowledge-graph-guide">
-          <h2>그래프 읽기</h2>
-          <ul>
-            <li><span class="concept">원형 노드</span><p>개념 문서입니다. 연결 수가 많을수록 크게 표시됩니다.</p></li>
-            <li><span class="entity">마름모 노드</span><p>인물 문서입니다. 개념과 직접 연결된 관계를 함께 표시합니다.</p></li>
-            <li><span>노드 선택</span><p>선택 문서를 화면 중앙에 두고 모든 직접 이웃을 한 프레임에 맞춥니다.</p></li>
-          </ul>
-        </section>
-      </aside>
+      </section>
     </div>
     <details class="knowledge-graph-static">
       <summary>문서 목록으로 그래프 읽기</summary>

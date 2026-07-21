@@ -6,7 +6,7 @@ export const EXPLORER_LIMITS = Object.freeze({
   nodes: 320,
   edges: 4000,
   initialHtmlBytes: 512 * 1024,
-  clientBytes: 72 * 1024
+  clientBytes: 96 * 1024
 });
 
 function pairKey(source, target) {
@@ -57,6 +57,7 @@ function finalizeDirectionRecord(record) {
 export function buildConceptEntityGraph(graph = {}) {
   const graphNodes = Array.isArray(graph.nodes) ? graph.nodes : [];
   const graphEdges = Array.isArray(graph.edges) ? graph.edges : [];
+  const graphNodesById = new Map(graphNodes.map((node) => [node?.id, node]));
   const retained = graphNodes
     .filter((node) => node?.visibility === "public" && EXPLORER_CATEGORY_SET.has(node?.category) && node?.id)
     .sort((left, right) => compareText(left.id, right.id));
@@ -78,6 +79,7 @@ export function buildConceptEntityGraph(graph = {}) {
         kinds: new Set(),
         weight: 0,
         occurrences: 0,
+        relations: new Map(),
         directions: {
           forward: emptyDirectionRecord(),
           reverse: emptyDirectionRecord(),
@@ -102,6 +104,24 @@ export function buildConceptEntityGraph(graph = {}) {
         : "reverse";
     if (kind) record.directions[direction].kinds.add(kind);
     record.directions[direction].occurrences += occurrences;
+    if (kind && (edge.origin === "curated" || (edge.evidence || []).length)) {
+      const context = (edge.contexts || []).find((item) => item?.note);
+      const relationKey = `${direction}\u0000${kind}`;
+      record.relations.set(relationKey, {
+        kind,
+        direction,
+        origin: edge.origin === "curated" ? "curated" : "derived",
+        note: String(context?.note || context?.excerpt || "").slice(0, 220),
+        evidence: uniqueTextList(edge.evidence).map((id) => {
+          const evidenceNode = graphNodesById.get(id);
+          return {
+            id,
+            title: String(evidenceNode?.title || id),
+            url: String(evidenceNode?.url || "")
+          };
+        })
+      });
+    }
   }
 
   const edges = [...groupedEdges.values()]
@@ -126,6 +146,8 @@ export function buildConceptEntityGraph(graph = {}) {
         kinds: [...edge.kinds].sort(compareText),
         weight: Math.min(12, Math.max(1, Math.round(edge.weight * 100) / 100)),
         occurrences: edge.occurrences,
+        relations: [...edge.relations.values()].sort((left, right) => compareText(left.direction, right.direction)
+          || compareText(left.kind, right.kind)),
         direction,
         directions
       };

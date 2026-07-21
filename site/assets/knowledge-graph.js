@@ -27,9 +27,67 @@ const PALETTE = Object.freeze({
 
 const CAMERA_LIMITS = Object.freeze({ min: 0.24, max: 4.8 });
 const FOCUS_CAMERA_LIMITS = Object.freeze({ min: 0.001, max: 2.8 });
-const STORAGE_KEY = "cs-wiki:knowledge-graph:settings:v1";
+const STORAGE_KEY = "cs-wiki:knowledge-graph:settings:v2";
 const DIRECTION = new Set(["forward", "reverse", "both", "none"]);
 const GROUP_COLORS = Object.freeze(["#00ff41", "#ffb000", "#8cb393", "#e7ffe9", "#00b82e", "#b67a00"]);
+const DOMAIN_LABELS = Object.freeze({
+  "domain/computer-architecture": "컴퓨터 구조",
+  "domain/computer-history": "컴퓨터 역사",
+  "domain/computer-science": "컴퓨터 과학",
+  "domain/internet": "인터넷",
+  "domain/machine-learning": "머신러닝",
+  "domain/mathematics": "수학",
+  "domain/operating-systems": "운영체제",
+  "domain/programming-languages": "프로그래밍 언어",
+  "domain/security": "보안",
+  "domain/software-engineering": "소프트웨어 공학",
+  "domain/systems": "시스템",
+  "domain/text-processing": "텍스트 처리",
+  "domain/web": "웹",
+  "domain/general": "연결 주제"
+});
+const RELATION_LABELS = Object.freeze({
+  mentions: "본문에서 언급",
+  related: "관련 항목",
+  supports: "근거로 뒷받침",
+  path_next: "학습 경로",
+  broader: "더 넓은 개념",
+  narrower: "더 좁은 개념",
+  prerequisite_for: "선수 개념",
+  enables: "가능하게 함",
+  constrains: "제약함",
+  measures: "측정함",
+  implements: "구현함",
+  exemplifies: "사례가 됨",
+  precedes: "역사적으로 앞섬",
+  responds_to: "문제에 대응함",
+  contradicts: "반박하거나 충돌함",
+  synthesizes: "종합함"
+});
+const RELATION_SECTORS = Object.freeze({
+  hierarchy: { label: "계층 · 학습", angle: -Math.PI / 2 },
+  application: { label: "구현 · 활용", angle: 0 },
+  association: { label: "근거 · 연관", angle: Math.PI / 2 },
+  history: { label: "역사 · 제약", angle: Math.PI }
+});
+const RELATION_SECTOR_BY_KIND = Object.freeze({
+  broader: "hierarchy",
+  narrower: "hierarchy",
+  prerequisite_for: "hierarchy",
+  path_next: "hierarchy",
+  enables: "application",
+  implements: "application",
+  exemplifies: "application",
+  measures: "application",
+  precedes: "history",
+  responds_to: "history",
+  constrains: "history",
+  supports: "association",
+  related: "association",
+  mentions: "association",
+  contradicts: "association",
+  synthesizes: "association"
+});
 
 export const GRAPH_SETTINGS_DEFAULTS = Object.freeze({
   fileQuery: "",
@@ -38,7 +96,7 @@ export const GRAPH_SETTINGS_DEFAULTS = Object.freeze({
   existingOnly: true,
   showOrphans: true,
   groups: Object.freeze([]),
-  showArrows: false,
+  showArrows: true,
   textFade: 0.25,
   nodeSize: 1,
   linkThickness: 1,
@@ -264,12 +322,24 @@ export function normalizeKnowledgeGraph(payload = {}) {
         occurrences: Math.max(0, Math.floor(finite(raw.directions[name]?.occurrences, 0)))
       }]))
       : undefined;
+    const relations = Array.isArray(raw?.relations) ? raw.relations.map((relation) => ({
+      kind: String(relation?.kind || "").trim(),
+      direction: DIRECTION.has(String(relation?.direction || "").trim()) ? String(relation.direction).trim() : "none",
+      origin: relation?.origin === "curated" ? "curated" : "derived",
+      note: String(relation?.note || "").trim().slice(0, 220),
+      evidence: Array.isArray(relation?.evidence) ? relation.evidence.map((item) => ({
+        id: String(item?.id || "").trim(),
+        title: String(item?.title || item?.id || "").trim(),
+        url: String(item?.url || "").trim()
+      })).filter((item) => item.id && item.title) : []
+    })).filter((relation) => relation.kind) : [];
     edges.push({
       source,
       target,
       weight: clamp(finite(raw?.weight, 1), 0.15, 12),
       kinds: textList(raw?.kinds),
       direction,
+      ...(relations.length ? { relations } : {}),
       ...(directions ? { directions } : {})
     });
   }
@@ -287,6 +357,143 @@ export function createGraphAdjacency(nodes = [], edges = []) {
     adjacency.get(edge.target).add(edge.source);
   }
   return adjacency;
+}
+
+function relationSector(edge = {}) {
+  const kinds = Array.isArray(edge.kinds) ? edge.kinds : [];
+  return ["hierarchy", "application", "history", "association"]
+    .find((sector) => kinds.some((kind) => RELATION_SECTOR_BY_KIND[kind] === sector)) || "association";
+}
+
+function graphPairKey(left, right) {
+  return String(left).localeCompare(String(right), "ko") <= 0
+    ? `${left}\u0000${right}`
+    : `${right}\u0000${left}`;
+}
+
+/** Arrange the complete graph as labeled domain constellations and aggregate cross-domain corridors. */
+export function createClusterOverviewLayout(nodes = [], edges = []) {
+  const validNodes = nodes.filter((node) => node?.id);
+  const domainCounts = new Map();
+  for (const node of validNodes) {
+    const domains = node.domains?.length ? node.domains : ["domain/general"];
+    for (const domain of domains) domainCounts.set(domain, (domainCounts.get(domain) || 0) + 1);
+  }
+  const domainForNode = new Map(validNodes.map((node) => {
+    const domains = node.domains?.length ? node.domains : ["domain/general"];
+    const domain = [...domains].sort((left, right) => (domainCounts.get(left) || 0) - (domainCounts.get(right) || 0)
+      || left.localeCompare(right, "ko"))[0];
+    return [node.id, domain];
+  }));
+  const groups = new Map();
+  for (const node of validNodes) {
+    const domain = domainForNode.get(node.id);
+    if (!groups.has(domain)) groups.set(domain, []);
+    groups.get(domain).push(node);
+  }
+  const ordered = [...groups.entries()].sort((left, right) => right[1].length - left[1].length
+    || left[0].localeCompare(right[0], "ko"));
+  const columns = Math.max(1, Math.ceil(Math.sqrt(ordered.length * 1.25)));
+  const rows = Math.max(1, Math.ceil(ordered.length / columns));
+  const positions = new Map();
+  const clusters = ordered.map(([domain, members], index) => {
+    const row = Math.floor(index / columns);
+    const column = index % columns;
+    const center = {
+      x: (column - (columns - 1) / 2) * 440 + (row % 2 ? 72 : 0),
+      y: (row - (rows - 1) / 2) * 350
+    };
+    const sorted = [...members].sort((left, right) => finite(right.degree) - finite(left.degree)
+      || left.title.localeCompare(right.title, "ko"));
+    let radius = 82;
+    sorted.forEach((node, memberIndex) => {
+      const angle = memberIndex * Math.PI * (3 - Math.sqrt(5));
+      const distance = memberIndex ? 30 + 27 * Math.sqrt(memberIndex) : 0;
+      const point = {
+        x: center.x + Math.cos(angle) * distance * 1.16,
+        y: center.y + Math.sin(angle) * distance * 0.82
+      };
+      positions.set(node.id, point);
+      radius = Math.max(radius, distance + 58);
+    });
+    return {
+      id: domain,
+      label: DOMAIN_LABELS[domain] || domain.replace(/^domain\//u, "").replaceAll("-", " "),
+      count: members.length,
+      memberIds: sorted.map((node) => node.id),
+      x: center.x,
+      y: center.y,
+      radius
+    };
+  });
+  const clusterById = new Map(clusters.map((cluster) => [cluster.id, cluster]));
+  const corridorCounts = new Map();
+  for (const edge of edges) {
+    const sourceDomain = domainForNode.get(edge.source);
+    const targetDomain = domainForNode.get(edge.target);
+    if (!sourceDomain || !targetDomain || sourceDomain === targetDomain) continue;
+    const key = graphPairKey(sourceDomain, targetDomain);
+    corridorCounts.set(key, (corridorCounts.get(key) || 0) + 1);
+  }
+  const corridors = [...corridorCounts.entries()].map(([key, count]) => {
+    const [sourceId, targetId] = key.split("\u0000");
+    return { source: clusterById.get(sourceId), target: clusterById.get(targetId), count };
+  }).filter((corridor) => corridor.source && corridor.target)
+    .sort((left, right) => right.count - left.count || left.source.id.localeCompare(right.source.id, "ko"));
+  return { positions, clusters, corridors, domainForNode };
+}
+
+/** Place direct neighbors in four semantic sectors around an exact center node. */
+export function createFocusedOrbitLayout(selected, neighbors = [], edges = []) {
+  if (!selected) return { positions: new Map(), sectors: [] };
+  const edgeByNeighbor = new Map();
+  for (const edge of edges) {
+    if (edge.source === selected.id) edgeByNeighbor.set(edge.target, edge);
+    else if (edge.target === selected.id) edgeByNeighbor.set(edge.source, edge);
+  }
+  const groups = new Map(Object.keys(RELATION_SECTORS).map((sector) => [sector, []]));
+  for (const node of neighbors.filter(Boolean)) groups.get(relationSector(edgeByNeighbor.get(node.id)))?.push(node);
+  const positions = new Map([[selected.id, { x: 0, y: 0 }]]);
+  const sectors = [];
+  for (const [sector, meta] of Object.entries(RELATION_SECTORS)) {
+    const members = groups.get(sector).sort((left, right) => finite(right.degree) - finite(left.degree)
+      || left.title.localeCompare(right.title, "ko"));
+    if (!members.length) continue;
+    members.forEach((node, index) => {
+      const ring = Math.floor(index / 7);
+      const ringMembers = members.slice(ring * 7, ring * 7 + 7);
+      const ringIndex = index % 7;
+      const span = Math.min(Math.PI * 0.42, Math.PI * 0.13 * Math.max(1, ringMembers.length - 1));
+      const angle = meta.angle + (ringMembers.length === 1 ? 0 : -span / 2 + span * ringIndex / (ringMembers.length - 1));
+      const radius = 205 + ring * 118;
+      positions.set(node.id, { x: Math.cos(angle) * radius, y: Math.sin(angle) * radius });
+    });
+    sectors.push({ key: sector, label: meta.label, x: Math.cos(meta.angle) * 390, y: Math.sin(meta.angle) * 390 });
+  }
+  return { positions, sectors };
+}
+
+/** Return one deterministic, unweighted shortest path between two visible graph nodes. */
+export function shortestGraphPath(adjacency = new Map(), sourceId = "", targetId = "") {
+  if (!sourceId || !targetId || !adjacency.has(sourceId) || !adjacency.has(targetId)) return [];
+  if (sourceId === targetId) return [sourceId];
+  const queue = [sourceId];
+  const previous = new Map([[sourceId, null]]);
+  for (let index = 0; index < queue.length; index += 1) {
+    const current = queue[index];
+    const neighbors = [...(adjacency.get(current) || [])].sort((left, right) => String(left).localeCompare(String(right), "ko"));
+    for (const neighbor of neighbors) {
+      if (previous.has(neighbor)) continue;
+      previous.set(neighbor, current);
+      if (neighbor === targetId) {
+        const path = [targetId];
+        while (previous.get(path[0]) !== null) path.unshift(previous.get(path[0]));
+        return path;
+      }
+      queue.push(neighbor);
+    }
+  }
+  return [];
 }
 
 /**
@@ -565,8 +772,17 @@ function bootstrapKnowledgeGraph() {
   let camera = { x: 0, y: 0, zoom: 1 };
   let selectedId = "";
   let hoveredId = "";
+  let hoveredEdgeKey = "";
   let keyboardNodeId = "";
   let activeFilter = "all";
+  let viewMode = "overview";
+  let semanticPositions = new Map();
+  let overviewClusters = [];
+  let overviewCorridors = [];
+  let focusSectors = [];
+  let pathStartId = "";
+  let pathEndId = "";
+  let pathNodeIds = [];
   let autoFocus = true;
   let frame = 0;
   let inViewport = true;
@@ -583,7 +799,10 @@ function bootstrapKnowledgeGraph() {
 
   const search = root.querySelector("[data-graph-search]");
   const searchResults = root.querySelector("[data-graph-search-results]");
+  const modeButtons = [...root.querySelectorAll("[data-graph-mode]")];
   const filterButtons = [...root.querySelectorAll("[data-graph-filter]")];
+  const densityButtons = [...root.querySelectorAll("[data-graph-label-density]")];
+  const trail = root.querySelector("[data-graph-trail]");
   const zoomIn = root.querySelector("[data-graph-zoom-in]");
   const zoomOut = root.querySelector("[data-graph-zoom-out]");
   const reset = root.querySelector("[data-graph-reset]");
@@ -594,6 +813,12 @@ function bootstrapKnowledgeGraph() {
   const inspectorDegree = inspector?.querySelector("[data-inspector-degree]");
   const inspectorNeighbors = inspector?.querySelector("[data-inspector-neighbors]");
   const inspectorLink = inspector?.querySelector("[data-inspector-link]");
+  const inspectorRelation = inspector?.querySelector("[data-inspector-relation]");
+  const inspectorRelationTitle = inspector?.querySelector("[data-inspector-relation-title]");
+  const inspectorRelationKinds = inspector?.querySelector("[data-inspector-relation-kinds]");
+  const inspectorRelationDirection = inspector?.querySelector("[data-inspector-relation-direction]");
+  const inspectorRelationNote = inspector?.querySelector("[data-inspector-relation-note]");
+  const inspectorRelationEvidence = inspector?.querySelector("[data-inspector-relation-evidence]");
   const settingsToggle = root.querySelector("[data-graph-settings-toggle]");
   const settingsPanel = root.querySelector("[data-graph-settings-panel]");
   const settingsClose = root.querySelector("[data-graph-settings-close]");
@@ -661,10 +886,16 @@ function bootstrapKnowledgeGraph() {
     return visibleNodes.filter((node) => ids.has(node.id));
   }
 
+  function positioned(node) {
+    const semantic = semanticPositions.get(node?.id);
+    return semantic ? { ...node, ...semantic } : node;
+  }
+
   function worldToScreen(node) {
+    const point = positioned(node);
     return {
-      x: viewport.width / 2 + (finite(node.x) - camera.x) * camera.zoom,
-      y: viewport.height / 2 + (finite(node.y) - camera.y) * camera.zoom
+      x: viewport.width / 2 + (finite(point?.x) - camera.x) * camera.zoom,
+      y: viewport.height / 2 + (finite(point?.y) - camera.y) * camera.zoom
     };
   }
 
@@ -757,15 +988,81 @@ function bootstrapKnowledgeGraph() {
     context.restore();
   }
 
+  function drawOverviewStructure() {
+    for (const corridor of overviewCorridors) {
+      const from = worldToScreen(corridor.source);
+      const to = worldToScreen(corridor.target);
+      context.save();
+      context.globalAlpha = Math.min(0.42, 0.11 + Math.log2(1 + corridor.count) * 0.065);
+      context.strokeStyle = PALETTE.entity;
+      context.lineWidth = Math.min(8, 1 + Math.sqrt(corridor.count) * 0.72);
+      context.beginPath();
+      context.moveTo(from.x, from.y);
+      context.lineTo(to.x, to.y);
+      context.stroke();
+      context.restore();
+    }
+    for (const cluster of overviewClusters) {
+      const center = worldToScreen(cluster);
+      const radius = Math.max(26, cluster.radius * camera.zoom);
+      context.save();
+      context.fillStyle = "rgba(0,255,65,0.022)";
+      context.strokeStyle = "rgba(0,255,65,0.22)";
+      context.lineWidth = 1;
+      context.setLineDash([4, 7]);
+      context.beginPath();
+      context.ellipse(center.x, center.y, radius * 1.14, radius * 0.86, 0, 0, Math.PI * 2);
+      context.fill();
+      context.stroke();
+      context.setLineDash([]);
+      context.font = '700 11px "D2Coding", monospace';
+      context.textAlign = "center";
+      context.textBaseline = "bottom";
+      context.fillStyle = PALETTE.text;
+      context.globalAlpha = 0.94;
+      context.fillText(`${cluster.label}  ${cluster.count}`, center.x, center.y - radius * 0.86 - 10);
+      context.restore();
+    }
+  }
+
+  function drawFocusSectorLabels() {
+    if (viewMode !== "focus" || !selectedId || viewport.width < 680) return;
+    const anchors = {
+      hierarchy: { x: viewport.width / 2, y: 22, align: "center" },
+      application: { x: viewport.width - 18, y: viewport.height / 2, align: "right" },
+      association: { x: viewport.width / 2, y: viewport.height - 58, align: "center" },
+      history: { x: 18, y: viewport.height / 2, align: "left" }
+    };
+    context.save();
+    context.font = '700 9px "D2Coding", monospace';
+    context.textBaseline = "middle";
+    context.fillStyle = PALETTE.muted;
+    context.globalAlpha = 0.82;
+    for (const sector of focusSectors) {
+      const anchor = anchors[sector.key];
+      if (!anchor) continue;
+      context.textAlign = anchor.align;
+      context.fillText(sector.label, anchor.x, anchor.y);
+    }
+    context.restore();
+  }
+
+  function isOverviewScene() {
+    return viewMode === "overview" || (viewMode === "focus" && !selectedId)
+      || (viewMode === "path" && pathNodeIds.length < 2);
+  }
+
   function draw() {
     context.clearRect(0, 0, viewport.width, viewport.height);
     context.fillStyle = PALETTE.background;
     context.fillRect(0, 0, viewport.width, viewport.height);
     drawGrid();
+    if (isOverviewScene()) drawOverviewStructure();
+    drawFocusSectorLabels();
     const drawIds = renderedIds();
     const neighbors = selectedId ? adjacency.get(selectedId) || new Set() : null;
 
-    for (const edge of visibleEdges) {
+    for (const edge of isOverviewScene() ? [] : visibleEdges) {
       if (!drawIds.has(edge.source) || !drawIds.has(edge.target)) continue;
       const source = nodeById.get(edge.source);
       const target = nodeById.get(edge.target);
@@ -773,13 +1070,17 @@ function bootstrapKnowledgeGraph() {
       const from = worldToScreen(source);
       const to = worldToScreen(target);
       const connected = Boolean(selectedId && (edge.source === selectedId || edge.target === selectedId));
-      const alpha = selectedId ? (connected ? 0.82 : 0.055) : 0.2;
-      const color = connected ? PALETTE.entity : PALETTE.muted;
-      const width = (connected ? 1.7 : Math.min(1.5, 0.55 + Math.log2(1 + edge.weight) * 0.35)) * settings.linkThickness;
+      const hovered = graphPairKey(edge.source, edge.target) === hoveredEdgeKey;
+      const active = viewMode === "path" || connected || hovered;
+      const alpha = active ? (hovered ? 1 : 0.82) : 0.13;
+      const color = active ? PALETTE.entity : PALETTE.muted;
+      const width = (hovered ? 3 : active ? 1.7 : Math.min(1.5, 0.55 + Math.log2(1 + edge.weight) * 0.35)) * settings.linkThickness;
       context.save();
       context.globalAlpha = alpha;
       context.strokeStyle = color;
       context.lineWidth = width;
+      const isDerived = (edge.kinds || []).every((kind) => ["mentions", "related", "supports", "path_next"].includes(kind));
+      if (isDerived) context.setLineDash([5, 6]);
       context.beginPath();
       context.moveTo(from.x, from.y);
       context.lineTo(to.x, to.y);
@@ -800,7 +1101,7 @@ function bootstrapKnowledgeGraph() {
       if (point.x < -radius * 2 || point.y < -radius * 2 || point.x > viewport.width + radius * 2 || point.y > viewport.height + radius * 2) continue;
       const selected = node.id === selectedId;
       const hovered = node.id === hoveredId;
-      const withinBeam = !selectedId || selected || neighbors?.has(node.id);
+      const withinBeam = viewMode === "path" || !selectedId || selected || neighbors?.has(node.id);
       const color = nodeColor(node);
       context.save();
       context.globalAlpha = withinBeam ? 1 : 0.11;
@@ -824,13 +1125,15 @@ function bootstrapKnowledgeGraph() {
         bottom: point.y + visualRadius * 1.15
       });
       const compact = viewport.width < 560;
-      const minimumDegree = selectedId ? 0 : camera.zoom >= 1.55 ? (compact ? 4 : 2) : (compact ? 8 : 6);
+      const densityOffset = settings.textFade >= 0.4 ? 4 : settings.textFade <= 0.05 ? -4 : 0;
+      const minimumDegree = selectedId || viewMode === "path" ? 0 : Math.max(0, (camera.zoom >= 1.55 ? (compact ? 4 : 2) : (compact ? 8 : 6)) + densityOffset);
       if (selected || hovered || (textVisibility > 0.04 && withinBeam && node.degree >= minimumDegree)) {
         labels.push({ node, point, radius, selected, hovered });
       }
     }
 
-    const labelLimit = viewport.width < 560 ? (selectedId ? 14 : 10) : (selectedId ? 32 : 36);
+    const densityLimit = settings.textFade >= 0.4 ? 0.55 : settings.textFade <= 0.05 ? 1.7 : 1;
+    const labelLimit = Math.round((viewport.width < 560 ? (selectedId ? 14 : 10) : (selectedId ? 32 : 36)) * densityLimit);
     const labelPriority = (label) => Number(label.selected) * 10000 + Number(label.hovered) * 9000 + label.node.degree;
     const occupied = [];
     const visibleLabels = [];
@@ -900,10 +1203,76 @@ function bootstrapKnowledgeGraph() {
     for (const node of topologyNodes) node.degree = adjacency.get(node.id)?.size || 0;
   }
 
+  function edgeBetween(leftId, rightId) {
+    const key = graphPairKey(leftId, rightId);
+    return topologyEdges.find((edge) => graphPairKey(edge.source, edge.target) === key) || null;
+  }
+
+  function refreshSemanticLayout() {
+    semanticPositions = new Map();
+    overviewClusters = [];
+    overviewCorridors = [];
+    focusSectors = [];
+    if (isOverviewScene()) {
+      const overview = createClusterOverviewLayout(visibleNodes, visibleEdges);
+      semanticPositions = overview.positions;
+      overviewClusters = overview.clusters;
+      overviewCorridors = overview.corridors;
+      return;
+    }
+    if (viewMode === "focus" && selectedId) {
+      const selected = nodeById.get(selectedId);
+      const neighbors = visibleNodes.filter((node) => node.id !== selectedId);
+      const focus = createFocusedOrbitLayout(selected, neighbors, visibleEdges);
+      semanticPositions = focus.positions;
+      focusSectors = focus.sectors;
+      return;
+    }
+    if (viewMode === "path" && pathNodeIds.length >= 2) {
+      const vertical = viewport.width < 680;
+      pathNodeIds.forEach((id, index) => {
+        const offset = (index - (pathNodeIds.length - 1) / 2) * (vertical ? 168 : 238);
+        semanticPositions.set(id, vertical ? { x: 0, y: offset } : { x: offset, y: 0 });
+      });
+    }
+  }
+
+  function positionedVisibleNodes() {
+    return visibleNodes.map((node) => positioned(node));
+  }
+
+  function updateTrail() {
+    if (!trail) return;
+    if (viewMode === "overview") {
+      trail.textContent = `전체 지식 · ${overviewClusters.length}개 주제 군집`;
+      return;
+    }
+    if (viewMode === "focus") {
+      const node = nodeById.get(selectedId);
+      trail.textContent = node ? `전체 지식 > ${node.title}` : "선택할 문서를 검색하거나 그래프에서 고르세요.";
+      return;
+    }
+    const start = nodeById.get(pathStartId);
+    const end = nodeById.get(pathEndId);
+    trail.textContent = !start
+      ? "경로의 첫 문서를 선택하세요."
+      : !end
+        ? `${start.title} > 두 번째 문서를 선택하세요.`
+        : pathNodeIds.length
+          ? `${start.title} > ${end.title} · ${pathNodeIds.length - 1}단계`
+          : `${start.title} > ${end.title} · 연결 경로 없음`;
+  }
+
+  function syncModeButtons() {
+    for (const button of modeButtons) button.setAttribute("aria-pressed", String(button.dataset.graphMode === viewMode));
+    root.dataset.graphMode = viewMode;
+    updateTrail();
+  }
+
   function refitSelected() {
-    const selected = nodeById.get(selectedId);
+    const selected = positioned(nodeById.get(selectedId));
     if (!selected || !topologyIds.has(selected.id)) return false;
-    const neighbors = [...(adjacency.get(selected.id) || [])].map((id) => nodeById.get(id)).filter(Boolean);
+    const neighbors = visibleNodes.filter((node) => node.id !== selected.id).map((node) => positioned(node));
     const padding = Math.max(42, Math.min(92, Math.min(viewport.width, viewport.height) * 0.11)) + 16 * settings.nodeSize;
     camera = fitFocusedGraphCamera(selected, neighbors, viewport, padding);
     return true;
@@ -916,15 +1285,29 @@ function bootstrapKnowledgeGraph() {
       showOrphans: settings.showOrphans,
       selectedId
     });
+    if (viewMode === "focus" && selectedId) {
+      candidateIds.clear();
+      candidateIds.add(selectedId);
+      for (const neighborId of adjacency.get(selectedId) || []) candidateIds.add(neighborId);
+    } else if (viewMode === "path" && pathNodeIds.length >= 2) {
+      candidateIds.clear();
+      for (const id of pathNodeIds) candidateIds.add(id);
+    }
     visibleIds = candidateIds;
     visibleNodes = topologyNodes.filter((node) => visibleIds.has(node.id));
     visibleEdges = topologyEdges.filter((edge) => visibleIds.has(edge.source) && visibleIds.has(edge.target));
+    if (viewMode === "path" && pathNodeIds.length >= 2) {
+      const pathPairs = new Set(pathNodeIds.slice(1).map((id, index) => graphPairKey(pathNodeIds[index], id)));
+      visibleEdges = visibleEdges.filter((edge) => pathPairs.has(graphPairKey(edge.source, edge.target)));
+    }
+    refreshSemanticLayout();
     if (keyboardNodeId && !visibleIds.has(keyboardNodeId)) keyboardNodeId = "";
     if (selectedId) updateInspector(nodeById.get(selectedId));
     if (fit) {
-      if (selectedId && autoFocus) refitSelected();
-      else if (!selectedId) camera = fitGraphCamera(visibleNodes, viewport);
+      if (viewMode === "focus" && selectedId && autoFocus) refitSelected();
+      else camera = fitGraphCamera(positionedVisibleNodes(), viewport);
     }
+    updateTrail();
     if (searchResults && !searchResults.hidden) renderSuggestions();
     scheduleDraw();
   }
@@ -1042,6 +1425,27 @@ function bootstrapKnowledgeGraph() {
     return best;
   }
 
+  function hitEdge(point) {
+    if (isOverviewScene()) return null;
+    let best = null;
+    let bestDistance = 8;
+    for (const edge of visibleEdges) {
+      const from = worldToScreen(nodeById.get(edge.source));
+      const to = worldToScreen(nodeById.get(edge.target));
+      const dx = to.x - from.x;
+      const dy = to.y - from.y;
+      const lengthSquared = dx * dx + dy * dy;
+      if (lengthSquared < 1) continue;
+      const ratio = clamp(((point.x - from.x) * dx + (point.y - from.y) * dy) / lengthSquared, 0, 1);
+      const distance = Math.hypot(point.x - (from.x + dx * ratio), point.y - (from.y + dy * ratio));
+      if (distance < bestDistance) {
+        best = edge;
+        bestDistance = distance;
+      }
+    }
+    return best;
+  }
+
   function keyboardNodes() {
     return [...renderedNodes()].sort((left, right) => left.title.localeCompare(right.title, "ko") || left.id.localeCompare(right.id));
   }
@@ -1053,8 +1457,9 @@ function bootstrapKnowledgeGraph() {
     const point = worldToScreen(node);
     const margin = 48;
     if (point.x < margin || point.x > viewport.width - margin || point.y < margin || point.y > viewport.height - margin) {
-      camera.x = finite(node.x);
-      camera.y = finite(node.y);
+      const position = positioned(node);
+      camera.x = finite(position.x);
+      camera.y = finite(position.y);
     }
     announce(`${node.title} · 직접 연결 ${adjacency.get(node.id)?.size || 0}개 · Enter로 선택`);
     scheduleDraw();
@@ -1064,6 +1469,7 @@ function bootstrapKnowledgeGraph() {
     if (!inspector) return;
     inspector.hidden = !node;
     if (!node) return;
+    if (inspectorRelation) inspectorRelation.hidden = true;
     const neighborNodes = [...(adjacency.get(node.id) || [])]
       .map((id) => nodeById.get(id)).filter(Boolean)
       .sort((a, b) => b.degree - a.degree || a.title.localeCompare(b.title, "ko"));
@@ -1091,15 +1497,60 @@ function bootstrapKnowledgeGraph() {
         inspectorNeighbors.append(empty);
       }
       for (const neighbor of neighborNodes) {
+        const edge = edgeBetween(node.id, neighbor.id);
         const button = document.createElement("button");
         button.type = "button";
         button.className = "graph-neighbor";
-        button.textContent = neighbor.title;
+        const relation = document.createElement("span");
+        relation.textContent = RELATION_SECTORS[relationSector(edge)]?.label || "근거 · 연관";
+        const title = document.createElement("strong");
+        title.textContent = neighbor.title;
+        button.append(relation, title);
         button.dataset.nodeId = neighbor.id;
         button.addEventListener("click", () => selectNode(neighbor.id));
         inspectorNeighbors.append(button);
       }
     }
+  }
+
+  function showRelationInspector(edge) {
+    if (!edge) return;
+    const source = nodeById.get(edge.source);
+    const target = nodeById.get(edge.target);
+    if (!source || !target) return;
+    const owner = nodeById.get(selectedId) || source;
+    updateInspector(owner);
+    if (!inspectorRelation) return;
+    inspectorRelation.hidden = false;
+    if (inspectorRelationTitle) inspectorRelationTitle.textContent = `${source.title} — ${target.title}`;
+    if (inspectorRelationKinds) inspectorRelationKinds.textContent = (edge.kinds || [])
+      .map((kind) => RELATION_LABELS[kind] || kind).join(" · ") || "문서 관계";
+    if (inspectorRelationDirection) inspectorRelationDirection.textContent = ({
+      forward: `${source.title}에서 ${target.title} 방향`,
+      reverse: `${target.title}에서 ${source.title} 방향`,
+      both: "양방향 관계",
+      none: "방향 없는 관계"
+    })[edge.direction] || "방향 없는 관계";
+    const relation = (edge.relations || []).find((item) => item.origin === "curated")
+      || (edge.relations || []).find((item) => item.note)
+      || edge.relations?.[0];
+    if (inspectorRelationNote) {
+      inspectorRelationNote.hidden = !relation?.note;
+      inspectorRelationNote.textContent = relation?.note || "";
+    }
+    if (inspectorRelationEvidence) {
+      const list = inspectorRelationEvidence.querySelector("div");
+      list?.replaceChildren();
+      for (const evidence of relation?.evidence || []) {
+        const href = safeHref(evidence.url, ownerWindow);
+        const item = document.createElement(href === "#" ? "span" : "a");
+        item.textContent = evidence.title;
+        if (href !== "#") item.href = href;
+        list?.append(item);
+      }
+      inspectorRelationEvidence.hidden = !(relation?.evidence || []).length;
+    }
+    announce(`${source.title}와 ${target.title}의 연결을 선택했습니다.`);
   }
 
   function stopAnimation({ complete = true } = {}) {
@@ -1117,26 +1568,95 @@ function bootstrapKnowledgeGraph() {
     scheduleDraw();
   }
 
+  function choosePathNode(id) {
+    const node = nodeById.get(id);
+    if (!node || !topologyIds.has(id)) return false;
+    if (!pathStartId || pathEndId) {
+      pathStartId = id;
+      pathEndId = "";
+      pathNodeIds = [id];
+      selectedId = id;
+      announce(`${node.title}에서 시작합니다. 두 번째 문서를 선택하세요.`);
+    } else if (id !== pathStartId) {
+      pathEndId = id;
+      pathNodeIds = shortestGraphPath(adjacency, pathStartId, pathEndId);
+      selectedId = id;
+      announce(pathNodeIds.length
+        ? `${nodeById.get(pathStartId)?.title}에서 ${node.title}까지 ${pathNodeIds.length - 1}단계입니다.`
+        : "두 문서를 잇는 경로를 찾지 못했습니다.");
+    }
+    keyboardNodeId = id;
+    updateInspector(node);
+    autoFocus = true;
+    recomputeVisibility({ fit: true });
+    return true;
+  }
+
+  function setViewMode(value) {
+    const next = ["overview", "focus", "path"].includes(value) ? value : "overview";
+    if (next === viewMode) return;
+    viewMode = next;
+    hoveredEdgeKey = "";
+    if (viewMode === "overview") {
+      selectedId = "";
+      pathStartId = "";
+      pathEndId = "";
+      pathNodeIds = [];
+      updateInspector(null);
+    } else if (viewMode === "path") {
+      selectedId = "";
+      pathStartId = "";
+      pathEndId = "";
+      pathNodeIds = [];
+      updateInspector(null);
+    } else {
+      pathStartId = "";
+      pathEndId = "";
+      pathNodeIds = [];
+    }
+    autoFocus = true;
+    syncModeButtons();
+    recomputeVisibility({ fit: true });
+    announce(viewMode === "overview" ? "주제별 지식 군집을 표시합니다."
+      : viewMode === "focus" ? "집중해서 볼 문서를 선택하세요."
+        : "경로의 첫 문서를 선택하세요.");
+  }
+
   function selectNode(id) {
     const node = nodeById.get(id);
     if (!node || !topologyIds.has(id)) return false;
+    if (viewMode === "path") return choosePathNode(id);
     stopAnimation();
+    viewMode = "focus";
     selectedId = id;
     keyboardNodeId = id;
     autoFocus = true;
     recomputeVisibility();
     refitSelected();
     updateInspector(nodeById.get(id));
+    syncModeButtons();
     announce(`${node.title} 선택 · 직접 연결 ${adjacency.get(id)?.size || 0}개`);
     scheduleDraw();
     return true;
   }
 
   function clearSelection() {
+    if (viewMode === "path") {
+      pathStartId = "";
+      pathEndId = "";
+      pathNodeIds = [];
+      selectedId = "";
+      updateInspector(null);
+      recomputeVisibility({ fit: true });
+      announce("경로 선택을 초기화했습니다. 첫 문서를 선택하세요.");
+      return;
+    }
     if (!selectedId) return;
     selectedId = "";
+    viewMode = "overview";
     autoFocus = false;
     updateInspector(null);
+    syncModeButtons();
     recomputeVisibility({ fit: true });
     announce("노드 선택을 해제했습니다.");
   }
@@ -1152,9 +1672,9 @@ function bootstrapKnowledgeGraph() {
 
   function resetCamera() {
     autoFocus = true;
-    if (!selectedId || !refitSelected()) camera = fitGraphCamera(visibleNodes, viewport);
+    if (viewMode !== "focus" || !selectedId || !refitSelected()) camera = fitGraphCamera(positionedVisibleNodes(), viewport);
     scheduleDraw();
-    announce(selectedId ? "선택 노드와 직접 연결을 화면에 맞췄습니다." : `${visibleNodes.length}개 노드를 화면에 맞췄습니다.`);
+    announce(viewMode === "focus" && selectedId ? "선택 문서와 직접 연결을 화면에 맞췄습니다." : `${visibleNodes.length}개 문서를 화면에 맞췄습니다.`);
   }
 
   function applyFilter(value) {
@@ -1336,6 +1856,16 @@ function bootstrapKnowledgeGraph() {
     setControlValue(linkDistance, settings.linkDistance);
     updateSettingOutputs();
     renderGroups();
+    const density = settings.textFade >= 0.4 ? "low" : settings.textFade <= 0.05 ? "high" : "medium";
+    for (const button of densityButtons) button.setAttribute("aria-pressed", String(button.dataset.graphLabelDensity === density));
+  }
+
+  function setLabelDensity(value) {
+    settings.textFade = value === "low" ? 0.45 : value === "high" ? 0 : 0.25;
+    saveSettings();
+    syncSettingsControls();
+    scheduleDraw();
+    announce(`레이블을 ${value === "low" ? "핵심 문서 중심으로" : value === "high" ? "많이" : "균형 있게"} 표시합니다.`);
   }
 
   function bindBoolean(element, key, { topology = false, fit = false } = {}) {
@@ -1420,10 +1950,12 @@ function bootstrapKnowledgeGraph() {
       canvas.height = Math.round(height * dpr);
     }
     context.setTransform(dpr, 0, 0, dpr, 0, 0);
+    refreshSemanticLayout();
     if (!didFit) {
-      camera = fitGraphCamera(visibleNodes, viewport);
+      camera = fitGraphCamera(positionedVisibleNodes(), viewport);
       didFit = true;
-    } else if (selectedId && autoFocus) refitSelected();
+    } else if (viewMode === "focus" && selectedId && autoFocus) refitSelected();
+    else if (viewMode === "path" && pathNodeIds.length >= 2 && autoFocus) camera = fitGraphCamera(positionedVisibleNodes(), viewport);
     scheduleDraw();
   }
 
@@ -1431,16 +1963,19 @@ function bootstrapKnowledgeGraph() {
     if (event.button !== 0) return;
     const point = localPoint(event);
     const node = hitNode(point);
+    const edge = node ? null : hitEdge(point);
+    const nodePosition = positioned(node);
     pointer = {
       id: event.pointerId,
       start: point,
       node,
-      nodeStart: node ? { x: node.x, y: node.y } : null,
+      edge,
+      nodeStart: node ? { x: nodePosition.x, y: nodePosition.y } : null,
       cameraStart: { ...camera },
       moved: false
     };
     canvas.setPointerCapture?.(event.pointerId);
-    canvas.style.cursor = node ? "grabbing" : "move";
+    canvas.style.cursor = node ? "grabbing" : edge ? "pointer" : "move";
   });
 
   canvas.addEventListener("pointermove", (event) => {
@@ -1453,8 +1988,10 @@ function bootstrapKnowledgeGraph() {
         autoFocus = false;
       }
       if (pointer.node) {
-        pointer.node.x = pointer.nodeStart.x + dx / camera.zoom;
-        pointer.node.y = pointer.nodeStart.y + dy / camera.zoom;
+        semanticPositions.set(pointer.node.id, {
+          x: pointer.nodeStart.x + dx / camera.zoom,
+          y: pointer.nodeStart.y + dy / camera.zoom
+        });
       } else {
         camera.x = pointer.cameraStart.x - dx / camera.zoom;
         camera.y = pointer.cameraStart.y - dy / camera.zoom;
@@ -1463,10 +2000,13 @@ function bootstrapKnowledgeGraph() {
       return;
     }
     const node = hitNode(point);
+    const edge = node ? null : hitEdge(point);
     const next = node?.id || "";
-    if (next !== hoveredId) {
+    const nextEdge = edge ? graphPairKey(edge.source, edge.target) : "";
+    if (next !== hoveredId || nextEdge !== hoveredEdgeKey) {
       hoveredId = next;
-      canvas.style.cursor = node ? "pointer" : "grab";
+      hoveredEdgeKey = nextEdge;
+      canvas.style.cursor = node || edge ? "pointer" : "grab";
       scheduleDraw();
     }
   });
@@ -1474,9 +2014,10 @@ function bootstrapKnowledgeGraph() {
   canvas.addEventListener("pointerup", (event) => {
     if (!pointer || pointer.id !== event.pointerId) return;
     if (!pointer.moved && pointer.node) selectNode(pointer.node.id);
+    else if (!pointer.moved && pointer.edge) showRelationInspector(pointer.edge);
     canvas.releasePointerCapture?.(event.pointerId);
     pointer = null;
-    canvas.style.cursor = hoveredId ? "pointer" : "grab";
+    canvas.style.cursor = hoveredId || hoveredEdgeKey ? "pointer" : "grab";
   });
   canvas.addEventListener("pointercancel", (event) => {
     if (!pointer || pointer.id !== event.pointerId) return;
@@ -1487,6 +2028,7 @@ function bootstrapKnowledgeGraph() {
   canvas.addEventListener("pointerleave", () => {
     if (pointer) return;
     hoveredId = "";
+    hoveredEdgeKey = "";
     canvas.style.cursor = "grab";
     scheduleDraw();
   });
@@ -1569,7 +2111,9 @@ function bootstrapKnowledgeGraph() {
     } else if (event.key === "Escape") clearSuggestions();
   });
 
+  for (const button of modeButtons) button.addEventListener("click", () => setViewMode(button.dataset.graphMode || "overview"));
   for (const button of filterButtons) button.addEventListener("click", () => applyFilter(button.dataset.graphFilter || "all"));
+  for (const button of densityButtons) button.addEventListener("click", () => setLabelDensity(button.dataset.graphLabelDensity || "medium"));
   zoomIn?.addEventListener("click", () => { autoFocus = false; setZoom(camera.zoom * 1.28); });
   zoomOut?.addEventListener("click", () => { autoFocus = false; setZoom(camera.zoom / 1.28); });
   reset?.addEventListener("click", resetCamera);
@@ -1634,6 +2178,7 @@ function bootstrapKnowledgeGraph() {
   });
 
   syncSettingsControls();
+  syncModeButtons();
   updateInspector(null);
   rebuildTopology({ relayout: settings.showTags || settings.showAttachments || !settings.existingOnly
     || settings.centerForce !== GRAPH_SETTINGS_DEFAULTS.centerForce
