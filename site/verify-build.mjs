@@ -23,6 +23,7 @@ import {
   evidenceStaticPageCount,
   evidenceStaticPageNumbers
 } from "./graph/evidence.mjs";
+import { EXPLORER_LIMITS, buildConceptEntityGraph } from "./graph/explorer.mjs";
 
 const root = process.cwd();
 const dist = join(root, "dist");
@@ -998,6 +999,67 @@ function assertEvidenceAssertion(record, graphNodesById, label) {
 
 const evidenceGraph = JSON.parse(await read(join("data", "knowledge-graph.json")));
 const evidenceGraphNodesById = new Map(evidenceGraph.nodes.map((node) => [node.id, node]));
+const expectedConceptEntityGraph = buildConceptEntityGraph(evidenceGraph);
+const knowledgeGraphHtml = await read(join("map", "graph", "index.html"));
+const embeddedConceptEntityGraphSource = knowledgeGraphHtml.match(/<script type="application\/json" id="knowledge-graph-data">([\s\S]*?)<\/script>/)?.[1];
+assert.ok(embeddedConceptEntityGraphSource, "knowledge graph page is missing its embedded graph payload");
+const conceptEntityGraph = JSON.parse(embeddedConceptEntityGraphSource);
+assert.deepEqual(conceptEntityGraph, expectedConceptEntityGraph, "concept/entity graph projection differs from the normalized graph");
+assert.deepEqual(conceptEntityGraph.limits, EXPLORER_LIMITS, "knowledge graph delivery limits differ from the builder contract");
+assert.ok(conceptEntityGraph.nodes.length <= EXPLORER_LIMITS.nodes, "knowledge graph exceeds its node delivery limit");
+assert.ok(conceptEntityGraph.edges.length <= EXPLORER_LIMITS.edges, "knowledge graph exceeds its edge delivery limit");
+assert.ok(Buffer.byteLength(knowledgeGraphHtml) <= EXPLORER_LIMITS.initialHtmlBytes, "knowledge graph HTML exceeds its initial delivery budget");
+assert.ok((await readBytes(join("assets", "knowledge-graph.js"))).length <= EXPLORER_LIMITS.clientBytes, "knowledge graph client exceeds its delivery budget");
+const independentlyExpectedNodeIds = evidenceGraph.nodes
+  .filter((node) => node.visibility === "public" && ["concepts", "entities"].includes(node.category))
+  .map((node) => node.id)
+  .sort((left, right) => left.localeCompare(right, "ko"));
+assert.deepEqual(
+  conceptEntityGraph.nodes.map((node) => node.id).sort(),
+  [...independentlyExpectedNodeIds].sort(),
+  "knowledge graph node coverage differs from public concept/person documents"
+);
+const independentlyExpectedNodeIdSet = new Set(independentlyExpectedNodeIds);
+const independentlyExpectedPairs = new Set(evidenceGraph.edges
+  .filter((edge) => independentlyExpectedNodeIdSet.has(edge.source) && independentlyExpectedNodeIdSet.has(edge.target) && edge.source !== edge.target)
+  .map((edge) => [edge.source, edge.target].sort((left, right) => left.localeCompare(right, "ko")).join("\u0000")));
+assert.ok(conceptEntityGraph.nodes.some((node) => node.category === "concepts"), "knowledge graph needs concept nodes");
+assert.ok(conceptEntityGraph.nodes.some((node) => node.category === "entities"), "knowledge graph needs person nodes");
+assertUniqueIds(conceptEntityGraph.nodes, "concept/entity graph nodes");
+const conceptEntityNodeIds = new Set(conceptEntityGraph.nodes.map((node) => node.id));
+const conceptEntityPairs = new Set();
+const conceptEntityNeighbors = new Map(conceptEntityGraph.nodes.map((node) => [node.id, new Set()]));
+for (const edge of conceptEntityGraph.edges) {
+  assert.ok(conceptEntityNodeIds.has(edge.source) && conceptEntityNodeIds.has(edge.target), "concept/entity graph edge references a missing node");
+  assert.notEqual(edge.source, edge.target, "concept/entity graph contains a self-edge");
+  const pair = [edge.source, edge.target].sort((left, right) => left.localeCompare(right, "ko")).join("\u0000");
+  assert.ok(!conceptEntityPairs.has(pair), "concept/entity graph contains a duplicate document pair");
+  conceptEntityPairs.add(pair);
+  conceptEntityNeighbors.get(edge.source).add(edge.target);
+  conceptEntityNeighbors.get(edge.target).add(edge.source);
+}
+assert.deepEqual([...conceptEntityPairs].sort(), [...independentlyExpectedPairs].sort(), "knowledge graph edge coverage differs from the induced concept/person graph");
+for (const node of conceptEntityGraph.nodes) {
+  assert.ok(["concepts", "entities"].includes(node.category), `knowledge graph node '${node.id}' has an unsupported category`);
+  assert.match(node.url, /\/(?:concepts|entities)\//, `knowledge graph node '${node.id}' has a conflicting article URL`);
+  assert.equal(node.degree, conceptEntityNeighbors.get(node.id).size, `knowledge graph node '${node.id}' has a stale degree`);
+  assert.ok(knowledgeGraphHtml.includes(`href="${node.url}"`), `knowledge graph static list is missing '${node.id}'`);
+}
+for (const marker of [
+  "data-knowledge-graph",
+  "data-knowledge-graph-canvas",
+  "data-graph-search",
+  'data-graph-filter="concepts"',
+  'data-graph-filter="entities"',
+  "data-graph-reset",
+  "data-graph-status",
+  "data-graph-inspector",
+  "knowledge-graph-static",
+  "knowledge-graph-noscript"
+]) assert.ok(knowledgeGraphHtml.includes(marker), `knowledge graph page is missing '${marker}'`);
+const knowledgeGraphAssetVersion = knowledgeGraphHtml.match(/CS_WIKI_ASSET_VERSION="([a-f0-9]{12})"/)?.[1];
+assert.ok(knowledgeGraphAssetVersion, "knowledge graph page is missing its asset version");
+assert.ok(knowledgeGraphHtml.includes(`knowledge-graph.js?v=${knowledgeGraphAssetVersion}`), "knowledge graph client must be content-versioned");
 const syntheticDiscoveryPages = [
   { id: "synthetic-public", graphVisibility: "public" },
   { id: "synthetic-context", graphVisibility: "context" },
@@ -1041,6 +1103,11 @@ function cleanDiscoveryArticlePath(url, label) {
 }
 
 const discoveryHomeHtml = await read("index.html");
+assert.ok(!discoveryHomeHtml.includes("<h2>지식 연결망</h2>"), "home page must not render the legacy knowledge network heading");
+assert.ok(!discoveryHomeHtml.includes('class="graph-panel"'), "home page must not render the legacy graph panel");
+assert.ok(!discoveryHomeHtml.includes('id="knowledge-graph"'), "home page must not render the legacy graph canvas");
+assert.ok(!discoveryHomeHtml.includes('id="graph-data"'), "home page must not embed the legacy graph payload");
+assert.ok(discoveryHomeHtml.includes(`href="${evidenceSiteRoute("/map/graph/")}"`), "home page must link to the concept/person knowledge graph");
 const discoveryCategoryHtml = new Map();
 for (const node of contextSiteNodes) {
   const label = "context article '" + node.id + "'";
@@ -1062,6 +1129,7 @@ if (sitemapXml !== null) {
   const allArticleUrls = new Set(evidenceGraph.nodes.map((node) => node.url));
   const sitemapArticleUrls = sitemapPaths.filter((path) => allArticleUrls.has(path));
   assertExactlyOnce(sitemapArticleUrls, expectedSiteDiscoveryUrls, "sitemap article discovery");
+  assert.ok(sitemapPaths.includes(`${evidenceSitePrefix}/map/graph/`), "sitemap is missing the knowledge graph route");
   for (const node of contextSiteNodes) assert.ok(!sitemapPaths.includes(node.url), "context article '" + node.id + "' must stay out of sitemap discovery");
 }
 const graphPublicDocuments = evidenceGraph.nodes.filter((node) => node.visibility === "public" && !EVIDENCE_SOURCE_CATEGORIES.has(node.category));
@@ -1512,12 +1580,13 @@ assert.ok(evidenceRootHtml.includes("evidence-lens.js?v=" + evidenceAssetVersion
 
 const mapLensRoots = [
   join("map", "index.html"),
+  join("map", "graph", "index.html"),
   join("map", "learning", "index.html"),
   join("map", "atlas", "index.html"),
   join("map", "history", "index.html"),
   join("map", "evidence", "index.html")
 ];
-const mapLensRoutes = ["/map/", "/map/learning/", "/map/atlas/", "/map/history/", "/map/evidence/"];
+const mapLensRoutes = ["/map/", "/map/graph/", "/map/learning/", "/map/atlas/", "/map/history/", "/map/evidence/"];
 for (const lensRoot of mapLensRoots) {
   const html = await read(lensRoot);
   assert.match(html, /class="map-mode-nav"/, "map lens root '" + lensRoot + "' is missing the shared mode navigation");

@@ -154,38 +154,6 @@ export function resolvePageLinks(pages, lookup) {
   return pages;
 }
 
-export function buildGraphPayload(pages, { limit = 12, urlFor = (url) => url } = {}) {
-  const graphPages = [...pages]
-    .filter((page) => page.category !== "meta")
-    .sort((a, b) => b.score - a.score || a.title.localeCompare(b.title, "ko"))
-    .slice(0, limit);
-  const ids = new Map(graphPages.map((page, index) => [page, index]));
-  const edges = [];
-  const seen = new Set();
-
-  for (const page of graphPages) {
-    for (const linked of page.links) {
-      if (!ids.has(linked) || linked === page) continue;
-      const first = Math.min(ids.get(page), ids.get(linked));
-      const second = Math.max(ids.get(page), ids.get(linked));
-      const edgeKey = `${first}:${second}`;
-      if (seen.has(edgeKey)) continue;
-      seen.add(edgeKey);
-      edges.push([first, second]);
-    }
-  }
-
-  return {
-    nodes: graphPages.map((page) => ({
-      title: page.title,
-      url: urlFor(page.url),
-      category: page.category,
-      score: page.score
-    })),
-    edges
-  };
-}
-
 export function selectSiteDiscoveryPages(pages, { visibilityFor = (page) => page.graphVisibility || "public" } = {}) {
   if (!Array.isArray(pages)) throw new Error("Site discovery pages must be an array");
   if (typeof visibilityFor !== "function") throw new Error("Site discovery visibility resolver must be a function");

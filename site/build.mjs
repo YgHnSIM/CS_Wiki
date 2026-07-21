@@ -11,10 +11,10 @@ import { buildKnowledgeGraph, extractWikiLinks } from "./graph/model.mjs";
 import { buildSemanticAtlas } from "./graph/atlas.mjs";
 import { buildHistoricalLens } from "./graph/history.mjs";
 import { EVIDENCE_LIMITS, buildEvidenceLens, evidenceStaticPageCount, evidenceStaticPageNumbers } from "./graph/evidence.mjs";
+import { buildConceptEntityGraph } from "./graph/explorer.mjs";
 import { graphNodeId } from "./graph/schema.mjs";
 import { describeRelationship, indexGraphEdges, relationLabel, selectLocalGraph } from "./graph/selectors.mjs";
 import {
-  buildGraphPayload,
   buildPageLookup,
   cleanInline,
   describe,
@@ -57,7 +57,8 @@ const assetHash = createHash("sha256")
   .update(await readFile(join(root, "site", "assets", "history-state.js")))
   .update(await readFile(join(root, "site", "assets", "history-lens.js")))
   .update(await readFile(join(root, "site", "assets", "evidence-state.js")))
-  .update(await readFile(join(root, "site", "assets", "evidence-lens.js")));
+  .update(await readFile(join(root, "site", "assets", "evidence-lens.js")))
+  .update(await readFile(join(root, "site", "assets", "knowledge-graph.js")));
 
 const categoryMeta = {
   sources: { label: "정규 소스", description: "raw에 보존한 원본을 직접 처리한 정규 소스 노트" },
@@ -91,6 +92,7 @@ const atlasFacetMeta = Object.freeze({
 
 const mapModes = Object.freeze([
   { id: "connection", label: "연결 경로", url: "/map/" },
+  { id: "graph", label: "지식 그래프", url: "/map/graph/" },
   { id: "learning", label: "학습 노선", url: "/map/learning/" },
   { id: "atlas", label: "전체 의미 지도", url: "/map/atlas/" },
   { id: "history", label: "역사·인과", url: "/map/history/" },
@@ -199,7 +201,7 @@ const evidenceNodesById = new Map(knowledgeGraph.nodes.map((node) => [node.id, n
 const siteDiscoveryPages = selectSiteDiscoveryPages(pages, {
   visibilityFor: (page) => evidenceNodesById.get(graphNodeId(page))?.visibility || "public"
 });
-const publicGraphPages = pages.filter((page) => evidenceNodesById.get(graphNodeId(page))?.visibility === "public");
+const conceptEntityGraph = buildConceptEntityGraph(knowledgeGraph);
 const evidenceDocumentNodes = knowledgeGraph.nodes
   .filter((node) => node.visibility === "public" && !["sources", "references"].includes(node.category))
   .sort((left, right) => left.title.localeCompare(right.title, "ko") || left.id.localeCompare(right.id, "ko"));
@@ -308,6 +310,7 @@ const assetVersion = assetHash
   .update(JSON.stringify({
     pages: pages.map(({ filePath, incoming, links, score, ...page }) => page),
     knowledgeGraph,
+    conceptEntityGraph,
     connectionGraph,
     learningMap,
     semanticAtlas: {
@@ -441,7 +444,7 @@ function navLinks(canonicalPath) {
   </a>`;
 }
 
-function layout({ title, description, content, canonicalPath = "/", bodyClass = "", graphData = null, localGraphData = null, pageModules = [] }) {
+function layout({ title, description, content, canonicalPath = "/", bodyClass = "", knowledgeGraphData = null, localGraphData = null, pageModules = [] }) {
   const fullTitle = title === "CS Wiki" ? title : `${title} · CS Wiki`;
   const canonical = siteUrl ? `${siteUrl}${canonicalPath}` : "";
   const nav = navLinks(canonicalPath);
@@ -505,7 +508,7 @@ function layout({ title, description, content, canonicalPath = "/", bodyClass = 
     <p class="search-hint">위아래 방향키로 이동하고 Enter로 문서를 엽니다.</p>
     <div class="search-results" data-search-results aria-live="polite"></div>
   </dialog>
-  ${graphData ? `<script type="application/json" id="graph-data">${JSON.stringify(graphData).replaceAll("<", "\\u003c")}</script>` : ""}
+  ${knowledgeGraphData ? `<script type="application/json" id="knowledge-graph-data">${JSON.stringify(knowledgeGraphData).replaceAll("<", "\\u003c")}</script>` : ""}
   ${localGraphData ? `<script type="application/json" id="local-graph-data">${JSON.stringify(localGraphData).replaceAll("<", "\\u003c")}</script>` : ""}
   <script>window.CS_WIKI_BASE=${JSON.stringify(siteBase)};window.CS_WIKI_ASSET_VERSION=${JSON.stringify(assetVersion)};</script>
   <script src="${withBase("/assets/site.js")}?v=${assetVersion}" defer></script>
@@ -546,15 +549,6 @@ function pageCard(page, { compact = false, step = "" } = {}) {
   </article>`;
 }
 
-function graphPayload() {
-  return buildGraphPayload(publicGraphPages, { urlFor: withBase });
-}
-
-function graphNodeList(graph) {
-  return `<ol class="graph-node-list" aria-label="연결이 많은 문서 목록">${graph.nodes.map((node, index) => `
-    <li><a href="${node.url}"><span>${String(index + 1).padStart(2, "0")}</span>${escapeHtml(node.title)}</a></li>`).join("")}</ol>`;
-}
-
 function pathCard(path, index, compact = false) {
   const first = path.pages[0];
   const last = path.pages.at(-1);
@@ -567,7 +561,6 @@ function pathCard(path, index, compact = false) {
 }
 
 function homePage() {
-  const graph = graphPayload();
   const featured = [...siteDiscoveryPages]
     .filter((page) => page.category === "analyses")
     .sort((a, b) => b.score - a.score || b.updated.localeCompare(a.updated))
@@ -595,6 +588,7 @@ function homePage() {
       <div class="hero-actions">
         <button type="button" class="primary-action" data-open-search>문서 검색</button>
         <a href="${withBase("/paths/")}">학습 경로 보기</a>
+        <a href="${withBase("/map/graph/")}">지식 그래프</a>
         <a href="${withBase("/map/learning/")}">학습 노선 지도</a>
         <a href="${withBase("/map/")}">지식 연결 찾기</a>
         <a href="${withBase("/map/atlas/")}">전체 의미 지도</a>
@@ -607,11 +601,6 @@ function homePage() {
         <div><dt>학습 경로</dt><dd>${resolvedLearningPaths.length}</dd></div>
         <div><dt>핵심 분석</dt><dd>${counts.analyses}</dd></div>
       </dl>
-    </div>
-    <div class="graph-panel">
-      <div class="panel-heading"><h2>지식 연결망</h2><span>연결이 많은 문서 ${Math.min(12, publicGraphPages.length)}개</span></div>
-      <canvas id="knowledge-graph" aria-hidden="true"></canvas>
-      <details class="graph-list-disclosure"><summary>문서 목록 보기</summary>${graphNodeList(graph)}</details>
     </div>
   </section>
   <section class="content-section">
@@ -641,8 +630,93 @@ function homePage() {
     title: "CS Wiki",
     description: "원본 문헌에서 출발해 컴퓨터 과학의 역사, 인물, 개념, 분석을 연결하는 기술 위키",
     content,
-    bodyClass: "home-page",
-    graphData: graph
+    bodyClass: "home-page"
+  });
+}
+
+function knowledgeGraphStaticList(nodes, label) {
+  return `<section><h3>${escapeHtml(label)} <span>${nodes.length}</span></h3><ol>${nodes.map((node) => `<li><a href="${escapeHtml(node.url)}">${escapeHtml(node.title)}</a><span>직접 연결 ${node.degree}</span></li>`).join("")}</ol></section>`;
+}
+
+function knowledgeGraphPage() {
+  const conceptNodes = conceptEntityGraph.nodes.filter((node) => node.category === "concepts");
+  const entityNodes = conceptEntityGraph.nodes.filter((node) => node.category === "entities");
+  const content = `<div class="knowledge-graph-page section-frame" data-knowledge-graph>
+    <header class="knowledge-graph-hero">
+      <div>
+        <p class="eyebrow">개념 ${conceptNodes.length} · 인물 ${entityNodes.length} · 직접 연결 ${conceptEntityGraph.stats.edges}</p>
+        <h1>지식 그래프</h1>
+        <p>개념과 인물 문서 사이의 위키 관계를 한 화면에서 탐색합니다. 노드를 선택하면 직접 연결된 문서만 밝아지고, 검색과 유형 필터로 범위를 좁힐 수 있습니다.</p>
+      </div>
+      <dl aria-label="지식 그래프 범위">
+        <div><dt>전체 노드</dt><dd>${conceptEntityGraph.stats.nodes}</dd></div>
+        <div><dt>개념</dt><dd>${conceptNodes.length}</dd></div>
+        <div><dt>인물</dt><dd>${entityNodes.length}</dd></div>
+        <div><dt>연결</dt><dd>${conceptEntityGraph.stats.edges}</dd></div>
+      </dl>
+    </header>
+    ${mapModeNav("graph")}
+    <section class="knowledge-graph-toolbar" aria-label="그래프 탐색 도구">
+      <div class="knowledge-graph-search">
+        <label for="knowledge-graph-search">노드 검색</label>
+        <input id="knowledge-graph-search" type="search" data-graph-search autocomplete="off" placeholder="개념 또는 인물 이름" aria-controls="knowledge-graph-search-results">
+        <div id="knowledge-graph-search-results" class="knowledge-graph-search-results" data-graph-search-results hidden></div>
+      </div>
+      <div class="knowledge-graph-filters" role="group" aria-label="문서 유형">
+        <button type="button" data-graph-filter="all" aria-pressed="true">전체 <span>${conceptEntityGraph.stats.nodes}</span></button>
+        <button type="button" data-graph-filter="concepts" aria-pressed="false">개념 <span>${conceptNodes.length}</span></button>
+        <button type="button" data-graph-filter="entities" aria-pressed="false">인물 <span>${entityNodes.length}</span></button>
+      </div>
+      <output class="knowledge-graph-status" data-graph-status aria-live="polite">개념과 인물 ${conceptEntityGraph.stats.nodes}개, 연결 ${conceptEntityGraph.stats.edges}개를 표시합니다.</output>
+    </section>
+    <div class="knowledge-graph-workspace">
+      <section class="knowledge-graph-stage" aria-label="개념과 인물 지식 그래프">
+        <canvas data-knowledge-graph-canvas tabindex="0" aria-describedby="knowledge-graph-hint">개념과 인물 문서의 연결 그래프입니다. 검색 또는 아래 문서 목록으로 같은 문서를 탐색할 수 있습니다.</canvas>
+        <div class="knowledge-graph-legend" aria-label="노드 범례">
+          <span><i class="concept" aria-hidden="true"></i>개념</span>
+          <span><i class="entity" aria-hidden="true"></i>인물</span>
+          <span><i class="relation" aria-hidden="true"></i>문서 관계</span>
+        </div>
+        <div class="knowledge-graph-camera" aria-label="그래프 화면 조절">
+          <button type="button" data-graph-zoom-out>축소</button>
+          <button type="button" data-graph-reset>맞춤</button>
+          <button type="button" data-graph-zoom-in>확대</button>
+        </div>
+        <p class="knowledge-graph-hint" id="knowledge-graph-hint">드래그: 이동 · 휠: 확대/축소 · 방향키: 노드 이동 · Enter: 선택 · Escape: 선택 해제</p>
+      </section>
+      <aside class="knowledge-graph-sidebar" aria-label="선택한 노드 정보">
+        <section class="knowledge-graph-inspector" data-graph-inspector hidden>
+          <p data-inspector-kind>개념</p>
+          <h2 data-inspector-title></h2>
+          <p data-inspector-summary></p>
+          <strong data-inspector-degree></strong>
+          <div class="knowledge-graph-neighbors"><h3>직접 연결</h3><div data-inspector-neighbors></div></div>
+          <a data-inspector-link href="#">문서 열기</a>
+        </section>
+        <section class="knowledge-graph-guide">
+          <h2>그래프 읽기</h2>
+          <ul>
+            <li><span class="concept">원형 노드</span><p>개념 문서입니다. 연결 수가 많을수록 크게 표시됩니다.</p></li>
+            <li><span class="entity">마름모 노드</span><p>인물 문서입니다. 개념과 직접 연결된 관계를 함께 표시합니다.</p></li>
+            <li><span>노드 선택</span><p>선택한 문서와 직접 이웃만 밝게 남아 연결 구조를 비교할 수 있습니다.</p></li>
+          </ul>
+        </section>
+      </aside>
+    </div>
+    <details class="knowledge-graph-static">
+      <summary>문서 목록으로 그래프 읽기</summary>
+      <div>${knowledgeGraphStaticList(conceptNodes, "개념")}${knowledgeGraphStaticList(entityNodes, "인물")}</div>
+    </details>
+    <noscript><p class="knowledge-graph-noscript">그래프 조작에는 JavaScript가 필요합니다. 위 문서 목록은 JavaScript 없이도 사용할 수 있습니다.</p></noscript>
+  </div>`;
+  return layout({
+    title: "지식 그래프",
+    description: "CS Wiki의 개념과 인물 문서를 노드로 연결해 탐색하는 지식 그래프",
+    content,
+    canonicalPath: "/map/graph/",
+    bodyClass: "knowledge-graph-page-body",
+    knowledgeGraphData: conceptEntityGraph,
+    pageModules: ["knowledge-graph.js"]
   });
 }
 
@@ -1861,6 +1935,7 @@ for (const path of resolvedLearningPaths) {
   await output(join("paths", path.slug, "index.html"), learningPathPage(path));
 }
 await output(join("map", "index.html"), connectionExplorerPage());
+await output(join("map", "graph", "index.html"), knowledgeGraphPage());
 const featuredLearningPath = resolvedLearningPaths.find((path) => path.slug === "computing-capability-history") || resolvedLearningPaths[0];
 const featuredLearningStation = featuredLearningPath.pages.find((page) => graphNodeId(page) === "computing-capability") || featuredLearningPath.pages[0];
 await output(join("map", "learning", "index.html"), learningMapPage({
@@ -2039,6 +2114,7 @@ if (siteUrl) {
     ...Object.keys(categoryMeta).map(categoryUrl),
     "/paths/",
     "/map/",
+    "/map/graph/",
     "/map/learning/",
     "/map/atlas/",
     "/map/history/",

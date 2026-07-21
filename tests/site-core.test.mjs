@@ -1,7 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import {
-  buildGraphPayload,
   buildPageLookup,
   normalizeBase,
   parseDocument,
@@ -67,20 +66,6 @@ test("links are fully aggregated before scoring and self-links are excluded", ()
   assert.equal(beta.incoming, 1);
   assert.equal(beta.score, 2);
   assert.equal(gamma.score, 1);
-});
-
-test("graph edges survive reverse-only links and mutual links are deduplicated", () => {
-  const first = page("First", [], { score: 20 });
-  const second = page("Second", [], { score: 10 });
-  const third = page("Third", [], { score: 5 });
-  first.links = [second];
-  second.links = [first];
-  third.links = [first];
-
-  const graph = buildGraphPayload([first, second, third]);
-
-  assert.deepEqual(graph.nodes.map((node) => node.title), ["First", "Second", "Third"]);
-  assert.deepEqual(graph.edges, [[0, 1], [0, 2]]);
 });
 
 test("context pages stay out of global site discovery while direct and operational pages remain addressable", () => {
