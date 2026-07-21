@@ -47,6 +47,27 @@ export function extractWikiLinks(body = "") {
   return links;
 }
 
+export function extractAttachmentLinks(body = "") {
+  const targets = new Set();
+  let inFence = false;
+  for (const line of String(body).split(/\r?\n/)) {
+    if (/^\s*(```|~~~)/.test(line)) {
+      inFence = !inFence;
+      continue;
+    }
+    if (inFence) continue;
+    for (const match of line.matchAll(/!\[\[([^\]|#]+)(?:#[^\]|]+)?(?:\|[^\]]+)?\]\]/gu)) {
+      const target = match[1].trim();
+      if (isAttachmentTarget(target)) targets.add(target);
+    }
+    for (const match of line.matchAll(/!?\[[^\]]*\]\((?:<([^>]+)>|([^\s)]+))(?:\s+["'][^"']*["'])?\)/gu)) {
+      const target = String(match[1] || match[2] || "").trim();
+      if (isAttachmentTarget(target)) targets.add(target);
+    }
+  }
+  return [...targets].sort((left, right) => left.localeCompare(right, "ko"));
+}
+
 function tableCells(line) {
   const input = line.trim().replace(/^\|/, "").replace(/\|$/, "");
   const cells = [];
@@ -150,6 +171,30 @@ function resolveTarget(lookup, value) {
   return lookup.get(key(value)) || lookup.get(key(basename(value, extname(value))));
 }
 
+// Obsidian accepted non-Markdown file types: Bases, Canvas, images, audio, video, and PDF.
+const ATTACHMENT_EXTENSION = /\.(?:3gp|avif|base|bmp|canvas|flac|gif|jpe?g|m4a|mkv|mov|mp3|mp4|ogg|ogv|pdf|png|svg|wav|webm|webp)$/iu;
+
+function isAttachmentTarget(value) {
+  const target = String(value || "").trim();
+  return Boolean(target)
+    && !/^(?:[a-z][a-z0-9+.-]*:|\/\/)/iu.test(target)
+    && ATTACHMENT_EXTENSION.test(target);
+}
+
+function attachmentTargets(page) {
+  return [...new Set([...(page.attachments || []), ...(page.targets || [])]
+    .map((value) => String(value || "").split("#", 1)[0].trim())
+    .filter((value) => isAttachmentTarget(value)))]
+    .sort((left, right) => left.localeCompare(right, "ko"));
+}
+
+function unresolvedTargets(page, lookup) {
+  return [...new Set((page.targets || [])
+    .map((value) => String(value || "").split("#", 1)[0].trim())
+    .filter((value) => value && !isAttachmentTarget(value) && !resolveTarget(lookup, value)))]
+    .sort((left, right) => left.localeCompare(right, "ko"));
+}
+
 function edgeKey(kind, source, target, directed) {
   if (!directed && source.localeCompare(target, "ko") > 0) return `${kind}|${target}|${source}`;
   return `${kind}|${source}|${target}`;
@@ -195,11 +240,14 @@ export function buildKnowledgeGraph(pages, learningPaths, { lookup, urlFor = (ur
     aliases: page.aliases,
     url: urlFor(page.url),
     category: page.category,
+    tags: page.tags,
     domains: page.tags.filter((tag) => tag.startsWith("domain/")),
     status: page.status,
     summary: page.summary,
     created: page.created || null,
     updated: page.updated || null,
+    attachments: attachmentTargets(page),
+    unresolved: unresolvedTargets(page, lookup),
     sourceId: page.sourceId || null,
     visibility: page.graphVisibility || (["index.md", "overview.md", "log.md"].includes(basename(page.filePath).toLowerCase()) ? "hidden" : "public"),
     pathMemberships: memberships.get(page) || [],

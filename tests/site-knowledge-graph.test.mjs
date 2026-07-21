@@ -1,10 +1,16 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import {
+  GRAPH_SETTINGS_DEFAULTS,
+  attachmentAssetHref,
+  computeVisibleGraphNodeIds,
   createDeterministicLayout,
   createGraphAdjacency,
+  fitFocusedGraphCamera,
   fitGraphCamera,
   graphSearchResults,
+  matchGraphQuery,
+  normalizeGraphSettings,
   normalizeKnowledgeGraph
 } from "../site/assets/knowledge-graph.js";
 import { EXPLORER_LIMITS, buildConceptEntityGraph } from "../site/graph/explorer.mjs";
@@ -26,16 +32,25 @@ test("concept/entity projection keeps public documents and collapses parallel re
   const projected = buildConceptEntityGraph({
     contentVersion: "2026-07-22",
     nodes: [
-      node("concept-a", "concepts", { title: "개념 A" }),
+      node("concept-a", "concepts", {
+        title: "개념 A",
+        aliases: ["Concept A", "개념 에이", "Concept A"],
+        domains: ["domain/z", "domain/a", "domain/z"],
+        created: "2026-07-01",
+        updated: "2026-07-22",
+        attachments: ["image-b.png", "image-a.png", "image-b.png"],
+        unresolved: ["미완성 B", "미완성 A"]
+      }),
       node("person-b", "entities", { title: "인물 B" }),
-      node("concept-isolated", "concepts"),
+      node("concept-isolated", "concepts", { tags: ["custom/z", "custom/a", "custom/z"] }),
       node("analysis-c", "analyses"),
       node("context-d", "concepts", { visibility: "context" }),
       node("hidden-e", "entities", { visibility: "hidden" })
     ],
     edges: [
-      { source: "concept-a", target: "person-b", kind: "mentions", weight: 1, occurrences: 2 },
-      { source: "person-b", target: "concept-a", kind: "related", weight: 2, occurrences: 1 },
+      { source: "concept-a", target: "person-b", kind: "mentions", directed: true, weight: 1, occurrences: 2 },
+      { source: "person-b", target: "concept-a", kind: "implements", directed: true, weight: 1, occurrences: 1 },
+      { source: "person-b", target: "concept-a", kind: "related", directed: false, weight: 1, occurrences: 3 },
       { source: "concept-a", target: "analysis-c", kind: "mentions", weight: 1 },
       { source: "concept-a", target: "context-d", kind: "related", weight: 2 }
     ]
@@ -46,9 +61,15 @@ test("concept/entity projection keeps public documents and collapses parallel re
   assert.deepEqual(projected.edges, [{
     source: "concept-a",
     target: "person-b",
-    kinds: ["mentions", "related"],
+    kinds: ["implements", "mentions", "related"],
     weight: 3,
-    occurrences: 3
+    occurrences: 6,
+    direction: "both",
+    directions: {
+      forward: { kinds: ["mentions"], occurrences: 2 },
+      reverse: { kinds: ["implements"], occurrences: 1 },
+      none: { kinds: ["related"], occurrences: 3 }
+    }
   }]);
   assert.deepEqual(projected.nodes.map(({ id, degree }) => ({ id, degree })), [
     { id: "concept-a", degree: 1 },
@@ -56,6 +77,20 @@ test("concept/entity projection keeps public documents and collapses parallel re
     { id: "person-b", degree: 1 }
   ]);
   assert.ok(projected.nodes.every((record) => Number.isFinite(record.x) && Number.isFinite(record.y)));
+  const concept = projected.nodes.find((record) => record.id === "concept-a");
+  assert.deepEqual(concept.aliases, ["개념 에이", "Concept A"]);
+  assert.deepEqual(concept.domains, ["domain/a", "domain/z"]);
+  assert.deepEqual(concept.tags, ["domain/a", "domain/z", "status/active", "type/concept"]);
+  assert.equal(concept.url, "/concepts/concept-a/");
+  assert.equal(concept.created, "2026-07-01");
+  assert.equal(concept.updated, "2026-07-22");
+  assert.deepEqual(concept.attachments, ["image-a.png", "image-b.png"]);
+  assert.deepEqual(concept.unresolved, ["미완성 A", "미완성 B"]);
+  const person = projected.nodes.find((record) => record.id === "person-b");
+  assert.deepEqual(person.tags, ["status/active", "type/entity"]);
+  assert.deepEqual(person.attachments, []);
+  assert.deepEqual(person.unresolved, []);
+  assert.deepEqual(projected.nodes.find((record) => record.id === "concept-isolated").tags, ["custom/a", "custom/z"]);
   assert.deepEqual(projected.limits, EXPLORER_LIMITS);
   assert.deepEqual(projected.stats, {
     nodes: 3,
@@ -74,12 +109,35 @@ test("concept/entity projection is stable when normalized graph arrays are reord
   const graph = {
     nodes: [node("c", "concepts"), node("a", "concepts"), node("b", "entities")],
     edges: [
-      { source: "c", target: "a", kind: "related", weight: 2 },
-      { source: "b", target: "a", kind: "mentions", weight: 1 }
+      { source: "c", target: "a", kind: "related", directed: false, weight: 2 },
+      { source: "b", target: "a", kind: "mentions", directed: true, weight: 1 }
     ]
   };
   const reversed = { nodes: [...graph.nodes].reverse(), edges: [...graph.edges].reverse() };
-  assert.deepEqual(buildConceptEntityGraph(graph), buildConceptEntityGraph(reversed));
+  const projected = buildConceptEntityGraph(graph);
+  assert.deepEqual(projected, buildConceptEntityGraph(reversed));
+  assert.deepEqual(projected.edges.map(({ source, target, direction, directions }) => ({ source, target, direction, directions })), [
+    {
+      source: "a",
+      target: "b",
+      direction: "reverse",
+      directions: {
+        forward: { kinds: [], occurrences: 0 },
+        reverse: { kinds: ["mentions"], occurrences: 1 },
+        none: { kinds: [], occurrences: 0 }
+      }
+    },
+    {
+      source: "a",
+      target: "c",
+      direction: "none",
+      directions: {
+        forward: { kinds: [], occurrences: 0 },
+        reverse: { kinds: [], occurrences: 0 },
+        none: { kinds: ["related"], occurrences: 1 }
+      }
+    }
+  ]);
 });
 
 test("client payload normalization prunes malformed records and deduplicates pairs", () => {
@@ -101,7 +159,129 @@ test("client payload normalization prunes malformed records and deduplicates pai
     { id: "a", category: "concepts", degree: 2 },
     { id: "b", category: "entities", degree: 0 }
   ]);
-  assert.deepEqual(normalized.edges, [{ source: "a", target: "b", weight: 3, kinds: ["related"] }]);
+  assert.deepEqual(normalized.edges, [{ source: "a", target: "b", weight: 3, kinds: ["related"], direction: "none" }]);
+});
+
+test("graph settings normalize persisted values and reject unsafe groups", () => {
+  const settings = normalizeGraphSettings({
+    showTags: true,
+    showAttachments: "yes",
+    existingOnly: false,
+    textFade: 9,
+    nodeSize: 0,
+    centerForce: -1,
+    repelForce: 99,
+    groups: [
+      { id: "domain", query: "tag:domain/software-engineering", color: "#ABCDEF" },
+      { id: "unsafe", query: "type:person", color: "red" }
+    ]
+  });
+  assert.equal(settings.showTags, true);
+  assert.equal(settings.showAttachments, GRAPH_SETTINGS_DEFAULTS.showAttachments);
+  assert.equal(settings.existingOnly, false);
+  assert.equal(settings.textFade, 1);
+  assert.equal(settings.nodeSize, 0.5);
+  assert.equal(settings.centerForce, 0);
+  assert.equal(settings.repelForce, 2.5);
+  assert.deepEqual(settings.groups, [
+    { id: "domain", query: "tag:domain/software-engineering", color: "#abcdef" },
+    { id: "unsafe", query: "type:person", color: "#ffb000" }
+  ]);
+});
+
+test("file and group queries support fields, phrases, OR, and exclusions", () => {
+  const concept = {
+    title: "저장 프로그램 컴퓨터",
+    aliases: ["Stored-program computer"],
+    summary: "프로그램과 데이터를 기억장치에 저장한다.",
+    url: "/concepts/저장-프로그램-컴퓨터/",
+    category: "concepts",
+    tags: ["domain/computer-architecture", "status/active"],
+    status: "active"
+  };
+  assert.equal(matchGraphQuery(concept, '"저장 프로그램" status:active'), true);
+  assert.equal(matchGraphQuery(concept, "tag:computer-architecture"), true);
+  assert.equal(matchGraphQuery(concept, "type:person OR alias:stored-program"), true);
+  assert.equal(matchGraphQuery(concept, "type:concept -status:draft"), true);
+  assert.equal(matchGraphQuery(concept, "path:entities OR status:draft"), false);
+});
+
+test("focused camera keeps the selection centered and every direct neighbor inside the safe frame", () => {
+  const selected = { id: "focus", x: 110, y: -80 };
+  const neighbors = [
+    { id: "left", x: -890, y: -80 },
+    { id: "right", x: 1610, y: -80 },
+    { id: "top", x: 110, y: -1280 },
+    { id: "bottom", x: 110, y: 1120 }
+  ];
+  const viewport = { width: 390, height: 280 };
+  const padding = 54;
+  const camera = fitFocusedGraphCamera(selected, [...neighbors].reverse(), viewport, padding);
+  assert.equal(camera.x, selected.x);
+  assert.equal(camera.y, selected.y);
+  assert.ok(camera.zoom < 0.24);
+  const center = { x: viewport.width / 2, y: viewport.height / 2 };
+  for (const node of neighbors) {
+    const screen = {
+      x: center.x + (node.x - camera.x) * camera.zoom,
+      y: center.y + (node.y - camera.y) * camera.zoom
+    };
+    assert.ok(screen.x >= padding - 0.001 && screen.x <= viewport.width - padding + 0.001);
+    assert.ok(screen.y >= padding - 0.001 && screen.y <= viewport.height - padding + 0.001);
+  }
+  assert.deepEqual(camera, fitFocusedGraphCamera(selected, neighbors, viewport, padding));
+});
+
+test("force controls produce finite deterministic but distinct layouts", () => {
+  const nodes = [node("a", "concepts"), node("b", "entities"), node("c", "concepts")];
+  const edges = [{ source: "a", target: "b", weight: 1 }, { source: "b", target: "c", weight: 2 }];
+  const compact = createDeterministicLayout(nodes, edges, {
+    iterations: 50,
+    centerForce: 2,
+    repelForce: 0.25,
+    linkForce: 2,
+    linkDistance: 0.5
+  });
+  const loose = createDeterministicLayout(nodes, edges, {
+    iterations: 50,
+    centerForce: 0,
+    repelForce: 2.5,
+    linkForce: 0,
+    linkDistance: 2
+  });
+  assert.ok(compact.every((record) => Number.isFinite(record.x) && Number.isFinite(record.y)));
+  assert.ok(loose.every((record) => Number.isFinite(record.x) && Number.isFinite(record.y)));
+  assert.deepEqual(compact, createDeterministicLayout([...nodes].reverse(), [...edges].reverse(), {
+    iterations: 50,
+    centerForce: 2,
+    repelForce: 0.25,
+    linkForce: 2,
+    linkDistance: 0.5
+  }));
+  assert.notDeepEqual(compact.map(({ x, y }) => ({ x, y })), loose.map(({ x, y }) => ({ x, y })));
+});
+
+test("clearing a selection restores the active graph filters before animation", () => {
+  const nodes = [
+    node("concept-a", "concepts", { title: "선택 개념" }),
+    node("person-b", "entities", { title: "연결 인물" }),
+    node("concept-c", "concepts", { title: "다른 개념" })
+  ];
+  const adjacency = createGraphAdjacency(nodes, [{ source: "concept-a", target: "person-b" }]);
+  assert.deepEqual(
+    [...computeVisibleGraphNodeIds(nodes, adjacency, { activeFilter: "entities", selectedId: "concept-a" })].sort(),
+    ["concept-a", "person-b"]
+  );
+  assert.deepEqual(
+    [...computeVisibleGraphNodeIds(nodes, adjacency, { activeFilter: "entities", selectedId: "" })],
+    ["person-b"]
+  );
+});
+
+test("attachment assets use the configured site base and reject unsafe paths", () => {
+  assert.equal(attachmentAssetHref("/CS_Wiki/assets/raw/", "도표/구조 그림.svg"), "/CS_Wiki/assets/raw/%EB%8F%84%ED%91%9C/%EA%B5%AC%EC%A1%B0%20%EA%B7%B8%EB%A6%BC.svg");
+  assert.equal(attachmentAssetHref("/assets/raw/", "../secret.pdf"), "");
+  assert.equal(attachmentAssetHref("/assets/raw/", "https://example.test/file.pdf"), "");
 });
 
 test("client helpers keep adjacency, layout, Korean search, and camera fitting deterministic", () => {

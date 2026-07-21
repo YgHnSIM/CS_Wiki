@@ -1032,6 +1032,12 @@ const conceptEntityNeighbors = new Map(conceptEntityGraph.nodes.map((node) => [n
 for (const edge of conceptEntityGraph.edges) {
   assert.ok(conceptEntityNodeIds.has(edge.source) && conceptEntityNodeIds.has(edge.target), "concept/entity graph edge references a missing node");
   assert.notEqual(edge.source, edge.target, "concept/entity graph contains a self-edge");
+  assert.match(edge.direction, /^(?:forward|reverse|both|none)$/, "concept/entity graph edge has an invalid direction");
+  assert.deepEqual(Object.keys(edge.directions || {}).sort(), ["forward", "none", "reverse"], "concept/entity graph edge is missing directional buckets");
+  const directionOccurrences = Object.values(edge.directions).reduce((total, record) => total + Number(record.occurrences || 0), 0);
+  assert.equal(directionOccurrences, edge.occurrences, "concept/entity graph edge direction counts differ from its total occurrences");
+  assert.equal(edge.direction === "forward" || edge.direction === "both", edge.directions.forward.occurrences > 0, "forward arrow metadata is inconsistent");
+  assert.equal(edge.direction === "reverse" || edge.direction === "both", edge.directions.reverse.occurrences > 0, "reverse arrow metadata is inconsistent");
   const pair = [edge.source, edge.target].sort((left, right) => left.localeCompare(right, "ko")).join("\u0000");
   assert.ok(!conceptEntityPairs.has(pair), "concept/entity graph contains a duplicate document pair");
   conceptEntityPairs.add(pair);
@@ -1042,6 +1048,10 @@ assert.deepEqual([...conceptEntityPairs].sort(), [...independentlyExpectedPairs]
 for (const node of conceptEntityGraph.nodes) {
   assert.ok(["concepts", "entities"].includes(node.category), `knowledge graph node '${node.id}' has an unsupported category`);
   assert.match(node.url, /\/(?:concepts|entities)\//, `knowledge graph node '${node.id}' has a conflicting article URL`);
+  for (const key of ["aliases", "domains", "tags", "attachments", "unresolved"]) {
+    assert.ok(Array.isArray(node[key]), `knowledge graph node '${node.id}' is missing '${key}' metadata`);
+  }
+  assert.ok(node.created === null || /^\d{4}-\d{2}-\d{2}$/.test(node.created), `knowledge graph node '${node.id}' has an invalid created date`);
   assert.equal(node.degree, conceptEntityNeighbors.get(node.id).size, `knowledge graph node '${node.id}' has a stale degree`);
   assert.ok(knowledgeGraphHtml.includes(`href="${node.url}"`), `knowledge graph static list is missing '${node.id}'`);
 }
@@ -1054,12 +1064,37 @@ for (const marker of [
   "data-graph-reset",
   "data-graph-status",
   "data-graph-inspector",
+  "data-graph-settings-toggle",
+  "data-graph-settings-panel",
+  "data-graph-settings-close",
+  "data-graph-settings-reset",
+  "data-graph-file-query",
+  "data-graph-toggle-tags",
+  "data-graph-toggle-attachments",
+  "data-graph-asset-root",
+  "data-graph-toggle-existing-only",
+  "data-graph-toggle-show-orphans",
+  "data-graph-group-list",
+  "data-graph-group-add",
+  "data-graph-toggle-show-arrows",
+  "data-graph-text-fade",
+  "data-graph-node-size",
+  "data-graph-link-thickness",
+  "data-graph-animate",
+  "data-graph-animation-progress",
+  "data-graph-center-force",
+  "data-graph-repel-force",
+  "data-graph-link-force",
+  "data-graph-link-distance",
   "knowledge-graph-static",
   "knowledge-graph-noscript"
 ]) assert.ok(knowledgeGraphHtml.includes(marker), `knowledge graph page is missing '${marker}'`);
 const knowledgeGraphAssetVersion = knowledgeGraphHtml.match(/CS_WIKI_ASSET_VERSION="([a-f0-9]{12})"/)?.[1];
 assert.ok(knowledgeGraphAssetVersion, "knowledge graph page is missing its asset version");
 assert.ok(knowledgeGraphHtml.includes(`knowledge-graph.js?v=${knowledgeGraphAssetVersion}`), "knowledge graph client must be content-versioned");
+const knowledgeGraphClient = await read(join("assets", "knowledge-graph.js"));
+assert.ok(knowledgeGraphClient.includes("knowledge-graph-worker.js"), "knowledge graph forces must use the layout worker");
+assert.ok((await readBytes(join("assets", "knowledge-graph-worker.js"))).length <= 16 * 1024, "knowledge graph worker exceeds its delivery budget");
 const syntheticDiscoveryPages = [
   { id: "synthetic-public", graphVisibility: "public" },
   { id: "synthetic-context", graphVisibility: "context" },

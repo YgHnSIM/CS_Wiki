@@ -7,7 +7,7 @@ import anchor from "markdown-it-anchor";
 import { connectionSummary, createConnectionIndex, findConnectionPaths } from "./assets/connection-paths.js";
 import { buildLearningMap } from "./assets/learning-lines.js";
 import { domainMeta, historyPeriods, learningPaths, statusMeta } from "./catalog.mjs";
-import { buildKnowledgeGraph, extractWikiLinks } from "./graph/model.mjs";
+import { buildKnowledgeGraph, extractAttachmentLinks, extractWikiLinks } from "./graph/model.mjs";
 import { buildSemanticAtlas } from "./graph/atlas.mjs";
 import { buildHistoricalLens } from "./graph/history.mjs";
 import { EVIDENCE_LIMITS, buildEvidenceLens, evidenceStaticPageCount, evidenceStaticPageNumbers } from "./graph/evidence.mjs";
@@ -58,7 +58,8 @@ const assetHash = createHash("sha256")
   .update(await readFile(join(root, "site", "assets", "history-lens.js")))
   .update(await readFile(join(root, "site", "assets", "evidence-state.js")))
   .update(await readFile(join(root, "site", "assets", "evidence-lens.js")))
-  .update(await readFile(join(root, "site", "assets", "knowledge-graph.js")));
+  .update(await readFile(join(root, "site", "assets", "knowledge-graph.js")))
+  .update(await readFile(join(root, "site", "assets", "knowledge-graph-worker.js")));
 
 const categoryMeta = {
   sources: { label: "정규 소스", description: "raw에 보존한 원본을 직접 처리한 정규 소스 노트" },
@@ -159,6 +160,7 @@ const pages = await Promise.all(files.map(async (filePath) => {
     category,
     slug,
     url: `/${category}/${slug}/`,
+    attachments: extractAttachmentLinks(parsed.content),
     targets: extractWikiLinks(parsed.content).map((link) => link.target),
     incoming: 0
   };
@@ -641,12 +643,12 @@ function knowledgeGraphStaticList(nodes, label) {
 function knowledgeGraphPage() {
   const conceptNodes = conceptEntityGraph.nodes.filter((node) => node.category === "concepts");
   const entityNodes = conceptEntityGraph.nodes.filter((node) => node.category === "entities");
-  const content = `<div class="knowledge-graph-page section-frame" data-knowledge-graph>
+  const content = `<div class="knowledge-graph-page section-frame" data-knowledge-graph data-graph-asset-root="${withBase("/assets/raw/")}">
     <header class="knowledge-graph-hero">
       <div>
         <p class="eyebrow">개념 ${conceptNodes.length} · 인물 ${entityNodes.length} · 직접 연결 ${conceptEntityGraph.stats.edges}</p>
         <h1>지식 그래프</h1>
-        <p>개념과 인물 문서 사이의 위키 관계를 한 화면에서 탐색합니다. 노드를 선택하면 직접 연결된 문서만 밝아지고, 검색과 유형 필터로 범위를 좁힐 수 있습니다.</p>
+        <p>개념과 인물 문서 사이의 위키 관계를 한 화면에서 탐색합니다. 검색·그룹·표시·장력 옵션을 조절하고, 노드를 선택해 모든 직접 연결을 한 프레임에서 비교할 수 있습니다.</p>
       </div>
       <dl aria-label="지식 그래프 범위">
         <div><dt>전체 노드</dt><dd>${conceptEntityGraph.stats.nodes}</dd></div>
@@ -667,6 +669,7 @@ function knowledgeGraphPage() {
         <button type="button" data-graph-filter="concepts" aria-pressed="false">개념 <span>${conceptNodes.length}</span></button>
         <button type="button" data-graph-filter="entities" aria-pressed="false">인물 <span>${entityNodes.length}</span></button>
       </div>
+      <button class="knowledge-graph-settings-toggle" type="button" data-graph-settings-toggle aria-controls="knowledge-graph-settings" aria-expanded="false">그래프 설정</button>
       <output class="knowledge-graph-status" data-graph-status aria-live="polite">개념과 인물 ${conceptEntityGraph.stats.nodes}개, 연결 ${conceptEntityGraph.stats.edges}개를 표시합니다.</output>
     </section>
     <div class="knowledge-graph-workspace">
@@ -682,7 +685,91 @@ function knowledgeGraphPage() {
           <button type="button" data-graph-reset>맞춤</button>
           <button type="button" data-graph-zoom-in>확대</button>
         </div>
-        <p class="knowledge-graph-hint" id="knowledge-graph-hint">드래그: 이동 · 휠: 확대/축소 · 방향키: 노드 이동 · Enter: 선택 · Escape: 선택 해제</p>
+        <p class="knowledge-graph-hint" id="knowledge-graph-hint">드래그: 이동 · 휠 또는 +/−: 확대/축소 · 방향키: 노드 이동 · Enter: 선택 · 0: 맞춤 · Escape: 선택 해제</p>
+        <aside class="knowledge-graph-settings" id="knowledge-graph-settings" data-graph-settings-panel aria-labelledby="knowledge-graph-settings-title" hidden>
+          <header>
+            <h2 id="knowledge-graph-settings-title">그래프 설정</h2>
+            <button type="button" data-graph-settings-close aria-controls="knowledge-graph-settings" aria-label="그래프 설정 닫기">닫기</button>
+          </header>
+          <div class="knowledge-graph-settings-body">
+            <details open>
+              <summary>필터</summary>
+              <fieldset>
+                <legend>표시할 파일과 노드</legend>
+                <label class="knowledge-graph-setting-query" for="knowledge-graph-file-query">
+                  <span>파일 검색</span>
+                  <input id="knowledge-graph-file-query" type="search" data-graph-file-query autocomplete="off" placeholder="경로 또는 파일 이름">
+                </label>
+                <label class="knowledge-graph-switch"><span>태그</span><input type="checkbox" data-graph-toggle-tags><i aria-hidden="true"></i></label>
+                <label class="knowledge-graph-switch"><span>첨부 파일</span><input type="checkbox" data-graph-toggle-attachments><i aria-hidden="true"></i></label>
+                <label class="knowledge-graph-switch"><span>존재하는 파일만</span><input type="checkbox" data-graph-toggle-existing-only checked><i aria-hidden="true"></i></label>
+                <label class="knowledge-graph-switch"><span>고립된 노드</span><input type="checkbox" data-graph-toggle-show-orphans checked><i aria-hidden="true"></i></label>
+              </fieldset>
+            </details>
+            <details open>
+              <summary>그룹</summary>
+              <fieldset>
+                <legend>검색 규칙에 따른 노드 색상</legend>
+                <div class="knowledge-graph-group-list" data-graph-group-list></div>
+                <button class="knowledge-graph-group-add" type="button" data-graph-group-add>그룹 추가</button>
+              </fieldset>
+            </details>
+            <details open>
+              <summary>표시</summary>
+              <fieldset>
+                <legend>노드와 연결선 표시 방식</legend>
+                <label class="knowledge-graph-switch"><span>연결선 화살표</span><input type="checkbox" data-graph-toggle-show-arrows><i aria-hidden="true"></i></label>
+                <label class="knowledge-graph-range" for="knowledge-graph-text-fade">
+                  <span>텍스트 흐림 임계값</span>
+                  <output for="knowledge-graph-text-fade" data-setting-value="text-fade">25%</output>
+                  <input id="knowledge-graph-text-fade" type="range" data-graph-text-fade min="0" max="1" step="0.05" value="0.25">
+                </label>
+                <label class="knowledge-graph-range" for="knowledge-graph-node-size">
+                  <span>노드 크기</span>
+                  <output for="knowledge-graph-node-size" data-setting-value="node-size">1.0배</output>
+                  <input id="knowledge-graph-node-size" type="range" data-graph-node-size min="0.5" max="2" step="0.1" value="1">
+                </label>
+                <label class="knowledge-graph-range" for="knowledge-graph-link-thickness">
+                  <span>연결선 굵기</span>
+                  <output for="knowledge-graph-link-thickness" data-setting-value="link-thickness">1.0배</output>
+                  <input id="knowledge-graph-link-thickness" type="range" data-graph-link-thickness min="0.5" max="2" step="0.1" value="1">
+                </label>
+                <div class="knowledge-graph-animation">
+                  <span>그래프 애니메이션</span>
+                  <button type="button" data-graph-animate aria-pressed="false">재생</button>
+                  <progress data-graph-animation-progress min="0" max="1" value="1" aria-label="애니메이션 진행률">100%</progress>
+                </div>
+              </fieldset>
+            </details>
+            <details open>
+              <summary>장력</summary>
+              <fieldset>
+                <legend>그래프 배치에 작용하는 힘</legend>
+                <label class="knowledge-graph-range" for="knowledge-graph-center-force">
+                  <span>중앙으로 모으기</span>
+                  <output for="knowledge-graph-center-force" data-setting-value="center-force">35%</output>
+                  <input id="knowledge-graph-center-force" type="range" data-graph-center-force min="0" max="2" step="0.05" value="0.35">
+                </label>
+                <label class="knowledge-graph-range" for="knowledge-graph-repel-force">
+                  <span>노드 밀어내기</span>
+                  <output for="knowledge-graph-repel-force" data-setting-value="repel-force">1.0배</output>
+                  <input id="knowledge-graph-repel-force" type="range" data-graph-repel-force min="0.25" max="2.5" step="0.05" value="1">
+                </label>
+                <label class="knowledge-graph-range" for="knowledge-graph-link-force">
+                  <span>연결선 당기기</span>
+                  <output for="knowledge-graph-link-force" data-setting-value="link-force">65%</output>
+                  <input id="knowledge-graph-link-force" type="range" data-graph-link-force min="0" max="2" step="0.05" value="0.65">
+                </label>
+                <label class="knowledge-graph-range" for="knowledge-graph-link-distance">
+                  <span>연결 거리</span>
+                  <output for="knowledge-graph-link-distance" data-setting-value="link-distance">1.0배</output>
+                  <input id="knowledge-graph-link-distance" type="range" data-graph-link-distance min="0.5" max="2" step="0.05" value="1">
+                </label>
+              </fieldset>
+            </details>
+          </div>
+          <footer><button type="button" data-graph-settings-reset>기본값 복원</button></footer>
+        </aside>
       </section>
       <aside class="knowledge-graph-sidebar" aria-label="선택한 노드 정보">
         <section class="knowledge-graph-inspector" data-graph-inspector hidden>
@@ -698,7 +785,7 @@ function knowledgeGraphPage() {
           <ul>
             <li><span class="concept">원형 노드</span><p>개념 문서입니다. 연결 수가 많을수록 크게 표시됩니다.</p></li>
             <li><span class="entity">마름모 노드</span><p>인물 문서입니다. 개념과 직접 연결된 관계를 함께 표시합니다.</p></li>
-            <li><span>노드 선택</span><p>선택한 문서와 직접 이웃만 밝게 남아 연결 구조를 비교할 수 있습니다.</p></li>
+            <li><span>노드 선택</span><p>선택 문서를 화면 중앙에 두고 모든 직접 이웃을 한 프레임에 맞춥니다.</p></li>
           </ul>
         </section>
       </aside>

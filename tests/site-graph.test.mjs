@@ -3,6 +3,7 @@ import test from "node:test";
 import { buildPageLookup } from "../site/core.mjs";
 import {
   buildKnowledgeGraph,
+  extractAttachmentLinks,
   extractWikiLinks,
   parseCuratedRelations
 } from "../site/graph/model.mjs";
@@ -56,6 +57,21 @@ test("wiki links retain section context while images and fenced examples are ign
   ]);
 });
 
+test("attachment links include every Obsidian file family while ignoring external and fenced examples", () => {
+  assert.deepEqual(extractAttachmentLinks(`![[diagram.svg]]\n![plot](assets/plot.png)\n[paper](<files/paper.pdf>)\n![[audio/recording.flac]]\n![[audio/voice.m4a]]\n![[audio/clip.ogg]]\n![[video/demo.mkv]]\n![[video/demo.mov]]\n![[board.canvas]]\n![[data.base]]\n![remote](https://example.test/remote.png)\n\`\`\`md\n![[ignored.jpg]]\n\`\`\``), [
+    "assets/plot.png",
+    "audio/clip.ogg",
+    "audio/recording.flac",
+    "audio/voice.m4a",
+    "board.canvas",
+    "data.base",
+    "diagram.svg",
+    "files/paper.pdf",
+    "video/demo.mkv",
+    "video/demo.mov"
+  ]);
+});
+
 test("curated relation tables preserve wiki-link aliases containing pipes", () => {
   const relations = parseCuratedRelations(`## 관계\n\n| 관계 | 대상 | 설명 | 근거 |\n|---|---|---|---|\n| enables | [[Target|표시 이름]] | 새 작업을 표현하게 한다. | [[Evidence|원전]] |\n| responds_to | [[Problem]] | 문제에 대응한다. | [[Evidence]] |`, { pageTitle: "Source" });
   assert.deepEqual(relations[0], {
@@ -75,6 +91,7 @@ test("the normalized graph distinguishes evidence, related, mentions, paths, and
   const alpha = page("Alpha", {
     graphId: "concept-alpha",
     sources: ["Evidence"],
+    targets: ["Beta", "diagram.svg", "Missing page"],
     publicationYear: "1936",
     eventStart: "1936",
     eventEnd: "1945",
@@ -92,6 +109,9 @@ test("the normalized graph distinguishes evidence, related, mentions, paths, and
   const alphaNode = result.nodes.find((node) => node.title === "Alpha");
   assert.equal(alphaNode.id, "concept-alpha");
   assert.equal(alphaNode.url, "/base/concepts/alpha/");
+  assert.deepEqual(alphaNode.tags, ["domain/computer-science"]);
+  assert.deepEqual(alphaNode.attachments, ["diagram.svg"]);
+  assert.deepEqual(alphaNode.unresolved, ["Missing page"]);
   assert.deepEqual(alphaNode.historical, { publicationYear: 1936, eventStart: 1936, eventEnd: 1945, layer: "theory", note: null });
   assert.deepEqual(alphaNode.pathMemberships.map((membership) => membership.id), ["route"]);
 

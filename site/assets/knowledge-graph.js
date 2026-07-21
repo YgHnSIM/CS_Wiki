@@ -4,7 +4,13 @@ const CATEGORY = Object.freeze({
   entities: "entities",
   entity: "entities",
   people: "entities",
-  person: "entities"
+  person: "entities",
+  tags: "tags",
+  tag: "tags",
+  attachments: "attachments",
+  attachment: "attachments",
+  missing: "missing",
+  unresolved: "missing"
 });
 
 const PALETTE = Object.freeze({
@@ -12,11 +18,35 @@ const PALETTE = Object.freeze({
   raised: "#120021",
   concept: "#00ff41",
   entity: "#ffb000",
+  tag: "#8cb393",
+  attachment: "#00b82e",
+  missing: "#ffb000",
   text: "#e7ffe9",
   muted: "#8cb393"
 });
 
 const CAMERA_LIMITS = Object.freeze({ min: 0.24, max: 4.8 });
+const FOCUS_CAMERA_LIMITS = Object.freeze({ min: 0.001, max: 2.8 });
+const STORAGE_KEY = "cs-wiki:knowledge-graph:settings:v1";
+const DIRECTION = new Set(["forward", "reverse", "both", "none"]);
+const GROUP_COLORS = Object.freeze(["#00ff41", "#ffb000", "#8cb393", "#e7ffe9", "#00b82e", "#b67a00"]);
+
+export const GRAPH_SETTINGS_DEFAULTS = Object.freeze({
+  fileQuery: "",
+  showTags: false,
+  showAttachments: false,
+  existingOnly: true,
+  showOrphans: true,
+  groups: Object.freeze([]),
+  showArrows: false,
+  textFade: 0.25,
+  nodeSize: 1,
+  linkThickness: 1,
+  centerForce: 0.35,
+  repelForce: 1,
+  linkForce: 0.65,
+  linkDistance: 1
+});
 
 export function clamp(value, minimum, maximum) {
   return Math.min(maximum, Math.max(minimum, Number(value) || 0));
@@ -33,6 +63,141 @@ export function normalizeSearchText(value) {
 function finite(value, fallback = 0) {
   const number = Number(value);
   return Number.isFinite(number) ? number : fallback;
+}
+
+function textList(value) {
+  const values = Array.isArray(value) ? value : value == null ? [] : [value];
+  return [...new Set(values.map((item) => String(item || "").trim()).filter(Boolean))]
+    .sort((left, right) => left.localeCompare(right, "ko"));
+}
+
+function booleanSetting(value, fallback) {
+  return typeof value === "boolean" ? value : fallback;
+}
+
+function validColor(value, fallback) {
+  const color = String(value || "").trim();
+  return /^#[\da-f]{6}$/iu.test(color) ? color.toLowerCase() : fallback;
+}
+
+export function normalizeGraphSettings(value = {}) {
+  const raw = value && typeof value === "object" ? value : {};
+  const rawGroups = Array.isArray(raw.groups) ? raw.groups : [];
+  const groups = rawGroups.slice(0, 32).map((group, index) => ({
+    id: String(group?.id || `group-${index + 1}`).trim() || `group-${index + 1}`,
+    query: String(group?.query || "").trim(),
+    color: validColor(group?.color, GROUP_COLORS[index % GROUP_COLORS.length])
+  }));
+  return {
+    fileQuery: String(raw.fileQuery ?? GRAPH_SETTINGS_DEFAULTS.fileQuery).trim(),
+    showTags: booleanSetting(raw.showTags, GRAPH_SETTINGS_DEFAULTS.showTags),
+    showAttachments: booleanSetting(raw.showAttachments, GRAPH_SETTINGS_DEFAULTS.showAttachments),
+    existingOnly: booleanSetting(raw.existingOnly, GRAPH_SETTINGS_DEFAULTS.existingOnly),
+    showOrphans: booleanSetting(raw.showOrphans, GRAPH_SETTINGS_DEFAULTS.showOrphans),
+    groups,
+    showArrows: booleanSetting(raw.showArrows, GRAPH_SETTINGS_DEFAULTS.showArrows),
+    textFade: clamp(finite(raw.textFade, GRAPH_SETTINGS_DEFAULTS.textFade), 0, 1),
+    nodeSize: clamp(finite(raw.nodeSize, GRAPH_SETTINGS_DEFAULTS.nodeSize), 0.5, 2),
+    linkThickness: clamp(finite(raw.linkThickness, GRAPH_SETTINGS_DEFAULTS.linkThickness), 0.5, 2),
+    centerForce: clamp(finite(raw.centerForce, GRAPH_SETTINGS_DEFAULTS.centerForce), 0, 2),
+    repelForce: clamp(finite(raw.repelForce, GRAPH_SETTINGS_DEFAULTS.repelForce), 0.25, 2.5),
+    linkForce: clamp(finite(raw.linkForce, GRAPH_SETTINGS_DEFAULTS.linkForce), 0, 2),
+    linkDistance: clamp(finite(raw.linkDistance, GRAPH_SETTINGS_DEFAULTS.linkDistance), 0.5, 2)
+  };
+}
+
+function queryTokens(query) {
+  return String(query || "").match(/(?:[^\s"]+:)?"[^"]*"|\S+/gu) || [];
+}
+
+function queryHaystack(node, field = "") {
+  const typeNames = node.category === "concepts"
+    ? ["concepts", "concept", "개념"]
+    : node.category === "entities"
+      ? ["entities", "entity", "person", "people", "인물"]
+      : [node.category, node.type];
+  const values = {
+    title: [node.title],
+    aliases: node.aliases,
+    alias: node.aliases,
+    summary: [node.summary],
+    path: [node.path, node.url],
+    url: [node.url],
+    tag: node.tags,
+    tags: node.tags,
+    type: typeNames,
+    status: [node.status]
+  };
+  const selected = field && Object.hasOwn(values, field)
+    ? values[field]
+    : [node.title, ...(node.aliases || []), node.summary, node.path, node.url,
+      ...(node.tags || []), ...(node.domains || []), ...typeNames, node.status];
+  return normalizeSearchText((selected || []).filter(Boolean).join(" "));
+}
+
+function parseQueryTerm(rawToken) {
+  let token = String(rawToken || "");
+  let negative = false;
+  if (token.startsWith("-") && token.length > 1) {
+    negative = true;
+    token = token.slice(1);
+  }
+  let field = "";
+  const separator = token.indexOf(":");
+  if (separator > 0) {
+    const candidate = normalizeSearchText(token.slice(0, separator));
+    if (["title", "alias", "aliases", "summary", "path", "url", "tag", "tags", "type", "status"].includes(candidate)) {
+      field = candidate;
+      token = token.slice(separator + 1);
+    }
+  }
+  if (token.startsWith('"') && token.endsWith('"')) token = token.slice(1, -1);
+  return { field, negative, value: normalizeSearchText(token) };
+}
+
+/** Match the subset of Obsidian graph search used by file filters and groups. */
+export function matchGraphQuery(node, query = "") {
+  if (typeof node === "string" && query && typeof query === "object") {
+    [node, query] = [query, node];
+  }
+  const tokens = queryTokens(query);
+  if (!tokens.length) return true;
+  const clauses = [[]];
+  for (const token of tokens) {
+    if (/^OR$/iu.test(token) && clauses.at(-1).length) clauses.push([]);
+    else clauses.at(-1).push(parseQueryTerm(token));
+  }
+  return clauses.some((terms) => terms.length && terms.every((term) => {
+    if (!term.value) return true;
+    const matched = queryHaystack(node || {}, term.field).includes(term.value);
+    return term.negative ? !matched : matched;
+  }));
+}
+
+/** Apply global graph filters, then retain a selected document and every direct neighbor. */
+export function computeVisibleGraphNodeIds(nodes = [], adjacency = new Map(), options = {}) {
+  const activeFilter = String(options.activeFilter || "all");
+  const fileQuery = String(options.fileQuery || "");
+  const showOrphans = options.showOrphans !== false;
+  const selectedId = String(options.selectedId || "");
+  const topologyIds = new Set(nodes.map((node) => node.id));
+  const candidateIds = new Set(nodes.filter((node) => {
+    if (activeFilter !== "all" && node.category !== activeFilter) return false;
+    return !fileQuery || matchGraphQuery(node, fileQuery);
+  }).map((node) => node.id));
+  if (!showOrphans) {
+    for (const id of [...candidateIds]) {
+      const hasVisibleNeighbor = [...(adjacency.get(id) || [])].some((neighborId) => candidateIds.has(neighborId));
+      if (!hasVisibleNeighbor) candidateIds.delete(id);
+    }
+  }
+  if (selectedId && topologyIds.has(selectedId)) {
+    candidateIds.add(selectedId);
+    for (const neighborId of adjacency.get(selectedId) || []) {
+      if (topologyIds.has(neighborId)) candidateIds.add(neighborId);
+    }
+  }
+  return candidateIds;
 }
 
 function hashString(value) {
@@ -54,13 +219,25 @@ export function normalizeKnowledgeGraph(payload = {}) {
     if (!id || !category || byId.has(id)) continue;
     const x = Number(raw?.x);
     const y = Number(raw?.y);
+    const missing = category === "missing" || raw?.missing === true || raw?.exists === false;
     byId.set(id, {
       id,
       title: String(raw?.title || id).trim() || id,
+      aliases: textList(raw?.aliases),
       url: String(raw?.url || "").trim(),
+      path: String(raw?.path || raw?.url || "").trim(),
       category,
       summary: String(raw?.summary || "").trim(),
       status: String(raw?.status || "").trim(),
+      type: String(raw?.type || category).trim(),
+      domains: textList(raw?.domains),
+      tags: textList(raw?.tags),
+      created: String(raw?.created || "").trim(),
+      updated: String(raw?.updated || "").trim(),
+      attachments: textList(raw?.attachments),
+      unresolved: textList(raw?.unresolved),
+      exists: !missing,
+      missing,
       degree: Math.max(0, Math.floor(finite(raw?.degree, 0))),
       ...(Number.isFinite(x) && Number.isFinite(y) ? { x, y } : {})
     });
@@ -75,16 +252,30 @@ export function normalizeKnowledgeGraph(payload = {}) {
     const key = source < target ? `${source}\u0000${target}` : `${target}\u0000${source}`;
     if (edgeKeys.has(key)) continue;
     edgeKeys.add(key);
+    const rawDirection = String(raw?.direction || "").trim().toLocaleLowerCase("en-US");
+    const direction = DIRECTION.has(rawDirection)
+      ? rawDirection
+      : raw?.directed === true
+        ? "forward"
+        : "none";
+    const directions = raw?.directions && typeof raw.directions === "object"
+      ? Object.fromEntries(["forward", "reverse", "none"].map((name) => [name, {
+        kinds: textList(raw.directions[name]?.kinds),
+        occurrences: Math.max(0, Math.floor(finite(raw.directions[name]?.occurrences, 0)))
+      }]))
+      : undefined;
     edges.push({
       source,
       target,
       weight: clamp(finite(raw?.weight, 1), 0.15, 12),
-      kinds: [...new Set((Array.isArray(raw?.kinds) ? raw.kinds : [raw?.kinds])
-        .map((kind) => String(kind || "").trim()).filter(Boolean))]
+      kinds: textList(raw?.kinds),
+      direction,
+      ...(directions ? { directions } : {})
     });
   }
 
   const nodes = [...byId.values()].sort((a, b) => a.id.localeCompare(b.id));
+  edges.sort((left, right) => left.source.localeCompare(right.source) || left.target.localeCompare(right.target));
   return { nodes, edges };
 }
 
@@ -104,6 +295,10 @@ export function createGraphAdjacency(nodes = [], edges = []) {
  */
 export function createDeterministicLayout(nodes = [], edges = [], options = {}) {
   const iterations = clamp(Math.floor(finite(options.iterations, 180)), 0, 600);
+  const centerForce = clamp(finite(options.centerForce, GRAPH_SETTINGS_DEFAULTS.centerForce), 0, 2);
+  const repelForce = clamp(finite(options.repelForce, GRAPH_SETTINGS_DEFAULTS.repelForce), 0.25, 2.5);
+  const linkForce = clamp(finite(options.linkForce, GRAPH_SETTINGS_DEFAULTS.linkForce), 0, 2);
+  const linkDistance = clamp(finite(options.linkDistance, GRAPH_SETTINGS_DEFAULTS.linkDistance), 0.5, 2);
   const layoutNodes = [...nodes]
     .filter((node) => node?.id)
     .sort((a, b) => String(a.id).localeCompare(String(b.id)))
@@ -140,7 +335,7 @@ export function createDeterministicLayout(nodes = [], edges = [], options = {}) 
           distanceSquared = 0.01;
         }
         const distance = Math.sqrt(distanceSquared);
-        const force = Math.min(5.5, 7200 / distanceSquared) * cooling;
+        const force = Math.min(5.5, 7200 / distanceSquared) * repelForce * cooling;
         const fx = dx / distance * force;
         const fy = dy / distance * force;
         left.vx -= fx;
@@ -156,8 +351,9 @@ export function createDeterministicLayout(nodes = [], edges = [], options = {}) 
       const dx = target.x - source.x;
       const dy = target.y - source.y;
       const distance = Math.max(0.1, Math.hypot(dx, dy));
-      const preferred = 112 - Math.min(30, Math.log2(1 + finite(edge.weight, 1)) * 9);
-      const force = (distance - preferred) * 0.006 * Math.sqrt(finite(edge.weight, 1)) * cooling;
+      const preferred = (112 - Math.min(30, Math.log2(1 + finite(edge.weight, 1)) * 9)) * linkDistance;
+      const force = (distance - preferred) * 0.006 * (linkForce / GRAPH_SETTINGS_DEFAULTS.linkForce)
+        * Math.sqrt(finite(edge.weight, 1)) * cooling;
       const fx = dx / distance * force;
       const fy = dy / distance * force;
       source.vx += fx;
@@ -167,8 +363,9 @@ export function createDeterministicLayout(nodes = [], edges = [], options = {}) 
     }
 
     for (const node of layoutNodes) {
-      node.vx += -node.x * 0.0018 * cooling;
-      node.vy += -node.y * 0.0018 * cooling;
+      const centerScale = centerForce / GRAPH_SETTINGS_DEFAULTS.centerForce;
+      node.vx += -node.x * 0.0018 * centerScale * cooling;
+      node.vy += -node.y * 0.0018 * centerScale * cooling;
       node.vx *= 0.78;
       node.vy *= 0.78;
       const speed = Math.hypot(node.vx, node.vy);
@@ -230,7 +427,35 @@ export function fitGraphCamera(nodes = [], viewport = {}, padding = 54) {
   return { x: (minX + maxX) / 2, y: (minY + maxY) / 2, zoom };
 }
 
+/**
+ * Center a selected node exactly while fitting all direct-neighbor glyphs in a
+ * symmetric safe frame. Unlike the all-graph camera this may zoom below 0.24.
+ */
+export function fitFocusedGraphCamera(selected, neighbors = [], viewport = {}, padding = 64) {
+  if (!selected) return fitGraphCamera(neighbors, viewport, padding);
+  const width = Math.max(1, finite(viewport.width, 1));
+  const height = Math.max(1, finite(viewport.height, 1));
+  const safePadding = typeof padding === "object"
+    ? Math.max(0, finite(padding.padding, 64) + finite(padding.glyphRadius, 0))
+    : Math.max(0, finite(padding, 64));
+  const selectedX = finite(selected.x);
+  const selectedY = finite(selected.y);
+  const positioned = neighbors.filter(Boolean);
+  const maxDeltaX = positioned.reduce((largest, node) => Math.max(largest, Math.abs(finite(node.x) - selectedX)), 0);
+  const maxDeltaY = positioned.reduce((largest, node) => Math.max(largest, Math.abs(finite(node.y) - selectedY)), 0);
+  const availableHalfWidth = Math.max(1, width / 2 - safePadding);
+  const availableHalfHeight = Math.max(1, height / 2 - safePadding);
+  const zoomX = maxDeltaX > 0 ? availableHalfWidth / maxDeltaX : FOCUS_CAMERA_LIMITS.max;
+  const zoomY = maxDeltaY > 0 ? availableHalfHeight / maxDeltaY : FOCUS_CAMERA_LIMITS.max;
+  return {
+    x: selectedX,
+    y: selectedY,
+    zoom: clamp(Math.min(zoomX, zoomY, FOCUS_CAMERA_LIMITS.max), FOCUS_CAMERA_LIMITS.min, FOCUS_CAMERA_LIMITS.max)
+  };
+}
+
 function safeHref(value, ownerWindow) {
+  if (!String(value || "").trim()) return "#";
   try {
     const url = new URL(value, ownerWindow.location.href);
     if (url.origin === ownerWindow.location.origin) return `${url.pathname}${url.search}${url.hash}`;
@@ -238,6 +463,69 @@ function safeHref(value, ownerWindow) {
     // Invalid or cross-origin content links stay inert.
   }
   return "#";
+}
+
+/** Build a same-site raw attachment path without permitting absolute URLs or traversal. */
+export function attachmentAssetHref(assetRoot = "/assets/raw/", value = "") {
+  const raw = String(value || "").trim().replaceAll("\\", "/");
+  if (!raw || /^(?:[a-z][a-z0-9+.-]*:|\/\/)/iu.test(raw)) return "";
+  const segments = raw.split("/").filter((segment) => segment && segment !== ".");
+  if (!segments.length || segments.includes("..")) return "";
+  const root = `${String(assetRoot || "/assets/raw/").replace(/\/+$/u, "")}/`;
+  return `${root}${segments.map((segment) => encodeURIComponent(segment)).join("/")}`;
+}
+
+function auxiliaryNodeId(category, value) {
+  return `${category}:${encodeURIComponent(normalizeSearchText(value))}`;
+}
+
+function buildAuxiliaryGraph(payload, { attachmentRoot = "/assets/raw/" } = {}) {
+  const nodesById = new Map(payload.nodes.map((node) => [node.id, { ...node }]));
+  const edges = payload.edges.map((edge) => ({ ...edge }));
+  const edgeKeys = new Set(edges.map((edge) => edge.source < edge.target
+    ? `${edge.source}\u0000${edge.target}`
+    : `${edge.target}\u0000${edge.source}`));
+  const addAuxiliary = (owner, category, title, extra = {}) => {
+    const id = auxiliaryNodeId(category, title);
+    if (!nodesById.has(id)) {
+      nodesById.set(id, {
+        id,
+        title: category === "tags" ? `#${title}` : title,
+        aliases: [],
+        url: category === "attachments" ? attachmentAssetHref(attachmentRoot, title) : "",
+        path: title,
+        category,
+        summary: extra.summary || "",
+        status: category === "missing" ? "unresolved" : "active",
+        type: category,
+        domains: [],
+        tags: category === "tags" ? [title] : [],
+        created: owner.created,
+        updated: owner.updated,
+        attachments: [],
+        unresolved: [],
+        exists: category !== "missing",
+        missing: category === "missing",
+        degree: 0
+      });
+    }
+    const key = owner.id < id ? `${owner.id}\u0000${id}` : `${id}\u0000${owner.id}`;
+    if (!edgeKeys.has(key)) {
+      edgeKeys.add(key);
+      edges.push({ source: owner.id, target: id, weight: 0.8, kinds: [category], direction: "none" });
+    }
+  };
+  for (const node of payload.nodes) {
+    if (!["concepts", "entities"].includes(node.category)) continue;
+    for (const tag of node.tags) addAuxiliary(node, "tags", tag);
+    for (const attachment of node.attachments) addAuxiliary(node, "attachments", attachment);
+    for (const unresolved of node.unresolved) addAuxiliary(node, "missing", unresolved);
+  }
+  return { nodes: [...nodesById.values()], edges };
+}
+
+function categoryLabel(category) {
+  return ({ concepts: "개념", entities: "인물", tags: "태그", attachments: "첨부 파일", missing: "미해결 링크" })[category] || "노드";
 }
 
 function bootstrapKnowledgeGraph() {
@@ -249,24 +537,49 @@ function bootstrapKnowledgeGraph() {
   const context = canvas.getContext("2d");
   if (!context) return;
 
+  const status = root.querySelector("[data-graph-status]");
   let payload;
   try {
     payload = normalizeKnowledgeGraph(JSON.parse(dataElement.textContent || "{}"));
   } catch {
-    const status = root.querySelector("[data-graph-status]");
     if (status) status.textContent = "지식 그래프 데이터를 읽지 못했습니다.";
     return;
   }
 
   const ownerWindow = root.ownerDocument.defaultView || window;
   const reduceMotion = ownerWindow.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches || false;
-  const hasPrecomputedLayout = payload.nodes.every((node) => Number.isFinite(node.x) && Number.isFinite(node.y));
-  const nodes = hasPrecomputedLayout
-    ? payload.nodes.map((node) => ({ ...node }))
-    : createDeterministicLayout(payload.nodes, payload.edges, { iterations: reduceMotion ? 150 : 190 });
-  const nodeById = new Map(nodes.map((node) => [node.id, node]));
-  const adjacency = createGraphAdjacency(nodes, payload.edges);
-  for (const node of nodes) node.degree = Math.max(node.degree, adjacency.get(node.id)?.size || 0);
+  const auxiliaryGraph = buildAuxiliaryGraph(payload, { attachmentRoot: root.dataset.graphAssetRoot });
+  let allNodes = auxiliaryGraph.nodes;
+  let allEdges = auxiliaryGraph.edges;
+  let nodeById = new Map(allNodes.map((node) => [node.id, node]));
+  let topologyNodes = [];
+  let topologyEdges = [];
+  let topologyIds = new Set();
+  let adjacency = new Map();
+  let visibleNodes = [];
+  let visibleEdges = [];
+  let visibleIds = new Set();
+
+  let settings = loadSettings();
+  let viewport = { width: 1, height: 1 };
+  let camera = { x: 0, y: 0, zoom: 1 };
+  let selectedId = "";
+  let hoveredId = "";
+  let keyboardNodeId = "";
+  let activeFilter = "all";
+  let autoFocus = true;
+  let frame = 0;
+  let inViewport = true;
+  let didFit = false;
+  let pointer = null;
+  let suggestionIndex = -1;
+  let layoutGeneration = 0;
+  let layoutTimer = 0;
+  let activeWorker = null;
+  let animationFrame = 0;
+  let animationStart = 0;
+  let animationOrder = [];
+  let animationVisibleIds = null;
 
   const search = root.querySelector("[data-graph-search]");
   const searchResults = root.querySelector("[data-graph-search-results]");
@@ -274,7 +587,6 @@ function bootstrapKnowledgeGraph() {
   const zoomIn = root.querySelector("[data-graph-zoom-in]");
   const zoomOut = root.querySelector("[data-graph-zoom-out]");
   const reset = root.querySelector("[data-graph-reset]");
-  const status = root.querySelector("[data-graph-status]");
   const inspector = root.querySelector("[data-graph-inspector]");
   const inspectorKind = inspector?.querySelector("[data-inspector-kind]");
   const inspectorTitle = inspector?.querySelector("[data-inspector-title]");
@@ -282,27 +594,54 @@ function bootstrapKnowledgeGraph() {
   const inspectorDegree = inspector?.querySelector("[data-inspector-degree]");
   const inspectorNeighbors = inspector?.querySelector("[data-inspector-neighbors]");
   const inspectorLink = inspector?.querySelector("[data-inspector-link]");
-
-  let viewport = { width: 1, height: 1 };
-  let camera = { x: 0, y: 0, zoom: 1 };
-  let selectedId = "";
-  let hoveredId = "";
-  let keyboardNodeId = "";
-  let activeFilter = "all";
-  let visibleNodes = nodes;
-  let visibleIds = new Set(nodes.map((node) => node.id));
-  let frame = 0;
-  let inViewport = true;
-  let didFit = false;
-  let pointer = null;
-  let suggestionIndex = -1;
+  const settingsToggle = root.querySelector("[data-graph-settings-toggle]");
+  const settingsPanel = root.querySelector("[data-graph-settings-panel]");
+  const settingsClose = root.querySelector("[data-graph-settings-close]");
+  const settingsReset = root.querySelector("[data-graph-settings-reset]");
+  const fileQuery = root.querySelector("[data-graph-file-query]");
+  const toggleTags = root.querySelector("[data-graph-toggle-tags]");
+  const toggleAttachments = root.querySelector("[data-graph-toggle-attachments]");
+  const toggleExistingOnly = root.querySelector("[data-graph-toggle-existing-only]");
+  const toggleShowOrphans = root.querySelector("[data-graph-toggle-show-orphans]");
+  const groupList = root.querySelector("[data-graph-group-list]");
+  const groupAdd = root.querySelector("[data-graph-group-add]");
+  const toggleShowArrows = root.querySelector("[data-graph-toggle-show-arrows]");
+  const textFade = root.querySelector("[data-graph-text-fade]");
+  const nodeSize = root.querySelector("[data-graph-node-size]");
+  const linkThickness = root.querySelector("[data-graph-link-thickness]");
+  const animate = root.querySelector("[data-graph-animate]");
+  const animationProgress = root.querySelector("[data-graph-animation-progress]");
+  const centerForce = root.querySelector("[data-graph-center-force]");
+  const repelForce = root.querySelector("[data-graph-repel-force]");
+  const linkForce = root.querySelector("[data-graph-link-force]");
+  const linkDistance = root.querySelector("[data-graph-link-distance]");
 
   canvas.setAttribute("role", "application");
-  canvas.setAttribute("aria-label", `개념과 인물 ${nodes.length}개를 연결한 지식 그래프. 방향키로 노드를 이동하고 Enter로 선택합니다.`);
+  canvas.setAttribute("aria-label", `개념과 인물 ${payload.nodes.length}개를 연결한 지식 그래프. 방향키로 노드를 이동하고 Enter로 선택합니다.`);
   canvas.style.touchAction = "none";
+
+  function loadSettings() {
+    try {
+      return normalizeGraphSettings(JSON.parse(ownerWindow.localStorage?.getItem(STORAGE_KEY) || "{}"));
+    } catch {
+      return normalizeGraphSettings();
+    }
+  }
+
+  function saveSettings() {
+    try {
+      ownerWindow.localStorage?.setItem(STORAGE_KEY, JSON.stringify(settings));
+    } catch {
+      // Storage can be unavailable in private or hardened browsing contexts.
+    }
+  }
 
   function announce(message) {
     if (status) status.textContent = message;
+  }
+
+  function announceGraphState() {
+    announce(`${visibleNodes.length}개 노드, 연결 ${visibleEdges.length}개를 표시합니다.`);
   }
 
   function scheduleDraw() {
@@ -313,10 +652,19 @@ function bootstrapKnowledgeGraph() {
     });
   }
 
+  function renderedIds() {
+    return animationVisibleIds || visibleIds;
+  }
+
+  function renderedNodes() {
+    const ids = renderedIds();
+    return visibleNodes.filter((node) => ids.has(node.id));
+  }
+
   function worldToScreen(node) {
     return {
-      x: viewport.width / 2 + (node.x - camera.x) * camera.zoom,
-      y: viewport.height / 2 + (node.y - camera.y) * camera.zoom
+      x: viewport.width / 2 + (finite(node.x) - camera.x) * camera.zoom,
+      y: viewport.height / 2 + (finite(node.y) - camera.y) * camera.zoom
     };
   }
 
@@ -328,7 +676,19 @@ function bootstrapKnowledgeGraph() {
   }
 
   function nodeRadius(node) {
-    return 5.5 + Math.min(6.5, Math.sqrt(Math.max(0, node.degree)) * 1.25);
+    return (5.5 + Math.min(6.5, Math.sqrt(Math.max(0, node.degree)) * 1.25)) * settings.nodeSize;
+  }
+
+  function nodeColor(node) {
+    const matchingGroup = settings.groups.find((group) => group.query && matchGraphQuery(node, group.query));
+    if (matchingGroup) return matchingGroup.color;
+    return ({
+      concepts: PALETTE.concept,
+      entities: PALETTE.entity,
+      tags: PALETTE.tag,
+      attachments: PALETTE.attachment,
+      missing: PALETTE.missing
+    })[node.category] || PALETTE.muted;
   }
 
   function traceNode(node, point, radius) {
@@ -339,6 +699,17 @@ function bootstrapKnowledgeGraph() {
       context.lineTo(point.x, point.y + radius * 1.15);
       context.lineTo(point.x - radius, point.y);
       context.closePath();
+    } else if (node.category === "tags") {
+      for (let index = 0; index < 6; index += 1) {
+        const angle = Math.PI / 3 * index - Math.PI / 2;
+        const x = point.x + Math.cos(angle) * radius;
+        const y = point.y + Math.sin(angle) * radius;
+        if (!index) context.moveTo(x, y);
+        else context.lineTo(x, y);
+      }
+      context.closePath();
+    } else if (["attachments", "missing"].includes(node.category)) {
+      context.rect(point.x - radius, point.y - radius, radius * 2, radius * 2);
     } else {
       context.arc(point.x, point.y, radius, 0, Math.PI * 2);
     }
@@ -364,41 +735,73 @@ function bootstrapKnowledgeGraph() {
     context.restore();
   }
 
+  function drawArrowhead(from, to, targetRadius, color, alpha, width) {
+    const dx = to.x - from.x;
+    const dy = to.y - from.y;
+    const length = Math.hypot(dx, dy);
+    if (length < 1) return;
+    const ux = dx / length;
+    const uy = dy / length;
+    const tip = { x: to.x - ux * (targetRadius + 3), y: to.y - uy * (targetRadius + 3) };
+    const size = 6 + width * 1.4;
+    const base = { x: tip.x - ux * size, y: tip.y - uy * size };
+    context.save();
+    context.globalAlpha = alpha;
+    context.fillStyle = color;
+    context.beginPath();
+    context.moveTo(tip.x, tip.y);
+    context.lineTo(base.x - uy * size * 0.52, base.y + ux * size * 0.52);
+    context.lineTo(base.x + uy * size * 0.52, base.y - ux * size * 0.52);
+    context.closePath();
+    context.fill();
+    context.restore();
+  }
+
   function draw() {
     context.clearRect(0, 0, viewport.width, viewport.height);
     context.fillStyle = PALETTE.background;
     context.fillRect(0, 0, viewport.width, viewport.height);
     drawGrid();
+    const drawIds = renderedIds();
     const neighbors = selectedId ? adjacency.get(selectedId) || new Set() : null;
 
-    for (const edge of payload.edges) {
-      if (!visibleIds.has(edge.source) || !visibleIds.has(edge.target)) continue;
+    for (const edge of visibleEdges) {
+      if (!drawIds.has(edge.source) || !drawIds.has(edge.target)) continue;
       const source = nodeById.get(edge.source);
       const target = nodeById.get(edge.target);
+      if (!source || !target) continue;
       const from = worldToScreen(source);
       const to = worldToScreen(target);
-      const connected = selectedId && (edge.source === selectedId || edge.target === selectedId);
+      const connected = Boolean(selectedId && (edge.source === selectedId || edge.target === selectedId));
+      const alpha = selectedId ? (connected ? 0.82 : 0.055) : 0.2;
+      const color = connected ? PALETTE.entity : PALETTE.muted;
+      const width = (connected ? 1.7 : Math.min(1.5, 0.55 + Math.log2(1 + edge.weight) * 0.35)) * settings.linkThickness;
       context.save();
-      context.globalAlpha = selectedId ? (connected ? 0.82 : 0.055) : 0.2;
-      context.strokeStyle = connected ? PALETTE.entity : PALETTE.muted;
-      context.lineWidth = connected ? 1.7 : Math.min(1.5, 0.55 + Math.log2(1 + edge.weight) * 0.35);
+      context.globalAlpha = alpha;
+      context.strokeStyle = color;
+      context.lineWidth = width;
       context.beginPath();
       context.moveTo(from.x, from.y);
       context.lineTo(to.x, to.y);
       context.stroke();
       context.restore();
+      if (settings.showArrows) {
+        if (["forward", "both"].includes(edge.direction)) drawArrowhead(from, to, nodeRadius(target), color, alpha, width);
+        if (["reverse", "both"].includes(edge.direction)) drawArrowhead(to, from, nodeRadius(source), color, alpha, width);
+      }
     }
 
     const labels = [];
     const nodeBounds = [];
-    for (const node of visibleNodes) {
+    const textVisibility = clamp((camera.zoom - settings.textFade * 1.5 + 0.35) / 0.55, 0, 1);
+    for (const node of renderedNodes()) {
       const point = worldToScreen(node);
       const radius = nodeRadius(node);
       if (point.x < -radius * 2 || point.y < -radius * 2 || point.x > viewport.width + radius * 2 || point.y > viewport.height + radius * 2) continue;
       const selected = node.id === selectedId;
       const hovered = node.id === hoveredId;
       const withinBeam = !selectedId || selected || neighbors?.has(node.id);
-      const color = node.category === "entities" ? PALETTE.entity : PALETTE.concept;
+      const color = nodeColor(node);
       context.save();
       context.globalAlpha = withinBeam ? 1 : 0.11;
       if ((selected || hovered) && !reduceMotion) {
@@ -406,10 +809,10 @@ function bootstrapKnowledgeGraph() {
         context.shadowBlur = selected ? 22 : 14;
       }
       traceNode(node, point, radius + (selected ? 2.5 : hovered ? 1.5 : 0));
-      context.fillStyle = selected ? PALETTE.raised : color;
+      context.fillStyle = selected || node.category === "missing" ? PALETTE.raised : color;
       context.fill();
-      context.lineWidth = selected ? 2.5 : 1;
-      context.strokeStyle = selected ? color : "rgba(231,255,233,0.62)";
+      context.lineWidth = selected ? 2.5 : node.category === "missing" ? 1.8 : 1;
+      context.strokeStyle = selected || node.category === "missing" ? color : "rgba(231,255,233,0.62)";
       context.stroke();
       context.restore();
       const visualRadius = radius + (selected ? 2.5 : hovered ? 1.5 : 0);
@@ -421,12 +824,8 @@ function bootstrapKnowledgeGraph() {
         bottom: point.y + visualRadius * 1.15
       });
       const compact = viewport.width < 560;
-      const minimumDegree = selectedId
-        ? 0
-        : camera.zoom >= 1.55
-          ? (compact ? 4 : 2)
-          : (compact ? 8 : 6);
-      if (selected || hovered || (withinBeam && node.degree >= minimumDegree)) {
+      const minimumDegree = selectedId ? 0 : camera.zoom >= 1.55 ? (compact ? 4 : 2) : (compact ? 8 : 6);
+      if (selected || hovered || (textVisibility > 0.04 && withinBeam && node.degree >= minimumDegree)) {
         labels.push({ node, point, radius, selected, hovered });
       }
     }
@@ -436,9 +835,7 @@ function bootstrapKnowledgeGraph() {
     const occupied = [];
     const visibleLabels = [];
     const intersects = (first, second, horizontal = 0, vertical = horizontal) => first.left < second.right + horizontal
-      && first.right + horizontal > second.left
-      && first.top < second.bottom + vertical
-      && first.bottom + vertical > second.top;
+      && first.right + horizontal > second.left && first.top < second.bottom + vertical && first.bottom + vertical > second.top;
     labels.sort((a, b) => labelPriority(b) - labelPriority(a) || a.node.title.localeCompare(b.node.title, "ko"));
     for (const label of labels) {
       const { node, point, radius, selected, hovered } = label;
@@ -464,10 +861,8 @@ function bootstrapKnowledgeGraph() {
           bottom: placement.y + fontSize * 0.75
         }
       }));
-      const placement = placements.find((candidate) => candidate.box.left >= 4
-        && candidate.box.right <= viewport.width - 4
-        && candidate.box.top >= 4
-        && candidate.box.bottom <= viewport.height - 4
+      const placement = placements.find((candidate) => candidate.box.left >= 4 && candidate.box.right <= viewport.width - 4
+        && candidate.box.top >= 4 && candidate.box.bottom <= viewport.height - 4
         && !occupied.some((other) => intersects(candidate.box, other, 5, 3))
         && !nodeBounds.some((other) => other.id !== node.id && intersects(candidate.box, other, 3, 2)))
         || (important ? placements[0] : null);
@@ -482,11 +877,149 @@ function bootstrapKnowledgeGraph() {
       context.font = font;
       context.textAlign = align;
       context.textBaseline = "middle";
-      context.fillStyle = selected ? (node.category === "entities" ? PALETTE.entity : PALETTE.concept) : PALETTE.text;
-      context.globalAlpha = selected || hovered ? 1 : 0.8;
+      context.fillStyle = selected ? nodeColor(node) : PALETTE.text;
+      context.globalAlpha = selected || hovered ? 1 : 0.8 * textVisibility;
       context.fillText(text, x, y);
       context.restore();
     }
+  }
+
+  function topologyForSettings() {
+    const include = (node) => {
+      if (node.category === "tags") return settings.showTags;
+      if (node.category === "attachments") return settings.showAttachments;
+      if (node.category === "missing") return !settings.existingOnly;
+      return !settings.existingOnly || node.exists !== false;
+    };
+    const nodes = allNodes.filter(include);
+    const ids = new Set(nodes.map((node) => node.id));
+    return { nodes, edges: allEdges.filter((edge) => ids.has(edge.source) && ids.has(edge.target)), ids };
+  }
+
+  function updateDegrees() {
+    for (const node of topologyNodes) node.degree = adjacency.get(node.id)?.size || 0;
+  }
+
+  function refitSelected() {
+    const selected = nodeById.get(selectedId);
+    if (!selected || !topologyIds.has(selected.id)) return false;
+    const neighbors = [...(adjacency.get(selected.id) || [])].map((id) => nodeById.get(id)).filter(Boolean);
+    const padding = Math.max(42, Math.min(92, Math.min(viewport.width, viewport.height) * 0.11)) + 16 * settings.nodeSize;
+    camera = fitFocusedGraphCamera(selected, neighbors, viewport, padding);
+    return true;
+  }
+
+  function recomputeVisibility({ fit = false } = {}) {
+    const candidateIds = computeVisibleGraphNodeIds(topologyNodes, adjacency, {
+      activeFilter,
+      fileQuery: settings.fileQuery,
+      showOrphans: settings.showOrphans,
+      selectedId
+    });
+    visibleIds = candidateIds;
+    visibleNodes = topologyNodes.filter((node) => visibleIds.has(node.id));
+    visibleEdges = topologyEdges.filter((edge) => visibleIds.has(edge.source) && visibleIds.has(edge.target));
+    if (keyboardNodeId && !visibleIds.has(keyboardNodeId)) keyboardNodeId = "";
+    if (selectedId) updateInspector(nodeById.get(selectedId));
+    if (fit) {
+      if (selectedId && autoFocus) refitSelected();
+      else if (!selectedId) camera = fitGraphCamera(visibleNodes, viewport);
+    }
+    if (searchResults && !searchResults.hidden) renderSuggestions();
+    scheduleDraw();
+  }
+
+  function applyLayout(layoutNodes) {
+    const positions = new Map(layoutNodes.map((node) => [node.id, node]));
+    allNodes = allNodes.map((node) => {
+      const positioned = positions.get(node.id);
+      return positioned ? { ...node, x: positioned.x, y: positioned.y } : node;
+    });
+    nodeById = new Map(allNodes.map((node) => [node.id, node]));
+    topologyNodes = topologyNodes.map((node) => nodeById.get(node.id)).filter(Boolean);
+    updateDegrees();
+    recomputeVisibility({ fit: true });
+  }
+
+  function layoutOptions() {
+    return {
+      iterations: reduceMotion ? 150 : 190,
+      centerForce: settings.centerForce,
+      repelForce: settings.repelForce,
+      linkForce: settings.linkForce,
+      linkDistance: settings.linkDistance
+    };
+  }
+
+  function requestLayout() {
+    const generation = ++layoutGeneration;
+    activeWorker?.terminate?.();
+    activeWorker = null;
+    const nodes = topologyNodes.map((node) => ({ ...node }));
+    const edges = topologyEdges.map((edge) => ({ ...edge }));
+    const fallback = () => {
+      if (generation !== layoutGeneration) return;
+      applyLayout(createDeterministicLayout(nodes, edges, layoutOptions()));
+    };
+    if (typeof ownerWindow.Worker !== "function") {
+      fallback();
+      return;
+    }
+    try {
+      const workerUrl = new URL("./knowledge-graph-worker.js", import.meta.url);
+      workerUrl.searchParams.set("v", ownerWindow.CS_WIKI_ASSET_VERSION || new URL(import.meta.url).searchParams.get("v") || "1");
+      const worker = new ownerWindow.Worker(workerUrl, { type: "module" });
+      activeWorker = worker;
+      const timeout = ownerWindow.setTimeout(() => {
+        if (generation !== layoutGeneration) return;
+        worker.terminate();
+        activeWorker = null;
+        fallback();
+      }, 10000);
+      worker.addEventListener("message", (event) => {
+        if (event.data?.id !== generation) return;
+        ownerWindow.clearTimeout(timeout);
+        worker.terminate();
+        activeWorker = null;
+        if (event.data.ok && Array.isArray(event.data.nodes)) applyLayout(event.data.nodes);
+        else fallback();
+      });
+      worker.addEventListener("error", () => {
+        ownerWindow.clearTimeout(timeout);
+        worker.terminate();
+        activeWorker = null;
+        fallback();
+      }, { once: true });
+      worker.postMessage({
+        id: generation,
+        moduleUrl: import.meta.url,
+        nodes,
+        edges,
+        options: layoutOptions()
+      });
+    } catch {
+      fallback();
+    }
+  }
+
+  function scheduleLayout() {
+    ownerWindow.clearTimeout(layoutTimer);
+    layoutTimer = ownerWindow.setTimeout(requestLayout, 180);
+  }
+
+  function rebuildTopology({ relayout = false, fit = true } = {}) {
+    const topology = topologyForSettings();
+    topologyNodes = topology.nodes;
+    topologyEdges = topology.edges;
+    topologyIds = topology.ids;
+    adjacency = createGraphAdjacency(topologyNodes, topologyEdges);
+    updateDegrees();
+    if (selectedId && !topologyIds.has(selectedId)) {
+      selectedId = "";
+      updateInspector(null);
+    }
+    recomputeVisibility({ fit });
+    if (relayout) scheduleLayout();
   }
 
   function localPoint(event) {
@@ -497,7 +1030,7 @@ function bootstrapKnowledgeGraph() {
   function hitNode(point) {
     let best = null;
     let bestDistance = Infinity;
-    for (const node of visibleNodes) {
+    for (const node of renderedNodes()) {
       const screen = worldToScreen(node);
       const distance = Math.hypot(screen.x - point.x, screen.y - point.y);
       const hitRadius = Math.max(13, nodeRadius(node) + 5);
@@ -510,7 +1043,7 @@ function bootstrapKnowledgeGraph() {
   }
 
   function keyboardNodes() {
-    return [...visibleNodes].sort((left, right) => left.title.localeCompare(right.title, "ko") || left.id.localeCompare(right.id));
+    return [...renderedNodes()].sort((left, right) => left.title.localeCompare(right.title, "ko") || left.id.localeCompare(right.id));
   }
 
   function showKeyboardNode(node) {
@@ -520,10 +1053,10 @@ function bootstrapKnowledgeGraph() {
     const point = worldToScreen(node);
     const margin = 48;
     if (point.x < margin || point.x > viewport.width - margin || point.y < margin || point.y > viewport.height - margin) {
-      camera.x = node.x;
-      camera.y = node.y;
+      camera.x = finite(node.x);
+      camera.y = finite(node.y);
     }
-    announce(`${node.title} · 직접 연결 ${[...(adjacency.get(node.id) || [])].filter((id) => visibleIds.has(id)).length}개 · Enter로 선택`);
+    announce(`${node.title} · 직접 연결 ${adjacency.get(node.id)?.size || 0}개 · Enter로 선택`);
     scheduleDraw();
   }
 
@@ -532,17 +1065,23 @@ function bootstrapKnowledgeGraph() {
     inspector.hidden = !node;
     if (!node) return;
     const neighborNodes = [...(adjacency.get(node.id) || [])]
-      .filter((id) => visibleIds.has(id))
       .map((id) => nodeById.get(id)).filter(Boolean)
       .sort((a, b) => b.degree - a.degree || a.title.localeCompare(b.title, "ko"));
-    if (inspectorKind) inspectorKind.textContent = node.category === "entities" ? "인물" : "개념";
+    if (inspectorKind) inspectorKind.textContent = categoryLabel(node.category);
     if (inspectorTitle) inspectorTitle.textContent = node.title;
     if (inspectorSummary) inspectorSummary.textContent = node.summary || "요약이 아직 없습니다.";
     if (inspectorDegree) inspectorDegree.textContent = `${neighborNodes.length}개 직접 연결`;
     if (inspectorLink) {
-      inspectorLink.href = safeHref(node.url, ownerWindow);
-      if (inspectorLink.href.endsWith("#")) inspectorLink.setAttribute("aria-disabled", "true");
-      else inspectorLink.removeAttribute("aria-disabled");
+      const href = safeHref(node.url, ownerWindow);
+      const linkable = href !== "#";
+      inspectorLink.hidden = !linkable;
+      if (linkable) {
+        inspectorLink.href = href;
+        inspectorLink.removeAttribute("aria-disabled");
+      } else {
+        inspectorLink.removeAttribute("href");
+        inspectorLink.setAttribute("aria-disabled", "true");
+      }
     }
     if (inspectorNeighbors) {
       inspectorNeighbors.replaceChildren();
@@ -551,38 +1090,60 @@ function bootstrapKnowledgeGraph() {
         empty.textContent = "직접 연결 없음";
         inspectorNeighbors.append(empty);
       }
-      for (const neighbor of neighborNodes.slice(0, 12)) {
+      for (const neighbor of neighborNodes) {
         const button = document.createElement("button");
         button.type = "button";
         button.className = "graph-neighbor";
         button.textContent = neighbor.title;
         button.dataset.nodeId = neighbor.id;
-        button.addEventListener("click", () => selectNode(neighbor.id, true));
+        button.addEventListener("click", () => selectNode(neighbor.id));
         inspectorNeighbors.append(button);
       }
     }
   }
 
-  function selectNode(id, focus = false) {
+  function stopAnimation({ complete = true } = {}) {
+    if (animationFrame) ownerWindow.cancelAnimationFrame(animationFrame);
+    animationFrame = 0;
+    animationVisibleIds = null;
+    if (animate) {
+      animate.setAttribute("aria-pressed", "false");
+      animate.textContent = "재생";
+    }
+    if (animationProgress && complete) {
+      animationProgress.value = 1;
+      animationProgress.textContent = "100%";
+    }
+    scheduleDraw();
+  }
+
+  function selectNode(id) {
     const node = nodeById.get(id);
-    if (!node || !visibleIds.has(id)) return false;
+    if (!node || !topologyIds.has(id)) return false;
+    stopAnimation();
     selectedId = id;
     keyboardNodeId = id;
-    updateInspector(node);
-    const visibleNeighborCount = [...(adjacency.get(id) || [])].filter((neighborId) => visibleIds.has(neighborId)).length;
-    announce(`${node.title} 선택 · 직접 연결 ${visibleNeighborCount}개`);
-    if (focus) {
-      camera.x = node.x;
-      camera.y = node.y;
-      camera.zoom = Math.max(camera.zoom, 1.25);
-    }
+    autoFocus = true;
+    recomputeVisibility();
+    refitSelected();
+    updateInspector(nodeById.get(id));
+    announce(`${node.title} 선택 · 직접 연결 ${adjacency.get(id)?.size || 0}개`);
     scheduleDraw();
     return true;
   }
 
+  function clearSelection() {
+    if (!selectedId) return;
+    selectedId = "";
+    autoFocus = false;
+    updateInspector(null);
+    recomputeVisibility({ fit: true });
+    announce("노드 선택을 해제했습니다.");
+  }
+
   function setZoom(nextZoom, anchor = { x: viewport.width / 2, y: viewport.height / 2 }) {
     const before = screenToWorld(anchor);
-    camera.zoom = clamp(nextZoom, CAMERA_LIMITS.min, CAMERA_LIMITS.max);
+    camera.zoom = clamp(nextZoom, FOCUS_CAMERA_LIMITS.min, CAMERA_LIMITS.max);
     const after = screenToWorld(anchor);
     camera.x += before.x - after.x;
     camera.y += before.y - after.y;
@@ -590,28 +1151,20 @@ function bootstrapKnowledgeGraph() {
   }
 
   function resetCamera() {
-    camera = fitGraphCamera(visibleNodes, viewport);
+    autoFocus = true;
+    if (!selectedId || !refitSelected()) camera = fitGraphCamera(visibleNodes, viewport);
     scheduleDraw();
-    announce(`${visibleNodes.length}개 노드를 화면에 맞췄습니다.`);
+    announce(selectedId ? "선택 노드와 직접 연결을 화면에 맞췄습니다." : `${visibleNodes.length}개 노드를 화면에 맞췄습니다.`);
   }
 
   function applyFilter(value) {
     activeFilter = ["concepts", "entities"].includes(value) ? value : "all";
-    visibleNodes = activeFilter === "all" ? nodes : nodes.filter((node) => node.category === activeFilter);
-    visibleIds = new Set(visibleNodes.map((node) => node.id));
     for (const button of filterButtons) {
       const pressed = (button.dataset.graphFilter || "all") === activeFilter;
       button.setAttribute("aria-pressed", String(pressed));
     }
-    if (selectedId && !visibleIds.has(selectedId)) {
-      selectedId = "";
-      updateInspector(null);
-    } else if (selectedId) {
-      updateInspector(nodeById.get(selectedId));
-    }
-    if (keyboardNodeId && !visibleIds.has(keyboardNodeId)) keyboardNodeId = "";
-    renderSuggestions();
-    resetCamera();
+    recomputeVisibility({ fit: true });
+    announce(`${visibleNodes.length}개 노드를 표시합니다.`);
   }
 
   function clearSuggestions() {
@@ -638,8 +1191,8 @@ function bootstrapKnowledgeGraph() {
 
   function chooseSuggestion(node) {
     if (search) search.value = node.title;
+    selectNode(node.id);
     clearSuggestions();
-    selectNode(node.id, true);
   }
 
   function renderSuggestions() {
@@ -651,7 +1204,8 @@ function bootstrapKnowledgeGraph() {
       clearSuggestions();
       return;
     }
-    const matches = graphSearchResults(nodes, query, activeFilter, 8);
+    const category = activeFilter === "all" ? "all" : activeFilter;
+    const matches = graphSearchResults(topologyNodes, query, category, 8);
     if (!matches.length) {
       const empty = document.createElement("p");
       empty.className = "graph-search-empty";
@@ -669,7 +1223,7 @@ function bootstrapKnowledgeGraph() {
         const title = document.createElement("strong");
         title.textContent = node.title;
         const meta = document.createElement("span");
-        meta.textContent = `${node.category === "entities" ? "인물" : "개념"} · 연결 ${node.degree}`;
+        meta.textContent = `${categoryLabel(node.category)} · 연결 ${node.degree}`;
         button.append(title, meta);
         button.addEventListener("pointerdown", (event) => event.preventDefault());
         button.addEventListener("click", () => chooseSuggestion(node));
@@ -679,6 +1233,180 @@ function bootstrapKnowledgeGraph() {
     searchResults.hidden = false;
     suggestionIndex = -1;
     search.setAttribute("aria-expanded", "true");
+  }
+
+  function setPanel(open) {
+    if (!settingsPanel) return;
+    settingsPanel.hidden = !open;
+    settingsToggle?.setAttribute("aria-expanded", String(open));
+    if (open) settingsClose?.focus();
+    else settingsToggle?.focus();
+  }
+
+  function renderGroups() {
+    if (!groupList) return;
+    groupList.replaceChildren();
+    settings.groups.forEach((group, index) => {
+      const row = document.createElement("div");
+      row.className = "knowledge-graph-group-row";
+      row.dataset.graphGroup = group.id;
+      const color = document.createElement("input");
+      color.type = "color";
+      color.value = group.color;
+      color.dataset.graphGroupColor = "";
+      color.setAttribute("aria-label", `${index + 1}번 그룹 색상`);
+      const query = document.createElement("input");
+      query.type = "search";
+      query.value = group.query;
+      query.placeholder = "검색식";
+      query.dataset.graphGroupQuery = "";
+      query.setAttribute("aria-label", `${index + 1}번 그룹 검색식`);
+      const actions = document.createElement("div");
+      actions.className = "knowledge-graph-group-actions";
+      const action = (label, operation, disabled = false) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.textContent = label;
+        button.dataset.graphGroupAction = operation;
+        button.disabled = disabled;
+        return button;
+      };
+      actions.append(action("위", "up", index === 0), action("아래", "down", index === settings.groups.length - 1), action("삭제", "remove"));
+      row.append(color, query, actions);
+      color.addEventListener("input", () => {
+        settings.groups[index].color = validColor(color.value, group.color);
+        saveSettings();
+        scheduleDraw();
+      });
+      query.addEventListener("input", () => {
+        settings.groups[index].query = query.value;
+        saveSettings();
+        scheduleDraw();
+      });
+      actions.addEventListener("click", (event) => {
+        const operation = event.target.closest("[data-graph-group-action]")?.dataset.graphGroupAction;
+        if (!operation) return;
+        if (operation === "remove") settings.groups.splice(index, 1);
+        else {
+          const targetIndex = operation === "up" ? index - 1 : index + 1;
+          if (targetIndex < 0 || targetIndex >= settings.groups.length) return;
+          [settings.groups[index], settings.groups[targetIndex]] = [settings.groups[targetIndex], settings.groups[index]];
+        }
+        saveSettings();
+        renderGroups();
+        scheduleDraw();
+      });
+      groupList.append(row);
+    });
+  }
+
+  function setControlValue(element, value) {
+    if (element) element.value = String(value);
+  }
+
+  function updateSettingOutputs() {
+    const values = {
+      "text-fade": `${Math.round(settings.textFade * 100)}%`,
+      "node-size": `${settings.nodeSize.toFixed(1)}배`,
+      "link-thickness": `${settings.linkThickness.toFixed(1)}배`,
+      "center-force": `${Math.round(settings.centerForce * 100)}%`,
+      "repel-force": `${settings.repelForce.toFixed(2).replace(/0$/u, "")}배`,
+      "link-force": `${Math.round(settings.linkForce * 100)}%`,
+      "link-distance": `${settings.linkDistance.toFixed(2).replace(/0$/u, "")}배`
+    };
+    for (const [name, value] of Object.entries(values)) {
+      const output = root.querySelector(`[data-setting-value="${name}"]`);
+      if (output) output.textContent = value;
+    }
+  }
+
+  function syncSettingsControls() {
+    if (fileQuery) fileQuery.value = settings.fileQuery;
+    if (toggleTags) toggleTags.checked = settings.showTags;
+    if (toggleAttachments) toggleAttachments.checked = settings.showAttachments;
+    if (toggleExistingOnly) toggleExistingOnly.checked = settings.existingOnly;
+    if (toggleShowOrphans) toggleShowOrphans.checked = settings.showOrphans;
+    if (toggleShowArrows) toggleShowArrows.checked = settings.showArrows;
+    setControlValue(textFade, settings.textFade);
+    setControlValue(nodeSize, settings.nodeSize);
+    setControlValue(linkThickness, settings.linkThickness);
+    setControlValue(centerForce, settings.centerForce);
+    setControlValue(repelForce, settings.repelForce);
+    setControlValue(linkForce, settings.linkForce);
+    setControlValue(linkDistance, settings.linkDistance);
+    updateSettingOutputs();
+    renderGroups();
+  }
+
+  function bindBoolean(element, key, { topology = false, fit = false } = {}) {
+    element?.addEventListener("change", () => {
+      settings[key] = element.checked;
+      saveSettings();
+      if (topology) rebuildTopology({ relayout: true });
+      else if (fit) recomputeVisibility({ fit: true });
+      else scheduleDraw();
+      if (topology || fit) announceGraphState();
+    });
+  }
+
+  function bindRange(element, key, { layout = false } = {}) {
+    element?.addEventListener("input", () => {
+      settings[key] = normalizeGraphSettings({ ...settings, [key]: element.value })[key];
+      saveSettings();
+      updateSettingOutputs();
+      if (layout) scheduleLayout();
+      else {
+        if (selectedId && autoFocus && key === "nodeSize") refitSelected();
+        scheduleDraw();
+      }
+    });
+  }
+
+  function animationTick(timestamp) {
+    const progress = clamp((timestamp - animationStart) / 7000, 0, 1);
+    const count = Math.min(animationOrder.length, Math.max(1, Math.ceil(animationOrder.length * progress)));
+    animationVisibleIds = new Set(animationOrder.slice(0, count).map((node) => node.id));
+    if (animationProgress) {
+      animationProgress.value = progress;
+      animationProgress.textContent = `${Math.round(progress * 100)}%`;
+    }
+    scheduleDraw();
+    if (progress < 1) animationFrame = ownerWindow.requestAnimationFrame(animationTick);
+    else {
+      stopAnimation();
+      announce("문서 생성 시간순 그래프 애니메이션을 마쳤습니다.");
+    }
+  }
+
+  function startAnimation() {
+    if (animationFrame) {
+      stopAnimation({ complete: false });
+      announce("그래프 애니메이션을 중지했습니다.");
+      return;
+    }
+    if (reduceMotion) {
+      stopAnimation();
+      announce("동작 줄이기 설정에 따라 애니메이션 없이 전체 그래프를 표시합니다.");
+      return;
+    }
+    selectedId = "";
+    autoFocus = false;
+    updateInspector(null);
+    recomputeVisibility({ fit: true });
+    animationOrder = [...visibleNodes].sort((left, right) => {
+      const leftTime = Date.parse(left.created) || Number.MAX_SAFE_INTEGER;
+      const rightTime = Date.parse(right.created) || Number.MAX_SAFE_INTEGER;
+      return leftTime - rightTime || left.title.localeCompare(right.title, "ko") || left.id.localeCompare(right.id);
+    });
+    if (!animationOrder.length) return;
+    animationVisibleIds = new Set();
+    animationStart = ownerWindow.performance?.now?.() || Date.now();
+    if (animate) {
+      animate.setAttribute("aria-pressed", "true");
+      animate.textContent = "중지";
+    }
+    if (animationProgress) animationProgress.value = 0;
+    animationFrame = ownerWindow.requestAnimationFrame(animationTick);
   }
 
   function resize() {
@@ -695,7 +1423,7 @@ function bootstrapKnowledgeGraph() {
     if (!didFit) {
       camera = fitGraphCamera(visibleNodes, viewport);
       didFit = true;
-    }
+    } else if (selectedId && autoFocus) refitSelected();
     scheduleDraw();
   }
 
@@ -706,7 +1434,6 @@ function bootstrapKnowledgeGraph() {
     pointer = {
       id: event.pointerId,
       start: point,
-      previous: point,
       node,
       nodeStart: node ? { x: node.x, y: node.y } : null,
       cameraStart: { ...camera },
@@ -721,7 +1448,10 @@ function bootstrapKnowledgeGraph() {
     if (pointer?.id === event.pointerId) {
       const dx = point.x - pointer.start.x;
       const dy = point.y - pointer.start.y;
-      if (Math.hypot(dx, dy) > 3) pointer.moved = true;
+      if (Math.hypot(dx, dy) > 3) {
+        pointer.moved = true;
+        autoFocus = false;
+      }
       if (pointer.node) {
         pointer.node.x = pointer.nodeStart.x + dx / camera.zoom;
         pointer.node.y = pointer.nodeStart.y + dy / camera.zoom;
@@ -729,7 +1459,6 @@ function bootstrapKnowledgeGraph() {
         camera.x = pointer.cameraStart.x - dx / camera.zoom;
         camera.y = pointer.cameraStart.y - dy / camera.zoom;
       }
-      pointer.previous = point;
       scheduleDraw();
       return;
     }
@@ -749,36 +1478,54 @@ function bootstrapKnowledgeGraph() {
     pointer = null;
     canvas.style.cursor = hoveredId ? "pointer" : "grab";
   });
-
   canvas.addEventListener("pointercancel", (event) => {
     if (!pointer || pointer.id !== event.pointerId) return;
     canvas.releasePointerCapture?.(event.pointerId);
     pointer = null;
     canvas.style.cursor = "grab";
   });
-
   canvas.addEventListener("pointerleave", () => {
     if (pointer) return;
     hoveredId = "";
     canvas.style.cursor = "grab";
     scheduleDraw();
   });
-
   canvas.addEventListener("focus", () => {
     const ordered = keyboardNodes();
     const current = nodeById.get(selectedId || keyboardNodeId);
-    showKeyboardNode(current && visibleIds.has(current.id)
+    showKeyboardNode(current && renderedIds().has(current.id)
       ? current
       : [...ordered].sort((left, right) => right.degree - left.degree || left.title.localeCompare(right.title, "ko"))[0]);
   });
-
   canvas.addEventListener("blur", () => {
     hoveredId = "";
     scheduleDraw();
   });
-
   canvas.addEventListener("keydown", (event) => {
     const ordered = keyboardNodes();
+    if (["+", "="].includes(event.key)) {
+      event.preventDefault();
+      autoFocus = false;
+      setZoom(camera.zoom * 1.28);
+      return;
+    }
+    if (["-", "_"].includes(event.key)) {
+      event.preventDefault();
+      autoFocus = false;
+      setZoom(camera.zoom / 1.28);
+      return;
+    }
+    if (event.key === "0") {
+      event.preventDefault();
+      resetCamera();
+      return;
+    }
+    if (event.key === "Escape") {
+      event.preventDefault();
+      if (settingsPanel && !settingsPanel.hidden) setPanel(false);
+      else clearSelection();
+      return;
+    }
     if (!ordered.length) return;
     const currentIndex = Math.max(0, ordered.findIndex((node) => node.id === keyboardNodeId));
     if (["ArrowRight", "ArrowDown", "ArrowLeft", "ArrowUp", "Home", "End"].includes(event.key)) {
@@ -788,20 +1535,14 @@ function bootstrapKnowledgeGraph() {
       else if (event.key === "End") nextIndex = ordered.length - 1;
       else nextIndex = (currentIndex + (["ArrowRight", "ArrowDown"].includes(event.key) ? 1 : -1) + ordered.length) % ordered.length;
       showKeyboardNode(ordered[nextIndex]);
-    } else if (event.key === "Enter") {
+    } else if (event.key === "Enter" && keyboardNodeId) {
       event.preventDefault();
-      if (keyboardNodeId) selectNode(keyboardNodeId, true);
-    } else if (event.key === "Escape" && selectedId) {
-      event.preventDefault();
-      selectedId = "";
-      updateInspector(null);
-      announce("노드 선택을 해제했습니다.");
-      scheduleDraw();
+      selectNode(keyboardNodeId);
     }
   });
-
   canvas.addEventListener("wheel", (event) => {
     event.preventDefault();
+    autoFocus = false;
     setZoom(camera.zoom * Math.exp(-finite(event.deltaY) * 0.0014), localPoint(event));
   }, { passive: false });
 
@@ -825,17 +1566,54 @@ function bootstrapKnowledgeGraph() {
       const index = suggestionIndex < 0 ? 0 : suggestionIndex;
       const node = nodeById.get(buttons[index]?.dataset.graphResult);
       if (node) chooseSuggestion(node);
-    } else if (event.key === "Escape") {
-      clearSuggestions();
-    }
+    } else if (event.key === "Escape") clearSuggestions();
   });
 
-  for (const button of filterButtons) {
-    button.addEventListener("click", () => applyFilter(button.dataset.graphFilter || "all"));
-  }
-  zoomIn?.addEventListener("click", () => setZoom(camera.zoom * 1.28));
-  zoomOut?.addEventListener("click", () => setZoom(camera.zoom / 1.28));
+  for (const button of filterButtons) button.addEventListener("click", () => applyFilter(button.dataset.graphFilter || "all"));
+  zoomIn?.addEventListener("click", () => { autoFocus = false; setZoom(camera.zoom * 1.28); });
+  zoomOut?.addEventListener("click", () => { autoFocus = false; setZoom(camera.zoom / 1.28); });
   reset?.addEventListener("click", resetCamera);
+  settingsToggle?.addEventListener("click", () => setPanel(settingsPanel?.hidden !== false));
+  settingsClose?.addEventListener("click", () => setPanel(false));
+  settingsReset?.addEventListener("click", () => {
+    settings = normalizeGraphSettings();
+    saveSettings();
+    syncSettingsControls();
+    rebuildTopology({ relayout: true });
+    announce("그래프 설정을 기본값으로 복원했습니다.");
+  });
+  root.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && settingsPanel && !settingsPanel.hidden && event.target !== canvas) {
+      event.preventDefault();
+      setPanel(false);
+    }
+  });
+  fileQuery?.addEventListener("input", () => {
+    settings.fileQuery = fileQuery.value;
+    saveSettings();
+    recomputeVisibility({ fit: true });
+    announceGraphState();
+  });
+  bindBoolean(toggleTags, "showTags", { topology: true });
+  bindBoolean(toggleAttachments, "showAttachments", { topology: true });
+  bindBoolean(toggleExistingOnly, "existingOnly", { topology: true });
+  bindBoolean(toggleShowOrphans, "showOrphans", { fit: true });
+  bindBoolean(toggleShowArrows, "showArrows");
+  bindRange(textFade, "textFade");
+  bindRange(nodeSize, "nodeSize");
+  bindRange(linkThickness, "linkThickness");
+  bindRange(centerForce, "centerForce", { layout: true });
+  bindRange(repelForce, "repelForce", { layout: true });
+  bindRange(linkForce, "linkForce", { layout: true });
+  bindRange(linkDistance, "linkDistance", { layout: true });
+  groupAdd?.addEventListener("click", () => {
+    const index = settings.groups.length;
+    settings.groups.push({ id: `group-${Date.now()}-${index}`, query: "", color: GROUP_COLORS[index % GROUP_COLORS.length] });
+    saveSettings();
+    renderGroups();
+    groupList?.querySelector("[data-graph-group-query]:last-of-type")?.focus();
+  });
+  animate?.addEventListener("click", startAnimation);
 
   const resizeObserver = typeof ResizeObserver === "function" ? new ResizeObserver(resize) : null;
   resizeObserver?.observe(canvas);
@@ -855,10 +1633,19 @@ function bootstrapKnowledgeGraph() {
     if (!document.hidden) scheduleDraw();
   });
 
+  syncSettingsControls();
   updateInspector(null);
-  applyFilter("all");
+  rebuildTopology({ relayout: settings.showTags || settings.showAttachments || !settings.existingOnly
+    || settings.centerForce !== GRAPH_SETTINGS_DEFAULTS.centerForce
+    || settings.repelForce !== GRAPH_SETTINGS_DEFAULTS.repelForce
+    || settings.linkForce !== GRAPH_SETTINGS_DEFAULTS.linkForce
+    || settings.linkDistance !== GRAPH_SETTINGS_DEFAULTS.linkDistance });
   resize();
-  announce(`개념과 인물 ${nodes.length}개, 연결 ${payload.edges.length}개를 표시합니다.`);
+  if (animationProgress) {
+    animationProgress.value = 1;
+    animationProgress.textContent = "100%";
+  }
+  announceGraphState();
 }
 
 if (typeof document !== "undefined") bootstrapKnowledgeGraph();
