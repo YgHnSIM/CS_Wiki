@@ -1131,7 +1131,12 @@ assert.ok(!discoveryHomeHtml.includes("<h2>지식 연결망</h2>"), "home page m
 assert.ok(!discoveryHomeHtml.includes('class="graph-panel"'), "home page must not render the legacy graph panel");
 assert.ok(!discoveryHomeHtml.includes('id="knowledge-graph"'), "home page must not render the legacy graph canvas");
 assert.ok(!discoveryHomeHtml.includes('id="graph-data"'), "home page must not embed the legacy graph payload");
-assert.ok(discoveryHomeHtml.includes(`href="${evidenceSiteRoute("/map/graph/")}"`), "home page must link to the concept/person knowledge graph");
+assert.ok(!discoveryHomeHtml.includes(`href="${evidenceSiteRoute("/map/graph/")}"`), "home page must not expose the removed knowledge graph entry point");
+assert.ok(!discoveryHomeHtml.includes(`href="${evidenceSiteRoute("/map/atlas/")}"`), "home page must not expose the removed semantic atlas entry point");
+assert.ok(discoveryHomeHtml.includes(`href="${evidenceSiteRoute("/map/")}"`), "home page must retain the connection explorer entry point");
+assert.ok(discoveryHomeHtml.includes(`href="${evidenceSiteRoute("/map/learning/")}"`), "home page must retain the learning map entry point");
+assert.ok(discoveryHomeHtml.includes(`href="${evidenceSiteRoute("/map/history/")}"`), "home page must retain the history lens entry point");
+assert.ok(discoveryHomeHtml.includes(`href="${evidenceSiteRoute("/map/evidence/")}"`), "home page must retain the evidence lens entry point");
 const discoveryCategoryHtml = new Map();
 for (const node of contextSiteNodes) {
   const label = "context article '" + node.id + "'";
@@ -1610,12 +1615,17 @@ const mapLensRoots = [
   join("map", "history", "index.html"),
   join("map", "evidence", "index.html")
 ];
-const mapLensRoutes = ["/map/", "/map/graph/", "/map/learning/", "/map/atlas/", "/map/history/", "/map/evidence/"];
+const mapLensRoutes = ["/map/", "/map/learning/", "/map/history/", "/map/evidence/"];
+const removedMapLensRoutes = ["/map/graph/", "/map/atlas/"];
 for (const lensRoot of mapLensRoots) {
   const html = await read(lensRoot);
   assert.match(html, /class="map-mode-nav"/, "map lens root '" + lensRoot + "' is missing the shared mode navigation");
+  const navigation = html.match(/<nav class="map-mode-nav"[\s\S]*?<\/nav>/)?.[0] || "";
   for (const route of mapLensRoutes) {
-    assert.ok(html.includes('href="' + evidenceSiteRoute(route) + '"'), "map lens root '" + lensRoot + "' is missing tab '" + route + "'");
+    assert.ok(navigation.includes('href="' + evidenceSiteRoute(route) + '"'), "map lens root '" + lensRoot + "' is missing tab '" + route + "'");
+  }
+  for (const route of removedMapLensRoutes) {
+    assert.ok(!navigation.includes('href="' + evidenceSiteRoute(route) + '"'), "map lens root '" + lensRoot + "' still exposes removed tab '" + route + "'");
   }
 }
 

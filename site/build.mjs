@@ -93,9 +93,7 @@ const atlasFacetMeta = Object.freeze({
 
 const mapModes = Object.freeze([
   { id: "connection", label: "연결 경로", url: "/map/" },
-  { id: "graph", label: "지식 그래프", url: "/map/graph/" },
   { id: "learning", label: "학습 노선", url: "/map/learning/" },
-  { id: "atlas", label: "전체 의미 지도", url: "/map/atlas/" },
   { id: "history", label: "역사·인과", url: "/map/history/" },
   { id: "evidence", label: "근거 계보", url: "/map/evidence/" }
 ]);
@@ -590,10 +588,8 @@ function homePage() {
       <div class="hero-actions">
         <button type="button" class="primary-action" data-open-search>문서 검색</button>
         <a href="${withBase("/paths/")}">학습 경로 보기</a>
-        <a href="${withBase("/map/graph/")}">지식 그래프</a>
         <a href="${withBase("/map/learning/")}">학습 노선 지도</a>
         <a href="${withBase("/map/")}">지식 연결 찾기</a>
-        <a href="${withBase("/map/atlas/")}">전체 의미 지도</a>
         <a href="${withBase("/map/history/")}">역사·인과 렌즈</a>
         <a href="${withBase("/map/evidence/")}">근거 계보 보기</a>
       </div>
