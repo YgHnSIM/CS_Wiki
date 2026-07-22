@@ -9,8 +9,7 @@ export const STYLE_PARTS = Object.freeze([
   "30-archive.css",
   "40-learning.css",
   "50-semantic-atlas.css",
-  "60-history.css",
-  "70-knowledge-graph.css"
+  "60-history.css"
 ]);
 
 
