@@ -4,7 +4,7 @@ aliases: [Dahl Dijkstra Hoare 1972, Notes on Structured Programming]
 summary: "Dahl, Dijkstra, Hoare의 1972년 책을 바탕으로 구조적 프로그래밍, 단계적 정제, 데이터 구조화의 방법론을 정리한 참고 자료."
 tags: [type/reference, domain/software-engineering, domain/programming-languages, status/active]
 created: 2026-07-10
-updated: 2026-07-10
+updated: 2026-07-22
 sources: ["Academic Press 1972", "Internet Archive: Structured_Programming__Dahl_Dijkstra_Hoare"]
 source_id: ref-013
 source_kind: external
@@ -15,6 +15,7 @@ retrieved: 2026-07-10
 version: null
 snapshot_status: external-only
 status: active
+publication_year: 1972
 ---
 
 ## 개요

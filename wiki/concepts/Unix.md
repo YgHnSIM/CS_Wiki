@@ -4,9 +4,13 @@ aliases: [UNIX, 유닉스]
 summary: "파일, 프로세스, 셸, 파이프, 시스템 호출을 중심으로 구성된 Bell Labs의 다중 사용자 대화형 운영체제."
 tags: [type/concept, domain/operating-systems, domain/computer-history, domain/software-engineering, status/active]
 created: 2026-07-10
-updated: 2026-07-10
+updated: 2026-07-22
 sources: ["The UNIX Time-Sharing System", "The Development of the C Language", "The Evolution of the Unix Time-sharing System", "Portability of C Programs and the UNIX System"]
 status: active
+graph_id: concept-092a889f122121cb
+event_start: 1969
+historical_layer: system
+historical_note: "초기 Unix 시스템 개발이 시작된 1969년을 대표 시점으로 둔다."
 ---
 
 ## 개요

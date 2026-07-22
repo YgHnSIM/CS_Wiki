@@ -2,11 +2,12 @@
 title: 스티븐 C. 존슨
 aliases: [Stephen C. Johnson, S. C. Johnson, Steve Johnson]
 summary: "C/Unix 이식성, pcc, lint 같은 도구 흐름을 통해 C 프로그램의 이식성과 인터페이스 점검에 기여한 연구자."
-tags: [type/entity, domain/software-engineering, domain/programming-languages, domain/operating-systems, status/draft]
+tags: [type/entity, domain/software-engineering, domain/programming-languages, domain/operating-systems, status/review]
 created: 2026-07-10
-updated: 2026-07-10
+updated: 2026-07-22
 sources: ["The Development of the C Language", "Portability of C Programs and the UNIX System"]
-status: draft
+status: review
+graph_id: entity-2f17a71c2815f89f
 ---
 
 ## 개요

@@ -4,7 +4,7 @@ aliases: [Ritchie Unix evolution, Unix evolution, Evolution of Unix]
 summary: "Ritchie의 Unix 초기 진화 회고를 바탕으로 파일 시스템, 프로세스 제어, 파이프라인 명령, C 재작성을 정리한 참고 자료."
 tags: [type/reference, domain/computer-history, domain/operating-systems, domain/software-engineering, status/active]
 created: 2026-07-10
-updated: 2026-07-10
+updated: 2026-07-22
 sources: ["AT&T Bell Laboratories Technical Journal 1984"]
 source_id: ref-020
 source_kind: external
@@ -15,6 +15,7 @@ retrieved: 2026-07-10
 version: null
 snapshot_status: external-only
 status: active
+publication_year: 1984
 ---
 
 ## 개요

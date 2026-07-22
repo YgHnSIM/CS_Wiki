@@ -4,12 +4,13 @@ aliases: [Electronic Delay Storage Automatic Calculator]
 summary: "초기 저장 프로그램 컴퓨터로, 소프트웨어의 입력·적재·디버깅·재사용 계층이 선명하게 드러난 사례."
 tags: [type/concept, domain/computer-history, domain/software-engineering, status/active]
 created: 2026-05-04
-updated: 2026-07-18
+updated: 2026-07-22
 event_start: 1949
 historical_layer: machine
 capability_layers: [programmability, reliable-results]
 sources: ["초기 소프트웨어의 탄생.md", "초기 소프트웨어의 탄생_해설.md", "EDSAC과 Initial Orders.md", "EDSAC과 Initial Orders_해설.md", "서브루틴과 스택(Stack)의 원리.md", "폐쇄형 서브루틴과 Wheeler Jump.md", "The Preparation of Programs for an Electronic Digital Computer", "First Draft of a Report on the EDVAC", "The Manchester Small Scale Experimental Machine - The Baby"]
 status: active
+graph_id: concept-00b55ff0f7a3581b
 ---
 
 ## 개요

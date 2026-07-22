@@ -4,7 +4,7 @@ aliases: [Ritchie C history, C language history, Development of C]
 summary: "Ritchie의 C 언어 발전사 논문을 바탕으로 B에서 C로의 전환, PDP-11, Unix 커널 재작성을 정리한 참고 자료."
 tags: [type/reference, domain/programming-languages, domain/software-engineering, domain/computer-history, status/active]
 created: 2026-07-10
-updated: 2026-07-10
+updated: 2026-07-22
 sources: ["HOPL-II 1993", "Bell Labs/Lucent electronic reprint"]
 source_id: ref-019
 source_kind: external
@@ -15,6 +15,7 @@ retrieved: 2026-07-10
 version: null
 snapshot_status: external-only
 status: active
+publication_year: 1993
 ---
 
 ## 개요

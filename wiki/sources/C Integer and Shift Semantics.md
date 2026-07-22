@@ -4,7 +4,7 @@ aliases: [C 정수와 시프트 의미론, C integer overflow rules, WG14 intege
 summary: "WG14 문서를 바탕으로 C의 unsigned 래핑, signed overflow, 시프트 연산 조건을 정리한 참고 자료."
 tags: [type/reference, domain/programming-languages, domain/systems, domain/security, status/active]
 created: 2026-07-10
-updated: 2026-07-10
+updated: 2026-07-22
 sources: ["WG14 N1570", "WG14 N2817"]
 source_id: ref-029
 source_kind: external
@@ -15,6 +15,8 @@ retrieved: 2026-07-10
 version: "N1570 / N2817"
 snapshot_status: external-only
 status: active
+publication_year: 2011
+historical_note: "주요 직접 근거인 WG14 N1570 공개 위원회 초안의 발행 연도다."
 ---
 
 ## 개요

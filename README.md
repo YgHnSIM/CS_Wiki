@@ -50,9 +50,23 @@ npm run maintenance:check
 npm run test:site
 npm run test:python
 npm test
+npm run check:links
 ```
 
+외부 링크 검사는 네트워크가 필요한 별도 점검이며 매주 GitHub Actions에서도 실행됩니다. 404·410은 깨진 링크로 실패시키고, 출판사 봇 차단과 속도 제한은 별도 상태로 보고합니다.
+
+Windows PowerShell에서 로컬 실행 정책이 `npm.ps1`을 막는 경우 같은 명령을 `npm.cmd run check`처럼 실행할 수 있습니다.
+
 Pull request에서는 같은 통합 검증을 실행하되 배포하지 않으며, `main` 브랜치 푸시와 수동 실행에서만 GitHub Pages 배포를 이어서 수행합니다.
+
+실브라우저 검사는 Chromium에서 검색, 모바일 탐색, 지식 렌즈 초기화, 키보드 입력, 무자바스크립트 탐색과 주요 접근성 규칙을 확인합니다. 처음 실행하는 환경에서는 브라우저 런타임을 설치합니다.
+
+```bash
+npm run test:browser:install
+npm run test:browser
+```
+
+사이트 CSS는 `site/styles/`의 기능별 모듈로 관리하고 빌드 때 단일 `dist/assets/site.css`로 결합합니다. 따라서 소스 변경 충돌을 줄이면서 배포 요청 수는 늘리지 않습니다.
 
 ## 글꼴
 

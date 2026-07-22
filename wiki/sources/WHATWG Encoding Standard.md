@@ -4,7 +4,7 @@ aliases: [WHATWG Encoding, Web Encoding Standard]
 summary: "웹 플랫폼의 바이트-문자 변환 알고리즘, 인코딩 라벨, BOM, 오류 대체 정책을 정리한 참고 자료."
 tags: [type/reference, domain/computer-science, domain/web, domain/text-processing, status/active]
 created: 2026-07-10
-updated: 2026-07-10
+updated: 2026-07-22
 sources: ["WHATWG Encoding Standard"]
 source_id: ref-026
 source_kind: external
@@ -15,6 +15,8 @@ retrieved: 2026-07-10
 version: "Living Standard / snapshot 2026-05-21 (a985b62a)"
 snapshot_status: external-only
 status: active
+publication_year: 2026
+historical_note: "Living Standard의 2026-05-21 고정 스냅샷을 기준으로 한 연도다."
 ---
 
 ## 개요

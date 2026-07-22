@@ -2201,6 +2201,39 @@ VisiCalc는 기관 기록이 뒷받침하는 “개인용 컴퓨터용 최초의
 - [[index]]
 - [[overview]]
 
+## [2026-07-22] update | 프로젝트 품질 체계 강화
+
+위키의 상태 전이·역사 메타데이터·안정 식별자와 사이트 검증 체계를 함께 정비했다. 기존 `draft` 15개는 원문 대조를 기다리는 `review`로 전환하고, 공개 지식·근거 자료의 연도 메타데이터를 보강했다. 개념·개체·분석·메타 페이지에는 제목 변경과 무관한 결정적 `graph_id`를 부여했으며, overview 통계를 공개 지식 문서와 근거 자료로 분리해 자동 계산하도록 했다.
+
+외부 출처 URL의 주간 상태 점검기, 최소 권한·커밋 SHA 고정 GitHub Actions, Chromium 실브라우저·접근성 회귀 테스트를 추가했다. 테스트에서 발견된 역사 지도 스크롤 레인의 키보드 초점 누락을 수정했다. 사이트 CSS 원본은 기능별 모듈로 나누되 배포 시 단일 파일로 결합하고, 중복 지식 그래프 JSON 산출물을 제거한 뒤 전체 파일 수·용량 예산 검증을 추가했다.
+
+변경된 페이지와 코드:
+
+- 상태·역사·그래프 메타데이터: `wiki/concepts/`, `wiki/entities/`, `wiki/analyses/`, `wiki/meta/`, `wiki/sources/`
+- 현황·운영 규칙: [[overview]], `AGENTS.md`, `README.md`
+- lint·유지보수·링크 점검: `scripts/wiki_common.py`, `scripts/wiki_lint.py`, `scripts/wiki_maintenance.py`, `scripts/check_external_links.py`
+- 빌드·스타일·접근성: `site/build.mjs`, `site/verify-build.mjs`, `site/verify-output.mjs`, `site/styles/`, `site/assets/history-lens.js`
+- 자동화·테스트: `.github/workflows/`, `playwright.config.mjs`, `tests/`
+- 작업 기록: [[log]]
+
+### 검증
+
+- 외부 URL 159개 중 정상 119개, 접근 제한 35개, 명시적 단절(404/410) 0개 확인
+- Chromium 사용자 흐름·키보드 탐색·JavaScript 비활성화·axe 접근성 검사 통과
+- `raw/` 원본 변경 없음
+
+### 출처
+
+- `AGENTS.md`
+- `wiki/` 및 `site/`
+- GitHub Actions 공식 보안 권고
+
+### 관련 항목
+
+- [[index]]
+- [[overview]]
+- [[지식 그래프 관계 스키마]]
+
 <!-- wiki-maintenance: global-sections -->
 ## 출처
 

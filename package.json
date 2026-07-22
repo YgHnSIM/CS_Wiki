@@ -12,14 +12,21 @@
     "fonts:subset": "python scripts/subset_fonts.py",
     "lint:wiki": "python scripts/wiki_lint.py",
     "maintenance:check": "python scripts/wiki_maintenance.py --check",
+    "check:links": "python scripts/check_external_links.py --fail-on-broken",
     "verify:site": "node site/verify-build.mjs",
     "test:site": "node --test tests/*.test.mjs",
     "test:python": "python -m unittest discover -s tests -p \"test_*.py\"",
+    "test:browser": "node scripts/run_browser_tests.mjs",
+    "test:browser:install": "playwright install chromium",
     "test": "npm run test:site && npm run test:python",
-    "check": "npm run lint:wiki && npm run maintenance:check && npm test && npm run build && npm run verify:site"
+    "check": "npm run lint:wiki && npm run maintenance:check && npm test && npm run build && npm run verify:site && npm run test:browser"
   },
   "dependencies": {
     "markdown-it": "^14.1.0",
     "markdown-it-anchor": "^9.2.0"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.12.1",
+    "@playwright/test": "^1.61.1"
   }
 }

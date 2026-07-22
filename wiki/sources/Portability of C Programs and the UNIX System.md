@@ -4,7 +4,7 @@ aliases: [C and Unix portability, Johnson Ritchie portability paper]
 summary: "Johnson과 Ritchie의 1978년 논문을 바탕으로 C 프로그램과 Unix 시스템의 이식성, 도구, 기계 의존성 관리를 정리한 참고 자료."
 tags: [type/reference, domain/software-engineering, domain/programming-languages, domain/operating-systems, status/active]
 created: 2026-07-10
-updated: 2026-07-10
+updated: 2026-07-22
 sources: ["Bell System Technical Journal 1978"]
 source_id: ref-021
 source_kind: external
@@ -15,6 +15,7 @@ retrieved: 2026-07-10
 version: null
 snapshot_status: external-only
 status: active
+publication_year: 1978
 ---
 
 ## 개요

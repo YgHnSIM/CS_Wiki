@@ -1,7 +1,9 @@
 from __future__ import annotations
 
 import json
+import hashlib
 import re
+import unicodedata
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Iterable
@@ -351,3 +353,69 @@ def expected_count(page: Page, sources: SourceMaps) -> tuple[str, int] | None:
     if page.is_content:
         return "근거", len(effective_source_pages(page, sources))
     return None
+
+
+def effective_graph_visibility(page: Page) -> str:
+    explicit = parse_scalar(page.meta.get("graph_visibility"))
+    return explicit or ("hidden" if page.is_special else "public")
+
+
+def public_knowledge_pages(pages: list[Page]) -> list[Page]:
+    return [
+        page
+        for page in pages
+        if page.path.parent.name != "sources"
+        and not page.is_special
+        and effective_graph_visibility(page) == "public"
+    ]
+
+
+def public_graph_pages(pages: list[Page]) -> list[Page]:
+    return [
+        page
+        for page in pages
+        if not page.is_special and effective_graph_visibility(page) == "public"
+    ]
+
+
+def knowledge_metrics(pages: list[Page]) -> dict[str, int]:
+    sources = source_maps(pages)
+    knowledge = public_knowledge_pages(pages)
+    public_documents = public_graph_pages(pages)
+    event_documents = sum(bool(parse_scalar(page.meta.get("event_start"))) for page in public_documents)
+    publication_documents = sum(
+        not parse_scalar(page.meta.get("event_start"))
+        and bool(parse_scalar(page.meta.get("publication_year")))
+        for page in public_documents
+    )
+    snapshot_counts = {
+        status: sum(parse_scalar(page.meta.get("snapshot_status")) == status for page in sources.pages)
+        for status in ("local", "archived", "external-only")
+    }
+    return {
+        "knowledge_documents": len(knowledge),
+        "public_documents": len(public_documents),
+        "evidence_documents": len(sources.pages),
+        "document_evidence_links": sum(len(effective_source_pages(page, sources)) for page in knowledge),
+        "event_documents": event_documents,
+        "publication_documents": publication_documents,
+        "dated_documents": event_documents + publication_documents,
+        "undated_documents": len(public_documents) - event_documents - publication_documents,
+        "local_sources": snapshot_counts["local"],
+        "archived_sources": snapshot_counts["archived"],
+        "external_only_sources": snapshot_counts["external-only"],
+    }
+
+
+def stable_graph_id(page: Page) -> str:
+    prefix = {
+        "concepts": "concept",
+        "entities": "entity",
+        "analyses": "analysis",
+        "meta": "meta",
+    }.get(page.path.parent.name)
+    if not prefix:
+        raise ValueError(f"{page.rel}: unsupported graph-id category")
+    seed = unicodedata.normalize("NFKC", f"{page.path.parent.name}/{page.stem}").casefold()
+    digest = hashlib.sha256(seed.encode("utf-8")).hexdigest()[:16]
+    return f"{prefix}-{digest}"

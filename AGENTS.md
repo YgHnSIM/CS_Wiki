@@ -89,7 +89,7 @@ historical_layer: theory
 capability_layers: [computability, complexity]
 ```
 
-- `graph_id`는 위키 전체에서 고유한 소문자 ASCII slug이며 한 번 배정한 뒤 제목이나 파일명이 바뀌어도 수정하지 않는다. 새 개념·개체·분석·메타 페이지에는 작성을 권장한다. 값이 없으면 빌드가 `source_id` 또는 최초 파일명을 기준으로 호환 ID를 만든다.
+- `graph_id`는 위키 전체에서 고유한 소문자 ASCII slug이며 한 번 배정한 뒤 제목이나 파일명이 바뀌어도 수정하지 않는다. 새 개념·개체·분석·메타 페이지에는 반드시 작성한다. 값이 없으면 빌드가 `source_id` 또는 최초 파일명을 기준으로 호환 ID를 만들지만, 유지보수 점검은 누락을 허용하지 않는다.
 - `graph_visibility`는 `public | context | hidden` 중 하나다. `public`은 일반 지도에 표시하고, `context`는 다른 문서의 관계 문맥에서만 표시하며, `hidden`은 운영 문서처럼 지도에서 숨긴다. `index.md`, `overview.md`, `log.md`는 기본적으로 `hidden`이다.
 - `publication_year`, `event_start`, `event_end`는 출판물이나 역사적 사건의 검증된 연도를 뜻한다. 제목·파일명이나 위키 작성·수정일인 `created`, `updated`에서 역사 연도를 추정하지 않는다. `event_end`는 `event_start` 없이 단독으로 기록할 수 없고, 기간의 시작은 종료보다 늦을 수 없다.
 - 출판 시점과 사건·관찰 기간이 다르면 두 값을 함께 기록하고, `historical_note`에 제출·출판, 초판·확인 판본 같은 구분을 300자 이내로 설명한다. 확인할 수 없는 연도는 비워 두어 역사 지도에서 `연도 미상`으로 보존한다.
@@ -208,6 +208,10 @@ capability_layers: [computability, complexity]
 자동 점검은 저장소 루트에서 `python scripts/wiki_lint.py`로 실행합니다. 프론트매터, provenance, 링크·섹션, 고아 페이지, 별칭 충돌, 상호 링크, 색인 수치, 출처 일치, 로그 계층을 함께 검사하며 오류가 있으면 종료 코드 1을 반환합니다. 기계 판독 결과는 `--json`으로 출력합니다.
 
 기계적으로 안전한 정리는 `python scripts/wiki_maintenance.py --check`로 먼저 확인한 뒤 필요한 `--fix-*` 옵션을 사용합니다. 이 도구는 `raw/`를 수정하지 않으며 반복 실행해도 결과가 달라지지 않아야 합니다.
+
+외부 참고 자료의 URL 가용성과 보존 우선순위는 `python scripts/check_external_links.py --fail-on-broken`으로 점검합니다. 자동 접근을 제한하는 401·403·429 응답은 깨진 링크와 구분하고, 404·410만 명확한 링크 소실로 처리합니다. GitHub Actions는 이 점검을 매주 실행합니다.
+
+웹사이트의 실제 브라우저 동작은 `npm run test:browser`로 확인합니다. 검색·모바일 탐색·지식 렌즈·키보드 입력·무자바스크립트 경로와 심각도 serious 이상 접근성 위반을 Chromium에서 검사하며, 처음 실행하는 환경은 `npm run test:browser:install`로 런타임을 준비합니다.
 
 ## 4. 특수 파일
 

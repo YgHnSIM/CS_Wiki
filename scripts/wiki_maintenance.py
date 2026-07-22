@@ -11,10 +11,13 @@ from wiki_common import (
     Resolver,
     append_related_link,
     expected_count,
+    knowledge_metrics,
     links_in_section,
     load_pages,
     parse_scalar,
+    set_frontmatter_field,
     set_updated,
+    stable_graph_id,
     source_maps,
 )
 
@@ -147,11 +150,68 @@ def fix_index_counts(root: Path, pages, fix: bool) -> tuple[int, int]:
             overview_page.newline * 2 + status_block + overview_page.newline * 2 + "## 주요 주제",
             1,
         )
+    metrics = knowledge_metrics(pages)
+    overview_page.text = re.sub(
+        r"근거 계보 렌즈는 \d+개 공개 지식 문서, \d+개 정규 소스·참고 자료와 \d+개 문서–근거 연결을",
+        (
+            f"근거 계보 렌즈는 {metrics['knowledge_documents']}개 공개 지식 문서, "
+            f"{metrics['evidence_documents']}개 정규 소스·참고 자료와 "
+            f"{metrics['document_evidence_links']}개 문서–근거 연결을"
+        ),
+        overview_page.text,
+        count=1,
+    )
+    overview_page.text = re.sub(
+        r"근거 문서의 로컬 원본 \d+개, 보존 스냅샷 \d+개, 외부 링크 의존 \d+개는",
+        (
+            f"근거 문서의 로컬 원본 {metrics['local_sources']}개, "
+            f"보존 스냅샷 {metrics['archived_sources']}개, "
+            f"외부 링크 의존 {metrics['external_only_sources']}개는"
+        ),
+        overview_page.text,
+        count=1,
+    )
+    overview_page.text = re.sub(
+        (
+            r"현재 원전 대조로 연도가 기록된 문서는 \d+개이고, 그중 사건 시점을 가진 문서 \d+개와 "
+            r"출판 시점을 가진 문서 \d+개를"
+        ),
+        (
+            f"현재 원전 대조로 연도가 기록된 문서는 {metrics['dated_documents']}개이고, "
+            f"그중 사건 시점을 가진 문서 {metrics['event_documents']}개와 "
+            f"출판 시점을 가진 문서 {metrics['publication_documents']}개를"
+        ),
+        overview_page.text,
+        count=1,
+    )
+    overview_page.text = re.sub(
+        r"연도를 확인하지 못한 \d+개는",
+        f"연도를 확인하지 못한 {metrics['undated_documents']}개는",
+        overview_page.text,
+        count=1,
+    )
     if overview_page.text != overview_original:
         overview_page.text = set_updated(overview_page.text, TODAY, overview_page.newline)
     if write_if_changed(overview_page, overview_original, fix):
         changed_files += 1
     return changed_files, changed_items
+
+
+def fix_graph_ids(pages, fix: bool) -> tuple[int, int]:
+    changed_files = 0
+    assigned_ids = 0
+    for page in pages:
+        if page.path.parent.name not in {"concepts", "entities", "analyses", "meta"}:
+            continue
+        if parse_scalar(page.meta.get("graph_id")):
+            continue
+        original = page.text
+        page.text = set_frontmatter_field(page.text, "graph_id", stable_graph_id(page), page.newline)
+        page.text = set_updated(page.text, TODAY, page.newline)
+        assigned_ids += 1
+        if write_if_changed(page, original, fix):
+            changed_files += 1
+    return changed_files, assigned_ids
 
 
 def fix_log_headings(root: Path, pages, fix: bool) -> tuple[int, int]:
@@ -223,11 +283,12 @@ def main() -> int:
     parser.add_argument("--fix-index-counts", action="store_true")
     parser.add_argument("--fix-log-headings", action="store_true")
     parser.add_argument("--fix-log-order", action="store_true")
+    parser.add_argument("--fix-graph-ids", action="store_true")
     parser.add_argument("--all", action="store_true", help="apply every maintenance fix")
     parser.add_argument("--check", action="store_true", help="dry-run; this is the default without fix flags")
     args = parser.parse_args()
     root = args.root.resolve()
-    selected = args.all or any((args.fix_related, args.fix_index_counts, args.fix_log_headings, args.fix_log_order))
+    selected = args.all or any((args.fix_related, args.fix_index_counts, args.fix_log_headings, args.fix_log_order, args.fix_graph_ids))
     apply_fixes = selected and not args.check
 
     total_changes = 0
@@ -251,6 +312,11 @@ def main() -> int:
         files, swaps = fix_known_log_order(root, pages, apply_fixes)
         total_changes += files
         print(f"log order: {swaps} swap across {files} files {'fixed' if apply_fixes else 'needed'}")
+    if args.all or args.fix_graph_ids or not selected:
+        pages = load_pages(root)
+        files, graph_ids = fix_graph_ids(pages, apply_fixes)
+        total_changes += files
+        print(f"graph ids: {graph_ids} ids across {files} files {'fixed' if apply_fixes else 'needed'}")
     return 1 if not apply_fixes and total_changes else 0
 
 

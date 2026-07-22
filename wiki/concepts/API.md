@@ -4,9 +4,10 @@ aliases: [Application Programming Interface, 응용 프로그래밍 인터페이
 summary: "기능 제공자와 사용자 사이의 동작, 호출 규약, 비용, 전제 조건을 정리한 프로그래밍 인터페이스."
 tags: [type/concept, domain/software-engineering, status/active]
 created: 2026-07-09
-updated: 2026-07-10
+updated: 2026-07-22
 sources: ["The Preparation of Programs for an Electronic Digital Computer", "The UNIX Time-Sharing System", "On the Criteria To Be Used in Decomposing Systems into Modules", "Software Reuse"]
 status: active
+graph_id: concept-2ff6633d43e61407
 ---
 
 ## 개요

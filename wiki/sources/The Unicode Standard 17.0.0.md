@@ -4,7 +4,7 @@ aliases: [Unicode 17.0.0, The Unicode Standard]
 summary: "Unicode 17.0.0의 핵심 명세를 바탕으로 코드 포인트, scalar value, 코드 유닛, UTF-8, UTF-16, BOM의 구분을 정리한 참고 자료."
 tags: [type/reference, domain/computer-science, domain/systems, domain/text-processing, status/active]
 created: 2026-07-10
-updated: 2026-07-10
+updated: 2026-07-22
 sources: ["Unicode 17.0.0 Core Specification"]
 source_id: ref-022
 source_kind: external
@@ -15,6 +15,7 @@ retrieved: 2026-07-10
 version: "17.0.0"
 snapshot_status: external-only
 status: active
+publication_year: 2025
 ---
 
 ## 개요

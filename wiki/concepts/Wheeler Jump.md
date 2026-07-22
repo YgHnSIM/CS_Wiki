@@ -4,9 +4,13 @@ aliases: [휠러 점프, Wheeler jump]
 summary: "호출부 명령을 이용해 복귀 점프를 만들어내는 EDSAC의 초기 서브루틴 호출 기법."
 tags: [type/concept, domain/computer-history, domain/software-engineering, status/active]
 created: 2026-05-04
-updated: 2026-07-10
+updated: 2026-07-22
 sources: ["초기 소프트웨어의 탄생.md", "초기 소프트웨어의 탄생_해설.md", "EDSAC과 Initial Orders.md", "EDSAC과 Initial Orders_해설.md", "서브루틴과 스택(Stack)의 원리.md", "폐쇄형 서브루틴과 Wheeler Jump.md", "A Case against the GO TO Statement"]
 status: active
+graph_id: concept-2397a193cf79979b
+event_start: 1949
+historical_layer: software
+historical_note: "EDSAC 초기 서브루틴 호출 관행이 형성된 1949년을 대표 시점으로 둔다."
 ---
 
 ## 개요

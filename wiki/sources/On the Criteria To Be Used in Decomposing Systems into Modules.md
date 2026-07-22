@@ -4,7 +4,7 @@ aliases: [Criteria for Modularization, 모듈 분해 기준, Parnas modularizati
 summary: "Parnas의 1972년 논문을 바탕으로 모듈화, 정보 은닉, 변경 가능한 설계 결정 중심의 분해 기준을 정리한 참고 자료."
 tags: [type/reference, domain/software-engineering, domain/computer-history, status/active]
 created: 2026-07-10
-updated: 2026-07-10
+updated: 2026-07-22
 sources: ["Communications of the ACM 1972", "ACM DOI", "PDF copy"]
 source_id: ref-003
 source_kind: external
@@ -15,6 +15,7 @@ retrieved: 2026-07-10
 version: null
 snapshot_status: external-only
 status: active
+publication_year: 1972
 ---
 
 ## 개요

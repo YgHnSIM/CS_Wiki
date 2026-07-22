@@ -4,7 +4,7 @@ aliases: [Church 1936, Unsolvable Problem, Church's theorem]
 summary: "Church의 1936년 논문을 바탕으로 효과적 계산 가능성, 람다 정의 가능성, 재귀 함수, 처치-튜링 논제를 보강한 참고 자료."
 tags: [type/reference, domain/computer-history, domain/computer-science, status/active]
 created: 2026-07-10
-updated: 2026-07-10
+updated: 2026-07-22
 sources: ["American Journal of Mathematics 1936"]
 source_id: ref-010
 source_kind: external
@@ -15,6 +15,7 @@ retrieved: 2026-07-10
 version: null
 snapshot_status: external-only
 status: active
+publication_year: 1936
 ---
 
 ## 개요

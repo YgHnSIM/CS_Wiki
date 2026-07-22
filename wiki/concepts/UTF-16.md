@@ -4,9 +4,10 @@ aliases: [Unicode Transformation Format 16-bit, surrogate pair, 서로게이트 
 summary: "Unicode scalar value를 16비트 코드 유닛 하나 또는 surrogate pair 두 개로 표현하는 인코딩 형식."
 tags: [type/concept, domain/computer-science, domain/text-processing, status/active]
 created: 2026-07-10
-updated: 2026-07-10
+updated: 2026-07-22
 sources: ["The Unicode Standard 17.0.0", "WHATWG Encoding Standard"]
 status: active
+graph_id: concept-c854e2f6358212d1
 ---
 
 ## 개요

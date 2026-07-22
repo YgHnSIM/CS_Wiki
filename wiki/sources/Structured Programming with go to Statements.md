@@ -4,7 +4,7 @@ aliases: [Knuth 1974, structured programming with goto]
 summary: "Knuth의 1974년 논문을 바탕으로 `goto` 논쟁의 균형, 오류 탈출 구문, 프로그램 변환 방법론을 정리한 참고 자료."
 tags: [type/reference, domain/software-engineering, domain/programming-languages, status/active]
 created: 2026-07-10
-updated: 2026-07-10
+updated: 2026-07-22
 sources: ["ACM Computing Surveys 1974"]
 source_id: ref-014
 source_kind: external
@@ -15,6 +15,7 @@ retrieved: 2026-07-10
 version: null
 snapshot_status: external-only
 status: active
+publication_year: 1974
 ---
 
 ## 개요

@@ -4,9 +4,13 @@ aliases: [Dennard scaling, 데나드 스케일링, 일정 전계 스케일링, c
 summary: "MOSFET의 치수와 전압을 함께 축소해 회로 속도와 집적도를 높이면서 이상적인 전력 밀도를 일정하게 유지하는 소자 스케일링 규칙."
 tags: [type/concept, domain/computer-history, domain/computer-architecture, status/active]
 created: 2026-07-16
-updated: 2026-07-16
+updated: 2026-07-22
 sources: ["Design of Ion-Implanted MOSFET's with Very Small Physical Dimensions", "Cramming More Components onto Integrated Circuits", "The Landscape of Parallel Computing Research - A View from Berkeley", "Implications of Historical Trends in the Electrical Efficiency of Computing", "Dark Silicon and the End of Multicore Scaling"]
 status: active
+graph_id: concept-3b07c7d6f11aed09
+event_start: 1974
+historical_layer: architecture
+historical_note: "MOSFET 축소 규칙을 제시한 Dennard 등의 논문이 출판된 1974년을 대표 시점으로 둔다."
 ---
 
 ## 개요

@@ -2,11 +2,12 @@
 title: 찰스 W. 크루거
 aliases: [Charles W. Krueger, Charles Krueger, C. W. Krueger]
 summary: "소프트웨어 재사용을 추상화, 선택, 특수화, 통합의 문제로 정리한 컴퓨터 과학자."
-tags: [type/entity, domain/software-engineering, domain/computer-history, status/draft]
+tags: [type/entity, domain/software-engineering, domain/computer-history, status/review]
 created: 2026-07-10
-updated: 2026-07-10
+updated: 2026-07-22
 sources: ["Software Reuse"]
-status: draft
+status: review
+graph_id: entity-1a2d36f59369083d
 ---
 
 ## 개요

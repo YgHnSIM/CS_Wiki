@@ -4,7 +4,7 @@ aliases: [Manchester Baby source, SSEM source]
 summary: "Manchester Baby의 저장 프로그램 실행, Williams-Kilburn tube, EDSAC과의 최초성 기준 차이를 정리한 참고 자료."
 tags: [type/reference, domain/computer-history, domain/computer-architecture, status/active]
 created: 2026-07-10
-updated: 2026-07-10
+updated: 2026-07-22
 sources: ["University of Manchester Computer50"]
 source_id: ref-007
 source_kind: external
@@ -15,6 +15,9 @@ retrieved: 2026-07-10
 version: null
 snapshot_status: external-only
 status: active
+event_start: 1948
+historical_layer: machine
+historical_note: "자료가 설명하는 Manchester Baby의 최초 저장 프로그램 실행은 1948년 6월 21일이다."
 ---
 
 ## 개요

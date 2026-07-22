@@ -2,11 +2,15 @@
 title: PDP-11
 aliases: [DEC PDP-11, PDP-11/40, PDP-11/45]
 summary: "초기 Unix와 C 언어가 실용화된 DEC 미니컴퓨터 계열."
-tags: [type/concept, domain/computer-history, domain/computer-architecture, status/draft]
+tags: [type/concept, domain/computer-history, domain/computer-architecture, status/review]
 created: 2026-07-10
-updated: 2026-07-10
+updated: 2026-07-22
 sources: ["The UNIX Time-Sharing System", "The Development of the C Language", "The Evolution of the Unix Time-sharing System", "Portability of C Programs and the UNIX System"]
-status: draft
+status: review
+graph_id: concept-18a0ce4363c25093
+event_start: 1970
+historical_layer: machine
+historical_note: "PDP-11이 출시된 1970년을 대표 시점으로 둔다."
 ---
 
 ## 개요

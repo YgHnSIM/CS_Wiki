@@ -948,6 +948,7 @@ export async function initializeHistoryLens(root, dependencies = {}) {
       header.append(heading, make("span", "", `${laneEvents.length}개`));
       const list = make("ol", "history-lane-events");
       list.setAttribute("aria-labelledby", heading.id);
+      list.tabIndex = 0;
       laneEvents.forEach((event, index) => {
         const item = make("li", "history-event-item");
         const selected = state.event === event.id;

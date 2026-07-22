@@ -4,7 +4,7 @@ aliases: [FORTRAN Programmer's Reference Manual, IBM 704 FORTRAN Manual, FORTRAN
 summary: "1956년 IBM 704 FORTRAN 매뉴얼을 바탕으로 소스 프로그램, 목적 프로그램, DO 문, 최적화 힌트를 정리한 참고 자료."
 tags: [type/reference, domain/programming-languages, domain/software-engineering, domain/computer-history, status/active]
 created: 2026-07-10
-updated: 2026-07-10
+updated: 2026-07-22
 sources: ["IBM 704 Programmer's Reference Manual 1956", "Computer History Museum archive"]
 source_id: ref-015
 source_kind: external
@@ -15,6 +15,7 @@ retrieved: 2026-07-10
 version: "1956-10-15"
 snapshot_status: external-only
 status: active
+publication_year: 1956
 ---
 
 ## 개요

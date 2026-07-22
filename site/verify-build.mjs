@@ -4,7 +4,9 @@ import { readFile, readdir } from "node:fs/promises";
 import { join } from "node:path";
 import { gzipSync } from "node:zlib";
 import { historyPeriods, learningPaths } from "./catalog.mjs";
-import { escapeHtml, selectSiteDiscoveryPages, withBase } from "./core.mjs";
+import { escapeHtml, key, selectSiteDiscoveryPages, withBase } from "./core.mjs";
+import { loadWikiContent } from "./content.mjs";
+import { buildKnowledgeGraph } from "./graph/model.mjs";
 import { ATLAS_LIMITS, ATLAS_SCHEMA_VERSION } from "./graph/atlas.mjs";
 import {
   HISTORY_LIMITS,
@@ -24,6 +26,7 @@ import {
   evidenceStaticPageNumbers
 } from "./graph/evidence.mjs";
 import { EXPLORER_LIMITS, buildConceptEntityGraph } from "./graph/explorer.mjs";
+import { verifyOutputEnvelope } from "./verify-output.mjs";
 
 const root = process.cwd();
 const dist = join(root, "dist");
@@ -997,7 +1000,20 @@ function assertEvidenceAssertion(record, graphNodesById, label) {
   }
 }
 
-const evidenceGraph = JSON.parse(await read(join("data", "knowledge-graph.json")));
+const wikiRoot = join(root, "wiki");
+const { pages: wikiPages, lookup: wikiLookup } = await loadWikiContent({ root, wikiRoot });
+const verifiedLearningPaths = learningPaths.map((path) => ({
+  ...path,
+  pages: path.pages.map((title) => {
+    const page = wikiLookup.get(key(title));
+    if (!page) throw new Error(`Verification learning path '${path.title}' references missing page '${title}'`);
+    return page;
+  })
+}));
+const evidenceGraph = buildKnowledgeGraph(wikiPages, verifiedLearningPaths, {
+  lookup: wikiLookup,
+  urlFor: (pathname) => withBase(pathname, evidenceSitePrefix)
+});
 const evidenceGraphNodesById = new Map(evidenceGraph.nodes.map((node) => [node.id, node]));
 const expectedConceptEntityGraph = buildConceptEntityGraph(evidenceGraph);
 const knowledgeGraphHtml = await read(join("map", "graph", "index.html"));
@@ -1817,4 +1833,12 @@ console.log(
   + evidenceManifest.stats.searchShards + " bounded prefix pages, "
   + staticDocumentPages + "/" + staticSourcePages + "/" + staticRelationPages
   + " no-JS document/source/relation pages"
+);
+
+const outputTotals = await verifyOutputEnvelope(dist);
+console.log(
+  `Verified output envelope: ${outputTotals.files} files, `
+  + `${(outputTotals.totalBytes / 1024 / 1024).toFixed(2)} MiB total, `
+  + `${(outputTotals.htmlBytes / 1024 / 1024).toFixed(2)} MiB HTML, `
+  + `${(outputTotals.jsonBytes / 1024 / 1024).toFixed(2)} MiB JSON`
 );

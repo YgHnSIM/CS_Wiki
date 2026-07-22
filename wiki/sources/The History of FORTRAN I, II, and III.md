@@ -4,7 +4,7 @@ aliases: [Backus 1978 Fortran history, History of Fortran I II III]
 summary: "Backus의 1978년 회고를 바탕으로 자동 프로그래밍에서 Fortran 컴파일러로 이어지는 역사적 맥락을 정리한 참고 자료."
 tags: [type/reference, domain/programming-languages, domain/software-engineering, domain/computer-history, status/active]
 created: 2026-07-10
-updated: 2026-07-10
+updated: 2026-07-22
 sources: ["ACM SIGPLAN Notices 1978", "IBM Research publication record"]
 source_id: ref-017
 source_kind: external
@@ -15,6 +15,7 @@ retrieved: 2026-07-10
 version: null
 snapshot_status: external-only
 status: active
+publication_year: 1978
 ---
 
 ## 개요

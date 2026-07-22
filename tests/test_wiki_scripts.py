@@ -16,13 +16,14 @@ from wiki_common import (  # noqa: E402
     effective_source_pages,
     expected_count,
     flow_list,
+    knowledge_metrics,
     parse_flow_list,
     parse_document,
     set_frontmatter_field,
     source_maps,
 )
 from wiki_lint import lint  # noqa: E402
-from wiki_maintenance import GLOBAL_MARKER, _managed_log_block, fix_log_headings  # noqa: E402
+from wiki_maintenance import GLOBAL_MARKER, _managed_log_block, fix_graph_ids, fix_log_headings  # noqa: E402
 from wiki_summaries import set_summary  # noqa: E402
 
 
@@ -498,6 +499,53 @@ class LintRegressionTests(unittest.TestCase):
 
 
 class MaintenanceRegressionTests(unittest.TestCase):
+    def test_graph_id_assignment_is_stable_and_idempotent(self) -> None:
+        root = Path("C:/tmp/wiki-test")
+        page = make_page(
+            root,
+            "wiki/concepts/안정 식별자.md",
+            base_frontmatter("안정 식별자", "type/concept") + "## 출처\n\n## 관련 항목\n",
+        )
+        changed, assigned = fix_graph_ids([page], fix=False)
+        self.assertEqual((1, 1), (changed, assigned))
+        self.assertRegex(page.text, r"graph_id: concept-[a-f0-9]{16}")
+        migrated = make_page(root, "wiki/concepts/이름을 바꿔도.md", page.text)
+        changed, assigned = fix_graph_ids([migrated], fix=False)
+        self.assertEqual((0, 0), (changed, assigned))
+
+    def test_knowledge_metrics_separate_public_documents_from_evidence_claims(self) -> None:
+        root = Path("C:/tmp/wiki-test")
+        source = make_page(
+            root,
+            "wiki/sources/Reference.md",
+            base_frontmatter(
+                "Reference",
+                "type/reference",
+                sources='["Paper"]',
+                extra=(
+                    "source_id: ref-001\n"
+                    "source_kind: external\n"
+                    'primary_sources: ["Paper"]\n'
+                    "supporting_sources: []\n"
+                    'source_urls: ["https://example.com/paper"]\n'
+                    "retrieved: 2026-07-15\n"
+                    "version: null\n"
+                    "snapshot_status: external-only\n"
+                    "publication_year: 1970\n"
+                ),
+            ),
+        )
+        concept = make_page(
+            root,
+            "wiki/concepts/Concept.md",
+            base_frontmatter("Concept", "type/concept", sources='["Reference"]', extra="graph_id: concept-test\n"),
+        )
+        metrics = knowledge_metrics([source, concept])
+        self.assertEqual(2, metrics["public_documents"])
+        self.assertEqual(1, metrics["knowledge_documents"])
+        self.assertEqual(1, metrics["document_evidence_links"])
+        self.assertEqual(1, metrics["publication_documents"])
+
     def test_log_content_after_managed_block_is_preserved(self) -> None:
         root = Path("C:/tmp/wiki-test")
         prefix = (

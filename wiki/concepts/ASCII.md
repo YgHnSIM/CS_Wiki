@@ -4,9 +4,10 @@ aliases: [American Standard Code for Information Interchange, 아스키]
 summary: "문자에 숫자 값을 대응시키는 7비트 문자 인코딩 표준이자 UTF-8 ASCII 범위 호환성의 기반."
 tags: [type/concept, domain/computer-science, domain/systems, status/active]
 created: 2026-05-12
-updated: 2026-07-10
+updated: 2026-07-22
 sources: ["데이터 표현과 인코딩.md", "The Unicode Standard 17.0.0", "RFC 3629 UTF-8"]
 status: active
+graph_id: concept-6a0c16a9841c87e8
 ---
 
 ## 개요

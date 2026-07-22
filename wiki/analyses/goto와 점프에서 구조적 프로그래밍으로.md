@@ -4,9 +4,10 @@ aliases: [goto/점프에서 구조적 프로그래밍으로, jump to structured 
 summary: "기계 점프와 고급 언어 `goto`의 차이를 구분하고, 제어 흐름이 구조적 프로그래밍으로 정리되는 과정을 분석."
 tags: [type/analysis, domain/software-engineering, domain/programming-languages, domain/computer-history, status/active]
 created: 2026-07-10
-updated: 2026-07-10
+updated: 2026-07-22
 sources: ["A Case against the GO TO Statement", "Flow Diagrams, Turing Machines and Languages with Only Two Formation Rules", "Structured Programming", "Structured Programming with go to Statements"]
 status: active
+graph_id: analysis-fc1fa74eef57ee33
 ---
 
 ## 핵심 주장

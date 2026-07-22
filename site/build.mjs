@@ -16,6 +16,7 @@ import { buildConceptEntityGraph } from "./graph/explorer.mjs";
 import { graphNodeId } from "./graph/schema.mjs";
 import { describeRelationship, indexGraphEdges, relationLabel, selectLocalGraph } from "./graph/selectors.mjs";
 import { createDataOutputPath, createOutputWriter } from "./output.mjs";
+import { loadSiteCss } from "./styles/index.mjs";
 import {
   cleanInline,
   escapeHtml,
@@ -36,8 +37,9 @@ const siteBase = normalizeBase(process.env.SITE_BASE || "");
 const siteUrl = (process.env.SITE_URL || "").replace(/\/$/, "");
 const repositoryUrl = "https://github.com/YgHnSIM/CS_Wiki";
 const withBase = (pathname = "/") => addBase(pathname, siteBase);
+const siteCss = await loadSiteCss(root);
 const assetHash = createHash("sha256")
-  .update(await readFile(join(root, "site", "assets", "site.css")))
+  .update(siteCss)
   .update(await readFile(join(root, "site", "assets", "site.js")))
   .update(await readFile(join(root, "site", "assets", "article-relationships.js")))
   .update(await readFile(join(root, "site", "assets", "connection-paths.js")))
@@ -1833,6 +1835,7 @@ const evidenceDataOutputPath = createDataOutputPath("evidence", "evidence lens")
 await rm(distRoot, { recursive: true, force: true });
 await mkdir(join(distRoot, "assets"), { recursive: true });
 await cp(join(root, "site", "assets"), join(distRoot, "assets"), { recursive: true });
+await output(join("assets", "site.css"), siteCss);
 if (existsSync(rawAssets)) await cp(rawAssets, join(distRoot, "assets", "raw"), { recursive: true });
 
 await output("index.html", homePage());
@@ -1937,7 +1940,6 @@ const searchIndex = siteDiscoveryPages.map((page) => ({
   text: cleanInline(page.body).slice(0, 1600)
 }));
 await output("search.json", JSON.stringify(searchIndex));
-await output(join("data", "knowledge-graph.json"), JSON.stringify(knowledgeGraph));
 await output(join("data", "connection-graph.json"), JSON.stringify(connectionGraph));
 await output(join("data", "learning-map.json"), JSON.stringify(learningMap));
 await output(join("data", "atlas", "manifest.json"), JSON.stringify(semanticAtlas.manifest));

@@ -18,6 +18,7 @@ from wiki_common import (
     expected_count,
     links_in_section,
     load_pages,
+    knowledge_metrics,
     normalize_heading,
     parse_flow_list,
     parse_scalar,
@@ -561,6 +562,28 @@ def lint(root: Path) -> tuple[list[Issue], dict[str, int]]:
         )
         if expected_status_summary not in overview_page.text:
             add(issues, "error", "overview.status_summary", overview_page.rel, 1, "자동 운영 상태 통계가 실제 페이지 상태와 다름")
+        metrics = knowledge_metrics(pages)
+        expected_overview_fragments = {
+            "overview.evidence_summary": (
+                f"근거 계보 렌즈는 {metrics['knowledge_documents']}개 공개 지식 문서, "
+                f"{metrics['evidence_documents']}개 정규 소스·참고 자료와 "
+                f"{metrics['document_evidence_links']}개 문서–근거 연결을"
+            ),
+            "overview.preservation_summary": (
+                f"근거 문서의 로컬 원본 {metrics['local_sources']}개, "
+                f"보존 스냅샷 {metrics['archived_sources']}개, "
+                f"외부 링크 의존 {metrics['external_only_sources']}개는"
+            ),
+            "overview.history_summary": (
+                f"현재 원전 대조로 연도가 기록된 문서는 {metrics['dated_documents']}개이고, "
+                f"그중 사건 시점을 가진 문서 {metrics['event_documents']}개와 "
+                f"출판 시점을 가진 문서 {metrics['publication_documents']}개를"
+            ),
+            "overview.undated_summary": f"연도를 확인하지 못한 {metrics['undated_documents']}개는",
+        }
+        for code, fragment in expected_overview_fragments.items():
+            if fragment not in overview_page.text:
+                add(issues, "error", code, overview_page.rel, 1, "개요의 자동 지식 지도 통계가 실제 페이지 메타데이터와 다름")
 
     shallow = 0
     for page in pages:
@@ -579,6 +602,12 @@ def lint(root: Path) -> tuple[list[Issue], dict[str, int]]:
         "errors": sum(issue.severity == "error" for issue in issues),
         "warnings": sum(issue.severity == "warning" for issue in issues),
         "shallow_active": shallow,
+        "graph_id_missing": sum(
+            page.path.parent.name in {"concepts", "entities", "analyses", "meta"}
+            and not parse_scalar(page.meta.get("graph_id"))
+            for page in pages
+        ),
+        **knowledge_metrics(pages),
     }
     return issues, stats
 

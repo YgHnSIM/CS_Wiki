@@ -4,9 +4,10 @@ aliases: [유니코드 스칼라 값, 스칼라 값, scalar value]
 summary: "Unicode 코드 포인트 가운데 surrogate 영역을 제외해 UTF 인코딩 형식의 입력이 되는 값."
 tags: [type/concept, domain/computer-science, domain/text-processing, status/active]
 created: 2026-07-10
-updated: 2026-07-10
+updated: 2026-07-22
 sources: ["The Unicode Standard 17.0.0", "RFC 3629 UTF-8"]
 status: active
+graph_id: concept-be5e965404a672d3
 ---
 
 ## 개요

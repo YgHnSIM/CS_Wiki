@@ -4,7 +4,7 @@ aliases: [UTS #39, Unicode Technical Standard #39, 유니코드 보안 메커니
 summary: "UTS #39를 바탕으로 동형이의 문자, mixed-script 탐지, Unicode 식별자 보안 문제를 정리한 참고 자료."
 tags: [type/reference, domain/computer-science, domain/security, domain/text-processing, status/active]
 created: 2026-07-10
-updated: 2026-07-10
+updated: 2026-07-22
 sources: ["Unicode Technical Standard #39"]
 source_id: ref-027
 source_kind: external
@@ -15,6 +15,8 @@ retrieved: 2026-07-10
 version: "17.0.0 / Revision 32"
 snapshot_status: external-only
 status: active
+publication_year: 2025
+historical_note: "Unicode 17.0.0에 맞춘 UTS #39 Revision 32의 발행 연도다."
 ---
 
 ## 개요

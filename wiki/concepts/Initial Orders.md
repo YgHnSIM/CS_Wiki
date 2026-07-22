@@ -4,9 +4,13 @@ aliases: [초기 명령, EDSAC Initial Orders]
 summary: "EDSAC에서 종이 테이프 프로그램을 읽고 해석해 메모리에 적재한 초기 로더·어셈블러 절차."
 tags: [type/concept, domain/computer-history, domain/software-engineering, status/active]
 created: 2026-05-04
-updated: 2026-07-10
+updated: 2026-07-22
 sources: ["초기 소프트웨어의 탄생.md", "초기 소프트웨어의 탄생_해설.md", "EDSAC과 Initial Orders.md", "EDSAC과 Initial Orders_해설.md"]
 status: active
+graph_id: concept-ef0b337a520af324
+event_start: 1949
+historical_layer: software
+historical_note: "EDSAC의 실용 운전과 함께 Initial Orders가 사용된 1949년을 대표 시점으로 둔다."
 ---
 
 ## 개요

@@ -4,7 +4,7 @@ aliases: [UAX #29, Unicode Standard Annex #29, Unicode text boundaries]
 summary: "UAX #29를 바탕으로 그래핌 클러스터, 단어·문장 경계, 사용자 지각 문자 단위를 정리한 참고 자료."
 tags: [type/reference, domain/computer-science, domain/text-processing, status/active]
 created: 2026-07-10
-updated: 2026-07-10
+updated: 2026-07-22
 sources: ["Unicode Standard Annex #29"]
 source_id: ref-025
 source_kind: external
@@ -15,6 +15,8 @@ retrieved: 2026-07-10
 version: "Unicode 17.0.0 / Revision 47"
 snapshot_status: external-only
 status: active
+publication_year: 2025
+historical_note: "Unicode 17.0.0에 맞춘 UAX #29 Revision 47의 발행 연도다."
 ---
 
 ## 개요

@@ -4,9 +4,10 @@ aliases: [Koomey's law, 쿠미의 법칙, 계산 에너지 효율 추세, comput
 summary: "1946–2009년 컴퓨터 표본에서 최고 부하의 단위 에너지당 계산량이 평균 약 1.57년마다 배가했다는 경험적 역사 추세와 그 측정 범위·한계를 가리키는 후대의 이름."
 tags: [type/concept, domain/computer-history, domain/computer-architecture, status/active]
 created: 2026-07-16
-updated: 2026-07-16
+updated: 2026-07-22
 sources: ["Implications of Historical Trends in the Electrical Efficiency of Computing", "Cramming More Components onto Integrated Circuits", "Design of Ion-Implanted MOSFET's with Very Small Physical Dimensions", "The Case for Energy-Proportional Computing"]
 status: active
+graph_id: concept-0fdf8f46e0e7b677
 ---
 
 ## 개요

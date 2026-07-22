@@ -4,9 +4,13 @@ aliases: [Unicode Transformation Format 8-bit, UTF8]
 summary: "Unicode scalar value를 1-4개의 8비트 코드 유닛으로 표현하는 ASCII 호환 가변 길이 인코딩."
 tags: [type/concept, domain/computer-science, domain/internet, domain/text-processing, status/active]
 created: 2026-07-10
-updated: 2026-07-10
+updated: 2026-07-22
 sources: ["The Unicode Standard 17.0.0", "RFC 3629 UTF-8", "WHATWG Encoding Standard"]
 status: active
+graph_id: concept-f4f7573102f01723
+event_start: 1992
+historical_layer: system
+historical_note: "UTF-8 설계가 제안된 1992년을 대표 시점으로 둔다."
 ---
 
 ## 개요

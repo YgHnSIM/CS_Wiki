@@ -4,9 +4,13 @@ aliases: [Electronic Discrete Variable Automatic Computer]
 summary: "저장 프로그램 컴퓨터의 논리 구조를 문서화하고 후속 기계 설계에 영향을 준 초기 전자식 컴퓨터 설계."
 tags: [type/concept, domain/computer-history, domain/computer-architecture, status/active]
 created: 2026-07-10
-updated: 2026-07-10
+updated: 2026-07-22
 sources: ["First Draft of a Report on the EDVAC"]
 status: active
+graph_id: concept-4ac13a0d4fe8ec32
+event_start: 1945
+historical_layer: architecture
+historical_note: "First Draft of a Report on the EDVAC이 배포된 1945년을 설계의 대표 시점으로 둔다."
 ---
 
 ## 개요

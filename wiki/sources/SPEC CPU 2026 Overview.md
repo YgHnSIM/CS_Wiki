@@ -4,7 +4,7 @@ aliases: [SPEC CPU2026 overview]
 summary: "표준 성능 벤치마크의 조건과 한계를 설명하고, 실행 시간 중심 SPECspeed와 처리량 중심 SPECrate를 구분하는 SPEC 공식 개요."
 tags: [type/reference, domain/computer-architecture, domain/computer-science, status/active]
 created: 2026-07-15
-updated: 2026-07-16
+updated: 2026-07-22
 sources: ["SPEC_CPU_2026_Overview.html", "SPEC official CPU 2026 overview webpage", "SPEC CPU 2026 Run and Reporting Rules"]
 source_id: ref-032
 source_kind: external
@@ -15,6 +15,7 @@ retrieved: 2026-07-15
 version: "SPEC CPU 2026 overview and run rules retrieved 2026-07-16"
 snapshot_status: archived
 status: active
+publication_year: 2026
 ---
 
 ## 개요
