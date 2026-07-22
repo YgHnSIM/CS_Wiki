@@ -22,11 +22,12 @@ test("global search and mobile navigation work in a real browser", async ({ page
 
 test("interactive knowledge lenses initialize and accept keyboard input", async ({ page }) => {
   await page.goto("/map/graph/");
-  const canvas = page.locator("[data-knowledge-graph-canvas]");
-  await expect(canvas).toHaveAttribute("aria-label", /지식 그래프/);
-  await canvas.focus();
-  await page.keyboard.press("ArrowRight");
-  await expect(page.locator("[data-graph-status]")).not.toBeEmpty();
+  await expect(page).toHaveURL(/\/map\/atlas\/$/);
+  await expect(page.locator("[data-atlas-controls]")).toBeVisible();
+  await page.locator("[data-atlas-search]").fill("EDSAC");
+  await expect(page.locator("[data-atlas-search-results] [role=option]").first()).toBeVisible();
+  await page.keyboard.press("ArrowDown");
+  await expect(page.locator("[data-atlas-status]")).not.toBeEmpty();
 
   await page.goto("/map/history/");
   await expect(page.locator("[data-history-controls]")).toBeVisible();
@@ -40,8 +41,35 @@ test("interactive knowledge lenses initialize and accept keyboard input", async 
 });
 
 
+test("article connections stay compact and keyboard-switchable", async ({ page }) => {
+  await page.goto("/concepts/edsac/");
+  const explorer = page.locator("[data-relationship-explorer]");
+  const map = explorer.locator("[data-relationship-map]");
+  const list = explorer.locator("[data-relationship-list]");
+  await expect(explorer.getByRole("heading", { name: "문서 연결" })).toBeVisible();
+  await expect(map).not.toHaveAttribute("open", "");
+
+  const guide = explorer.getByRole("tab", { name: /읽기/ });
+  await guide.click();
+  await expect(guide).toHaveAttribute("aria-selected", "true");
+  await expect.poll(async () => list.locator(":scope > li").count()).toBeGreaterThan(0);
+  expect(await list.locator(":scope > li").count()).toBeLessThanOrEqual(6);
+
+  await guide.focus();
+  await page.keyboard.press("ArrowRight");
+  await expect(explorer.getByRole("tab", { name: /근거/ })).toHaveAttribute("aria-selected", "true");
+  await map.locator("summary").click();
+  await expect(map).toHaveAttribute("open", "");
+  await expect(list.locator("[data-relationship-select]").first()).toBeVisible();
+
+  await page.setViewportSize({ width: 390, height: 844 });
+  await expect(list).toBeVisible();
+  await expect(explorer.locator("[data-relationship-channel]")).toHaveCount(4);
+});
+
+
 test("core pages have no serious automated accessibility violations", async ({ page }) => {
-  for (const route of ["/", "/map/graph/", "/map/history/", "/map/evidence/"]) {
+  for (const route of ["/", "/concepts/edsac/", "/map/atlas/", "/map/history/", "/map/evidence/"]) {
     await page.goto(route);
     const results = await new AxeBuilder({ page }).analyze();
     const serious = results.violations.filter((violation) => ["serious", "critical"].includes(violation.impact));

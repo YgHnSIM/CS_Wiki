@@ -1,6 +1,6 @@
 /* Document-local relationship atlas */
 .relationship-explorer {
-  margin-top: 88px;
+  margin-top: 64px;
   border: 1px solid var(--line-strong);
   background:
     linear-gradient(rgba(0, 255, 65, 0.025) 1px, transparent 1px),
@@ -10,17 +10,14 @@
 }
 
 .relationship-header {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(180px, 220px);
-  gap: 24px;
-  align-items: end;
+  display: block;
   padding: 22px;
   border-bottom: 1px solid var(--line-strong);
 }
 
 .relationship-header > div > p:first-child {
   margin: 0 0 8px;
-  color: var(--amber);
+  color: var(--phosphor);
   font-family: var(--display);
   font-size: 9px;
   letter-spacing: 0.13em;
@@ -40,32 +37,54 @@
   font-size: 10px;
 }
 
-.relationship-header label {
+.relationship-channel-rail {
   display: grid;
-  gap: 7px;
-  color: var(--muted);
-  font-size: 9px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-bottom: 1px solid var(--line-strong);
 }
 
-.relationship-header [data-relationship-filter-control][hidden] {
-  display: none;
-}
-
-.relationship-header select {
-  min-height: 44px;
-  padding: 9px 10px;
-  border: 1px solid var(--amber-line);
+.relationship-channel-rail button {
+  display: grid;
+  min-height: 78px;
+  padding: 12px 14px;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 4px 12px;
+  border: 0;
+  border-right: 1px solid var(--line);
   border-radius: 0;
   background: var(--void-raised);
-  color: var(--amber);
+  color: var(--muted);
   font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.relationship-channel-rail button:last-child {
+  border-right: 0;
+}
+
+.relationship-channel-rail button[aria-selected="true"] {
+  background: rgba(0, 255, 65, 0.08);
+  color: var(--phosphor);
+  box-shadow: inset 0 -2px var(--phosphor);
+}
+
+.relationship-channel-rail strong {
+  color: var(--phosphor);
+  font-variant-numeric: tabular-nums;
+}
+
+.relationship-channel-rail small {
+  grid-column: 1 / -1;
+  font-size: 8px;
+  line-height: 1.45;
 }
 
 .relationship-map-disclosure > summary {
   min-height: 48px;
   padding: 13px 20px;
   border-bottom: 1px solid var(--line);
-  color: var(--amber);
+  color: var(--phosphor);
   font-size: 10px;
   cursor: pointer;
 }
@@ -104,37 +123,28 @@
   transition: opacity 140ms ease, stroke-width 140ms ease, stroke 140ms ease;
 }
 
-.local-edge[data-bucket="evidence"] line {
-  stroke: rgba(255, 176, 0, 0.72);
-  stroke-width: 1.8;
-}
-
-.local-edge[data-bucket="learning"] line {
-  stroke: rgba(0, 255, 65, 0.72);
-  stroke-dasharray: 9 5;
-}
-
-.local-edge[data-bucket="curated"] line {
+.local-edge[data-channel="core"] line {
   stroke: var(--phosphor);
   stroke-width: 2.4;
 }
 
-.local-edge[data-bucket="related"] line {
-  stroke: rgba(0, 255, 65, 0.5);
+.local-edge[data-channel="guide"] line {
+  stroke: rgba(0, 255, 65, 0.72);
+  stroke-dasharray: 9 5;
 }
 
-.local-edge[data-bucket="mentions"] line {
+.local-edge[data-channel="evidence"] line {
+  stroke: rgba(0, 255, 65, 0.48);
+  stroke-dasharray: 3 4;
+}
+
+.local-edge[data-channel="trace"] line {
   stroke: rgba(140, 179, 147, 0.42);
   stroke-dasharray: 2 7;
 }
 
 marker[id^="arrow-"] path {
   fill: var(--phosphor);
-}
-
-marker[id$="-evidence"] path,
-marker[id$="-history"] path {
-  fill: var(--amber);
 }
 
 .local-node {
@@ -197,16 +207,16 @@ marker[id$="-history"] path {
 }
 
 .local-node.is-active {
-  filter: drop-shadow(0 0 10px rgba(255, 176, 0, 0.68));
+  filter: drop-shadow(0 0 10px rgba(0, 255, 65, 0.58));
 }
 
 .local-node.is-active .local-node-shape > * {
-  stroke: var(--amber);
+  stroke: var(--phosphor);
   stroke-width: 2.6;
 }
 
 .local-edge.is-active line {
-  stroke: var(--amber);
+  stroke: var(--phosphor);
   stroke-width: 3;
   opacity: 1;
 }
@@ -221,7 +231,7 @@ marker[id$="-history"] path {
 }
 
 .relationship-inspector > span {
-  color: var(--amber);
+  color: var(--phosphor);
   font-size: 9px;
   letter-spacing: 0.08em;
 }
@@ -265,52 +275,24 @@ marker[id$="-history"] path {
 }
 
 .relationship-list-heading output {
-  color: var(--amber);
+  color: var(--phosphor);
   font-size: 10px;
   text-align: right;
 }
 
-.relationship-group + .relationship-group {
-  border-top: 1px solid var(--line-strong);
-}
-
-.relationship-group > summary {
-  display: flex;
-  min-height: 54px;
-  padding: 13px 20px;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-  cursor: pointer;
-}
-
-.relationship-group > summary > span:first-child {
-  display: flex;
-  flex-direction: column;
-  color: var(--muted);
-  font-size: 9px;
-}
-
-.relationship-group > summary strong {
-  color: var(--phosphor);
-  font-size: 12px;
-}
-
-.relationship-group > summary > span:last-child {
-  color: var(--amber);
-  font-family: var(--display);
-  font-size: 13px;
-}
-
-.relationship-group > ol {
+.relationship-compact-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   margin: 0;
   padding: 0;
   list-style: none;
-  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line-strong);
 }
 
 .relationship-record {
-  padding: 17px 20px;
+  min-width: 0;
+  padding: 16px 18px;
+  border-right: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
   transition: background 140ms ease;
 }
@@ -320,8 +302,8 @@ marker[id$="-history"] path {
 }
 
 .relationship-record.is-active {
-  background: rgba(255, 176, 0, 0.07);
-  box-shadow: inset 3px 0 var(--amber);
+  background: rgba(0, 255, 65, 0.07);
+  box-shadow: inset 3px 0 var(--phosphor);
 }
 
 .relationship-record-heading {
@@ -357,15 +339,11 @@ marker[id$="-history"] path {
   line-height: 1.25;
 }
 
-.relation-chip.evidence {
-  color: var(--amber);
-}
-
-.relation-chip.learning {
+.relation-chip.guide {
   border-style: dashed;
 }
 
-.relation-chip.mentions {
+.relation-chip.trace {
   color: var(--muted);
   border-style: dotted;
 }
@@ -382,8 +360,8 @@ marker[id$="-history"] path {
 }
 
 .relationship-record-heading button[aria-pressed="true"] {
-  border-color: var(--amber);
-  color: var(--amber);
+  border-color: var(--phosphor);
+  color: var(--phosphor);
 }
 
 .relationship-record > p {
@@ -400,7 +378,7 @@ marker[id$="-history"] path {
 .relationship-edge-details > summary {
   min-height: 40px;
   padding: 9px 0;
-  color: var(--amber);
+  color: var(--phosphor);
   font-size: 9px;
   cursor: pointer;
 }
@@ -459,9 +437,20 @@ marker[id$="-history"] path {
 }
 
 @media (max-width: 860px) {
-  .relationship-header {
+  .relationship-channel-rail {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .relationship-channel-rail button:nth-child(2) {
+    border-right: 0;
+  }
+
+  .relationship-channel-rail button:nth-child(-n + 2) {
+    border-bottom: 1px solid var(--line);
+  }
+
+  .relationship-compact-list {
     grid-template-columns: 1fr;
-    align-items: stretch;
   }
 
   .relationship-map-layout {
@@ -514,6 +503,11 @@ marker[id$="-history"] path {
     padding: 18px 14px;
   }
 
+  .relationship-channel-rail button {
+    min-height: 72px;
+    padding-inline: 12px;
+  }
+
   .relationship-header h2 {
     font-size: 18px;
   }
@@ -539,13 +533,8 @@ marker[id$="-history"] path {
     padding-inline: 14px;
   }
 
-  .relationship-record-heading {
-    flex-direction: column;
-  }
-
-  .relationship-record-heading button {
-    width: 100%;
-  }
+  .relationship-record-heading { flex-direction: column; }
+  .relationship-record-heading button { width: 100%; }
 
   .relationship-edge-details li {
     grid-template-columns: 1fr;
@@ -1357,4 +1346,3 @@ marker[id$="-history"] path {
     padding-inline: 12px;
   }
 }
-

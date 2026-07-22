@@ -7,6 +7,7 @@ import {
   extractWikiLinks,
   parseCuratedRelations
 } from "../site/graph/model.mjs";
+import { validateKnowledgeGraph } from "../site/graph/schema.mjs";
 import { describeRelationship, indexGraphEdges, relationLabel, selectLocalGraph } from "../site/graph/selectors.mjs";
 
 function page(title, extra = {}) {
@@ -49,11 +50,11 @@ function graph(pages, paths = []) {
   return buildKnowledgeGraph(pages, paths, { lookup: buildPageLookup(pages), urlFor: (url) => `/base${url}` });
 }
 
-test("wiki links retain section context while images and fenced examples are ignored", () => {
-  const links = extractWikiLinks(`본문 [[Alpha|알파]]\n\n## 관련 항목\n- [[Beta]]\n- ![[image.png]]\n\`\`\`md\n[[Example only]]\n\`\`\``);
-  assert.deepEqual(links.map(({ target, section, line }) => ({ target, section, line })), [
-    { target: "Alpha", section: "본문", line: 1 },
-    { target: "Beta", section: "관련 항목", line: 4 }
+test("wiki links retain section context and recommendation notes while ignoring images and fenced examples", () => {
+  const links = extractWikiLinks(`본문 [[Alpha|알파]]\n\n## 관련 항목\n- [[Beta]] — 다음 개념의 전제다.\n- ![[image.png]]\n\`\`\`md\n[[Example only]]\n\`\`\``);
+  assert.deepEqual(links.map(({ target, section, line, note }) => ({ target, section, line, note })), [
+    { target: "Alpha", section: "본문", line: 1, note: "" },
+    { target: "Beta", section: "관련 항목", line: 4, note: "다음 개념의 전제다." }
   ]);
 });
 
@@ -86,7 +87,7 @@ test("curated relation tables preserve wiki-link aliases containing pipes", () =
   assert.deepEqual(parseCuratedRelations("```markdown\n## 관계\n\n| 관계 | 대상 | 설명 |\n|---|---|---|\n| enables | [[Target]] | 예시 |\n```"), []);
 });
 
-test("the normalized graph distinguishes evidence, related, mentions, paths, and curated relations", () => {
+test("the normalized graph distinguishes four connection channels and bundles each document pair once", () => {
   const evidence = page("Evidence", { category: "references", sourceId: "ref-001" });
   const alpha = page("Alpha", {
     graphId: "concept-alpha",
@@ -103,7 +104,7 @@ test("the normalized graph distinguishes evidence, related, mentions, paths, and
   const route = { slug: "route", title: "Route", description: "A route", pages: [alpha, beta] };
   const result = graph([beta, evidence, alpha], [route]);
 
-  assert.equal(result.schemaVersion, "1.0.0");
+  assert.equal(result.schemaVersion, "2.0.0");
   assert.equal(result.contentVersion, "2026-01-02");
   assert.equal(result.nodes.find((node) => node.title === "Evidence").id, "ref-001");
   const alphaNode = result.nodes.find((node) => node.title === "Alpha");
@@ -117,14 +118,24 @@ test("the normalized graph distinguishes evidence, related, mentions, paths, and
 
   assert.equal(result.edges.filter((edge) => edge.kind === "supports").length, 1);
   assert.equal(result.edges.filter((edge) => edge.kind === "mentions").length, 1);
-  assert.equal(result.edges.filter((edge) => edge.kind === "related").length, 1);
-  assert.equal(result.edges.find((edge) => edge.kind === "related").reciprocal, true);
+  assert.equal(result.edges.filter((edge) => edge.kind === "recommends").length, 2);
+  assert.ok(result.edges.filter((edge) => edge.kind === "recommends").every((edge) => edge.directed));
   assert.equal(result.edges.filter((edge) => edge.kind === "path_next").length, 1);
   const curated = result.edges.find((edge) => edge.kind === "enables");
   assert.equal(curated.origin, "curated");
   assert.deepEqual(curated.evidence, ["ref-001"]);
   assert.equal(curated.contexts[0].note, "Alpha가 Beta를 가능하게 한다.");
   assert.equal(result.stats.byKind.enables, 1);
+  const alphaBeta = result.connections.find((connection) => connection.kinds.includes("enables"));
+  assert.deepEqual(alphaBeta.kinds, ["enables", "mentions", "path_next", "recommends"]);
+  assert.equal(alphaBeta.channels.core.length, 1);
+  assert.equal(alphaBeta.channels.guide.length, 3);
+  assert.equal(alphaBeta.channels.trace.length, 1);
+  assert.equal(result.stats.connectionPairs, result.connections.length);
+  const corrupt = structuredClone(result);
+  const corruptBundle = corrupt.connections.find((connection) => connection.kinds.includes("enables"));
+  corruptBundle.channels.trace.push(corruptBundle.channels.core[0]);
+  assert.throws(() => validateKnowledgeGraph(corrupt), /misclassifies|membership/);
 });
 
 test("graph output is deterministic when page input order changes", () => {
@@ -159,7 +170,7 @@ test("invalid stable IDs, metadata, relations, and duplicate IDs fail loudly", (
   ]), /needs direct evidence/);
 });
 
-test("local graph selection balances relation families and excludes hidden operational nodes", () => {
+test("local graph selection separates four channels and excludes hidden operational nodes", () => {
   const evidence = page("Evidence", { category: "references", sourceId: "ref-001" });
   const learner = page("Learner");
   const related = page("Related", { body: "## 관련 항목\n\n- [[Focus]]" });
@@ -174,10 +185,14 @@ test("local graph selection balances relation families and excludes hidden opera
   const result = graph([focus, evidence, learner, related, mentioned, hidden], [route]);
   const local = selectLocalGraph(result, "concept-focus", { limit: 4 });
 
-  assert.deepEqual(local.visibleRecords.map((record) => record.bucket), ["evidence", "learning", "related", "mentions"]);
+  assert.deepEqual(local.channels, ["core", "guide", "evidence", "trace"]);
+  assert.deepEqual(local.views.core, []);
+  assert.deepEqual(local.views.guide.map((record) => record.node.title), ["Related", "Learner"]);
+  assert.deepEqual(local.views.evidence.map((record) => record.node.title), ["Evidence"]);
+  assert.deepEqual(local.views.trace.map((record) => record.node.title), ["Mentioned"]);
   assert.equal(local.records.some((record) => record.node.title === "Hidden"), false);
   assert.equal(local.totalNeighbors, 4);
-  assert.equal(local.totalEdges, 4);
+  assert.equal(local.totalEdges, 5);
 
   const evidenceRecord = local.records.find((record) => record.node.title === "Evidence");
   assert.equal(evidenceRecord.direction, "incoming");
@@ -186,7 +201,7 @@ test("local graph selection balances relation families and excludes hidden opera
   assert.match(describeRelationship(result, evidenceRecord.primaryEdge).detail, /sources/);
 });
 
-test("local graph bundles multiple edge kinds for the same neighbor", () => {
+test("local graph shows one neighbor card while preserving every edge and direction", () => {
   const focus = page("Focus", { graphId: "concept-focus", body: "[[Neighbor]]\n\n## 관련 항목\n\n- [[Neighbor]]" });
   const neighbor = page("Neighbor", { body: "## 관련 항목\n\n- [[Focus]]" });
   const route = { slug: "route", title: "Route", description: "A route", pages: [focus, neighbor] };
@@ -194,24 +209,24 @@ test("local graph bundles multiple edge kinds for the same neighbor", () => {
   const local = selectLocalGraph(result, "concept-focus");
 
   assert.equal(local.totalNeighbors, 1);
-  assert.deepEqual(local.records[0].edges.map((edge) => edge.kind), ["path_next", "related", "mentions"]);
-  assert.deepEqual(local.records[0].labels, ["학습 경로의 다음 단계", "관련 항목", "본문에서 언급"]);
-  assert.deepEqual(local.records[0].availableBuckets, ["learning", "related", "mentions"]);
-  assert.equal(local.views.learning[0].primaryEdge.kind, "path_next");
-  assert.equal(local.views.related[0].primaryEdge.kind, "related");
-  assert.equal(local.views.mentions[0].primaryEdge.kind, "mentions");
+  assert.deepEqual(local.records[0].edges.map((edge) => edge.kind), ["recommends", "recommends", "path_next", "mentions"]);
+  assert.deepEqual(local.records[0].labels, ["함께 읽기 추천", "읽을거리로 추천됨", "학습 경로의 다음 단계", "본문에서 언급"]);
+  assert.deepEqual(local.records[0].availableChannels, ["guide", "trace"]);
+  assert.equal(local.views.guide[0].primaryEdge.kind, "recommends");
+  assert.equal(local.views.trace[0].primaryEdge.kind, "mentions");
+  assert.equal(local.views.guide.length, 1);
 });
 
-test("family views keep weaker relations that share a neighbor with stronger evidence", () => {
+test("channel views keep weaker relations that share a neighbor with a stronger guide edge", () => {
   const evidence = page("Evidence", { category: "references", sourceId: "ref-001" });
   const focus = page("Focus", { graphId: "concept-focus", sources: ["Evidence"] });
   const route = { slug: "route", title: "Route", description: "A route", pages: [evidence, focus] };
   const result = graph([focus, evidence], [route]);
   const local = selectLocalGraph(result, "concept-focus");
 
-  assert.equal(local.records[0].primaryEdge.kind, "supports");
+  assert.equal(local.records[0].primaryEdge.kind, "path_next");
   assert.equal(local.views.evidence[0].primaryEdge.kind, "supports");
-  assert.equal(local.views.learning[0].primaryEdge.kind, "path_next");
+  assert.equal(local.views.guide[0].primaryEdge.kind, "path_next");
 });
 
 test("the reusable edge index preserves local graph results as the wiki grows", () => {

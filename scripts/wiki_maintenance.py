@@ -3,16 +3,14 @@ from __future__ import annotations
 import argparse
 import re
 import sys
-from collections import Counter, defaultdict
+from collections import Counter
 from datetime import date
 from pathlib import Path
 
 from wiki_common import (
     Resolver,
-    append_related_link,
     expected_count,
     knowledge_metrics,
-    links_in_section,
     load_pages,
     parse_scalar,
     set_frontmatter_field,
@@ -55,38 +53,57 @@ def write_if_changed(page, original: str, fix: bool) -> bool:
     return True
 
 
-def related_plan(pages) -> dict:
+def fix_related(pages, fix: bool) -> tuple[int, int]:
     resolver = Resolver(pages)
-    related: dict = {}
+    changed_files = 0
+    changed_items = 0
     for page in pages:
         if not page.is_content:
             continue
-        targets = set()
-        for name in links_in_section(page, "관련 항목", level=2, last=True):
-            target, _ = resolver.resolve(name)
-            if target and target.is_content and target is not page:
-                targets.add(target)
-        related[page] = targets
-    additions: dict = defaultdict(set)
-    for source, targets in related.items():
-        for target in targets:
-            if source not in related.get(target, set()):
-                additions[target].add(source.stem)
-    return additions
-
-
-def fix_related(pages, fix: bool) -> tuple[int, int]:
-    additions = related_plan(pages)
-    changed_files = 0
-    added_links = 0
-    for page, targets in additions.items():
+        headings = list(re.finditer(r"^##[ \t]+관련 항목[ \t]*\r?$", page.text, re.MULTILINE))
+        if not headings:
+            continue
+        heading = headings[-1]
         original = page.text
-        for target in sorted(targets, key=str.casefold):
-            page.text = append_related_link(page, target, TODAY)
-            added_links += 1
+        chunk = page.text[heading.end() :]
+        selected: list[str] = []
+        seen: set[str] = set()
+        for match in re.finditer(r"^-\s+(\[\[([^\]]+)\]\])(.*)$", chunk, re.MULTILINE):
+            link = match.group(1)
+            raw = match.group(2)
+            tail = match.group(3).strip()
+            target_name = raw.split("|", 1)[0].split("#", 1)[0].strip()
+            target, _ = resolver.resolve(target_name)
+            identity = (target.rel if target else target_name).casefold()
+            if identity in seen:
+                changed_items += 1
+                continue
+            seen.add(identity)
+            if len(selected) >= 5:
+                changed_items += 1
+                continue
+            reason = tail.lstrip("-–—:·").strip()
+            if not reason:
+                summary = parse_scalar(target.meta.get("summary")) if target else ""
+                summary = re.sub(r"\s+", " ", summary or "").strip()
+                if len(summary) > 120:
+                    summary = summary[:117].rstrip() + "…"
+                reason = summary or f"{target_name} 문서로 이어서 읽는다."
+                changed_items += 1
+            selected.append(f"- {link} — {reason}")
+        prefix = page.text[: heading.start()].rstrip("\r\n")
+        rebuilt = (
+            prefix
+            + page.newline * 2
+            + "## 관련 항목"
+            + (page.newline * 2 + page.newline.join(selected) + page.newline if selected else page.newline)
+        )
+        page.text = rebuilt
+        if page.text != original:
+            page.text = set_updated(page.text, TODAY, page.newline)
         if write_if_changed(page, original, fix):
             changed_files += 1
-    return changed_files, added_links
+    return changed_files, changed_items
 
 
 def fix_index_counts(root: Path, pages, fix: bool) -> tuple[int, int]:
@@ -296,7 +313,7 @@ def main() -> int:
         pages = load_pages(root)
         files, links = fix_related(pages, apply_fixes)
         total_changes += files
-        print(f"related: {links} links across {files} files {'fixed' if apply_fixes else 'needed'}")
+        print(f"related reading: {links} compacted or annotated items across {files} files {'fixed' if apply_fixes else 'needed'}")
     if args.all or args.fix_index_counts or not selected:
         pages = load_pages(root)
         files, items = fix_index_counts(root, pages, apply_fixes)

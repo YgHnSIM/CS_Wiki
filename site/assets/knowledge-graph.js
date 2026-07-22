@@ -32,6 +32,7 @@ const DIRECTION = new Set(["forward", "reverse", "both", "none"]);
 const GROUP_COLORS = Object.freeze(["#00ff41", "#ffb000", "#8cb393", "#e7ffe9", "#00b82e", "#b67a00"]);
 const RELATION_LABELS = Object.freeze({
   mentions: "본문에서 언급",
+  recommends: "함께 읽기 추천",
   related: "관련 항목",
   supports: "근거로 뒷받침",
   path_next: "학습 경로",
@@ -59,6 +60,7 @@ const RELATION_SECTOR_BY_KIND = Object.freeze({
   narrower: "hierarchy",
   prerequisite_for: "hierarchy",
   path_next: "hierarchy",
+  recommends: "association",
   enables: "application",
   implements: "application",
   exemplifies: "application",

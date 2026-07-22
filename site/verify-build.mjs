@@ -25,7 +25,6 @@ import {
   evidenceStaticPageCount,
   evidenceStaticPageNumbers
 } from "./graph/evidence.mjs";
-import { EXPLORER_LIMITS, buildConceptEntityGraph } from "./graph/explorer.mjs";
 import { verifyOutputEnvelope } from "./verify-output.mjs";
 
 const root = process.cwd();
@@ -102,7 +101,7 @@ for (const marker of [
   "data-atlas-node-list",
   "data-atlas-corridor-list"
 ]) assert.ok(atlasRootHtml.includes(marker), `semantic atlas root is missing '${marker}'`);
-assert.match(atlasRootHtml, /<details class="atlas-list-disclosure">/, "semantic atlas needs a progressively disclosed text view");
+assert.match(atlasRootHtml, /<details class="atlas-list-disclosure" open>/, "structure atlas must expose its text view before the canvas interaction");
 assert.match(atlasRootHtml, /<noscript>[\s\S]*atlas-static-cluster-list/, "semantic atlas needs a no-JS cluster list");
 
 function cleanAtlasPath(url) {
@@ -185,7 +184,7 @@ for (const cluster of atlasManifest.clusters) {
   const route = String(cluster.route || `/map/atlas/${cluster.id}/`).replace(/^\//, "");
   const html = await read(join(route, "index.html"));
   assert.ok(html.includes(`data-default-cluster="${cluster.id}"`), `cluster route '${cluster.id}' is not statically selected`);
-  assert.match(html, /<details class="atlas-list-disclosure">/, `cluster route '${cluster.id}' needs a text view`);
+  assert.match(html, /<details class="atlas-list-disclosure" open>/, `cluster route '${cluster.id}' needs a list-first text view`);
   assert.match(html, /<noscript>[\s\S]*atlas-item-list/, `cluster route '${cluster.id}' needs a no-JS document list`);
   for (const document of members) {
     assert.ok(html.includes(`href="${document.url}"`), `cluster route '${cluster.id}' is missing document '${document.id}'`);
@@ -1015,91 +1014,9 @@ const evidenceGraph = buildKnowledgeGraph(wikiPages, verifiedLearningPaths, {
   urlFor: (pathname) => withBase(pathname, evidenceSitePrefix)
 });
 const evidenceGraphNodesById = new Map(evidenceGraph.nodes.map((node) => [node.id, node]));
-const expectedConceptEntityGraph = buildConceptEntityGraph(evidenceGraph);
-const knowledgeGraphHtml = await read(join("map", "graph", "index.html"));
-const embeddedConceptEntityGraphSource = knowledgeGraphHtml.match(/<script type="application\/json" id="knowledge-graph-data">([\s\S]*?)<\/script>/)?.[1];
-assert.ok(embeddedConceptEntityGraphSource, "knowledge graph page is missing its embedded graph payload");
-const conceptEntityGraph = JSON.parse(embeddedConceptEntityGraphSource);
-assert.deepEqual(conceptEntityGraph, expectedConceptEntityGraph, "concept/entity graph projection differs from the normalized graph");
-assert.deepEqual(conceptEntityGraph.limits, EXPLORER_LIMITS, "knowledge graph delivery limits differ from the builder contract");
-assert.ok(conceptEntityGraph.nodes.length <= EXPLORER_LIMITS.nodes, "knowledge graph exceeds its node delivery limit");
-assert.ok(conceptEntityGraph.edges.length <= EXPLORER_LIMITS.edges, "knowledge graph exceeds its edge delivery limit");
-assert.ok(Buffer.byteLength(knowledgeGraphHtml) <= EXPLORER_LIMITS.initialHtmlBytes, "knowledge graph HTML exceeds its initial delivery budget");
-assert.ok((await readBytes(join("assets", "knowledge-graph.js"))).length <= EXPLORER_LIMITS.clientBytes, "knowledge graph client exceeds its delivery budget");
-const independentlyExpectedNodeIds = evidenceGraph.nodes
-  .filter((node) => node.visibility === "public" && ["concepts", "entities"].includes(node.category))
-  .map((node) => node.id)
-  .sort((left, right) => left.localeCompare(right, "ko"));
-assert.deepEqual(
-  conceptEntityGraph.nodes.map((node) => node.id).sort(),
-  [...independentlyExpectedNodeIds].sort(),
-  "knowledge graph node coverage differs from public concept/person documents"
-);
-const independentlyExpectedNodeIdSet = new Set(independentlyExpectedNodeIds);
-const independentlyExpectedPairs = new Set(evidenceGraph.edges
-  .filter((edge) => independentlyExpectedNodeIdSet.has(edge.source) && independentlyExpectedNodeIdSet.has(edge.target) && edge.source !== edge.target)
-  .map((edge) => [edge.source, edge.target].sort((left, right) => left.localeCompare(right, "ko")).join("\u0000")));
-assert.ok(conceptEntityGraph.nodes.some((node) => node.category === "concepts"), "knowledge graph needs concept nodes");
-assert.ok(conceptEntityGraph.nodes.some((node) => node.category === "entities"), "knowledge graph needs person nodes");
-assertUniqueIds(conceptEntityGraph.nodes, "concept/entity graph nodes");
-const conceptEntityNodeIds = new Set(conceptEntityGraph.nodes.map((node) => node.id));
-const conceptEntityPairs = new Set();
-const conceptEntityNeighbors = new Map(conceptEntityGraph.nodes.map((node) => [node.id, new Set()]));
-for (const edge of conceptEntityGraph.edges) {
-  assert.ok(conceptEntityNodeIds.has(edge.source) && conceptEntityNodeIds.has(edge.target), "concept/entity graph edge references a missing node");
-  assert.notEqual(edge.source, edge.target, "concept/entity graph contains a self-edge");
-  assert.match(edge.direction, /^(?:forward|reverse|both|none)$/, "concept/entity graph edge has an invalid direction");
-  assert.deepEqual(Object.keys(edge.directions || {}).sort(), ["forward", "none", "reverse"], "concept/entity graph edge is missing directional buckets");
-  const directionOccurrences = Object.values(edge.directions).reduce((total, record) => total + Number(record.occurrences || 0), 0);
-  assert.equal(directionOccurrences, edge.occurrences, "concept/entity graph edge direction counts differ from its total occurrences");
-  assert.equal(edge.direction === "forward" || edge.direction === "both", edge.directions.forward.occurrences > 0, "forward arrow metadata is inconsistent");
-  assert.equal(edge.direction === "reverse" || edge.direction === "both", edge.directions.reverse.occurrences > 0, "reverse arrow metadata is inconsistent");
-  const pair = [edge.source, edge.target].sort((left, right) => left.localeCompare(right, "ko")).join("\u0000");
-  assert.ok(!conceptEntityPairs.has(pair), "concept/entity graph contains a duplicate document pair");
-  conceptEntityPairs.add(pair);
-  conceptEntityNeighbors.get(edge.source).add(edge.target);
-  conceptEntityNeighbors.get(edge.target).add(edge.source);
-}
-assert.deepEqual([...conceptEntityPairs].sort(), [...independentlyExpectedPairs].sort(), "knowledge graph edge coverage differs from the induced concept/person graph");
-for (const node of conceptEntityGraph.nodes) {
-  assert.ok(["concepts", "entities"].includes(node.category), `knowledge graph node '${node.id}' has an unsupported category`);
-  assert.match(node.url, /\/(?:concepts|entities)\//, `knowledge graph node '${node.id}' has a conflicting article URL`);
-  for (const key of ["aliases", "domains", "tags", "attachments", "unresolved"]) {
-    assert.ok(Array.isArray(node[key]), `knowledge graph node '${node.id}' is missing '${key}' metadata`);
-  }
-  assert.ok(node.created === null || /^\d{4}-\d{2}-\d{2}$/.test(node.created), `knowledge graph node '${node.id}' has an invalid created date`);
-  assert.equal(node.degree, conceptEntityNeighbors.get(node.id).size, `knowledge graph node '${node.id}' has a stale degree`);
-  assert.ok(knowledgeGraphHtml.includes(`href="${node.url}"`), `knowledge graph static list is missing '${node.id}'`);
-}
-for (const marker of [
-  "data-knowledge-graph",
-  "data-knowledge-graph-canvas",
-  "data-graph-search",
-  'data-graph-filter="concepts"',
-  'data-graph-filter="entities"',
-  "data-graph-reset",
-  "data-graph-status",
-  "data-graph-inspector",
-  "data-graph-settings-toggle",
-  "data-graph-settings-panel",
-  "data-graph-settings-close",
-  "data-graph-asset-root",
-  'data-graph-mode="focus"',
-  'data-graph-mode="path"',
-  "data-graph-toggle-show-arrows",
-  'data-graph-label-density="low"',
-  'data-graph-label-density="medium"',
-  'data-graph-label-density="high"',
-  "data-inspector-relation",
-  "knowledge-graph-static",
-  "knowledge-graph-noscript"
-]) assert.ok(knowledgeGraphHtml.includes(marker), `knowledge graph page is missing '${marker}'`);
-const knowledgeGraphAssetVersion = knowledgeGraphHtml.match(/CS_WIKI_ASSET_VERSION="([a-f0-9]{12})"/)?.[1];
-assert.ok(knowledgeGraphAssetVersion, "knowledge graph page is missing its asset version");
-assert.ok(knowledgeGraphHtml.includes(`knowledge-graph.js?v=${knowledgeGraphAssetVersion}`), "knowledge graph client must be content-versioned");
-const knowledgeGraphClient = await read(join("assets", "knowledge-graph.js"));
-assert.ok(knowledgeGraphClient.includes("knowledge-graph-worker.js"), "knowledge graph forces must use the layout worker");
-assert.ok((await readBytes(join("assets", "knowledge-graph-worker.js"))).length <= 16 * 1024, "knowledge graph worker exceeds its delivery budget");
+const knowledgeGraphRedirectHtml = await read(join("map", "graph", "index.html"));
+assert.ok(knowledgeGraphRedirectHtml.includes(`url=${evidenceSiteRoute("/map/atlas/")}`), "legacy knowledge graph route must redirect to the structure atlas");
+assert.ok(!knowledgeGraphRedirectHtml.includes("knowledge-graph-data"), "legacy knowledge graph route must not embed a second graph payload");
 const syntheticDiscoveryPages = [
   { id: "synthetic-public", graphVisibility: "public" },
   { id: "synthetic-context", graphVisibility: "context" },
@@ -1148,7 +1065,7 @@ assert.ok(!discoveryHomeHtml.includes('class="graph-panel"'), "home page must no
 assert.ok(!discoveryHomeHtml.includes('id="knowledge-graph"'), "home page must not render the legacy graph canvas");
 assert.ok(!discoveryHomeHtml.includes('id="graph-data"'), "home page must not embed the legacy graph payload");
 assert.ok(!discoveryHomeHtml.includes(`href="${evidenceSiteRoute("/map/graph/")}"`), "home page must not expose the removed knowledge graph entry point");
-assert.ok(!discoveryHomeHtml.includes(`href="${evidenceSiteRoute("/map/atlas/")}"`), "home page must not expose the removed semantic atlas entry point");
+assert.ok(discoveryHomeHtml.includes(`href="${evidenceSiteRoute("/map/atlas/")}"`), "home page must expose the unified structure atlas entry point");
 assert.ok(discoveryHomeHtml.includes(`href="${evidenceSiteRoute("/map/")}"`), "home page must retain the connection explorer entry point");
 assert.ok(discoveryHomeHtml.includes(`href="${evidenceSiteRoute("/map/learning/")}"`), "home page must retain the learning map entry point");
 assert.ok(discoveryHomeHtml.includes(`href="${evidenceSiteRoute("/map/history/")}"`), "home page must retain the history lens entry point");
@@ -1174,7 +1091,8 @@ if (sitemapXml !== null) {
   const allArticleUrls = new Set(evidenceGraph.nodes.map((node) => node.url));
   const sitemapArticleUrls = sitemapPaths.filter((path) => allArticleUrls.has(path));
   assertExactlyOnce(sitemapArticleUrls, expectedSiteDiscoveryUrls, "sitemap article discovery");
-  assert.ok(sitemapPaths.includes(`${evidenceSitePrefix}/map/graph/`), "sitemap is missing the knowledge graph route");
+  assert.ok(!sitemapPaths.includes(`${evidenceSitePrefix}/map/graph/`), "sitemap must omit the legacy knowledge graph redirect");
+  assert.ok(sitemapPaths.includes(`${evidenceSitePrefix}/map/atlas/`), "sitemap is missing the structure atlas route");
   for (const node of contextSiteNodes) assert.ok(!sitemapPaths.includes(node.url), "context article '" + node.id + "' must stay out of sitemap discovery");
 }
 const graphPublicDocuments = evidenceGraph.nodes.filter((node) => node.visibility === "public" && !EVIDENCE_SOURCE_CATEGORIES.has(node.category));
@@ -1625,14 +1543,13 @@ assert.ok(evidenceRootHtml.includes("evidence-lens.js?v=" + evidenceAssetVersion
 
 const mapLensRoots = [
   join("map", "index.html"),
-  join("map", "graph", "index.html"),
   join("map", "learning", "index.html"),
   join("map", "atlas", "index.html"),
   join("map", "history", "index.html"),
   join("map", "evidence", "index.html")
 ];
-const mapLensRoutes = ["/map/", "/map/learning/", "/map/history/", "/map/evidence/"];
-const removedMapLensRoutes = ["/map/graph/", "/map/atlas/"];
+const mapLensRoutes = ["/map/atlas/", "/map/", "/map/learning/", "/map/history/", "/map/evidence/"];
+const removedMapLensRoutes = ["/map/graph/"];
 for (const lensRoot of mapLensRoots) {
   const html = await read(lensRoot);
   assert.match(html, /class="map-mode-nav"/, "map lens root '" + lensRoot + "' is missing the shared mode navigation");

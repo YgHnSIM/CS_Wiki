@@ -23,7 +23,7 @@ from wiki_common import (  # noqa: E402
     source_maps,
 )
 from wiki_lint import lint  # noqa: E402
-from wiki_maintenance import GLOBAL_MARKER, _managed_log_block, fix_graph_ids, fix_log_headings  # noqa: E402
+from wiki_maintenance import GLOBAL_MARKER, _managed_log_block, fix_graph_ids, fix_log_headings, fix_related  # noqa: E402
 from wiki_summaries import set_summary  # noqa: E402
 
 
@@ -135,6 +135,23 @@ class ResolverAndSourceTests(unittest.TestCase):
 
 
 class LintRegressionTests(unittest.TestCase):
+    def test_related_reading_budget_and_reason_are_enforced(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            for index in range(1, 7):
+                target = base_frontmatter(f"Target {index}", "type/concept") + "## 출처\n\n## 관련 항목\n"
+                write_page(root, f"wiki/concepts/Target {index}.md", target)
+            items = "\n".join(
+                f"- [[Target {index}]]" + ("" if index == 1 else f" — {index}번째 추천 이유다.")
+                for index in range(1, 7)
+            )
+            owner = base_frontmatter("Owner", "type/concept") + f"## 출처\n\n## 관련 항목\n\n{items}\n"
+            write_page(root, "wiki/concepts/Owner.md", owner)
+
+            issues, _ = lint(root)
+            owner_codes = {issue.code for issue in issues if issue.path == "wiki/concepts/Owner.md"}
+            self.assertTrue({"links.related_budget", "links.related_reason"}.issubset(owner_codes))
+
     def test_graph_metadata_and_relation_table_are_validated(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
@@ -299,12 +316,12 @@ class LintRegressionTests(unittest.TestCase):
                 "## 관계\n\n"
                 "| 관계 | 대상 | 설명 | 근거 |\n"
                 "|---|---|---|---|\n"
-                "| supports | [[Target]] | 첫 설명이다. | [[First Evidence]] |\n"
+                "| broader | [[Target]] | 첫 설명이다. | [[First Evidence]] |\n"
                 "\n## 관계 메모\n\n두 번째 표도 같은 문서의 관계 계약에 속한다.\n\n"
                 "## 관계\n\n"
                 "| 관계 | 대상 | 설명 | 근거 |\n"
                 "|---|---|---|---|\n"
-                "| supports | [[Target Alias]] | 다른 근거를 단 두 번째 설명이다. | [[Second Evidence]] |\n"
+                "| broader | [[Target Alias]] | 다른 근거를 단 두 번째 설명이다. | [[Second Evidence]] |\n"
                 "| contradicts | [[Target]] | 관계 종류가 다르면 별도 주장이다. | [[Second Evidence]] |\n\n"
                 "## 출처\n\n"
                 "## 관련 항목\n"
@@ -321,7 +338,7 @@ class LintRegressionTests(unittest.TestCase):
                 if issue.path == "wiki/concepts/Owner.md" and issue.code == "graph.relation_duplicate"
             ]
             self.assertEqual(1, len(duplicates))
-            self.assertIn("supports → Target", duplicates[0].message)
+            self.assertIn("broader → Target", duplicates[0].message)
 
     def test_historical_relation_requires_direct_evidence(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
@@ -499,6 +516,52 @@ class LintRegressionTests(unittest.TestCase):
 
 
 class MaintenanceRegressionTests(unittest.TestCase):
+    def test_related_reading_compaction_is_bounded_explained_and_idempotent(self) -> None:
+        root = Path("C:/tmp/wiki-test")
+        targets = [
+            make_page(
+                root,
+                f"wiki/concepts/Target {index}.md",
+                base_frontmatter(f"Target {index}", "type/concept") + "## 출처\n\n## 관련 항목\n",
+            )
+            for index in range(1, 7)
+        ]
+        owner = make_page(
+            root,
+            "wiki/concepts/Owner.md",
+            base_frontmatter("Owner", "type/concept")
+            + "## 출처\n\n## 관련 항목\n\n"
+            + "\n".join(f"- [[Target {index}]]" for index in range(1, 7))
+            + "\n",
+        )
+        changed, items = fix_related([owner, *targets], fix=False)
+        self.assertEqual(1, changed)
+        self.assertEqual(6, items)
+        self.assertEqual(5, len(re.findall(r"^- \[\[Target", owner.text, re.MULTILINE)))
+        self.assertIn("— Target 1 summary", owner.text)
+        self.assertEqual((0, 0), fix_related([owner, *targets], fix=False))
+
+    def test_related_migration_preserves_crlf_without_phantom_whitespace(self) -> None:
+        root = Path("C:/tmp/wiki-test")
+        target = make_page(
+            root,
+            "wiki/concepts/Target.md",
+            (base_frontmatter("Target", "type/concept") + "## 출처\n\n## 관련 항목\n").replace("\n", "\r\n"),
+        )
+        owner = make_page(
+            root,
+            "wiki/concepts/Owner.md",
+            (
+                base_frontmatter("Owner", "type/concept")
+                + "## 출처\n\n## 관련 항목\n\n- [[Target]]\n"
+            ).replace("\n", "\r\n"),
+        )
+
+        self.assertEqual((1, 1), fix_related([owner, target], fix=False))
+        self.assertNotIn("\r\r\n", owner.text)
+        self.assertIsNone(re.search(r"(?<!\r)\n", owner.text))
+        self.assertEqual((0, 0), fix_related([owner, target], fix=False))
+
     def test_graph_id_assignment_is_stable_and_idempotent(self) -> None:
         root = Path("C:/tmp/wiki-test")
         page = make_page(

@@ -39,8 +39,6 @@ CAPABILITY_LAYERS = {
     "reliable-results",
 }
 CURATED_RELATIONS = {
-    "related",
-    "supports",
     "broader",
     "narrower",
     "prerequisite_for",
@@ -390,6 +388,17 @@ def lint(root: Path) -> tuple[list[Issue], dict[str, int]]:
         if page.path.name != "log.md":
             if heading_names.count("출처") != 1 or heading_names.count("관련 항목") != 1 or not heading_names or heading_names[-1] != "관련 항목":
                 add(issues, "error", "sections.bottom", page.rel, 1, "출처 1개와 마지막 관련 항목 1개가 필요함")
+        if page.is_content:
+            related_span = section_span(page.text, "관련 항목", level=2, last=True)
+            if related_span:
+                related_chunk = page.text[related_span[0] : related_span[1]]
+                related_items = re.findall(r"^-\s+\[\[([^\]]+)\]\](.*)$", related_chunk, re.MULTILINE)
+                if len(related_items) > 5:
+                    add(issues, "error", "links.related_budget", page.rel, 1, f"관련 항목은 최대 5개까지 허용함: {len(related_items)}개")
+                for raw_target, tail in related_items:
+                    if not tail.strip().lstrip("-–—:·").strip():
+                        target_name = raw_target.split("|", 1)[0].split("#", 1)[0].strip()
+                        add(issues, "error", "links.related_reason", page.rel, 1, f"관련 항목에 한 줄 이유가 필요함: {target_name}")
         lint_relation_table(page, resolver, issues)
 
     for graph_id, matches in graph_node_ids.items():
@@ -463,20 +472,6 @@ def lint(root: Path) -> tuple[list[Issue], dict[str, int]]:
                         break
             if semantic_incoming == 0:
                 add(issues, "error", "links.orphan", page.rel, 1, "콘텐츠 페이지로 들어오는 의미적 링크가 없음")
-
-    # Related links must be symmetric inside the related section.
-    for page in pages:
-        if not page.is_content:
-            continue
-        for name in links_in_section(page, "관련 항목", level=2, last=True):
-            target, _ = resolver.resolve(name)
-            if not target or not target.is_content or target is page:
-                continue
-            reverse = {value.casefold() for value in links_in_section(target, "관련 항목", level=2, last=True)}
-            if page.stem.casefold() not in reverse and not any(
-                resolver.resolve(value)[0] is page for value in links_in_section(target, "관련 항목", level=2, last=True)
-            ):
-                add(issues, "error", "links.related_asymmetric", page.rel, 1, f"{target.rel}의 관련 항목에 역링크가 없음")
 
     # Source metadata, source section, and explicit body source links must agree.
     source_pages = sources.pages

@@ -792,7 +792,6 @@ export async function initializeSemanticAtlas(root, dependencies = {}) {
     const canonical = atlasPageUrlFor(window.location.href, state, pageLocationOptions());
     window.history.replaceState(atlasHistoryEntry(state), "", canonical);
     syncControls();
-    controls?.removeAttribute("hidden");
     errorPanel?.setAttribute("hidden", "");
     if (canvas) {
       renderer = rendererModule.createAtlasRenderer(canvas, {
@@ -801,6 +800,7 @@ export async function initializeSemanticAtlas(root, dependencies = {}) {
       });
     }
     await loadState(state, { history: null });
+    controls?.removeAttribute("hidden");
     if (state.q) performSearch();
   } catch {
     announce("의미 지도를 시작하지 못했습니다. 아래 정적 목록은 계속 사용할 수 있습니다.");

@@ -4,6 +4,7 @@ import {
   CURATED_RELATION_KINDS,
   GRAPH_SCHEMA_VERSION,
   RELATION_META,
+  graphConnectionChannel,
   graphNodeId,
   parseYear,
   validateGraphMetadata,
@@ -40,7 +41,12 @@ export function extractWikiLinks(body = "") {
         label: (match[2] || match[1]).trim(),
         section,
         line: lineIndex + 1,
-        excerpt: cleanText(line).slice(0, 220)
+        excerpt: cleanText(line).slice(0, 220),
+        note: section === "관련 항목"
+          ? cleanText(`${line.slice(0, match.index)} ${line.slice(match.index + match[0].length)}`)
+            .replace(/^[-–—:·\s]+|[-–—:·\s]+$/g, "")
+            .slice(0, 220)
+          : ""
       });
     }
   });
@@ -211,6 +217,38 @@ function relationLegend() {
   }]));
 }
 
+function buildConnectionBundles(edges) {
+  const bundles = new Map();
+  for (const edge of edges) {
+    const endpoints = [edge.source, edge.target].sort((left, right) => left.localeCompare(right, "ko"));
+    const id = `${endpoints[0]}::${endpoints[1]}`;
+    if (!bundles.has(id)) {
+      bundles.set(id, {
+        id,
+        source: endpoints[0],
+        target: endpoints[1],
+        edgeIds: [],
+        kinds: [],
+        channels: { core: [], guide: [], evidence: [], trace: [] }
+      });
+    }
+    const bundle = bundles.get(id);
+    const channel = graphConnectionChannel(edge);
+    bundle.edgeIds.push(edge.id);
+    bundle.channels[channel].push(edge.id);
+    if (!bundle.kinds.includes(edge.kind)) bundle.kinds.push(edge.kind);
+  }
+  return [...bundles.values()].map((bundle) => ({
+    ...bundle,
+    edgeIds: bundle.edgeIds.sort((left, right) => left.localeCompare(right, "ko")),
+    kinds: bundle.kinds.sort((left, right) => left.localeCompare(right, "ko")),
+    channels: Object.fromEntries(Object.entries(bundle.channels).map(([channel, edgeIds]) => [
+      channel,
+      edgeIds.sort((left, right) => left.localeCompare(right, "ko"))
+    ]))
+  })).sort((left, right) => left.id.localeCompare(right.id, "ko"));
+}
+
 export function buildKnowledgeGraph(pages, learningPaths, { lookup, urlFor = (url) => url } = {}) {
   if (!lookup) throw new Error("buildKnowledgeGraph requires a page lookup");
   const pageIds = new Map();
@@ -321,12 +359,19 @@ export function buildKnowledgeGraph(pages, learningPaths, { lookup, urlFor = (ur
       if (link.section === "출처" || link.section === "관계") continue;
       const targetPage = resolveTarget(lookup, link.target);
       if (!targetPage || targetPage === page) continue;
-      const kind = link.section === "관련 항목" ? "related" : "mentions";
+      const kind = link.section === "관련 항목" ? "recommends" : "mentions";
       addEdge({
         source: pageId,
         target: pageIds.get(targetPage),
         kind,
-        context: { pageId, section: link.section, line: link.line, label: link.label, excerpt: link.excerpt }
+        context: {
+          pageId,
+          section: link.section,
+          line: link.line,
+          label: link.label,
+          excerpt: link.excerpt,
+          ...(link.note ? { note: link.note } : {})
+        }
       });
     }
 
@@ -379,8 +424,7 @@ export function buildKnowledgeGraph(pages, learningPaths, { lookup, urlFor = (ur
       ...edge,
       evidence: edge.evidence.sort((a, b) => a.localeCompare(b, "ko")),
       contexts: edge.contexts.sort((a, b) => JSON.stringify(a).localeCompare(JSON.stringify(b), "ko")),
-      reciprocal: edge.kind === "related"
-        && _owners.size > 1
+      reciprocal: edge.kind === "related" && _owners.size > 1
     }))
     .sort((a, b) => a.kind.localeCompare(b.kind) || a.source.localeCompare(b.source, "ko") || a.target.localeCompare(b.target, "ko"));
   const nodesById = new Map(nodes.map((node) => [node.id, node]));
@@ -400,6 +444,7 @@ export function buildKnowledgeGraph(pages, learningPaths, { lookup, urlFor = (ur
     kind,
     finalizedEdges.filter((edge) => edge.kind === kind).length
   ]));
+  const connections = buildConnectionBundles(finalizedEdges);
   const graph = {
     schemaVersion: GRAPH_SCHEMA_VERSION,
     contentVersion: pages.map((page) => page.updated || page.created || "").sort().at(-1) || null,
@@ -408,6 +453,8 @@ export function buildKnowledgeGraph(pages, learningPaths, { lookup, urlFor = (ur
       edges: finalizedEdges.length,
       paths: learningPaths.length,
       curatedEdges: finalizedEdges.filter((edge) => edge.origin === "curated").length,
+      connectionPairs: connections.length,
+      multiChannelPairs: connections.filter((connection) => Object.values(connection.channels).filter((ids) => ids.length).length > 1).length,
       byKind
     },
     legend: relationLegend(),
@@ -420,6 +467,7 @@ export function buildKnowledgeGraph(pages, learningPaths, { lookup, urlFor = (ur
     },
     nodes,
     edges: finalizedEdges,
+    connections,
     paths: learningPaths.map((path, order) => ({
       id: path.slug,
       order,

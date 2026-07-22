@@ -40,12 +40,13 @@ function edge(id, source, target, kind = "mentions", extra = {}) {
 
 function graph(nodes, edges) {
   return {
-    schemaVersion: "1.0.0",
+    schemaVersion: "2.0.0",
     contentVersion: "source-version",
     nodes,
     edges,
     legend: {
       mentions: { label: "본문에서 언급" },
+      recommends: { label: "함께 읽기 추천" },
       related: { label: "관련 항목" },
       supports: { label: "근거로 뒷받침" },
       path_next: { label: "학습 경로의 다음 단계" }
@@ -79,10 +80,11 @@ test("semantic atlas starts with bounded clusters and explainable corridor shard
   assert.equal(atlas.overview.edges.length, 1);
   assert.ok(atlas.overview.nodes.every((item) => Number.isFinite(item.x) && Number.isFinite(item.y)));
   const corridor = Object.values(atlas.corridors)[0];
-  assert.equal(corridor.stats.totalRelations, 3);
-  assert.deepEqual(corridor.relationships.map((item) => item.kind), ["supports", "path_next", "mentions"]);
-  assert.equal(corridor.relationships[0].contexts[0].note, "c의 직접 근거다.");
+  assert.equal(corridor.stats.totalRelations, 1);
+  assert.deepEqual(corridor.relationships.map((item) => item.kind), ["path_next"]);
   assert.equal(corridor.relationships[0].sourceTitle, "문서 b");
+  assert.ok(!JSON.stringify(atlas).includes("a-c"));
+  assert.ok(!JSON.stringify(atlas).includes("b-c"));
   assert.ok(!JSON.stringify(atlas).includes("hidden-a"));
 });
 
@@ -95,7 +97,7 @@ test("context documents stay out of global discovery and appear only beside dire
   ];
   const edges = [
     edge("a-b", "public-a", "public-b", "related"),
-    edge("a-context", "public-a", "context-meta", "supports"),
+    edge("a-context", "public-a", "context-meta", "recommends"),
     edge("context-chain", "context-meta", "context-far", "mentions")
   ];
   const atlas = buildSemanticAtlas(graph(nodes, edges));
@@ -111,12 +113,12 @@ test("context documents stay out of global discovery and appear only beside dire
   assert.ok(!focus.nodes.some((item) => item.id === "context-far"));
 });
 
-test("lookup and per-document focus shards keep lazy requests stable as documents grow", () => {
+test("lookup and per-document focus shards keep one-hop structure requests stable as documents grow", () => {
   const nodes = [node("focus", "domain/a"), node("one", "domain/a"), node("two", "domain/b"), node("far", "domain/b")];
   const edges = [
-    edge("f-one", "focus", "one", "supports"),
+    edge("f-one", "focus", "one", "recommends"),
     edge("f-two", "focus", "two", "related"),
-    edge("two-far", "two", "far", "mentions")
+    edge("two-far", "two", "far", "recommends")
   ];
   const atlas = buildSemanticAtlas(graph(nodes, edges));
   const focusLookup = atlas.lookup.entries.find((item) => item.id === "focus");
@@ -125,7 +127,9 @@ test("lookup and per-document focus shards keep lazy requests stable as document
   const shard = atlas.focusShards[shardKey];
   assert.deepEqual(Object.keys(shard.records), ["focus"]);
   assert.equal(shard.records.focus.nodes[0].id, "focus");
-  assert.ok(shard.records.focus.nodes.some((item) => item.id === "far" && item.hop === 2));
+  assert.ok(shard.records.focus.nodes.some((item) => item.id === "one" && item.hop === 1));
+  assert.ok(shard.records.focus.nodes.some((item) => item.id === "two" && item.hop === 1));
+  assert.ok(!shard.records.focus.nodes.some((item) => item.id === "far"));
   assert.equal(Object.keys(atlas.focusShards).length, nodes.length);
 });
 

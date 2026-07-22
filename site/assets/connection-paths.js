@@ -16,7 +16,7 @@ function edgeCost(edge, inverse, mode) {
     if (edge.kind === "mentions" || edge.kind === "supports") return Number.POSITIVE_INFINITY;
     if (edge.origin === "curated") return 1;
     if (edge.kind === "path_next" || edge.family === "learning") return 2;
-    if (edge.kind === "related") return 3;
+    if (edge.kind === "recommends" || edge.kind === "related") return 3;
     return 4;
   }
   if (mode === "evidence") {
@@ -28,7 +28,7 @@ function edgeCost(edge, inverse, mode) {
   }
   let cost = edge.origin === "curated" ? 1
     : edge.kind === "path_next" ? 2
-      : edge.kind === "related" ? 3
+      : edge.kind === "recommends" || edge.kind === "related" ? 3
         : edge.kind === "supports" ? 2
           : edge.kind === "mentions" ? 12
             : edge.cost || 5;
@@ -76,6 +76,9 @@ function detailFor(index, edge) {
     return edge.reciprocal
       ? "두 문서가 관련 항목에서 서로를 함께 읽을 대상으로 지정합니다."
       : "한 문서가 관련 항목에서 다른 문서를 함께 읽을 대상으로 지정합니다.";
+  }
+  if (edge.kind === "recommends") {
+    return context.note || `“${source?.title || edge.source}”에서 “${target?.title || edge.target}”을 다음 읽을거리로 추천합니다.`;
   }
   if (edge.kind === "mentions") {
     const owner = index.nodes.get(context.pageId) || source;

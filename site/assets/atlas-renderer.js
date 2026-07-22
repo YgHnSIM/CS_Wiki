@@ -14,6 +14,10 @@ const FAMILY_STYLES = Object.freeze({
   path: { lineDash: [10, 6], alpha: 0.68, color: "#ffb000" },
   curated: { lineDash: [7, 4], alpha: 0.62, color: "#d8ffd9" },
   semantic: { lineDash: [7, 4], alpha: 0.62, color: "#d8ffd9" },
+  causal: { lineDash: [], alpha: 0.7, color: "#d8ffd9" },
+  history: { lineDash: [7, 4], alpha: 0.62, color: "#d8ffd9" },
+  navigation: { lineDash: [3, 5], alpha: 0.56, color: "#00ff41" },
+  recommends: { lineDash: [3, 5], alpha: 0.56, color: "#00ff41" },
   related: { lineDash: [2, 5], alpha: 0.48, color: "#00ff41" },
   mentions: { lineDash: [1, 7], alpha: 0.3, color: "#8cb393" },
   default: { lineDash: [4, 5], alpha: 0.42, color: "#8cb393" }

@@ -1,4 +1,6 @@
-const BUCKET_ORDER = ["curated", "evidence", "learning", "related", "mentions"];
+import { GRAPH_CONNECTION_CHANNELS, graphConnectionChannel } from "./schema.mjs";
+
+const CHANNEL_ORDER = GRAPH_CONNECTION_CHANNELS;
 
 function nodeMap(graph) {
   return new Map(graph.nodes.map((node) => [node.id, node]));
@@ -18,19 +20,24 @@ export function indexGraphEdges(graph) {
 }
 
 function edgeRank(edge) {
-  return (edge.origin === "curated" ? 1000 : 0)
-    + (edge.weight || 0) * 100
+  const kindPriority = edge.origin === "curated" && !["related", "supports"].includes(edge.kind)
+    ? 5000
+    : edge.kind === "recommends"
+      ? 3500
+      : edge.kind === "related"
+        ? 3400
+        : edge.kind === "path_next"
+          ? 2500
+          : edge.kind === "supports"
+            ? 1500
+            : 500;
+  return kindPriority
+    + (edge.weight || 0) * 10
     + (edge.reciprocal ? 20 : 0)
     + Math.min(edge.occurrences || 0, 19);
 }
 
-function bucketFor(edge) {
-  if (edge.origin === "curated" && edge.kind !== "supports" && edge.kind !== "related") return "curated";
-  if (edge.kind === "supports" || edge.family === "evidence") return "evidence";
-  if (edge.kind === "path_next" || edge.family === "learning") return "learning";
-  if (edge.kind === "related") return "related";
-  return "mentions";
-}
+export const connectionChannel = graphConnectionChannel;
 
 function directionFor(edges, focusId) {
   if (edges.every((edge) => !edge.directed)) return "undirected";
@@ -40,14 +47,15 @@ function directionFor(edges, focusId) {
   return outgoing ? "outgoing" : "incoming";
 }
 
-function recordForBucket(record, bucket, graph, focusId) {
-  const edges = record.edges.filter((edge) => bucketFor(edge) === bucket);
+function recordForChannel(record, channel, graph, focusId) {
+  const edges = record.edges.filter((edge) => connectionChannel(edge) === channel);
   if (!edges.length) return null;
   const primaryEdge = edges[0];
   return {
     ...record,
+    edges,
     primaryEdge,
-    bucket,
+    channel,
     direction: directionFor(edges, focusId),
     labels: edges.map((edge) => relationLabel(graph, edge, focusId)),
     score: edgeRank(primaryEdge)
@@ -80,6 +88,8 @@ export function describeRelationship(graph, edge) {
     detail = edge.reciprocal
       ? "두 문서의 관련 항목에 서로 등록된 양방향 연결입니다."
       : "한 문서의 관련 항목에서 함께 읽을 대상으로 연결했습니다.";
+  } else if (edge.kind === "recommends") {
+    detail = context.note || `“${source?.title || edge.source}”에서 “${target?.title || edge.target}”을 다음 읽을거리로 추천합니다.`;
   } else if (edge.kind === "mentions") {
     const owner = nodes.get(context.pageId);
     detail = `“${owner?.title || context.pageId || source?.title}”의 ‘${context.section || "본문"}’에서 언급됩니다.`;
@@ -88,7 +98,7 @@ export function describeRelationship(graph, edge) {
   return { statement, detail };
 }
 
-export function selectLocalGraph(graph, focusId, { limit = 14, edgesByNodeId = null } = {}) {
+export function selectLocalGraph(graph, focusId, { limit = 6, edgesByNodeId = null } = {}) {
   const nodes = nodeMap(graph);
   const focus = nodes.get(focusId);
   if (!focus) throw new Error(`Unknown local graph focus '${focusId}'`);
@@ -106,47 +116,43 @@ export function selectLocalGraph(graph, focusId, { limit = 14, edgesByNodeId = n
   const records = [...bundles.values()].map((record) => {
     record.edges.sort((a, b) => edgeRank(b) - edgeRank(a) || a.id.localeCompare(b.id, "ko"));
     const primaryEdge = record.edges[0];
-    const availableBuckets = [...new Set(record.edges.map(bucketFor))];
+    const availableChannels = [...new Set(record.edges.map(connectionChannel))];
     return {
       ...record,
       primaryEdge,
-      bucket: bucketFor(primaryEdge),
-      availableBuckets,
+      channel: connectionChannel(primaryEdge),
+      availableChannels,
       direction: directionFor(record.edges, focusId),
       labels: record.edges.map((edge) => relationLabel(graph, edge, focusId)),
       score: edgeRank(primaryEdge)
     };
   }).sort((a, b) => b.score - a.score || a.node.title.localeCompare(b.node.title, "ko"));
 
-  const queues = new Map(BUCKET_ORDER.map((bucket) => [bucket, records.filter((record) => record.bucket === bucket)]));
-  const visibleRecords = [];
-  while (visibleRecords.length < Math.min(limit, records.length)) {
-    let added = false;
-    for (const bucket of BUCKET_ORDER) {
-      const record = queues.get(bucket).shift();
-      if (!record) continue;
-      visibleRecords.push(record);
-      added = true;
-      if (visibleRecords.length >= limit) break;
-    }
-    if (!added) break;
-  }
+  const channelViews = Object.fromEntries(CHANNEL_ORDER.map((channel) => [
+    channel,
+    records.map((record) => recordForChannel(record, channel, graph, focusId)).filter(Boolean)
+      .sort((a, b) => b.score - a.score || a.node.title.localeCompare(b.node.title, "ko"))
+  ]));
+  const recommended = channelViews.guide.filter((record) => ["recommends", "related"].includes(record.primaryEdge.kind));
+  const learningOnly = channelViews.guide.filter((record) => !["recommends", "related"].includes(record.primaryEdge.kind));
+  const featuredCandidates = [...channelViews.core, ...recommended, ...learningOnly];
+  const featuredIds = new Set();
+  const featuredRecords = featuredCandidates.filter((record) => {
+    if (featuredIds.has(record.neighborId)) return false;
+    featuredIds.add(record.neighborId);
+    return true;
+  }).slice(0, limit);
+  const visibleRecords = featuredRecords;
   const visibleIds = new Set(visibleRecords.map((record) => record.neighborId));
   const hiddenRecords = records.filter((record) => !visibleIds.has(record.neighborId));
-  const views = { all: visibleRecords };
-  for (const bucket of BUCKET_ORDER) {
-    views[bucket] = records
-      .map((record) => recordForBucket(record, bucket, graph, focusId))
-      .filter(Boolean)
-      .sort((a, b) => b.score - a.score || a.node.title.localeCompare(b.node.title, "ko"))
-      .slice(0, limit);
-  }
-  const counts = Object.fromEntries(BUCKET_ORDER.map((bucket) => [bucket, records.filter((record) => record.availableBuckets.includes(bucket)).length]));
+  const views = Object.fromEntries(CHANNEL_ORDER.map((channel) => [channel, channelViews[channel].slice(0, limit)]));
+  const counts = Object.fromEntries(CHANNEL_ORDER.map((channel) => [channel, channelViews[channel].length]));
   return {
     focus,
     totalNeighbors: records.length,
     totalEdges: records.reduce((sum, record) => sum + record.edges.length, 0),
     counts,
+    channels: CHANNEL_ORDER,
     records,
     views,
     visibleRecords,

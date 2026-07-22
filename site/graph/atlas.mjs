@@ -7,8 +7,8 @@ export const ATLAS_LIMITS = Object.freeze({
   clusterNodes: 240,
   clusterEdges: 240,
   corridorRelations: 40,
-  focusNodes: 56,
-  focusEdges: 180,
+  focusNodes: 7,
+  focusEdges: 12,
   labels: 40
 });
 
@@ -28,6 +28,7 @@ const KIND_PRIORITY = Object.freeze({
   synthesizes: 88,
   supports: 70,
   path_next: 58,
+  recommends: 52,
   related: 36,
   mentions: 8
 });
@@ -77,6 +78,10 @@ function edgeCompare(left, right) {
   return edgePriority(right) - edgePriority(left) || stableCompare(left.id, right.id);
 }
 
+function isStructureEdge(edge) {
+  return edge?.origin === "curated" || ["recommends", "related", "path_next"].includes(edge?.kind);
+}
+
 function selectBalancedEdges(edges, limit) {
   const ranked = [...edges].sort(edgeCompare);
   if (ranked.length <= limit) return ranked;
@@ -84,11 +89,11 @@ function selectBalancedEdges(edges, limit) {
     curated: ranked.filter((edge) => edge.origin === "curated"),
     supports: ranked.filter((edge) => edge.origin !== "curated" && edge.kind === "supports"),
     learning: ranked.filter((edge) => edge.origin !== "curated" && edge.kind === "path_next"),
-    related: ranked.filter((edge) => edge.origin !== "curated" && edge.kind === "related"),
+    guide: ranked.filter((edge) => edge.origin !== "curated" && ["recommends", "related"].includes(edge.kind)),
     mentions: ranked.filter((edge) => edge.origin !== "curated" && edge.kind === "mentions"),
-    other: ranked.filter((edge) => edge.origin !== "curated" && !["supports", "path_next", "related", "mentions"].includes(edge.kind))
+    other: ranked.filter((edge) => edge.origin !== "curated" && !["supports", "path_next", "recommends", "related", "mentions"].includes(edge.kind))
   };
-  const shares = { curated: 0.16, supports: 0.24, learning: 0.2, related: 0.28, mentions: 0.08, other: 0.04 };
+  const shares = { curated: 0.44, supports: 0, learning: 0.2, guide: 0.36, mentions: 0, other: 0 };
   const selected = [];
   const selectedIds = new Set();
   const take = (edge) => {
@@ -100,13 +105,12 @@ function selectBalancedEdges(edges, limit) {
   for (const [name, group] of Object.entries(groups)) {
     group.slice(0, Math.floor(limit * shares[name])).forEach(take);
   }
-  const strongGroups = [groups.curated, groups.other, groups.supports, groups.learning, groups.related];
+  const strongGroups = [groups.curated, groups.guide, groups.learning];
   let cursor = 0;
   while (selected.length < limit && strongGroups.some((group) => cursor < group.length)) {
     for (const group of strongGroups) take(group[cursor]);
     cursor += 1;
   }
-  for (const edge of groups.mentions) take(edge);
   return selected.sort(edgeCompare);
 }
 
@@ -195,16 +199,10 @@ function documentLayout(nodes, { centerX = 0.5, centerY = 0.5, radius = 0.39, co
 
 function focusLayout(focusId, nodeIds, directIds) {
   const direct = nodeIds.filter((id) => id !== focusId && directIds.has(id));
-  const second = nodeIds.filter((id) => id !== focusId && !directIds.has(id));
   const coordinates = new Map([[focusId, { x: 0.5, y: 0.5 }]]);
   direct.forEach((id, index) => {
     const angle = index * GOLDEN_ANGLE + (hashNumber(id) % 31) / 31;
     const distance = 0.19 + 0.09 * ((index % 4) / 3);
-    coordinates.set(id, { x: 0.5 + Math.cos(angle) * distance, y: 0.5 + Math.sin(angle) * distance });
-  });
-  second.forEach((id, index) => {
-    const angle = index * GOLDEN_ANGLE + 0.29;
-    const distance = 0.34 + 0.1 * ((index % 5) / 4);
     coordinates.set(id, { x: 0.5 + Math.cos(angle) * distance, y: 0.5 + Math.sin(angle) * distance });
   });
   return coordinates;
@@ -222,29 +220,13 @@ function buildFocusRecord(focus, nodesById, adjacency, limits) {
     .sort((left, right) => right[1] - left[1]
       || Number(nodesById.get(right[0])?.degree?.total || 0) - Number(nodesById.get(left[0])?.degree?.total || 0)
       || stableCompare(left[0], right[0]))
-    .slice(0, Math.min(42, limits.focusNodes - 1))
+    .slice(0, Math.min(6, limits.focusNodes - 1))
     .map(([id]) => id);
   const selected = new Set([focus.id, ...direct]);
-  const secondScore = new Map();
-  for (const directId of direct) {
-    for (const edge of values(adjacency.get(directId))) {
-      const id = edge.source === directId ? edge.target : edge.source;
-      if (selected.has(id) || !nodesById.has(id) || nodesById.get(id)?.visibility === "context") continue;
-      secondScore.set(id, Math.max(secondScore.get(id) || 0, edgePriority(edge)));
-    }
-  }
-  const remaining = Math.max(0, limits.focusNodes - selected.size);
-  const second = [...secondScore]
-    .sort((left, right) => right[1] - left[1]
-      || Number(nodesById.get(right[0])?.degree?.total || 0) - Number(nodesById.get(left[0])?.degree?.total || 0)
-      || stableCompare(left[0], right[0]))
-    .slice(0, remaining)
-    .map(([id]) => id);
-  second.forEach((id) => selected.add(id));
   const coordinates = focusLayout(focus.id, [...selected], new Set(direct));
   const nodes = [...selected].map((id) => nodeRecord(nodesById.get(id), {
     ...coordinates.get(id),
-    hop: id === focus.id ? 0 : direct.includes(id) ? 1 : 2,
+    hop: id === focus.id ? 0 : 1,
     focus: id === focus.id,
     context: nodesById.get(id)?.visibility === "context"
   }));
@@ -267,9 +249,9 @@ function buildFocusRecord(focus, nodesById, adjacency, limits) {
     stats: {
       directCandidates: directScore.size,
       visibleDirect: direct.length,
-      visibleSecond: second.length,
+      visibleSecond: 0,
       visibleEdges: edges.length,
-      truncatedNodes: 1 + directScore.size + secondScore.size > nodes.length,
+      truncatedNodes: 1 + directScore.size > nodes.length,
       truncatedEdges: edgeMap.size > edges.length
     }
   };
@@ -282,9 +264,9 @@ export function buildSemanticAtlas(graph, options = {}) {
   const visibleNodes = contextualNodes.filter((node) => node?.visibility !== "context");
   const contextualIds = new Set(contextualNodes.map((node) => node.id));
   const visibleIds = new Set(visibleNodes.map((node) => node.id));
-  const visibleEdges = values(graph?.edges).filter((edge) => visibleIds.has(edge.source) && visibleIds.has(edge.target))
+  const visibleEdges = values(graph?.edges).filter((edge) => isStructureEdge(edge) && visibleIds.has(edge.source) && visibleIds.has(edge.target))
     .sort((left, right) => stableCompare(left.id, right.id));
-  const contextualEdges = values(graph?.edges).filter((edge) => contextualIds.has(edge.source) && contextualIds.has(edge.target)
+  const contextualEdges = values(graph?.edges).filter((edge) => isStructureEdge(edge) && contextualIds.has(edge.source) && contextualIds.has(edge.target)
       && (visibleIds.has(edge.source) || visibleIds.has(edge.target)))
     .sort((left, right) => stableCompare(left.id, right.id));
   const nodesById = new Map(contextualNodes.map((node) => [node.id, node]));

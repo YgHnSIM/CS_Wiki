@@ -1,11 +1,14 @@
 import { basename } from "node:path";
 import { slugify } from "../core.mjs";
 
-export const GRAPH_SCHEMA_VERSION = "1.0.0";
+export const GRAPH_SCHEMA_VERSION = "2.0.0";
 
 export const RELATION_META = Object.freeze({
   mentions: { label: "본문에서 언급", inverseLabel: "본문에서 언급됨", family: "navigation", directed: true, origin: "derived", weight: 1, cost: 8 },
-  related: { label: "관련 항목", inverseLabel: "관련 항목", family: "navigation", directed: false, origin: "derived", weight: 2, cost: 6 },
+  recommends: { label: "함께 읽기 추천", inverseLabel: "읽을거리로 추천됨", family: "navigation", directed: true, origin: "derived", weight: 3, cost: 4 },
+  // Schema v1 compatibility only. New builds emit `recommends` for the final
+  // related-reading section and never accept `related` as a curated claim.
+  related: { label: "기존 관련 항목", inverseLabel: "기존 관련 항목", family: "navigation", directed: false, origin: "derived", weight: 2, cost: 6 },
   supports: { label: "근거로 뒷받침", inverseLabel: "근거를 받음", family: "evidence", directed: true, origin: "derived", weight: 5, cost: 2 },
   path_next: { label: "학습 경로의 다음 단계", inverseLabel: "학습 경로의 이전 단계", family: "learning", directed: true, origin: "derived", weight: 4, cost: 3 },
   broader: { label: "더 넓은 개념", inverseLabel: "더 좁은 개념", family: "semantic", directed: true, origin: "curated", weight: 6, cost: 1 },
@@ -43,8 +46,6 @@ export const CAPABILITY_LAYERS = Object.freeze([
 ]);
 
 export const CURATED_RELATION_KINDS = Object.freeze([
-  "related",
-  "supports",
   "broader",
   "narrower",
   "prerequisite_for",
@@ -65,6 +66,15 @@ export const HISTORICAL_RELATION_KINDS = Object.freeze([
   "precedes",
   "constrains"
 ]);
+
+export const GRAPH_CONNECTION_CHANNELS = Object.freeze(["core", "guide", "evidence", "trace"]);
+
+export function graphConnectionChannel(edge) {
+  if (edge.origin === "curated" && !["related", "supports"].includes(edge.kind)) return "core";
+  if (["recommends", "related", "path_next"].includes(edge.kind)) return "guide";
+  if (edge.kind === "supports") return "evidence";
+  return "trace";
+}
 
 export function parseYear(value) {
   if (value === undefined || value === null || value === "") return null;
@@ -125,6 +135,7 @@ export function validateKnowledgeGraph(graph) {
     nodeIds.add(node.id);
   }
   const edgeIds = new Set();
+  const edgesById = new Map();
   for (const edge of graph.edges) {
     if (edgeIds.has(edge.id)) throw new Error(`Duplicate graph edge id '${edge.id}'`);
     edgeIds.add(edge.id);
@@ -135,6 +146,60 @@ export function validateKnowledgeGraph(graph) {
     if (edge.origin === "curated" && HISTORICAL_RELATION_KINDS.includes(edge.kind) && !(edge.evidence || []).length) {
       throw new Error(`Historical graph edge '${edge.id}' requires direct evidence`);
     }
+    edgesById.set(edge.id, edge);
   }
+  if (!Array.isArray(graph.connections)) throw new Error("Graph connections must be an array");
+  const connectionIds = new Set();
+  const assignedEdgeIds = new Set();
+  for (const connection of graph.connections) {
+    if (connectionIds.has(connection.id)) throw new Error(`Duplicate graph connection id '${connection.id}'`);
+    connectionIds.add(connection.id);
+    if (!nodeIds.has(connection.source) || !nodeIds.has(connection.target) || connection.source === connection.target) {
+      throw new Error(`Graph connection '${connection.id}' has invalid endpoints`);
+    }
+    const expectedId = `${connection.source}::${connection.target}`;
+    if (connection.id !== expectedId || connection.source.localeCompare(connection.target, "ko") > 0) {
+      throw new Error(`Graph connection '${connection.id}' is not a canonical document pair`);
+    }
+    if (!Array.isArray(connection.edgeIds) || !connection.edgeIds.length) {
+      throw new Error(`Graph connection '${connection.id}' has no edges`);
+    }
+    const channelKeys = Object.keys(connection.channels || {}).sort();
+    if (JSON.stringify(channelKeys) !== JSON.stringify([...GRAPH_CONNECTION_CHANNELS].sort())) {
+      throw new Error(`Graph connection '${connection.id}' has invalid channels`);
+    }
+    const channelEdgeIds = [];
+    for (const channel of GRAPH_CONNECTION_CHANNELS) {
+      if (!Array.isArray(connection.channels[channel])) throw new Error(`Graph connection '${connection.id}' channel '${channel}' is invalid`);
+      for (const edgeId of connection.channels[channel]) {
+        const edge = edgesById.get(edgeId);
+        if (!edge || graphConnectionChannel(edge) !== channel) {
+          throw new Error(`Graph connection '${connection.id}' misclassifies edge '${edgeId}'`);
+        }
+        channelEdgeIds.push(edgeId);
+      }
+    }
+    const declaredEdgeIds = [...connection.edgeIds].sort((left, right) => left.localeCompare(right, "ko"));
+    const classifiedEdgeIds = [...channelEdgeIds].sort((left, right) => left.localeCompare(right, "ko"));
+    if (JSON.stringify(declaredEdgeIds) !== JSON.stringify(classifiedEdgeIds) || new Set(declaredEdgeIds).size !== declaredEdgeIds.length) {
+      throw new Error(`Graph connection '${connection.id}' edge and channel membership differ`);
+    }
+    const kinds = new Set();
+    for (const edgeId of declaredEdgeIds) {
+      const edge = edgesById.get(edgeId);
+      if (!edge || ![edge.source, edge.target].every((id) => id === connection.source || id === connection.target)) {
+        throw new Error(`Graph connection '${connection.id}' references an edge outside its pair`);
+      }
+      if (assignedEdgeIds.has(edgeId)) throw new Error(`Graph edge '${edgeId}' belongs to multiple connections`);
+      assignedEdgeIds.add(edgeId);
+      kinds.add(edge.kind);
+    }
+    const declaredKinds = [...(connection.kinds || [])].sort((left, right) => left.localeCompare(right, "ko"));
+    const actualKinds = [...kinds].sort((left, right) => left.localeCompare(right, "ko"));
+    if (JSON.stringify(declaredKinds) !== JSON.stringify(actualKinds)) {
+      throw new Error(`Graph connection '${connection.id}' kinds differ from its edges`);
+    }
+  }
+  if (assignedEdgeIds.size !== edgeIds.size) throw new Error("Every graph edge must belong to exactly one connection");
   return graph;
 }

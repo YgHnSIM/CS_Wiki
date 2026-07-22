@@ -11,7 +11,7 @@ const FACET_ALIASES = Object.freeze({
   capability: ["capability", "capabilityLayers", "capability_layers"]
 });
 
-const RELATION_PRIORITY = Object.freeze({ supports: 4, path_next: 3, related: 2, mentions: 1 });
+const RELATION_PRIORITY = Object.freeze({ supports: 4, path_next: 4, recommends: 3, related: 2, mentions: 1 });
 const hasOwn = (value, key) => Object.prototype.hasOwnProperty.call(value || {}, key);
 
 function values(value) {
@@ -384,6 +384,8 @@ export function describeAtlasEdge(edge = {}, nodesById = {}, legend = {}) {
     detail = edge.reciprocal
       ? "두 문서의 관련 항목에 서로 등록된 양방향 연결입니다."
       : "한 문서의 관련 항목에서 함께 읽을 대상으로 연결했습니다.";
+  } else if (edge.kind === "recommends") {
+    detail = context?.note || `“${sourceTitle}”에서 “${targetTitle}”을 다음 읽을거리로 추천합니다.`;
   } else if (edge.kind === "mentions") {
     context = contexts.find((item) => item?.pageId || item?.section || item?.excerpt) || context;
     const owner = lookupRecord(nodesById, context?.pageId);

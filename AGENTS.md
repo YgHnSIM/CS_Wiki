@@ -107,10 +107,27 @@ capability_layers: [computability, complexity]
 ```
 
 - 한 행은 `현재 문서 → 대상` 방향으로 읽는다. `대상`은 반드시 위키링크이며 `설명`은 관계가 성립하는 이유를 한 문장으로 적는다. `근거`에는 관계를 직접 뒷받침하는 `type/source` 또는 `type/reference` 페이지를 연결한다. 다른 개념·분석 페이지를 관계 근거로 대신할 수 없다. 역사·인과 렌즈에 쓰이는 `responds_to`, `enables`, `precedes`, `constrains`는 근거를 비워 둘 수 없다.
-- 허용 관계는 `related`, `supports`, `broader`, `narrower`, `prerequisite_for`, `enables`, `constrains`, `measures`, `implements`, `exemplifies`, `precedes`, `responds_to`, `contradicts`, `synthesizes`다.
-- 단순 본문 언급, `## 관련 항목`, 프론트매터 `sources`, 학습 경로의 인접 단계는 각각 `mentions`, `related`, `supports`, `path_next`로 자동 생성하므로 표에 반복하지 않는다.
+- 허용 관계는 `broader`, `narrower`, `prerequisite_for`, `enables`, `constrains`, `measures`, `implements`, `exemplifies`, `precedes`, `responds_to`, `contradicts`, `synthesizes`다. 자동 관계인 `recommends`, `supports`와 이전 스키마 호환용 `related`는 관계 표에 직접 쓰지 않는다.
+- 단순 본문 언급, `## 관련 항목`, 프론트매터 `sources`, 학습 경로의 인접 단계는 각각 `mentions`, `recommends`, `supports`, `path_next`로 자동 생성하므로 표에 반복하지 않는다.
 - 한 문서 안에서 같은 `관계 종류 + 대상` 행을 여러 번 만들지 않는다. 설명이나 근거를 보강할 때는 기존 행에 통합하며, 별칭으로 같은 대상을 가리키는 중복도 lint가 거부한다.
 - 같은 도메인이라는 이유만으로 문서 쌍을 간선으로 만들지 않는다. 도메인은 문서 수가 늘어도 폭증하지 않는 군집 속성으로만 사용한다.
+
+그래프와 화면은 같은 두 문서 사이의 여러 간선을 **하나의 문서쌍 연결 묶음**으로 합치고 다음 네 채널로 나눠 보여 준다. 한 문서쌍은 목록과 지도에서 한 번만 표시하며, 세부 관계 종류와 방향은 그 묶음 안에 보존한다.
+
+| 채널 | 포함 관계 | 기본 노출 |
+|---|---|---|
+| 핵심 (`core`) | 편집자가 `## 관계`에 기록한 의미 관계 | 문서 화면의 첫 채널 |
+| 읽기 (`guide`) | `recommends`, `path_next`, 이전 `related` | 핵심 관계가 없을 때 첫 채널 |
+| 근거 (`evidence`) | 프론트매터에서 생성한 `supports` | 사용자가 선택할 때 |
+| 언급 (`trace`) | 본문에서 생성한 `mentions` | 사용자가 선택할 때 |
+
+일반 지식 문서의 마지막 `## 관련 항목`은 현재 문서에서 다음 읽을거리로 향하는 **방향 있는 추천**이다. 최대 5개만 두고 각 항목에 선택 이유를 한 줄로 적는다. 역방향 링크를 의무화하지 않으며, 같은 대상은 한 번만 기록한다.
+
+```markdown
+## 관련 항목
+
+- [[계산 가능성]] — 컴퓨팅 능력의 이론적 경계를 먼저 확인한다.
+```
 
 근거 계보 렌즈는 일반 지식 문서의 프론트매터 `sources`를 **문서 전체에 등록된 근거 묶음**으로만 해석한다. 이를 문장별 진위, 출처 독립성이나 신뢰도 점수로 바꾸지 않는다. 소스·참고 자료 페이지의 `primary_sources`와 `supporting_sources`는 그 자료 페이지가 정리한 원자료와 보조·접근 자료의 재현 계보이며, 지식 문서의 개별 주장에 대한 직접·간접 근거 등급이 아니다. `snapshot_status`도 품질 점수가 아니라 다시 확인할 수 있는 보존 조건이다.
 
@@ -136,6 +153,7 @@ capability_layers: [computability, complexity]
 - 본문 중 반복적인 `[[소스 페이지]]` 인용은 피하고, 직접 인용·논쟁적 주장·모순·여러 소스 비교처럼 근거 위치가 특히 중요한 경우에만 짧은 각주 또는 `[[소스 페이지|출처]]` 표기를 사용
 - 모순이 발견되면 명시적으로 기록: `> [!WARNING] 모순 발견`
 - 각 페이지 하단에는 `## 출처` 섹션과 `## 관련 항목` 섹션을 두되, `## 관련 항목`이 마지막에 오도록 배치
+- 개념·개체·분석 페이지의 `## 관련 항목`은 이유가 적힌 추천 링크를 최대 5개만 두며 상호 링크를 만들기 위해 역방향 항목을 억지로 추가하지 않음
 - 깃 커밋 메세지는 영어로 작성하며, `ingest: number_title` 형식을 따름
 	- 예시 
 		- `ingest: 001_Computing Origins - Babbage and Lovelace`
@@ -205,7 +223,7 @@ capability_layers: [computability, complexity]
 6. **제안** — 추가로 조사할 만한 질문이나 찾아볼 소스 제안
 7. **결과를 log.md에 기록**
 
-자동 점검은 저장소 루트에서 `python scripts/wiki_lint.py`로 실행합니다. 프론트매터, provenance, 링크·섹션, 고아 페이지, 별칭 충돌, 상호 링크, 색인 수치, 출처 일치, 로그 계층을 함께 검사하며 오류가 있으면 종료 코드 1을 반환합니다. 기계 판독 결과는 `--json`으로 출력합니다.
+자동 점검은 저장소 루트에서 `python scripts/wiki_lint.py`로 실행합니다. 프론트매터, provenance, 링크·섹션, 고아 페이지, 별칭 충돌, 관련 항목 예산·이유, 색인 수치, 출처 일치, 로그 계층을 함께 검사하며 오류가 있으면 종료 코드 1을 반환합니다. 기계 판독 결과는 `--json`으로 출력합니다.
 
 기계적으로 안전한 정리는 `python scripts/wiki_maintenance.py --check`로 먼저 확인한 뒤 필요한 `--fix-*` 옵션을 사용합니다. 이 도구는 `raw/`를 수정하지 않으며 반복 실행해도 결과가 달라지지 않아야 합니다.
 
@@ -238,7 +256,7 @@ capability_layers: [computability, complexity]
 
 - **정확성**: 모든 주장은 소스에 근거
 - **일관성**: 페이지 간 모순 없음 (있으면 명시)
-- **연결성**: 관련 페이지는 반드시 상호 링크
+- **연결성**: 의미 관계는 방향과 이유를 보존하고, 읽기 추천은 필요한 방향에만 기록
 - **최신성**: 새 소스 수집 시 관련 페이지 모두 갱신
 - **가독성**: 구조적이고 스캔 가능한 형식
 
