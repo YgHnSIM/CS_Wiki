@@ -1068,7 +1068,6 @@ for (const marker of [
   "data-graph-settings-panel",
   "data-graph-settings-close",
   "data-graph-asset-root",
-  'data-graph-mode="overview"',
   'data-graph-mode="focus"',
   'data-graph-mode="path"',
   "data-graph-toggle-show-arrows",

@@ -648,7 +648,7 @@ function knowledgeGraphPage() {
       <div>
         <p class="eyebrow">개념 ${conceptNodes.length} · 인물 ${entityNodes.length} · 직접 연결 ${conceptEntityGraph.stats.edges}</p>
         <h1>지식 그래프</h1>
-        <p>주제 군집을 살펴보고, 한 문서의 직접 연결이나 두 문서 사이의 경로에 집중할 수 있습니다.</p>
+        <p>문서를 선택해 직접 연결에 집중하거나 두 문서 사이의 경로를 확인할 수 있습니다.</p>
       </div>
     </header>
     ${mapModeNav("graph")}
@@ -659,8 +659,7 @@ function knowledgeGraphPage() {
         <div id="knowledge-graph-search-results" class="knowledge-graph-search-results" data-graph-search-results hidden></div>
       </div>
       <div class="knowledge-graph-modes" role="group" aria-label="탐색 방식">
-        <button type="button" data-graph-mode="overview" aria-pressed="true">군집 개요</button>
-        <button type="button" data-graph-mode="focus" aria-pressed="false">선택 집중</button>
+        <button type="button" data-graph-mode="focus" aria-pressed="true">선택 집중</button>
         <button type="button" data-graph-mode="path" aria-pressed="false">두 문서 경로</button>
       </div>
       <div class="knowledge-graph-filters" role="group" aria-label="문서 유형">
@@ -676,7 +675,7 @@ function knowledgeGraphPage() {
         <div class="knowledge-graph-legend" aria-label="노드 범례">
           <span><i class="concept" aria-hidden="true"></i>개념</span>
           <span><i class="entity" aria-hidden="true"></i>인물</span>
-          <span><i class="relation" aria-hidden="true"></i>주제 경계</span>
+          <span><i class="relation" aria-hidden="true"></i>문서 관계</span>
         </div>
         <div class="knowledge-graph-camera" aria-label="그래프 화면 조절">
           <button type="button" data-graph-zoom-out>축소</button>
@@ -684,8 +683,8 @@ function knowledgeGraphPage() {
           <button type="button" data-graph-zoom-in>확대</button>
         </div>
         <div class="knowledge-graph-context">
-          <p data-graph-trail>전체 지식</p>
-          <output class="knowledge-graph-status" data-graph-status aria-live="polite">개념과 인물 ${conceptEntityGraph.stats.nodes}개를 주제별로 표시합니다.</output>
+          <p data-graph-trail>선택할 문서를 검색하거나 그래프에서 고르세요.</p>
+          <output class="knowledge-graph-status" data-graph-status aria-live="polite">개념과 인물 ${conceptEntityGraph.stats.nodes}개, 연결 ${conceptEntityGraph.stats.edges}개를 표시합니다.</output>
         </div>
         <p class="knowledge-graph-hint" id="knowledge-graph-hint">드래그로 이동하고 휠로 확대합니다. 노드를 선택하면 직접 연결에 집중합니다.</p>
         <aside class="knowledge-graph-settings" id="knowledge-graph-settings" data-graph-settings-panel aria-labelledby="knowledge-graph-settings-title" hidden>

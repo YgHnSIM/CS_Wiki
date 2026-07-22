@@ -30,22 +30,6 @@ const FOCUS_CAMERA_LIMITS = Object.freeze({ min: 0.001, max: 2.8 });
 const STORAGE_KEY = "cs-wiki:knowledge-graph:settings:v2";
 const DIRECTION = new Set(["forward", "reverse", "both", "none"]);
 const GROUP_COLORS = Object.freeze(["#00ff41", "#ffb000", "#8cb393", "#e7ffe9", "#00b82e", "#b67a00"]);
-const DOMAIN_LABELS = Object.freeze({
-  "domain/computer-architecture": "컴퓨터 구조",
-  "domain/computer-history": "컴퓨터 역사",
-  "domain/computer-science": "컴퓨터 과학",
-  "domain/internet": "인터넷",
-  "domain/machine-learning": "머신러닝",
-  "domain/mathematics": "수학",
-  "domain/operating-systems": "운영체제",
-  "domain/programming-languages": "프로그래밍 언어",
-  "domain/security": "보안",
-  "domain/software-engineering": "소프트웨어 공학",
-  "domain/systems": "시스템",
-  "domain/text-processing": "텍스트 처리",
-  "domain/web": "웹",
-  "domain/general": "연결 주제"
-});
 const RELATION_LABELS = Object.freeze({
   mentions: "본문에서 언급",
   related: "관련 항목",
@@ -369,78 +353,6 @@ function graphPairKey(left, right) {
   return String(left).localeCompare(String(right), "ko") <= 0
     ? `${left}\u0000${right}`
     : `${right}\u0000${left}`;
-}
-
-/** Arrange the complete graph as labeled domain constellations and aggregate cross-domain corridors. */
-export function createClusterOverviewLayout(nodes = [], edges = []) {
-  const validNodes = nodes.filter((node) => node?.id);
-  const domainCounts = new Map();
-  for (const node of validNodes) {
-    const domains = node.domains?.length ? node.domains : ["domain/general"];
-    for (const domain of domains) domainCounts.set(domain, (domainCounts.get(domain) || 0) + 1);
-  }
-  const domainForNode = new Map(validNodes.map((node) => {
-    const domains = node.domains?.length ? node.domains : ["domain/general"];
-    const domain = [...domains].sort((left, right) => (domainCounts.get(left) || 0) - (domainCounts.get(right) || 0)
-      || left.localeCompare(right, "ko"))[0];
-    return [node.id, domain];
-  }));
-  const groups = new Map();
-  for (const node of validNodes) {
-    const domain = domainForNode.get(node.id);
-    if (!groups.has(domain)) groups.set(domain, []);
-    groups.get(domain).push(node);
-  }
-  const ordered = [...groups.entries()].sort((left, right) => right[1].length - left[1].length
-    || left[0].localeCompare(right[0], "ko"));
-  const columns = Math.max(1, Math.ceil(Math.sqrt(ordered.length * 1.25)));
-  const rows = Math.max(1, Math.ceil(ordered.length / columns));
-  const positions = new Map();
-  const clusters = ordered.map(([domain, members], index) => {
-    const row = Math.floor(index / columns);
-    const column = index % columns;
-    const center = {
-      x: (column - (columns - 1) / 2) * 440 + (row % 2 ? 72 : 0),
-      y: (row - (rows - 1) / 2) * 350
-    };
-    const sorted = [...members].sort((left, right) => finite(right.degree) - finite(left.degree)
-      || left.title.localeCompare(right.title, "ko"));
-    let radius = 82;
-    sorted.forEach((node, memberIndex) => {
-      const angle = memberIndex * Math.PI * (3 - Math.sqrt(5));
-      const distance = memberIndex ? 30 + 27 * Math.sqrt(memberIndex) : 0;
-      const point = {
-        x: center.x + Math.cos(angle) * distance * 1.16,
-        y: center.y + Math.sin(angle) * distance * 0.82
-      };
-      positions.set(node.id, point);
-      radius = Math.max(radius, distance + 58);
-    });
-    return {
-      id: domain,
-      label: DOMAIN_LABELS[domain] || domain.replace(/^domain\//u, "").replaceAll("-", " "),
-      count: members.length,
-      memberIds: sorted.map((node) => node.id),
-      x: center.x,
-      y: center.y,
-      radius
-    };
-  });
-  const clusterById = new Map(clusters.map((cluster) => [cluster.id, cluster]));
-  const corridorCounts = new Map();
-  for (const edge of edges) {
-    const sourceDomain = domainForNode.get(edge.source);
-    const targetDomain = domainForNode.get(edge.target);
-    if (!sourceDomain || !targetDomain || sourceDomain === targetDomain) continue;
-    const key = graphPairKey(sourceDomain, targetDomain);
-    corridorCounts.set(key, (corridorCounts.get(key) || 0) + 1);
-  }
-  const corridors = [...corridorCounts.entries()].map(([key, count]) => {
-    const [sourceId, targetId] = key.split("\u0000");
-    return { source: clusterById.get(sourceId), target: clusterById.get(targetId), count };
-  }).filter((corridor) => corridor.source && corridor.target)
-    .sort((left, right) => right.count - left.count || left.source.id.localeCompare(right.source.id, "ko"));
-  return { positions, clusters, corridors, domainForNode };
 }
 
 /** Place direct neighbors in four semantic sectors around an exact center node. */
@@ -775,10 +687,8 @@ function bootstrapKnowledgeGraph() {
   let hoveredEdgeKey = "";
   let keyboardNodeId = "";
   let activeFilter = "all";
-  let viewMode = "overview";
+  let viewMode = "focus";
   let semanticPositions = new Map();
-  let overviewClusters = [];
-  let overviewCorridors = [];
   let focusSectors = [];
   let pathStartId = "";
   let pathEndId = "";
@@ -988,43 +898,6 @@ function bootstrapKnowledgeGraph() {
     context.restore();
   }
 
-  function drawOverviewStructure() {
-    for (const corridor of overviewCorridors) {
-      const from = worldToScreen(corridor.source);
-      const to = worldToScreen(corridor.target);
-      context.save();
-      context.globalAlpha = Math.min(0.42, 0.11 + Math.log2(1 + corridor.count) * 0.065);
-      context.strokeStyle = PALETTE.entity;
-      context.lineWidth = Math.min(8, 1 + Math.sqrt(corridor.count) * 0.72);
-      context.beginPath();
-      context.moveTo(from.x, from.y);
-      context.lineTo(to.x, to.y);
-      context.stroke();
-      context.restore();
-    }
-    for (const cluster of overviewClusters) {
-      const center = worldToScreen(cluster);
-      const radius = Math.max(26, cluster.radius * camera.zoom);
-      context.save();
-      context.fillStyle = "rgba(0,255,65,0.022)";
-      context.strokeStyle = "rgba(0,255,65,0.22)";
-      context.lineWidth = 1;
-      context.setLineDash([4, 7]);
-      context.beginPath();
-      context.ellipse(center.x, center.y, radius * 1.14, radius * 0.86, 0, 0, Math.PI * 2);
-      context.fill();
-      context.stroke();
-      context.setLineDash([]);
-      context.font = '700 11px "D2Coding", monospace';
-      context.textAlign = "center";
-      context.textBaseline = "bottom";
-      context.fillStyle = PALETTE.text;
-      context.globalAlpha = 0.94;
-      context.fillText(`${cluster.label}  ${cluster.count}`, center.x, center.y - radius * 0.86 - 10);
-      context.restore();
-    }
-  }
-
   function drawFocusSectorLabels() {
     if (viewMode !== "focus" || !selectedId || viewport.width < 680) return;
     const anchors = {
@@ -1047,22 +920,16 @@ function bootstrapKnowledgeGraph() {
     context.restore();
   }
 
-  function isOverviewScene() {
-    return viewMode === "overview" || (viewMode === "focus" && !selectedId)
-      || (viewMode === "path" && pathNodeIds.length < 2);
-  }
-
   function draw() {
     context.clearRect(0, 0, viewport.width, viewport.height);
     context.fillStyle = PALETTE.background;
     context.fillRect(0, 0, viewport.width, viewport.height);
     drawGrid();
-    if (isOverviewScene()) drawOverviewStructure();
     drawFocusSectorLabels();
     const drawIds = renderedIds();
     const neighbors = selectedId ? adjacency.get(selectedId) || new Set() : null;
 
-    for (const edge of isOverviewScene() ? [] : visibleEdges) {
+    for (const edge of visibleEdges) {
       if (!drawIds.has(edge.source) || !drawIds.has(edge.target)) continue;
       const source = nodeById.get(edge.source);
       const target = nodeById.get(edge.target);
@@ -1071,7 +938,7 @@ function bootstrapKnowledgeGraph() {
       const to = worldToScreen(target);
       const connected = Boolean(selectedId && (edge.source === selectedId || edge.target === selectedId));
       const hovered = graphPairKey(edge.source, edge.target) === hoveredEdgeKey;
-      const active = viewMode === "path" || connected || hovered;
+      const active = (viewMode === "path" && pathNodeIds.length >= 2) || connected || hovered;
       const alpha = active ? (hovered ? 1 : 0.82) : 0.13;
       const color = active ? PALETTE.entity : PALETTE.muted;
       const width = (hovered ? 3 : active ? 1.7 : Math.min(1.5, 0.55 + Math.log2(1 + edge.weight) * 0.35)) * settings.linkThickness;
@@ -1210,16 +1077,7 @@ function bootstrapKnowledgeGraph() {
 
   function refreshSemanticLayout() {
     semanticPositions = new Map();
-    overviewClusters = [];
-    overviewCorridors = [];
     focusSectors = [];
-    if (isOverviewScene()) {
-      const overview = createClusterOverviewLayout(visibleNodes, visibleEdges);
-      semanticPositions = overview.positions;
-      overviewClusters = overview.clusters;
-      overviewCorridors = overview.corridors;
-      return;
-    }
     if (viewMode === "focus" && selectedId) {
       const selected = nodeById.get(selectedId);
       const neighbors = visibleNodes.filter((node) => node.id !== selectedId);
@@ -1243,10 +1101,6 @@ function bootstrapKnowledgeGraph() {
 
   function updateTrail() {
     if (!trail) return;
-    if (viewMode === "overview") {
-      trail.textContent = `전체 지식 · ${overviewClusters.length}개 주제 군집`;
-      return;
-    }
     if (viewMode === "focus") {
       const node = nodeById.get(selectedId);
       trail.textContent = node ? `전체 지식 > ${node.title}` : "선택할 문서를 검색하거나 그래프에서 고르세요.";
@@ -1426,7 +1280,6 @@ function bootstrapKnowledgeGraph() {
   }
 
   function hitEdge(point) {
-    if (isOverviewScene()) return null;
     let best = null;
     let bestDistance = 8;
     for (const edge of visibleEdges) {
@@ -1593,17 +1446,11 @@ function bootstrapKnowledgeGraph() {
   }
 
   function setViewMode(value) {
-    const next = ["overview", "focus", "path"].includes(value) ? value : "overview";
+    const next = ["focus", "path"].includes(value) ? value : "focus";
     if (next === viewMode) return;
     viewMode = next;
     hoveredEdgeKey = "";
-    if (viewMode === "overview") {
-      selectedId = "";
-      pathStartId = "";
-      pathEndId = "";
-      pathNodeIds = [];
-      updateInspector(null);
-    } else if (viewMode === "path") {
+    if (viewMode === "path") {
       selectedId = "";
       pathStartId = "";
       pathEndId = "";
@@ -1617,9 +1464,7 @@ function bootstrapKnowledgeGraph() {
     autoFocus = true;
     syncModeButtons();
     recomputeVisibility({ fit: true });
-    announce(viewMode === "overview" ? "주제별 지식 군집을 표시합니다."
-      : viewMode === "focus" ? "집중해서 볼 문서를 선택하세요."
-        : "경로의 첫 문서를 선택하세요.");
+    announce(viewMode === "focus" ? "집중해서 볼 문서를 선택하세요." : "경로의 첫 문서를 선택하세요.");
   }
 
   function selectNode(id) {
@@ -1653,7 +1498,7 @@ function bootstrapKnowledgeGraph() {
     }
     if (!selectedId) return;
     selectedId = "";
-    viewMode = "overview";
+    viewMode = "focus";
     autoFocus = false;
     updateInspector(null);
     syncModeButtons();
@@ -2111,7 +1956,7 @@ function bootstrapKnowledgeGraph() {
     } else if (event.key === "Escape") clearSuggestions();
   });
 
-  for (const button of modeButtons) button.addEventListener("click", () => setViewMode(button.dataset.graphMode || "overview"));
+  for (const button of modeButtons) button.addEventListener("click", () => setViewMode(button.dataset.graphMode || "focus"));
   for (const button of filterButtons) button.addEventListener("click", () => applyFilter(button.dataset.graphFilter || "all"));
   for (const button of densityButtons) button.addEventListener("click", () => setLabelDensity(button.dataset.graphLabelDensity || "medium"));
   zoomIn?.addEventListener("click", () => { autoFocus = false; setZoom(camera.zoom * 1.28); });

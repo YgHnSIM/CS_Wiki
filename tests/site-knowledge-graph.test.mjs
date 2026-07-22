@@ -4,7 +4,6 @@ import {
   GRAPH_SETTINGS_DEFAULTS,
   attachmentAssetHref,
   computeVisibleGraphNodeIds,
-  createClusterOverviewLayout,
   createDeterministicLayout,
   createFocusedOrbitLayout,
   createGraphAdjacency,
@@ -245,7 +244,7 @@ test("focused camera keeps the selection centered and every direct neighbor insi
   assert.deepEqual(camera, fitFocusedGraphCamera(selected, neighbors, viewport, padding));
 });
 
-test("semantic layouts create stable clusters and relation sectors", () => {
+test("focused layout places neighbors in stable relation sectors", () => {
   const nodes = [
     node("architecture-a", "concepts", { domains: ["domain/computer-architecture"], degree: 3 }),
     node("architecture-b", "entities", { domains: ["domain/computer-architecture"], degree: 1 }),
@@ -255,12 +254,6 @@ test("semantic layouts create stable clusters and relation sectors", () => {
     { source: "architecture-a", target: "architecture-b", kinds: ["related"] },
     { source: "architecture-a", target: "software-c", kinds: ["enables"] }
   ];
-  const overview = createClusterOverviewLayout(nodes, edges);
-  assert.equal(overview.clusters.length, 2);
-  assert.equal(overview.corridors.length, 1);
-  assert.equal(overview.corridors[0].count, 1);
-  assert.deepEqual(overview, createClusterOverviewLayout([...nodes].reverse(), [...edges].reverse()));
-
   const focus = createFocusedOrbitLayout(nodes[0], nodes.slice(1), edges);
   assert.deepEqual(focus.positions.get("architecture-a"), { x: 0, y: 0 });
   assert.ok(focus.positions.get("software-c").x > 0, "implementation neighbor belongs on the right");
