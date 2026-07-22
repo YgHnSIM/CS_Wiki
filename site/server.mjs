@@ -2,6 +2,7 @@ import { createReadStream } from "node:fs";
 import { realpath, stat } from "node:fs/promises";
 import { createServer } from "node:http";
 import { extname, isAbsolute, join, relative, resolve } from "node:path";
+import { normalizeBase } from "./core.mjs";
 
 const contentTypes = {
   ".css": "text/css; charset=utf-8",
@@ -23,7 +24,7 @@ function isInside(root, candidate) {
   return rel === "" || (!rel.startsWith("..") && !isAbsolute(rel));
 }
 
-export function resolveRequestPath(root, requestUrl) {
+export function resolveRequestPath(root, requestUrl, basePath = "") {
   let pathname;
   try {
     pathname = decodeURIComponent(new URL(requestUrl, "http://localhost").pathname);
@@ -32,6 +33,11 @@ export function resolveRequestPath(root, requestUrl) {
   }
 
   if (pathname.includes("\0")) return { statusCode: 400, filePath: null };
+  const normalizedBase = normalizeBase(basePath);
+  if (normalizedBase && (pathname === normalizedBase || pathname.startsWith(`${normalizedBase}/`))) {
+    pathname = pathname.slice(normalizedBase.length) || "/";
+  }
+
   const portablePath = pathname.replaceAll("\\", "/");
   if (portablePath.split("/").includes("..")) return { statusCode: 403, filePath: null };
 
@@ -73,6 +79,7 @@ async function existingFile(root, candidate) {
 
 export async function handleStaticRequest(request, response, {
   root,
+  basePath = "",
   fallback = "404.html",
   createStream = createReadStream
 }) {
@@ -82,7 +89,7 @@ export async function handleStaticRequest(request, response, {
     return;
   }
 
-  const resolved = resolveRequestPath(root, request.url || "/");
+  const resolved = resolveRequestPath(root, request.url || "/", basePath);
   if (resolved.statusCode !== 200) {
     sendText(response, resolved.statusCode, resolved.statusCode === 400 ? "Bad Request" : "Forbidden");
     return;

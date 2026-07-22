@@ -2234,6 +2234,32 @@ VisiCalc는 기관 기록이 뒷받침하는 “개인용 컴퓨터용 최초의
 - [[overview]]
 - [[지식 그래프 관계 스키마]]
 
+## [2026-07-22] update | GitHub Pages base 경로 테스트 수정
+
+GitHub Pages 배포 환경의 `SITE_BASE=/CS_Wiki`로 생성된 CSS·JavaScript·지도 데이터 경로를 로컬 정적 테스트 서버가 `dist/`에 매핑하지 못해 최신 배포가 중단된 문제를 수정했다. 정적 서버는 이제 설정한 base와 정확히 일치하는 URL 접두사만 제거하며, 접두사가 비슷한 다른 경로와 경로 순회 요청은 기존처럼 허용하지 않는다. 루트 기반 로컬 미리보기 경로도 유지한다.
+
+변경된 페이지와 코드:
+
+- 정적 서버 base 경로 처리: `site/server.mjs`, `site/serve.mjs`
+- base 경로·경계·경로 순회 회귀 테스트: `tests/site-server.test.mjs`
+- 작업 기록: [[log]]
+
+### 검증
+
+- `SITE_BASE=/CS_Wiki`, 실제 Pages URL 환경에서 전체 lint·유지보수·빌드·검증 통과
+- Node 테스트 166개, Python 테스트 20개, Chromium 브라우저 테스트 4개 통과
+- `raw/` 원본 변경 없음
+
+### 출처
+
+- GitHub Actions `Deploy CS Wiki` 실행 기록
+- `site/server.mjs`
+
+### 관련 항목
+
+- [[index]]
+- [[overview]]
+
 <!-- wiki-maintenance: global-sections -->
 ## 출처
 
