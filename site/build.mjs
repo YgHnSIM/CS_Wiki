@@ -1,35 +1,30 @@
-import { cp, mkdir, readdir, readFile, rm, writeFile } from "node:fs/promises";
+import { cp, mkdir, readFile, rm } from "node:fs/promises";
 import { existsSync } from "node:fs";
-import { basename, dirname, extname, join, relative, sep } from "node:path";
+import { join } from "node:path";
 import { createHash } from "node:crypto";
 import MarkdownIt from "markdown-it";
 import anchor from "markdown-it-anchor";
 import { connectionSummary, createConnectionIndex, findConnectionPaths } from "./assets/connection-paths.js";
 import { buildLearningMap } from "./assets/learning-lines.js";
-import { domainMeta, historyPeriods, learningPaths, statusMeta } from "./catalog.mjs";
-import { buildKnowledgeGraph, extractAttachmentLinks, extractWikiLinks } from "./graph/model.mjs";
+import { categoryMeta, domainMeta, historyPeriods, learningPaths, navCategories, statusMeta } from "./catalog.mjs";
+import { loadWikiContent } from "./content.mjs";
+import { buildKnowledgeGraph } from "./graph/model.mjs";
 import { buildSemanticAtlas } from "./graph/atlas.mjs";
 import { buildHistoricalLens } from "./graph/history.mjs";
 import { EVIDENCE_LIMITS, buildEvidenceLens, evidenceStaticPageCount, evidenceStaticPageNumbers } from "./graph/evidence.mjs";
 import { buildConceptEntityGraph } from "./graph/explorer.mjs";
 import { graphNodeId } from "./graph/schema.mjs";
 import { describeRelationship, indexGraphEdges, relationLabel, selectLocalGraph } from "./graph/selectors.mjs";
+import { createDataOutputPath, createOutputWriter } from "./output.mjs";
 import {
-  buildPageLookup,
   cleanInline,
-  describe,
   escapeHtml,
   key,
   normalizeBase,
-  parseDocument,
-  parseFlowList,
-  parseScalar,
-  resolvePageLinks,
   safeExternalUrl,
   selectSiteDiscoveryPages,
   slugify,
   sourceTarget as resolveSourceTarget,
-  validateUniquePageOutputs,
   withBase as addBase
 } from "./core.mjs";
 
@@ -61,15 +56,6 @@ const assetHash = createHash("sha256")
   .update(await readFile(join(root, "site", "assets", "knowledge-graph.js")))
   .update(await readFile(join(root, "site", "assets", "knowledge-graph-worker.js")));
 
-const categoryMeta = {
-  sources: { label: "정규 소스", description: "raw에 보존한 원본을 직접 처리한 정규 소스 노트" },
-  references: { label: "참고 자료", description: "논문·표준·공식 기록으로 기존 지식을 보강한 외부 참고 자료" },
-  entities: { label: "인물", description: "컴퓨터 과학의 형성에 관여한 연구자와 설계자" },
-  concepts: { label: "개념", description: "컴퓨팅의 원리, 구조, 언어를 연결하는 핵심 개념" },
-  analyses: { label: "분석", description: "여러 소스와 개념을 비교하고 연결한 종합 분석" },
-  meta: { label: "메타", description: "위키의 운영 상태와 전체 지식 구조" }
-};
-const navCategories = ["sources", "references", "concepts", "entities", "analyses"];
 const atlasFacetMeta = Object.freeze({
   historical: {
     theory: "이론",
@@ -102,74 +88,7 @@ function mapModeNav(activeMode) {
   return `<nav class="map-mode-nav" aria-label="지식 지도 보기">${mapModes.map((mode) => `<a${mode.id === activeMode ? ' aria-current="page"' : ""} href="${withBase(mode.url)}">${mode.label}</a>`).join("")}</nav>`;
 }
 
-async function markdownFiles(directory) {
-  const entries = await readdir(directory, { withFileTypes: true });
-  const nested = await Promise.all(entries.map(async (entry) => {
-    const path = join(directory, entry.name);
-    if (entry.isDirectory()) return markdownFiles(path);
-    return extname(entry.name).toLowerCase() === ".md" ? [path] : [];
-  }));
-  return nested.flat();
-}
-
-function getCategory(filePath, tags = []) {
-  const rel = relative(wikiRoot, filePath).split(sep);
-  if (rel[0] === "sources") return tags.includes("type/reference") ? "references" : "sources";
-  return rel.length > 1 && categoryMeta[rel[0]] ? rel[0] : "meta";
-}
-
-const files = await markdownFiles(wikiRoot);
-const pages = await Promise.all(files.map(async (filePath) => {
-  const raw = await readFile(filePath, "utf8");
-  const parsed = parseDocument(raw);
-  const title = parseScalar(parsed.data.title) || basename(filePath, ".md");
-  const tags = parseFlowList(parsed.data.tags);
-  const category = getCategory(filePath, tags);
-  const slug = slugify(title);
-  return {
-    filePath,
-    relativePath: relative(root, filePath).split(sep).join("/"),
-    title,
-    summary: parseScalar(parsed.data.summary) || describe(parsed.content),
-    aliases: parseFlowList(parsed.data.aliases),
-    tags,
-    sources: parseFlowList(parsed.data.sources),
-    status: parseScalar(parsed.data.status) || "draft",
-    created: parseScalar(parsed.data.created),
-    updated: parseScalar(parsed.data.updated),
-    sourceId: parseScalar(parsed.data.source_id),
-    graphId: parseScalar(parsed.data.graph_id),
-    graphVisibility: parseScalar(parsed.data.graph_visibility),
-    publicationYear: parseScalar(parsed.data.publication_year),
-    eventStart: parseScalar(parsed.data.event_start),
-    eventEnd: parseScalar(parsed.data.event_end),
-    historicalLayer: parseScalar(parsed.data.historical_layer),
-    historicalNote: parseScalar(parsed.data.historical_note),
-    capabilityLayers: parseFlowList(parsed.data.capability_layers),
-    sourceKind: parseScalar(parsed.data.source_kind),
-    primarySources: parseFlowList(parsed.data.primary_sources),
-    supportingSources: parseFlowList(parsed.data.supporting_sources),
-    sourceUrls: parseFlowList(parsed.data.source_urls),
-    retrieved: parseScalar(parsed.data.retrieved),
-    version: parseScalar(parsed.data.version),
-    snapshotStatus: parseScalar(parsed.data.snapshot_status),
-    body: parsed.content.trim(),
-    description: parseScalar(parsed.data.summary) || describe(parsed.content),
-    category,
-    slug,
-    url: `/${category}/${slug}/`,
-    attachments: extractAttachmentLinks(parsed.content),
-    targets: extractWikiLinks(parsed.content).map((link) => link.target),
-    incoming: 0
-  };
-}));
-
-pages.sort((a, b) => a.title.localeCompare(b.title, "ko"));
-validateUniquePageOutputs(pages, {
-  additionalOutputs: (page) => page.category === "references" ? [`sources/${page.slug}`] : []
-});
-const lookup = buildPageLookup(pages);
-resolvePageLinks(pages, lookup);
+const { pages, lookup } = await loadWikiContent({ root, wikiRoot });
 
 const resolvedLearningPaths = learningPaths.map((path) => ({
   ...path,
@@ -1906,44 +1825,10 @@ function redirectPage(target) {
   return `<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="robots" content="noindex"><meta http-equiv="refresh" content="0;url=${escapeHtml(withBase(target))}"><link rel="canonical" href="${escapeHtml(withBase(target))}"><title>이동 중 · CS Wiki</title></head><body><p><a href="${escapeHtml(withBase(target))}">새 주소로 이동</a></p></body></html>`;
 }
 
-async function output(pathname, value) {
-  const destination = join(distRoot, pathname.replace(/^\//, ""));
-  await mkdir(dirname(destination), { recursive: true });
-  await writeFile(destination, value, "utf8");
-}
-
-function atlasDataOutputPath(url, label) {
-  const pathname = String(url || "").split(/[?#]/, 1)[0].replaceAll("\\", "/");
-  const parts = pathname.split("/");
-  let decodedParts = [];
-  try { decodedParts = parts.map((part) => decodeURIComponent(part)); } catch { decodedParts = [".."]; }
-  if (!pathname || pathname.startsWith("/") || decodedParts.includes("..") || decodedParts.includes(".") || parts.some((part) => !part)) {
-    throw new Error(`Unsafe semantic atlas ${label} path '${url}'`);
-  }
-  return join("data", "atlas", ...parts);
-}
-
-function historyDataOutputPath(url, label) {
-  const pathname = String(url || "").split(/[?#]/, 1)[0].replaceAll("\\", "/");
-  const parts = pathname.split("/");
-  let decodedParts = [];
-  try { decodedParts = parts.map((part) => decodeURIComponent(part)); } catch { decodedParts = [".."]; }
-  if (!pathname || pathname.startsWith("/") || decodedParts.includes("..") || decodedParts.includes(".") || parts.some((part) => !part)) {
-    throw new Error(`Unsafe historical lens ${label} path '${url}'`);
-  }
-  return join("data", "history", ...parts);
-}
-
-function evidenceDataOutputPath(url, label) {
-  const pathname = String(url || "").split(/[?#]/, 1)[0].replaceAll("\\", "/");
-  const parts = pathname.split("/");
-  let decodedParts = [];
-  try { decodedParts = parts.map((part) => decodeURIComponent(part)); } catch { decodedParts = [".."]; }
-  if (!pathname || pathname.startsWith("/") || decodedParts.includes("..") || decodedParts.includes(".") || parts.some((part) => !part)) {
-    throw new Error(`Unsafe evidence lens ${label} path '${url}'`);
-  }
-  return join("data", "evidence", ...parts);
-}
+const output = createOutputWriter(distRoot);
+const atlasDataOutputPath = createDataOutputPath("atlas", "semantic atlas");
+const historyDataOutputPath = createDataOutputPath("history", "historical lens");
+const evidenceDataOutputPath = createDataOutputPath("evidence", "evidence lens");
 
 await rm(distRoot, { recursive: true, force: true });
 await mkdir(join(distRoot, "assets"), { recursive: true });

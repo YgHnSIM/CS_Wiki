@@ -1,3 +1,14 @@
+export const categoryMeta = Object.freeze({
+  sources: { label: "정규 소스", description: "raw에 보존한 원본을 직접 처리한 정규 소스 노트" },
+  references: { label: "참고 자료", description: "논문·표준·공식 기록으로 기존 지식을 보강한 외부 참고 자료" },
+  entities: { label: "인물", description: "컴퓨터 과학의 형성에 관여한 연구자와 설계자" },
+  concepts: { label: "개념", description: "컴퓨팅의 원리, 구조, 언어를 연결하는 핵심 개념" },
+  analyses: { label: "분석", description: "여러 소스와 개념을 비교하고 연결한 종합 분석" },
+  meta: { label: "메타", description: "위키의 운영 상태와 전체 지식 구조" }
+});
+
+export const navCategories = Object.freeze(["sources", "references", "concepts", "entities", "analyses"]);
+
 export const statusMeta = {
   active: { label: "검증됨", description: "원문 대조와 링크 검사를 통과한 문서" },
   draft: { label: "초안", description: "근거 또는 교차 검토를 보강하는 문서" },

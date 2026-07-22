@@ -2168,6 +2168,39 @@ VisiCalc는 기관 기록이 뒷받침하는 “개인용 컴퓨터용 최초의
 - [[index]]
 - [[overview]]
 
+## [2026-07-22] update | 정적 사이트 빌드 책임 분리
+
+단일 `site/build.mjs`에 결합되어 있던 위키 파일 탐색·프론트매터 변환·문서 분류·링크 해석을 `site/content.mjs`로 분리했다. 카테고리 메타데이터와 내비게이션 순서는 `site/catalog.mjs`에서 한 번만 정의하도록 옮겨 콘텐츠 로더와 렌더러가 같은 설정을 사용한다.
+
+정적 파일 기록과 지도 데이터 경로 검증은 `site/output.mjs`로 분리했다. 출력기는 절대 경로와 상위 디렉터리 이동을 거부하고, 지도 데이터는 각 네임스페이스 아래의 이식 가능한 상대 경로만 허용한다. 콘텐츠 변환·분류·링크 역참조와 UTF-8 출력·경로 탈출 방지를 직접 검증하는 Node 테스트 5개를 추가했다.
+
+변경된 페이지와 코드:
+
+- 빌드 오케스트레이션: `site/build.mjs`
+- 카테고리 설정: `site/catalog.mjs`
+- 콘텐츠 로딩 계층: `site/content.mjs`
+- 안전한 출력 계층: `site/output.mjs`
+- 경계 단위 테스트: `tests/site-content.test.mjs`, `tests/site-output.test.mjs`
+- 작업 기록: [[log]]
+
+### 검증
+
+- 위키 lint 오류·경고 0건
+- 사이트 테스트 163개와 Python 테스트 17개 통과
+- 226개 위키 페이지 전체 빌드 및 정적 결과 검증 통과
+- `raw/` 원본 변경 없음
+
+### 출처
+
+- `site/build.mjs`
+- `site/core.mjs`
+- `site/graph/model.mjs`
+
+### 관련 항목
+
+- [[index]]
+- [[overview]]
+
 <!-- wiki-maintenance: global-sections -->
 ## 출처
 
