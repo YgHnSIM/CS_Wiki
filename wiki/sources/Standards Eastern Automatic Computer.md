@@ -4,7 +4,7 @@ aliases: [SEAC, Standards Electronic Automatic Computer, NBS SEAC]
 summary: "1950년 NBS에서 유용한 계산을 시작해 수학 표 제작, 수치 알고리즘 연구와 과학 모델링에 사용된 저장 프로그램 전자식 컴퓨터 SEAC의 공식 역사 자료."
 tags: [type/reference, domain/computer-history, domain/computer-architecture, status/active]
 created: 2026-07-20
-updated: 2026-07-20
+updated: 2026-07-25
 publication_year: 2022
 event_start: 1950
 event_end: 1964
@@ -15,8 +15,8 @@ sources: ["NIST, Standards Eastern Automatic Computer", "NBS Circular 551 - Comp
 source_id: ref-059
 source_kind: external
 primary_sources: ["NIST, Standards Eastern Automatic Computer", "NBS Circular 551 - Computer Development (SEAC and DYSEAC) at the National Bureau of Standards"]
-supporting_sources: ["NIST, Mathematics and Statistics at NIST - A Timeline"]
-source_urls: ["https://www.nist.gov/mathematics-statistics/standards-eastern-automatic-computer", "https://nvlpubs.nist.gov/nistpubs/Legacy/circ/nbscircular551.pdf", "https://www.nist.gov/mathematics-statistics/mathematics-and-statistics-nist-timeline"]
+supporting_sources: ["NIST, NBS Builds a Computer", "NIST, Mathematics and Statistics at NIST - A Timeline"]
+source_urls: ["https://www.nist.gov/mathematics-statistics/standards-eastern-automatic-computer", "https://www.nist.gov/history/nbsnist-culture-excellence/nbs-builds-computer", "https://www.nist.gov/mathematics-statistics/mathematics-and-statistics-nist-timeline"]
 retrieved: 2026-07-20
 version: "NBS Circular 551, issued 1955-01-25; NIST history page created 2022-03-14, updated 2022-04-21"
 snapshot_status: external-only
@@ -48,7 +48,7 @@ NIST 자료를 함께 보면 NBS는 Mathematical Tables Project를 지원했고,
 ## 출처
 
 - NIST, [Standards Eastern Automatic Computer](https://www.nist.gov/mathematics-statistics/standards-eastern-automatic-computer)
-- National Bureau of Standards, [Computer Development (SEAC and DYSEAC) at the National Bureau of Standards](https://nvlpubs.nist.gov/nistpubs/Legacy/circ/nbscircular551.pdf), Circular 551, 1955.
+- NIST, [NBS Builds a Computer](https://www.nist.gov/history/nbsnist-culture-excellence/nbs-builds-computer) — Circular 551의 서지와 SEAC 초기 운용을 보강하는 기관 역사 자료.
 - NIST, [Mathematics and Statistics at NIST - A Timeline](https://www.nist.gov/mathematics-statistics/mathematics-and-statistics-nist-timeline)
 
 ## 관련 항목

@@ -508,7 +508,7 @@ export const learningPaths = [
   {
     slug: "llm-inference-systems",
     title: "LLM 추론 시스템과 서비스 품질",
-    description: "Transformer의 생성 순차성에서 출발해 어텐션 데이터 이동, 동적 배칭·KV 캐시, 재사용·양자화, TTFT·TPOT SLO와 유효 요청당 에너지가 실제 LLM 서비스 능력을 만드는 과정을 읽는다.",
+    description: "Transformer의 생성 순차성에서 출발해 어텐션 데이터 이동, 동적 배칭·KV 캐시, 대기열·승인 제어, TTFT·TPOT SLO와 유효 요청당 에너지가 실제 LLM 서비스 능력을 만드는 과정을 읽는다.",
     pages: [
       "Attention Is All You Need",
       "Transformer",
@@ -517,12 +517,16 @@ export const learningPaths = [
       "입출력 인지 어텐션",
       "Orca - A Distributed Serving System for Transformer-Based Generative Models",
       "연속 배칭",
+      "A Proof for the Queuing Formula L = λW",
+      "리틀의 법칙",
       "Efficient Memory Management for Large Language Model Serving with PagedAttention",
       "KV 캐시",
       "SGLang - Efficient Execution of Structured Language Model Programs",
       "접두사 KV 캐싱",
       "DistServe - Disaggregating Prefill and Decoding for Goodput-optimized Large Language Model Serving",
       "프리필과 디코드",
+      "Serving DNNs like Clockwork Performance Predictability from the Bottom Up",
+      "대기열과 부하 제어",
       "Fast Inference from Transformers via Speculative Decoding",
       "추측 디코딩",
       "GPTQ - Accurate Post-Training Quantization for Generative Pre-trained Transformers",
@@ -539,6 +543,7 @@ export const learningPaths = [
       "낮은 비트는 왜 LLM 추론 속도를 보장하지 않는가",
       "초당 토큰 수는 왜 LLM 서비스 능력을 설명하지 못하는가",
       "같은 SLO의 LLM 서비스는 무엇을 비용으로 세어야 하는가",
+      "LLM 서빙에서 처리량과 지연은 왜 함께 움직이는가",
       "꼬리 지연 시간",
       "컴퓨팅 능력이란 무엇인가"
     ]

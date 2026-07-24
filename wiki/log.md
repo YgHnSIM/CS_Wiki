@@ -2717,6 +2717,40 @@ TokenPowerBench와 MLPerf Inference의 공식 전력 측정 방법론을 참고 
 - [[평균 성능은 왜 서비스의 컴퓨팅 능력을 설명하지 못하는가]]
 - [[인코딩 심화]]
 
+## [2026-07-25] reference | 대기열·SLO·에너지 연결
+
+대기열의 평균 유량 관계와 SLO 지향 모델 서빙을 추가해, LLM 서비스의 원시 처리량을 활성 작업·체류 시간·기한 초과·승인 정책·유휴 자원과 함께 읽는 연결을 만들었다. Little의 법칙은 평균·정상 상태의 관계로만 기록하고, Clockwork는 단발 DNN 추론 사례임을 밝혀 자동회귀 LLM의 프리필·디코드·KV 캐시 정책과 구분했다.
+
+변경된 페이지:
+
+- 참고 자료: [[A Proof for the Queuing Formula L = λW]], [[Serving DNNs like Clockwork Performance Predictability from the Bottom Up]]
+- 참고 자료 유지보수: [[Standards Eastern Automatic Computer]]의 404 직접 PDF 링크를 NIST 공식 역사 페이지로 교체
+- 개념: [[리틀의 법칙]], [[대기열과 부하 제어]]
+- 분석: [[LLM 서빙에서 처리량과 지연은 왜 함께 움직이는가]]
+- 기존 연결: [[LLM 추론 서비스 지표]], [[연속 배칭]], [[꼬리 지연 시간]], [[에너지 비례 컴퓨팅]], [[같은 SLO의 LLM 서비스는 무엇을 비용으로 세어야 하는가]], [[초당 토큰 수는 왜 LLM 서비스 능력을 설명하지 못하는가]], [[평균 성능은 왜 서비스의 컴퓨팅 능력을 설명하지 못하는가]]
+- 탐색·운영: [[index]], [[overview]], [[확장 실행 로드맵]], `site/catalog.mjs`, [[log]]
+
+### 검증
+
+- Little의 원 논문이 명시한 유한 평균·정상성 조건을 보존하고, `L`, `λ`, `W`에 요청·토큰·대기·서비스 시간을 섞지 않도록 경계를 명시했다.
+- Clockwork의 DNN 실행 모델과 LLM의 반복 디코드·KV 캐시를 구분했으며, 원시 처리량·goodput·거부·취소를 같은 성공 지표로 합치지 않았다.
+- 대기열 제어의 자원 여유는 꼬리 지연과 에너지 비례성의 교환으로 연결하되, 하나의 정책이 두 목표를 자동으로 최적화한다고 주장하지 않았다.
+- 전체 링크 검사에서 새 Clockwork URL은 정상 응답했다. 기존 NIST 참고 자료 두 건의 404는 [[확장 실행 로드맵#p5 — 검토·출처 보존]]에 보존 대기열로 기록했다.
+- `npm run check`는 285페이지, 검토된 관계 275개, Node 153개·Python 23개·브라우저 5개 테스트를 모두 통과했다.
+
+### 출처
+
+- [[A Proof for the Queuing Formula L = λW]]
+- [[Serving DNNs like Clockwork Performance Predictability from the Bottom Up]]
+- [[DistServe - Disaggregating Prefill and Decoding for Goodput-optimized Large Language Model Serving]]
+- [[The Case for Energy-Proportional Computing]]
+
+### 관련 항목
+
+- [[리틀의 법칙]]
+- [[대기열과 부하 제어]]
+- [[LLM 서빙에서 처리량과 지연은 왜 함께 움직이는가]]
+
 <!-- wiki-maintenance: global-sections -->
 ## 출처
 

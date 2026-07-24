@@ -7,7 +7,7 @@ created: 2026-07-25
 updated: 2026-07-25
 historical_layer: measurement
 capability_layers: [realized-performance, scalability, resource-efficiency, reliable-results]
-sources: ["TokenPowerBench - Benchmarking the Power Consumption of LLM Inference", "MLPerf Inference Power Measurement", "MLPerf Inference Benchmark", "The Case for Energy-Proportional Computing"]
+sources: ["TokenPowerBench - Benchmarking the Power Consumption of LLM Inference", "MLPerf Inference Power Measurement", "MLPerf Inference Benchmark", "The Case for Energy-Proportional Computing", "A Proof for the Queuing Formula L = λW", "Serving DNNs like Clockwork Performance Predictability from the Bottom Up"]
 status: active
 graph_id: analysis-llm-slo-resource-cost
 graph_visibility: public
@@ -24,6 +24,8 @@ graph_visibility: public
 `good request`는 정한 모델·토크나이저와 품질·출력 길이 조건을 통과하고, TTFT·TPOT 또는 종단 지연 SLO를 만족해 완전한 결과를 반환한 요청이다. SLO 수치와 달성 목표, 요청 혼합이 다르면 good request의 의미도 달라진다.
 
 원시 완료 요청이나 출력 토큰을 분모로 두면 결과를 짧게 만들거나 지연된 요청을 완료로 세고, 어려운 요청을 거부하는 시스템이 유리해질 수 있다. 비교 전에 입력·출력 길이 분포, 종료 규칙, 품질 평가와 실패 처리 규칙을 고정해야 한다.
+
+대기열의 관점에서는 평균 활성 작업 수·유효 처리율·체류 시간이 같은 요청 경계에 있어야 한다. [[리틀의 법칙]]은 이 평균 관계를 점검하게 하지만, 거부·시간 초과가 있는 서비스에서 도착률, 승인률과 완료률은 다를 수 있다. 따라서 [[대기열과 부하 제어]]의 보고에는 각 유량과 거부된 요청이 사용한 자원을 별도로 남긴다. Clockwork가 SLO 안에 끝난 요청만 goodput으로 셌듯, 실패 요청을 good request 분모에서 빼더라도 그 작업이 사용한 에너지와 장비 시간은 분자에서 사라지지 않는다.
 
 ## 2. 에너지와 가속기 시간을 같은 분모로 둔다
 
@@ -83,6 +85,7 @@ GPU 텔레메트리는 단계별 변화를 보기 좋지만 CPU·DRAM·네트워
 | synthesizes | [[LLM 추론 서비스 지표]] | TTFT·TPOT·품질을 통과한 good request를 자원 회계의 유효 작업 단위로 사용한다. | [[MLPerf Inference Power Measurement]] |
 | synthesizes | [[에너지 비례 컴퓨팅]] | 총량과 증분 에너지를 구분하고 낮은 부하의 유휴 전력을 서비스 용량 비용에 남긴다. | [[The Case for Energy-Proportional Computing]] |
 | constrains | [[컴퓨팅 능력이란 무엇인가]] | 같은 작업·결과 계약·시스템 경계에서 측정한 자원만 LLM 서비스 능력 비교에 사용하게 한다. | [[MLPerf Inference Benchmark]] |
+| synthesizes | [[대기열과 부하 제어]] | 승인·거부·시간 초과가 있는 부하에서 유효 요청 분모와 이미 소비한 자원 분자를 함께 보존한다. | [[A Proof for the Queuing Formula L = λW]], [[Serving DNNs like Clockwork Performance Predictability from the Bottom Up]] |
 
 ## 출처
 
@@ -90,6 +93,8 @@ GPU 텔레메트리는 단계별 변화를 보기 좋지만 CPU·DRAM·네트워
 - [[MLPerf Inference Power Measurement]]
 - [[MLPerf Inference Benchmark]]
 - [[The Case for Energy-Proportional Computing]]
+- [[A Proof for the Queuing Formula L = λW]]
+- [[Serving DNNs like Clockwork Performance Predictability from the Bottom Up]]
 
 ## 관련 항목
 
