@@ -4,7 +4,7 @@ aliases: [TPU paper, Jouppi et al. 2017, Tensor Processing Unit performance]
 summary: "Google의 1세대 TPU를 실제 데이터센터 신경망 추론 작업으로 평가해 도메인 특화 하드웨어의 성능·에너지·꼬리 지연 이점을 분석한 2017년 논문."
 tags: [type/reference, domain/computer-architecture, domain/machine-learning, status/active]
 created: 2026-07-16
-updated: 2026-07-18
+updated: 2026-07-24
 publication_year: 2017
 historical_layer: architecture
 capability_layers: [realized-performance, resource-efficiency, reliable-results]
@@ -46,7 +46,7 @@ TPU는 범용 프로세서의 캐시, 비순차 실행, 분기 예측 같은 복
 
 ## 위키 반영
 
-이 자료는 [[도메인 특화 가속기]]의 대표 사례이자, [[컴퓨팅 능력이란 무엇인가]]에서 작업 부하·정밀도·꼬리 지연·에너지 조건을 함께 기록해야 하는 이유를 보여준다. [[컴퓨팅 능력의 발달사]]에서는 범용 단일 코어 향상 이후 성능이 특정 도메인과 전체 소프트웨어 스택의 공동 설계로 이동한 사례로 사용한다. 평균과 높은 백분위가 다른 성능 질문이라는 점은 [[평균 성능은 왜 서비스의 컴퓨팅 능력을 설명하지 못하는가]]에서 확장한다.
+이 자료는 [[도메인 특화 가속기]]의 대표 사례이자, [[컴퓨팅 능력이란 무엇인가]]에서 작업 부하·정밀도·꼬리 지연·에너지 조건을 함께 기록해야 하는 이유를 보여준다. [[컴퓨팅 능력의 발달사]]에서는 범용 단일 코어 향상 이후 성능이 특정 도메인과 전체 소프트웨어 스택의 공동 설계로 이동한 사례로 사용한다. 낮은 정밀도 추론의 측정 경계는 학습용 [[혼합 정밀도]]와 같지 않으므로, 두 결과를 비교할 때는 모델 품질과 작업 단계를 분리해야 한다. 평균과 높은 백분위가 다른 성능 질문이라는 점은 [[평균 성능은 왜 서비스의 컴퓨팅 능력을 설명하지 못하는가]]에서 확장한다.
 
 ## 출처
 

@@ -318,6 +318,10 @@ export const learningPaths = [
       "What Every Computer Scientist Should Know About Floating-Point Arithmetic",
       "IEEE 754-2019 Standard for Floating-Point Arithmetic",
       "부동소수점 정확성",
+      "Mixed Precision Training",
+      "혼합 정밀도",
+      "MLPerf Training Benchmark",
+      "목표 품질 도달 시간",
       "Hitting the Memory Wall",
       "메모리 장벽",
       "Validity of the Single Processor Approach to Achieving Large Scale Computing Capabilities",
@@ -463,6 +467,25 @@ export const learningPaths = [
       "더 빠른 프로세서는 왜 더 빠른 프로그램을 보장하지 않는가",
       "컴퓨팅 능력이란 무엇인가",
       "컴퓨팅 능력의 발달사"
+    ]
+  },
+  {
+    slug: "mixed-precision-ml-quality",
+    title: "혼합 정밀도와 AI 품질",
+    description: "낮은 정밀도의 메모리·가속기 이득을 수치 안정성, 모델 품질 문턱과 목표 품질 도달 시간의 조건에서 읽는다.",
+    pages: [
+      "What Every Computer Scientist Should Know About Floating-Point Arithmetic",
+      "IEEE 754-2019 Standard for Floating-Point Arithmetic",
+      "부동소수점 정확성",
+      "Mixed Precision Training",
+      "혼합 정밀도",
+      "MLPerf Training Benchmark",
+      "목표 품질 도달 시간",
+      "In-Datacenter Performance Analysis of a Tensor Processing Unit",
+      "도메인 특화 가속기",
+      "낮은 정밀도는 AI의 컴퓨팅 능력을 어떻게 바꾸는가",
+      "더 빠른 계산은 같은 답을 내는가",
+      "컴퓨팅 능력이란 무엇인가"
     ]
   },
   {
