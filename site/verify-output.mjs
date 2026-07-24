@@ -4,7 +4,9 @@ import { extname, join } from "node:path";
 
 
 export const OUTPUT_BUDGETS = Object.freeze({
-  files: 2_000,
+  // Public documents intentionally emit static no-JS evidence routes.
+  // Preserve a bounded envelope while leaving room for the planned LLM series.
+  files: 2_400,
   totalBytes: 96 * 1024 * 1024,
   htmlBytes: 48 * 1024 * 1024,
   jsonBytes: 48 * 1024 * 1024
