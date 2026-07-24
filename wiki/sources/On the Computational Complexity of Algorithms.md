@@ -4,7 +4,7 @@ aliases: [Hartmanis-Stearns 1965, computational complexity of algorithms]
 summary: "계산 가능한 대상들 사이에도 필요한 시간 자원에 따른 본질적 난이도 차이가 있음을 형식화하고 시간 복잡도 계층을 제시한 1965년 논문."
 tags: [type/reference, domain/computer-science, domain/computer-history, status/active]
 created: 2026-07-15
-updated: 2026-07-18
+updated: 2026-07-24
 publication_year: 1965
 historical_layer: theory
 capability_layers: [complexity]
@@ -49,6 +49,7 @@ status: active
 | 관계 | 대상 | 설명 | 근거 |
 |---|---|---|---|
 | responds_to | [[계산 가능성]] | 계산 가능 여부만으로는 구분되지 않는 입력 규모별 시간 자원 증가를 별도의 질문으로 만든다. | [[On the Computational Complexity of Algorithms]] |
+| enables | [[계산 복잡도]] | 계산 가능한 수열 사이의 시간 자원 차이를 형식화해 복잡도 분류의 출발점을 제공한다. | [[On the Computational Complexity of Algorithms]] |
 
 ## 출처
 
@@ -60,4 +61,7 @@ status: active
 
 - [[On Computable Numbers with an Application to the Entscheidungsproblem]]
 - [[계산 가능성]]
+- [[계산 복잡도]]
+- [[다항 시간 환원]]
+- [[NP-완전]]
 - [[컴퓨팅 능력이란 무엇인가]]

@@ -446,6 +446,26 @@ export const learningPaths = [
     ]
   },
   {
+    slug: "algorithmic-complexity-practicality",
+    title: "알고리즘 복잡도와 실용성",
+    description: "계산 가능성에서 시간 자원, 다항 시간 환원과 NP-완전성을 거쳐 알고리즘 개선과 하드웨어 개선을 실제 성능 조건에서 비교한다.",
+    pages: [
+      "On Computable Numbers with an Application to the Entscheidungsproblem",
+      "계산 가능성",
+      "On the Computational Complexity of Algorithms",
+      "계산 복잡도",
+      "The Complexity of Theorem-Proving Procedures",
+      "다항 시간 환원",
+      "Reducibility Among Combinatorial Problems",
+      "NP-완전",
+      "There's Plenty of Room at the Top",
+      "더 빠른 하드웨어는 더 나은 알고리즘을 대신할 수 있는가",
+      "더 빠른 프로세서는 왜 더 빠른 프로그램을 보장하지 않는가",
+      "컴퓨팅 능력이란 무엇인가",
+      "컴퓨팅 능력의 발달사"
+    ]
+  },
+  {
     slug: "fault-tolerance-availability",
     title: "결함 허용과 가용성",
     description: "꼬리 지연의 종단 측정에서 출발해 실패 모형, 공통 원인, 탐지·복구 시간과 안전한 서비스 회복을 함께 읽는다.",
