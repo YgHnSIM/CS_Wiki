@@ -4,7 +4,7 @@ aliases: [FORTRAN과 컴파일러, Fortran compiler, Fortran and compiler]
 summary: "Fortran을 고급 언어와 효율적 컴파일러가 결합된 시스템으로 보고, 소스 프로그램에서 목적 프로그램으로의 전환을 분석."
 tags: [type/analysis, domain/programming-languages, domain/software-engineering, domain/computer-history, status/active]
 created: 2026-07-10
-updated: 2026-07-22
+updated: 2026-07-25
 sources: ["The Preparation of Programs for an Electronic Digital Computer", "FORTRAN Automatic Coding System for the IBM 704 EDPM", "The FORTRAN Automatic Coding System", "The History of FORTRAN I, II, and III", "What Every Computer Scientist Should Know About Floating-Point Arithmetic", "IEEE 754-2019 Standard for Floating-Point Arithmetic"]
 status: active
 graph_id: analysis-866096c7a9c8c715
@@ -43,6 +43,13 @@ graph_id: analysis-866096c7a9c8c715
 ## 의미
 
 Fortran 이후 프로그래밍의 중심은 사람이 기계 명령을 직접 나열하는 일에서, 사람이 읽을 수 있는 프로그램 텍스트와 이를 처리하는 도구 체계를 함께 설계하는 일로 옮겨간다. 이 변화는 [[어셈블러]], [[링커]], 컴파일러, 빌드 도구, IDE, 정적 분석기까지 이어지는 소프트웨어 도구 사슬의 출발점으로 볼 수 있다.
+
+## 관계
+
+| 관계 | 대상 | 설명 | 근거 |
+|---|---|---|---|
+| synthesizes | [[컴파일러 최적화]] | 수학적 소스 표기를 IBM 704 목적 프로그램으로 바꾸면서 제어 흐름과 기계 자원을 분석해 실행 효율을 유지하려 한 컴파일러의 역할을 종합한다. | [[The FORTRAN Automatic Coding System]] |
+| synthesizes | [[프로그래밍 가능성]] | 문제 영역의 표기와 효율적인 번역기를 결합해 더 많은 사용자가 기계의 계산 능력에 접근하게 한 전환을 종합한다. | [[FORTRAN Automatic Coding System for the IBM 704 EDPM]], [[The FORTRAN Automatic Coding System]] |
 
 ## 출처
 

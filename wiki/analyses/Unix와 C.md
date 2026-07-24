@@ -4,7 +4,7 @@ aliases: [UNIX와 C, Unix and C]
 summary: "Unix 운영체제와 C 언어가 시스템 프로그래밍, 이식성, 도구 생태계 안에서 서로를 강화한 과정을 분석."
 tags: [type/analysis, domain/operating-systems, domain/programming-languages, domain/software-engineering, domain/computer-history, status/active]
 created: 2026-07-10
-updated: 2026-07-22
+updated: 2026-07-25
 sources: ["The UNIX Time-Sharing System", "The Development of the C Language", "The Evolution of the Unix Time-sharing System", "Portability of C Programs and the UNIX System"]
 status: active
 graph_id: analysis-8d320775b8ff83eb
@@ -37,6 +37,13 @@ Unix 커널을 C로 다시 작성한 일은 이 결합의 핵심 사건이다. C
 ## 의미
 
 Unix와 C의 결합은 이후 운영체제, 컴파일러, 셸, 라이브러리, 네트워크 도구, 임베디드 시스템, 오픈소스 문화에 깊은 영향을 주었다. 이 사건의 핵심은 C가 Unix를 만들었고 Unix가 C를 퍼뜨렸다는 단순한 상호 홍보가 아니라, 언어·운영체제·도구·소스 코드 이식성이 하나의 생태계로 맞물렸다는 점이다.
+
+## 관계
+
+| 관계 | 대상 | 설명 | 근거 |
+|---|---|---|---|
+| synthesizes | [[이식성]] | C와 Unix의 공통 언어·인터페이스, 기계 의존 부분의 제한이 프로그램과 운영체제를 다른 하드웨어로 옮기는 비용을 낮춘 전환을 종합한다. | [[Portability of C Programs and the UNIX System]] |
+| synthesizes | [[시스템 프로그래밍]] | C가 Unix의 파일·프로세스·시스템 호출 환경을 어셈블리보다 높은 수준에서 구현하고 도구 생태계와 결합한 방식을 종합한다. | [[The UNIX Time-Sharing System]], [[The Development of the C Language]] |
 
 ## 출처
 
