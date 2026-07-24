@@ -5,8 +5,8 @@ import { extname, join } from "node:path";
 
 export const OUTPUT_BUDGETS = Object.freeze({
   // Public documents intentionally emit static no-JS evidence routes.
-  // Evidence routes grow with each public document; this leaves a bounded margin after the LLM energy series.
-  files: 2_800,
+  // The distributed-consistency expansion reaches 2,826 bounded artifacts; 3,200 keeps headroom for the queued P3–P5 work without relaxing byte budgets.
+  files: 3_200,
   totalBytes: 96 * 1024 * 1024,
   htmlBytes: 48 * 1024 * 1024,
   jsonBytes: 48 * 1024 * 1024

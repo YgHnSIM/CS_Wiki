@@ -2751,6 +2751,40 @@ TokenPowerBench와 MLPerf Inference의 공식 전력 측정 방법론을 참고 
 - [[대기열과 부하 제어]]
 - [[LLM 서빙에서 처리량과 지연은 왜 함께 움직이는가]]
 
+## [2026-07-25] reference | 분산 상태·일관성
+
+CAP의 네트워크 분할 경계, Raft의 crash fault 복제 로그, Spanner의 외부 일관성·시간 불확실성을 서로 다른 계층으로 추가했다. 분산 서비스의 빠른 응답을 일관성·진행성·복구·사용자 SLO와 같은 성질로 합치지 않고, 어떤 상태 계약을 어떤 지연·자원 비용으로 지키는지 기록하는 연결을 만들었다.
+
+변경된 페이지와 코드:
+
+- 참고 자료: [[Brewer's Conjecture and the Feasibility of Consistent, Available, Partition-Tolerant Web Services]], [[In Search of an Understandable Consensus Algorithm]], [[Spanner - Google's Globally-Distributed Database]]
+- 개념: [[CAP 정리]], [[복제 로그와 합의]], [[외부 일관성과 시간 불확실성]]
+- 분석: [[분산 서비스는 빠른 응답과 같은 상태를 어떻게 함께 보장하는가]]
+- 기존 연결: [[가용성과 복구]], [[결함 허용]], [[꼬리 지연 시간]], [[평균 성능은 왜 서비스의 컴퓨팅 능력을 설명하지 못하는가]], [[빠른 서비스는 왜 가용한 서비스를 보장하지 않는가]]
+- 탐색·운영: [[index]], [[overview]], `site/catalog.mjs`, [[확장 실행 로드맵]], [[log]]
+
+### 검증
+
+- CAP을 고정된 “2/3 선택”이나 운영 가동률 공식으로 일반화하지 않고, 분할 모형의 선형화 가능성·응답 보장 경계로 한정했다.
+- Raft의 crash fault 안전성·진행성을 비잔틴 내성이나 사용자 SLO 보장으로 확대하지 않았다.
+- Spanner의 TrueTime을 완벽한 전역 시계로 해석하지 않고, Paxos 복제·다중 그룹 트랜잭션·시간 불확실성·commit wait를 분리했다.
+- 새 Princeton·USENIX 원전 URL은 정상 응답했고, ACM DOI의 403은 접근 제한으로 구분했다. 전체 링크 점검의 404 두 건은 기존 NIST 자료이며 [[확장 실행 로드맵#p5 — 검토·출처 보존]] 대기열에 유지했다.
+- `npm run check`는 292페이지, 검토된 관계 293개, Node 153개·Python 23개·브라우저 5개 테스트를 모두 통과했다. 정적 산출물은 2,826개·71.24MiB이며, 공개 문서별 무자바스크립트 근거 경로의 정상 증가를 수용하도록 파일 예산만 3,200개로 조정하고 바이트 예산은 유지했다.
+- `raw/` 원본과 첨부 파일은 변경하지 않았다.
+
+### 출처
+
+- [[Brewer's Conjecture and the Feasibility of Consistent, Available, Partition-Tolerant Web Services]]
+- [[In Search of an Understandable Consensus Algorithm]]
+- [[Spanner - Google's Globally-Distributed Database]]
+
+### 관련 항목
+
+- [[CAP 정리]]
+- [[복제 로그와 합의]]
+- [[외부 일관성과 시간 불확실성]]
+- [[분산 서비스는 빠른 응답과 같은 상태를 어떻게 함께 보장하는가]]
+
 <!-- wiki-maintenance: global-sections -->
 ## 출처
 

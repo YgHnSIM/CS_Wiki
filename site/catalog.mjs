@@ -572,15 +572,22 @@ export const learningPaths = [
     title: "결함 허용과 가용성",
     description: "꼬리 지연의 종단 측정에서 출발해 실패 모형, 공통 원인, 탐지·복구 시간과 안전한 서비스 회복을 함께 읽는다.",
     pages: [
+      "Brewer's Conjecture and the Feasibility of Consistent, Available, Partition-Tolerant Web Services",
+      "CAP 정리",
       "The Byzantine Generals Problem",
       "비잔틴 장애",
       "Why Do Internet Services Fail and What Can Be Done About It",
       "Recovery-Oriented Computing (ROC)",
       "결함 허용",
+      "In Search of an Understandable Consensus Algorithm",
+      "복제 로그와 합의",
+      "Spanner - Google's Globally-Distributed Database",
+      "외부 일관성과 시간 불확실성",
       "가용성과 복구",
       "The Tail at Scale",
       "꼬리 지연 시간",
       "빠른 서비스는 왜 가용한 서비스를 보장하지 않는가",
+      "분산 서비스는 빠른 응답과 같은 상태를 어떻게 함께 보장하는가",
       "평균 성능은 왜 서비스의 컴퓨팅 능력을 설명하지 못하는가",
       "컴퓨팅 능력이란 무엇인가",
       "컴퓨팅 능력의 발달사"
@@ -596,13 +603,16 @@ export const learningPaths = [
       "The Datacenter as a Computer",
       "The Tail at Scale",
       "꼬리 지연 시간",
+      "Spanner - Google's Globally-Distributed Database",
+      "외부 일관성과 시간 불확실성",
       "The Case for Energy-Proportional Computing",
       "에너지 비례 컴퓨팅",
       "In-Datacenter Performance Analysis of a Tensor Processing Unit",
       "도메인 특화 가속기",
       "컴퓨팅 능력이란 무엇인가",
       "컴퓨팅 능력의 발달사",
-      "평균 성능은 왜 서비스의 컴퓨팅 능력을 설명하지 못하는가"
+      "평균 성능은 왜 서비스의 컴퓨팅 능력을 설명하지 못하는가",
+      "분산 서비스는 빠른 응답과 같은 상태를 어떻게 함께 보장하는가"
     ]
   }
 ];
