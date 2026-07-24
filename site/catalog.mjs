@@ -494,6 +494,23 @@ export const learningPaths = [
     ]
   },
   {
+    slug: "llm-inference-systems",
+    title: "LLM 추론 시스템과 서비스 품질",
+    description: "Transformer의 학습 병렬성과 생성 순차성을 구분하고, 자기 주의의 산술량·메모리 이동을 실제 추론 성능 조건에서 읽는다.",
+    pages: [
+      "Attention Is All You Need",
+      "Transformer",
+      "자기 주의",
+      "FlashAttention - Fast and Memory-Efficient Exact Attention with IO-Awareness",
+      "입출력 인지 어텐션",
+      "Transformer 추론은 왜 연산량만으로 설명되지 않는가",
+      "메모리 장벽",
+      "Roofline An Insightful Visual Performance Model",
+      "도메인 특화 가속기",
+      "컴퓨팅 능력이란 무엇인가"
+    ]
+  },
+  {
     slug: "developer-productivity",
     title: "개발자 생산성과 측정",
     description: "언어·컴파일러·재사용이 줄인 표현 비용을 본질적 설계 부담과 구분하고, 코드량 대신 성과·협업·흐름·웰빙을 함께 측정한다.",
