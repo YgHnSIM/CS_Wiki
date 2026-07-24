@@ -4,7 +4,7 @@ aliases: [Backus 1957 FORTRAN paper, FORTRAN automatic coding paper]
 summary: "Backus 팀의 1957년 논문을 바탕으로 Fortran 언어와 번역기, 제어 흐름 분석, 인덱스 레지스터 최적화를 정리한 참고 자료."
 tags: [type/reference, domain/programming-languages, domain/software-engineering, domain/computer-history, status/active]
 created: 2026-07-10
-updated: 2026-07-18
+updated: 2026-07-24
 publication_year: 1957
 historical_layer: software
 capability_layers: [programmability, realized-performance]
@@ -36,7 +36,7 @@ status: active
 
 ## 위키 반영
 
-이 자료는 [[컴파일러 최적화]]와 [[Fortran과 컴파일러]]의 중심 근거다. 특히 초기 컴파일러가 단순한 텍스트 치환기가 아니라, 제어 흐름과 레지스터 제약을 분석해 실행 가능한 목적 프로그램을 만드는 복합 소프트웨어였음을 보여준다.
+이 자료는 [[컴파일러 최적화]]와 [[Fortran과 컴파일러]]의 중심 근거다. 특히 초기 컴파일러가 단순한 텍스트 치환기가 아니라, 제어 흐름과 레지스터 제약을 분석해 실행 가능한 목적 프로그램을 만드는 복합 소프트웨어였음을 보여준다. 또한 고급 표기가 반복적인 기계어 표현 비용을 줄여도 요구사항·설계·검증 전체의 생산성을 코드량 하나로 판정할 수 없다는 점에서 [[개발자 생산성]]의 역사적 사례로 연결된다.
 
 ## 관계
 

@@ -308,6 +308,11 @@ export const learningPaths = [
       "On the Computational Complexity of Algorithms",
       "프로그래밍 가능성",
       "범용성은 어떻게 컴퓨팅 능력이 되었는가",
+      "No Silver Bullet—Essence and Accidents of Software Engineering",
+      "본질적 복잡성과 부수적 복잡성",
+      "The SPACE of Developer Productivity",
+      "개발자 생산성",
+      "코드 생산량은 왜 개발 생산성을 설명하지 못하는가",
       "계산 결과에서 실행 가능한 절차로",
       "인간 계산자와 계산 공장",
       "수학 표에서 스프레드시트로",
@@ -485,6 +490,25 @@ export const learningPaths = [
       "도메인 특화 가속기",
       "낮은 정밀도는 AI의 컴퓨팅 능력을 어떻게 바꾸는가",
       "더 빠른 계산은 같은 답을 내는가",
+      "컴퓨팅 능력이란 무엇인가"
+    ]
+  },
+  {
+    slug: "developer-productivity",
+    title: "개발자 생산성과 측정",
+    description: "언어·컴파일러·재사용이 줄인 표현 비용을 본질적 설계 부담과 구분하고, 코드량 대신 성과·협업·흐름·웰빙을 함께 측정한다.",
+    pages: [
+      "The FORTRAN Automatic Coding System",
+      "프로그래밍 가능성",
+      "Software Reuse",
+      "소프트웨어 재사용",
+      "No Silver Bullet—Essence and Accidents of Software Engineering",
+      "본질적 복잡성과 부수적 복잡성",
+      "The SPACE of Developer Productivity",
+      "개발자 생산성",
+      "소프트웨어 공학",
+      "코드 생산량은 왜 개발 생산성을 설명하지 못하는가",
+      "범용성은 어떻게 컴퓨팅 능력이 되었는가",
       "컴퓨팅 능력이란 무엇인가"
     ]
   },
