@@ -2849,6 +2849,37 @@ CAP의 네트워크 분할 경계, Raft의 crash fault 복제 로그, Spanner의
 - [[벤치마크 계약]]
 - [[벤치마크 숫자는 왜 직접 비교되지 않는가]]
 
+## [2026-07-25] reference | 검토 문서 활성화와 출처 보존
+
+원전·공식 기록 대조를 마친 검토 상태 문서 15개를 `active`로 승격하고, 각각에 근거가 있는 핵심 관계를 추가했다. 이로써 Unix와 PDP-11, 구조적 프로그래밍과 정보 은닉, 소프트웨어 재사용과 컴포넌트화, C 이식성의 연결이 읽기 추천과 별도로 의미 관계로 보존된다.
+
+두 NIST 참고 자료는 자동 링크 점검에서 404로 드러난 직접 PDF 경로를 제거하고, 현재 응답하는 NIST 공식 출판물·편람 기록으로 접근 경로를 갱신했다. `raw/` 원본과 첨부 파일은 수정하지 않았다.
+
+변경된 페이지:
+
+- 활성화 및 관계 보강: [[PDP-11]], [[운영체제]], [[파일 시스템]], [[유닉스 파이프]], [[단계적 정제]], [[더글러스 매킬로이]], [[데이비드 파나스]], [[도널드 커누스]], [[스티븐 C. 존슨]], [[올레요한 달]], [[주세페 야코피니]], [[찰스 W. 크루거]], [[켄 톰프슨]], [[코라도 뵘]], [[토니 호어]]
+- 출처 보존: [[DLMF Standard Reference Tables on Demand]], [[Handbook of Mathematical Functions with Formulas, Graphs, and Mathematical Tables]]
+- 운영 기록: [[확장 실행 로드맵]], [[overview]], [[index]], [[log]]
+
+### 검증
+
+- `python scripts/wiki_lint.py --json`과 `python scripts/wiki_maintenance.py --check`를 통과했다.
+- `python scripts/check_external_links.py --fail-on-broken`은 224개 URL에서 깨진 링크 0건으로 통과했다. 접근 제한·일시 오류는 기존과 같이 별도 분류했다.
+- `npm run check`는 Node 153개, Python 23개, Chromium 브라우저 5개 테스트를 모두 통과했고, 298개 위키 페이지와 22개 학습선·247개 역을 정적 출력으로 검증했다.
+
+### 출처
+
+- [[The UNIX Time-Sharing System]]
+- [[The Development of the C Language]]
+- [[On the Criteria To Be Used in Decomposing Systems into Modules]]
+- [[Structured Programming]]
+- [[Software Reuse]]
+
+### 관련 항목
+
+- [[확장 실행 로드맵]]
+- [[지식 그래프 관계 스키마]]
+
 <!-- wiki-maintenance: global-sections -->
 ## 출처
 

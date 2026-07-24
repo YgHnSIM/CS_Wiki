@@ -4,20 +4,20 @@ aliases: [Handbook of Mathematical Functions, Abramowitz and Stegun, A&S, 수학
 summary: "미국 국립표준국이 1964년 발행한 함수·공식·그래프·수학 표 편람으로, 손 계산용 표 제작과 전자 컴퓨터 기반 함수 계산이 공존하던 전환기를 보여주는 참고 자료."
 tags: [type/reference, domain/computer-history, domain/mathematics, status/active]
 created: 2026-07-20
-updated: 2026-07-20
+updated: 2026-07-25
 publication_year: 1964
 event_start: 1938
 event_end: 1964
 historical_note: "1938년 WPA 지원 Mathematical Tables Project에 참여한 NBS 계산 조직의 작업이 1964년 Applied Mathematics Series 55 발행으로 이어졌다."
 historical_layer: measurement
 capability_layers: [resource-efficiency, reliable-results]
-sources: ["Milton Abramowitz and Irene A. Stegun, eds., Handbook of Mathematical Functions with Formulas, Graphs, and Mathematical Tables, NBS Applied Mathematics Series 55, 1964", "NIST official historical record for the Handbook of Mathematical Functions", "R. F. Boisvert and D. W. Lozier, Handbook of Mathematical Functions, NIST Special Publication 958, 2001"]
+sources: ["Milton Abramowitz and Irene A. Stegun, eds., Handbook of Mathematical Functions with Formulas, Graphs, and Mathematical Tables, NBS Applied Mathematics Series 55, 1964", "NIST official historical record for the Handbook of Mathematical Functions"]
 source_id: ref-054
 source_kind: external
 primary_sources: ["Milton Abramowitz and Irene A. Stegun, eds., Handbook of Mathematical Functions with Formulas, Graphs, and Mathematical Tables, NBS Applied Mathematics Series 55, 1964", "NIST official historical record for the Handbook of Mathematical Functions"]
-supporting_sources: ["R. F. Boisvert and D. W. Lozier, Handbook of Mathematical Functions, NIST Special Publication 958, 2001"]
-source_urls: ["https://www.nist.gov/mathematics-statistics/handbook-mathematical-functions-abramowitz-and-stegun", "https://nvlpubs.nist.gov/nistpubs/sp958-lide/135-139.pdf"]
-retrieved: 2026-07-20
+supporting_sources: []
+source_urls: ["https://www.nist.gov/mathematics-statistics/handbook-mathematical-functions-abramowitz-and-stegun"]
+retrieved: 2026-07-25
 version: "NBS Applied Mathematics Series 55, June 1964, 1046 pages"
 snapshot_status: external-only
 status: active
@@ -52,10 +52,13 @@ NIST는 이 편람을 기관 역사상 가장 널리 배포되고 가장 많이 
 
 이 자료는 [[수학 표]]에서 20세기 함수표의 대표 사례와 인쇄 표에서 요청 시 함수 계산으로의 전환을 설명하는 직접 근거다. “가장 흔히 쓰인 표”를 논할 때는 NBS/NIST 출판물 내부의 배포 기록이라는 모집단을 명시하는 사례로 사용한다.
 
+## 보존 점검
+
+NIST Special Publication 958의 개별 135–139쪽 PDF 경로는 2026-07-25 링크 점검에서 404였고, 이어서 확인한 HTML 해설 경로도 이 자동 점검 환경에서 404였다. 이 페이지는 현재 200 응답하는 NIST 공식 편람 기록을 보존 접근 경로로 유지하며, 편람의 직접 역사적 근거는 1964년 NBS 판본과 그 기관 기록으로 한정한다.
+
 ## 출처
 
 - NIST, [Handbook of Mathematical Functions: Abramowitz and Stegun](https://www.nist.gov/mathematics-statistics/handbook-mathematical-functions-abramowitz-and-stegun)
-- R. F. Boisvert and D. W. Lozier, NIST Special Publication 958, [Handbook of Mathematical Functions](https://nvlpubs.nist.gov/nistpubs/sp958-lide/135-139.pdf)
 - Milton Abramowitz and Irene A. Stegun, eds., *Handbook of Mathematical Functions with Formulas, Graphs, and Mathematical Tables*, NBS Applied Mathematics Series 55, 1964.
 
 ## 관련 항목

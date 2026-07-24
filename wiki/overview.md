@@ -15,7 +15,7 @@ status: active
 
 
 <!-- wiki-maintenance: status-summary -->
-운영 상태: 전체 298개 페이지 중 active 283개, draft 0개, review 15개, archived 0개다.
+운영 상태: 전체 298개 페이지 중 active 298개, draft 0개, review 0개, archived 0개다.
 
 최근 보강에서는 [[리틀의 법칙]]과 [[대기열과 부하 제어]]를 추가해 LLM 서비스의 요청·토큰 유량, TTFT·TPOT SLO, 승인·거부, 여유 용량과 전체 시스템 에너지를 같은 측정 경계에서 읽는 연결을 만들었다. [[LLM 서빙에서 처리량과 지연은 왜 함께 움직이는가]]는 이 연결을 배칭·KV 캐시·꼬리 지연의 운영 교환으로 종합한다.
 
