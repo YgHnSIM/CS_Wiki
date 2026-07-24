@@ -2817,6 +2817,38 @@ CAP의 네트워크 분할 경계, Raft의 crash fault 복제 로그, Spanner의
 - [[입력 검증]]
 - [[입력을 해석하는 경계는 왜 보안 경계인가]]
 
+## [2026-07-25] reference | 벤치마크 측정 계약
+
+성능·전력·에너지 숫자를 작업 부하, 결과 조건, 실행 시나리오, 시스템·계측 경계, 단위·분모, 규칙·판본의 계약으로 읽도록 확장했다. 이로써 같은 단위를 쓴 결과라도 관측값·이론 상한·분석 모델, 단일 작업·처리량, 평균 전력·작업당 에너지를 같은 순위로 합치지 않도록 기준을 고정했다.
+
+변경된 페이지와 코드:
+
+- 개념: [[벤치마크 계약]]
+- 분석: [[벤치마크 숫자는 왜 직접 비교되지 않는가]]
+- 기존 연결: [[컴퓨팅 능력이란 무엇인가]], [[목표 품질 도달 시간]], [[더 빠른 계산은 같은 답을 내는가]]
+- 근거 연결: [[SPEC CPU 2026 Overview]], [[The Linpack Benchmark]], [[Roofline An Insightful Visual Performance Model]], [[Power Measurement Tutorial for the Green500 List]], [[MLPerf Training Benchmark]], [[MLPerf Inference Benchmark]], [[MLPerf Inference Power Measurement]], [[TokenPowerBench - Benchmarking the Power Consumption of LLM Inference]]
+- 탐색·운영: [[index]], [[overview]], `site/catalog.mjs`, [[확장 실행 로드맵]], [[log]]
+
+### 검증
+
+- SPECspeed·SPECrate, LINPACK `Rmax`·`Rpeak`, Roofline의 상한과 관측 실행, W·J를 각각 다른 종류의 수치로 구분했다.
+- MLPerf의 품질·시나리오·판본과 전력 계측의 같은 실행 구간·시스템 경계를 결합해, 원시 처리량이나 구성요소 사양만으로 서비스·에너지 성능을 결론내리지 않도록 했다.
+- 새 개념은 상위 컴퓨팅 능력 측정 틀, 목표 품질 도달 시간, LLM 추론 에너지 지표와 근거가 있는 의미 관계로 연결했다.
+- 외부 링크 점검은 225개 URL 중 새 P4 자료의 소실 없이 기존 P5 출처 보존 대기열의 NIST 404 두 건만 확인했다.
+- `npm run check`는 298페이지·7,426링크, Node 153개·Python 23개·브라우저 5개 테스트를 통과했다. 정적 출력도 학습선 22개·정류장 247개, 2,943파일·73.85 MiB로 검증했다.
+
+### 출처
+
+- [[SPEC CPU 2026 Overview]]
+- [[The Linpack Benchmark]]
+- [[MLPerf Inference Benchmark]]
+- [[MLPerf Inference Power Measurement]]
+
+### 관련 항목
+
+- [[벤치마크 계약]]
+- [[벤치마크 숫자는 왜 직접 비교되지 않는가]]
+
 <!-- wiki-maintenance: global-sections -->
 ## 출처
 

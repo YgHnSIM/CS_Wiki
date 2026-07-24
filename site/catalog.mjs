@@ -338,6 +338,8 @@ export const learningPaths = [
       "LLM 가중치 양자화",
       "MLPerf Training Benchmark",
       "목표 품질 도달 시간",
+      "벤치마크 계약",
+      "벤치마크 숫자는 왜 직접 비교되지 않는가",
       "Hitting the Memory Wall",
       "메모리 장벽",
       "Validity of the Single Processor Approach to Achieving Large Scale Computing Capabilities",
