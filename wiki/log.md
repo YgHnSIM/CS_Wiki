@@ -4,7 +4,7 @@ aliases: [log, 변경 기록, 작업 기록]
 summary: "CS Wiki의 소스 수집, 질의, 점검, 콘텐츠·웹사이트 변경을 시간순으로 남긴 운영 기록."
 tags: [type/meta, status/active]
 created: 2026-05-03
-updated: 2026-07-24
+updated: 2026-07-25
 sources: []
 status: active
 ---
@@ -2600,6 +2600,39 @@ GPTQ와 AWQ를 참고 자료로 추가하고, 가중치 전용 사후 학습 양
 - [[LLM 가중치 양자화]]
 - [[낮은 비트는 왜 LLM 추론 속도를 보장하지 않는가]]
 - [[낮은 정밀도는 AI의 컴퓨팅 능력을 어떻게 바꾸는가]]
+
+## [2026-07-25] reference | LLM 추론 에너지와 SLO 자원 비용
+
+TokenPowerBench와 MLPerf Inference의 공식 전력 측정 방법론을 참고 자료로 추가했다. 전력(W)과 에너지(J), GPU·노드·전체 시스템·벽면 AC 경계, 유휴·프리필·디코드 귀속을 구분하고, 품질과 TTFT·TPOT를 만족한 요청당 에너지와 가속기 시간을 같은 분모로 비교하는 자원 회계를 정리했다.
+
+변경된 페이지와 코드:
+
+- 참고 자료: [[TokenPowerBench - Benchmarking the Power Consumption of LLM Inference]], [[MLPerf Inference Power Measurement]]
+- 개념: [[LLM 추론 에너지 지표]]
+- 분석: [[같은 SLO의 LLM 서비스는 무엇을 비용으로 세어야 하는가]]
+- 보강: [[에너지 비례 컴퓨팅]], [[전력 장벽은 성능 향상의 의미를 어떻게 바꾸었는가]], [[LLM 추론 서비스 지표]], [[프리필과 디코드]], [[컴퓨팅 능력이란 무엇인가]], [[컴퓨팅 능력의 발달사]], [[컴퓨팅 능력 독서 지도]]
+- 탐색·운영: [[index]], [[overview]], `site/catalog.mjs`, `site/verify-output.mjs`
+
+### 검증
+
+- 평균·첨두 전력과 실행 에너지를 구분하고, 전력의 시간 적분 또는 평균 전력×시간으로 에너지를 계산하도록 정리했다.
+- GPU 텔레메트리를 전체 서비스 에너지로 일반화하지 않고 노드·전체 SUT·벽면 AC의 포함 범위를 분리했다.
+- 입력·출력 토큰과 good request의 분모를 구분하고, 거부·시간 초과·오류·재시도에 쓴 자원은 분자에 남겼다.
+- 공급자 요금·환율처럼 시점에 따라 달라지는 화폐 가격을 제외하고 물리 자원 회계에 범위를 한정했다.
+- 위키 lint·유지보수 점검, Node 153개·Python 23개·브라우저 5개 테스트와 2,504파일 정적 빌드 검증을 통과했다.
+- 새 TokenPowerBench·MLPerf Power URL 7개는 모두 정상 응답했다. 전체 외부 링크 점검의 404 세 건은 기존 NIST URL에 한정됐다.
+- `raw/` 원본 변경 없음
+
+### 출처
+
+- [[TokenPowerBench - Benchmarking the Power Consumption of LLM Inference]]
+- [[MLPerf Inference Power Measurement]]
+
+### 관련 항목
+
+- [[LLM 추론 에너지 지표]]
+- [[같은 SLO의 LLM 서비스는 무엇을 비용으로 세어야 하는가]]
+- [[LLM 추론 서비스 지표]]
 
 <!-- wiki-maintenance: global-sections -->
 ## 출처

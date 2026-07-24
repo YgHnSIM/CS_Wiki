@@ -337,6 +337,10 @@ export const learningPaths = [
       "The Landscape of Parallel Computing Research - A View from Berkeley",
       "Roofline An Insightful Visual Performance Model",
       "전력 장벽은 성능 향상의 의미를 어떻게 바꾸었는가",
+      "TokenPowerBench - Benchmarking the Power Consumption of LLM Inference",
+      "MLPerf Inference Power Measurement",
+      "LLM 추론 에너지 지표",
+      "같은 SLO의 LLM 서비스는 무엇을 비용으로 세어야 하는가",
       "The Datacenter as a Computer",
       "The Tail at Scale",
       "꼬리 지연 시간",
@@ -437,7 +441,7 @@ export const learningPaths = [
   {
     slug: "power-energy-barrier",
     title: "전력 장벽과 에너지 효율",
-    description: "집적도와 소자 축소의 결합이 약해진 뒤 성능 향상이 세대 간 환산 계산량/에너지, 실제 부하의 전력 곡선과 칩의 활성 면적을 관리하는 문제로 바뀐 과정을 읽는다.",
+    description: "집적도와 소자 축소의 결합이 약해진 뒤 성능 향상이 세대 간 계산량/에너지, 부하별 전력과 활성 면적에서 LLM의 단계별·전체 시스템 유효 요청당 자원까지 확장된 과정을 읽는다.",
     pages: [
       "Cramming More Components onto Integrated Circuits",
       "무어의 법칙",
@@ -452,6 +456,10 @@ export const learningPaths = [
       "다크 실리콘",
       "도메인 특화 가속기",
       "Power Measurement Tutorial for the Green500 List",
+      "TokenPowerBench - Benchmarking the Power Consumption of LLM Inference",
+      "MLPerf Inference Power Measurement",
+      "LLM 추론 에너지 지표",
+      "같은 SLO의 LLM 서비스는 무엇을 비용으로 세어야 하는가",
       "컴퓨팅 능력이란 무엇인가",
       "컴퓨팅 능력의 발달사",
       "전력 장벽은 성능 향상의 의미를 어떻게 바꾸었는가"
@@ -500,7 +508,7 @@ export const learningPaths = [
   {
     slug: "llm-inference-systems",
     title: "LLM 추론 시스템과 서비스 품질",
-    description: "Transformer의 생성 순차성에서 출발해 어텐션 데이터 이동, 동적 배칭·KV 캐시, 프리필·디코드와 TTFT·TPOT SLO가 실제 LLM 서비스 능력을 만드는 과정을 읽는다.",
+    description: "Transformer의 생성 순차성에서 출발해 어텐션 데이터 이동, 동적 배칭·KV 캐시, 재사용·양자화, TTFT·TPOT SLO와 유효 요청당 에너지가 실제 LLM 서비스 능력을 만드는 과정을 읽는다.",
     pages: [
       "Attention Is All You Need",
       "Transformer",
@@ -522,11 +530,15 @@ export const learningPaths = [
       "LLM 가중치 양자화",
       "MLPerf Inference Benchmark",
       "LLM 추론 서비스 지표",
+      "TokenPowerBench - Benchmarking the Power Consumption of LLM Inference",
+      "MLPerf Inference Power Measurement",
+      "LLM 추론 에너지 지표",
       "Transformer 추론은 왜 연산량만으로 설명되지 않는가",
       "KV 캐시는 왜 LLM 추론 처리량을 제한하는가",
       "재사용과 추측은 LLM 추론 작업량을 어떻게 바꾸는가",
       "낮은 비트는 왜 LLM 추론 속도를 보장하지 않는가",
       "초당 토큰 수는 왜 LLM 서비스 능력을 설명하지 못하는가",
+      "같은 SLO의 LLM 서비스는 무엇을 비용으로 세어야 하는가",
       "꼬리 지연 시간",
       "컴퓨팅 능력이란 무엇인가"
     ]

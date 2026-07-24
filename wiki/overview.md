@@ -11,11 +11,11 @@ status: active
 
 ## 현재 상태
 
-이 위키는 컴퓨터 과학과 컴퓨팅사 지식을 원본 소스 기반으로 정리한다. 현재 정규 소스는 6개 묶음, 참고 자료는 82개이며, 주요 주제는 수학 표와 인간 계산 조직, 검산과 수치 결과 계약, 정적 표에서 재계산 가능한 스프레드시트로의 전환, 19세기 기계식 계산 장치에서 계산 가능성, 계산 복잡도와 다항 시간 환원, 범용성과 프로그래밍 가능성, 개발 생산성의 다차원 측정, 기계 계산의 이론적 의미, 20세기 초기 저장 프로그램 컴퓨터의 계보, 로더, 어셈블러, 서브루틴, 스택 기반 호출 구조, `goto`와 구조적 프로그래밍, Fortran과 컴파일러, Unix와 C, 서브루틴 라이브러리와 API적 사고, 소프트웨어 재사용의 역사, 집적도·소자 축소에서 캐시·RISC와 메모리 장벽, 알고리즘·소프트웨어·아키텍처의 공동 성능 개선, 부동소수점 표준화와 수치 정확성, 혼합 정밀도와 목표 품질 도달 시간, Transformer의 자기 주의·입출력 인지 실행·연속 배칭·KV 캐시·접두사 재사용·추측 디코딩·프리필/디코드 분리와 TTFT·TPOT goodput 측정, 고정 크기와 확대 크기의 병렬 확장, 장기 환산 계산량/에너지·부하별 전력·활성 면적으로 나뉜 전력 장벽, 팬아웃과 꼬리 지연, 결함 허용과 탐지·복구를 포함한 서비스 결과 계약, 분산·도메인 특화 구조로 이어진 컴퓨팅 능력의 발달, 논리 회로와 이진 표현, 디지털 데이터 표현과 메모리 안전성, 그리고 유니코드 기반 텍스트 인코딩 심화로 이어지는 컴퓨팅 개념의 형성이다.
+이 위키는 컴퓨터 과학과 컴퓨팅사 지식을 원본 소스 기반으로 정리한다. 현재 정규 소스는 6개 묶음, 참고 자료는 84개이며, 주요 주제는 수학 표와 인간 계산 조직, 검산과 수치 결과 계약, 정적 표에서 재계산 가능한 스프레드시트로의 전환, 19세기 기계식 계산 장치에서 계산 가능성, 계산 복잡도와 다항 시간 환원, 범용성과 프로그래밍 가능성, 개발 생산성의 다차원 측정, 기계 계산의 이론적 의미, 20세기 초기 저장 프로그램 컴퓨터의 계보, 로더, 어셈블러, 서브루틴, 스택 기반 호출 구조, `goto`와 구조적 프로그래밍, Fortran과 컴파일러, Unix와 C, 서브루틴 라이브러리와 API적 사고, 소프트웨어 재사용의 역사, 집적도·소자 축소에서 캐시·RISC와 메모리 장벽, 알고리즘·소프트웨어·아키텍처의 공동 성능 개선, 부동소수점 표준화와 수치 정확성, 혼합 정밀도와 목표 품질 도달 시간, Transformer의 자기 주의·입출력 인지 실행·연속 배칭·KV 캐시·접두사 재사용·추측 디코딩·프리필/디코드 분리, TTFT·TPOT goodput과 유효 요청당 에너지·가속기 시간 측정, 고정 크기와 확대 크기의 병렬 확장, 장기 환산 계산량/에너지·부하별 전력·활성 면적으로 나뉜 전력 장벽, 팬아웃과 꼬리 지연, 결함 허용과 탐지·복구를 포함한 서비스 결과 계약, 분산·도메인 특화 구조로 이어진 컴퓨팅 능력의 발달, 논리 회로와 이진 표현, 디지털 데이터 표현과 메모리 안전성, 그리고 유니코드 기반 텍스트 인코딩 심화로 이어지는 컴퓨팅 개념의 형성이다.
 
 
 <!-- wiki-maintenance: status-summary -->
-운영 상태: 전체 275개 페이지 중 active 260개, draft 0개, review 15개, archived 0개다.
+운영 상태: 전체 279개 페이지 중 active 264개, draft 0개, review 15개, archived 0개다.
 
 ## 웹 탐색 구조
 
@@ -23,11 +23,11 @@ status: active
 
 구조 지도는 공개 문서를 처음부터 한 화면에 흩뿌리지 않고 의미 군집과 군집 회랑으로 압축한다. 지도에는 편집자가 검토한 의미 관계와 읽기 추천·학습 순서만 남기고, 근거와 본문 언급은 문서 채널과 전용 렌즈로 분리한다. 텍스트 목록이 Canvas보다 먼저 나오며 문서를 열면 최대 6개 직접 이웃만 불러온다. 군집별 정적 주소에는 모든 문서 링크를 보존하고, 새 문서는 공개 범위와 첫 도메인 태그에 따라 지도·검색·통계에 자동으로 들어간다. 문서별 초점 조각을 따로 생성하므로 전체 문서 수가 늘어나도 한 요청의 크기는 제한된다.
 
-역사·인과 렌즈는 같은 222개 공개 문서를 연도 목록이 아니라 **한계 → 대응 → 새 능력 → 다음 제약**의 변화로 읽게 한다. 현재 원전 대조로 연도가 기록된 문서는 126개이고, 그중 사건 시점을 가진 문서 38개와 출판 시점을 가진 문서 88개를 1800년 이전부터 2015년 이후까지 여덟 시대에 배치한다. 연도를 확인하지 못한 145개는 제목이나 작성일로 추정하지 않고 별도 `연도 미상` 시대에 보존한다. 편집자가 직접 기록한 `responds_to`, `enables`, `precedes`, `constrains`만 합성한 검토 전환은 17개이며 완전 전환 9개와 부분 전환 8개를 구분해 보여 준다.
+역사·인과 렌즈는 같은 222개 공개 문서를 연도 목록이 아니라 **한계 → 대응 → 새 능력 → 다음 제약**의 변화로 읽게 한다. 현재 원전 대조로 연도가 기록된 문서는 129개이고, 그중 사건 시점을 가진 문서 38개와 출판 시점을 가진 문서 91개를 1800년 이전부터 2015년 이후까지 여덟 시대에 배치한다. 연도를 확인하지 못한 146개는 제목이나 작성일로 추정하지 않고 별도 `연도 미상` 시대에 보존한다. 편집자가 직접 기록한 `responds_to`, `enables`, `precedes`, `constrains`만 합성한 검토 전환은 17개이며 완전 전환 9개와 부분 전환 8개를 구분해 보여 준다.
 
 아홉 시대는 10개 정적 조각으로 제공된다. 한 조각은 최대 120개 문서와 96개 전환 요약만 담고, 첫 화면은 manifest와 시대별 대표 문서만 받는다. 직접 선택은 안정 ID를 해시한 최대 96레코드 조회 버킷 하나와 해당 시대 조각만 불러오며, 전체 검색도 네 개의 작은 버킷을 병렬로 읽는다. 전환 하나가 관계를 매우 많이 가져도 시대 조각에는 최대 6개 대표 간선·32KiB 요약만 두고, 전체 관계는 최대 48레코드·64KiB 상세 쪽으로 나눠 사용자가 한 쪽씩 지연 로드한다. 새 공개 문서는 자동으로 정확히 한 시대에 들어가며 역사 메타데이터가 없으면 `연도 미상`·`층위 미분류`에 안전하게 수용된다. 시대 문서나 고차수 관계가 늘면 새 정적 조각만 생기므로 한 번의 요청과 화면 표시량은 전체 문서 수와 함께 커지지 않는다.
 
-근거 계보 렌즈는 183개 공개 지식 문서, 88개 정규 소스·참고 자료와 753개 문서–근거 연결을 **원자료·재현 정보 → 정규 소스·참고 자료 → 지식 문서·검토 관계**의 3레일로 펼친다. 프론트매터 `sources`는 문서 전체의 등록 근거 묶음으로, 설명과 직접 근거가 붙은 편집 관계 44개는 별도의 검토 관계로 구분한다. 근거 수를 신뢰도·진실도 점수로 만들지 않고, 같은 자료를 쓰는 문서도 공통 자료를 등록했다는 사실만 보여 준다. 근거 문서의 로컬 원본 6개, 보존 스냅샷 7개, 외부 링크 의존 75개는 품질 순위가 아니라 재현 조건으로 표시한다.
+근거 계보 렌즈는 185개 공개 지식 문서, 90개 정규 소스·참고 자료와 773개 문서–근거 연결을 **원자료·재현 정보 → 정규 소스·참고 자료 → 지식 문서·검토 관계**의 3레일로 펼친다. 프론트매터 `sources`는 문서 전체의 등록 근거 묶음으로, 설명과 직접 근거가 붙은 편집 관계 44개는 별도의 검토 관계로 구분한다. 근거 수를 신뢰도·진실도 점수로 만들지 않고, 같은 자료를 쓰는 문서도 공통 자료를 등록했다는 사실만 보여 준다. 근거 문서의 로컬 원본 6개, 보존 스냅샷 7개, 외부 링크 의존 77개는 품질 순위가 아니라 재현 조건으로 표시한다.
 
 첫 화면은 전체 문서–근거 행렬을 받지 않는다. 직접 조회, 제목·별칭 앞 2–4글자 prefix 검색, 문서·관계 초점과 근거 역색인은 모두 레코드 수와 64KiB 상한을 가진 조각으로 나뉜다. 문서나 자료 하나가 수백·수천 연결을 가져도 미리보기는 최대 8개·32KiB, 전체 상세는 최대 48레코드·64KiB씩만 제공한다. 정적 화면의 자료·하류 문서·검토 관계도 12개씩 나뉘고 쪽 이동은 현재 주변과 양 끝만 표시해 연결 수의 제곱으로 HTML이 커지지 않는다. 모든 공개 문서·자료·검토 관계에는 정적 주소와 실제 문서 링크가 있어 자바스크립트 없이도 계보와 다음 쪽을 읽을 수 있다. 직접 사용된 `context` 자료는 해당 초점의 정적 주소에서만 따라가며 전역 검색·통계·사이트맵에는 나타나지 않는다. 새 공개 문서와 자료는 별도 목록 편집 없이 자동 편입되고, 문서 수가 늘면 조각 수만 늘어난다.
 
@@ -107,6 +107,8 @@ status: active
 
 [[Implications of Historical Trends in the Electrical Efficiency of Computing]]은 1946–2009년 최고 부하의 환산 계산량/에너지 장기 추세를, [[The Case for Energy-Proportional Computing]]은 실제 서버의 유휴–첨두 전력 곡선을, [[Dark Silicon and the End of Multicore Scaling]]은 고정 전력 칩의 동시 활성 면적을 각각 다룬다. [[Koomey의 법칙]], [[에너지 비례 컴퓨팅]]과 [[다크 실리콘]]은 이 세 측정 경계를 분리하며, [[전력 장벽은 성능 향상의 의미를 어떻게 바꾸었는가]]는 성능 향상이 높은 클럭에서 작업당 에너지·부하 관리·선택적 활성화의 공동 문제로 이동한 과정을 분석한다.
 
+[[TokenPowerBench - Benchmarking the Power Consumption of LLM Inference]]는 이 계보를 GPU·노드·전체 시스템의 유휴·프리필·디코드 전력으로 확장하고, [[MLPerf Inference Power Measurement]]는 같은 벤치마크 실행의 벽면 AC 전력을 측정한다. [[LLM 추론 에너지 지표]]와 [[같은 SLO의 LLM 서비스는 무엇을 비용으로 세어야 하는가]]는 총량 에너지와 가속기 시간을 품질·TTFT·TPOT를 만족한 요청당 비용으로 묶는다.
+
 ### 부동소수점 성능과 정확성
 
 [[What Every Computer Scientist Should Know About Floating-Point Arithmetic]]은 유한 정밀도 표현, 반올림, 상쇄와 시스템 지원을 1991년의 IEEE 754-1985 맥락에서 설명하고, [[IEEE 754-2019 Standard for Floating-Point Arithmetic]]은 현행 표준의 공개 범위와 진행 중인 P754 개정 상태를 구분한다. [[부동소수점 정확성]]은 정확한 반올림, 비트 재현성, 수치 오차와 과업 검증을 서로 다른 계약으로 정리한다. [[더 빠른 계산은 같은 답을 내는가]]는 컴파일러·병렬 실행이 연산 순서를 바꿀 때 LINPACK·SPEC의 검증을 통과한 성능만 같은 계산의 향상으로 셀 수 있음을 분석한다.
@@ -127,6 +129,8 @@ status: active
 
 [[DistServe - Disaggregating Prefill and Decoding for Goodput-optimized Large Language Model Serving]]는 [[프리필과 디코드]]를 다른 GPU 군에 배치해 단계 간 간섭과 결합된 자원 구성을 줄이고, TTFT·TPOT 목표를 만족한 요청의 goodput을 측정한다. [[MLPerf Inference Benchmark]]는 모델·품질·요청 시나리오와 판본을 고정해 이 지연·처리량을 비교 가능한 계약으로 만든다. [[LLM 추론 서비스 지표]]와 [[초당 토큰 수는 왜 LLM 서비스 능력을 설명하지 못하는가]]는 원시 토큰률을 첫 응답·연속 생성·SLO 달성률과 자원 비용의 벡터 안에서 해석한다.
 
+서비스의 자원 비용은 GPU 전력이나 합계 토큰당 에너지 하나가 아니다. TokenPowerBench와 MLPerf Power를 잇는 LLM 추론 에너지 지표는 입력·출력 토큰, 유휴 전력과 GPU·노드·벽면 AC 경계를 구분한다. 같은 SLO 분석은 실패·거부 요청의 자원을 분자에 남기고 `J/good request`와 `accelerator-hour/good request`를 함께 비교한다.
+
 ### 개발 생산성과 측정
 
 [[No Silver Bullet—Essence and Accidents of Software Engineering]]은 언어·도구가 줄이는 표현상의 부수적 마찰과 요구사항·설계·변경의 본질적 부담을 구분한다. [[The SPACE of Developer Productivity]]은 개발자 생산성을 만족과 웰빙, 성과, 활동, 소통과 협업, 효율과 몰입의 다섯 차원으로 다룬다. [[본질적 복잡성과 부수적 복잡성]], [[개발자 생산성]], [[코드 생산량은 왜 개발 생산성을 설명하지 못하는가]]는 코드 줄 수·커밋 수를 활동의 한 신호로 한정하고, 품질·협업·흐름을 함께 측정해야 하는 이유를 정리한다.
@@ -139,7 +143,11 @@ status: active
 
 [[컴퓨팅 능력의 발달사]]는 기계 이전의 계산 조직과 배포 인프라를 출발점으로 추가해, 장치의 연산률만이 아니라 작업 분해·검산·출판 가능성도 각 시대의 계산 능력을 규정했다는 관점을 제시한다.
 
-[[컴퓨팅 능력이란 무엇인가]]는 컴퓨팅 능력을 계산 가능성, 알고리즘 복잡도, 프로그래밍 가능성, 실제 성능, 확장성, 자원 효율, 신뢰 가능한 결과의 일곱 층위로 종합하고 비교 가능한 측정 조건을 정리한다. 컴퓨팅 능력 독서 지도는 정의 허브에서 핵심 분석을 거쳐 [[컴퓨팅 능력의 발달사]]에 도달하는 순서와 35개 원전 코어를 안내한다. 발달사는 계산 가능성과 저장 프로그램·라이브러리·컴파일러·운영체제가 만든 프로그래밍 가능성에서 집적·축소와 수치 표준화, 메모리·전력 장벽, 병렬·분산·특화 구조로 층위가 늘어난 과정을 분석한다. [[Cramming More Components onto Integrated Circuits]]와 [[Design of Ion-Implanted MOSFET's with Very Small Physical Dimensions]]는 [[무어의 법칙]]과 [[Dennard 스케일링]]을 구분해 집적도 증가와 소자 축소의 결합을 설명하고, 캐시와 RISC 원전은 늘어난 잠재 자원이 실제 프로그램 성능으로 전환되는 조건을 보강한다. Goldberg와 IEEE 754는 더 빠른 연산이 같은 계산이 되기 위한 표현·반올림·결과 계약을 보강한다. [[Hitting the Memory Wall]], [[Attention Is All You Need]], [[FlashAttention - Fast and Memory-Efficient Exact Attention with IO-Awareness]], [[Orca - A Distributed Serving System for Transformer-Based Generative Models]], [[Efficient Memory Management for Large Language Model Serving with PagedAttention]], [[SGLang - Efficient Execution of Structured Language Model Programs]], [[Fast Inference from Transformers via Speculative Decoding]], [[GPTQ - Accurate Post-Training Quantization for Generative Pre-trained Transformers]], [[AWQ - Activation-aware Weight Quantization for On-Device LLM Compression and Acceleration]]과 [[DistServe - Disaggregating Prefill and Decoding for Goodput-optimized Large Language Model Serving]]는 메모리 장벽을 Transformer의 GPU 입출력, 요청 스케줄링·KV 수용량, 접두사 재사용·추측 실행·가중치 양자화와 프리필–디코드 간섭 문제로 잇는다. [[MLPerf Inference Benchmark]]는 이를 품질·지연·시나리오를 포함한 추론 측정 계약으로 보강한다. Amdahl과 Gustafson은 고정된 작업의 시간 단축과 고정된 시간의 문제 규모 확대를 서로 다른 병렬 성능으로 나눈다. [[The Datacenter as a Computer]], [[The Tail at Scale]]과 [[In-Datacenter Performance Analysis of a Tensor Processing Unit]]은 시스템 경계가 창고 규모 서비스, 종단 지연 분포와 [[도메인 특화 가속기]]로 확장된 흐름을 보여준다. [[SPEC CPU 2026 Overview]], [[The Linpack Benchmark]], [[Roofline An Insightful Visual Performance Model]], [[Power Measurement Tutorial for the Green500 List]]는 검증된 작업별 성능·데이터 이동·에너지 효율을 측정하는 기준을 제공한다.
+[[컴퓨팅 능력이란 무엇인가]]는 컴퓨팅 능력을 계산 가능성, 알고리즘 복잡도, 프로그래밍 가능성, 실제 성능, 확장성, 자원 효율, 신뢰 가능한 결과의 일곱 층위로 종합하고 비교 가능한 측정 조건을 정리한다. 컴퓨팅 능력 독서 지도는 정의 허브에서 핵심 분석을 거쳐 [[컴퓨팅 능력의 발달사]]에 도달하는 순서와 37개 원전 코어를 안내한다. 발달사는 계산 가능성과 저장 프로그램·라이브러리·컴파일러·운영체제가 만든 프로그래밍 가능성에서 집적·축소와 수치 표준화, 메모리·전력 장벽, 병렬·분산·특화 구조로 층위가 늘어난 과정을 분석한다.
+
+[[Cramming More Components onto Integrated Circuits]]와 [[Design of Ion-Implanted MOSFET's with Very Small Physical Dimensions]]는 [[무어의 법칙]]과 [[Dennard 스케일링]]을 구분하고, 캐시와 RISC 원전은 늘어난 잠재 자원이 실제 프로그램 성능으로 전환되는 조건을 보강한다. Goldberg와 IEEE 754는 더 빠른 연산이 같은 계산이 되기 위한 결과 계약을 붙인다. [[Hitting the Memory Wall]]에서 Transformer의 입출력 인지 실행·동적 배칭·KV 캐시·접두사 재사용·추측 실행·가중치 양자화·프리필–디코드 분리로 이어지는 원전은 연산 잠재력이 실제 LLM 서비스 능력이 되는 조건을 보여준다. MLPerf Inference, TokenPowerBench와 MLPerf Power는 이를 품질·지연·시나리오·에너지 측정 계약으로 보강한다.
+
+Amdahl과 Gustafson은 고정 작업의 시간 단축과 고정 시간의 문제 규모 확대를 서로 다른 병렬 성능으로 나눈다. [[The Datacenter as a Computer]], [[The Tail at Scale]]과 [[In-Datacenter Performance Analysis of a Tensor Processing Unit]]은 시스템 경계가 창고 규모 서비스, 종단 지연 분포와 [[도메인 특화 가속기]]로 확장된 흐름을 보여준다. SPEC CPU, LINPACK, Roofline과 Green500 지침은 검증된 작업별 성능·데이터 이동·에너지 효율을 측정하는 기준을 제공한다.
 
 ### 데이터 표현과 안전성
 
