@@ -15,7 +15,7 @@ status: active
 
 
 <!-- wiki-maintenance: status-summary -->
-운영 상태: 전체 279개 페이지 중 active 264개, draft 0개, review 15개, archived 0개다.
+운영 상태: 전체 280개 페이지 중 active 265개, draft 0개, review 15개, archived 0개다.
 
 ## 웹 탐색 구조
 
