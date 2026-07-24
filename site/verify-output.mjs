@@ -5,10 +5,11 @@ import { extname, join } from "node:path";
 
 export const OUTPUT_BUDGETS = Object.freeze({
   // Public documents intentionally emit static no-JS evidence routes.
-  // The distributed-consistency expansion reaches 2,826 bounded artifacts; 3,200 keeps headroom for the queued P3–P5 work without relaxing byte budgets.
-  files: 3_200,
-  totalBytes: 96 * 1024 * 1024,
-  htmlBytes: 48 * 1024 * 1024,
+  // The P6–P10 expansion emits 3,560 bounded artifacts. These limits retain
+  // explicit output ceilings while allowing the next bounded content increment.
+  files: 4_096,
+  totalBytes: 112 * 1024 * 1024,
+  htmlBytes: 64 * 1024 * 1024,
   jsonBytes: 48 * 1024 * 1024
 });
 

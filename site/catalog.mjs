@@ -356,6 +356,12 @@ export const learningPaths = [
       "꼬리 지연 시간",
       "In-Datacenter Performance Analysis of a Tensor Processing Unit",
       "도메인 특화 가속기",
+      "표현·배치·계약은 어떻게 컴퓨팅 능력을 만드는가",
+      "한 프로그램의 순서는 여러 실행 주체에서 어떻게 보존되는가",
+      "한 소스의 의미와 성능은 가속기로 어떻게 번역되는가",
+      "로컬 호출과 파일은 원격 상태가 될 때 무엇을 잃는가",
+      "자동화는 계산 노동을 없애는가 책임을 옮기는가",
+      "낮은 운영 에너지는 지속 가능한 컴퓨팅을 보장하는가",
       "컴퓨팅 능력이란 무엇인가",
       "더 빠른 계산은 같은 답을 내는가",
       "평균 성능은 왜 서비스의 컴퓨팅 능력을 설명하지 못하는가",
@@ -389,6 +395,25 @@ export const learningPaths = [
       "프로그래밍 가능성",
       "컴퓨팅 능력이란 무엇인가",
       "범용성은 어떻게 컴퓨팅 능력이 되었는가"
+    ]
+  },
+  {
+    slug: "heterogeneous-compilation",
+    title: "소스 코드에서 이기종 가속기까지",
+    description: "컴파일러의 중간 표현에서 CUDA의 실행 모델, Halide의 스케줄 분리와 TVM의 자동 최적화까지 따라가며, 소스 의미와 목표 하드웨어 성능을 함께 보존하는 조건을 읽는다.",
+    pages: [
+      "The FORTRAN Automatic Coding System",
+      "컴파일러",
+      "LLVM: A Compilation Framework for Lifelong Program Analysis & Transformation",
+      "중간 표현",
+      "Scalable Parallel Programming with CUDA",
+      "이기종 실행 모델",
+      "Decoupling Algorithms from Schedules for Easy Optimization of Image Processing Pipelines",
+      "알고리즘과 스케줄 분리",
+      "TVM: An Automated End-to-End Optimizing Compiler for Deep Learning",
+      "성능 이식성",
+      "도메인 특화 가속기",
+      "한 소스의 의미와 성능은 가속기로 어떻게 번역되는가"
     ]
   },
   {
@@ -449,9 +474,27 @@ export const learningPaths = [
     ]
   },
   {
+    slug: "concurrency-consistency",
+    title: "동시성과 일관성",
+    description: "협력하는 프로세스와 모니터에서 시작해 공유 메모리의 순차 일관성, 동시 객체의 선형화 가능성, 복제 상태의 순서 계약까지 따라간다.",
+    pages: [
+      "Cooperating Sequential Processes",
+      "동시성",
+      "Monitors: An Operating System Structuring Concept",
+      "상호 배제와 동기화",
+      "How to Make a Multiprocessor Computer That Correctly Executes Multiprocess Programs",
+      "순차 일관성",
+      "Linearizability: A Correctness Condition for Concurrent Objects",
+      "선형화 가능성",
+      "복제 로그와 합의",
+      "분산 서비스는 빠른 응답과 같은 상태를 어떻게 함께 보장하는가",
+      "한 프로그램의 순서는 여러 실행 주체에서 어떻게 보존되는가"
+    ]
+  },
+  {
     slug: "power-energy-barrier",
     title: "전력 장벽과 에너지 효율",
-    description: "집적도와 소자 축소의 결합이 약해진 뒤 성능 향상이 세대 간 계산량/에너지, 부하별 전력과 활성 면적에서 LLM의 단계별·전체 시스템 유효 요청당 자원까지 확장된 과정을 읽는다.",
+    description: "집적도와 소자 축소의 결합이 약해진 뒤 성능 향상이 세대 간 계산량/에너지, 부하별 전력과 활성 면적, LLM의 유효 요청당 자원에서 제품·시설 수명 주기 경계까지 확장된 과정을 읽는다.",
     pages: [
       "Cramming More Components onto Integrated Circuits",
       "무어의 법칙",
@@ -470,6 +513,13 @@ export const learningPaths = [
       "MLPerf Inference Power Measurement",
       "LLM 추론 에너지 지표",
       "같은 SLO의 LLM 서비스는 무엇을 비용으로 세어야 하는가",
+      "GHG Protocol Product Life Cycle Accounting and Reporting Standard",
+      "수명 주기 평가 경계",
+      "Chasing Carbon: The Elusive Environmental Footprint of Computing",
+      "운영 탄소와 내재 탄소",
+      "Carbon Emissions and Large Neural Network Training",
+      "전력 사용 효율",
+      "낮은 운영 에너지는 지속 가능한 컴퓨팅을 보장하는가",
       "컴퓨팅 능력이란 무엇인가",
       "컴퓨팅 능력의 발달사",
       "전력 장벽은 성능 향상의 의미를 어떻게 바꾸었는가"
@@ -561,7 +611,7 @@ export const learningPaths = [
   {
     slug: "developer-productivity",
     title: "개발자 생산성과 측정",
-    description: "언어·컴파일러·재사용이 줄인 표현 비용을 본질적 설계 부담과 구분하고, 코드량 대신 성과·협업·흐름·웰빙을 함께 측정한다.",
+    description: "언어·컴파일러·재사용과 AI 코딩 지원이 줄인 표현 비용을 본질적 설계 부담·검증·통합 책임과 구분하고, 코드량 대신 성과·협업·흐름·웰빙을 함께 측정한다.",
     pages: [
       "The FORTRAN Automatic Coding System",
       "프로그래밍 가능성",
@@ -573,6 +623,13 @@ export const learningPaths = [
       "개발자 생산성",
       "소프트웨어 공학",
       "코드 생산량은 왜 개발 생산성을 설명하지 못하는가",
+      "Expectation vs. Experience: Evaluating the Usability of Code Generation Tools Powered by Large Language Models",
+      "AI 코딩 지원",
+      "자동화 경계",
+      "검증 노동",
+      "The Impact of AI on Developer Productivity: Evidence from GitHub Copilot",
+      "Measuring the Impact of Early-2025 AI on Experienced Open-Source Developer Productivity",
+      "자동화는 계산 노동을 없애는가 책임을 옮기는가",
       "범용성은 어떻게 컴퓨팅 능력이 되었는가",
       "컴퓨팅 능력이란 무엇인가"
     ]
@@ -601,6 +658,29 @@ export const learningPaths = [
       "평균 성능은 왜 서비스의 컴퓨팅 능력을 설명하지 못하는가",
       "컴퓨팅 능력이란 무엇인가",
       "컴퓨팅 능력의 발달사"
+    ]
+  },
+  {
+    slug: "remote-state",
+    title: "로컬 인터페이스에서 원격 상태까지",
+    description: "Unix의 파일·시스템 호출에서 논리 시계, 종단 간 원칙, RPC와 분산 파일 시스템으로 이어지며 지연·부분 실패·재시도·복제 상태의 계약을 읽는다.",
+    pages: [
+      "Unix와 C",
+      "파일 시스템",
+      "시스템 호출",
+      "Time, Clocks, and the Ordering of Events in a Distributed System",
+      "종단 간 원칙",
+      "End-to-End Arguments in System Design",
+      "원격 프로시저 호출",
+      "Implementing Remote Procedure Calls",
+      "부분 실패",
+      "The Google File System",
+      "분산 파일 시스템",
+      "Dynamo: Amazon's Highly Available Key-value Store",
+      "CAP 정리",
+      "복제 로그와 합의",
+      "외부 일관성과 시간 불확실성",
+      "로컬 호출과 파일은 원격 상태가 될 때 무엇을 잃는가"
     ]
   },
   {

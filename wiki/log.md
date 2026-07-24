@@ -2880,6 +2880,77 @@ CAP의 네트워크 분할 경계, Raft의 crash fault 복제 로그, Spanner의
 - [[확장 실행 로드맵]]
 - [[지식 그래프 관계 스키마]]
 
+## [2026-07-25] query | 프로젝트 콘텐츠 지형과 다음 연결
+
+위키 전체를 범용 컴퓨터 과학 백과가 아니라 “컴퓨팅 능력이 어떤 경계에서 만들어지는가”를 추적하는 지식 체계로 다시 개괄했다. 현재 콘텐츠를 실행 가능한 표현, 작업·상태의 배치, 유효 결과 계약이라는 세 횡단 질문으로 종합하고, 기존에 직접 연결되지 않았던 초기 계산 조직과 서비스 스케줄링, 결과·절차·KV 상태의 재사용, 수치·텍스트·분산 상태의 동등성 문제를 비교했다.
+
+새 종합은 직접 역사 계보와 구조적 비교를 구분한다. 후속 확장은 문서 수가 적은 분야보다 현재 강한 양 끝 사이의 논증 공백을 우선해, 동시성·메모리 일관성, 이기종 컴파일·런타임과 성능 이식성, 네트워크·RPC·분산 저장, 자동화 이후의 노동·검증·생산성, 제조·냉각을 포함한 수명 주기 자원 회계를 제안했다.
+
+변경된 페이지:
+
+- 검토 분석 생성: [[표현·배치·계약은 어떻게 컴퓨팅 능력을 만드는가]]
+- 기존 종합 연결: [[컴퓨팅 능력의 발달사]]
+- 탐색·운영: [[index]], [[overview]], [[log]]
+
+### 검증
+
+- 새 문서는 탐색적 비교를 원전 대조 전의 `review` 상태와 `context` 노출로 보존했다.
+- 관계 표는 현재 문서에서 대상 문서로 읽히며, 기존 소스·참고 자료만 직접 근거로 사용했다.
+- 위키 구조 검사, 유지보수 dry-run과 전체 사이트 검사를 실행해 색인·상태 수치·링크·정적 출력의 일관성을 확인했다.
+- `raw/` 원본과 첨부 파일은 변경하지 않았다.
+
+### 출처
+
+- [[The computation factory - de Prony's project for making tables in the 1790s]]
+- [[The Preparation of Programs for an Electronic Digital Computer]]
+- [[Slave Memories and Dynamic Storage Allocation]]
+- [[Unicode Normalization Forms]]
+- [[In Search of an Understandable Consensus Algorithm]]
+- [[MLPerf Inference Benchmark]]
+
+### 관련 항목
+
+- [[표현·배치·계약은 어떻게 컴퓨팅 능력을 만드는가]]
+- [[컴퓨팅 능력의 발달사]]
+- [[컴퓨팅 능력이란 무엇인가]]
+
+## [2026-07-25] reference | P6–P10 횡단 확장 구현
+
+표현·배치·계약이라는 공통 질문을 실제 콘텐츠로 채웠다. 동시성의 공유 상태 순서, 이기종 가속기의 의미·성능 번역, 원격 상태의 지연·부분 실패, AI 코딩 지원 이후의 검증 책임, 운영 에너지와 수명 주기 환경 영향의 경계를 각각 원전·개념·분석으로 분리했다. 이 확장은 분야를 하나의 직접 역사 계보로 합치지 않고, 같은 컴퓨팅 능력 주장에 필요한 작업·자원·결과 계약을 비교하는 연결로 유지한다.
+
+### 변경된 페이지
+
+- P6: [[Cooperating Sequential Processes]], [[Monitors: An Operating System Structuring Concept]], [[How to Make a Multiprocessor Computer That Correctly Executes Multiprocess Programs]], [[Linearizability: A Correctness Condition for Concurrent Objects]], [[동시성]], [[상호 배제와 동기화]], [[순차 일관성]], [[선형화 가능성]], [[한 프로그램의 순서는 여러 실행 주체에서 어떻게 보존되는가]]
+- P7: [[LLVM: A Compilation Framework for Lifelong Program Analysis & Transformation]], [[Scalable Parallel Programming with CUDA]], [[Decoupling Algorithms from Schedules for Easy Optimization of Image Processing Pipelines]], [[TVM: An Automated End-to-End Optimizing Compiler for Deep Learning]], [[중간 표현]], [[이기종 실행 모델]], [[알고리즘과 스케줄 분리]], [[성능 이식성]], [[한 소스의 의미와 성능은 가속기로 어떻게 번역되는가]]
+- P8: [[Time, Clocks, and the Ordering of Events in a Distributed System]], [[End-to-End Arguments in System Design]], [[Implementing Remote Procedure Calls]], [[The Google File System]], [[Dynamo - Amazon's Highly Available Key-value Store]], [[종단 간 원칙]], [[원격 프로시저 호출]], [[부분 실패]], [[분산 파일 시스템]], [[로컬 호출과 파일은 원격 상태가 될 때 무엇을 잃는가]]
+- P9: [[Expectation vs. Experience: Evaluating the Usability of Code Generation Tools Powered by Large Language Models]], [[The Impact of AI on Developer Productivity: Evidence from GitHub Copilot]], [[Measuring the Impact of Early-2025 AI on Experienced Open-Source Developer Productivity]], [[자동화 경계]], [[검증 노동]], [[AI 코딩 지원]], [[자동화는 계산 노동을 없애는가 책임을 옮기는가]]
+- P10: [[GHG Protocol Product Life Cycle Accounting and Reporting Standard]], [[Chasing Carbon: The Elusive Environmental Footprint of Computing]], [[Carbon Emissions and Large Neural Network Training]], [[수명 주기 평가 경계]], [[운영 탄소와 내재 탄소]], [[전력 사용 효율]], [[낮은 운영 에너지는 지속 가능한 컴퓨팅을 보장하는가]]
+- 통합: [[표현·배치·계약은 어떻게 컴퓨팅 능력을 만드는가]], [[컴퓨팅 능력의 발달사]], [[컴퓨팅 능력 독서 지도]], [[확장 실행 로드맵]], [[index]], [[overview]], `site/catalog.mjs`
+
+### 검증
+
+- `python scripts/wiki_lint.py --json`은 341개 페이지, 8,398개 링크에서 오류·경고 0건으로 통과했다.
+- `python scripts/wiki_maintenance.py --check`과 `git diff --check`를 통과했다.
+- 상승된 네트워크 검사 `python scripts/check_external_links.py --fail-on-broken`은 262개 URL에서 정상 204건, 접근 제한 51건, 명확한 소실 0건, 일시 오류 7건으로 통과했다.
+- `npm.cmd run check`는 Node 153개, Python 23개, Chromium 브라우저 5개 테스트를 모두 통과했고, 341개 위키 페이지와 25개 학습선·290개 역의 정적 출력을 검증했다.
+- 새 자료·개념·분석은 전역 링크·출처·관계 검사를 통과한 뒤 `active`로 승격했다.
+- `raw/` 원본과 첨부 파일은 변경하지 않았다.
+
+### 출처
+
+- [[Cooperating Sequential Processes]]
+- [[LLVM: A Compilation Framework for Lifelong Program Analysis & Transformation]]
+- [[Implementing Remote Procedure Calls]]
+- [[Expectation vs. Experience: Evaluating the Usability of Code Generation Tools Powered by Large Language Models]]
+- [[GHG Protocol Product Life Cycle Accounting and Reporting Standard]]
+- [[Chasing Carbon: The Elusive Environmental Footprint of Computing]]
+
+### 관련 항목
+
+- [[표현·배치·계약은 어떻게 컴퓨팅 능력을 만드는가]]
+- [[컴퓨팅 능력 독서 지도]]
+- [[확장 실행 로드맵]]
+
 <!-- wiki-maintenance: global-sections -->
 ## 출처
 
