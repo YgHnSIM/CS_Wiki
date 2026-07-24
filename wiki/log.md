@@ -2510,6 +2510,36 @@ Orca의 반복 단위 스케줄링과 PagedAttention의 블록 기반 KV 캐시 
 - [[KV 캐시]]
 - [[KV 캐시는 왜 LLM 추론 처리량을 제한하는가]]
 
+## [2026-07-24] reference | LLM 프리필·디코드와 서비스 지표
+
+DistServe의 프리필–디코드 분리와 MLPerf Inference의 판본별 추론 벤치마크 규칙을 참고 자료로 추가했다. 자동회귀 실행의 두 단계, 첫 토큰 시간(TTFT)·출력 토큰당 시간(TPOT), SLO 달성률과 goodput을 구분하고, 원시 토큰 처리량을 사용자 지연·품질·요청 시나리오와 자원 비용 안에서 해석했다.
+
+변경된 페이지와 코드:
+
+- 참고 자료: [[DistServe - Disaggregating Prefill and Decoding for Goodput-optimized Large Language Model Serving]], [[MLPerf Inference Benchmark]]
+- 개념: [[프리필과 디코드]], [[LLM 추론 서비스 지표]]
+- 분석: [[초당 토큰 수는 왜 LLM 서비스 능력을 설명하지 못하는가]]
+- 보강: [[꼬리 지연 시간]], [[컴퓨팅 능력이란 무엇인가]], [[컴퓨팅 능력의 발달사]], [[컴퓨팅 능력 독서 지도]]
+- 탐색·운영: [[index]], [[overview]], `site/catalog.mjs`
+
+### 검증
+
+- 프리필을 항상 계산 병목, 디코드를 항상 메모리 병목인 보편 법칙으로 만들지 않고 모델·배치·하드웨어 조건에 한정했다.
+- DistServe의 최대 7.4배 goodput과 12.6배 엄격한 SLO 결과를 논문의 모델·요청 추적·GPU·네트워크와 SLO 조건에 한정했다.
+- MLPerf의 Offline·Server/Interactive·스트림 시나리오와 판본별 품질·지연 규칙을 구분하고, 공개 점수를 임의의 운영 부하 성능 보증으로 해석하지 않았다.
+- `raw/` 원본 변경 없음
+
+### 출처
+
+- [[DistServe - Disaggregating Prefill and Decoding for Goodput-optimized Large Language Model Serving]]
+- [[MLPerf Inference Benchmark]]
+
+### 관련 항목
+
+- [[프리필과 디코드]]
+- [[LLM 추론 서비스 지표]]
+- [[초당 토큰 수는 왜 LLM 서비스 능력을 설명하지 못하는가]]
+
 <!-- wiki-maintenance: global-sections -->
 ## 출처
 

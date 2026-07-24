@@ -496,7 +496,7 @@ export const learningPaths = [
   {
     slug: "llm-inference-systems",
     title: "LLM 추론 시스템과 서비스 품질",
-    description: "Transformer의 생성 순차성에서 출발해 어텐션 데이터 이동, 반복 단위 스케줄링과 KV 캐시 수용량이 실제 LLM 서비스 처리량을 만드는 과정을 읽는다.",
+    description: "Transformer의 생성 순차성에서 출발해 어텐션 데이터 이동, 동적 배칭·KV 캐시, 프리필·디코드와 TTFT·TPOT SLO가 실제 LLM 서비스 능력을 만드는 과정을 읽는다.",
     pages: [
       "Attention Is All You Need",
       "Transformer",
@@ -507,11 +507,14 @@ export const learningPaths = [
       "연속 배칭",
       "Efficient Memory Management for Large Language Model Serving with PagedAttention",
       "KV 캐시",
+      "DistServe - Disaggregating Prefill and Decoding for Goodput-optimized Large Language Model Serving",
+      "프리필과 디코드",
+      "MLPerf Inference Benchmark",
+      "LLM 추론 서비스 지표",
       "Transformer 추론은 왜 연산량만으로 설명되지 않는가",
       "KV 캐시는 왜 LLM 추론 처리량을 제한하는가",
-      "메모리 장벽",
-      "Roofline An Insightful Visual Performance Model",
-      "도메인 특화 가속기",
+      "초당 토큰 수는 왜 LLM 서비스 능력을 설명하지 못하는가",
+      "꼬리 지연 시간",
       "컴퓨팅 능력이란 무엇인가"
     ]
   },
