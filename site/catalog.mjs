@@ -325,6 +325,9 @@ export const learningPaths = [
       "부동소수점 정확성",
       "Mixed Precision Training",
       "혼합 정밀도",
+      "GPTQ - Accurate Post-Training Quantization for Generative Pre-trained Transformers",
+      "AWQ - Activation-aware Weight Quantization for On-Device LLM Compression and Acceleration",
+      "LLM 가중치 양자화",
       "MLPerf Training Benchmark",
       "목표 품질 도달 시간",
       "Hitting the Memory Wall",
@@ -489,6 +492,7 @@ export const learningPaths = [
       "In-Datacenter Performance Analysis of a Tensor Processing Unit",
       "도메인 특화 가속기",
       "낮은 정밀도는 AI의 컴퓨팅 능력을 어떻게 바꾸는가",
+      "낮은 비트는 왜 LLM 추론 속도를 보장하지 않는가",
       "더 빠른 계산은 같은 답을 내는가",
       "컴퓨팅 능력이란 무엇인가"
     ]
@@ -513,11 +517,15 @@ export const learningPaths = [
       "프리필과 디코드",
       "Fast Inference from Transformers via Speculative Decoding",
       "추측 디코딩",
+      "GPTQ - Accurate Post-Training Quantization for Generative Pre-trained Transformers",
+      "AWQ - Activation-aware Weight Quantization for On-Device LLM Compression and Acceleration",
+      "LLM 가중치 양자화",
       "MLPerf Inference Benchmark",
       "LLM 추론 서비스 지표",
       "Transformer 추론은 왜 연산량만으로 설명되지 않는가",
       "KV 캐시는 왜 LLM 추론 처리량을 제한하는가",
       "재사용과 추측은 LLM 추론 작업량을 어떻게 바꾸는가",
+      "낮은 비트는 왜 LLM 추론 속도를 보장하지 않는가",
       "초당 토큰 수는 왜 LLM 서비스 능력을 설명하지 못하는가",
       "꼬리 지연 시간",
       "컴퓨팅 능력이란 무엇인가"

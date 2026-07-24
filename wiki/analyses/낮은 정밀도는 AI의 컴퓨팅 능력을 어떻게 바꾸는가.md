@@ -4,10 +4,10 @@ aliases: [AI 저정밀도 성능, 혼합 정밀도와 모델 품질, low precisi
 summary: "혼합 정밀도가 메모리·데이터 이동·전용 연산 자원의 비용을 낮추는 동시에 수치 안정성과 모델 품질이라는 결과 계약을 바꾸며, 이를 목표 품질 도달 시간으로 비교해야 하는 이유를 분석한다."
 tags: [type/analysis, domain/machine-learning, domain/computer-architecture, domain/computer-science, status/active]
 created: 2026-07-24
-updated: 2026-07-24
+updated: 2026-07-25
 historical_layer: measurement
 capability_layers: [realized-performance, resource-efficiency, reliable-results]
-sources: ["Mixed Precision Training", "MLPerf Training Benchmark", "IEEE 754-2019 Standard for Floating-Point Arithmetic", "In-Datacenter Performance Analysis of a Tensor Processing Unit"]
+sources: ["Mixed Precision Training", "MLPerf Training Benchmark", "IEEE 754-2019 Standard for Floating-Point Arithmetic", "In-Datacenter Performance Analysis of a Tensor Processing Unit", "GPTQ - Accurate Post-Training Quantization for Generative Pre-trained Transformers", "AWQ - Activation-aware Weight Quantization for On-Device LLM Compression and Acceleration"]
 status: active
 graph_id: analysis-low-precision-ai-result-contract
 graph_visibility: public
@@ -18,6 +18,8 @@ graph_visibility: public
 AI 시스템에서 낮은 정밀도는 메모리 용량, 데이터 이동과 전용 연산기의 처리량을 바꿀 수 있다. 그러나 낮은 비트 수만으로 컴퓨팅 능력이 커졌다고 결론낼 수는 없다. 어떤 값을 낮은 형식으로 저장·연산했는지, 수치 안정성을 어떻게 보완했는지, 모델이 정한 품질 문턱을 얼마나 빨리 만족했는지를 함께 확인해야 한다.
 
 [[Mixed Precision Training]]은 반정밀도 저장·연산에 단정밀도 마스터 가중치와 손실 스케일링을 결합한 사례다. [[MLPerf Training Benchmark]]은 높은 학습 처리량이 목표 품질 도달 시간의 단축을 보장하지 않는다고 지적한다. 두 자료를 함께 읽으면 낮은 정밀도의 이득은 “같은 계산을 더 빠르게”라는 단일 명제가 아니라, **결과 계약을 명시하고 그 계약 아래 자원·시간을 줄이는 설계**임을 알 수 있다.
+
+추론에서는 [[GPTQ - Accurate Post-Training Quantization for Generative Pre-trained Transformers]]와 [[AWQ - Activation-aware Weight Quantization for On-Device LLM Compression and Acceleration]]가 [[LLM 가중치 양자화]]의 두 PTQ 경로를 보여준다. 전자는 근사 2차 오차 보상, 후자는 활성값을 관찰한 채널별 스케일로 낮은 비트 가중치의 품질을 보존한다. 두 방법 모두 압축률을 실제 속도로 바꾸려면 패킹·역양자화와 장치별 커널이 필요하다.
 
 ## 1. 무엇이 줄어드는가
 
@@ -61,6 +63,7 @@ AI 시스템에서 낮은 정밀도는 메모리 용량, 데이터 이동과 전
 | synthesizes | [[혼합 정밀도]] | 정밀도 역할 분담과 수치 안정성 장치를 시스템 수준의 시간·자원·품질 비교로 연결한다. | [[Mixed Precision Training]] |
 | measures | [[목표 품질 도달 시간]] | 학습 성능을 처리량 대신 정해진 품질 문턱까지의 시간으로 검증한다. | [[MLPerf Training Benchmark]] |
 | constrains | [[더 빠른 계산은 같은 답을 내는가]] | 비트 동일성 외에 과업 품질·안정성·측정 규칙을 포함한 결과 계약이 필요함을 보인다. | [[MLPerf Training Benchmark]] |
+| synthesizes | [[LLM 가중치 양자화]] | 추론 가중치의 압축·대역폭 이득과 보정·커널·과업 품질 조건을 혼합 정밀도 측정 틀에 연결한다. | [[AWQ - Activation-aware Weight Quantization for On-Device LLM Compression and Acceleration]] |
 
 ## 출처
 
@@ -68,11 +71,13 @@ AI 시스템에서 낮은 정밀도는 메모리 용량, 데이터 이동과 전
 - [[MLPerf Training Benchmark]]
 - [[IEEE 754-2019 Standard for Floating-Point Arithmetic]]
 - [[In-Datacenter Performance Analysis of a Tensor Processing Unit]]
+- [[GPTQ - Accurate Post-Training Quantization for Generative Pre-trained Transformers]]
+- [[AWQ - Activation-aware Weight Quantization for On-Device LLM Compression and Acceleration]]
 
 ## 관련 항목
 
 - [[혼합 정밀도]] — 정밀도별 역할 분담과 안정성 장치를 정리한다.
 - [[목표 품질 도달 시간]] — 학습 결과 계약을 시간 측정에 연결한다.
-- [[부동소수점 정확성]] — 수치적 결과가 유효하다는 뜻을 여러 층위로 나눈다.
+- [[LLM 가중치 양자화]] — 추론 가중치의 비트 폭·보정·그룹·스케일 설계를 설명한다.
 - [[도메인 특화 가속기]] — 정밀도·데이터 경로를 특정 작업에 맞추는 하드웨어 관점을 제공한다.
-- [[더 빠른 계산은 같은 답을 내는가]] — 성능 향상과 결과 계약의 일반 원칙을 다룬다.
+- [[낮은 비트는 왜 LLM 추론 속도를 보장하지 않는가]] — 압축률과 실제 커널 속도 사이의 조건을 분석한다.
