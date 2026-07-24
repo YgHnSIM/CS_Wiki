@@ -275,9 +275,11 @@ export const learningPaths = [
   {
     slug: "unicode-text",
     title: "데이터 표현과 유니코드",
-    description: "비트와 바이트에서 코드 포인트·정규화·그래핌 클러스터·텍스트 보안까지 층위별로 읽는다.",
+    description: "비트와 바이트에서 입력 검증, 코드 포인트·정규화·그래핌 클러스터, 수치 범위·메모리 경계까지 해석 계약의 보안을 층위별로 읽는다.",
     pages: [
       "데이터 표현과 인코딩",
+      "CWE-20 Improper Input Validation",
+      "입력 검증",
       "The Unicode Standard 17.0.0",
       "RFC 3629 UTF-8",
       "Unicode Normalization Forms",
@@ -294,8 +296,14 @@ export const learningPaths = [
       "유니코드 정규화",
       "그래핌 클러스터",
       "동형이의 문자",
+      "C Integer and Shift Semantics",
+      "CWE-190 Integer Overflow or Wraparound",
+      "정수 오버플로",
+      "C 문자열",
+      "메모리 안전성",
       "비트 패턴과 해석 규칙",
-      "인코딩 심화"
+      "인코딩 심화",
+      "입력을 해석하는 경계는 왜 보안 경계인가"
     ]
   },
   {
