@@ -446,6 +446,25 @@ export const learningPaths = [
     ]
   },
   {
+    slug: "fault-tolerance-availability",
+    title: "결함 허용과 가용성",
+    description: "꼬리 지연의 종단 측정에서 출발해 실패 모형, 공통 원인, 탐지·복구 시간과 안전한 서비스 회복을 함께 읽는다.",
+    pages: [
+      "The Byzantine Generals Problem",
+      "비잔틴 장애",
+      "Why Do Internet Services Fail and What Can Be Done About It",
+      "Recovery-Oriented Computing (ROC)",
+      "결함 허용",
+      "가용성과 복구",
+      "The Tail at Scale",
+      "꼬리 지연 시간",
+      "빠른 서비스는 왜 가용한 서비스를 보장하지 않는가",
+      "평균 성능은 왜 서비스의 컴퓨팅 능력을 설명하지 못하는가",
+      "컴퓨팅 능력이란 무엇인가",
+      "컴퓨팅 능력의 발달사"
+    ]
+  },
+  {
     slug: "service-tail-latency",
     title: "서비스 성능과 꼬리 지연",
     description: "단일 작업의 시간·처리량에서 창고 규모 서비스의 팬아웃과 종단 백분위로 측정 경계를 넓히고, 짧은 꼬리와 자원·에너지·결과 품질의 교환을 읽는다.",
