@@ -4,7 +4,7 @@ aliases: [Green500 power tutorial 2007]
 summary: "LINPACK 달성 성능과 같은 실행 구간의 평균 전력을 결합해 GFLOPS/W를 산출하는 Green500의 2007년 전력 측정 지침."
 tags: [type/reference, domain/computer-architecture, domain/computer-science, status/active]
 created: 2026-07-15
-updated: 2026-07-18
+updated: 2026-07-25
 publication_year: 2007
 historical_layer: measurement
 capability_layers: [resource-efficiency]
@@ -45,6 +45,13 @@ status: active
 ## 위키 반영
 
 이 자료는 [[The Linpack Benchmark]]의 성능 측정에 전력이라는 자원 제약을 추가한다. “컴퓨팅 능력이란 무엇인가”에서는 절대 성능과 효율을 구분하고, 지표의 작업 부하·시스템 경계·측정 구간을 함께 기록해야 하는 이유를 설명하는 데 사용할 수 있다.
+
+## 관계
+
+| 관계 | 대상 | 설명 | 근거 |
+|---|---|---|---|
+| measures | [[컴퓨팅 능력이란 무엇인가]] | 같은 LINPACK 실행의 달성 성능과 평균 시스템 전력을 결합해 제한된 전력당 실현 성능을 측정한다. | [[Power Measurement Tutorial for the Green500 List]] |
+| exemplifies | [[전력 장벽은 성능 향상의 의미를 어떻게 바꾸었는가]] | 최고 성능만이 아니라 작업·시스템 경계가 고정된 성능/W를 비교하는 초기 측정 사례를 제공한다. | [[Power Measurement Tutorial for the Green500 List]] |
 
 ## 출처
 

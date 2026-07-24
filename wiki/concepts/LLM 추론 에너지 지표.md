@@ -89,6 +89,7 @@ graph_visibility: public
 | 관계 | 대상 | 설명 | 근거 |
 |---|---|---|---|
 | measures | [[프리필과 디코드]] | 전력 샘플을 입력 처리·생성 구간과 맞춰 단계별 에너지와 토큰 분모를 구분한다. | [[TokenPowerBench - Benchmarking the Power Consumption of LLM Inference]] |
+| measures | [[LLM 가중치 양자화]] | 같은 모델 품질·작업 부하와 시스템 경계에서 양자화가 전체 추론 에너지와 J/token을 실제로 줄였는지 평가한다. | [[TokenPowerBench - Benchmarking the Power Consumption of LLM Inference]] |
 | narrower | [[LLM 추론 서비스 지표]] | LLM 서비스의 품질·지연·처리량 계약에 전력·에너지와 가속기 시간 축을 구체화한다. | [[MLPerf Inference Power Measurement]] |
 | measures | [[컴퓨팅 능력이란 무엇인가]] | 동일 작업·품질·SLO 아래의 전체 시스템 에너지와 제한 자원 시간을 자원 효율로 측정한다. | [[MLPerf Inference Power Measurement]] |
 

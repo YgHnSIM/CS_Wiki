@@ -4,7 +4,7 @@ aliases: [Koomey et al. 2011, Koomey의 법칙 원전, Computing energy efficien
 summary: "1946–2009년 여러 종류의 컴퓨터에서 최고 부하의 계산량을 전력으로 나눈 장기 자료를 분석해 계산의 전기 효율이 약 1.57년마다 배가했다는 역사적 추세를 보고한 논문."
 tags: [type/reference, domain/computer-history, domain/computer-architecture, status/active]
 created: 2026-07-16
-updated: 2026-07-18
+updated: 2026-07-25
 publication_year: 2011
 event_start: 1946
 event_end: 2009
@@ -85,6 +85,13 @@ status: active
 ## 위키 반영
 
 이 자료는 [[컴퓨팅 능력이란 무엇인가|컴퓨팅 능력]]의 자원 효율 층위를 역사적으로 뒷받침한다. [[전력 장벽은 성능 향상의 의미를 어떻게 바꾸었는가]]에서는 최고 부하의 환산 계산량/에너지 개선이 실제 운용의 낮은 부하 효율이나 칩의 순간 전력 한계를 자동으로 해결하지 않는다는 점을 분석하는 데 사용한다.
+
+## 관계
+
+| 관계 | 대상 | 설명 | 근거 |
+|---|---|---|---|
+| measures | [[Koomey의 법칙]] | 1946–2009년 컴퓨터 표본의 최고 부하 계산량과 전력을 공통 단위로 환산해 계산/에너지의 장기 추세를 측정한다. | [[Implications of Historical Trends in the Electrical Efficiency of Computing]] |
+| exemplifies | [[전력 장벽은 성능 향상의 의미를 어떻게 바꾸었는가]] | 세대 간 계산/J의 향상이 순간 전력·실제 부하 곡선과 구분되어야 하는 역사적 측정 축을 제공한다. | [[Implications of Historical Trends in the Electrical Efficiency of Computing]] |
 
 ## 출처
 

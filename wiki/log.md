@@ -2634,6 +2634,37 @@ TokenPowerBench와 MLPerf Inference의 공식 전력 측정 방법론을 참고 
 - [[같은 SLO의 LLM 서비스는 무엇을 비용으로 세어야 하는가]]
 - [[LLM 추론 서비스 지표]]
 
+## [2026-07-25] update | 에너지 축 관계 보강
+
+계산/J의 장기 추세, 작업 구간의 성능/W, 부하별 에너지 비례성, 칩의 활성 면적 제약을 LLM 양자화와 서비스 에너지 지표까지 이어지는 하나의 의미 관계 축으로 연결했다. 자동 생성되는 언급·추천·학습 경로 관계를 반복하지 않고, 직접 근거가 있는 핵심 관계 19개를 기존 문서의 `## 관계` 표에 추가했다.
+
+변경된 페이지:
+
+- 참고 자료: [[Implications of Historical Trends in the Electrical Efficiency of Computing]], [[Power Measurement Tutorial for the Green500 List]], [[Dark Silicon and the End of Multicore Scaling]], [[TokenPowerBench - Benchmarking the Power Consumption of LLM Inference]]
+- 개념: [[Koomey의 법칙]], [[에너지 비례 컴퓨팅]], [[다크 실리콘]], [[LLM 추론 에너지 지표]]
+- 분석: [[전력 장벽은 성능 향상의 의미를 어떻게 바꾸었는가]], [[낮은 비트는 왜 LLM 추론 속도를 보장하지 않는가]]
+- 탐색·운영: [[index]], [[overview]], [[log]]
+
+### 검증
+
+- 역사적 전력 계보와 현대 LLM 추론 계측 사이에 19개의 출처 기반 핵심 관계를 추가했다.
+- 저비트 추론의 속도 개선과 전체 시스템 에너지 절감을 구분하고, 같은 작업량·품질·SLO에서 J/token을 확인하도록 연결했다.
+- 새 페이지·외부 URL·학습 경로를 추가하지 않았으며 `raw/` 원본을 변경하지 않았다.
+
+### 출처
+
+- [[Implications of Historical Trends in the Electrical Efficiency of Computing]]
+- [[Power Measurement Tutorial for the Green500 List]]
+- [[The Case for Energy-Proportional Computing]]
+- [[Dark Silicon and the End of Multicore Scaling]]
+- [[TokenPowerBench - Benchmarking the Power Consumption of LLM Inference]]
+
+### 관련 항목
+
+- [[전력 장벽은 성능 향상의 의미를 어떻게 바꾸었는가]]
+- [[LLM 추론 에너지 지표]]
+- [[낮은 비트는 왜 LLM 추론 속도를 보장하지 않는가]]
+
 <!-- wiki-maintenance: global-sections -->
 ## 출처
 

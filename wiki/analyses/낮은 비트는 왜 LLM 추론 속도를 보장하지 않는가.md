@@ -7,7 +7,7 @@ created: 2026-07-25
 updated: 2026-07-25
 historical_layer: system
 capability_layers: [realized-performance, resource-efficiency, reliable-results]
-sources: ["Hitting the Memory Wall", "Mixed Precision Training", "GPTQ - Accurate Post-Training Quantization for Generative Pre-trained Transformers", "AWQ - Activation-aware Weight Quantization for On-Device LLM Compression and Acceleration"]
+sources: ["Hitting the Memory Wall", "Mixed Precision Training", "GPTQ - Accurate Post-Training Quantization for Generative Pre-trained Transformers", "AWQ - Activation-aware Weight Quantization for On-Device LLM Compression and Acceleration", "TokenPowerBench - Benchmarking the Power Consumption of LLM Inference"]
 status: active
 graph_id: analysis-low-bit-llm-inference
 graph_visibility: public
@@ -56,6 +56,8 @@ GPTQ와 AWQ는 여러 평가에서 낮은 perplexity 저하를 보고하지만, 
 | 하드웨어 | 장치·메모리 대역폭, 지원 저비트 명령, 병렬화 |
 | 결과 | TTFT·TPOT·처리량, 전력·에너지, perplexity와 과업 품질 |
 
+속도 향상과 에너지 절감도 같은 결론이 아니다. [[TokenPowerBench - Benchmarking the Power Consumption of LLM Inference]]는 양자화를 배치 크기·문맥 길이·병렬화와 함께 실험 변수로 두고 GPU·노드·전체 시스템의 J/token을 측정한다. 따라서 낮은 비트의 효과는 같은 작업량·품질·SLO에서 실행 시간이 줄었는지와 별도로, 유휴·프리필·디코드를 포함한 전체 시스템 에너지가 줄었는지 확인해야 한다.
+
 ## 결론
 
 낮은 비트는 모델 용량과 가중치 데이터 이동을 줄이는 표현 선택이다. 실제 가속은 그 감소분이 현재 병목에서 충분히 크고, 패킹·역양자화와 메타데이터 비용이 작으며, 커널과 하드웨어가 해당 형식을 효율적으로 실행할 때 생긴다. 따라서 “4비트 모델”보다 “어떤 양자화 형식을 어떤 커널·장치·배치에서, 같은 과업 품질로 실행했는가”가 비교 가능한 문장이다.
@@ -67,6 +69,7 @@ GPTQ와 AWQ는 여러 평가에서 낮은 perplexity 저하를 보고하지만, 
 | synthesizes | [[LLM 가중치 양자화]] | 모델 용량·가중치 바이트 절감과 스케일·패킹·역양자화 비용을 하나의 실행 경계에서 비교한다. | [[GPTQ - Accurate Post-Training Quantization for Generative Pre-trained Transformers]] |
 | responds_to | [[메모리 장벽]] | 낮은 비트가 가중치 대역폭 병목을 완화해도 커널·활성값·KV 병목이 남을 수 있음을 분석한다. | [[Hitting the Memory Wall]] |
 | synthesizes | [[혼합 정밀도]] | 가중치·활성값·누산의 정밀도를 분리하고 품질 문턱을 통과한 자원 이득만 비교한다. | [[Mixed Precision Training]] |
+| synthesizes | [[LLM 추론 에너지 지표]] | 저비트 실행의 속도·품질 비교를 같은 부하와 시스템 경계의 전체 에너지·J/token 측정으로 확장한다. | [[TokenPowerBench - Benchmarking the Power Consumption of LLM Inference]] |
 | constrains | [[컴퓨팅 능력이란 무엇인가]] | 압축률이나 저비트 TOPS가 아니라 같은 작업·품질·시스템 경계의 달성 성능을 요구한다. | [[AWQ - Activation-aware Weight Quantization for On-Device LLM Compression and Acceleration]] |
 
 ## 출처
@@ -75,11 +78,12 @@ GPTQ와 AWQ는 여러 평가에서 낮은 perplexity 저하를 보고하지만, 
 - [[Mixed Precision Training]]
 - [[GPTQ - Accurate Post-Training Quantization for Generative Pre-trained Transformers]]
 - [[AWQ - Activation-aware Weight Quantization for On-Device LLM Compression and Acceleration]]
+- [[TokenPowerBench - Benchmarking the Power Consumption of LLM Inference]]
 
 ## 관련 항목
 
 - [[LLM 가중치 양자화]] — 비트 폭·그룹·보정·중요도 보호의 설계 요소를 설명한다.
 - [[메모리 장벽]] — 가중치 바이트 감소가 유리한 메모리 대역폭 조건을 제공한다.
-- [[혼합 정밀도]] — 역할별 수치 형식과 정확성 보완의 일반 원리다.
+- [[LLM 추론 에너지 지표]] — 같은 품질·SLO에서 저비트 실행의 전체 시스템 에너지 효과를 검증하는 측정 틀이다.
 - [[KV 캐시]] — 가중치 전용 양자화로 줄지 않는 요청별 상태를 설명한다.
 - [[낮은 정밀도는 AI의 컴퓨팅 능력을 어떻게 바꾸는가]] — 품질 문턱과 자원 이득을 AI 전체 측정 관점에서 종합한다.
