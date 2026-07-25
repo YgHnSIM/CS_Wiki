@@ -22,12 +22,7 @@ test("global search and mobile navigation work in a real browser", async ({ page
 
 test("interactive knowledge lenses initialize and accept keyboard input", async ({ page }) => {
   await page.goto("/map/graph/");
-  await expect(page).toHaveURL(/\/map\/atlas\/$/);
-  await expect(page.locator("[data-atlas-controls]")).toBeVisible();
-  await page.locator("[data-atlas-search]").fill("EDSAC");
-  await expect(page.locator("[data-atlas-search-results] [role=option]").first()).toBeVisible();
-  await page.keyboard.press("ArrowDown");
-  await expect(page.locator("[data-atlas-status]")).not.toBeEmpty();
+  await expect(page).toHaveURL(/\/map\/$/);
 
   await page.goto("/map/history/");
   await expect(page.locator("[data-history-controls]")).toBeVisible();
@@ -69,7 +64,7 @@ test("article connections stay compact and keyboard-switchable", async ({ page }
 
 
 test("core pages have no serious automated accessibility violations", async ({ page }) => {
-  for (const route of ["/", "/concepts/edsac/", "/map/atlas/", "/map/history/", "/map/evidence/"]) {
+  for (const route of ["/", "/concepts/edsac/", "/map/", "/map/history/", "/map/evidence/"]) {
     await page.goto(route);
     const results = await new AxeBuilder({ page }).analyze();
     const serious = results.violations.filter((violation) => ["serious", "critical"].includes(violation.impact));

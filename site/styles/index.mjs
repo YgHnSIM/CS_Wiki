@@ -8,7 +8,6 @@ export const STYLE_PARTS = Object.freeze([
   "20-document-relationships.css",
   "30-archive.css",
   "40-learning.css",
-  "50-semantic-atlas.css",
   "60-history.css"
 ]);
 

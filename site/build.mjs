@@ -9,7 +9,6 @@ import { buildLearningMap } from "./assets/learning-lines.js";
 import { categoryMeta, domainMeta, historyPeriods, learningPaths, navCategories, statusMeta } from "./catalog.mjs";
 import { loadWikiContent } from "./content.mjs";
 import { buildKnowledgeGraph } from "./graph/model.mjs";
-import { buildSemanticAtlas } from "./graph/atlas.mjs";
 import { buildHistoricalLens } from "./graph/history.mjs";
 import { EVIDENCE_LIMITS, buildEvidenceLens, evidenceStaticPageCount, evidenceStaticPageNumbers } from "./graph/evidence.mjs";
 import { graphNodeId } from "./graph/schema.mjs";
@@ -46,10 +45,6 @@ const assetHash = createHash("sha256")
   .update(await readFile(join(root, "site", "assets", "connection-worker.js")))
   .update(await readFile(join(root, "site", "assets", "learning-lines.js")))
   .update(await readFile(join(root, "site", "assets", "learning-map.js")))
-  .update(await readFile(join(root, "site", "assets", "atlas-renderer.js")))
-  .update(await readFile(join(root, "site", "assets", "atlas-state.js")))
-  .update(await readFile(join(root, "site", "assets", "atlas-worker.js")))
-  .update(await readFile(join(root, "site", "assets", "semantic-atlas.js")))
   .update(await readFile(join(root, "site", "assets", "history-state.js")))
   .update(await readFile(join(root, "site", "assets", "history-lens.js")))
   .update(await readFile(join(root, "site", "assets", "evidence-state.js")))
@@ -77,7 +72,6 @@ const atlasFacetMeta = Object.freeze({
 });
 
 const mapModes = Object.freeze([
-  { id: "atlas", label: "구조 지도", url: "/map/atlas/" },
   { id: "connection", label: "연결 경로", url: "/map/" },
   { id: "learning", label: "학습 노선", url: "/map/learning/" },
   { id: "history", label: "역사·인과", url: "/map/history/" },
@@ -113,7 +107,6 @@ const knowledgeGraph = buildKnowledgeGraph(pages, resolvedLearningPaths, {
 });
 const knowledgeGraphEdgesByNodeId = indexGraphEdges(knowledgeGraph);
 const learningMap = buildLearningMap(knowledgeGraph);
-const semanticAtlas = buildSemanticAtlas(knowledgeGraph, { domainLabels: domainMeta });
 const historicalLens = buildHistoricalLens(knowledgeGraph, { periods: historyPeriods });
 const evidenceLens = buildEvidenceLens(knowledgeGraph);
 const evidenceNodesById = new Map(knowledgeGraph.nodes.map((node) => [node.id, node]));
@@ -232,11 +225,6 @@ const assetVersion = assetHash
     knowledgeGraph,
     connectionGraph,
     learningMap,
-    semanticAtlas: {
-      contentVersion: semanticAtlas.manifest.contentVersion,
-      limits: semanticAtlas.manifest.limits,
-      stats: semanticAtlas.manifest.stats
-    },
     historicalLens: {
       contentVersion: historicalLens.manifest.contentVersion,
       limits: historicalLens.manifest.limits,
@@ -252,12 +240,6 @@ const assetVersion = assetHash
   .slice(0, 12);
 
 for (const payload of [
-  semanticAtlas.manifest,
-  semanticAtlas.overview,
-  semanticAtlas.lookup,
-  ...Object.values(semanticAtlas.shards),
-  ...Object.values(semanticAtlas.corridors),
-  ...Object.values(semanticAtlas.focusShards),
   historicalLens.manifest,
   historicalLens.overview,
   ...Object.values(historicalLens.lookupShards),
@@ -359,8 +341,6 @@ function navLinks(canonicalPath) {
   const mapActive = canonicalPath.startsWith("/map/");
   return `${categoryLinks}<a class="nav-link path-nav" href="${withBase("/paths/")}"${pathActive ? ' aria-current="page"' : ""}>
     <span>학습 경로</span><span class="nav-count">${resolvedLearningPaths.length}</span>
-  </a><a class="nav-link map-nav" href="${withBase("/map/atlas/")}"${mapActive ? ' aria-current="page"' : ""}>
-    <span>지식 지도</span><span class="nav-count" aria-hidden="true">↔</span>
   </a>`;
 }
 
@@ -803,7 +783,6 @@ function relationshipRail(local) {
     <ol>${featured.slice(0, 4).map((record) => `<li><a href="${escapeHtml(record.node.url)}"><span>${escapeHtml(relationLabel(knowledgeGraph, record.primaryEdge, local.focus.id))}</span>${escapeHtml(record.node.title)}</a></li>`).join("")}</ol>
     <a class="relationship-jump-link" href="#relationships">연결 채널 보기</a>
     <a class="relationship-jump-link" href="${withBase(`/map/?from=${encodeURIComponent(local.focus.id)}`)}">다른 문서와 연결 찾기</a>
-    <a class="relationship-jump-link" href="${withBase(`/map/atlas/?focus=${encodeURIComponent(local.focus.id)}`)}">전체 지도에서 이 문서 보기</a>
     <a class="relationship-jump-link" href="${withBase(`/map/history/?event=${encodeURIComponent(local.focus.id)}`)}">역사 렌즈에서 이 문서 보기</a>
     ${local.focus.visibility === "public" ? `<a class="relationship-jump-link" href="${withBase(evidenceRouteForNode(local.focus))}">근거 계보에서 이 문서 보기</a>` : ""}
   </section>`;
@@ -1711,7 +1690,6 @@ function redirectPage(target) {
 }
 
 const output = createOutputWriter(distRoot);
-const atlasDataOutputPath = createDataOutputPath("atlas", "semantic atlas");
 const historyDataOutputPath = createDataOutputPath("history", "historical lens");
 const evidenceDataOutputPath = createDataOutputPath("evidence", "evidence lens");
 
@@ -1730,7 +1708,7 @@ for (const path of resolvedLearningPaths) {
   await output(join("paths", path.slug, "index.html"), learningPathPage(path));
 }
 await output(join("map", "index.html"), connectionExplorerPage());
-await output(join("map", "graph", "index.html"), redirectPage("/map/atlas/"));
+await output(join("map", "graph", "index.html"), redirectPage("/map/"));
 const featuredLearningPath = resolvedLearningPaths.find((path) => path.slug === "computing-capability-history") || resolvedLearningPaths[0];
 const featuredLearningStation = featuredLearningPath.pages.find((page) => graphNodeId(page) === "computing-capability") || featuredLearningPath.pages[0];
 await output(join("map", "learning", "index.html"), learningMapPage({
@@ -1742,14 +1720,6 @@ for (const path of resolvedLearningPaths) {
     defaultPath: path,
     defaultStation: path.pages[0],
     canonicalPath: `/map/learning/${path.slug}/`
-  }));
-}
-await output(join("map", "atlas", "index.html"), semanticAtlasPage());
-for (const cluster of atlasClusterEntries()) {
-  if (!/^[a-z0-9]+(?:[._-]+[a-z0-9]+)*$/.test(cluster.id)) throw new Error(`Unsafe semantic atlas cluster id '${cluster.id}'`);
-  await output(join("map", "atlas", cluster.id, "index.html"), semanticAtlasPage({
-    clusterId: cluster.id,
-    canonicalPath: `/map/atlas/${cluster.id}/`
   }));
 }
 await output(join("map", "history", "index.html"), historicalLensPage());
@@ -1825,24 +1795,6 @@ const searchIndex = siteDiscoveryPages.map((page) => ({
 await output("search.json", JSON.stringify(searchIndex));
 await output(join("data", "connection-graph.json"), JSON.stringify(connectionGraph));
 await output(join("data", "learning-map.json"), JSON.stringify(learningMap));
-await output(join("data", "atlas", "manifest.json"), JSON.stringify(semanticAtlas.manifest));
-await output(atlasDataOutputPath(semanticAtlas.manifest.overview.url, "overview"), JSON.stringify(semanticAtlas.overview));
-await output(atlasDataOutputPath(semanticAtlas.manifest.lookup.url, "lookup"), JSON.stringify(semanticAtlas.lookup));
-for (const [id, payload] of Object.entries(semanticAtlas.shards)) {
-  const url = semanticAtlas.manifest.clusterShards[id]
-    || semanticAtlas.manifest.routes.cluster.replace("{id}", encodeURIComponent(id));
-  await output(atlasDataOutputPath(url, `cluster '${id}'`), JSON.stringify(payload));
-}
-for (const [id, payload] of Object.entries(semanticAtlas.corridors)) {
-  const url = semanticAtlas.manifest.corridorShards[id]
-    || semanticAtlas.manifest.routes.corridor.replace("{id}", encodeURIComponent(id));
-  await output(atlasDataOutputPath(url, `corridor '${id}'`), JSON.stringify(payload));
-}
-for (const [id, payload] of Object.entries(semanticAtlas.focusShards)) {
-  if (!/^node-[a-f0-9]{16}$/.test(id)) throw new Error(`Unsafe semantic atlas focus shard id '${id}'`);
-  const url = semanticAtlas.manifest.routes.focus.replace("{shard}", encodeURIComponent(payload.shardId || id));
-  await output(atlasDataOutputPath(url, `focus '${id}'`), JSON.stringify(payload));
-}
 await output(join("data", "history", "manifest.json"), JSON.stringify(historicalLens.manifest));
 await output(historyDataOutputPath(historicalLens.manifest.overview.url, "overview"), JSON.stringify(historicalLens.overview));
 for (const [bucket, payload] of Object.entries(historicalLens.lookupShards)) {
@@ -1909,10 +1861,8 @@ if (siteUrl) {
     "/paths/",
     "/map/",
     "/map/learning/",
-    "/map/atlas/",
     "/map/history/",
     "/map/evidence/",
-    ...atlasClusterEntries().map((cluster) => `/map/atlas/${cluster.id}/`),
     ...historicalLens.manifest.shards.map((record) => record.route),
     ...evidenceDocumentNodes.flatMap((node) => Array.from({ length: evidenceDocumentStaticPageCount(node.id) }, (_, index) => evidenceFocusRoute("document", node.id, index + 1))),
     ...evidenceSourceNodes.flatMap((node) => Array.from({ length: evidenceSourceStaticPageCount(node.id) }, (_, index) => evidenceFocusRoute("source", node.id, index + 1))),

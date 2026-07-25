@@ -2951,6 +2951,21 @@ CAP의 네트워크 분할 경계, Raft의 crash fault 복제 로그, Spanner의
 - [[컴퓨팅 능력 독서 지도]]
 - [[확장 실행 로드맵]]
 
+## [2026-07-25] update | 지식 지도 기능 제거
+
+- 전역 내비게이션에서 `지식 지도` 항목을 제거했다.
+- `/map/atlas/` 정적 페이지와 군집 경로, 아틀라스 데이터 샤드, 전용 클라이언트 모듈·스타일·생성기·테스트를 제거했다.
+- 기존 `/map/graph/` 주소는 남아 있는 `연결 경로`(`/map/`)로 이동하도록 변경했다.
+- 문서 페이지의 `전체 지도에서 이 문서 보기` 링크와 사이트맵의 아틀라스 경로를 제거했다.
+- `npm.cmd test`, `npm.cmd run build`, `npm.cmd run verify:site`를 통과했다.
+
+### 변경된 페이지
+
+- [[log]]
+- `site/build.mjs`
+- `site/verify-build.mjs`
+- 지식 지도 전용 자산 및 테스트
+
 <!-- wiki-maintenance: global-sections -->
 ## 출처
 

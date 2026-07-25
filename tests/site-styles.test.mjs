@@ -11,8 +11,7 @@ test("feature CSS modules compose in one deterministic cascade", async () => {
     "Document evidence lineage",
     "Document-local relationship atlas",
     "Learning-path transit map",
-    "Semantic atlas",
     "Historical causal lens"
   ]) assert.ok(css.includes(marker), `composed stylesheet is missing '${marker}'`);
-  assert.ok(css.length > 100_000, "composed stylesheet is unexpectedly small");
+  assert.ok(css.length > 75_000, "composed stylesheet is unexpectedly small");
 });

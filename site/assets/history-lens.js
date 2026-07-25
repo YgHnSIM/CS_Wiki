@@ -579,7 +579,7 @@ function mapRoots(historyRoot, currentHref) {
   const marker = "/map/history/";
   const index = root.pathname.indexOf(marker);
   const prefix = index >= 0 ? root.pathname.slice(0, index) : "";
-  return { atlas: `${prefix}/map/atlas/`, connections: `${prefix}/map/` };
+  return { connections: `${prefix}/map/` };
 }
 
 function searchResultIndex(current, key, length) {

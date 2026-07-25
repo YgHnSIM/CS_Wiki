@@ -7,7 +7,6 @@ import { historyPeriods, learningPaths } from "./catalog.mjs";
 import { escapeHtml, key, selectSiteDiscoveryPages, withBase } from "./core.mjs";
 import { loadWikiContent } from "./content.mjs";
 import { buildKnowledgeGraph } from "./graph/model.mjs";
-import { ATLAS_LIMITS, ATLAS_SCHEMA_VERSION } from "./graph/atlas.mjs";
 import {
   HISTORY_LIMITS,
   HISTORY_LOOKUP_HASH,
@@ -78,6 +77,15 @@ for (const attribute of ["data-learning-line", "data-learning-station", "data-le
 
 console.log(`Verified ${payload.stats.lines} learning lines and ${payload.stats.stations} stations in dist`);
 
+function assertUniqueIds(records, label) {
+  const ids = records.map((record) => record?.id);
+  assert.ok(ids.every(Boolean), `${label} contains a record without an id`);
+  assert.equal(new Set(ids).size, ids.length, `${label} contains duplicate ids`);
+}
+
+if (false) {
+const ATLAS_SCHEMA_VERSION = "";
+const ATLAS_LIMITS = {};
 const atlasManifestPath = join("data", "atlas", "manifest.json");
 const atlasManifest = JSON.parse(await read(atlasManifestPath));
 const atlasRootHtml = await read(join("map", "atlas", "index.html"));
@@ -123,7 +131,7 @@ async function readAtlasPayload(url, label) {
   return { path, bytes, record };
 }
 
-function assertUniqueIds(records, label) {
+function atlasAssertUniqueIds(records, label) {
   const ids = records.map((record) => record?.id);
   assert.ok(ids.every(Boolean), `${label} contains a record without an id`);
   assert.equal(new Set(ids).size, ids.length, `${label} contains duplicate ids`);
@@ -133,8 +141,8 @@ function assertCompleteEdges(record, label, edgeLimit) {
   const nodes = record.nodes || [];
   const edges = record.edges || [];
   const nodeIds = new Set(nodes.map((node) => node.id));
-  assertUniqueIds(nodes, `${label} nodes`);
-  assertUniqueIds(edges, `${label} edges`);
+  atlasAssertUniqueIds(nodes, `${label} nodes`);
+  atlasAssertUniqueIds(edges, `${label} edges`);
   assert.ok(edges.length <= edgeLimit, `${label} exceeds its ${edgeLimit}-edge display ceiling`);
   for (const edge of edges) {
     assert.ok(nodeIds.has(edge.source), `${label} edge '${edge.id}' has missing source '${edge.source}'`);
@@ -150,7 +158,7 @@ assert.ok(overview.nodes.length <= ATLAS_LIMITS.overviewNodes, "atlas overview e
 assertCompleteEdges(overview, "atlas overview", ATLAS_LIMITS.overviewEdges);
 assert.equal(overview.stats.documents, lookup.entries.length, "overview and lookup document counts differ");
 assert.equal(atlasManifest.stats.documents, lookup.entries.length, "manifest and lookup document counts differ");
-assertUniqueIds(lookup.entries, "atlas lookup entries");
+atlasAssertUniqueIds(lookup.entries, "atlas lookup entries");
 
 const manifestBytes = await readBytes(atlasManifestPath);
 const initialDataBytes = Buffer.concat([manifestBytes, overviewAsset.bytes]);
@@ -170,7 +178,7 @@ assert.ok((await readBytes(join("map", "atlas", "index.html"))).length <= 256 * 
 
 const lookupById = new Map(lookup.entries.map((entry) => [entry.id, entry]));
 const clusterIds = new Set(atlasManifest.clusters.map((cluster) => cluster.id));
-assertUniqueIds(atlasManifest.clusters, "atlas manifest clusters");
+atlasAssertUniqueIds(atlasManifest.clusters, "atlas manifest clusters");
 assert.equal(atlasManifest.stats.clusters, atlasManifest.clusters.length, "manifest cluster count is inconsistent");
 for (const cluster of atlasManifest.clusters) {
   assert.equal(atlasManifest.clusterShards[cluster.id], cluster.url, `cluster '${cluster.id}' has conflicting shard references`);
@@ -193,7 +201,7 @@ for (const cluster of atlasManifest.clusters) {
 }
 
 assert.equal(atlasManifest.stats.corridors, atlasManifest.corridors.length, "manifest corridor count is inconsistent");
-assertUniqueIds(atlasManifest.corridors, "atlas manifest corridors");
+atlasAssertUniqueIds(atlasManifest.corridors, "atlas manifest corridors");
 for (const corridor of atlasManifest.corridors) {
   assert.ok(clusterIds.has(corridor.source) && clusterIds.has(corridor.target), `corridor '${corridor.id}' references a missing cluster`);
   assert.equal(atlasManifest.corridorShards[corridor.id], corridor.shard, `corridor '${corridor.id}' has conflicting shard references`);
@@ -243,6 +251,7 @@ for (const [control, facet] of Object.entries(facetKeys)) {
 
 assert.ok([...lookupById.values()].every((entry) => entry.historicalLayer !== undefined && Array.isArray(entry.capabilityLayers)), "lookup entries must expose semantic facet fields");
 console.log(`Verified semantic atlas: ${atlasManifest.stats.clusters} clusters, ${atlasManifest.stats.corridors} corridors, ${atlasManifest.stats.focusShards} bounded focus shards`);
+}
 
 const historyManifestPath = join("data", "history", "manifest.json");
 const historyManifest = JSON.parse(await read(historyManifestPath));
@@ -711,12 +720,6 @@ function assertHistoryDetailAffordance(html, transition, label) {
 }
 
 assert.equal(historyManifest.stats.documents, historyLookupEntries.length, "history manifest and lookup document counts differ");
-assert.equal(historyManifest.stats.documents, atlasManifest.stats.documents, "historical lens must contain every public atlas document");
-assert.deepEqual(
-  [...historyLookupById.keys()].sort(),
-  [...lookupById.keys()].sort(),
-  "historical lens and semantic atlas expose different public documents"
-);
 assert.equal(historyOverview.stats.documents, historyLookupEntries.length, "history overview and lookup document counts differ");
 assert.equal(historyOverview.stats.datedDocuments, historyManifest.stats.datedDocuments, "history overview dated count is inconsistent");
 assert.equal(historyOverview.stats.undatedDocuments, historyManifest.stats.undatedDocuments, "history overview undated count is inconsistent");
@@ -1015,7 +1018,7 @@ const evidenceGraph = buildKnowledgeGraph(wikiPages, verifiedLearningPaths, {
 });
 const evidenceGraphNodesById = new Map(evidenceGraph.nodes.map((node) => [node.id, node]));
 const knowledgeGraphRedirectHtml = await read(join("map", "graph", "index.html"));
-assert.ok(knowledgeGraphRedirectHtml.includes(`url=${evidenceSiteRoute("/map/atlas/")}`), "legacy knowledge graph route must redirect to the structure atlas");
+assert.ok(knowledgeGraphRedirectHtml.includes(`url=${evidenceSiteRoute("/map/")}`), "legacy knowledge graph route must redirect to the connection explorer");
 assert.ok(!knowledgeGraphRedirectHtml.includes("knowledge-graph-data"), "legacy knowledge graph route must not embed a second graph payload");
 const syntheticDiscoveryPages = [
   { id: "synthetic-public", graphVisibility: "public" },
@@ -1065,7 +1068,7 @@ assert.ok(!discoveryHomeHtml.includes('class="graph-panel"'), "home page must no
 assert.ok(!discoveryHomeHtml.includes('id="knowledge-graph"'), "home page must not render the legacy graph canvas");
 assert.ok(!discoveryHomeHtml.includes('id="graph-data"'), "home page must not embed the legacy graph payload");
 assert.ok(!discoveryHomeHtml.includes(`href="${evidenceSiteRoute("/map/graph/")}"`), "home page must not expose the removed knowledge graph entry point");
-assert.ok(discoveryHomeHtml.includes(`href="${evidenceSiteRoute("/map/atlas/")}"`), "home page must expose the unified structure atlas entry point");
+assert.ok(!discoveryHomeHtml.includes(`href="${evidenceSiteRoute("/map/atlas/")}"`), "home page must not expose the removed structure atlas");
 assert.ok(discoveryHomeHtml.includes(`href="${evidenceSiteRoute("/map/")}"`), "home page must retain the connection explorer entry point");
 assert.ok(discoveryHomeHtml.includes(`href="${evidenceSiteRoute("/map/learning/")}"`), "home page must retain the learning map entry point");
 assert.ok(discoveryHomeHtml.includes(`href="${evidenceSiteRoute("/map/history/")}"`), "home page must retain the history lens entry point");
@@ -1092,7 +1095,7 @@ if (sitemapXml !== null) {
   const sitemapArticleUrls = sitemapPaths.filter((path) => allArticleUrls.has(path));
   assertExactlyOnce(sitemapArticleUrls, expectedSiteDiscoveryUrls, "sitemap article discovery");
   assert.ok(!sitemapPaths.includes(`${evidenceSitePrefix}/map/graph/`), "sitemap must omit the legacy knowledge graph redirect");
-  assert.ok(sitemapPaths.includes(`${evidenceSitePrefix}/map/atlas/`), "sitemap is missing the structure atlas route");
+  assert.ok(!sitemapPaths.includes(`${evidenceSitePrefix}/map/atlas/`), "sitemap must omit the removed structure atlas route");
   for (const node of contextSiteNodes) assert.ok(!sitemapPaths.includes(node.url), "context article '" + node.id + "' must stay out of sitemap discovery");
 }
 const graphPublicDocuments = evidenceGraph.nodes.filter((node) => node.visibility === "public" && !EVIDENCE_SOURCE_CATEGORIES.has(node.category));
@@ -1544,11 +1547,10 @@ assert.ok(evidenceRootHtml.includes("evidence-lens.js?v=" + evidenceAssetVersion
 const mapLensRoots = [
   join("map", "index.html"),
   join("map", "learning", "index.html"),
-  join("map", "atlas", "index.html"),
   join("map", "history", "index.html"),
   join("map", "evidence", "index.html")
 ];
-const mapLensRoutes = ["/map/atlas/", "/map/", "/map/learning/", "/map/history/", "/map/evidence/"];
+const mapLensRoutes = ["/map/", "/map/learning/", "/map/history/", "/map/evidence/"];
 const removedMapLensRoutes = ["/map/graph/"];
 for (const lensRoot of mapLensRoots) {
   const html = await read(lensRoot);
