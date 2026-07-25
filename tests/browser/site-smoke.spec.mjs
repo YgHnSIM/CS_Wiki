@@ -43,8 +43,13 @@ test("home discovery stays compact on desktop and mobile", async ({ page }) => {
     height: document.documentElement.scrollHeight,
     viewport: window.innerHeight
   }));
+  const mobileCircuitDecoration = await page.locator(".hero-circuit").evaluate((element) => ({
+    before: getComputedStyle(element, "::before").display,
+    after: getComputedStyle(element, "::after").display
+  }));
   expect(mobile.width).toBe(mobile.clientWidth);
   expect(mobile.height / mobile.viewport).toBeLessThan(4.5);
+  expect(mobileCircuitDecoration).toEqual({ before: "none", after: "none" });
 });
 
 

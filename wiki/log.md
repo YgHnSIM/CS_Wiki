@@ -3020,6 +3020,18 @@ CAP의 네트워크 분할 경계, Raft의 crash fault 복제 로그, Spanner의
 - `site/verify-build.mjs`
 - `tests/browser/site-smoke.spec.mjs`
 
+## [2026-07-26] update | 모바일 회로 패널 모서리 장식 정리
+
+- 데스크톱 회로 패널의 우상단·좌하단 모서리 장식이 모바일 가로 스크롤 레이아웃에서 독립된 세로선처럼 보이던 문제를 수정했다.
+- 900px 이하에서는 해당 장식만 숨기고 회로 카드, 스크롤 힌트, 패널 경계와 상태 수치는 그대로 유지했다.
+- 모바일 브라우저 검사에 두 장식의 비노출 상태를 추가했다.
+
+### 변경된 페이지
+
+- [[log]]
+- `site/styles/00-core.css`
+- `tests/browser/site-smoke.spec.mjs`
+
 <!-- wiki-maintenance: global-sections -->
 ## 출처
 

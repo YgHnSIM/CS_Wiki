@@ -2194,6 +2194,11 @@ kbd {
     min-height: 0;
   }
 
+  .home-page .hero-circuit::before,
+  .home-page .hero-circuit::after {
+    display: none;
+  }
+
   .home-page .circuit-stage {
     display: grid;
     min-height: 0;
