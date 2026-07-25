@@ -3,7 +3,10 @@ import { join } from "node:path";
 import { createStaticServer } from "../site/server.mjs";
 
 const root = process.cwd();
-const server = createStaticServer({ root: join(root, "dist") });
+const server = createStaticServer({
+  root: join(root, "dist"),
+  basePath: process.env.SITE_BASE || ""
+});
 
 function exitCode(child) {
   return new Promise((resolve, reject) => {
