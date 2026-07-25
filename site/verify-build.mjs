@@ -903,6 +903,13 @@ assert.ok(discoveryHomeHtml.includes(`href="${evidenceSiteRoute("/map/")}"`), "h
 assert.ok(discoveryHomeHtml.includes(`href="${evidenceSiteRoute("/map/learning/")}"`), "home page must retain the learning map entry point");
 assert.ok(discoveryHomeHtml.includes(`href="${evidenceSiteRoute("/map/history/")}"`), "home page must retain the history lens entry point");
 assert.ok(discoveryHomeHtml.includes(`href="${evidenceSiteRoute("/map/evidence/")}"`), "home page must retain the evidence lens entry point");
+assert.ok(discoveryHomeHtml.includes('class="hero-circuit"'), "home page must render the representative learning circuit");
+assert.ok(discoveryHomeHtml.includes(`href="${evidenceSiteRoute("/paths/generality-programmability/")}"`), "home circuit must link to its complete learning path");
+for (const title of ["해석 기관", "튜링 기계", "저장 프로그램 컴퓨터", "EDSAC", "Unix", "C 언어"]) {
+  const node = evidenceGraph.nodes.find((candidate) => candidate.title === title);
+  assert.ok(node, `home circuit document '${title}' is missing from the knowledge graph`);
+  assert.ok(discoveryHomeHtml.includes(`href="${node.url}"`), `home circuit must link to '${title}'`);
+}
 const discoveryCategoryHtml = new Map();
 for (const node of contextSiteNodes) {
   const label = "context article '" + node.id + "'";

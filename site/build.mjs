@@ -458,6 +458,63 @@ function pathCard(path, index, compact = false) {
   </a>`;
 }
 
+function homeCircuit() {
+  const path = resolvedLearningPaths.find((candidate) => candidate.slug === "generality-programmability");
+  if (!path) throw new Error("Home circuit requires the 'generality-programmability' learning path");
+
+  const nodeSpecs = [
+    { title: "해석 기관", slot: "01" },
+    { title: "튜링 기계", slot: "02" },
+    { title: "저장 프로그램 컴퓨터", slot: "03" },
+    { title: "EDSAC", slot: "04" },
+    { title: "Unix", slot: "05" },
+    { title: "C 언어", slot: "06" }
+  ];
+  const nodes = nodeSpecs.map((spec) => {
+    const page = lookup.get(key(spec.title));
+    if (!page) throw new Error(`Home circuit references missing page '${spec.title}'`);
+    const start = page.eventStart || page.publicationYear;
+    const end = page.eventEnd;
+    const period = start ? `${start}${end && end !== start ? `–${end}` : ""}` : "연도 미상";
+    return { ...spec, page, period };
+  });
+
+  return `<aside class="hero-circuit" aria-labelledby="hero-circuit-title">
+    <header class="circuit-header">
+      <div>
+        <p>대표 읽기 흐름</p>
+        <h2 id="hero-circuit-title">범용 기계에서 시스템까지</h2>
+      </div>
+      <span>${nodes.length}개 노드</span>
+    </header>
+    <div class="circuit-stage">
+      <svg class="circuit-traces" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+        <path class="circuit-trace-base" d="M 22 13 L 68 24 L 28 39 L 70 51 L 32 67 L 69 81" pathLength="100"/>
+        <path class="circuit-trace-signal" d="M 22 13 L 68 24 L 28 39 L 70 51 L 32 67 L 69 81" pathLength="100"/>
+      </svg>
+      <ol class="circuit-nodes">
+        ${nodes.map(({ page, period, slot }) => `<li class="circuit-node circuit-node-${slot}">
+          <a href="${withBase(page.url)}">
+            <span class="circuit-node-point" aria-hidden="true"></span>
+            <span class="circuit-node-period">${escapeHtml(period)}</span>
+            <strong>${escapeHtml(page.title)}</strong>
+            <span class="circuit-node-type">${escapeHtml(categoryMeta[page.category].label)}</span>
+          </a>
+        </li>`).join("")}
+      </ol>
+      <a class="circuit-route" href="${withBase(`/paths/${path.slug}/`)}">
+        <span>전체 학습 경로 보기</span>
+        <strong>${path.pages.length}단계</strong>
+      </a>
+    </div>
+    <dl class="circuit-status">
+      <div><dt>문서</dt><dd>${siteDiscoveryPages.length}</dd></div>
+      <div><dt>관계</dt><dd>${knowledgeGraph.edges.length}</dd></div>
+      <div><dt>학습 경로</dt><dd>${resolvedLearningPaths.length}</dd></div>
+    </dl>
+  </aside>`;
+}
+
 function homePage() {
   const featured = [...siteDiscoveryPages]
     .filter((page) => page.category === "analyses")
@@ -498,6 +555,7 @@ function homePage() {
         <div><dt>핵심 분석</dt><dd>${counts.analyses}</dd></div>
       </dl>
     </div>
+    ${homeCircuit()}
   </section>
   <section class="content-section">
     <div class="section-heading"><span>01</span><div><h2>주제별 학습 경로</h2><p>원문에서 개념과 분석으로 이어지는 순서를 따라 읽을 수 있습니다.</p></div></div>
