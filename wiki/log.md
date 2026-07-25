@@ -3003,6 +3003,22 @@ CAP의 네트워크 분할 경계, Raft의 crash fault 복제 로그, Spanner의
 - `site/styles/00-core.css`
 - `site/verify-build.mjs`
 
+## [2026-07-26] update | 홈 화면 길이와 탐색 밀도 개선
+
+- 홈에 25개 학습 경로 전체를 펼치던 구성을 네 개의 대표 경로와 전체 경로 링크로 바꿨다.
+- 자료 유형, 지식 범위, 핵심 분석, 최근 갱신을 두 개의 압축된 탐색 보드로 재구성했다.
+- 여섯 개였던 히어로 동작은 검색·학습 경로를 우선 노출하고 네 지식 지도는 필요할 때 펼치는 방식으로 정리했다.
+- 모바일의 대표 읽기 흐름은 세로로 긴 회로 배치 대신 가로 스크롤 단계 목록으로 전환했다.
+- 홈의 대표 경로 수와 전용 탐색 링크가 유지되는지 정적 빌드 검증을 추가하고, 데스크톱 3화면·모바일 4.5화면 미만의 길이와 가로 넘침 방지를 브라우저 회귀 검사로 고정했다.
+
+### 변경된 페이지
+
+- [[log]]
+- `site/build.mjs`
+- `site/styles/00-core.css`
+- `site/verify-build.mjs`
+- `tests/browser/site-smoke.spec.mjs`
+
 <!-- wiki-maintenance: global-sections -->
 ## 출처
 

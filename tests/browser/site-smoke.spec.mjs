@@ -19,6 +19,34 @@ test("global search and mobile navigation work in a real browser", async ({ page
   await expect(menu).toHaveAttribute("aria-expanded", "false");
 });
 
+test("home discovery stays compact on desktop and mobile", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto("/");
+  await expect(page.locator("[data-home-path]")).toHaveCount(4);
+  await expect(
+    page.getByRole("region", { name: "대표 학습 경로" }).getByRole("link", { name: /전체 \d+개/ })
+  ).toBeVisible();
+
+  const desktop = await page.evaluate(() => ({
+    width: document.documentElement.scrollWidth,
+    clientWidth: document.documentElement.clientWidth,
+    height: document.documentElement.scrollHeight,
+    viewport: window.innerHeight
+  }));
+  expect(desktop.width).toBe(desktop.clientWidth);
+  expect(desktop.height / desktop.viewport).toBeLessThan(3);
+
+  await page.setViewportSize({ width: 390, height: 844 });
+  const mobile = await page.evaluate(() => ({
+    width: document.documentElement.scrollWidth,
+    clientWidth: document.documentElement.clientWidth,
+    height: document.documentElement.scrollHeight,
+    viewport: window.innerHeight
+  }));
+  expect(mobile.width).toBe(mobile.clientWidth);
+  expect(mobile.height / mobile.viewport).toBeLessThan(4.5);
+});
+
 
 test("interactive knowledge lenses initialize and accept keyboard input", async ({ page }) => {
   await page.goto("/map/graph/");

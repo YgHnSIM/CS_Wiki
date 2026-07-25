@@ -32,6 +32,7 @@ const read = (path) => readFile(join(dist, path), "utf8");
 const readBytes = (path) => readFile(join(dist, path));
 const payload = JSON.parse(await read(join("data", "learning-map.json")));
 const rootHtml = await read(join("map", "learning", "index.html"));
+const homeHtml = await read("index.html");
 const lines = new Map(payload.lines.map((line) => [line.id, line]));
 const lineRank = new Map(payload.lines.map((line, index) => [line.id, index]));
 
@@ -44,6 +45,22 @@ const dataVersion = rootHtml.match(/learning-map\.json\?v=([a-f0-9]{12})/)?.[1];
 const assetVersion = rootHtml.match(/CS_WIKI_ASSET_VERSION="([a-f0-9]{12})"/)?.[1];
 assert.ok(dataVersion, "the learning payload URL must be content-versioned");
 assert.equal(dataVersion, assetVersion, "the learning payload and page assets must share one content fingerprint");
+
+assert.equal(
+  (homeHtml.match(/data-home-path/g) || []).length,
+  4,
+  "home must expose four representative paths instead of the full learning catalog"
+);
+assert.ok(learningPaths.length > 4, "the representative home path set must remain smaller than the full catalog");
+assert.equal(
+  (homeHtml.match(/class="route-card"/g) || []).length,
+  5,
+  "home must keep one compact entry for every public document category"
+);
+assert.match(homeHtml, /<details class="hero-toolbox">/, "home knowledge lenses must use progressive disclosure");
+for (const route of ["/paths/", "/map/learning/", "/map/", "/map/history/", "/map/evidence/"]) {
+  assert.ok(homeHtml.includes(`href="${withBase(route)}"`), `home is missing discovery route '${route}'`);
+}
 
 for (const path of learningPaths) {
   const line = lines.get(path.slug);

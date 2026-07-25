@@ -519,11 +519,22 @@ function homePage() {
   const featured = [...siteDiscoveryPages]
     .filter((page) => page.category === "analyses")
     .sort((a, b) => b.score - a.score || b.updated.localeCompare(a.updated))
-    .slice(0, 4);
+    .slice(0, 3);
   const recent = [...siteDiscoveryPages]
     .filter((page) => page.category !== "meta")
     .sort((a, b) => b.updated.localeCompare(a.updated) || b.score - a.score)
-    .slice(0, 6);
+    .slice(0, 5);
+  const homePathSlugs = [
+    "computing-origins",
+    "generality-programmability",
+    "concurrency-consistency",
+    "llm-inference-systems"
+  ];
+  const homePaths = homePathSlugs.map((slug) => {
+    const path = resolvedLearningPaths.find((candidate) => candidate.slug === slug);
+    if (!path) throw new Error(`Home discovery board references missing learning path '${slug}'`);
+    return path;
+  });
   const routes = ["sources", "references", "concepts", "entities", "analyses"].map((category, routeIndex) => {
     const top = [...siteDiscoveryPages].filter((page) => page.category === category).sort((a, b) => b.score - a.score)[0];
     return `<a class="route-card" href="${withBase(categoryUrl(category))}">
@@ -543,10 +554,15 @@ function homePage() {
       <div class="hero-actions">
         <button type="button" class="primary-action" data-open-search>문서 검색</button>
         <a href="${withBase("/paths/")}">학습 경로 보기</a>
-        <a href="${withBase("/map/learning/")}">학습 노선 지도</a>
-        <a href="${withBase("/map/")}">지식 연결 찾기</a>
-        <a href="${withBase("/map/history/")}">역사·인과 렌즈</a>
-        <a href="${withBase("/map/evidence/")}">근거 계보 보기</a>
+        <details class="hero-toolbox">
+          <summary>지식 지도 4개</summary>
+          <nav aria-label="지식 지도">
+            <a href="${withBase("/map/learning/")}">학습 노선</a>
+            <a href="${withBase("/map/")}">연결 경로</a>
+            <a href="${withBase("/map/history/")}">역사·인과</a>
+            <a href="${withBase("/map/evidence/")}">근거 계보</a>
+          </nav>
+        </details>
       </div>
       <dl class="hero-stats">
         <div><dt>전체 문서</dt><dd>${siteDiscoveryPages.length}</dd></div>
@@ -557,28 +573,51 @@ function homePage() {
     </div>
     ${homeCircuit()}
   </section>
-  <section class="content-section">
-    <div class="section-heading"><span>01</span><div><h2>주제별 학습 경로</h2><p>원문에서 개념과 분석으로 이어지는 순서를 따라 읽을 수 있습니다.</p></div></div>
-    <div class="learning-path-grid">${resolvedLearningPaths.map((path, index) => pathCard(path, index)).join("")}</div>
-  </section>
-  <section class="content-section">
-    <div class="section-heading"><span>02</span><div><h2>자료 유형별 탐색</h2><p>정규 소스, 외부 참고 자료, 개념, 인물과 분석을 구분해 찾습니다.</p></div></div>
-    <div class="route-grid">${routes}</div>
-  </section>
-  <section class="content-section scope-section">
-    <div class="section-heading"><span>03</span><div><h2>현재 지식 범위</h2><p>현재 콘텐츠는 컴퓨팅사와 소프트웨어 공학을 중심으로 확장되고 있습니다.</p></div></div>
-    <div class="scope-grid">${Object.entries(domainCounts).sort((a, b) => b[1] - a[1]).slice(0, 8).map(([domain, count]) => `<div><span>${escapeHtml(domainMeta[domain] || domain.replace("domain/", ""))}</span><strong>${count}</strong></div>`).join("")}</div>
-    <p class="scope-note">알고리즘, 데이터베이스, 네트워크, 분산 시스템과 인공지능은 관련 원본 소스가 추가될 때 같은 출처 검증 절차로 확장합니다.</p>
-  </section>
-  <section class="content-section split-section">
-    <div>
-      <div class="section-heading"><span>04</span><div><h2>핵심 분석</h2><p>여러 문헌을 가로질러 하나의 질문을 추적합니다.</p></div></div>
-      <div class="feature-list">${featured.map((page, index) => `<div class="feature-item"><span>${String(index + 1).padStart(2, "0")}</span>${pageCard(page, { compact: true })}</div>`).join("")}</div>
+  <section class="home-directory content-section">
+    <div class="section-heading"><span>01</span><div><h2>읽기 시작점</h2><p>대표 경로로 순서대로 읽거나, 자료 유형을 골라 바로 탐색합니다.</p></div></div>
+    <div class="home-directory-grid">
+      <section class="home-panel" aria-labelledby="home-paths-title">
+        <header class="home-panel-heading">
+          <div><span>GUIDED</span><h3 id="home-paths-title">대표 학습 경로</h3></div>
+          <a href="${withBase("/paths/")}">전체 ${resolvedLearningPaths.length}개</a>
+        </header>
+        <div class="home-path-list">
+          ${homePaths.map((path, index) => `<a class="home-path-row" data-home-path href="${withBase(`/paths/${path.slug}/`)}">
+            <span>${String(index + 1).padStart(2, "0")}</span>
+            <div><strong>${escapeHtml(path.title)}</strong><p>${escapeHtml(path.description)}</p></div>
+            <small>${path.pages.length}단계</small>
+          </a>`).join("")}
+        </div>
+      </section>
+      <section class="home-panel" aria-labelledby="home-routes-title">
+        <header class="home-panel-heading">
+          <div><span>DIRECTORY</span><h3 id="home-routes-title">자료 유형별 탐색</h3></div>
+          <button type="button" data-open-search>전체 검색</button>
+        </header>
+        <div class="home-route-list">${routes}</div>
+      </section>
     </div>
-    <aside class="recent-panel">
-      <div class="panel-heading"><h2>최근 갱신</h2><span>updated 기준</span></div>
-      <ol>${recent.map((page) => `<li><a href="${withBase(page.url)}"><span>${escapeHtml(page.title)}</span><time>${page.updated}</time></a></li>`).join("")}</ol>
-    </aside>
+  </section>
+  <section class="home-briefing content-section">
+    <div class="section-heading"><span>02</span><div><h2>현재 위키 한눈에 보기</h2><p>지식 범위, 여러 문헌을 잇는 분석, 최근 갱신을 한 화면에서 확인합니다.</p></div></div>
+    <div class="home-briefing-grid">
+      <section class="home-panel home-scope" aria-labelledby="home-scope-title">
+        <header class="home-panel-heading"><div><span>SCOPE</span><h3 id="home-scope-title">지식 범위</h3></div></header>
+        <div class="home-scope-grid">${Object.entries(domainCounts).sort((a, b) => b[1] - a[1]).slice(0, 6).map(([domain, count]) => `<div><span>${escapeHtml(domainMeta[domain] || domain.replace("domain/", ""))}</span><strong>${count}</strong></div>`).join("")}</div>
+        <p>관련 원본 소스가 추가될 때 같은 출처 검증 절차로 범위를 확장합니다.</p>
+      </section>
+      <section class="home-panel" aria-labelledby="home-analysis-title">
+        <header class="home-panel-heading"><div><span>SYNTHESIS</span><h3 id="home-analysis-title">핵심 분석</h3></div><a href="${withBase("/analyses/")}">전체 ${counts.analyses}개</a></header>
+        <ol class="home-feature-list">${featured.map((page, index) => `<li>
+          <span>${String(index + 1).padStart(2, "0")}</span>
+          <a href="${withBase(page.url)}"><strong>${escapeHtml(page.title)}</strong><small>${escapeHtml(page.summary)}</small></a>
+        </li>`).join("")}</ol>
+      </section>
+      <aside class="home-panel home-recent" aria-labelledby="home-recent-title">
+        <header class="home-panel-heading"><div><span>UPDATED</span><h3 id="home-recent-title">최근 갱신</h3></div></header>
+        <ol>${recent.map((page) => `<li><a href="${withBase(page.url)}"><span>${escapeHtml(page.title)}</span><time>${page.updated}</time></a></li>`).join("")}</ol>
+      </aside>
+    </div>
   </section>`;
   return layout({
     title: "CS Wiki",
