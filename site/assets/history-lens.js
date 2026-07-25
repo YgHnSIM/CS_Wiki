@@ -1009,11 +1009,9 @@ export async function initializeHistoryLens(root, dependencies = {}) {
       read.href = safePageHref(event.url, windowRef);
       actions.append(read);
     }
-    const atlas = make("a", "", "의미 지도에서 보기");
-    atlas.href = `${roots.atlas}?focus=${encodeURIComponent(event.id)}`;
     const connection = make("a", "", "연결 경로 찾기");
     connection.href = `${roots.connections}?from=${encodeURIComponent(event.id)}`;
-    actions.append(atlas, connection);
+    actions.append(connection);
     container.append(actions);
   }
 

@@ -6,12 +6,12 @@ import test from "node:test";
 import { createDataOutputPath, createOutputWriter } from "../site/output.mjs";
 
 test("data output paths stay inside their lens namespace", () => {
-  const resolveAtlasPath = createDataOutputPath("atlas", "semantic atlas");
-  assert.equal(resolveAtlasPath("clusters/one.json?v=abc", "cluster"), join("data", "atlas", "clusters", "one.json"));
+  const resolveEvidencePath = createDataOutputPath("evidence", "evidence lens");
+  assert.equal(resolveEvidencePath("documents/one.json?v=abc", "document"), join("data", "evidence", "documents", "one.json"));
   for (const value of ["", "/absolute.json", "../escape.json", "safe/../escape.json", "safe//empty.json", "%2e%2e/escape.json", "unsafe/<name>.json"]) {
-    assert.throws(() => resolveAtlasPath(value, "cluster"), /Unsafe semantic atlas cluster path/);
+    assert.throws(() => resolveEvidencePath(value, "document"), /Unsafe evidence lens document path/);
   }
-  assert.throws(() => createDataOutputPath("../atlas", "semantic atlas"), /Unsafe data namespace/);
+  assert.throws(() => createDataOutputPath("../evidence", "evidence lens"), /Unsafe data namespace/);
 });
 
 test("output writer creates nested UTF-8 artifacts", async () => {

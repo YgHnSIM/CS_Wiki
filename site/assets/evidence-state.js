@@ -225,8 +225,6 @@ export function evidenceManifestAssetUrl(manifest = {}, descriptorOrKey, replace
   return returnAbsolute ? resolved.href : `${resolved.pathname}${resolved.search}`;
 }
 
-export const evidenceAssetUrl = evidenceManifestAssetUrl;
-
 function normalizedRootPath(value) {
   let pathname;
   try {

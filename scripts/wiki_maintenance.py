@@ -134,7 +134,7 @@ def fix_index_counts(root: Path, pages, fix: bool) -> tuple[int, int]:
             changed_items += 1
         return replaced
 
-    index_page.text = re.sub(r"^-\s+\[\[([^\]]+)\]\].*$", replace_item, index_page.text, flags=re.MULTILINE)
+    index_page.text = re.sub(r"^-\s+\[\[([^\]]+)\]\][^\r\n]*", replace_item, index_page.text, flags=re.MULTILINE)
     if index_page.text != original:
         index_page.text = set_updated(index_page.text, TODAY, index_page.newline)
     changed_files = 1 if write_if_changed(index_page, original, fix) else 0

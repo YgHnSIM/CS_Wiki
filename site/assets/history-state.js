@@ -234,8 +234,6 @@ export function historyHistoryEntry(state = {}) {
   return { historyMap: snapshot };
 }
 
-export const historyMapHistoryEntry = historyHistoryEntry;
-
 export function historyStateFromHistory(entry, currentUrl, allowedFacets = {}, options = {}) {
   const snapshot = entry?.historyMap;
   if (!snapshot || typeof snapshot !== "object" || Array.isArray(snapshot)) {

@@ -11,7 +11,6 @@ from pathlib import Path
 
 from wiki_common import (
     BASE_REQUIRED,
-    CONTENT_DIRS,
     VALID_STATUSES,
     Resolver,
     effective_source_pages,

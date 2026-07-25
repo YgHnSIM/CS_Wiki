@@ -23,7 +23,14 @@ from wiki_common import (  # noqa: E402
     source_maps,
 )
 from wiki_lint import lint  # noqa: E402
-from wiki_maintenance import GLOBAL_MARKER, _managed_log_block, fix_graph_ids, fix_log_headings, fix_related  # noqa: E402
+from wiki_maintenance import (  # noqa: E402
+    GLOBAL_MARKER,
+    _managed_log_block,
+    fix_graph_ids,
+    fix_index_counts,
+    fix_log_headings,
+    fix_related,
+)
 from wiki_summaries import set_summary  # noqa: E402
 
 
@@ -516,6 +523,55 @@ class LintRegressionTests(unittest.TestCase):
 
 
 class MaintenanceRegressionTests(unittest.TestCase):
+    def test_index_count_fix_preserves_crlf_and_is_idempotent(self) -> None:
+        root = Path("C:/tmp/wiki-test")
+        reference_one = make_page(
+            root,
+            "wiki/sources/Reference One.md",
+            base_frontmatter("Reference One", "type/reference"),
+        )
+        reference_two = make_page(
+            root,
+            "wiki/sources/Reference Two.md",
+            base_frontmatter("Reference Two", "type/reference"),
+        )
+        correct = make_page(
+            root,
+            "wiki/concepts/Correct.md",
+            base_frontmatter("Correct", "type/concept", sources="[Reference One]"),
+        )
+        wrong = make_page(
+            root,
+            "wiki/concepts/Wrong.md",
+            base_frontmatter("Wrong", "type/concept", sources="[Reference One, Reference Two]"),
+        )
+        index = make_page(
+            root,
+            "wiki/index.md",
+            (
+                base_frontmatter("Index", "type/meta")
+                + "- [[Correct]] — correct. (근거 1개)\n"
+                + "- [[Wrong]] — wrong. (근거 1개)\n"
+            ).replace("\n", "\r\n"),
+        )
+        overview = make_page(
+            root,
+            "wiki/overview.md",
+            (
+                base_frontmatter("Overview", "type/meta")
+                + "현재 정규 소스는 0개 묶음, 참고 자료는 2개이며 확인한다.\n\n"
+                + "<!-- wiki-maintenance: status-summary -->\n"
+                + "운영 상태: 전체 6개 페이지 중 active 0개, draft 6개, review 0개, archived 0개다.\n"
+            ).replace("\n", "\r\n"),
+        )
+        pages = [index, overview, reference_one, reference_two, correct, wrong]
+
+        self.assertEqual((1, 1), fix_index_counts(root, pages, fix=False))
+        self.assertIn("- [[Correct]] — correct. (근거 1개)\r\n", index.text)
+        self.assertIn("- [[Wrong]] — wrong. (근거 2개)\r\n", index.text)
+        self.assertIsNone(re.search(r"(?<!\r)\n", index.text))
+        self.assertEqual((0, 0), fix_index_counts(root, pages, fix=False))
+
     def test_related_reading_compaction_is_bounded_explained_and_idempotent(self) -> None:
         root = Path("C:/tmp/wiki-test")
         targets = [

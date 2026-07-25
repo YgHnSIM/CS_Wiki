@@ -714,7 +714,6 @@ export function buildEvidenceLens(graph = {}, options = {}) {
     });
   }
   relationBases.sort((left, right) => compareText(left.edgeId, right.edgeId));
-  const relationByEdgeId = new Map(relationBases.map((assertion) => [assertion.edgeId, assertion]));
 
   const documentAttestations = [];
   for (const edge of [...rawEdges].sort((left, right) => compareText(left.id, right.id))) {

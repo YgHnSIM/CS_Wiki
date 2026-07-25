@@ -277,21 +277,6 @@ def set_updated(text: str, date: str, newline: str) -> str:
     return set_frontmatter_field(text, "updated", date, newline)
 
 
-def append_related_link(page: Page, target: str, date: str) -> str:
-    span = section_span(page.text, "관련 항목", level=2, last=True)
-    if span is None:
-        raise ValueError(f"{page.rel}: missing final related section")
-    start, end = span
-    chunk = page.text[start:end]
-    if re.search(rf"\[\[{re.escape(target)}(?:[#|\]])", chunk, re.IGNORECASE):
-        return page.text
-    stripped = chunk.rstrip("\r\n")
-    suffix = chunk[len(stripped) :]
-    insertion = page.newline + f"- [[{target}]]"
-    new_chunk = stripped + insertion + suffix
-    return set_updated(page.text[:start] + new_chunk + page.text[end:], date, page.newline)
-
-
 @dataclass
 class SourceMaps:
     by_stem: dict[str, list[Page]]

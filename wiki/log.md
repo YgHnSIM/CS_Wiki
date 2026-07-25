@@ -2667,11 +2667,11 @@ TokenPowerBench와 MLPerf Inference의 공식 전력 측정 방법론을 참고 
 
 ## [2026-07-25] update | 확장 실행 로드맵
 
-세션 전환과 대화 맥락 압축 뒤에도 P0–P5 확장 작업을 같은 순서로 재개할 수 있도록 [[확장 실행 로드맵]]을 추가했다. 각 단계의 범위·상태·완료 커밋·검증 결과를 저장소에 기록하고, 검증과 원격 푸시가 끝나기 전에는 다음 단계로 넘어가지 않는 절차를 고정했다.
+세션 전환과 대화 맥락 압축 뒤에도 P0–P5 확장 작업을 같은 순서로 재개할 수 있도록 `확장 실행 로드맵`을 추가했다. 각 단계의 범위·상태·완료 커밋·검증 결과를 저장소에 기록하고, 검증과 원격 푸시가 끝나기 전에는 다음 단계로 넘어가지 않는 절차를 고정했다.
 
 변경된 페이지:
 
-- 메타: [[확장 실행 로드맵]]
+- 메타: `확장 실행 로드맵`
 - 탐색·운영: [[index]], [[log]]
 
 ### 검증
@@ -2686,7 +2686,7 @@ TokenPowerBench와 MLPerf Inference의 공식 전력 측정 방법론을 참고 
 
 ### 관련 항목
 
-- [[확장 실행 로드맵]]
+- `확장 실행 로드맵`
 
 ## [2026-07-25] update | 기존 핵심 관계 보강
 
@@ -2695,7 +2695,7 @@ TokenPowerBench와 MLPerf Inference의 공식 전력 측정 방법론을 참고 
 변경된 페이지:
 
 - 분석: [[컴퓨팅 능력의 발달사]], [[평균 성능은 왜 서비스의 컴퓨팅 능력을 설명하지 못하는가]], [[인코딩 심화]], [[비트 패턴과 해석 규칙]], [[Unix와 C]], [[Fortran과 컴파일러]], [[병렬 컴퓨팅은 시간을 줄이는가 문제를 키우는가]], [[범용성은 어떻게 컴퓨팅 능력이 되었는가]]
-- 메타·운영: [[확장 실행 로드맵]], [[index]], [[overview]], [[log]]
+- 메타·운영: `확장 실행 로드맵`, [[index]], [[overview]], [[log]]
 
 ### 검증
 
@@ -2728,14 +2728,14 @@ TokenPowerBench와 MLPerf Inference의 공식 전력 측정 방법론을 참고 
 - 개념: [[리틀의 법칙]], [[대기열과 부하 제어]]
 - 분석: [[LLM 서빙에서 처리량과 지연은 왜 함께 움직이는가]]
 - 기존 연결: [[LLM 추론 서비스 지표]], [[연속 배칭]], [[꼬리 지연 시간]], [[에너지 비례 컴퓨팅]], [[같은 SLO의 LLM 서비스는 무엇을 비용으로 세어야 하는가]], [[초당 토큰 수는 왜 LLM 서비스 능력을 설명하지 못하는가]], [[평균 성능은 왜 서비스의 컴퓨팅 능력을 설명하지 못하는가]]
-- 탐색·운영: [[index]], [[overview]], [[확장 실행 로드맵]], `site/catalog.mjs`, [[log]]
+- 탐색·운영: [[index]], [[overview]], `확장 실행 로드맵`, `site/catalog.mjs`, [[log]]
 
 ### 검증
 
 - Little의 원 논문이 명시한 유한 평균·정상성 조건을 보존하고, `L`, `λ`, `W`에 요청·토큰·대기·서비스 시간을 섞지 않도록 경계를 명시했다.
 - Clockwork의 DNN 실행 모델과 LLM의 반복 디코드·KV 캐시를 구분했으며, 원시 처리량·goodput·거부·취소를 같은 성공 지표로 합치지 않았다.
 - 대기열 제어의 자원 여유는 꼬리 지연과 에너지 비례성의 교환으로 연결하되, 하나의 정책이 두 목표를 자동으로 최적화한다고 주장하지 않았다.
-- 전체 링크 검사에서 새 Clockwork URL은 정상 응답했다. 기존 NIST 참고 자료 두 건의 404는 [[확장 실행 로드맵#p5 — 검토·출처 보존]]에 보존 대기열로 기록했다.
+- 전체 링크 검사에서 새 Clockwork URL은 정상 응답했다. 기존 NIST 참고 자료 두 건의 404는 `확장 실행 로드맵#P5 — 검토·출처 보존`에 보존 대기열로 기록했다.
 - `npm run check`는 285페이지, 검토된 관계 275개, Node 153개·Python 23개·브라우저 5개 테스트를 모두 통과했다.
 
 ### 출처
@@ -2761,14 +2761,14 @@ CAP의 네트워크 분할 경계, Raft의 crash fault 복제 로그, Spanner의
 - 개념: [[CAP 정리]], [[복제 로그와 합의]], [[외부 일관성과 시간 불확실성]]
 - 분석: [[분산 서비스는 빠른 응답과 같은 상태를 어떻게 함께 보장하는가]]
 - 기존 연결: [[가용성과 복구]], [[결함 허용]], [[꼬리 지연 시간]], [[평균 성능은 왜 서비스의 컴퓨팅 능력을 설명하지 못하는가]], [[빠른 서비스는 왜 가용한 서비스를 보장하지 않는가]]
-- 탐색·운영: [[index]], [[overview]], `site/catalog.mjs`, [[확장 실행 로드맵]], [[log]]
+- 탐색·운영: [[index]], [[overview]], `site/catalog.mjs`, `확장 실행 로드맵`, [[log]]
 
 ### 검증
 
 - CAP을 고정된 “2/3 선택”이나 운영 가동률 공식으로 일반화하지 않고, 분할 모형의 선형화 가능성·응답 보장 경계로 한정했다.
 - Raft의 crash fault 안전성·진행성을 비잔틴 내성이나 사용자 SLO 보장으로 확대하지 않았다.
 - Spanner의 TrueTime을 완벽한 전역 시계로 해석하지 않고, Paxos 복제·다중 그룹 트랜잭션·시간 불확실성·commit wait를 분리했다.
-- 새 Princeton·USENIX 원전 URL은 정상 응답했고, ACM DOI의 403은 접근 제한으로 구분했다. 전체 링크 점검의 404 두 건은 기존 NIST 자료이며 [[확장 실행 로드맵#p5 — 검토·출처 보존]] 대기열에 유지했다.
+- 새 Princeton·USENIX 원전 URL은 정상 응답했고, ACM DOI의 403은 접근 제한으로 구분했다. 전체 링크 점검의 404 두 건은 기존 NIST 자료이며 `확장 실행 로드맵#P5 — 검토·출처 보존` 대기열에 유지했다.
 - `npm run check`는 292페이지, 검토된 관계 293개, Node 153개·Python 23개·브라우저 5개 테스트를 모두 통과했다. 정적 산출물은 2,826개·71.24MiB이며, 공개 문서별 무자바스크립트 근거 경로의 정상 증가를 수용하도록 파일 예산만 3,200개로 조정하고 바이트 예산은 유지했다.
 - `raw/` 원본과 첨부 파일은 변경하지 않았다.
 
@@ -2795,7 +2795,7 @@ CAP의 네트워크 분할 경계, Raft의 crash fault 복제 로그, Spanner의
 - 개념: [[입력 검증]]
 - 분석: [[입력을 해석하는 경계는 왜 보안 경계인가]]
 - 기존 연결: [[유니코드 정규화]], [[동형이의 문자]], [[C 문자열]], [[정수 오버플로]], [[메모리 안전성]], [[인코딩 심화]], [[비트 패턴과 해석 규칙]]
-- 탐색·운영: [[index]], [[overview]], `site/catalog.mjs`, [[확장 실행 로드맵]], [[log]]
+- 탐색·운영: [[index]], [[overview]], `site/catalog.mjs`, `확장 실행 로드맵`, [[log]]
 
 ### 검증
 
@@ -2827,7 +2827,7 @@ CAP의 네트워크 분할 경계, Raft의 crash fault 복제 로그, Spanner의
 - 분석: [[벤치마크 숫자는 왜 직접 비교되지 않는가]]
 - 기존 연결: [[컴퓨팅 능력이란 무엇인가]], [[목표 품질 도달 시간]], [[더 빠른 계산은 같은 답을 내는가]]
 - 근거 연결: [[SPEC CPU 2026 Overview]], [[The Linpack Benchmark]], [[Roofline An Insightful Visual Performance Model]], [[Power Measurement Tutorial for the Green500 List]], [[MLPerf Training Benchmark]], [[MLPerf Inference Benchmark]], [[MLPerf Inference Power Measurement]], [[TokenPowerBench - Benchmarking the Power Consumption of LLM Inference]]
-- 탐색·운영: [[index]], [[overview]], `site/catalog.mjs`, [[확장 실행 로드맵]], [[log]]
+- 탐색·운영: [[index]], [[overview]], `site/catalog.mjs`, `확장 실행 로드맵`, [[log]]
 
 ### 검증
 
@@ -2859,7 +2859,7 @@ CAP의 네트워크 분할 경계, Raft의 crash fault 복제 로그, Spanner의
 
 - 활성화 및 관계 보강: [[PDP-11]], [[운영체제]], [[파일 시스템]], [[유닉스 파이프]], [[단계적 정제]], [[더글러스 매킬로이]], [[데이비드 파나스]], [[도널드 커누스]], [[스티븐 C. 존슨]], [[올레요한 달]], [[주세페 야코피니]], [[찰스 W. 크루거]], [[켄 톰프슨]], [[코라도 뵘]], [[토니 호어]]
 - 출처 보존: [[DLMF Standard Reference Tables on Demand]], [[Handbook of Mathematical Functions with Formulas, Graphs, and Mathematical Tables]]
-- 운영 기록: [[확장 실행 로드맵]], [[overview]], [[index]], [[log]]
+- 운영 기록: `확장 실행 로드맵`, [[overview]], [[index]], [[log]]
 
 ### 검증
 
@@ -2877,7 +2877,7 @@ CAP의 네트워크 분할 경계, Raft의 crash fault 복제 로그, Spanner의
 
 ### 관련 항목
 
-- [[확장 실행 로드맵]]
+- `확장 실행 로드맵`
 - [[지식 그래프 관계 스키마]]
 
 ## [2026-07-25] query | 프로젝트 콘텐츠 지형과 다음 연결
@@ -2925,7 +2925,7 @@ CAP의 네트워크 분할 경계, Raft의 crash fault 복제 로그, Spanner의
 - P8: [[Time, Clocks, and the Ordering of Events in a Distributed System]], [[End-to-End Arguments in System Design]], [[Implementing Remote Procedure Calls]], [[The Google File System]], [[Dynamo - Amazon's Highly Available Key-value Store]], [[종단 간 원칙]], [[원격 프로시저 호출]], [[부분 실패]], [[분산 파일 시스템]], [[로컬 호출과 파일은 원격 상태가 될 때 무엇을 잃는가]]
 - P9: [[Expectation vs. Experience: Evaluating the Usability of Code Generation Tools Powered by Large Language Models]], [[The Impact of AI on Developer Productivity: Evidence from GitHub Copilot]], [[Measuring the Impact of Early-2025 AI on Experienced Open-Source Developer Productivity]], [[자동화 경계]], [[검증 노동]], [[AI 코딩 지원]], [[자동화는 계산 노동을 없애는가 책임을 옮기는가]]
 - P10: [[GHG Protocol Product Life Cycle Accounting and Reporting Standard]], [[Chasing Carbon: The Elusive Environmental Footprint of Computing]], [[Carbon Emissions and Large Neural Network Training]], [[수명 주기 평가 경계]], [[운영 탄소와 내재 탄소]], [[전력 사용 효율]], [[낮은 운영 에너지는 지속 가능한 컴퓨팅을 보장하는가]]
-- 통합: [[표현·배치·계약은 어떻게 컴퓨팅 능력을 만드는가]], [[컴퓨팅 능력의 발달사]], [[컴퓨팅 능력 독서 지도]], [[확장 실행 로드맵]], [[index]], [[overview]], `site/catalog.mjs`
+- 통합: [[표현·배치·계약은 어떻게 컴퓨팅 능력을 만드는가]], [[컴퓨팅 능력의 발달사]], [[컴퓨팅 능력 독서 지도]], `확장 실행 로드맵`, [[index]], [[overview]], `site/catalog.mjs`
 
 ### 검증
 
@@ -2949,7 +2949,7 @@ CAP의 네트워크 분할 경계, Raft의 crash fault 복제 로그, Spanner의
 
 - [[표현·배치·계약은 어떻게 컴퓨팅 능력을 만드는가]]
 - [[컴퓨팅 능력 독서 지도]]
-- [[확장 실행 로드맵]]
+- `확장 실행 로드맵`
 
 ## [2026-07-25] update | 지식 지도 기능 제거
 
@@ -2965,6 +2965,29 @@ CAP의 네트워크 분할 경계, Raft의 crash fault 복제 로그, Spanner의
 - `site/build.mjs`
 - `site/verify-build.mjs`
 - 지식 지도 전용 자산 및 테스트
+
+## [2026-07-25] update | 리팩터링 잔재와 임시 산출물 정리
+
+- 제거된 구조 지도의 호출되지 않는 렌더 함수군과 `if (false)` 검증 블록을 삭제하고, 역사 렌즈가 만들던 `undefined?focus=...` 링크를 연결 경로 링크 하나로 정리했다.
+- 미사용 변수·함수·import와 호환 별칭을 제거하고, 범용 출력 경로 테스트의 삭제된 기능 명칭을 현행 근거 렌즈 기준으로 바꿨다.
+- 완료된 숨김 작업 문서 `확장 실행 로드맵`을 삭제했다. 과거 작업 이력은 이 로그에 보존하고, 색인·개요·관계 스키마·README의 현행 경로와 수치를 340개 페이지·25개 학습 경로 기준으로 갱신했다.
+- Windows CRLF 색인을 변경으로 오인하던 유지보수 정규식을 수정하고 줄끝 보존·멱등성 회귀 테스트를 추가했다.
+- `dist/`, `node_modules/`, `output/`, `graphify-out/`과 Python 바이트코드 캐시를 제거하고 `graphify-out/` 재생성을 무시 목록에 추가했다. Obsidian 설정과 `raw/` 원본은 유지했다.
+
+### 변경된 페이지
+
+- 운영 문서: [[index]], [[overview]], [[지식 그래프 관계 스키마]], [[log]], `README.md`
+- 빌드·클라이언트: `site/build.mjs`, `site/verify-build.mjs`, 역사·근거 상태 모듈과 관계 스타일
+- 유지보수·검사: `scripts/wiki_common.py`, `scripts/wiki_lint.py`, `scripts/wiki_maintenance.py`, 관련 회귀 테스트
+- 삭제: `wiki/meta/확장 실행 로드맵.md`
+
+### 검증
+
+- 위키 구조 검사는 340개 페이지와 8,331개 링크에서 오류·경고 0건으로 통과했다.
+- 유지보수 dry-run은 관련 항목·색인·로그·그래프 ID 변경 필요 0건으로 통과했다.
+- Node 118개와 Python 24개 단위 테스트, Chromium 브라우저 5개 검사, 정적 사이트 빌드와 출력 검증을 통과했다.
+- 빌드는 340개 위키 페이지, 25개 학습선·290개 역, 336개 공개 역사 문서와 158개 검토 전환의 정적 출력을 확인했다.
+- `raw/` 원본과 첨부 파일은 변경하지 않았다.
 
 <!-- wiki-maintenance: global-sections -->
 ## 출처

@@ -9,7 +9,7 @@ test("feature CSS modules compose in one deterministic cascade", async () => {
   const css = await loadSiteCss(resolve("."));
   for (const marker of [
     "Document evidence lineage",
-    "Document-local relationship atlas",
+    "Document-local relationship channels",
     "Learning-path transit map",
     "Historical causal lens"
   ]) assert.ok(css.includes(marker), `composed stylesheet is missing '${marker}'`);

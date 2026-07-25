@@ -137,7 +137,7 @@ test("static evidence URLs preserve long ids and reject unsafe or ambiguous path
     "/map/evidence/source/ref-001/0/",
     "/map/evidence/relation/relation-1/not-a-page/",
     "/map/evidence/document/id/2/extra/",
-    "/map/atlas/document/id/"
+    "/map/history/document/id/"
   ]) assert.equal(parseEvidenceUrl(unsafe).valid, false, unsafe);
 });
 

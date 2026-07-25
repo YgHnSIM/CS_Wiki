@@ -50,7 +50,7 @@ const assetHash = createHash("sha256")
   .update(await readFile(join(root, "site", "assets", "evidence-state.js")))
   .update(await readFile(join(root, "site", "assets", "evidence-lens.js")));
 
-const atlasFacetMeta = Object.freeze({
+const historyFacetMeta = Object.freeze({
   historical: {
     theory: "이론",
     machine: "기계",
@@ -338,7 +338,6 @@ function navLinks(canonicalPath) {
     </a>`;
   }).join("");
   const pathActive = canonicalPath.startsWith("/paths/");
-  const mapActive = canonicalPath.startsWith("/map/");
   return `${categoryLinks}<a class="nav-link path-nav" href="${withBase("/paths/")}"${pathActive ? ' aria-current="page"' : ""}>
     <span>학습 경로</span><span class="nav-count">${resolvedLearningPaths.length}</span>
   </a>`;
@@ -1117,194 +1116,6 @@ function learningMapPage({ defaultPath, defaultStation, canonicalPath = "/map/le
   });
 }
 
-function atlasArray(value) {
-  if (Array.isArray(value)) return value;
-  if (value && typeof value === "object") return Object.entries(value).map(([id, record]) => (
-    record && typeof record === "object" ? { id, ...record } : { id, count: record }
-  ));
-  return [];
-}
-
-function atlasView(payload = {}) {
-  const source = payload.view || payload.layout || payload.overview || payload.cluster || payload.corridor || payload;
-  const nodeSource = source.nodes?.items || source.nodes || source.clusters || source.documents;
-  const edgeSource = source.edges?.items || source.edges || source.corridors || source.relations;
-  return { nodes: atlasArray(nodeSource), edges: atlasArray(edgeSource), labels: atlasArray(source.labels) };
-}
-
-function atlasClusterEntries() {
-  const manifestRecords = atlasArray(semanticAtlas.manifest.clusters).filter((cluster) => cluster?.id);
-  if (manifestRecords.length) return manifestRecords.map((cluster) => ({ ...cluster, kind: "cluster", count: cluster.count ?? cluster.nodeCount }));
-  const overview = atlasView(semanticAtlas.overview);
-  const records = overview.nodes.filter((node) => node?.id).map((node) => ({ ...node, kind: "cluster" }));
-  if (records.length) return records;
-  return Object.keys(semanticAtlas.shards || {}).sort((a, b) => a.localeCompare(b, "ko")).map((id) => {
-    const shard = semanticAtlas.shards[id] || {};
-    return { id, title: shard.title || shard.label || id, summary: shard.summary || shard.description || "", count: atlasDocumentEntries(shard).length, kind: "cluster" };
-  });
-}
-
-function atlasDocumentEntries(payload) {
-  const source = payload?.documents || payload?.cluster?.documents || atlasView(payload).nodes;
-  const seen = new Set();
-  return atlasArray(source).filter((node) => {
-    if (!node?.id || node.kind === "cluster" || seen.has(node.id)) return false;
-    seen.add(node.id);
-    return true;
-  });
-}
-
-function atlasDocumentsForCluster(clusterId, payload) {
-  const lookupEntries = atlasArray(semanticAtlas.lookup.entries || semanticAtlas.lookup.nodes || semanticAtlas.lookup.documents);
-  const complete = lookupEntries.filter((node) => node?.clusterId === clusterId);
-  return complete.length ? complete : atlasDocumentEntries(payload);
-}
-
-function atlasFacetValues(name) {
-  const aliases = {
-    domain: ["domain", "domains"],
-    category: ["category", "categories"],
-    status: ["status", "statuses"],
-    historical: ["historical", "historicalLayers", "historical_layers"],
-    capability: ["capability", "capabilityLayers", "capability_layers"]
-  }[name];
-  const facets = semanticAtlas.manifest.facets || semanticAtlas.manifest.allowedFacets || {};
-  const keyName = aliases.find((keyName) => Object.hasOwn(facets, keyName));
-  if (!keyName) return [];
-  const raw = facets[keyName];
-  const records = Array.isArray(raw)
-    ? raw.map((record) => typeof record === "string" ? { value: record } : record)
-    : raw && typeof raw === "object"
-      ? Object.entries(raw).map(([value, record]) => typeof record === "number" ? { value, count: record } : { value, ...(record || {}) })
-      : [];
-  return records
-    .map((record) => ({ ...record, value: String(record?.value || record?.id || record?.key || "").trim() }))
-    .filter((record) => record.value)
-    .sort((a, b) => atlasFacetLabel(name, a.value).localeCompare(atlasFacetLabel(name, b.value), "ko") || a.value.localeCompare(b.value, "ko"));
-}
-
-function atlasFacetLabel(name, value) {
-  if (name === "domain") return domainMeta[value] || value.replace(/^domain\//, "");
-  if (name === "category") return categoryMeta[value]?.label || value;
-  if (name === "status") return statusMeta[value]?.label || value;
-  return atlasFacetMeta[name]?.[value] || value;
-}
-
-function atlasFacetControl(name, label) {
-  const records = atlasFacetValues(name);
-  const options = records.length
-    ? `<option value="">전체</option>${records.map((record) => `<option value="${escapeHtml(record.value)}">${escapeHtml(atlasFacetLabel(name, record.value))}${Number.isFinite(record.count) ? ` (${record.count})` : ""}</option>`).join("")}`
-    : `<option value="">메타데이터 없음</option>`;
-  return `<label>${label}<select name="${name}" data-atlas-filter="${name}"${records.length ? "" : " disabled"}>${options}</select></label>`;
-}
-
-function atlasClusterNode(id) {
-  return atlasClusterEntries().find((node) => node.id === id) || null;
-}
-
-function atlasNodeUrl(node) {
-  if (node?.url) return node.url;
-  const source = knowledgeGraph.nodes.find((candidate) => candidate.id === node?.id);
-  return source?.url || "";
-}
-
-function atlasClusterListHtml(activeClusterId = "") {
-  const entries = atlasClusterEntries();
-  return `<ol class="atlas-static-cluster-list">${entries.map((cluster) => {
-    const shard = semanticAtlas.shards?.[cluster.id];
-    const count = Number(cluster.count ?? cluster.nodeCount ?? cluster.documentCount ?? atlasDocumentsForCluster(cluster.id, shard).length) || 0;
-    return `<li><a href="${withBase(`/map/atlas/${encodeURIComponent(cluster.id)}/`)}"${cluster.id === activeClusterId ? ' aria-current="page"' : ""}><strong>${escapeHtml(cluster.title || cluster.label || cluster.id)}</strong><span>${count}개 문서${cluster.summary || cluster.description ? ` · ${escapeHtml(cluster.summary || cluster.description)}` : ""}</span></a></li>`;
-  }).join("")}</ol>`;
-}
-
-function atlasDocumentListHtml(documents, activeId = "") {
-  return `<ol class="atlas-item-list">${documents.map((node) => {
-    const url = atlasNodeUrl(node);
-    const meta = [categoryMeta[node.category]?.label || node.category, statusLabel(node.status), ...(node.domains || []).slice(0, 1).map((domain) => domainMeta[domain] || domain.replace(/^domain\//, ""))].filter(Boolean).join(" · ");
-    return `<li>${url ? `<a href="${escapeHtml(url)}"${node.id === activeId ? ' aria-current="true"' : ""}><strong>${escapeHtml(node.title || node.label || node.id)}</strong>${meta ? `<small>${escapeHtml(meta)}</small>` : ""}</a>` : `<span>${escapeHtml(node.title || node.label || node.id)}</span>`}</li>`;
-  }).join("")}</ol>`;
-}
-
-function atlasCorridorListHtml(edges, clustersById) {
-  return `<ol class="atlas-relation-list">${edges.slice(0, 80).map((edge) => {
-    const source = clustersById.get(edge.source);
-    const target = clustersById.get(edge.target);
-    const title = `${source?.title || source?.label || edge.source} ↔ ${target?.title || target?.label || edge.target}`;
-    const detail = [edge.label || edge.dominantFamily || edge.family || "군집 간 관계", edge.count ? `${edge.count}개 연결` : ""].filter(Boolean).join(" · ");
-    return `<li><strong><a href="${withBase(`/map/atlas/?corridor=${encodeURIComponent(edge.corridorId || edge.id)}`)}">${escapeHtml(title)}</a></strong><span>${escapeHtml(detail)}</span></li>`;
-  }).join("")}</ol>`;
-}
-
-function atlasRelationListHtml(edges) {
-  return `<ol class="atlas-relation-list">${edges.slice(0, 80).map((edge) => {
-    const description = describeRelationship(knowledgeGraph, edge);
-    const source = knowledgeGraph.nodes.find((node) => node.id === edge.source);
-    const target = knowledgeGraph.nodes.find((node) => node.id === edge.target);
-    return `<li><strong>${escapeHtml(knowledgeGraph.legend[edge.kind]?.label || edge.label || edge.kind || "관계")}</strong><span>${escapeHtml(source?.title || edge.source)} → ${escapeHtml(target?.title || edge.target)}</span><p>${escapeHtml(description.detail)}</p></li>`;
-  }).join("")}</ol>`;
-}
-
-function semanticAtlasPage({ clusterId = "", canonicalPath = "/map/atlas/" } = {}) {
-  const clusters = atlasClusterEntries();
-  const clustersById = new Map(clusters.map((cluster) => [cluster.id, cluster]));
-  const cluster = clusterId ? atlasClusterNode(clusterId) : null;
-  const shard = clusterId ? semanticAtlas.shards?.[clusterId] : semanticAtlas.overview;
-  if (clusterId && (!cluster || !shard)) throw new Error(`Semantic atlas static route references missing cluster '${clusterId}'`);
-  const view = atlasView(shard);
-  const documents = clusterId ? atlasDocumentsForCluster(clusterId, shard) : [];
-  const overviewEdges = atlasView(semanticAtlas.overview).edges;
-  const lookupEntries = atlasArray(semanticAtlas.lookup.entries || semanticAtlas.lookup.nodes || semanticAtlas.lookup.documents || semanticAtlas.lookup);
-  const documentCount = Number(semanticAtlas.manifest.stats?.documents ?? semanticAtlas.manifest.stats?.nodes ?? lookupEntries.length) || knowledgeGraph.nodes.filter((node) => node.visibility !== "hidden").length;
-  const relationCount = Number(semanticAtlas.manifest.stats?.relations ?? semanticAtlas.manifest.stats?.edges ?? knowledgeGraph.stats.edges) || 0;
-  const stageTitle = cluster ? cluster.title || cluster.label || cluster.id : "전체 지식 군집";
-  const stageSummary = cluster
-    ? cluster.summary || cluster.description || `${documents.length}개 문서가 이 의미 군집에 속합니다.`
-    : "검토 관계와 읽기 순서만 남긴 군집과 군집 사이의 회랑에서 출발합니다.";
-  const staticNodeList = cluster ? atlasDocumentListHtml(documents) : atlasClusterListHtml();
-  const staticEdgeList = cluster ? atlasRelationListHtml(view.edges) : atlasCorridorListHtml(overviewEdges, clustersById);
-  const content = `<div class="semantic-atlas-page section-frame" data-semantic-atlas
-    data-atlas-manifest-url="${withBase("/data/atlas/manifest.json")}?v=${assetVersion}"
-    data-atlas-root-url="${withBase("/map/atlas/")}"${clusterId ? ` data-default-cluster="${escapeHtml(clusterId)}" data-default-cluster-path="${withBase(canonicalPath)}"` : ""}>
-    <section class="atlas-hero">
-      <div><p class="eyebrow"><a href="${withBase("/")}">홈</a> / STRUCTURE ATLAS</p><h1>지식의 구조를 <span>군집과 회랑으로<br>읽는다.</span></h1><p>검토 관계와 읽기 순서만 남겨 구조를 먼저 봅니다. 근거와 본문 언급은 문서의 별도 채널에서 확인합니다.</p></div>
-      <dl><div><dt>탐색 문서</dt><dd>${documentCount}</dd></div><div><dt>의미 군집</dt><dd>${clusters.length}</dd></div><div><dt>군집 회랑</dt><dd>${overviewEdges.length}</dd></div><div><dt>구조 연결</dt><dd>${relationCount.toLocaleString("ko-KR")}</dd></div></dl>
-    </section>
-    ${mapModeNav("atlas")}
-    <form class="atlas-controls" data-atlas-controls hidden>
-      <div class="atlas-search-shell"><label>문서 찾기<input type="search" data-atlas-search autocomplete="off" role="combobox" aria-autocomplete="list" aria-haspopup="listbox" aria-expanded="false" aria-controls="atlas-search-results" placeholder="제목·별칭·설명 검색"></label><div id="atlas-search-results" class="atlas-search-results" data-atlas-search-results aria-live="polite"></div></div>
-      ${atlasFacetControl("domain", "주제")}
-      ${atlasFacetControl("category", "자료 유형")}
-      ${atlasFacetControl("status", "검증 상태")}
-      ${atlasFacetControl("historical", "역사 층위")}
-      ${atlasFacetControl("capability", "능력 층위")}
-      <button class="atlas-control-clear" type="button" data-atlas-overview>전체 보기</button>
-    </form>
-    <div class="atlas-state-bar"><nav class="atlas-breadcrumb" data-atlas-breadcrumb aria-label="구조 지도 위치"><a href="${withBase("/map/atlas/")}">전체 지도</a>${cluster ? `<span aria-hidden="true">/</span><span>${escapeHtml(stageTitle)}</span>` : ""}</nav><output data-atlas-status aria-live="polite">${cluster ? `${documents.length}개 문서를 포함한 군집을 선택했습니다.` : `${clusters.length}개 군집과 ${overviewEdges.length}개 회랑을 표시합니다.`}</output><p data-atlas-filter-notice hidden></p></div>
-    <div class="atlas-workspace">
-      <section class="atlas-stage" aria-labelledby="atlas-stage-title">
-        <header class="atlas-stage-header"><div><p data-atlas-stage-kicker>${cluster ? "CLUSTER VIEW" : "ATLAS OVERVIEW"}</p><h2 id="atlas-stage-title">${escapeHtml(stageTitle)}</h2></div><div class="atlas-zoom-controls" aria-label="지도 확대와 축소"><button type="button" data-atlas-zoom-out aria-label="축소">−</button><button type="button" data-atlas-reset-camera>맞춤</button><button type="button" data-atlas-zoom-in aria-label="확대">+</button></div></header>
-        <div class="atlas-canvas-frame"><canvas data-atlas-canvas aria-hidden="true"></canvas><details class="atlas-canvas-legend"><summary>지도 범례</summary><div><span class="atlas-legend-shape concept">개념</span><span class="atlas-legend-shape entity">인물</span><span class="atlas-legend-shape analysis">분석</span><span class="atlas-legend-shape source">원전·참고</span></div><div><span class="atlas-legend-line causal">검토 관계</span><span class="atlas-legend-line navigation">읽기 추천</span><span class="atlas-legend-line learning">학습 순서</span></div></details><p class="atlas-canvas-hint">드래그 이동 · 휠 확대 · 노드 선택</p><div class="atlas-error" data-atlas-error hidden role="alert"><h3>지도 조각을 불러오지 못했습니다</h3><p>아래 정적 목록은 계속 사용할 수 있습니다.</p><button type="button" data-atlas-retry>다시 시도</button></div></div>
-      </section>
-      <aside class="atlas-side-panel">
-        <section class="atlas-inspector" data-atlas-inspector aria-labelledby="atlas-inspector-title"><p>${cluster ? "SELECTED CLUSTER" : "ATLAS GUIDE"}</p><h3 id="atlas-inspector-title">${escapeHtml(stageTitle)}</h3><p>${escapeHtml(stageSummary)}</p><dl><div><dt>${cluster ? "문서" : "군집"}</dt><dd>${cluster ? documents.length : clusters.length}</dd></div><div><dt>${cluster ? "내부 관계" : "회랑"}</dt><dd>${cluster ? view.edges.length : overviewEdges.length}</dd></div></dl><div class="atlas-inspector-actions">${cluster ? `<a href="${withBase("/map/atlas/")}">전체 지도</a>` : `<span>군집을 선택해 문서를 펼칩니다.</span>`}</div></section>
-        <details class="atlas-list-disclosure" open><summary>텍스트 목록으로 지도 읽기</summary><div class="atlas-accessible-view">
-          <section><header><h4 data-atlas-node-heading>${cluster ? "군집의 전체 문서" : "지식 군집"}</h4><p data-atlas-node-summary>${cluster ? `${documents.length}개 문서 링크` : `${clusters.length}개 정적 군집 경로`}</p></header><div data-atlas-node-list>${staticNodeList}</div></section>
-          <section><header><h4 data-atlas-edge-heading>${cluster ? "문서 관계" : "군집 회랑"}</h4><p data-atlas-edge-summary>${cluster ? `${view.edges.length}개 중 대표 관계` : `${overviewEdges.length}개 군집 간 연결`}</p></header><div ${cluster ? "data-atlas-edge-list" : "data-atlas-corridor-list"}>${staticEdgeList}</div></section>
-        </div></details>
-      </aside>
-    </div>
-    <noscript><p class="atlas-noscript">자바스크립트 없이도 아래 정적 ${cluster ? "문서" : "군집"} 목록을 따라갈 수 있습니다.</p>${cluster ? atlasDocumentListHtml(documents) : atlasClusterListHtml()}</noscript>
-  </div>`;
-  return layout({
-    title: cluster ? `${stageTitle} · 구조 지도` : "구조 지도",
-    description: cluster ? `${stageTitle} 군집의 검토 관계와 읽기 순서를 탐색합니다.` : "CS Wiki의 검토 관계와 읽기 순서를 의미 군집과 회랑으로 압축한 구조 지도.",
-    content,
-    canonicalPath,
-    bodyClass: "semantic-atlas-page-body",
-    pageModules: ["semantic-atlas.js"]
-  });
-}
-
 const historyNodesById = new Map(knowledgeGraph.nodes.map((node) => [node.id, node]));
 const historyRangeCount = Object.values(historicalLens.lookupShards)
   .flatMap((shard) => shard.entries)
@@ -1335,7 +1146,7 @@ function historyEraListHtml(activePeriodId = "") {
 
 function historyEventListHtml(events = []) {
   if (!events.length) return '<p class="history-empty">이 조각에는 배치된 문서가 없습니다.</p>';
-  return `<ol class="history-event-ledger">${events.map((event) => `<li class="history-event-card" data-history-lane="${escapeHtml(event.lane || "unclassified")}" data-history-year="${event.time?.anchorYear ?? ""}"><button type="button" data-history-action="event" data-history-id="${escapeHtml(event.id)}"><time>${escapeHtml(historyTimeText(event))}</time><strong>${escapeHtml(event.title)}</strong><span>${escapeHtml(atlasFacetMeta.historical[event.lane] || "층위 미분류")}${event.capabilityLayers?.length ? ` · ${event.capabilityLayers.map((layer) => atlasFacetMeta.capability[layer] || layer).join(" · ")}` : ""}</span></button><a href="${escapeHtml(event.url)}">문서 읽기</a>${event.time?.note ? `<p>${escapeHtml(event.time.note)}</p>` : ""}</li>`).join("")}</ol>`;
+  return `<ol class="history-event-ledger">${events.map((event) => `<li class="history-event-card" data-history-lane="${escapeHtml(event.lane || "unclassified")}" data-history-year="${event.time?.anchorYear ?? ""}"><button type="button" data-history-action="event" data-history-id="${escapeHtml(event.id)}"><time>${escapeHtml(historyTimeText(event))}</time><strong>${escapeHtml(event.title)}</strong><span>${escapeHtml(historyFacetMeta.historical[event.lane] || "층위 미분류")}${event.capabilityLayers?.length ? ` · ${event.capabilityLayers.map((layer) => historyFacetMeta.capability[layer] || layer).join(" · ")}` : ""}</span></button><a href="${escapeHtml(event.url)}">문서 읽기</a>${event.time?.note ? `<p>${escapeHtml(event.time.note)}</p>` : ""}</li>`).join("")}</ol>`;
 }
 
 function historyRoleRecords(transition, key) {
@@ -1438,7 +1249,7 @@ function historicalLensPage({ periodId = "", page = 1, canonicalPath = "/map/his
       <div class="history-search-shell"><label>문서 찾기<input type="search" data-history-search autocomplete="off" role="combobox" aria-autocomplete="list" aria-haspopup="listbox" aria-expanded="false" aria-controls="history-search-results" placeholder="문서·전환·연도 검색"></label><div id="history-search-results" class="history-search-results" data-history-search-results role="listbox" aria-label="역사 문서와 전환 검색 결과" aria-live="polite"></div></div>
       <label>시기<select data-history-era><option value="">전체 시대</option>${historicalLens.manifest.periods.map((record) => `<option value="${escapeHtml(record.id)}"${record.id === periodId ? " selected" : ""}>${escapeHtml(record.label || record.title || record.id)}</option>`).join("")}</select></label>
       <label>역사 층위<select data-history-layer><option value="">전체 층위</option>${historicalLens.manifest.lanes.map((lane) => `<option value="${escapeHtml(lane.id)}">${escapeHtml(lane.label)}</option>`).join("")}</select></label>
-      <label>능력 층위<select data-history-capability><option value="">전체 능력</option>${historicalLens.manifest.facets.capabilities.map((capability) => `<option value="${escapeHtml(capability)}">${escapeHtml(atlasFacetMeta.capability[capability] || capability)}</option>`).join("")}</select></label>
+      <label>능력 층위<select data-history-capability><option value="">전체 능력</option>${historicalLens.manifest.facets.capabilities.map((capability) => `<option value="${escapeHtml(capability)}">${escapeHtml(historyFacetMeta.capability[capability] || capability)}</option>`).join("")}</select></label>
       <label>표시<select data-history-display><option value="all">문서와 전환</option><option value="events">문서만</option><option value="transitions">전환만</option></select></label>
       <button type="button" data-history-reset>초기화</button>
     </form>
