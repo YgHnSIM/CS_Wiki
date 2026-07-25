@@ -92,6 +92,7 @@ export function createEvidenceLens(root, environment = {}) {
   const preservation = root.querySelector("[data-evidence-preservation]");
   const reset = root.querySelector("[data-evidence-reset]");
   const status = root.querySelector("[data-evidence-status]");
+  const searchStatus = root.querySelector("[data-evidence-search-status]") || status;
   const errorPanel = root.querySelector("[data-evidence-error]");
   const retry = root.querySelector("[data-evidence-retry]");
   if (!windowObject || !fetchImpl || !controls || !input || !results) return null;
@@ -99,7 +100,31 @@ export function createEvidenceLens(root, environment = {}) {
   const manifestUrl = new URL(root.dataset.evidenceManifestUrl, windowObject.location.href).href;
   const rootUrl = new URL(root.dataset.evidenceRootUrl || "/map/evidence/", windowObject.location.href).href;
   const cache = createEvidenceLruCache(PAYLOAD_CACHE_SIZE);
+  const hasFocus = Boolean(root.dataset.evidenceFocusScope && root.dataset.evidenceFocusId);
+  if (!hasFocus) {
+    const unavailableFilters = [
+      scope?.closest(".evidence-filter-scope, label"),
+      preservation?.closest(".evidence-filter-preservation, label")
+    ].filter(Boolean);
+    unavailableFilters.forEach((filter) => {
+      filter.hidden = true;
+      filter.style.display = "none";
+    });
+    if (scope) scope.disabled = true;
+    if (preservation) preservation.disabled = true;
+    if (reset) {
+      reset.hidden = true;
+      reset.disabled = true;
+    }
+    root.dataset.evidenceFilterState = "unavailable";
+    if (status) {
+      status.textContent = "허브에서는 문서·근거 검색으로 계보를 선택하세요. 범위와 보존 상태 필터는 선택한 계보에서 사용할 수 있습니다.";
+    }
+  } else {
+    root.dataset.evidenceFilterState = "available";
+  }
   const originalStatus = status?.textContent || "";
+  const originalSearchStatus = searchStatus?.textContent || "";
   let manifest = null;
   let activeIndex = -1;
   let visibleEntries = [];
@@ -109,14 +134,40 @@ export function createEvidenceLens(root, environment = {}) {
   let composing = false;
 
   controls.hidden = false;
+  if (!results.id) results.id = "evidence-search-results";
+  input.setAttribute("role", "combobox");
+  input.setAttribute("aria-autocomplete", "list");
+  input.setAttribute("aria-haspopup", "listbox");
+  input.setAttribute("aria-controls", results.id);
+  input.setAttribute("aria-expanded", "false");
+  results.removeAttribute("aria-live");
+  if (searchStatus) {
+    searchStatus.setAttribute("role", "status");
+    searchStatus.setAttribute("aria-live", "polite");
+    searchStatus.setAttribute("aria-atomic", "true");
+  }
+
+  function setSearchState(state, message = null) {
+    root.dataset.evidenceSearchState = state;
+    const hasOptions = state === "results" && visibleEntries.length > 0;
+    input.setAttribute("aria-expanded", String(hasOptions));
+    results.setAttribute("aria-busy", String(state === "loading"));
+    if (hasOptions) results.setAttribute("role", "listbox");
+    else results.removeAttribute("role");
+    if (!hasOptions) input.removeAttribute("aria-activedescendant");
+    if (message !== null && searchStatus) searchStatus.textContent = message;
+  }
 
   function showError(message = "검색 조각을 불러오지 못했습니다.") {
+    visibleEntries = [];
+    activeIndex = -1;
+    results.replaceChildren();
+    setSearchState("error", "검색 결과를 불러오지 못했습니다.");
     if (errorPanel) {
       errorPanel.hidden = false;
       const paragraph = errorPanel.querySelector("p");
       if (paragraph) paragraph.textContent = `${message} 현재 계보와 정적 링크는 계속 사용할 수 있습니다.`;
     }
-    results.removeAttribute("aria-busy");
   }
 
   function clearError() {
@@ -157,46 +208,49 @@ export function createEvidenceLens(root, environment = {}) {
     }
   }
 
-  function closeResults({ clear = false } = {}) {
+  function closeResults({ clear = false, state = "idle", message = originalSearchStatus } = {}) {
     if (clear) input.value = "";
     visibleEntries = [];
     activeIndex = -1;
     results.replaceChildren();
-    results.removeAttribute("aria-busy");
-    input.setAttribute("aria-expanded", "false");
-    input.removeAttribute("aria-activedescendant");
+    setSearchState(state, message);
   }
 
-  function renderResults(entries, query) {
+  function renderResults(entries, query, resultMessage) {
     visibleEntries = entries.filter((entry) => evidenceSearchEntryUrl(entry, rootUrl));
     activeIndex = -1;
     if (!visibleEntries.length) {
       results.innerHTML = `<p>${escapeHtml(query)}로 시작하는 ${scope?.value && scope.value !== "all" ? "선택 범위의 " : ""}문서가 없습니다.</p>`;
-      input.setAttribute("aria-expanded", "true");
+      setSearchState("empty", "0개 검색 결과");
       return;
     }
     results.innerHTML = visibleEntries.map((entry, index) => {
       const id = evidenceOptionId(entry, index);
       const href = evidenceSearchEntryUrl(entry, rootUrl);
-      return `<a id="${id}" role="option" aria-selected="false" href="${escapeHtml(href)}"><strong>${escapeHtml(entry.title)}</strong><small>${escapeHtml(resultLabel(entry))}</small></a>`;
+      return `<a id="${id}" role="option" aria-selected="false" tabindex="-1" href="${escapeHtml(href)}"><strong>${escapeHtml(entry.title)}</strong><small>${escapeHtml(resultLabel(entry))}</small></a>`;
     }).join("");
-    input.setAttribute("aria-expanded", "true");
+    setSearchState("results", resultMessage);
     [...results.querySelectorAll('[role="option"]')].forEach((option, index) => {
       option.addEventListener("pointerenter", () => setActive(index, { scroll: false }));
-      option.addEventListener("focus", () => setActive(index, { scroll: false }));
     });
   }
 
   async function search() {
     const query = input.value;
     if (codePointLength(query) < 2) {
+      requestSerial += 1;
+      activeController?.abort();
+      activeController = null;
       closeResults();
       return;
     }
     const serial = ++requestSerial;
     activeController?.abort();
     activeController = new AbortController();
-    results.setAttribute("aria-busy", "true");
+    visibleEntries = [];
+    activeIndex = -1;
+    results.replaceChildren();
+    setSearchState("loading", "검색 중입니다.");
     clearError();
     try {
       const currentManifest = await loadManifest();
@@ -232,17 +286,24 @@ export function createEvidenceLens(root, environment = {}) {
         page += 1;
       }
       if (serial !== requestSerial) return;
-      results.removeAttribute("aria-busy");
-      renderResults([...matches.values()].sort((left, right) => compareEntries(left, right, query)), query);
-      if (status) status.textContent = `${matches.size}개 검색 결과${pageCount > MAX_SEARCH_PAGES ? " · 더 구체적인 제목을 입력하세요" : ""}`;
+      renderResults(
+        [...matches.values()].sort((left, right) => compareEntries(left, right, query)),
+        query,
+        `${matches.size}개 검색 결과${pageCount > MAX_SEARCH_PAGES ? " · 더 구체적인 제목을 입력하세요" : ""}`
+      );
     } catch (error) {
       if (error?.name === "AbortError") return;
+      if (serial !== requestSerial) return;
       showError(error?.message || "검색 조각을 불러오지 못했습니다.");
     }
   }
 
   function scheduleSearch() {
     windowObject.clearTimeout(timer);
+    if (codePointLength(input.value) < 2) {
+      void search();
+      return;
+    }
     timer = windowObject.setTimeout(search, SEARCH_DELAY);
   }
 
@@ -275,15 +336,23 @@ export function createEvidenceLens(root, environment = {}) {
     }
     if (event.key === "Escape") {
       event.preventDefault();
+      requestSerial += 1;
+      activeController?.abort();
+      activeController = null;
       closeResults({ clear: true });
-      if (status) status.textContent = originalStatus;
     }
   });
-  scope?.addEventListener("change", () => { if (codePointLength(input.value) >= 2) scheduleSearch(); });
+  scope?.addEventListener("change", () => {
+    if (codePointLength(input.value) >= 2) scheduleSearch();
+    else closeResults();
+  });
   preservation?.addEventListener("change", applyPreservationFilter);
   reset?.addEventListener("click", () => {
     if (scope) scope.value = "all";
     if (preservation) preservation.value = "";
+    requestSerial += 1;
+    activeController?.abort();
+    activeController = null;
     closeResults({ clear: true });
     applyPreservationFilter();
     input.focus();
@@ -295,12 +364,14 @@ export function createEvidenceLens(root, environment = {}) {
     try {
       await loadManifest({ force: true });
       if (codePointLength(input.value) >= 2) await search();
+      else closeResults();
     } catch (error) {
       showError(error?.message);
     }
   });
 
   loadManifest().catch((error) => showError(error?.message));
+  setSearchState("idle", originalSearchStatus);
 
   return {
     search,

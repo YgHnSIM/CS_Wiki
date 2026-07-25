@@ -23,9 +23,9 @@
   margin: 18px 0 22px;
   color: var(--text);
   font-family: var(--display);
-  font-size: clamp(42px, 5.4vw, 82px);
+  font-size: clamp(40px, 4.8vw, 72px);
   font-weight: 700;
-  line-height: 0.98;
+  line-height: 1.05;
   letter-spacing: -0.06em;
 }
 
@@ -64,7 +64,7 @@
 
 .evidence-hero dt {
   color: var(--muted);
-  font-size: 10px;
+  font-size: var(--type-meta);
   letter-spacing: 0.08em;
 }
 
@@ -87,7 +87,7 @@
 .evidence-boundary strong {
   color: var(--amber);
   font-family: var(--display);
-  font-size: 10px;
+  font-size: var(--type-meta);
   letter-spacing: 0.12em;
 }
 
@@ -103,6 +103,7 @@
   display: grid;
   padding: 16px 20px;
   grid-template-columns: minmax(280px, 1.5fr) minmax(150px, 0.55fr) minmax(170px, 0.65fr) 96px;
+  grid-template-areas: "search scope preservation reset";
   gap: 10px;
   border-bottom: 1px solid var(--line-strong);
   background: rgba(0, 255, 65, 0.025);
@@ -116,7 +117,7 @@
   display: grid;
   gap: 7px;
   color: var(--muted);
-  font-size: 9px;
+  font-size: var(--type-meta);
   letter-spacing: 0.08em;
 }
 
@@ -127,7 +128,7 @@
   min-height: 46px;
   border: 1px solid var(--line);
   border-radius: 0;
-  background: var(--surface);
+  background: var(--void-raised);
   color: var(--text);
   font: inherit;
 }
@@ -153,6 +154,22 @@
 
 .evidence-search-shell {
   position: relative;
+  grid-area: search;
+}
+
+.evidence-filter-scope,
+.evidence-controls > label:nth-of-type(1) {
+  grid-area: scope;
+}
+
+.evidence-filter-preservation,
+.evidence-controls > label:nth-of-type(2) {
+  grid-area: preservation;
+}
+
+.evidence-filter-reset,
+.evidence-controls > button {
+  grid-area: reset;
 }
 
 .evidence-search-results {
@@ -192,7 +209,7 @@
 
 .evidence-search-results small {
   color: var(--muted);
-  font-size: 9px;
+  font-size: var(--type-meta);
 }
 
 .evidence-state-bar {
@@ -204,7 +221,7 @@
   gap: 20px;
   border-bottom: 1px solid var(--line);
   color: var(--muted);
-  font-size: 10px;
+  font-size: var(--type-meta);
 }
 
 .evidence-state-bar nav {
@@ -231,7 +248,7 @@
   margin: 0 0 12px;
   color: var(--amber);
   font-family: var(--display);
-  font-size: 9px;
+  font-size: var(--type-meta);
   letter-spacing: 0.14em;
 }
 
@@ -267,7 +284,7 @@
   background: rgba(0, 255, 65, 0.02);
   color: var(--muted);
   font-family: var(--display);
-  font-size: 9px;
+  font-size: var(--type-meta);
   letter-spacing: 0.08em;
   text-align: center;
 }
@@ -314,7 +331,7 @@
 .evidence-braid-rail > header p {
   margin-top: 5px;
   color: var(--muted);
-  font-size: 10px;
+  font-size: var(--type-meta);
   line-height: 1.5;
 }
 
@@ -361,7 +378,7 @@
   gap: 10px;
   color: var(--muted);
   font-family: var(--display);
-  font-size: 8px;
+  font-size: var(--type-meta);
   letter-spacing: 0.08em;
 }
 
@@ -422,7 +439,7 @@
 .evidence-source-card dt,
 .evidence-document-card dt {
   color: var(--muted);
-  font-size: 8px;
+  font-size: var(--type-meta);
 }
 
 .evidence-provenance-card dd,
@@ -441,21 +458,21 @@
 .evidence-provenance-card h4 {
   margin: 0 0 7px;
   color: var(--phosphor);
-  font-size: 10px;
+  font-size: var(--type-meta);
 }
 
 .evidence-provenance-card ul {
   margin: 0;
   padding-left: 18px;
   color: var(--muted);
-  font-size: 10px;
+  font-size: var(--type-meta);
   line-height: 1.6;
 }
 
 .evidence-provenance-card section > p {
   margin: 0;
   color: var(--muted);
-  font-size: 10px;
+  font-size: var(--type-meta);
 }
 
 .evidence-external-links,
@@ -474,7 +491,7 @@
   align-items: center;
   border: 1px solid var(--line);
   color: var(--phosphor);
-  font-size: 9px;
+  font-size: var(--type-meta);
 }
 
 .evidence-external-links a:hover,
@@ -511,7 +528,7 @@
 .evidence-downstream-list > header p {
   margin-top: 6px;
   color: var(--muted);
-  font-size: 9px;
+  font-size: var(--type-meta);
   line-height: 1.55;
 }
 
@@ -531,7 +548,7 @@
   grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
   align-items: center;
   gap: 8px;
-  font-size: 9px;
+  font-size: var(--type-meta);
   text-align: center;
 }
 
@@ -550,7 +567,7 @@
 .evidence-relation-count {
   color: var(--amber) !important;
   font-family: var(--display);
-  font-size: 9px !important;
+  font-size: var(--type-meta) !important;
 }
 
 .evidence-reviewed-relations {
@@ -576,7 +593,7 @@
   grid-column: 1 / -1;
   color: var(--amber);
   font-family: var(--display);
-  font-size: 9px;
+  font-size: var(--type-meta);
   letter-spacing: 0.12em;
 }
 
@@ -624,13 +641,24 @@
   min-height: 44px;
   align-items: center;
   justify-content: center;
-  color: var(--muted-dim);
+  color: var(--muted);
 }
 
 .evidence-preservation-summary {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 160px)) minmax(260px, 1fr);
   border-bottom: 1px solid var(--line-strong);
+}
+
+.evidence-preservation-summary > h2 {
+  margin: 0;
+  padding: 18px 20px;
+  grid-column: 1 / -1;
+  border-bottom: 1px solid var(--line);
+  color: var(--text);
+  font-size: 18px;
+  line-height: 1.35;
+  word-break: keep-all;
 }
 
 .evidence-preservation-summary > div,
@@ -649,7 +677,7 @@
 
 .evidence-preservation-summary span {
   color: var(--muted);
-  font-size: 9px;
+  font-size: var(--type-meta);
 }
 
 .evidence-preservation-summary strong {
@@ -716,7 +744,7 @@
   align-items: center;
   gap: 8px;
   color: var(--text);
-  font-size: 10px;
+  font-size: var(--type-meta);
 }
 
 .evidence-entry-points li a span {
@@ -773,7 +801,7 @@
 
 .trace-map-link a {
   color: var(--phosphor);
-  font-size: 10px;
+  font-size: var(--type-meta);
 }
 
 [data-evidence-card].is-filtered {
@@ -783,14 +811,6 @@
 @media (max-width: 1180px) {
   .evidence-hero {
     grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.65fr);
-  }
-
-  .evidence-controls {
-    grid-template-columns: minmax(260px, 1fr) repeat(2, minmax(150px, 0.5fr));
-  }
-
-  .evidence-controls button {
-    grid-column: 3;
   }
 }
 
@@ -814,14 +834,10 @@
 
   .evidence-controls {
     grid-template-columns: 1fr 1fr;
-  }
-
-  .evidence-search-shell {
-    grid-column: 1 / -1;
-  }
-
-  .evidence-controls button {
-    grid-column: auto;
+    grid-template-areas:
+      "search search"
+      "scope preservation"
+      "reset reset";
   }
 
   .evidence-braid {
@@ -865,7 +881,7 @@
   }
 
   .evidence-hero h1 {
-    font-size: clamp(36px, 12vw, 52px);
+    font-size: clamp(36px, 9vw, 46px);
   }
 
   .evidence-hero dl > div {
@@ -880,11 +896,11 @@
 
   .evidence-controls {
     grid-template-columns: 1fr;
-  }
-
-  .evidence-search-shell,
-  .evidence-controls button {
-    grid-column: auto;
+    grid-template-areas:
+      "search"
+      "scope"
+      "preservation"
+      "reset";
   }
 
   .evidence-state-bar {
@@ -939,4 +955,3 @@
     transition: none;
   }
 }
-

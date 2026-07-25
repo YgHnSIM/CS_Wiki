@@ -154,6 +154,7 @@ for (const edge of evidencedRelationEdges) {
   if (edge.target !== edge.source) relationEdgesByEndpoint.get(edge.target)?.push(edge);
 }
 const EVIDENCE_STATIC_PAGE_SIZE = EVIDENCE_LIMITS.staticPageRecords;
+const LISTING_PAGE_SIZE = 24;
 
 function evidenceRelationRouteId(edgeId) {
   return `relation-${createHash("sha256").update(`relation\0${String(edgeId)}`).digest("hex").slice(0, 16)}`;
@@ -163,6 +164,10 @@ function evidenceFocusRoute(scope, id, page = 1) {
   const safeScope = scope === "source" ? "source" : scope === "relation" ? "relation" : "document";
   const segment = encodeURIComponent(String(id));
   return `/map/evidence/${safeScope}/${segment}/${page > 1 ? `${page}/` : ""}`;
+}
+
+function listingRoute(category, page = 1) {
+  return page > 1 ? `/${category}/page/${page}/` : `/${category}/`;
 }
 
 function evidenceRouteForNode(node, page = 1) {
@@ -273,6 +278,11 @@ const md = new MarkdownIt({ html: false, linkify: true, typographer: false })
     })
   });
 
+// Tables are kept semantic, but their wrapper owns narrow-screen horizontal
+// scrolling so four-column prose tables never collapse into one-character cells.
+md.renderer.rules.table_open = () => '<div class="table-scroll" tabindex="0" role="region" aria-label="표, 좌우로 스크롤할 수 있습니다."><span class="table-scroll-hint">표는 좌우로 스크롤할 수 있습니다.</span><table>';
+md.renderer.rules.table_close = () => "</table></div>";
+
 function renderWikiLinks(body) {
   return body
     .replace(/!\[\[([^\]|]+)(?:\|([^\]]+))?\]\]/g, (_, target, label) => {
@@ -329,6 +339,12 @@ const domainCounts = siteDiscoveryPages.reduce((acc, page) => {
   return acc;
 }, {});
 
+for (const page of siteDiscoveryPages) {
+  for (const domain of page.tags.filter((tag) => tag.startsWith("domain/"))) {
+    if (!domainMeta[domain]) throw new Error(`Page '${page.relativePath}' uses an unlabelled domain '${domain}'`);
+  }
+}
+
 function navLinks(canonicalPath) {
   const categoryLinks = navCategories.map((category) => {
     const meta = categoryMeta[category];
@@ -338,7 +354,10 @@ function navLinks(canonicalPath) {
     </a>`;
   }).join("");
   const pathActive = canonicalPath.startsWith("/paths/");
-  return `${categoryLinks}<a class="nav-link path-nav" href="${withBase("/paths/")}"${pathActive ? ' aria-current="page"' : ""}>
+  const mapActive = canonicalPath.startsWith("/map/");
+  return `${categoryLinks}<a class="nav-link map-nav" href="${withBase("/map/")}"${mapActive ? ' aria-current="page"' : ""}>
+    <span>지식 지도</span>
+  </a><a class="nav-link path-nav" href="${withBase("/paths/")}"${pathActive ? ' aria-current="page"' : ""}>
     <span>학습 경로</span><span class="nav-count">${resolvedLearningPaths.length}</span>
   </a>`;
 }
@@ -381,18 +400,22 @@ function layout({ title, description, content, canonicalPath = "/", bodyClass = 
     </button>
     <button class="menu-trigger" type="button" aria-expanded="false" aria-controls="mobile-menu">메뉴</button>
   </header>
-  <nav class="mobile-nav" id="mobile-menu" aria-label="모바일 탐색" hidden>${nav}</nav>
-  <main id="content">${content}</main>
+  <main id="content" tabindex="-1">${content}</main>
   <footer class="footer">
     <p>원본 소스에 근거해 연결하는 컴퓨터 과학 위키</p>
-    <div><a href="${withBase("/meta/")}">운영 정보</a><a href="${repositoryUrl}">GitHub 저장소</a><span>${siteDiscoveryPages.length}개 문서</span><span>검증됨 ${statusCounts.active || 0}</span></div>
+    <div><a href="${withBase("/meta/")}">운영 정보</a><a href="${repositoryUrl}">GitHub 저장소</a><span>${siteDiscoveryPages.length}개 문서</span><span>원문 대조 완료 ${statusCounts.active || 0}</span></div>
   </footer>
-  <dialog class="search-dialog" data-search-dialog>
-    <form method="dialog" class="search-header">
-      <label for="site-search">전체 문서 검색</label>
-      <button type="submit">닫기</button>
-    </form>
-    <input id="site-search" type="search" autocomplete="off" placeholder="제목, 개념, 인물, 본문 검색" data-search-input>
+  <dialog class="mobile-nav" id="mobile-menu" aria-labelledby="mobile-menu-title" data-mobile-menu>
+    <header><h2 id="mobile-menu-title">주요 탐색</h2><button type="button" data-close-menu aria-label="메뉴 닫기">닫기</button></header>
+    <nav aria-label="모바일 주요 탐색">${nav}</nav>
+  </dialog>
+  <dialog class="search-dialog" id="site-search-dialog" data-search-dialog aria-labelledby="site-search-title" aria-describedby="site-search-help">
+    <header class="search-header">
+      <h2 id="site-search-title">전체 문서 검색</h2>
+      <button type="button" data-close-search aria-label="검색 닫기">닫기</button>
+    </header>
+    <label class="search-input-label" for="site-search">검색어</label>
+    <input id="site-search" type="search" autocomplete="off" role="combobox" aria-autocomplete="list" aria-controls="site-search-listbox" aria-expanded="false" placeholder="제목, 개념, 인물, 본문 검색" data-search-input>
     <div class="search-controls">
       <label>자료 유형<select data-search-category>
         <option value="">전체</option>
@@ -402,10 +425,11 @@ function layout({ title, description, content, canonicalPath = "/", bodyClass = 
         <option value="">전체</option>
         ${Object.entries(statusMeta).map(([value, meta]) => `<option value="${value}">${meta.label}</option>`).join("")}
       </select></label>
-      <output data-search-count aria-live="polite"></output>
+      <output id="site-search-status" data-search-count role="status" aria-live="polite" aria-atomic="true"></output>
     </div>
-    <p class="search-hint">위아래 방향키로 이동하고 Enter로 문서를 엽니다.</p>
-    <div class="search-results" data-search-results aria-live="polite"></div>
+    <p id="site-search-help" class="search-hint">위아래 방향키로 이동하고 Enter로 문서를 엽니다.</p>
+    <div class="search-results" id="site-search-listbox" data-search-results role="listbox" aria-label="전체 문서 검색 결과" aria-busy="false"></div>
+    <div class="search-error" data-search-error hidden><p data-search-error-message></p><button type="button" data-search-retry>다시 시도</button></div>
   </dialog>
   ${localGraphData ? `<script type="application/json" id="local-graph-data">${JSON.stringify(localGraphData).replaceAll("<", "\\u003c")}</script>` : ""}
   <script>window.CS_WIKI_BASE=${JSON.stringify(siteBase)};window.CS_WIKI_ASSET_VERSION=${JSON.stringify(assetVersion)};</script>
@@ -418,6 +442,12 @@ function layout({ title, description, content, canonicalPath = "/", bodyClass = 
 
 function pageDomains(page) {
   return page.tags.filter((tag) => tag.startsWith("domain/"));
+}
+
+function domainLabel(domain) {
+  const label = domainMeta[domain];
+  if (!label) throw new Error(`Missing user-facing label for domain '${domain}'`);
+  return label;
 }
 
 function statusLabel(status) {
@@ -435,15 +465,17 @@ function effectiveSources(page) {
 function pageCard(page, { compact = false, step = "" } = {}) {
   const domains = pageDomains(page);
   const sourceCount = effectiveSources(page).length || page.sources.length;
+  const connectionCount = Number(page.score) || 0;
   return `<article class="document-card${compact ? " compact" : ""}"
     data-document-card data-title="${escapeHtml(page.title)}" data-summary="${escapeHtml(page.summary)}"
     data-status="${escapeHtml(page.status)}" data-domains="${escapeHtml(domains.join(","))}"
-    data-updated="${escapeHtml(page.updated || page.created || "")}" data-score="${page.score}">
+    data-updated="${escapeHtml(page.updated || page.created || "")}" data-score="${connectionCount}"
+    data-connection-count="${connectionCount}" data-evidence-count="${sourceCount}">
     <div class="card-meta"><span>${step || categoryMeta[page.category].label}</span><span class="status-label ${escapeHtml(page.status)}">${escapeHtml(statusLabel(page.status))}</span></div>
     <h3><a href="${withBase(page.url)}">${escapeHtml(page.title)}</a></h3>
     ${compact ? "" : `<p>${escapeHtml(page.summary)}</p>`}
-    ${compact || !domains.length ? "" : `<div class="card-domains">${domains.slice(0, 2).map((tag) => `<span>${escapeHtml(domainMeta[tag] || tag.replace("domain/", ""))}</span>`).join("")}</div>`}
-    <div class="card-foot"><time>${page.updated || page.created || "날짜 미기록"}</time><span>${sourceCount ? `근거 ${sourceCount}` : `연결 ${page.score}`}</span></div>
+    ${compact || !domains.length ? "" : `<div class="card-domains">${domains.slice(0, 2).map((tag) => `<span>${escapeHtml(domainLabel(tag))}</span>`).join("")}</div>`}
+    <div class="card-foot"><time>${page.updated || page.created || "날짜 미기록"}</time><span>연결 ${connectionCount}</span><span>등록 근거 ${sourceCount}</span></div>
   </article>`;
 }
 
@@ -485,7 +517,7 @@ function homeCircuit() {
         <p>대표 읽기 흐름</p>
         <h2 id="hero-circuit-title">범용 기계에서 시스템까지</h2>
       </div>
-      <span>${nodes.length}개 노드</span>
+      <span><span class="circuit-node-total">${nodes.length}개 노드</span><span class="circuit-node-mobile">대표 2/${nodes.length}개 노드</span></span>
     </header>
     <div class="circuit-stage">
       <svg class="circuit-traces" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
@@ -503,7 +535,7 @@ function homeCircuit() {
         </li>`).join("")}
       </ol>
       <a class="circuit-route" href="${withBase(`/paths/${path.slug}/`)}">
-        <span>전체 학습 경로 보기</span>
+        <span>이 학습 경로 전체 보기</span>
         <strong>${path.pages.length}단계</strong>
       </a>
     </div>
@@ -548,7 +580,7 @@ function homePage() {
   const content = `
   <section class="hero section-frame">
     <div class="hero-copy">
-      <p class="eyebrow">정규 소스 ${counts.sources} · 참고 자료 ${counts.references} · 검증된 문서 ${statusCounts.active || 0}</p>
+      <p class="eyebrow">정규 소스 ${counts.sources} · 참고 자료 ${counts.references} · 원문 대조 완료 문서 ${statusCounts.active || 0}</p>
       <h1><span class="hero-title-line hero-title-primary">컴퓨팅의 역사를</span><span class="hero-title-line hero-title-accent">연결해서 읽는다.</span></h1>
       <p class="hero-intro">배비지와 러브레이스에서 저장 프로그램 컴퓨터, 구조적 프로그래밍, Unix와 C, 유니코드까지. 원본 문헌에서 출발해 개념과 분석을 잇는 기술 위키입니다.</p>
       <div class="hero-actions">
@@ -603,7 +635,7 @@ function homePage() {
     <div class="home-briefing-grid">
       <section class="home-panel home-scope" aria-labelledby="home-scope-title">
         <header class="home-panel-heading"><div><span>SCOPE</span><h3 id="home-scope-title">지식 범위</h3></div></header>
-        <div class="home-scope-grid">${Object.entries(domainCounts).sort((a, b) => b[1] - a[1]).slice(0, 6).map(([domain, count]) => `<div><span>${escapeHtml(domainMeta[domain] || domain.replace("domain/", ""))}</span><strong>${count}</strong></div>`).join("")}</div>
+        <div class="home-scope-grid">${Object.entries(domainCounts).sort((a, b) => b[1] - a[1]).slice(0, 6).map(([domain, count]) => `<div><span>${escapeHtml(domainLabel(domain))}</span><strong>${count}</strong></div>`).join("")}</div>
         <p>관련 원본 소스가 추가될 때 같은 출처 검증 절차로 범위를 확장합니다.</p>
       </section>
       <section class="home-panel" aria-labelledby="home-analysis-title">
@@ -633,6 +665,36 @@ function evidenceItem(value) {
   return `<li><span>${escapeHtml(value)}</span></li>`;
 }
 
+function externalUrlLabel(url) {
+  try {
+    const parsed = new URL(url);
+    const host = parsed.hostname.replace(/^www\./i, "");
+    const isPdf = /\.pdf$/i.test(parsed.pathname);
+    return isPdf ? `PDF · ${host}` : host;
+  } catch {
+    return "외부 링크";
+  }
+}
+
+function labelledExternalUrls(urls) {
+  const labels = urls.map(externalUrlLabel);
+  const frequency = labels.reduce((counts, label) => {
+    counts.set(label, (counts.get(label) || 0) + 1);
+    return counts;
+  }, new Map());
+  return urls.map((url, index) => {
+    const label = labels[index];
+    if ((frequency.get(label) || 0) < 2) return { url, label };
+    try {
+      const parts = new URL(url).pathname.split("/").filter(Boolean);
+      const suffix = decodeURIComponent(parts.at(-1) || "링크").slice(0, 48);
+      return { url, label: `${label} · ${suffix}` };
+    } catch {
+      return { url, label: `${label} · ${index + 1}` };
+    }
+  });
+}
+
 function evidenceTrace(page) {
   const isSource = page.category === "sources" || page.category === "references";
   const graphNode = evidenceNodesById.get(graphNodeId(page));
@@ -641,8 +703,11 @@ function evidenceTrace(page) {
   const sourceUrls = page.sourceUrls.map(safeExternalUrl).filter(Boolean);
   const evidenceLabel = isSource ? "원자료로 기록" : "문서 단위 근거";
   const snapshotLabels = { local: "로컬 원본", "external-only": "외부 링크", archived: "보존 스냅샷" };
+  const sourceSummary = isSource
+    ? `원자료 ${direct.length} · 보조·접근 자료 ${supporting.length}`
+    : `등록 근거 ${direct.length}`;
   return `<details class="evidence-trace">
-    <summary><span>근거 추적</span><strong>${direct.length}개 ${evidenceLabel}</strong></summary>
+    <summary><span>근거 추적</span><strong>${sourceSummary}</strong></summary>
     <div class="trace-grid">
       <section class="trace-stage"><span>01</span><div><h2>현재 문서</h2><p>${escapeHtml(page.title)} · ${escapeHtml(statusLabel(page.status))}</p></div></section>
       <section class="trace-stage"><span>02</span><div><h2>${evidenceLabel}</h2>${direct.length ? `<ul>${direct.map(evidenceItem).join("")}</ul>` : "<p>메타 문서에는 연결된 근거가 없습니다.</p>"}</div></section>
@@ -653,7 +718,7 @@ function evidenceTrace(page) {
         <div><dt>보존 상태</dt><dd>${escapeHtml(snapshotLabels[page.snapshotStatus] || page.snapshotStatus || "미기록")}</dd></div>
         <div><dt>판본</dt><dd>${escapeHtml(page.version || "확인되지 않음")}</dd></div>
         <div><dt>확인일</dt><dd>${escapeHtml(page.retrieved || "미기록")}</dd></div>
-      </dl>${sourceUrls.length ? `<div class="trace-urls">${sourceUrls.map((url, index) => `<a href="${escapeHtml(url)}" rel="noreferrer">외부 출처 ${index + 1}</a>`).join("")}</div>` : ""}</div></section>` : ""}
+      </dl>${sourceUrls.length ? `<div class="trace-urls">${labelledExternalUrls(sourceUrls).map(({ url, label }) => `<a href="${escapeHtml(url)}" rel="noreferrer">${escapeHtml(label)}</a>`).join("")}</div>` : ""}</div></section>` : ""}
     </div>
     ${graphNode?.visibility === "public" || evidenceRoutableSourceIds.has(graphNode?.id) ? `<p class="trace-map-link"><a href="${withBase(evidenceRouteForNode(graphNode))}">근거 계보에서 이 문서의 연결 펼쳐보기 →</a></p>` : ""}
   </details>`;
@@ -834,7 +899,8 @@ function relationshipExplorer(page, local) {
   const payload = {
     focus: { id: local.focus.id, title: local.focus.title, url: local.focus.url },
     defaultView,
-    views: Object.fromEntries(Object.entries(local.views).map(([view, records]) => [view, records.map(clientRecord)]))
+    views: Object.fromEntries(Object.entries(local.views).map(([view, records]) => [view, records.map(clientRecord)])),
+    allViews: Object.fromEntries(Object.entries(local.allViews || local.views).map(([view, records]) => [view, records.map(clientRecord)]))
   };
   const viewTemplates = Object.entries(local.views)
     .map(([view, records]) => `<template data-local-graph-view="${view}">${localGraphVisual({ ...local, visibleRecords: records }, focusId)}</template>`)
@@ -842,16 +908,19 @@ function relationshipExplorer(page, local) {
   const listTemplates = Object.entries(local.views)
     .map(([view, records]) => `<template data-relationship-list-view="${view}">${records.length ? records.map((record) => relationshipRecord(record, focusId)).join("") : '<li class="relationship-empty">이 채널에는 표시할 연결이 없습니다.</li>'}</template>`)
     .join("");
-  const channelButtons = Object.entries(relationshipChannelMeta).map(([channel, meta]) => `<button type="button" role="tab" data-relationship-channel="${channel}" aria-selected="${channel === defaultView}" aria-controls="relationship-channel-list" tabindex="${channel === defaultView ? 0 : -1}"><span>${meta.label}</span><strong>${local.counts[channel] || 0}</strong><small>${meta.description}</small></button>`).join("");
+  const channelButtons = Object.entries(relationshipChannelMeta).map(([channel, meta]) => `<button id="relationship-tab-${channel}" type="button" role="tab" data-relationship-channel="${channel}" aria-selected="${channel === defaultView}" aria-controls="relationship-channel-panel" tabindex="${channel === defaultView ? 0 : -1}"><span>${meta.label}</span><strong>${local.counts[channel] || 0}</strong><small>${meta.description}</small></button>`).join("");
   return {
     data: payload,
     html: `<section id="relationships" class="relationship-explorer" data-relationship-explorer data-focus-id="${escapeHtml(focusId)}" aria-labelledby="relationships-title">
       <header class="relationship-header">
-        <div><p>CONNECTION BUNDLES</p><h2 id="relationships-title">문서 연결</h2><p>한 문서쌍을 한 번만 표시합니다. 검토 연결 ${local.counts.core}개 · 전체 연결 문서 ${local.totalNeighbors}개</p></div>
+        <div><p>CONNECTION BUNDLES</p><h2 id="relationships-title">문서 연결</h2><p>각 채널 안에서는 한 문서쌍을 한 번만 표시합니다. 같은 문서쌍이 여러 채널에 포함될 수 있습니다.</p></div>
       </header>
       <div class="relationship-channel-rail" role="tablist" aria-label="연결 채널">${channelButtons}</div>
-      <div class="relationship-list-heading"><div><h3 data-relationship-view-title>${relationshipChannelMeta[defaultView].label} 연결</h3><p data-relationship-view-description>${relationshipChannelMeta[defaultView].description}</p></div><output data-relationship-status aria-live="polite">${local.views[defaultView].length}개 표시</output></div>
-      <ol class="relationship-compact-list" id="relationship-channel-list" data-relationship-list>${local.views[defaultView].map((record) => relationshipRecord(record, focusId)).join("")}</ol>${listTemplates}
+      <section class="relationship-channel-panel" id="relationship-channel-panel" role="tabpanel" aria-labelledby="relationship-tab-${defaultView}">
+        <div class="relationship-list-heading"><div><h3 data-relationship-view-title>${relationshipChannelMeta[defaultView].label} 연결</h3><p data-relationship-view-description>${relationshipChannelMeta[defaultView].description}</p></div><output data-relationship-status aria-live="polite">${local.displayedCounts?.[defaultView] || local.views[defaultView].length}/${local.counts[defaultView] || 0}개 표시</output></div>
+        <ol class="relationship-compact-list" id="relationship-channel-list" data-relationship-list>${local.views[defaultView].map((record) => relationshipRecord(record, focusId)).join("")}</ol>
+        <button type="button" data-relationship-toggle hidden>나머지 ${(local.counts[defaultView] || 0) - local.views[defaultView].length}개 보기</button>
+      </section>${listTemplates}
       <details class="relationship-map-disclosure" data-relationship-map>
         <summary>선택한 채널을 지도로 보기</summary>
         <div class="relationship-map-layout">
@@ -884,13 +953,19 @@ function relationshipRail(local) {
   </section>`;
 }
 
+function articleTocHtml(headings) {
+  if (!headings.length) return "";
+  return `<nav class="article-toc" id="article-toc" aria-labelledby="article-toc-title"><h2 id="article-toc-title">이 문서에서</h2><ol>${headings.map((heading) => `<li><a href="#${heading.id}">${escapeHtml(heading.title)}</a></li>`).join("")}</ol></nav>`;
+}
+
 function articlePage(page) {
   const local = selectLocalGraph(knowledgeGraph, graphNodeId(page), { limit: 6, edgesByNodeId: knowledgeGraphEdgesByNodeId });
   const relationships = relationshipExplorer(page, local);
   const relationshipsHtml = typeof relationships === "string" ? relationships : relationships.html;
   const sources = effectiveSources(page);
-  const sourceLabel = page.sources.length ? `${sources.length || page.sources.length}개 근거` : "메타 문서";
+  const sourceLabel = page.sources.length ? `등록 근거 ${sources.length || page.sources.length}` : "메타 문서";
   const headings = pageHeadings(page);
+  const toc = articleTocHtml(headings);
   const content = `
   <div class="article-layout section-frame">
     <aside class="article-rail">
@@ -903,7 +978,7 @@ function articlePage(page) {
           <div><dt>근거</dt><dd>${sourceLabel}</dd></div>
           <div><dt>검토 관계</dt><dd>${local.counts.core}</dd></div>
         </dl>
-        <a class="source-file" href="${repositoryUrl}/blob/main/${encodeURI(page.relativePath)}">GitHub에서 원문 보기</a>
+        <a class="source-file" href="${repositoryUrl}/blob/main/${encodeURI(page.relativePath)}">GitHub에서 페이지 소스 보기</a>
       </details>
     </aside>
     <article class="article">
@@ -912,13 +987,14 @@ function articlePage(page) {
         <h1>${escapeHtml(page.title)}</h1>
         ${page.aliases.length ? `<div class="aliases"><span>다른 이름</span>${page.aliases.map((alias) => `<span>${escapeHtml(alias)}</span>`).join("")}</div>` : ""}
       </header>
+      <div class="article-toc-inline-slot" data-toc-inline-slot>${toc}</div>
       ${evidenceTrace(page)}
       <div class="prose">${renderMarkdown(page)}</div>
       ${relationshipsHtml}
       ${pathProgress(page)}
     </article>
     <aside class="related-rail">
-      ${headings.length ? `<nav class="article-toc" aria-label="문서 목차"><h2>이 문서에서</h2><ol>${headings.map((heading) => `<li><a href="#${heading.id}">${escapeHtml(heading.title)}</a></li>`).join("")}</ol></nav>` : ""}
+      <div class="article-toc-rail-slot" data-toc-rail-slot></div>
       ${relationshipRail(local)}
     </aside>
   </div>`;
@@ -932,12 +1008,67 @@ function articlePage(page) {
   });
 }
 
-function listingPage(category) {
-  const categoryPages = siteDiscoveryPages
+function listingRecords(category) {
+  return siteDiscoveryPages
     .filter((page) => page.category === category)
     .sort((a, b) => b.score - a.score || a.title.localeCompare(b.title, "ko"));
-  const domains = [...new Set(categoryPages.flatMap(pageDomains))]
-    .sort((a, b) => (domainMeta[a] || a).localeCompare(domainMeta[b] || b, "ko"));
+}
+
+function listingFacetCounts(categoryPages) {
+  const domains = Object.fromEntries([...new Set(categoryPages.flatMap(pageDomains))]
+    .sort((a, b) => domainLabel(a).localeCompare(domainLabel(b), "ko"))
+    .map((domain) => [domain, categoryPages.filter((page) => pageDomains(page).includes(domain)).length]));
+  const statuses = Object.fromEntries(Object.keys(statusMeta)
+    .map((status) => [status, categoryPages.filter((page) => page.status === status).length]));
+  return { domains, statuses };
+}
+
+function staticPageNumbers(page, pageCount) {
+  const numbers = new Set([1, pageCount, page - 1, page, page + 1]);
+  return [...numbers].filter((number) => number >= 1 && number <= pageCount).sort((a, b) => a - b);
+}
+
+function listingPaginationHtml(category, page, pageCount) {
+  if (pageCount <= 1) return "";
+  const numbers = staticPageNumbers(page, pageCount);
+  const links = [];
+  for (const [index, number] of numbers.entries()) {
+    if (index && number - numbers[index - 1] > 1) links.push('<span aria-hidden="true">…</span>');
+    links.push(`<a href="${withBase(listingRoute(category, number))}"${number === page ? ' aria-current="page"' : ""} aria-label="${number === page ? `현재 쪽 ${number}/${pageCount}` : `쪽 ${number}/${pageCount}로 이동`}">${number}</a>`);
+  }
+  return `<nav class="listing-pagination" data-list-pagination aria-label="${escapeHtml(categoryMeta[category].label)} 목록 쪽 이동"><a href="${withBase(listingRoute(category, Math.max(1, page - 1)))}"${page === 1 ? ' aria-disabled="true" tabindex="-1"' : ""}>이전</a>${links.join("")}<a href="${withBase(listingRoute(category, Math.min(pageCount, page + 1)))}"${page === pageCount ? ' aria-disabled="true" tabindex="-1"' : ""}>다음</a></nav>`;
+}
+
+function listingData(category, categoryPages) {
+  return {
+    version: 1,
+    category,
+    total: categoryPages.length,
+    pageSize: LISTING_PAGE_SIZE,
+    facets: listingFacetCounts(categoryPages),
+    items: categoryPages.map((page) => ({
+      title: page.title,
+      summary: page.summary,
+      url: withBase(page.url),
+      category: categoryMeta[page.category].label,
+      status: page.status,
+      statusLabel: statusLabel(page.status),
+      domains: pageDomains(page),
+      updated: page.updated || page.created || "",
+      connectionCount: Number(page.score) || 0,
+      evidenceCount: effectiveSources(page).length || page.sources.length
+    }))
+  };
+}
+
+function listingPage(category, page = 1) {
+  const categoryPages = listingRecords(category);
+  const pageCount = Math.max(1, Math.ceil(categoryPages.length / LISTING_PAGE_SIZE));
+  if (!Number.isInteger(page) || page < 1 || page > pageCount) throw new Error(`Listing route references missing page '${category}/${page}'`);
+  const facets = listingFacetCounts(categoryPages);
+  const domains = Object.keys(facets.domains);
+  const pageRecords = categoryPages.slice((page - 1) * LISTING_PAGE_SIZE, page * LISTING_PAGE_SIZE);
+  const pageMeta = page > 1 ? ` · ${page}쪽` : "";
   const content = `
   <section class="listing-hero section-frame">
     <p class="eyebrow"><a href="${withBase("/")}">홈</a> / ${categoryMeta[category].label}</p>
@@ -946,22 +1077,29 @@ function listingPage(category) {
     <strong>${categoryPages.length}개 문서</strong>
     <span class="listing-watermark" aria-hidden="true">${categoryPages.length}</span>
   </section>
-  <section class="listing-content section-frame" data-listing>
+  <section class="listing-content section-frame" data-listing data-list-category="${escapeHtml(category)}" data-list-page="${page}" data-list-data-url="${withBase(`/data/listings/${category}.json`)}?v=${assetVersion}">
     <form class="listing-controls" data-list-controls>
-      <label>목록 검색<input type="search" placeholder="현재 목록에서 검색" data-list-query></label>
-      <label>주제<select data-list-domain><option value="">전체</option>${domains.map((domain) => `<option value="${domain}">${escapeHtml(domainMeta[domain] || domain.replace("domain/", ""))}</option>`).join("")}</select></label>
-      <label>상태<select data-list-status><option value="">전체</option>${Object.entries(statusMeta).map(([value, meta]) => `<option value="${value}">${meta.label}</option>`).join("")}</select></label>
-      <label>정렬<select data-list-sort><option value="score">연결 많은 순</option><option value="title">가나다순</option><option value="updated">최근 갱신순</option></select></label>
-      <output data-list-count aria-live="polite">${categoryPages.length}개 문서</output>
+      <label class="listing-filter-query">목록 검색<input type="search" placeholder="현재 목록에서 검색" data-list-query></label>
+      <details class="listing-filter-details" data-list-filter-details open>
+        <summary>필터 및 정렬</summary>
+        <div class="listing-filter-fields">
+          <label class="listing-filter-domain">주제<select data-list-domain><option value="">전체</option>${domains.map((domain) => `<option value="${domain}"${facets.domains[domain] ? "" : " disabled"}>${escapeHtml(domainLabel(domain))} ${facets.domains[domain]}</option>`).join("")}</select></label>
+          <label class="listing-filter-status">상태<select data-list-status><option value="">전체</option>${Object.entries(statusMeta).map(([value, meta]) => `<option value="${value}"${facets.statuses[value] ? "" : " disabled"}>${escapeHtml(meta.label)} ${facets.statuses[value]}</option>`).join("")}</select></label>
+          <label class="listing-filter-sort">정렬<select data-list-sort><option value="score">연결 많은 순</option><option value="title">가나다순</option><option value="updated">최근 갱신순</option></select></label>
+          <button type="button" class="listing-filter-reset" data-list-reset hidden>필터 초기화</button>
+        </div>
+      </details>
+      <output class="listing-filter-count" data-list-count aria-live="polite">${categoryPages.length}개 중 ${(page - 1) * LISTING_PAGE_SIZE + 1}–${Math.min(page * LISTING_PAGE_SIZE, categoryPages.length)}개 표시</output>
     </form>
-    <div class="document-grid">${categoryPages.map((page) => pageCard(page)).join("")}</div>
-    <p class="listing-empty" data-list-empty hidden>조건에 맞는 문서가 없습니다.</p>
+    <div class="document-grid" data-list-grid>${pageRecords.map((record) => pageCard(record)).join("")}</div>
+    ${listingPaginationHtml(category, page, pageCount)}
+    <p class="listing-empty" data-list-empty hidden>조건에 맞는 문서가 없습니다. <button type="button" data-list-empty-reset>필터 초기화</button></p>
   </section>`;
   return layout({
-    title: categoryMeta[category].label,
-    description: categoryMeta[category].description,
+    title: `${categoryMeta[category].label}${pageMeta}`,
+    description: `${categoryMeta[category].description}${page > 1 ? ` ${page}쪽 목록입니다.` : ""}`,
     content,
-    canonicalPath: categoryUrl(category),
+    canonicalPath: listingRoute(category, page),
     bodyClass: "listing-page"
   });
 }
@@ -1038,7 +1176,7 @@ function connectionRouteHtml(path, routeCount = 1, routeIndex = 0) {
   return `<article class="connection-route-card" data-connection-route>
     <header class="connection-route-heading">
       <div><p>ROUTE ${String(routeIndex + 1).padStart(2, "0")} / ${String(routeCount).padStart(2, "0")}</p><h2 tabindex="-1" data-connection-result-title>${escapeHtml(connectionSummary(connectionIndex, path))}</h2>${path.truncated ? `<p class="connection-route-limit">기본 경로는 확인했지만 계산 한도 안에서 일부 대안만 찾았습니다.</p>` : ""}</div>
-      <dl><div><dt>단계</dt><dd>${path.hops}</dd></div><div><dt>판독</dt><dd>${escapeHtml(path.quality.label)}</dd></div></dl>
+      <dl><div><dt>단계</dt><dd>${path.hops}</dd></div><div><dt>연결 유형</dt><dd>${escapeHtml(path.quality.label)}</dd></div></dl>
     </header>
     <ol class="connection-chain">${chain}</ol>
   </article>`;
@@ -1047,35 +1185,35 @@ function connectionRouteHtml(path, routeCount = 1, routeIndex = 0) {
 function connectionExplorerPage() {
   const selectable = connectionGraph.nodes.filter((node) => node.visibility === "public")
     .sort((a, b) => a.title.localeCompare(b.title, "ko"));
-  const defaultFrom = connectionIndex.nodes.get("src-001") || selectable[0];
-  const defaultTo = connectionIndex.nodes.get("ref-049") || selectable.find((node) => node.id !== defaultFrom.id);
-  const initialPaths = findConnectionPaths(connectionIndex, defaultFrom.id, defaultTo.id, { mode: "explain", limit: 3, maxHops: 6 });
+  const exampleFrom = connectionIndex.nodes.get("src-001") || selectable[0];
+  const exampleTo = connectionIndex.nodes.get("ref-049") || selectable.find((node) => node.id !== exampleFrom.id);
+  const initialPaths = findConnectionPaths(connectionIndex, exampleFrom.id, exampleTo.id, { mode: "explain", limit: 3, maxHops: 6 });
   const options = selectable.map((node) => `<option value="${escapeHtml(node.title)}">${escapeHtml(categoryMeta[node.category]?.label || node.category)}</option>`).join("");
   const content = `<div class="knowledge-map-page section-frame" data-connection-explorer
     data-connection-graph-url="${withBase("/data/connection-graph.json")}?v=${assetVersion}"
-    data-default-from="${escapeHtml(defaultFrom.id)}" data-default-to="${escapeHtml(defaultTo.id)}">
+    data-default-from="" data-default-to="" data-example-from="${escapeHtml(exampleFrom.id)}" data-example-to="${escapeHtml(exampleTo.id)}">
     <section class="connection-hero">
       <div><p class="eyebrow"><a href="${withBase("/")}">홈</a> / KNOWLEDGE ROUTER</p><h1>두 문서는 어떻게 연결되는가</h1><p>두 지식 사이의 최단 선만 보여주지 않습니다. 각 중간 문서와 관계의 방향, 그 연결을 선택한 이유를 읽을 수 있는 경로로 번역합니다.</p></div>
       <dl><div><dt>탐색 문서</dt><dd>${selectable.length}</dd></div><div><dt>경유 가능 문서</dt><dd>${connectionGraph.stats.nodes}</dd></div><div><dt>문서 연결쌍</dt><dd>${connectionGraph.stats.pairs.toLocaleString("ko-KR")}</dd></div></dl>
     </section>
     ${mapModeNav("connection")}
     <section class="connection-builder" aria-labelledby="connection-builder-title">
-      <div class="connection-builder-intro"><p>SELECT TWO DOCUMENTS</p><h2 id="connection-builder-title">관계가 번역되는 경로 찾기</h2><p>기본 렌즈는 검토 관계와 읽기 추천·학습 순서를 우선하고, 원전 허브와 자동 본문 언급을 지름길로 과대평가하지 않습니다.</p></div>
+      <div class="connection-builder-intro"><p>SELECT TWO DOCUMENTS</p><h2 id="connection-builder-title">관계가 번역되는 경로 찾기</h2><p>두 문서를 선택하면 관계의 방향과 중간 문서를 따라 읽을 수 있는 경로를 만듭니다.</p></div>
       <form class="connection-form" data-connection-form hidden>
-        <label><span>출발 문서</span><input type="search" list="connection-documents" required autocomplete="off" aria-describedby="connection-status" value="${escapeHtml(defaultFrom.title)}" data-connection-from></label>
+        <label><span>출발 문서</span><input type="search" list="connection-documents" required autocomplete="off" aria-describedby="connection-status" data-connection-from></label>
         <button class="connection-swap" type="button" data-connection-swap><span aria-hidden="true">⇄</span> 두 문서 바꾸기</button>
-        <label><span>도착 문서</span><input type="search" list="connection-documents" required autocomplete="off" aria-describedby="connection-status" value="${escapeHtml(defaultTo.title)}" data-connection-to></label>
+        <label><span>도착 문서</span><input type="search" list="connection-documents" required autocomplete="off" aria-describedby="connection-status" data-connection-to></label>
         <label><span>관계 렌즈</span><select data-connection-mode><option value="explain">핵심 연결</option><option value="concept">개념·학습</option><option value="evidence">근거 계보</option><option value="shortest">본문 언급 포함</option></select></label>
         <button class="connection-submit" type="submit">연결 설명 만들기</button>
       </form>
       <datalist id="connection-documents">${options}</datalist>
-      <div class="connection-state-row"><output id="connection-status" data-connection-status aria-live="polite">연결 그래프를 불러오는 중입니다.</output><button type="button" hidden disabled data-connection-copy>현재 경로 주소 복사</button></div>
+      <div class="connection-state-row"><output id="connection-status" data-connection-status aria-live="polite">두 문서를 선택하면 연결 경로를 설명합니다.</output><button type="button" data-connection-example hidden>예시 경로 보기</button><button type="button" hidden disabled data-connection-copy>현재 경로 주소 복사</button></div>
     </section>
     <section class="connection-results" aria-label="연결 경로 결과">
-      <div class="connection-route-tabs" data-connection-route-tabs hidden></div>
-      <div data-connection-results>
-        <div class="connection-loading" data-connection-loading><span aria-hidden="true"></span><h2>관계 그래프를 준비하고 있습니다</h2><p>요청한 두 문서에 맞는 연결을 계산하면 이 영역이 바뀝니다.</p></div>
-        <noscript><style>.connection-loading{display:none}</style><p class="connection-example-label">자바스크립트 없이 읽을 수 있는 빌드 시 예시 경로입니다.</p>${connectionRouteHtml(initialPaths[0], initialPaths.length)}</noscript>
+      <div class="connection-route-tabs" data-connection-route-tabs role="tablist" aria-label="대안 경로" hidden></div>
+      <div id="connection-route-panel" data-connection-results>
+        <div class="connection-loading" data-connection-loading><span aria-hidden="true"></span><h2>두 문서를 선택해 주세요</h2><p>출발 문서와 도착 문서를 고르면 이 영역에 설명 가능한 연결 경로가 표시됩니다.</p></div>
+        <noscript><style>.connection-loading{display:none}</style><p class="connection-example-label">자바스크립트 없이 읽을 수 있는 예시 경로입니다.</p>${connectionRouteHtml(initialPaths[0], initialPaths.length)}</noscript>
       </div>
     </section>
   </div>`;
@@ -1323,7 +1461,7 @@ function historyTransitionListHtml(transitions = []) {
 
 function historyPaginationHtml(period, page = 1) {
   if (!period || period.pageCount <= 1) return "";
-  return `<nav class="history-pagination" aria-label="${escapeHtml(period.label)} 문서 조각">${Array.from({ length: period.pageCount }, (_, index) => index + 1).map((number) => `<a href="${withBase(historyPeriodRoute(period, number))}"${number === page ? ' aria-current="page"' : ""}>${number}</a>`).join("")}</nav>`;
+  return `<nav class="history-pagination" aria-label="${escapeHtml(period.label)} 문서 쪽 이동">${Array.from({ length: period.pageCount }, (_, index) => index + 1).map((number) => `<a href="${withBase(historyPeriodRoute(period, number))}"${number === page ? ' aria-current="page"' : ""}>${number}</a>`).join("")}</nav>`;
 }
 
 function historicalLensPage({ periodId = "", page = 1, canonicalPath = "/map/history/" } = {}) {
@@ -1332,37 +1470,38 @@ function historicalLensPage({ periodId = "", page = 1, canonicalPath = "/map/his
   const shardId = period ? `${period.id}--page-${String(page).padStart(4, "0")}` : "";
   const shard = shardId ? historicalLens.shards[shardId] : null;
   if (period && (!shard || page < 1 || page > period.pageCount)) throw new Error(`History route references missing shard '${shardId}'`);
-  const events = shard?.events || historicalLens.overview.periods.flatMap((record) => record.sampleEvents || []);
-  const transitions = shard?.transitions || historicalLens.overview.transitions || [];
+  const rootEvents = historicalLens.overview.periods.flatMap((record) => record.sampleEvents || []);
+  const rootTransitions = historicalLens.overview.transitions || [];
+  const events = shard?.events || rootEvents.slice(0, 6);
+  const transitions = shard?.transitions || rootTransitions.slice(0, 6);
   const title = period?.title || period?.label || "전체 시대와 병목 이동";
   const summary = period?.question || "시대가 바뀔 때 사라진 병목보다 새로 드러난 병목과 대응을 함께 읽습니다.";
   const rangeCount = historyRangeCount;
   const content = `<div class="history-lens-page section-frame" data-history-lens
     data-history-manifest-url="${withBase("/data/history/manifest.json")}?v=${assetVersion}"
     data-history-root-url="${withBase("/map/history/")}"${period ? ` data-default-era="${escapeHtml(period.id)}" data-default-era-path="${withBase(canonicalPath)}" data-default-part="${escapeHtml(shardId)}" data-default-part-path="${withBase(canonicalPath)}"` : ""}>
-    <section class="history-hero"><div><p class="eyebrow"><a href="${withBase("/")}">홈</a> / HISTORICAL CAUSAL LENS</p><h1>컴퓨팅 능력은 <span>병목의 이동으로<br>발달했다.</span></h1><p>연도만 나열하지 않습니다. 어떤 한계가 어떤 대응을 낳았고, 그 대응이 새 능력과 다음 제약을 어떻게 만들었는지 원전 관계로 읽습니다.</p></div><dl><div><dt>연도 기록 문서</dt><dd>${historicalLens.manifest.stats.datedDocuments}</dd></div><div><dt>기간 사건</dt><dd>${rangeCount}</dd></div><div><dt>검토 전환</dt><dd>${historicalLens.manifest.stats.transitions}</dd></div><div><dt>연도 미기록</dt><dd>${historicalLens.manifest.stats.undatedDocuments}</dd></div></dl></section>
+    <section class="history-hero"><div><p class="eyebrow"><a href="${withBase("/")}">홈</a> / HISTORICAL CAUSAL LENS</p><h1>컴퓨팅 능력은 <span>병목의 이동으로 발달했다.</span></h1><p>연도만 나열하지 않습니다. 어떤 한계가 어떤 대응을 낳았고, 그 대응이 새 능력과 다음 제약을 어떻게 만들었는지 원전 관계로 읽습니다.</p></div><dl><div><dt>연도 기록 문서</dt><dd>${historicalLens.manifest.stats.datedDocuments}</dd></div><div><dt>기간 사건</dt><dd>${rangeCount}</dd></div><div><dt>검토 전환</dt><dd>${historicalLens.manifest.stats.transitions}</dd></div><div><dt>연도 미기록</dt><dd>${historicalLens.manifest.stats.undatedDocuments}</dd></div></dl></section>
     ${mapModeNav("history")}
     <form class="history-controls" data-history-controls hidden>
-      <div class="history-search-shell"><label>문서 찾기<input type="search" data-history-search autocomplete="off" role="combobox" aria-autocomplete="list" aria-haspopup="listbox" aria-expanded="false" aria-controls="history-search-results" placeholder="문서·전환·연도 검색"></label><div id="history-search-results" class="history-search-results" data-history-search-results role="listbox" aria-label="역사 문서와 전환 검색 결과" aria-live="polite"></div></div>
-      <label>시기<select data-history-era><option value="">전체 시대</option>${historicalLens.manifest.periods.map((record) => `<option value="${escapeHtml(record.id)}"${record.id === periodId ? " selected" : ""}>${escapeHtml(record.label || record.title || record.id)}</option>`).join("")}</select></label>
-      <label>역사 층위<select data-history-layer><option value="">전체 층위</option>${historicalLens.manifest.lanes.map((lane) => `<option value="${escapeHtml(lane.id)}">${escapeHtml(lane.label)}</option>`).join("")}</select></label>
-      <label>능력 층위<select data-history-capability><option value="">전체 능력</option>${historicalLens.manifest.facets.capabilities.map((capability) => `<option value="${escapeHtml(capability)}">${escapeHtml(historyFacetMeta.capability[capability] || capability)}</option>`).join("")}</select></label>
-      <label>표시<select data-history-display><option value="all">문서와 전환</option><option value="events">문서만</option><option value="transitions">전환만</option></select></label>
-      <button type="button" data-history-reset>초기화</button>
+      <div class="history-search-shell"><label>문서 찾기<input type="search" data-history-search autocomplete="off" role="combobox" aria-autocomplete="list" aria-haspopup="listbox" aria-expanded="false" aria-controls="history-search-results" placeholder="문서·전환·연도 검색"></label><div id="history-search-results" class="history-search-results" data-history-search-results role="listbox" aria-label="역사 문서와 전환 검색 결과"></div><output data-history-search-status role="status" aria-live="polite"></output></div>
+      <label class="history-filter-era">시기<select data-history-era><option value="">전체 시대</option>${historicalLens.manifest.periods.map((record) => `<option value="${escapeHtml(record.id)}"${record.id === periodId ? " selected" : ""}>${escapeHtml(record.label || record.title || record.id)}</option>`).join("")}</select></label>
+      <label class="history-filter-layer">역사 층위<select data-history-layer><option value="">전체 층위</option>${historicalLens.manifest.lanes.map((lane) => `<option value="${escapeHtml(lane.id)}">${escapeHtml(lane.label)}</option>`).join("")}</select></label>
+      <label class="history-filter-capability">능력 층위<select data-history-capability><option value="">전체 능력</option>${historicalLens.manifest.facets.capabilities.map((capability) => `<option value="${escapeHtml(capability)}">${escapeHtml(historyFacetMeta.capability[capability] || capability)}</option>`).join("")}</select></label>
+      <label class="history-filter-display">표시<select data-history-display><option value="all">문서와 전환</option><option value="events">문서만</option><option value="transitions">전환만</option></select></label>
+      <button type="button" class="history-filter-reset" data-history-reset>초기화</button>
     </form>
-    <div class="history-state-bar"><nav data-history-breadcrumb aria-label="역사 렌즈 위치"><a href="${withBase("/map/history/")}">전체 시대</a>${period ? `<span aria-hidden="true">/</span><span>${escapeHtml(period.label || period.id)}</span>${page > 1 ? `<span aria-hidden="true">/</span><span>${page}번째 조각</span>` : ""}` : ""}</nav><output data-history-status aria-live="polite">${period ? `${events.length}개 문서와 ${transitions.length}개 전환` : `${historicalLens.manifest.periods.length}개 시대와 ${historicalLens.manifest.stats.transitions}개 검토 전환`}</output></div>
+    <div class="history-state-bar"><nav data-history-breadcrumb aria-label="역사 렌즈 위치"><a href="${withBase("/map/history/")}">전체 시대</a>${period ? `<span aria-hidden="true">/</span><span>${escapeHtml(period.label || period.id)}</span>${page > 1 ? `<span aria-hidden="true">/</span><span>${page}쪽</span>` : ""}` : ""}</nav><output data-history-status aria-live="polite">${period ? `${events.length}개 문서와 ${transitions.length}개 전환` : `대표 문서 ${events.length}/${rootEvents.length}개 · 대표 전환 ${transitions.length}/${rootTransitions.length}개`}</output></div>
     <div class="history-workspace">
       <aside class="history-era-board"><header><p>ERA BOARD</p><h2>시대와 질문</h2></header><div data-history-era-list>${historyEraListHtml(periodId)}</div></aside>
-      <main class="history-stage" data-history-stage aria-labelledby="history-stage-title"><header><div><p data-history-stage-kicker>${period ? "ERA SWIMLANES" : "HISTORY OVERVIEW"}</p><h2 id="history-stage-title" data-history-stage-title>${escapeHtml(title)}</h2><p data-history-stage-summary>${escapeHtml(summary)}</p></div></header><div class="history-time-axis" aria-hidden="true"><span>한계</span><i>→</i><span>대응</span><i>→</i><span>새 능력</span><i>→</i><span>다음 제약</span></div><section class="history-events" aria-labelledby="history-events-title"><h3 id="history-events-title">${period ? "연도 × 역사 층위" : "시대별 대표 문서"}</h3><div data-history-event-list>${historyEventListHtml(events)}</div></section><section class="history-transitions" aria-labelledby="history-transitions-title"><h3 id="history-transitions-title">검토된 인과 전환</h3><div data-history-transition-list>${historyTransitionListHtml(transitions)}</div></section>${historyPaginationHtml(period, page)}</main>
+      <section class="history-stage" data-history-stage aria-labelledby="history-stage-title"><header><div><p data-history-stage-kicker>${period ? "ERA SWIMLANES" : "HISTORY OVERVIEW"}</p><h2 id="history-stage-title" data-history-stage-title>${escapeHtml(title)}</h2><p data-history-stage-summary>${escapeHtml(summary)}</p></div></header><div class="history-time-axis" aria-hidden="true"><span>한계</span><i>→</i><span>대응</span><i>→</i><span>새 능력</span><i>→</i><span>다음 제약</span></div><section class="history-events" aria-labelledby="history-events-title"><h3 id="history-events-title">${period ? "연도 × 역사 층위" : "시대별 대표 문서"}</h3><div data-history-event-list>${historyEventListHtml(events)}</div></section><section class="history-transitions" aria-labelledby="history-transitions-title"><h3 id="history-transitions-title">검토된 인과 전환</h3><div data-history-transition-list>${historyTransitionListHtml(transitions)}</div></section>${historyPaginationHtml(period, page)}</section>
       <aside class="history-inspector" data-history-inspector aria-labelledby="history-inspector-title"><p>HOW TO READ</p><h2 id="history-inspector-title">${escapeHtml(title)}</h2><p>${escapeHtml(summary)}</p><dl><div><dt>문서</dt><dd>${events.length}</dd></div><div><dt>전환</dt><dd>${transitions.length}</dd></div></dl><p>문서를 선택하면 사건·출판 시점과 층위를, 전환을 선택하면 저장된 방향·설명·근거를 읽습니다.</p></aside>
     </div>
     <div class="history-error" data-history-error hidden role="alert"><h2>역사 지도 조각을 불러오지 못했습니다</h2><p>현재 정적 문서와 시대 링크는 계속 사용할 수 있습니다.</p><button type="button" data-history-retry>다시 시도</button></div>
-    <details class="history-static-disclosure"><summary>텍스트 연대기와 전환 목록으로 읽기</summary><div class="history-static-view"><section><h2>문서</h2>${historyEventListHtml(events)}</section><section><h2>전환</h2>${historyTransitionListHtml(transitions)}</section>${historyPaginationHtml(period, page)}</div></details>
     <noscript><p class="history-noscript">자바스크립트 없이도 시대별 경로, 문서 링크와 검토된 관계 설명을 읽을 수 있습니다.</p></noscript>
   </div>`;
   return layout({
-    title: period ? `${period.label || period.id} · 역사·인과 렌즈` : "컴퓨팅 능력의 역사·인과 렌즈",
-    description: period ? `${period.label || period.id}의 컴퓨팅사 문서와 검토된 인과 전환.` : "컴퓨팅 능력의 발전을 연도, 역사 층위와 한계-대응-새 능력의 인과 전환으로 읽는 지도.",
+    title: period ? `${period.label || period.id} · 역사·인과 렌즈${page > 1 ? ` · ${page}쪽` : ""}` : "컴퓨팅 능력의 역사·인과 렌즈",
+    description: period ? `${period.label || period.id}의 컴퓨팅사 문서와 검토된 인과 전환${page > 1 ? ` · ${page}쪽` : ""}.` : "컴퓨팅 능력의 발전을 연도, 역사 층위와 한계-대응-새 능력의 인과 전환으로 읽는 지도.",
     content,
     canonicalPath,
     bodyClass: "history-lens-page-body",
@@ -1397,7 +1536,7 @@ function evidenceSourceProvenanceHtml(node, { selected = false } = {}) {
     <dl><div><dt>소스 ID</dt><dd>${escapeHtml(node.sourceId || node.id)}</dd></div><div><dt>자료 위치</dt><dd>${provenance.sourceKind === "raw" ? "raw 원본" : "외부 자료"}</dd></div><div><dt>판본</dt><dd>${escapeHtml(provenance.version || "판본 미확인")}</dd></div><div><dt>확인일</dt><dd>${escapeHtml(provenance.retrieved || "미기록")}</dd></div></dl>
     <section><h4>원자료로 기록</h4>${primary.length ? `<ul>${primary.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>` : "<p>기록 없음</p>"}</section>
     <section><h4>보조·접근 자료</h4>${supporting.length ? `<ul>${supporting.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>` : "<p>기록 없음</p>"}</section>
-    ${urls.length ? `<div class="evidence-external-links">${urls.map((url, index) => `<a href="${escapeHtml(url)}" rel="noreferrer">외부 출처 ${index + 1}</a>`).join("")}</div>` : ""}
+    ${urls.length ? `<div class="evidence-external-links">${labelledExternalUrls(urls).map(({ url, label }) => `<a href="${escapeHtml(url)}" rel="noreferrer">${escapeHtml(label)}</a>`).join("")}</div>` : ""}
   </article>`;
 }
 
@@ -1485,22 +1624,58 @@ function evidencePaginationHtml({ scope, id, page, pageCount, root = false }) {
     if (index && number - numbers[index - 1] > 1) links.push('<span class="evidence-pagination-gap" aria-hidden="true">…</span>');
     const route = root && number === 1 ? "/map/evidence/" : evidenceFocusRoute(scope, id, number);
     const position = number === page ? "현재" : number === 1 ? "첫" : number === pageCount ? "마지막" : number === page - 1 ? "이전" : number === page + 1 ? "다음" : "이동";
-    links.push(`<a href="${withBase(route)}" aria-label="${position} 조각, ${number}/${pageCount}"${number === page ? ' aria-current="page"' : ""}>${number}</a>`);
+    links.push(`<a href="${withBase(route)}" aria-label="${position} 쪽, ${number}/${pageCount}"${number === page ? ' aria-current="page"' : ""}>${number}</a>`);
   }
-  return `<nav class="evidence-pagination" aria-label="근거 계보 조각">${links.join("")}</nav>`;
+  return `<nav class="evidence-pagination" aria-label="근거 계보 쪽 이동">${links.join("")}</nav>`;
 }
 
-function evidenceEntryPointsHtml() {
+function evidenceEntryPointsHtml({ open = false } = {}) {
   const documents = [...evidenceDocumentNodes]
     .sort((left, right) => (evidenceEdgesByDocument.get(right.id)?.length || 0) - (evidenceEdgesByDocument.get(left.id)?.length || 0) || left.title.localeCompare(right.title, "ko"))
     .slice(0, 6);
   const sources = [...evidenceSourceNodes]
     .sort((left, right) => (evidenceEdgesBySource.get(right.id)?.length || 0) - (evidenceEdgesBySource.get(left.id)?.length || 0) || left.title.localeCompare(right.title, "ko"))
     .slice(0, 6);
-  return `<details class="evidence-entry-points"><summary>대표 문서와 근거 허브에서 시작하기</summary><div><section><h2>근거가 넓게 등록된 문서</h2><ol>${documents.map((node) => `<li><a href="${withBase(evidenceRouteForNode(node))}"><span>${evidenceEdgesByDocument.get(node.id)?.length || 0}</span>${escapeHtml(node.title)}</a></li>`).join("")}</ol></section><section><h2>여러 문서가 등록한 자료</h2><ol>${sources.map((node) => `<li><a href="${withBase(evidenceRouteForNode(node))}"><span>${evidenceEdgesBySource.get(node.id)?.length || 0}</span>${escapeHtml(node.title)}</a></li>`).join("")}</ol></section></div></details>`;
+  return `<details class="evidence-entry-points"${open ? " open" : ""}><summary>대표 문서와 근거 허브에서 시작하기</summary><div><section><h2>근거가 넓게 등록된 문서</h2><ol>${documents.map((node) => `<li><a href="${withBase(evidenceRouteForNode(node))}"><span>${evidenceEdgesByDocument.get(node.id)?.length || 0}</span>${escapeHtml(node.title)}</a></li>`).join("")}</ol></section><section><h2>여러 문서가 등록한 자료</h2><ol>${sources.map((node) => `<li><a href="${withBase(evidenceRouteForNode(node))}"><span>${evidenceEdgesBySource.get(node.id)?.length || 0}</span>${escapeHtml(node.title)}</a></li>`).join("")}</ol></section></div></details>`;
+}
+
+function evidenceControlsHtml() {
+  return `<form class="evidence-controls" data-evidence-controls hidden>
+    <div class="evidence-search-shell"><label>문서·근거 찾기<input type="search" data-evidence-search autocomplete="off" role="combobox" aria-autocomplete="list" aria-haspopup="listbox" aria-expanded="false" aria-controls="evidence-search-results" placeholder="제목·별칭 앞부분 2자 이상"></label><div id="evidence-search-results" class="evidence-search-results" data-evidence-search-results role="listbox" aria-label="근거 계보 검색 결과"></div><output data-evidence-search-status role="status" aria-live="polite"></output></div>
+    <label class="evidence-filter-scope">검색 범위<select data-evidence-scope><option value="all">전체</option><option value="document">지식 문서</option><option value="source">근거 문서</option><option value="relation">검토 관계</option></select></label>
+    <label class="evidence-filter-preservation">현재 근거 표시<select data-evidence-preservation><option value="">전체 보존 상태</option><option value="local">로컬 원본</option><option value="archived">보존 스냅샷</option><option value="external-only">외부 링크 의존</option></select></label>
+    <button type="button" class="evidence-filter-reset" data-evidence-reset>초기화</button>
+  </form>`;
+}
+
+function evidenceHubPage() {
+  const preservationCounts = Object.fromEntries(["local", "archived", "external-only"].map((status) => [status, evidenceSourceNodes.filter((node) => node.provenance?.snapshotStatus === status).length]));
+  const relationEvidenceLinks = evidencedRelationEdges.reduce((total, edge) => total + evidenceRelationEvidenceNodes(edge).length, 0);
+  const content = `<div class="evidence-lens-page evidence-hub-page section-frame" data-evidence-lens
+    data-evidence-manifest-url="${withBase("/data/evidence/manifest.json")}?v=${assetVersion}"
+    data-evidence-root-url="${withBase("/map/evidence/")}">
+    <section class="evidence-hero"><div><p class="eyebrow"><a href="${withBase("/")}">홈</a> / DOCUMENT EVIDENCE LINEAGE</p><h1>근거가 지식 문서로 <span>이어지는 경로를 읽는다.</span></h1><p>문서나 근거 자료를 선택하면 원자료와 재현 정보, 등록된 지식 문서, 직접 근거가 명시된 관계를 한 흐름으로 봅니다.</p></div><dl><div><dt>지식 문서</dt><dd>${evidenceDocumentNodes.length}</dd></div><div><dt>문서 근거 연결</dt><dd>${documentEvidenceEdges.length}</dd></div><div><dt>근거 문서</dt><dd>${evidenceSourceNodes.length}</dd></div><div><dt>직접 근거 관계</dt><dd>${relationEvidenceLinks}</dd></div></dl></section>
+    ${mapModeNav("evidence")}
+    <aside class="evidence-boundary" aria-label="이 렌즈가 보여 주는 범위"><strong>해석 경계</strong><p>이 렌즈는 문장별 진위나 신뢰도를 판정하지 않습니다. 프론트매터에 등록된 문서 단위 근거와 관계 표에 직접 연결된 관계 근거를 구분해 보여 줍니다.</p></aside>
+    ${evidenceControlsHtml()}
+    <div class="evidence-state-bar"><output data-evidence-status aria-live="polite">문서 또는 근거 자료를 선택해 계보를 시작하세요.</output></div>
+    ${evidenceEntryPointsHtml({ open: true })}
+    <section class="evidence-preservation-summary" aria-label="위키 전체 근거 문서의 보존 상태"><h2>위키 전체 근거 문서의 보존 상태</h2><div><span>로컬 원본</span><strong>${preservationCounts.local}</strong></div><div><span>보존 스냅샷</span><strong>${preservationCounts.archived}</strong></div><div><span>외부 링크 의존</span><strong>${preservationCounts["external-only"]}</strong></div><p>보존 상태는 자료의 품질 점수가 아니라 다시 확인할 수 있는 조건을 뜻합니다.</p></section>
+    <div class="evidence-error" data-evidence-error hidden role="status"><h2>검색 조각을 불러오지 못했습니다</h2><p>검색을 다시 시도해 주세요.</p><button type="button" data-evidence-retry>다시 시도</button></div>
+    <noscript><p class="evidence-noscript">자바스크립트 없이도 대표 문서와 근거 허브 링크에서 정적 계보를 읽을 수 있습니다.</p></noscript>
+  </div>`;
+  return layout({
+    title: "문서·근거 계보",
+    description: "원자료와 재현 정보에서 정규 소스·참고 자료를 거쳐 지식 문서와 검토 관계로 이어지는 문서 단위 근거 계보.",
+    content,
+    canonicalPath: "/map/evidence/",
+    bodyClass: "evidence-lens-page-body",
+    pageModules: ["evidence-lens.js"]
+  });
 }
 
 function evidenceLensPage({ scope = "document", id = "", page = 1, rootPage = false, canonicalPath = "/map/evidence/" } = {}) {
+  if (rootPage) return evidenceHubPage();
   const defaultDocument = evidenceNodesById.get("computing-capability") || [...evidenceDocumentNodes]
     .sort((left, right) => (evidenceEdgesByDocument.get(right.id)?.length || 0) - (evidenceEdgesByDocument.get(left.id)?.length || 0))[0];
   let focus = null;
@@ -1546,8 +1721,11 @@ function evidenceLensPage({ scope = "document", id = "", page = 1, rootPage = fa
   const focusSummary = relation ? evidenceRelationStatement(relation) : focus.summary;
   const routeId = relation ? evidenceRelationRouteId(relation.id) : focus.id;
   const scopeLabel = scope === "source" ? "근거 문서" : scope === "relation" ? "검토 관계" : "지식 문서";
-  const provenanceCards = pageEvidenceSources.map((node) => evidenceSourceProvenanceHtml(node, { selected: scope === "source" })).join("") || '<p class="evidence-empty">등록된 근거 문서가 없습니다.</p>';
-  const sourceCards = pageEvidenceSources.map((node) => evidenceSourceCardHtml(node, { selected: scope === "source" })).join("") || '<p class="evidence-empty">등록된 근거 문서가 없습니다.</p>';
+  const evidenceEmpty = evidenceSources.length
+    ? `<p class="evidence-empty">이 쪽에는 추가 근거 문서가 없습니다. ${page > 1 ? `<a href="${withBase(evidenceFocusRoute(scope, routeId))}">첫 쪽에서 ${evidenceSources.length}개 근거 보기</a>` : ""}</p>`
+    : '<p class="evidence-empty">등록된 근거 문서가 없습니다.</p>';
+  const provenanceCards = pageEvidenceSources.map((node) => evidenceSourceProvenanceHtml(node, { selected: scope === "source" })).join("") || evidenceEmpty;
+  const sourceCards = pageEvidenceSources.map((node) => evidenceSourceCardHtml(node, { selected: scope === "source" })).join("") || evidenceEmpty;
   const assertionCards = scope === "document"
     ? `${evidenceDocumentCardHtml(focus, { selected: true })}${neighbors.length ? `<section class="evidence-neighbor-list"><header><h3>같은 자료를 등록한 다른 문서</h3><p>공통 근거는 합의나 같은 결론을 뜻하지 않습니다.</p></header><ol>${neighbors.map(({ node, sourceIds }) => `<li>${evidenceDocumentCardHtml(node, { sharedCount: sourceIds.length })}</li>`).join("")}</ol></section>` : ""}`
     : scope === "source"
@@ -1562,13 +1740,9 @@ function evidenceLensPage({ scope = "document", id = "", page = 1, rootPage = fa
     <section class="evidence-hero"><div><p class="eyebrow"><a href="${withBase("/")}">홈</a> / DOCUMENT EVIDENCE LINEAGE</p><h1>근거가 지식 문서로 <span>이어지는 경로를 읽는다.</span></h1><p>링크를 점으로 흩뿌리지 않습니다. 원자료와 재현 정보, 정규 소스·참고 자료, 그 자료를 등록한 지식 문서와 검토 관계를 방향이 있는 계보로 펼칩니다.</p></div><dl><div><dt>지식 문서</dt><dd>${evidenceDocumentNodes.length}</dd></div><div><dt>문서 근거 연결</dt><dd>${documentEvidenceEdges.length}</dd></div><div><dt>근거 문서</dt><dd>${evidenceSourceNodes.length}</dd></div><div><dt>직접 근거 관계</dt><dd>${relationEvidenceLinks}</dd></div></dl></section>
     ${mapModeNav("evidence")}
     <aside class="evidence-boundary" aria-label="이 렌즈가 보여 주는 범위"><strong>해석 경계</strong><p>이 렌즈는 문장별 진위나 신뢰도를 판정하지 않습니다. 프론트매터에 등록된 문서 단위 근거와 관계 표에 직접 연결된 관계 근거를 구분해 보여 줍니다.</p></aside>
-    <form class="evidence-controls" data-evidence-controls hidden>
-      <div class="evidence-search-shell"><label>문서·근거 찾기<input type="search" data-evidence-search autocomplete="off" role="combobox" aria-autocomplete="list" aria-haspopup="listbox" aria-expanded="false" aria-controls="evidence-search-results" placeholder="제목·별칭 앞부분 2자 이상"></label><div id="evidence-search-results" class="evidence-search-results" data-evidence-search-results role="listbox" aria-label="근거 계보 검색 결과" aria-live="polite"></div></div>
-      <label>검색 범위<select data-evidence-scope><option value="all">전체</option><option value="document">지식 문서</option><option value="source">근거 문서</option><option value="relation">검토 관계</option></select></label>
-      <label>현재 근거 표시<select data-evidence-preservation><option value="">전체 보존 상태</option><option value="local">로컬 원본</option><option value="archived">보존 스냅샷</option><option value="external-only">외부 링크 의존</option></select></label>
-      <button type="button" data-evidence-reset>초기화</button>
-    </form>
-    <div class="evidence-state-bar"><nav aria-label="근거 계보 위치"><a href="${withBase("/map/evidence/")}">근거 계보</a><span aria-hidden="true">/</span><span>${escapeHtml(scopeLabel)}</span><span aria-hidden="true">/</span><span>${escapeHtml(focusTitle)}</span>${page > 1 ? `<span aria-hidden="true">/</span><span>${page}번째 조각</span>` : ""}</nav><output data-evidence-status aria-live="polite">${scope === "source" ? `${downstreamDocuments.length}개 지식 문서가 이 자료를 등록했습니다.` : `${evidenceSources.length}개 근거 문서가 연결되어 있습니다.`}</output></div>
+    ${evidenceControlsHtml()}
+    <div class="evidence-error evidence-error-inline" data-evidence-error hidden role="status"><h2>검색 조각을 불러오지 못했습니다</h2><p>검색을 다시 시도해 주세요.</p><button type="button" data-evidence-retry>다시 시도</button></div>
+    <div class="evidence-state-bar"><nav aria-label="근거 계보 위치"><a href="${withBase("/map/evidence/")}">근거 계보</a><span aria-hidden="true">/</span><span>${escapeHtml(scopeLabel)}</span><span aria-hidden="true">/</span><span>${escapeHtml(focusTitle)}</span>${page > 1 ? `<span aria-hidden="true">/</span><span>${page}쪽</span>` : ""}</nav><output data-evidence-status aria-live="polite">${scope === "source" ? `${downstreamDocuments.length}개 지식 문서가 이 자료를 등록했습니다.` : `${evidenceSources.length}개 근거 문서가 연결되어 있습니다.`}</output></div>
     <header class="evidence-focus-heading"><p>${escapeHtml(scopeLabel.toUpperCase())}</p><h2>${escapeHtml(focusTitle)}</h2><p>${escapeHtml(focusSummary)}</p></header>
     <div class="evidence-braid" aria-label="원자료에서 지식 문서로 이어지는 근거 계보">
       <div class="evidence-braid-labels" aria-hidden="true"><span>01 · 원자료와 재현 정보</span><i>→</i><span>02 · 정규 소스·참고 자료</span><i>→</i><span>03 · 지식 문서·검토 관계</span></div>
@@ -1576,16 +1750,15 @@ function evidenceLensPage({ scope = "document", id = "", page = 1, rootPage = fa
       <section class="evidence-braid-rail evidence-source-rail" aria-labelledby="evidence-source-title"><header><span>02</span><div><h2 id="evidence-source-title">정규 소스·참고 자료</h2><p>지식 문서가 근거로 등록한 위키의 자료 페이지</p></div></header><div data-evidence-source-list>${sourceCards}</div></section>
       <section class="evidence-braid-rail evidence-assertion-rail" aria-labelledby="evidence-assertion-title"><header><span>03</span><div><h2 id="evidence-assertion-title">지식 문서·검토 관계</h2><p>문서 단위 근거 묶음과 직접 근거가 명시된 관계</p></div></header><div data-evidence-assertion-list>${assertionCards}</div></section>
     </div>
-    ${pageRelations.length ? `<section class="evidence-reviewed-relations" aria-labelledby="evidence-reviewed-title"><header><p>RELATION ASSERTIONS</p><h2 id="evidence-reviewed-title">근거가 직접 명시된 검토 관계</h2><span>${pageRelations.length}/${focusRelations.length}개 표시</span></header><ol>${pageRelations.map((edge) => `<li>${evidenceRelationCardHtml(edge)}</li>`).join("")}</ol></section>` : ""}
+    ${focusRelations.length ? `<section class="evidence-reviewed-relations" aria-labelledby="evidence-reviewed-title"><header><p>RELATION ASSERTIONS</p><h2 id="evidence-reviewed-title">근거가 직접 명시된 검토 관계</h2><span>${pageRelations.length}/${focusRelations.length}개 표시</span></header>${pageRelations.length ? `<ol>${pageRelations.map((edge) => `<li>${evidenceRelationCardHtml(edge)}</li>`).join("")}</ol>` : `<p class="evidence-empty">이 쪽에는 추가 검토 관계가 없습니다. ${page > 1 ? `<a href="${withBase(evidenceFocusRoute(scope, routeId))}">첫 쪽에서 ${focusRelations.length}개 관계 보기</a>` : ""}</p>`}</section>` : ""}
     ${evidencePaginationHtml({ scope, id: routeId, page, pageCount, root: rootPage })}
-    <section class="evidence-preservation-summary" aria-label="전체 근거 문서의 보존 상태"><div><span>로컬 원본</span><strong>${preservationCounts.local}</strong></div><div><span>보존 스냅샷</span><strong>${preservationCounts.archived}</strong></div><div><span>외부 링크 의존</span><strong>${preservationCounts["external-only"]}</strong></div><p>보존 상태는 자료의 품질 점수가 아니라 다시 확인할 수 있는 조건을 뜻합니다.</p></section>
+    <section class="evidence-preservation-summary" aria-label="위키 전체 근거 문서의 보존 상태"><h2>위키 전체 근거 문서의 보존 상태</h2><div><span>로컬 원본</span><strong>${preservationCounts.local}</strong></div><div><span>보존 스냅샷</span><strong>${preservationCounts.archived}</strong></div><div><span>외부 링크 의존</span><strong>${preservationCounts["external-only"]}</strong></div><p>보존 상태는 자료의 품질 점수가 아니라 다시 확인할 수 있는 조건을 뜻합니다.</p></section>
     ${evidenceEntryPointsHtml()}
-    <div class="evidence-error" data-evidence-error hidden role="alert"><h2>검색 조각을 불러오지 못했습니다</h2><p>현재 계보와 정적 링크는 계속 사용할 수 있습니다.</p><button type="button" data-evidence-retry>다시 시도</button></div>
     <noscript><p class="evidence-noscript">자바스크립트 없이도 현재 근거 계보, 문서·자료 링크와 다음 조각을 모두 읽을 수 있습니다.</p></noscript>
   </div>`;
   return layout({
-    title: rootPage ? "문서·근거 계보" : `${focusTitle} · 근거 계보`,
-    description: "원자료와 재현 정보에서 정규 소스·참고 자료를 거쳐 지식 문서와 검토 관계로 이어지는 문서 단위 근거 계보.",
+    title: rootPage ? "문서·근거 계보" : `${focusTitle} · 근거 계보${page > 1 ? ` · ${page}쪽` : ""}`,
+    description: `원자료와 재현 정보에서 정규 소스·참고 자료를 거쳐 지식 문서와 검토 관계로 이어지는 문서 단위 근거 계보${page > 1 ? ` · ${page}쪽` : ""}.`,
     content,
     canonicalPath,
     bodyClass: "evidence-lens-page-body",
@@ -1609,7 +1782,13 @@ if (existsSync(rawAssets)) await cp(rawAssets, join(distRoot, "assets", "raw"), 
 
 await output("index.html", homePage());
 for (const [category] of Object.entries(categoryMeta)) {
-  await output(join(category, "index.html"), listingPage(category));
+  const records = listingRecords(category);
+  const pageCount = Math.max(1, Math.ceil(records.length / LISTING_PAGE_SIZE));
+  for (let page = 1; page <= pageCount; page += 1) {
+    const route = listingRoute(category, page);
+    await output(join(...route.split("/").filter(Boolean), "index.html"), listingPage(category, page));
+  }
+  await output(join("data", "listings", `${category}.json`), JSON.stringify(listingData(category, records)));
 }
 await output(join("paths", "index.html"), pathsIndexPage());
 for (const path of resolvedLearningPaths) {
@@ -1763,9 +1942,13 @@ await output("404.html", layout({
 }));
 
 if (siteUrl) {
+  const listingSitemapRoutes = Object.keys(categoryMeta).flatMap((category) => {
+    const pageCount = Math.max(1, Math.ceil(listingRecords(category).length / LISTING_PAGE_SIZE));
+    return Array.from({ length: pageCount }, (_, index) => listingRoute(category, index + 1));
+  });
   const sitemapUrls = [
     "/",
-    ...Object.keys(categoryMeta).map(categoryUrl),
+    ...listingSitemapRoutes,
     "/paths/",
     "/map/",
     "/map/learning/",

@@ -3,7 +3,7 @@ import { createHash } from "node:crypto";
 import { readFile, readdir } from "node:fs/promises";
 import { join } from "node:path";
 import { gzipSync } from "node:zlib";
-import { historyPeriods, learningPaths } from "./catalog.mjs";
+import { categoryMeta, domainMeta, historyPeriods, learningPaths, statusMeta } from "./catalog.mjs";
 import { escapeHtml, key, selectSiteDiscoveryPages, withBase } from "./core.mjs";
 import { loadWikiContent } from "./content.mjs";
 import { buildKnowledgeGraph } from "./graph/model.mjs";
@@ -134,7 +134,8 @@ for (const marker of [
   "data-history-error hidden",
   "data-history-retry"
 ]) assert.ok(historyRootHtml.includes(marker), `historical lens root is missing '${marker}'`);
-assert.match(historyRootHtml, /<details class="history-static-disclosure">/, "historical lens needs a progressively disclosed text chronology");
+assert.doesNotMatch(historyRootHtml, /history-static-disclosure/, "historical lens root must not duplicate its visible chronology with a second static disclosure");
+assert.match(historyRootHtml, /data-history-event-list/, "historical lens root needs a visible chronology");
 assert.match(historyRootHtml, /<noscript>[\s\S]*history-noscript/, "historical lens needs a no-JS explanation");
 
 function cleanHistoryPath(url) {
@@ -686,7 +687,8 @@ for (const record of historyManifest.shards) {
   assert.ok(staticHtml.includes(`data-default-part="${record.id}"`), `history route '${record.route}' does not restore part '${record.id}'`);
   assert.ok(staticHtml.includes(`data-default-era-path="${deployedRoute}"`), `history route '${record.route}' has a conflicting era path`);
   assert.ok(staticHtml.includes(`data-default-part-path="${deployedRoute}"`), `history route '${record.route}' has a conflicting part path`);
-  assert.match(staticHtml, /<details class="history-static-disclosure">/, `history route '${record.route}' needs a text chronology`);
+  assert.doesNotMatch(staticHtml, /history-static-disclosure/, `history route '${record.route}' must not duplicate its visible chronology with a second static disclosure`);
+  assert.match(staticHtml, /data-history-event-list/, `history route '${record.route}' needs a visible chronology`);
   assert.match(staticHtml, /<noscript>[\s\S]*history-noscript/, `history route '${record.route}' needs a no-JS explanation`);
   for (const event of shard.events) {
     assert.ok(staticHtml.includes(`href="${event.url}"`), `history route '${record.route}' is missing document '${event.id}'`);
@@ -854,6 +856,14 @@ function assertEvidenceAssertion(record, graphNodesById, label) {
 
 const wikiRoot = join(root, "wiki");
 const { pages: wikiPages, lookup: wikiLookup } = await loadWikiContent({ root, wikiRoot });
+for (const page of wikiPages) {
+  for (const domain of page.tags.filter((tag) => tag.startsWith("domain/"))) {
+    assert.ok(
+      Object.hasOwn(domainMeta, domain),
+      `wiki page '${page.relativePath}' uses an unlabelled domain '${domain}'`
+    );
+  }
+}
 const verifiedLearningPaths = learningPaths.map((path) => ({
   ...path,
   pages: path.pages.map((title) => {
@@ -895,6 +905,12 @@ for (const record of searchIndex) {
   assert.equal(record.title, node.title, "global search article '" + node.id + "' has a conflicting title");
   assert.equal(record.categoryKey, node.category, "global search article '" + node.id + "' has a conflicting category");
   assert.equal(record.status, node.status, "global search article '" + node.id + "' has a conflicting status");
+  assert.ok(statusMeta[node.status], "global search article '" + node.id + "' uses an unknown status '" + node.status + "'");
+  assert.equal(
+    record.statusLabel,
+    statusMeta[node.status].label,
+    "global search article '" + node.id + "' has a stale status label"
+  );
   assert.equal(record.description, node.summary, "global search article '" + node.id + "' has a conflicting summary");
   assert.deepEqual(record.aliases, node.aliases, "global search article '" + node.id + "' has conflicting aliases");
 }
@@ -940,20 +956,47 @@ for (const node of contextSiteNodes) {
   if (!discoveryCategoryHtml.has(node.category)) discoveryCategoryHtml.set(node.category, await read(join(node.category, "index.html")));
   assert.ok(!discoveryCategoryHtml.get(node.category).includes('href="' + node.url + '"'), label + " must stay out of its category listing");
 }
-const sitemapXml = await read("sitemap.xml").catch((error) => {
-  if (error?.code === "ENOENT") return null;
-  throw error;
-});
-if (sitemapXml !== null) {
-  const sitemapLocations = [...sitemapXml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
-  assert.ok(sitemapLocations.length, "sitemap must contain URL locations");
-  const sitemapPaths = sitemapLocations.map((location) => decodeURI(new URL(location).pathname));
-  const allArticleUrls = new Set(evidenceGraph.nodes.map((node) => node.url));
-  const sitemapArticleUrls = sitemapPaths.filter((path) => allArticleUrls.has(path));
-  assertExactlyOnce(sitemapArticleUrls, expectedSiteDiscoveryUrls, "sitemap article discovery");
-  assert.ok(!sitemapPaths.includes(`${evidenceSitePrefix}/map/graph/`), "sitemap must omit the legacy knowledge graph redirect");
-  assert.ok(!sitemapPaths.includes(`${evidenceSitePrefix}/map/atlas/`), "sitemap must omit the removed structure atlas route");
-  for (const node of contextSiteNodes) assert.ok(!sitemapPaths.includes(node.url), "context article '" + node.id + "' must stay out of sitemap discovery");
+
+const LISTING_PAGE_SIZE = 24;
+
+function listingCardUrls(html, label) {
+  const cards = html.match(/<article class="document-card[\s\S]*?<\/article>/g) || [];
+  return cards.map((card, index) => {
+    const url = card.match(/<h3><a href="([^"]+)"/u)?.[1];
+    assert.ok(url, `${label} card ${index + 1} is missing its primary article link`);
+    return url;
+  });
+}
+
+const listingNodesByCategory = new Map();
+for (const node of expectedSiteDiscoveryNodes) {
+  if (!listingNodesByCategory.has(node.category)) listingNodesByCategory.set(node.category, []);
+  listingNodesByCategory.get(node.category).push(node);
+}
+for (const [category, nodes] of listingNodesByCategory) {
+  const pageCount = Math.max(1, Math.ceil(nodes.length / LISTING_PAGE_SIZE));
+  const listedUrls = [];
+  for (let page = 1; page <= pageCount; page += 1) {
+    const route = page === 1 ? join(category, "index.html") : join(category, "page", String(page), "index.html");
+    const html = await read(route);
+    const label = `listing '${category}' page ${page}`;
+    assert.ok(html.includes(`data-list-category="${category}"`), label + " has a conflicting category");
+    assert.ok(html.includes(`data-list-page="${page}"`), label + " has a conflicting static page number");
+    assert.ok(html.includes(`data-list-data-url="${evidenceSiteRoute(`/data/listings/${category}.json`)}?v=${assetVersion}"`), label + " is missing its versioned client data");
+    const cardUrls = listingCardUrls(html, label);
+    assert.ok(cardUrls.length <= LISTING_PAGE_SIZE, label + " exceeds the static card budget");
+    listedUrls.push(...cardUrls);
+    if (pageCount > 1) {
+      assert.ok(html.includes('class="listing-pagination"'), label + " needs static pagination");
+      assert.ok(html.includes(`aria-label="현재 쪽 ${page}/${pageCount}"`), label + " must expose its current page to screen readers");
+    }
+  }
+  assertExactlyOnce(listedUrls, nodes.map((node) => node.url), `listing '${category}' cards`);
+  const data = JSON.parse(await read(join("data", "listings", `${category}.json`)));
+  assert.equal(data.category, category, `listing '${category}' data has a conflicting category`);
+  assert.equal(data.total, nodes.length, `listing '${category}' data has a conflicting total`);
+  assert.equal(data.pageSize, LISTING_PAGE_SIZE, `listing '${category}' data has a conflicting page size`);
+  assertExactlyOnce(data.items.map((item) => item.url), nodes.map((node) => node.url), `listing '${category}' client data`);
 }
 const graphPublicDocuments = evidenceGraph.nodes.filter((node) => node.visibility === "public" && !EVIDENCE_SOURCE_CATEGORIES.has(node.category));
 const graphPublicEvidence = evidenceGraph.nodes.filter((node) => node.visibility === "public" && EVIDENCE_SOURCE_CATEGORIES.has(node.category));
@@ -1360,8 +1403,8 @@ function assertFocusRelations(html, expectedEdges, relationAssertionsByEdgeId, l
   return actualIds;
 }
 
-function assertEvidenceStaticHtml(html, label, scope = null, id = null) {
-  for (const marker of [
+function assertEvidenceStaticHtml(html, label, { scope = null, id = null, hub = false } = {}) {
+  const markers = [
     "data-evidence-lens",
     "data-evidence-manifest-url=",
     "data-evidence-root-url=",
@@ -1371,13 +1414,12 @@ function assertEvidenceStaticHtml(html, label, scope = null, id = null) {
     "data-evidence-preservation",
     "data-evidence-reset",
     "data-evidence-status",
-    "data-evidence-provenance-list",
-    "data-evidence-source-list",
-    "data-evidence-assertion-list",
     "data-evidence-error hidden",
     "data-evidence-retry",
     "evidence-noscript"
-  ]) assert.ok(html.includes(marker), label + " is missing marker '" + marker + "'");
+  ];
+  if (!hub) markers.push("data-evidence-provenance-list", "data-evidence-source-list", "data-evidence-assertion-list");
+  for (const marker of markers) assert.ok(html.includes(marker), label + " is missing marker '" + marker + "'");
   assert.match(html, /<noscript>[\s\S]*evidence-noscript/, label + " needs a no-JS explanation");
   assert.doesNotMatch(html, /href="[^"]*\.json(?:[?#][^"]*)?"/, label + " must not require a JSON link for no-JS navigation");
   assert.ok(html.includes("manifest.json?v=" + evidenceAssetVersion), label + " references another evidence build");
@@ -1387,7 +1429,7 @@ function assertEvidenceStaticHtml(html, label, scope = null, id = null) {
   if (id) assert.ok(html.includes('data-evidence-focus-id="' + id + '"'), label + " has a conflicting focus id");
 }
 
-assertEvidenceStaticHtml(evidenceRootHtml, "evidence root");
+assertEvidenceStaticHtml(evidenceRootHtml, "evidence root", { hub: true });
 assert.match(evidenceRootHtml, /class="evidence-boundary"/, "evidence root must state the interpretation boundary");
 assert.ok(evidenceRootBytes.length <= EVIDENCE_DELIVERY_BUDGETS.rootHtmlBytes, "evidence root HTML exceeds its initial byte budget");
 assert.ok(gzipSync(evidenceRootBytes).length <= EVIDENCE_DELIVERY_BUDGETS.rootHtmlGzipBytes, "evidence root HTML exceeds its compressed budget");
@@ -1465,7 +1507,7 @@ for (const node of graphPublicDocuments) {
     expectedStaticEvidenceFiles.add(expectedStaticEvidenceFile("document", node.id, page));
     const label = "static evidence document '" + node.id + "' page " + page;
     const html = await read(evidenceStaticPath("document", node.id, page));
-    assertEvidenceStaticHtml(html, label, "document", node.id);
+    assertEvidenceStaticHtml(html, label, { scope: "document", id: node.id });
     assert.ok(html.includes('href="' + node.url + '"'), label + " is missing the readable knowledge document link");
     const members = edges.slice((page - 1) * EVIDENCE_STATIC_PAGE_SIZE, page * EVIDENCE_STATIC_PAGE_SIZE);
     assertExactlyOnce(
@@ -1500,7 +1542,7 @@ for (const node of graphRoutableEvidence) {
     expectedStaticEvidenceFiles.add(expectedStaticEvidenceFile("source", node.id, page));
     const label = "static evidence source '" + node.id + "' page " + page;
     const html = await read(evidenceStaticPath("source", node.id, page));
-    assertEvidenceStaticHtml(html, label, "source", node.id);
+    assertEvidenceStaticHtml(html, label, { scope: "source", id: node.id });
     assertExactlyOnce(evidenceEntityCardIds(html, "evidence-source-card", "source", label), [node.id], label + " focused source card");
     assert.ok(html.includes('href="' + node.url + '"'), label + " is missing the readable source document link");
     const members = edges.slice((page - 1) * EVIDENCE_STATIC_PAGE_SIZE, page * EVIDENCE_STATIC_PAGE_SIZE);
@@ -1539,7 +1581,7 @@ for (const edge of graphStaticRelations) {
     expectedStaticEvidenceFiles.add(expectedStaticEvidenceFile("relation", assertion.shardId, page));
     const label = "static evidence relation '" + edge.id + "' page " + page;
     const html = await read(evidenceStaticPath("relation", assertion.shardId, page));
-    assertEvidenceStaticHtml(html, label, "relation", assertion.shardId);
+    assertEvidenceStaticHtml(html, label, { scope: "relation", id: assertion.shardId });
     assert.doesNotMatch(html, /class="evidence-reviewed-relations"/, label + " must not duplicate the focused relation in a reviewed section");
     assertFocusRelations(html, [edge], relationAssertionsByEdgeId, label);
     for (const endpointId of [edge.source, edge.target]) {
@@ -1569,26 +1611,12 @@ assert.deepEqual(
   "evidence static route tree contains a missing, hidden, or stale page"
 );
 
-const evidenceRootFocusScope = evidenceRootHtml.match(/data-evidence-focus-scope="([^"]+)"/)?.[1];
-const evidenceRootFocusId = evidenceRootHtml.match(/data-evidence-focus-id="([^"]+)"/)?.[1];
-assert.equal(evidenceRootFocusScope, "document", "evidence root must start from a public document");
-assert.ok(graphPublicDocumentIds.has(evidenceRootFocusId), "evidence root starts from a missing document");
-const evidenceRootEdges = staticEdgesByDocument.get(evidenceRootFocusId) || [];
-const evidenceRootRelations = staticRelationsByDocument.get(evidenceRootFocusId) || [];
-const evidenceRootPageCount = evidenceStaticPageCount(evidenceRootEdges.length, evidenceRootRelations.length);
-assertFocusRelations(
-  evidenceRootHtml,
-  evidenceRootRelations.slice(0, EVIDENCE_STATIC_PAGE_SIZE),
-  relationAssertionsByEdgeId,
-  "evidence root"
-);
-assertEvidencePager(evidenceRootHtml, {
-  scope: "document",
-  id: evidenceRootFocusId,
-  page: 1,
-  pageCount: evidenceRootPageCount,
-  rootPage: true
-}, "evidence root");
+assert.doesNotMatch(evidenceRootHtml, /data-evidence-focus-(?:scope|id)=/, "evidence root must start without an arbitrary focus document");
+assert.match(evidenceRootHtml, /문서 또는 근거 자료를 선택해 계보를 시작하세요/, "evidence root must explain how to begin");
+assert.match(evidenceRootHtml, /<details class="evidence-entry-points" open>/, "evidence root must expose static entry points immediately");
+assert.match(evidenceRootHtml, /<h2>위키 전체 근거 문서의 보존 상태<\/h2>/, "evidence root must label its whole-wiki preservation summary");
+assert.doesNotMatch(evidenceRootHtml, /data-evidence-(?:provenance|source|assertion)-list/, "evidence root must not show empty focus rails");
+assert.doesNotMatch(evidenceRootHtml, /evidence-pagination/, "evidence root must not claim focus-page pagination");
 
 assert.ok(
   graphPublicDocuments.some((node) => evidenceRootHtml.includes('href="' + evidenceStaticRoute("document", node.id) + '"')),
@@ -1598,6 +1626,130 @@ assert.ok(
   graphPublicEvidence.some((node) => evidenceRootHtml.includes('href="' + evidenceStaticRoute("source", node.id) + '"')),
   "evidence root needs at least one no-JS source entry point"
 );
+
+const configuredSiteUrl = (process.env.SITE_URL || "").replace(/\/$/, "");
+if (configuredSiteUrl) {
+  const sitemapXml = await read("sitemap.xml");
+  const sitemapLocations = [...sitemapXml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
+  assert.ok(sitemapLocations.length, "sitemap must contain URL locations");
+
+  const routeWithoutBase = (siteRoute, label) => {
+    assert.equal(typeof siteRoute, "string", label + " must be a string");
+    assert.ok(siteRoute.startsWith(evidenceSitePrefix), label + " must stay below the configured site base");
+    const route = siteRoute.slice(evidenceSitePrefix.length) || "/";
+    assert.ok(route.startsWith("/") && route.endsWith("/") && !/[?#]/.test(route), label + " must be a canonical directory route");
+    return route;
+  };
+  const paginatedRoutes = (pageCount, routeForPage) => Array.from(
+    { length: pageCount },
+    (_, index) => routeForPage(index + 1)
+  );
+  const evidenceFocusPublicRoute = (scope, id, page = 1) => (
+    `/map/evidence/${scope}/${encodeURIComponent(String(id))}/${page > 1 ? `${page}/` : ""}`
+  );
+
+  const expectedListingRoutes = Object.keys(categoryMeta).flatMap((category) => {
+    const nodes = listingNodesByCategory.get(category) || [];
+    const pageCount = Math.max(1, Math.ceil(nodes.length / LISTING_PAGE_SIZE));
+    return paginatedRoutes(pageCount, (page) => page > 1 ? `/${category}/page/${page}/` : `/${category}/`);
+  });
+  const expectedEvidenceDocumentRoutes = graphPublicDocuments.flatMap((node) => {
+    const pageCount = evidenceStaticPageCount(
+      staticEdgesByDocument.get(node.id)?.length || 0,
+      staticRelationsByDocument.get(node.id)?.length || 0
+    );
+    return paginatedRoutes(pageCount, (page) => evidenceFocusPublicRoute("document", node.id, page));
+  });
+  const expectedEvidenceSourceRoutes = graphPublicEvidence.flatMap((node) => {
+    const pageCount = evidenceStaticPageCount(
+      staticEdgesBySource.get(node.id)?.length || 0,
+      staticRelationsByEvidence.get(node.id)?.length || 0
+    );
+    return paginatedRoutes(pageCount, (page) => evidenceFocusPublicRoute("source", node.id, page));
+  });
+  const expectedEvidenceRelationRoutes = graphStaticRelations.flatMap((edge) => {
+    const assertion = relationAssertionsByEdgeId.get(edge.id);
+    assert.ok(assertion, "sitemap relation '" + edge.id + "' is missing its stable assertion route");
+    const pageCount = evidenceStaticPageCount(graphRelationEvidence.get(edge.id)?.length || 0);
+    return paginatedRoutes(pageCount, (page) => evidenceFocusPublicRoute("relation", assertion.shardId, page));
+  });
+  const expectedArticleRoutes = expectedSiteDiscoveryUrls.map((url) => routeWithoutBase(url, "sitemap article route '" + url + "'"));
+  const expectedSitemapRoutes = [
+    "/",
+    ...expectedListingRoutes,
+    "/paths/",
+    "/map/",
+    "/map/learning/",
+    "/map/history/",
+    "/map/evidence/",
+    ...historyManifest.shards.map((record) => record.route),
+    ...expectedEvidenceDocumentRoutes,
+    ...expectedEvidenceSourceRoutes,
+    ...expectedEvidenceRelationRoutes,
+    ...verifiedLearningPaths.map((path) => `/map/learning/${path.slug}/`),
+    ...verifiedLearningPaths.map((path) => `/paths/${path.slug}/`),
+    ...expectedArticleRoutes
+  ];
+  const expectedSitemapLocations = expectedSitemapRoutes.map((route) => `${configuredSiteUrl}${route}`);
+
+  const normalizePublicUrl = (value, label) => {
+    let parsed;
+    try {
+      parsed = new URL(value);
+    } catch {
+      assert.fail(label + " is not an absolute URL: '" + value + "'");
+    }
+    assert.equal(parsed.search, "", label + " must not contain a query");
+    assert.equal(parsed.hash, "", label + " must not contain a fragment");
+    return parsed.href;
+  };
+  const normalizedExpectedLocations = expectedSitemapLocations.map((location) => normalizePublicUrl(location, "expected sitemap URL"));
+  const normalizedSitemapLocations = sitemapLocations.map((location) => normalizePublicUrl(location, "sitemap URL"));
+  assert.equal(
+    normalizedExpectedLocations.length,
+    new Set(normalizedExpectedLocations).size,
+    "expected static public route set contains duplicate URLs"
+  );
+  assertExactlyOnce(normalizedSitemapLocations, normalizedExpectedLocations, "sitemap static public routes");
+
+  const sitemapHtmlPath = (location) => {
+    const parsed = new URL(location);
+    let sitePath;
+    try {
+      sitePath = decodeURI(parsed.pathname);
+    } catch {
+      assert.fail("sitemap URL contains malformed path encoding: '" + location + "'");
+    }
+    assert.ok(sitePath.startsWith(evidenceSitePrefix), "sitemap URL escapes the configured site base: '" + location + "'");
+    const route = sitePath.slice(evidenceSitePrefix.length) || "/";
+    assert.ok(route.startsWith("/") && route.endsWith("/"), "sitemap URL must identify a directory route: '" + location + "'");
+    const parts = route.split("/").filter(Boolean).map((rawPart) => {
+      let part;
+      try {
+        part = decodeURIComponent(rawPart);
+      } catch {
+        assert.fail("sitemap URL contains malformed segment encoding: '" + location + "'");
+      }
+      assert.ok(part !== "." && part !== "..", "sitemap URL contains traversal: '" + location + "'");
+      assert.ok(!/[\\/\u0000-\u001f\u007f]/.test(part), "sitemap URL contains an unsafe path segment: '" + location + "'");
+      return part;
+    });
+    return parts.length ? join(...parts, "index.html") : "index.html";
+  };
+
+  for (const location of sitemapLocations) {
+    const normalizedLocation = normalizePublicUrl(location, "sitemap URL");
+    const html = await read(sitemapHtmlPath(location));
+    const canonicalUrls = [...html.matchAll(/<link rel="canonical" href="([^"]+)">/g)].map((match) => match[1]);
+    const openGraphUrls = [...html.matchAll(/<meta property="og:url" content="([^"]+)">/g)].map((match) => match[1]);
+    assert.equal(canonicalUrls.length, 1, "sitemap page '" + location + "' must expose exactly one canonical URL");
+    assert.equal(openGraphUrls.length, 1, "sitemap page '" + location + "' must expose exactly one og:url");
+    assert.equal(normalizePublicUrl(canonicalUrls[0], "canonical URL"), normalizedLocation, "sitemap page '" + location + "' has a conflicting canonical URL");
+    assert.equal(normalizePublicUrl(openGraphUrls[0], "og:url"), normalizedLocation, "sitemap page '" + location + "' has a conflicting og:url");
+  }
+
+  console.log(`Verified sitemap: ${sitemapLocations.length} unique public routes with matching canonical metadata`);
+}
 
 console.log(
   "Verified evidence lens: "

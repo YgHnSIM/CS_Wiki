@@ -71,7 +71,7 @@
 
 .learning-map-hero dt {
   color: var(--muted);
-  font-size: 9px;
+  font-size: var(--type-meta);
 }
 
 .learning-map-hero dd {
@@ -104,7 +104,7 @@
   margin: 0 0 8px;
   color: var(--amber);
   font-family: var(--display);
-  font-size: 9px;
+  font-size: var(--type-meta);
   letter-spacing: 0.12em;
 }
 
@@ -118,7 +118,7 @@
   display: block;
   margin-top: 8px;
   color: var(--muted);
-  font-size: 10px;
+  font-size: var(--type-meta);
 }
 
 .learning-line-list {
@@ -167,7 +167,7 @@
 }
 
 .learning-line-meta {
-  font-size: 9px;
+  font-size: var(--type-meta);
 }
 
 .learning-line-track {
@@ -283,7 +283,7 @@
 
 .learning-line-heading dt {
   color: var(--muted);
-  font-size: 9px;
+  font-size: var(--type-meta);
 }
 
 .learning-line-heading dd {
@@ -377,7 +377,7 @@
 .learning-station-order {
   color: var(--amber);
   font-family: var(--display);
-  font-size: 9px;
+  font-size: var(--type-meta);
 }
 
 .learning-station strong {
@@ -389,7 +389,7 @@
 
 .learning-station a > span:last-child {
   margin-top: 7px;
-  font-size: 9px;
+  font-size: var(--type-meta);
   line-height: 1.5;
 }
 
@@ -422,12 +422,12 @@
   gap: 18px;
   border-block: 1px solid var(--line-strong);
   color: var(--muted);
-  font-size: 9px;
+  font-size: var(--type-meta);
 }
 
 .learning-map-status-row output {
   color: var(--phosphor);
-  font-size: 10px;
+  font-size: var(--type-meta);
 }
 
 .learning-station-inspector {
@@ -449,7 +449,7 @@
 
 .learning-station-copy > span {
   color: var(--muted);
-  font-size: 9px;
+  font-size: var(--type-meta);
 }
 
 .learning-station-copy h2 {
@@ -478,7 +478,7 @@
   padding: 5px 8px;
   border: 1px solid var(--line);
   color: var(--muted);
-  font-size: 9px;
+  font-size: var(--type-meta);
 }
 
 .learning-station-flags span:first-child {
@@ -493,7 +493,7 @@
   padding: 10px 12px;
   border: 1px solid var(--line-strong);
   color: var(--phosphor);
-  font-size: 10px;
+  font-size: var(--type-meta);
 }
 
 .learning-station-actions a:hover,
@@ -517,7 +517,7 @@
   flex-direction: column;
   border: 1px solid var(--line);
   color: var(--muted);
-  font-size: 10px;
+  font-size: var(--type-meta);
   line-height: 1.5;
 }
 
@@ -529,7 +529,7 @@
 .learning-adjacent a span {
   margin-bottom: 5px;
   color: var(--amber);
-  font-size: 8px;
+  font-size: var(--type-meta);
 }
 
 .learning-transfers h3 {
@@ -541,7 +541,7 @@
 .learning-transfers > p {
   margin: 10px 0 18px;
   color: var(--muted);
-  font-size: 10px;
+  font-size: var(--type-meta);
   line-height: 1.65;
 }
 
@@ -574,12 +574,12 @@
 .learning-transfers a span,
 .learning-transfers a small {
   color: var(--amber);
-  font-size: 8px;
+  font-size: var(--type-meta);
 }
 
 .learning-transfers a strong {
   color: var(--text);
-  font-size: 9px;
+  font-size: var(--type-meta);
   line-height: 1.45;
 }
 
@@ -588,7 +588,7 @@
   padding: 14px 22px;
   border-bottom: 1px solid var(--line);
   color: var(--muted);
-  font-size: 10px;
+  font-size: var(--type-meta);
 }
 
 .path-map-entry {

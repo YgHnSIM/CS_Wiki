@@ -190,6 +190,8 @@ test("local graph selection separates four channels and excludes hidden operatio
   assert.deepEqual(local.views.guide.map((record) => record.node.title), ["Related", "Learner"]);
   assert.deepEqual(local.views.evidence.map((record) => record.node.title), ["Evidence"]);
   assert.deepEqual(local.views.trace.map((record) => record.node.title), ["Mentioned"]);
+  assert.deepEqual(local.allViews, local.views);
+  assert.deepEqual(local.displayedCounts, local.counts);
   assert.equal(local.records.some((record) => record.node.title === "Hidden"), false);
   assert.equal(local.totalNeighbors, 4);
   assert.equal(local.totalEdges, 5);
@@ -215,6 +217,24 @@ test("local graph shows one neighbor card while preserving every edge and direct
   assert.equal(local.views.guide[0].primaryEdge.kind, "recommends");
   assert.equal(local.views.trace[0].primaryEdge.kind, "mentions");
   assert.equal(local.views.guide.length, 1);
+});
+
+test("local graph exposes complete channel views alongside the limited preview", () => {
+  const focus = page("Focus", {
+    graphId: "concept-focus",
+    body: "[[One]], [[Two]], [[Three]]을 언급한다."
+  });
+  const one = page("One");
+  const two = page("Two");
+  const three = page("Three");
+  const result = graph([focus, one, two, three]);
+  const local = selectLocalGraph(result, "concept-focus", { limit: 2 });
+
+  assert.deepEqual(local.allViews.trace.map((record) => record.node.title), ["One", "Three", "Two"]);
+  assert.deepEqual(local.views.trace.map((record) => record.node.title), ["One", "Three"]);
+  assert.equal(local.counts.trace, 3);
+  assert.equal(local.displayedCounts.trace, 2);
+  assert.equal(local.allViews.trace.length - local.displayedCounts.trace, 1);
 });
 
 test("channel views keep weaker relations that share a neighbor with a stronger guide edge", () => {

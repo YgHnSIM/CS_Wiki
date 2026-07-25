@@ -145,15 +145,19 @@ export function selectLocalGraph(graph, focusId, { limit = 6, edgesByNodeId = nu
   const visibleRecords = featuredRecords;
   const visibleIds = new Set(visibleRecords.map((record) => record.neighborId));
   const hiddenRecords = records.filter((record) => !visibleIds.has(record.neighborId));
-  const views = Object.fromEntries(CHANNEL_ORDER.map((channel) => [channel, channelViews[channel].slice(0, limit)]));
+  const allViews = Object.fromEntries(CHANNEL_ORDER.map((channel) => [channel, channelViews[channel]]));
+  const views = Object.fromEntries(CHANNEL_ORDER.map((channel) => [channel, allViews[channel].slice(0, limit)]));
   const counts = Object.fromEntries(CHANNEL_ORDER.map((channel) => [channel, channelViews[channel].length]));
+  const displayedCounts = Object.fromEntries(CHANNEL_ORDER.map((channel) => [channel, views[channel].length]));
   return {
     focus,
     totalNeighbors: records.length,
     totalEdges: records.reduce((sum, record) => sum + record.edges.length, 0),
     counts,
+    displayedCounts,
     channels: CHANNEL_ORDER,
     records,
+    allViews,
     views,
     visibleRecords,
     hiddenRecords

@@ -57,7 +57,7 @@
 
 .history-hero dt {
   color: var(--muted);
-  font-size: 10px;
+  font-size: var(--type-meta);
   letter-spacing: 0.08em;
 }
 
@@ -76,6 +76,7 @@
   border-bottom: 1px solid var(--line-strong);
   background: rgba(10, 0, 20, 0.96);
   grid-template-columns: minmax(280px, 1.65fr) repeat(4, minmax(124px, 0.68fr)) 100px;
+  grid-template-areas: "search era layer capability display reset";
 }
 
 .history-controls[hidden],
@@ -90,7 +91,7 @@
   padding: 11px 14px;
   border-right: 1px solid var(--line);
   color: var(--muted);
-  font-size: 10px;
+  font-size: var(--type-meta);
   letter-spacing: 0.06em;
 }
 
@@ -132,6 +133,32 @@
 
 .history-search-shell {
   position: relative;
+  grid-area: search;
+}
+
+.history-filter-era,
+.history-controls > label:nth-of-type(1) {
+  grid-area: era;
+}
+
+.history-filter-layer,
+.history-controls > label:nth-of-type(2) {
+  grid-area: layer;
+}
+
+.history-filter-capability,
+.history-controls > label:nth-of-type(3) {
+  grid-area: capability;
+}
+
+.history-filter-display,
+.history-controls > label:nth-of-type(4) {
+  grid-area: display;
+}
+
+.history-filter-reset,
+.history-controls > button {
+  grid-area: reset;
 }
 
 .history-search-results {
@@ -179,7 +206,7 @@
 
 .history-search-result small {
   color: var(--muted);
-  font-size: 10px;
+  font-size: var(--type-meta);
 }
 
 .history-state-bar {
@@ -251,7 +278,7 @@
 .history-inspector-kicker {
   margin: 0 0 5px;
   color: var(--phosphor);
-  font-size: 10px;
+  font-size: var(--type-meta);
   letter-spacing: 0.1em;
 }
 
@@ -314,7 +341,7 @@
 .history-era-list small,
 .history-era-action small {
   color: var(--muted);
-  font-size: 9px;
+  font-size: var(--type-meta);
   grid-column: 1 / -1;
   line-height: 1.45;
 }
@@ -373,7 +400,7 @@
   grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
   align-items: center;
   gap: 9px;
-  font-size: 10px;
+  font-size: var(--type-meta);
   text-align: center;
 }
 
@@ -429,7 +456,7 @@
 
 .history-lane-header span {
   color: var(--muted);
-  font-size: 9px;
+  font-size: var(--type-meta);
 }
 
 .history-lane-events {
@@ -502,7 +529,7 @@
 .history-event-time,
 .history-event-card time {
   color: var(--amber);
-  font-size: 10px;
+  font-size: var(--type-meta);
 }
 
 .history-event-title,
@@ -516,7 +543,7 @@
 .history-event-card small,
 .history-event-card span {
   color: var(--muted);
-  font-size: 9px;
+  font-size: var(--type-meta);
   line-height: 1.45;
 }
 
@@ -546,14 +573,14 @@
   padding: 7px 12px;
   color: var(--amber);
   align-items: center;
-  font-size: 10px;
+  font-size: var(--type-meta);
 }
 
 .history-event-ledger > li > p {
   padding: 0 12px 11px;
   margin: 0;
   color: var(--muted);
-  font-size: 10px;
+  font-size: var(--type-meta);
 }
 
 .history-transition-list {
@@ -610,7 +637,7 @@
 .history-transition-list button > span,
 .history-transition-type {
   color: var(--amber);
-  font-size: 9px;
+  font-size: var(--type-meta);
   letter-spacing: 0.07em;
 }
 
@@ -623,7 +650,7 @@
 .history-transition-list button > small,
 .history-transition-note {
   color: var(--muted);
-  font-size: 9px;
+  font-size: var(--type-meta);
   line-height: 1.5;
 }
 
@@ -668,14 +695,14 @@
 .history-inspector-step > span {
   display: block;
   color: var(--muted);
-  font-size: 8px;
+  font-size: var(--type-meta);
 }
 
 .history-transition-roles p,
 .history-transition-step strong,
 .history-inspector-step strong {
   margin: 3px 0 0;
-  font-size: 10px;
+  font-size: var(--type-meta);
   line-height: 1.45;
 }
 
@@ -708,7 +735,7 @@
 .history-transition-evidence p {
   margin: 0 0 5px;
   color: var(--muted);
-  font-size: 9px;
+  font-size: var(--type-meta);
   line-height: 1.5;
 }
 
@@ -721,7 +748,7 @@
   margin: 0;
   border-top: 1px dashed var(--amber-line);
   color: var(--muted);
-  font-size: 9px;
+  font-size: var(--type-meta);
   line-height: 1.55;
 }
 
@@ -763,13 +790,13 @@
 
 .history-inspector dt {
   color: var(--muted);
-  font-size: 9px;
+  font-size: var(--type-meta);
 }
 
 .history-inspector dd {
   margin: 2px 0 0;
   overflow-wrap: anywhere;
-  font-size: 10px;
+  font-size: var(--type-meta);
 }
 
 .history-inspector-actions {
@@ -785,7 +812,7 @@
   padding: 7px 10px;
   border: 1px solid var(--line-strong);
   align-items: center;
-  font-size: 9px;
+  font-size: var(--type-meta);
   text-decoration: none;
 }
 
@@ -804,7 +831,7 @@
 .history-detail-summary {
   margin: 0;
   color: var(--muted);
-  font-size: 10px;
+  font-size: var(--type-meta);
   line-height: 1.55;
 }
 
@@ -821,11 +848,11 @@
   min-height: 40px;
   padding: 7px 10px;
   border: 1px solid var(--line-strong);
-  background: var(--panel-strong);
+  background: var(--void-raised);
   color: var(--text);
   align-items: center;
   font: inherit;
-  font-size: 9px;
+  font-size: var(--type-meta);
   text-decoration: none;
 }
 
@@ -850,13 +877,13 @@
 
 .history-inspector-edge > strong {
   color: var(--amber);
-  font-size: 10px;
+  font-size: var(--type-meta);
 }
 
 .history-inspector-edge p {
   margin: 4px 0;
   color: var(--muted);
-  font-size: 9px;
+  font-size: var(--type-meta);
   line-height: 1.5;
 }
 
@@ -865,7 +892,7 @@
   flex-wrap: wrap;
   gap: 4px 8px;
   color: var(--muted);
-  font-size: 9px;
+  font-size: var(--type-meta);
 }
 
 .history-edge-evidence > span:first-child {
@@ -959,11 +986,18 @@
 
 @media (max-width: 1260px) {
   .history-controls {
-    grid-template-columns: minmax(260px, 1.5fr) repeat(2, minmax(150px, 0.75fr)) 100px;
+    grid-template-columns: minmax(240px, 1.4fr) repeat(2, minmax(150px, 0.8fr));
+    grid-template-areas:
+      "search era layer"
+      "capability display reset";
   }
 
-  .history-controls label:nth-of-type(4),
-  .history-controls label:nth-of-type(5) {
+  .history-filter-capability,
+  .history-controls > label:nth-of-type(3),
+  .history-filter-display,
+  .history-controls > label:nth-of-type(4),
+  .history-filter-reset,
+  .history-controls > button {
     border-top: 1px solid var(--line);
   }
 
@@ -989,10 +1023,6 @@
 
   .history-hero dl > div {
     min-height: 102px;
-  }
-
-  .history-controls {
-    grid-template-columns: minmax(260px, 1.35fr) repeat(2, minmax(145px, 0.7fr)) 100px;
   }
 
   .history-workspace {
@@ -1048,10 +1078,6 @@
     font-size: clamp(36px, 11vw, 48px);
   }
 
-  .history-hero h1 br {
-    display: none;
-  }
-
   .history-hero dl {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -1063,6 +1089,13 @@
 
   .history-controls {
     grid-template-columns: 1fr;
+    grid-template-areas:
+      "search"
+      "era"
+      "layer"
+      "capability"
+      "display"
+      "reset";
   }
 
   .history-controls label,
@@ -1138,7 +1171,7 @@
   .history-time-axis {
     padding-inline: 9px;
     gap: 3px;
-    font-size: 8px;
+    font-size: var(--type-meta);
   }
 
   .history-lane {
@@ -1231,4 +1264,3 @@
     outline-offset: -3px;
   }
 }
-

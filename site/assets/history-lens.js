@@ -642,6 +642,7 @@ export async function initializeHistoryLens(root, dependencies = {}) {
   let searchTimer = 0;
   let activeSearchResults = [];
   let activeSearchIndex = -1;
+  let eventFocusId = "";
   const recordCache = new Map();
   const transitionDetailPages = new Map();
   const transitionDetailSelection = new Map();
@@ -910,13 +911,13 @@ export async function initializeHistoryLens(root, dependencies = {}) {
     eraList.replaceChildren(...children);
   }
 
-  function eventButton(event, selected) {
+  function eventButton(event, selected, focusable = false) {
     const button = make("button", `history-event-card${selected ? " is-selected" : ""}`);
     button.type = "button";
     button.dataset.historyAction = "event";
     button.dataset.historyId = event.id;
     button.setAttribute("aria-current", selected ? "true" : "false");
-    button.tabIndex = selected ? 0 : -1;
+    button.tabIndex = focusable ? 0 : -1;
     button.append(
       make("span", "history-event-time", historyTimeLabel(event)),
       make("strong", "history-event-title", event.title)
@@ -937,6 +938,12 @@ export async function initializeHistoryLens(root, dependencies = {}) {
     const lanes = [...new Set(events.map((event) => event.lane))].sort((left, right) => (
       laneOrder.indexOf(left) - laneOrder.indexOf(right) || left.localeCompare(right, "ko")
     ));
+    const visibleIds = new Set(events.map((event) => event.id));
+    eventFocusId = visibleIds.has(state.event)
+      ? state.event
+      : visibleIds.has(eventFocusId)
+        ? eventFocusId
+        : events[0]?.id || "";
     const fragment = documentRef.createDocumentFragment();
     for (const lane of lanes) {
       const laneEvents = events.filter((event) => event.lane === lane);
@@ -949,11 +956,10 @@ export async function initializeHistoryLens(root, dependencies = {}) {
       const list = make("ol", "history-lane-events");
       list.setAttribute("aria-labelledby", heading.id);
       list.tabIndex = 0;
-      laneEvents.forEach((event, index) => {
+      laneEvents.forEach((event) => {
         const item = make("li", "history-event-item");
         const selected = state.event === event.id;
-        const button = eventButton(event, selected);
-        if (!state.event && !index && lane === lanes[0]) button.tabIndex = 0;
+        const button = eventButton(event, selected, event.id === eventFocusId);
         item.append(button);
         list.append(item);
       });
@@ -1313,6 +1319,7 @@ export async function initializeHistoryLens(root, dependencies = {}) {
   }
 
   function updateLocalSelection(mode, id, history = "pushState") {
+    if (mode === "event") eventFocusId = id;
     state = {
       ...state,
       mode,
@@ -1323,7 +1330,7 @@ export async function initializeHistoryLens(root, dependencies = {}) {
       const selected = node.dataset.historyAction === mode && node.dataset.historyId === id;
       node.classList?.toggle("is-selected", selected);
       node.setAttribute?.("aria-current", selected ? "true" : "false");
-      if (node.dataset.historyAction === "event") node.tabIndex = selected ? 0 : -1;
+      if (node.dataset.historyAction === "event") node.tabIndex = node.dataset.historyId === eventFocusId ? 0 : -1;
     });
     renderInspector();
     renderBreadcrumb();
@@ -1446,6 +1453,7 @@ export async function initializeHistoryLens(root, dependencies = {}) {
     });
     if (!targetId || targetId === button.dataset.historyId && !["Home", "End"].includes(event.key)) return;
     event.preventDefault?.();
+    eventFocusId = targetId;
     updateLocalSelection("event", targetId, "replaceState");
     root.querySelector?.(`[data-history-action="event"][data-history-id="${targetId}"]`)?.focus?.();
   };

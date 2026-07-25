@@ -14,6 +14,7 @@ if (explorer) {
   const toInput = explorer.querySelector("[data-connection-to]");
   const modeSelect = explorer.querySelector("[data-connection-mode]");
   const swapButton = explorer.querySelector("[data-connection-swap]");
+  const exampleButton = explorer.querySelector("[data-connection-example]");
   const copyButton = explorer.querySelector("[data-connection-copy]");
   const status = explorer.querySelector("[data-connection-status]");
   const results = explorer.querySelector("[data-connection-results]");
@@ -56,6 +57,10 @@ if (explorer) {
   let activeTo = "";
   let activeMode = "explain";
   results.setAttribute("aria-busy", "true");
+  if (!results.id) results.id = "connection-route-panel";
+  routeTabs.setAttribute("role", "tablist");
+  if (!routeTabs.hasAttribute("aria-label")) routeTabs.setAttribute("aria-label", "대안 경로");
+  if (exampleButton) exampleButton.disabled = true;
 
   function element(tag, className = "", text = "") {
     const node = document.createElement(tag);
@@ -321,11 +326,20 @@ if (explorer) {
 
   function syncRouteTabs() {
     const buttons = [...routeTabs.querySelectorAll("button")];
+    const usesTabs = activeRoutes.length > 1;
     buttons.forEach((button, indexAt) => {
       const selected = indexAt === activeRoute;
       button.setAttribute("aria-current", selected ? "true" : "false");
-      button.setAttribute("aria-pressed", String(selected));
+      button.setAttribute("aria-selected", String(selected));
+      button.tabIndex = selected ? 0 : -1;
     });
+    if (usesTabs && buttons[activeRoute]) {
+      results.setAttribute("role", "tabpanel");
+      results.setAttribute("aria-labelledby", buttons[activeRoute].id);
+    } else {
+      results.removeAttribute("role");
+      results.removeAttribute("aria-labelledby");
+    }
   }
 
   function selectRoute(indexAt, { focusHeading = false, updateHistory = true } = {}) {
@@ -343,6 +357,9 @@ if (explorer) {
     activeRoutes.forEach((path, indexAt) => {
       const button = element("button", "", path.hops === 1 ? `경로 ${indexAt + 1} · 직접 연결` : `경로 ${indexAt + 1} · ${path.hops}단계`);
       button.type = "button";
+      button.id = `connection-route-tab-${indexAt + 1}`;
+      button.setAttribute("role", "tab");
+      button.setAttribute("aria-controls", results.id);
       button.addEventListener("click", () => selectRoute(indexAt, { focusHeading: false }));
       routeTabs.append(button);
     });
@@ -354,6 +371,8 @@ if (explorer) {
     activeRoute = 0;
     routeTabs.hidden = true;
     routeTabs.replaceChildren();
+    results.removeAttribute("role");
+    results.removeAttribute("aria-labelledby");
     copyButton.hidden = true;
     copyButton.disabled = true;
     results.classList.remove("is-stale");
@@ -374,6 +393,13 @@ if (explorer) {
 
   function emptyResult(message, canExpand = false) {
     messageResult("선택한 렌즈에서는 연결을 찾지 못했습니다.", message, canExpand);
+    const chooseDestination = element("button", "", "다른 도착 문서 선택");
+    chooseDestination.type = "button";
+    chooseDestination.addEventListener("click", () => {
+      toInput.focus();
+      toInput.select();
+    });
+    results.querySelector(".connection-empty")?.append(chooseDestination);
   }
 
   function cacheKey(fromId, toId, mode) {
@@ -429,8 +455,8 @@ if (explorer) {
     const requestedRoute = Number(route);
     activeRoute = Number.isInteger(requestedRoute) && requestedRoute >= 0 && requestedRoute < activeRoutes.length ? requestedRoute : 0;
     if (!activeRoutes.length) {
-      emptyResult("관계를 다른 렌즈로 넓히거나 두 문서의 관련 항목을 보강해 보세요.", activeMode !== "shortest");
-      setStatus("선택한 렌즈에서 연결 경로를 찾지 못했습니다.");
+      emptyResult("다른 도착 문서를 선택하거나 관계 렌즈를 넓혀 보세요.", activeMode !== "shortest");
+      setStatus("선택한 렌즈에서 연결 경로를 찾지 못했습니다. 다른 도착 문서를 선택해 보세요.");
     } else {
       renderTabs();
       renderRoute({ focusHeading });
@@ -469,22 +495,40 @@ if (explorer) {
     const requestedTo = url.searchParams.get("to") || "";
     const requestedMode = url.searchParams.get("mode") || "explain";
     const validEndpoint = (id) => nodes.get(id)?.visibility === "public";
-    const fromId = validEndpoint(requestedFrom) ? requestedFrom : explorer.dataset.defaultFrom;
-    const toId = validEndpoint(requestedTo) ? requestedTo : requestedFrom && !requestedTo ? "" : explorer.dataset.defaultTo;
+    const defaultFrom = validEndpoint(explorer.dataset.defaultFrom) ? explorer.dataset.defaultFrom : "";
+    const defaultTo = validEndpoint(explorer.dataset.defaultTo) ? explorer.dataset.defaultTo : "";
+    const fromId = validEndpoint(requestedFrom)
+      ? requestedFrom
+      : url.searchParams.has("from") ? "" : defaultFrom;
+    const toId = validEndpoint(requestedTo)
+      ? requestedTo
+      : url.searchParams.has("to") || requestedFrom && !requestedTo ? "" : defaultTo;
     const mode = modeLabels[requestedMode] ? requestedMode : "explain";
     setEndpoint(fromInput, fromId);
+    setEndpoint(toInput, toId);
     modeSelect.value = mode;
-    if (!toId) {
-      toInput.value = "";
-      setInvalid(toInput, false);
+    if (!fromId || !toId || fromId === toId) {
       activeFrom = fromId;
-      activeTo = "";
+      activeTo = toId;
       activeMode = mode;
-      messageResult("도착 문서를 선택해 주세요.", "도착 문서를 선택하면 이 문서에서 출발하는 경로를 계산합니다.");
-      setStatus("도착 문서를 선택해 주세요.");
-      if (focusDestination) queueMicrotask(() => toInput.focus());
+      if (fromId && toId && fromId === toId) {
+        messageResult("서로 다른 두 문서를 선택해 주세요.", "도착 문서를 바꾸면 두 문서 사이의 경로를 계산합니다.");
+        setInvalid(toInput, true);
+        setStatus("서로 다른 두 문서를 선택해 주세요.");
+        if (focusDestination) queueMicrotask(() => toInput.focus());
+      } else if (fromId) {
+        messageResult("도착 문서를 선택해 주세요.", "도착 문서를 선택하면 이 문서에서 출발하는 경로를 계산합니다.");
+        setStatus("도착 문서를 선택해 주세요.");
+        if (focusDestination) queueMicrotask(() => toInput.focus());
+      } else if (toId) {
+        messageResult("출발 문서를 선택해 주세요.", "출발 문서를 선택하면 이 문서로 이어지는 경로를 계산합니다.");
+        setStatus("출발 문서를 선택해 주세요.");
+        if (focusDestination) queueMicrotask(() => fromInput.focus());
+      } else {
+        messageResult("두 문서를 선택해 주세요.", "출발 문서와 도착 문서를 선택하면 설명 가능한 연결 경로를 계산합니다.");
+        setStatus("두 문서를 선택해 주세요.");
+      }
     } else {
-      setEndpoint(toInput, toId);
       await compute(fromId, toId, mode, { route: url.searchParams.get("route"), focusHeading: false });
     }
     syncUrl("replaceState");
@@ -530,6 +574,19 @@ if (explorer) {
     if (endpoints) compute(endpoints.fromId, endpoints.toId, modeSelect.value, { history: "pushState", focusHeading: true });
   });
 
+  exampleButton?.addEventListener("click", () => {
+    const fromId = explorer.dataset.exampleFrom || "";
+    const toId = explorer.dataset.exampleTo || "";
+    if (!nodes || nodes.get(fromId)?.visibility !== "public" || nodes.get(toId)?.visibility !== "public" || fromId === toId) {
+      setStatus("예시 경로를 사용할 수 없습니다. 두 문서를 직접 선택해 주세요.");
+      return;
+    }
+    setEndpoint(fromInput, fromId);
+    setEndpoint(toInput, toId);
+    modeSelect.value = "explain";
+    void compute(fromId, toId, "explain", { history: "pushState", focusHeading: true });
+  });
+
   copyButton.addEventListener("click", async () => {
     try {
       await navigator.clipboard.writeText(window.location.href);
@@ -552,6 +609,10 @@ if (explorer) {
       names = buildNameIndex();
       initializePathWorker();
       form.hidden = false;
+      if (exampleButton) {
+        exampleButton.hidden = false;
+        exampleButton.disabled = false;
+      }
       await restoreFromUrl({ focusDestination: true });
     })
     .catch(() => {

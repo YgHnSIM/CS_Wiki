@@ -19,7 +19,7 @@
   margin: 0 0 8px;
   color: var(--phosphor);
   font-family: var(--display);
-  font-size: 9px;
+  font-size: var(--type-meta);
   letter-spacing: 0.13em;
 }
 
@@ -34,7 +34,7 @@
 .relationship-list-heading p {
   margin: 7px 0 0;
   color: var(--muted);
-  font-size: 10px;
+  font-size: var(--type-meta);
 }
 
 .relationship-channel-rail {
@@ -76,7 +76,7 @@
 
 .relationship-channel-rail small {
   grid-column: 1 / -1;
-  font-size: 8px;
+  font-size: var(--type-meta);
   line-height: 1.45;
 }
 
@@ -85,7 +85,7 @@
   padding: 13px 20px;
   border-bottom: 1px solid var(--line);
   color: var(--phosphor);
-  font-size: 10px;
+  font-size: var(--type-meta);
   cursor: pointer;
 }
 
@@ -192,7 +192,7 @@ marker[id^="arrow-"] path {
 .local-focus-node text {
   fill: var(--text);
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: var(--type-meta);
   pointer-events: none;
 }
 
@@ -232,7 +232,7 @@ marker[id^="arrow-"] path {
 
 .relationship-inspector > span {
   color: var(--phosphor);
-  font-size: 9px;
+  font-size: var(--type-meta);
   letter-spacing: 0.08em;
 }
 
@@ -276,7 +276,7 @@ marker[id^="arrow-"] path {
 
 .relationship-list-heading output {
   color: var(--phosphor);
-  font-size: 10px;
+  font-size: var(--type-meta);
   text-align: right;
 }
 
@@ -335,7 +335,7 @@ marker[id^="arrow-"] path {
   align-items: center;
   border: 1px solid currentColor;
   color: var(--phosphor);
-  font-size: 8px;
+  font-size: var(--type-meta);
   line-height: 1.25;
 }
 
@@ -355,7 +355,7 @@ marker[id^="arrow-"] path {
   border-radius: 0;
   background: transparent;
   color: var(--muted);
-  font-size: 9px;
+  font-size: var(--type-meta);
   cursor: pointer;
 }
 
@@ -367,7 +367,7 @@ marker[id^="arrow-"] path {
 .relationship-record > p {
   margin: 10px 0 0;
   color: var(--muted);
-  font-size: 10px;
+  font-size: var(--type-meta);
 }
 
 .relationship-edge-details {
@@ -379,7 +379,7 @@ marker[id^="arrow-"] path {
   min-height: 40px;
   padding: 9px 0;
   color: var(--phosphor);
-  font-size: 9px;
+  font-size: var(--type-meta);
   cursor: pointer;
 }
 
@@ -396,7 +396,7 @@ marker[id^="arrow-"] path {
   padding: 9px 0;
   border-top: 1px solid rgba(0, 255, 65, 0.12);
   color: var(--muted);
-  font-size: 9px;
+  font-size: var(--type-meta);
 }
 
 .relationship-edge-details strong {
@@ -426,7 +426,7 @@ marker[id^="arrow-"] path {
 
 .relationship-jump-summary span {
   color: var(--muted) !important;
-  font-size: 8px !important;
+  font-size: var(--type-meta) !important;
 }
 
 .relationship-jump-link {
@@ -478,7 +478,7 @@ marker[id^="arrow-"] path {
 
   .local-graph--compact .local-node text,
   .local-graph--compact .local-focus-node text {
-    font-size: 10px;
+    font-size: var(--type-meta);
   }
 
   .relationship-inspector {
@@ -623,7 +623,7 @@ marker[id^="arrow-"] path {
 
 .connection-hero dt {
   color: var(--muted);
-  font-size: 10px;
+  font-size: var(--type-meta);
 }
 
 .connection-hero dd {
@@ -648,7 +648,7 @@ marker[id^="arrow-"] path {
   align-items: center;
   border-right: 1px solid var(--line);
   color: var(--muted);
-  font-size: 10px;
+  font-size: var(--type-meta);
 }
 
 .map-mode-nav a[aria-current="page"] {
@@ -677,7 +677,7 @@ marker[id^="arrow-"] path {
   margin: 0 0 14px;
   color: var(--amber);
   font-family: var(--display);
-  font-size: 9px;
+  font-size: var(--type-meta);
   letter-spacing: 0.12em;
 }
 
@@ -691,7 +691,7 @@ marker[id^="arrow-"] path {
 .connection-builder-intro > p:last-child {
   margin: 18px 0 0;
   color: var(--muted);
-  font-size: 10px;
+  font-size: var(--type-meta);
   line-height: 1.75;
 }
 
@@ -715,7 +715,7 @@ marker[id^="arrow-"] path {
 
 .connection-form label > span {
   color: var(--muted);
-  font-size: 9px;
+  font-size: var(--type-meta);
 }
 
 .connection-form input,
@@ -754,7 +754,7 @@ marker[id^="arrow-"] path {
   background: transparent;
   color: var(--phosphor);
   font: inherit;
-  font-size: 10px;
+  font-size: var(--type-meta);
   cursor: pointer;
 }
 
@@ -802,7 +802,7 @@ marker[id^="arrow-"] path {
 .connection-state-row output,
 .connection-noscript {
   color: var(--muted);
-  font-size: 10px;
+  font-size: var(--type-meta);
 }
 
 .connection-state-row button {
@@ -843,7 +843,7 @@ marker[id^="arrow-"] path {
   background: var(--void-raised);
   color: var(--muted);
   font: inherit;
-  font-size: 10px;
+  font-size: var(--type-meta);
   cursor: pointer;
 }
 
@@ -893,7 +893,7 @@ marker[id^="arrow-"] path {
 .connection-example-label {
   margin: 14px auto 18px;
   color: var(--muted);
-  font-size: 10px;
+  font-size: var(--type-meta);
   line-height: 1.7;
 }
 
@@ -922,7 +922,7 @@ marker[id^="arrow-"] path {
   margin: 0 0 12px;
   color: var(--amber);
   font-family: var(--display);
-  font-size: 9px;
+  font-size: var(--type-meta);
   letter-spacing: 0.12em;
 }
 
@@ -940,14 +940,14 @@ marker[id^="arrow-"] path {
   max-width: 720px;
   margin: 14px 0 0;
   color: var(--muted);
-  font-size: 10px;
+  font-size: var(--type-meta);
   line-height: 1.75;
 }
 
 .connection-route-limit {
   margin: 10px 0 0;
   color: var(--amber);
-  font-size: 9px;
+  font-size: var(--type-meta);
   line-height: 1.65;
 }
 
@@ -970,13 +970,13 @@ marker[id^="arrow-"] path {
 
 .connection-route-heading dt {
   color: var(--muted);
-  font-size: 8px;
+  font-size: var(--type-meta);
 }
 
 .connection-route-heading dd {
   margin: 5px 0 0;
   color: var(--amber);
-  font-size: 10px;
+  font-size: var(--type-meta);
 }
 
 .connection-chain {
@@ -1020,7 +1020,7 @@ marker[id^="arrow-"] path {
 .connection-node > div > span {
   margin-bottom: 7px;
   color: var(--muted);
-  font-size: 8px;
+  font-size: var(--type-meta);
   letter-spacing: 0.08em;
 }
 
@@ -1036,7 +1036,7 @@ marker[id^="arrow-"] path {
 .connection-node p {
   margin: 8px 0 0;
   color: var(--muted);
-  font-size: 10px;
+  font-size: var(--type-meta);
   line-height: 1.7;
 }
 
@@ -1093,7 +1093,7 @@ marker[id^="arrow-"] path {
 
 .connection-relation-card > span {
   color: var(--phosphor);
-  font-size: 10px;
+  font-size: var(--type-meta);
   font-weight: 700;
 }
 
@@ -1104,7 +1104,7 @@ marker[id^="arrow-"] path {
 .connection-relation-card > p {
   margin: 8px 0 0;
   color: var(--muted);
-  font-size: 10px;
+  font-size: var(--type-meta);
   line-height: 1.75;
 }
 
@@ -1117,14 +1117,14 @@ marker[id^="arrow-"] path {
   min-height: 40px;
   padding: 10px 0;
   color: var(--muted);
-  font-size: 9px;
+  font-size: var(--type-meta);
   cursor: pointer;
 }
 
 .connection-relation-card details p {
   margin: 4px 0;
   color: var(--muted);
-  font-size: 9px;
+  font-size: var(--type-meta);
 }
 
 .connection-relation-alternatives {
@@ -1138,7 +1138,7 @@ marker[id^="arrow-"] path {
   padding: 3px 6px;
   border: 1px solid var(--line);
   color: var(--muted);
-  font-size: 8px;
+  font-size: var(--type-meta);
 }
 
 .connection-relation-alternatives span:first-child {
@@ -1268,7 +1268,7 @@ marker[id^="arrow-"] path {
   }
 
   .connection-hero dt {
-    font-size: 8px;
+    font-size: var(--type-meta);
   }
 
   .connection-hero dd {

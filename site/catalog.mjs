@@ -10,7 +10,10 @@ export const categoryMeta = Object.freeze({
 export const navCategories = Object.freeze(["sources", "references", "concepts", "entities", "analyses"]);
 
 export const statusMeta = {
-  active: { label: "검증됨", description: "원문 대조와 링크 검사를 통과한 문서" },
+  active: {
+    label: "원문 대조 완료",
+    description: "원문 대조와 출처·내부 링크·색인 검사를 통과해 활성 지식으로 게시한 문서"
+  },
   draft: { label: "초안", description: "근거 또는 교차 검토를 보강하는 문서" },
   review: { label: "검토 중", description: "본문과 출처 매핑을 원문과 대조하는 문서" },
   archived: { label: "보관", description: "현재 지식에서는 대체되었지만 이력을 보존하는 문서" }
@@ -26,6 +29,10 @@ export const domainMeta = {
   "domain/operating-systems": "운영체제",
   "domain/security": "보안",
   "domain/systems": "시스템",
+  "domain/database": "데이터베이스",
+  "domain/distributed-systems": "분산 시스템",
+  "domain/edge-computing": "에지 컴퓨팅",
+  "domain/performance": "성능",
   "domain/internet": "인터넷",
   "domain/mathematics": "수학",
   "domain/machine-learning": "기계 학습",

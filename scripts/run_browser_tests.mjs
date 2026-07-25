@@ -1,38 +1,9 @@
 import { spawn } from "node:child_process";
-import { request } from "node:http";
 import { join } from "node:path";
-
+import { createStaticServer } from "../site/server.mjs";
 
 const root = process.cwd();
-const server = spawn(process.execPath, [join(root, "site", "serve.mjs")], {
-  cwd: root,
-  stdio: ["ignore", "ignore", "inherit"],
-  windowsHide: true
-});
-
-function reachable() {
-  return new Promise((resolve) => {
-    const req = request("http://127.0.0.1:4173/", { method: "HEAD" }, (response) => {
-      response.resume();
-      resolve(response.statusCode === 200);
-    });
-    req.on("error", () => resolve(false));
-    req.setTimeout(500, () => {
-      req.destroy();
-      resolve(false);
-    });
-    req.end();
-  });
-}
-
-async function waitForServer() {
-  const deadline = Date.now() + 15_000;
-  while (Date.now() < deadline) {
-    if (await reachable()) return;
-    await new Promise((resolve) => setTimeout(resolve, 100));
-  }
-  throw new Error("Timed out waiting for the browser-test server");
-}
+const server = createStaticServer({ root: join(root, "dist") });
 
 function exitCode(child) {
   return new Promise((resolve, reject) => {
@@ -41,22 +12,55 @@ function exitCode(child) {
   });
 }
 
+function listen(serverInstance) {
+  return new Promise((resolve, reject) => {
+    const onError = (error) => {
+      serverInstance.off("listening", onListening);
+      reject(error);
+    };
+    const onListening = () => {
+      serverInstance.off("error", onError);
+      resolve();
+    };
+    serverInstance.once("error", onError);
+    serverInstance.once("listening", onListening);
+    serverInstance.listen(0, "127.0.0.1");
+  });
+}
+
+function close(serverInstance) {
+  return new Promise((resolve, reject) => {
+    if (!serverInstance.listening) {
+      resolve();
+      return;
+    }
+    serverInstance.close((error) => {
+      if (error) reject(error);
+      else resolve();
+    });
+    serverInstance.closeIdleConnections?.();
+  });
+}
+
 let code = 1;
 try {
-  await waitForServer();
+  await listen(server);
+  const address = server.address();
+  if (!address || typeof address === "string") throw new Error("Browser-test server did not expose a TCP port");
+  const baseURL = `http://127.0.0.1:${address.port}`;
   const cli = join(root, "node_modules", "@playwright", "test", "cli.js");
   const runner = spawn(process.execPath, [cli, "test", ...process.argv.slice(2)], {
     cwd: root,
     stdio: "inherit",
-    windowsHide: true
+    windowsHide: true,
+    env: {
+      ...process.env,
+      CS_WIKI_E2E_BASE_URL: baseURL
+    }
   });
   code = await exitCode(runner);
 } finally {
-  server.kill();
-  await Promise.race([
-    exitCode(server),
-    new Promise((resolve) => setTimeout(resolve, 1_000))
-  ]);
+  await close(server);
 }
 
 process.exit(code);

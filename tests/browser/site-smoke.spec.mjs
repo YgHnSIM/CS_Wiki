@@ -11,7 +11,7 @@ test("global search and mobile navigation work in a real browser", async ({ page
   await expect(page.locator("[data-search-dialog]")).not.toHaveAttribute("open", "");
 
   await page.setViewportSize({ width: 390, height: 844 });
-  const menu = page.getByRole("button", { name: "메뉴" });
+  const menu = page.getByRole("button", { name: "메뉴", exact: true });
   await menu.click();
   await expect(menu).toHaveAttribute("aria-expanded", "true");
   await expect(page.locator("#mobile-menu")).toBeVisible();
