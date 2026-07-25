@@ -59,7 +59,10 @@ assert.equal(
 );
 assert.match(homeHtml, /<details class="hero-toolbox">/, "home knowledge lenses must use progressive disclosure");
 for (const route of ["/paths/", "/map/learning/", "/map/", "/map/history/", "/map/evidence/"]) {
-  assert.ok(homeHtml.includes(`href="${withBase(route)}"`), `home is missing discovery route '${route}'`);
+  assert.ok(
+    homeHtml.includes(`href="${withBase(route, process.env.SITE_BASE || "")}"`),
+    `home is missing discovery route '${route}'`
+  );
 }
 
 for (const path of learningPaths) {
