@@ -42,7 +42,7 @@ graph_visibility: public
 
 > “maintaining a single-precision copy of the weights”
 
-저자들이 반정밀도 학습의 정보 손실을 다루기 위해 제시한 핵심 장치를 짧게 나타낸 표현이다.
+저자들이 반정밀도 학습의 정보 손실을 다루기 위해 제시한 핵심 장치를 간결하게 나타낸 표현이다.
 
 ## 위키 반영
 

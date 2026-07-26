@@ -85,7 +85,7 @@ status: active
 
 ### 서브루틴 라이브러리와 API
 
-[[The Preparation of Programs for an Electronic Digital Computer]]는 EDSAC의 서브루틴 체계를 [[라이브러리]], [[라이브러리 카탈로그]], [[API]], [[자동 프로그래밍]], [[포스트모템 루틴]]으로 확장해 보여준다. [[서브루틴 라이브러리에서 API로]]는 내부 구현을 모두 알지 않아도 문서화된 명세와 호출 규약을 통해 루틴을 사용할 수 있었다는 점을 현대 API의 전사로 분석한다.
+[[The Preparation of Programs for an Electronic Digital Computer]]는 EDSAC의 서브루틴 체계를 [[라이브러리]], [[라이브러리 카탈로그]], [[API]], [[자동 프로그래밍]], [[포스트모템 루틴]]으로 확장해 보여준다. [[서브루틴 라이브러리에서 API로]]는 내부 구현을 모두 알지 않아도 문서화된 명세와 호출 규약을 통해 루틴을 사용할 수 있었다는 점을 현대 API의 전신으로 분석한다.
 
 ### 계산 결과와 실행 절차의 재사용
 

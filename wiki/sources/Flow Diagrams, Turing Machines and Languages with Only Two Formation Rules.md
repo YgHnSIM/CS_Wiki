@@ -20,7 +20,7 @@ publication_year: 1966
 
 ## 개요
 
-[[Flow Diagrams, Turing Machines and Languages with Only Two Formation Rules]]는 [[코라도 뵘]]과 [[주세페 야코피니]]가 1966년에 발표한 논문이다. 이 문헌은 흐름도(flow diagram)를 수학적으로 정규화하고, 계산 절차가 합성과 반복이라는 제한된 형성 규칙으로 표현될 수 있음을 보이는 데 초점을 둔다.
+[[Flow Diagrams, Turing Machines and Languages with Only Two Formation Rules]]는 [[코라도 뵘]]과 [[주세페 야코피니]]가 1966년에 발표한 논문이다. 이 문헌은 흐름도(flow diagram)를 수학적으로 정규화하고, 계산 절차가 합성과 반복이라는 제한된 형성 규칙으로 표현될 수 있음을 보여 주는 데 초점을 둔다.
 
 이 논문은 흔히 [[구조화 프로그램 정리]]의 근거로 인용된다. 중요한 점은 이 정리가 좋은 프로그램 작성법을 직접 제시한 것이 아니라, 임의의 계산 흐름을 구조화된 형식으로 표현할 수 있다는 표현 가능성의 결과라는 점이다.
 

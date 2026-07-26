@@ -12,13 +12,13 @@ graph_id: concept-be5e965404a672d3
 
 ## 개요
 
-[[Unicode scalar value]]는 Unicode [[코드 포인트]] 가운데 surrogate code point 범위 `U+D800`–`U+DFFF`를 제외한 값이다. 따라서 범위는 `U+0000`–`U+D7FF`와 `U+E000`–`U+10FFFF`이며, UTF-8·UTF-16·UTF-32 같은 Unicode encoding form이 코드 유닛 시퀀스로 인코딩하는 대상이 된다.
+[[Unicode scalar value]]는 Unicode [[코드 포인트]] 가운데 surrogate code point 범위 `U+D800`–`U+DFFF`를 제외한 값이다. 따라서 범위는 `U+0000`–`U+D7FF`와 `U+E000`–`U+10FFFF`이며 UTF-8·UTF-16·UTF-32 같은 Unicode encoding form이 코드 유닛 시퀀스로 인코딩하는 대상이 된다.
 
 ## 코드 포인트와의 차이
 
-Unicode 코드 포인트 공간은 `U+0000`부터 `U+10FFFF`까지이며 surrogate 영역도 포함한다. 반면 scalar value는 이 영역을 제외한다. UTF-16에서는 높은 surrogate와 낮은 surrogate라는 두 [[코드 유닛]]이 한 scalar value를 표현할 수 있지만, 각 surrogate 코드 포인트 자체가 scalar value가 되는 것은 아니다.
+Unicode 코드 포인트 공간은 `U+0000`부터 `U+10FFFF`까지이며 surrogate 영역도 포함한다. 반면 scalar value는 이 영역을 제외한다. UTF-16에서는 높은 surrogate와 낮은 surrogate라는 두 [[코드 유닛]]이 하나의 scalar value를 표현할 수 있지만 각 surrogate 코드 포인트 자체가 scalar value가 되는 것은 아니다.
 
-scalar value라고 해서 반드시 현재 문자에 배정된 값이라는 뜻도 아니다. 아직 할당되지 않은 코드 포인트와 noncharacter 가운데에도 surrogate가 아닌 값은 scalar value에 포함된다. 따라서 scalar value, 배정된 문자, 사용자가 인식하는 문자 단위는 서로 구분해야 한다.
+scalar value라고 해서 반드시 현재 문자에 배정된 값이라는 뜻도 아니다. 아직 할당되지 않은 코드 포인트와 noncharacter 가운데에도 surrogate가 아닌 값은 scalar value에 포함된다. 따라서 scalar value와 배정된 문자, 사용자가 인식하는 문자 단위는 서로 구분해야 한다.
 
 ## 인코딩에서의 역할
 

@@ -24,7 +24,7 @@ historical_note: "자료가 설명하는 Manchester Baby의 최초 저장 프로
 
 [[The Manchester Small Scale Experimental Machine - The Baby]]는 University of Manchester의 Computer50 자료를 바탕으로 [[Manchester Baby]]를 정리한 참고 자료다. Baby는 1948년 6월 21일 저장된 프로그램을 전자적으로 실행한 실험 기계로, Williams-Kilburn tube 메모리의 가능성과 저장 프로그램 개념을 검증하기 위해 만들어졌다.
 
-이 자료의 핵심은 Baby가 저장 프로그램 개념을 실제 실행으로 입증했다는 점이다. Baby의 주기억 장치는 수치 데이터뿐 아니라 프로그램 명령도 담았고, 프로그램을 바꾸기 위해 전자 회로를 다시 배선하는 대신 메모리 일부를 다시 설정할 수 있었다.
+이 자료의 핵심은 Baby가 저장 프로그램 개념을 실제 실행으로 입증했다는 점이다. Baby의 주기억 장치는 수치 데이터뿐 아니라 프로그램 명령도 담았고, 프로그램을 바꾸기 위해 전자 회로를 다시 배선하는 대신 기억장치의 일부를 다시 설정할 수 있었다.
 
 ## 주요 인사이트
 

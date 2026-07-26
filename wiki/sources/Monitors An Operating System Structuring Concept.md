@@ -24,7 +24,7 @@ graph_visibility: public
 
 ## 개요
 
-[[Monitors: An Operating System Structuring Concept]]은 C. A. R. Hoare가 1974년에 제시한 모니터(monitor) 개념을 다룬 논문이다. 모니터는 공유 자원의 상태를 보관하는 지역 변수와 그 자원에 접근하는 절차를 하나의 모듈로 묶고, 한 시점에는 한 프로세스만 그 절차 안에서 실행하게 하는 구조다.
+[[Monitors: An Operating System Structuring Concept]]은 C. A. R. Hoare가 1974년에 제시한 모니터(monitor) 개념을 다룬 논문이다. 모니터는 공유 자원의 상태를 보관하는 지역 변수와 그 자원에 접근하는 절차를 하나의 모듈로 묶고, 한 번에 하나의 프로세스만 그 절차 안에서 실행하게 하는 구조다.
 
 논문은 상호 배제만으로는 충분하지 않은 경우를 조건 변수(condition variable)의 `wait`와 `signal` 연산으로 다룬다. 어떤 조건이 아직 성립하지 않으면 실행을 미루고, 조건이 바뀌었을 때 대기한 실행 주체를 재개하는 방식으로 자원 접근의 안전성과 대기 흐름을 함께 표현한다.
 

@@ -20,7 +20,7 @@ publication_year: 1936
 
 ## 개요
 
-[[An Unsolvable Problem of Elementary Number Theory]]는 [[알론조 처치]]가 1936년에 발표한 논문이다. 이 문헌은 효과적으로 계산 가능한 함수라는 직관을 람다 정의 가능성(lambda-definability)과 재귀 함수(recursive function)로 형식화하고, 특정 수론 문제가 일반적으로 풀릴 수 없음을 보였다.
+[[An Unsolvable Problem of Elementary Number Theory]]는 [[알론조 처치]]가 1936년에 발표한 논문이다. 이 문헌은 효과적으로 계산 가능한 함수라는 직관을 람다 정의 가능성(lambda-definability)과 재귀 함수(recursive function)로 형식화하고, 특정 수론 문제가 일반적으로 해결될 수 없음을 보였다.
 
 이 자료는 [[On Computable Numbers with an Application to the Entscheidungsproblem]]와 함께 [[처치-튜링 논제]]의 배경을 이룬다. Church와 Turing은 서로 다른 형식 체계를 사용했지만, 효과적 계산 가능성이라는 직관을 같은 범위로 포착한다는 점에서 연결된다.
 

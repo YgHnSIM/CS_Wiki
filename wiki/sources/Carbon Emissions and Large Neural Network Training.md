@@ -24,7 +24,7 @@ graph_visibility: public
 
 ## 개요
 
-[[Carbon Emissions and Large Neural Network Training]]은 David Patterson 등이 대형 신경망 학습의 에너지 사용과 CO₂e를 추정하고, 모델 구조·프로세서·데이터센터·지역 전력 조건이 결과를 바꾼다고 분석한 2021년 연구다. 저자들은 T5, Meena, GShard, Switch Transformer, GPT-3 등의 사례를 비교하면서 에너지와 탄소를 보고하려면 단순한 파라미터 수나 연산량만으로 충분하지 않다고 설명한다.
+[[Carbon Emissions and Large Neural Network Training]]은 David Patterson 등이 대형 신경망 학습의 에너지 사용과 CO₂e를 추정하고, 모델 구조·프로세서·데이터센터·지역 전력 조건이 결과를 바꾼다고 분석한 2021년 연구다. 저자들은 T5, Meena, GShard, Switch Transformer, GPT-3 등의 사례를 비교하면서 에너지와 탄소를 보고하려면 단순한 파라미터 수나 연산량만으로는 충분하지 않다고 설명한다.
 
 논문은 희소 활성화 모델, 데이터센터 인프라, 가속기, 전력망의 탄소 집약도가 결과를 크게 바꿀 수 있음을 제시한다. 보고된 배수는 논문이 다룬 모델·장비·위치·측정 가정의 결과이므로, 모든 학습이나 추론 워크로드의 보편적 절감률로 사용하지 않는다.
 

@@ -20,7 +20,7 @@ publication_year: 1972
 
 ## 개요
 
-[[Structured Programming]]은 [[올레요한 달]], [[에츠허르 데이크스트라]], [[토니 호어]]의 글을 묶은 1972년 책이다. 첫 부분의 Dijkstra `Notes on Structured Programming`은 프로그램을 이해하고 증명하고 단계적으로 구성하는 방법을 다루며, Hoare의 글은 데이터 구조화, Dahl과 Hoare의 글은 계층적 프로그램 구조를 다룬다.
+[[Structured Programming]]은 [[올레요한 달]], [[에츠허르 데이크스트라]], [[토니 호어]]의 글을 묶은 1972년 책이다. 책의 첫 부분에 실린 Dijkstra의 `Notes on Structured Programming`은 프로그램을 이해하고 증명하며 단계적으로 구성하는 방법을 다룬다. Hoare의 글은 데이터 구조화를, Dahl과 Hoare의 글은 계층적 프로그램 구조를 다룬다.
 
 이 책에서 [[구조적 프로그래밍]]은 단순히 `goto`를 쓰지 않는 규칙이 아니다. 프로그램을 인간이 감당할 수 있는 작은 구조로 나누고, 그 구조들이 어떤 조건에서 올바른지 추론할 수 있게 만드는 설계 방법이다.
 

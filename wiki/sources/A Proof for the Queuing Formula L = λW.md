@@ -24,7 +24,7 @@ graph_visibility: public
 
 ## 개요
 
-[[A Proof for the Queuing Formula L = λW]]는 John D. C. Little이 1961년에 발표한 대기열 이론 논문이다. 논문은 한 시스템에서 단위 시간당 평균 도착률의 역수를 `1/λ`, 시스템 안의 평균 단위 수를 `L`, 한 단위가 시스템 안에 머무는 평균 시간을 `W`로 두고 다음 관계를 보인다.
+[[A Proof for the Queuing Formula L = λW]]는 John D. C. Little이 1961년에 발표한 대기열 이론 논문이다. 논문은 한 시스템에서 단위 시간당 평균 도착률의 역수를 `1/λ`, 시스템 안의 평균 단위 수를 `L`, 한 단위가 시스템 안에 머무는 평균 시간을 `W`로 두고 다음 관계를 제시한다.
 
 `L = λW`
 

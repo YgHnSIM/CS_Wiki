@@ -26,7 +26,7 @@ graph_visibility: public
 
 [[Decoupling Algorithms from Schedules for Easy Optimization of Image Processing Pipelines]]는 Jonathan Ragan-Kelley 등 연구진이 2012년 SIGGRAPH에서 발표한 Halide 논문이다. 저자들은 고성능 영상 처리 코드를 작성할 때 계산이 무엇을 하는지와, 중간값을 어디에 두고 어떤 순서로 계산할지를 같은 코드에 섞는 관행이 가독성·이식성·모듈성을 해친다고 보았다.
 
-Halide는 알고리즘을 함수들의 조합으로 표현하고, 스케줄에는 저장 위치, 계산 순서, 타일링, 융합, 재계산 또는 저장, 벡터화와 병렬화 선택을 둔다. 같은 알고리즘에 여러 스케줄을 적용해 ARM, x86, GPU 같은 서로 다른 대상에 맞는 실행을 탐색할 수 있게 한 것이 핵심이다.
+Halide는 알고리즘을 함수들의 조합으로 표현하고, 스케줄로 저장 위치, 계산 순서, 타일링, 융합, 재계산 또는 저장, 벡터화와 병렬화 방식을 지정한다. 같은 알고리즘에 여러 스케줄을 적용해 ARM, x86, GPU 같은 서로 다른 대상에 맞는 실행을 탐색할 수 있게 한 것이 핵심이다.
 
 ## 계산 정의와 실행 배치의 분리
 

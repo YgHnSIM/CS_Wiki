@@ -24,7 +24,7 @@ graph_visibility: public
 
 ## 개요
 
-[[LLVM - A Compilation Framework for Lifelong Program Analysis and Transformation|LLVM]]은 Chris Lattner와 Vikram Adve가 2004년 CGO에서 발표한 컴파일러 프레임워크 논문이다. 논문은 소스 언어와 특정 기계 사이에 정적 단일 대입(SSA) 형식의 저수준 공통 표현을 두고, 컴파일 시점뿐 아니라 링크·실행·실행 사이 유휴 시간에도 분석과 변환을 이어 갈 수 있게 하려 했다.
+[[LLVM - A Compilation Framework for Lifelong Program Analysis and Transformation|LLVM]]은 Chris Lattner와 Vikram Adve가 2004년 CGO에서 발표한 컴파일러 프레임워크 논문이다. 논문은 소스 언어와 특정 기계 사이에 정적 단일 대입(SSA) 형식의 저수준 공통 표현을 두고, 컴파일 시점뿐 아니라 링크·실행 시점과 실행 사이의 유휴 시간에도 분석과 변환을 이어 갈 수 있게 하려 했다.
 
 핵심은 하나의 표현이 모든 언어의 고수준 구조를 그대로 보존한다는 데 있지 않다. LLVM의 표현은 언어 독립적인 형식·명시적인 제어 흐름·무한 가상 레지스터를 제공하면서도 목적 기계 코드로 낮출 수 있도록 설계되었다. 이 균형은 언어별 프런트엔드, 공통 최적화, 기계별 백엔드를 느슨하게 분리하는 기반이 된다.
 

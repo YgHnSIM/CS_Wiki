@@ -1,7 +1,7 @@
 ---
 title: The Preparation of Programs for an Electronic Digital Computer
 aliases: [WWG, Preparation of Programs, 프로그램 준비, EDSAC programming textbook]
-summary: "Wilkes, Wheeler, Gill의 EDSAC 프로그래밍 문헌을 바탕으로 서브루틴 라이브러리, 카탈로그, 오류 진단, 자동 프로그래밍을 API의 전사로 정리한 참고 자료."
+summary: "Wilkes, Wheeler, Gill의 EDSAC 프로그래밍 문헌을 바탕으로 서브루틴 라이브러리, 카탈로그, 오류 진단, 자동 프로그래밍을 API의 전신으로 정리한 참고 자료."
 tags: [type/reference, domain/computer-history, domain/software-engineering, status/active]
 created: 2026-07-09
 updated: 2026-07-18
@@ -27,7 +27,7 @@ status: active
 
 이 참고 자료의 핵심은 서브루틴을 단순한 코드 조각이 아니라 문서화되고 검증되며 반복 사용되는 인터페이스 단위로 다룬다는 점이다. EDSAC의 [[라이브러리 카탈로그]]는 각 루틴의 동작, 사용 방법, 실행 시간, 정밀도, 저장 공간을 명시했고, 사용자는 내부 구현을 모두 알지 않아도 그 명세에 기대어 프로그램을 구성할 수 있었다.
 
-책의 라이브러리 관점은 현대 [[API]] 문서와 직접 연결된다. 이름 붙은 기능, 호출 규약, 전제 조건, 비용 정보, 구현 은닉, 버전 교체 가능성은 모두 현대 API 설계의 핵심 요소다. 다만 EDSAC의 라이브러리는 종이 테이프, 메모리 위치, 수작업 입력, 기계별 명령어에 강하게 묶여 있었기 때문에 현대 API와 동일시하기보다는 API적 사고의 전사로 보는 편이 정확하다.
+책의 라이브러리 관점은 현대 [[API]] 문서와 직접 연결된다. 이름 붙은 기능, 호출 규약, 전제 조건, 비용 정보, 구현 은닉, 버전 교체 가능성은 모두 현대 API 설계의 핵심 요소다. 다만 EDSAC의 라이브러리는 종이 테이프, 메모리 위치, 수작업 입력, 기계별 명령어에 강하게 묶여 있었기 때문에 현대 API와 동일시하기보다는 API적 사고의 전신으로 보는 편이 정확하다.
 
 ## 주요 인사이트
 

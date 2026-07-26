@@ -24,7 +24,7 @@ status: active
 
 [[Reevaluating Amdahl's Law]]은 John L. Gustafson이 1988년 《Communications of the ACM》에 발표한 짧은 논문이다. [[Validity of the Single Processor Approach to Achieving Large Scale Computing Capabilities]]에서 유래한 암달의 고정 문제 크기 가속 관점이 당시의 대규모 병렬 과학 계산을 충분히 설명하지 못한다고 주장하고, 실행 시간을 일정하게 두면서 병렬 부분의 문제 크기를 늘리는 확대 크기 가속(scaled speedup)을 제시한다.
 
-논문의 출발점은 Sandia National Laboratories의 1024프로세서 하이퍼큐브였다. Gustafson은 병렬 실행 시간 기준의 순차 비율이 약 0.4–0.8%인 빔 응력 분석, 표면파 시뮬레이션, 불안정 유체 흐름의 세 응용에서 각각 1021배, 1020배, 1016배의 가속을 달성했다고 보고했다. 이 수치는 대규모 병렬성이 불가능하다는 보편적 결론에 대한 반례로 제시됐지만, 세 과학 계산과 당시의 시스템·측정 방식에 한정된 결과다.
+논문의 출발점은 Sandia National Laboratories의 1024개 프로세서 하이퍼큐브였다. Gustafson은 병렬 실행 시간을 기준으로 한 순차 비율이 약 0.4–0.8%인 빔 응력 분석, 표면파 시뮬레이션, 불안정 유체 흐름의 세 응용에서 각각 1021배, 1020배, 1016배의 가속을 달성했다고 보고했다. 이 수치는 대규모 병렬성이 불가능하다는 보편적 결론에 대한 반례로 제시됐지만, 세 과학 계산과 당시의 시스템·측정 방식에 한정된 결과다.
 
 ## 암달의 고정 크기 모델
 

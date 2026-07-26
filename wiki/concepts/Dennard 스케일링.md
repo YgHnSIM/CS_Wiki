@@ -15,7 +15,7 @@ historical_note: "MOSFET 축소 규칙을 제시한 Dennard 등의 논문이 출
 
 ## 개요
 
-[[Dennard 스케일링]](Dennard scaling)은 MOSFET의 치수와 공급 전압을 같은 비율로 낮춰 내부 전기장을 일정하게 유지하는 축소 규칙이다. Robert Dennard와 IBM 연구진의 [[Design of Ion-Implanted MOSFET's with Very Small Physical Dimensions]]에서 제시되었으며, 일정 전계 스케일링(constant-field scaling)이라고도 한다.
+[[Dennard 스케일링]](Dennard scaling)은 MOSFET의 치수와 공급 전압을 같은 비율로 낮춰 내부 전기장을 일정하게 유지하는 축소 규칙이다. Robert Dennard와 IBM 연구진의 [[Design of Ion-Implanted MOSFET's with Very Small Physical Dimensions]]에서 제시됐으며 일정 전계 스케일링(constant-field scaling)이라고도 한다.
 
 ## 이상적 축소 규칙
 
@@ -30,7 +30,7 @@ historical_note: "MOSFET 축소 규칙을 제시한 Dennard 등의 논문이 출
 | 회로당 전력 | 약 `1/κ²` | 소자 하나의 전력이 줄어든다 |
 | 전력 밀도 | 대체로 일정 | 집적도 증가를 열 증가 없이 흡수한다 |
 
-이 관계가 성립하면 트랜지스터 수, 동작 속도와 에너지 효율을 동시에 개선할 수 있다. [[무어의 법칙]]이 관찰한 집적도 증가가 오랫동안 클럭과 단일 코어 성능 향상으로 전환될 수 있었던 중요한 이유다.
+이 관계가 성립하면 트랜지스터 수와 동작 속도, 에너지 효율을 동시에 개선할 수 있다. [[무어의 법칙]]이 관찰한 집적도 증가가 오랫동안 클럭과 단일 코어 성능 향상으로 전환될 수 있었던 중요한 이유다.
 
 ## 무어의 법칙과의 차이
 
@@ -40,7 +40,7 @@ historical_note: "MOSFET 축소 규칙을 제시한 Dennard 등의 논문이 출
 
 소자가 작아질수록 임계 전압과 공급 전압을 같은 속도로 계속 낮추기 어려워졌다. 누설 전류, 변동성, 절연막과 신뢰성, 배선 지연도 더 큰 비중을 차지했다. 전압 축소가 치수 축소를 따라가지 못하면 소자당 전력이 충분히 줄지 않고, 모든 트랜지스터를 동시에 높은 주파수로 사용할 때 전력 밀도와 발열이 증가한다.
 
-이 변화는 단일 코어 클럭 상승의 둔화와 멀티코어 전환의 배경이다. [[The Landscape of Parallel Computing Research - A View from Berkeley]]가 기록하듯, 더 많은 트랜지스터를 복잡한 단일 코어에 투입하는 방식의 수익이 줄면서 병렬 하드웨어, 에너지 효율과 소프트웨어 공동 설계가 중심 과제가 되었다.
+이 변화는 단일 코어 클럭 상승의 둔화와 멀티코어 전환의 배경이다. [[The Landscape of Parallel Computing Research - A View from Berkeley]]가 기록하듯 더 많은 트랜지스터를 복잡한 단일 코어에 투입하는 방식의 수익이 줄면서 병렬 하드웨어, 에너지 효율과 소프트웨어 공동 설계가 중심 과제가 됐다.
 
 ## 장기 효율과 활성 면적
 

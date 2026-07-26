@@ -22,7 +22,7 @@ status: active
 
 ## 개요
 
-[[In-Datacenter Performance Analysis of a Tensor Processing Unit]]는 Norman P. Jouppi와 Google 연구진이 2017년에 발표한 1세대 Tensor Processing Unit(TPU) 평가 논문이다. 2015년부터 데이터센터 신경망 추론에 배치된 맞춤형 ASIC을 동시대 서버급 CPU와 GPU에 비교한다.
+[[In-Datacenter Performance Analysis of a Tensor Processing Unit]]는 Norman P. Jouppi와 Google 연구진이 2017년에 발표한 1세대 Tensor Processing Unit(TPU) 평가 논문이다. 2015년부터 데이터센터 신경망 추론에 배치된 맞춤형 ASIC을 동시대 서버급 CPU·GPU와 비교한다.
 
 TPU의 핵심은 65,536개의 8비트 곱셈-누산기(MAC)를 갖춘 행렬 곱셈 장치와 28 MiB의 소프트웨어 관리 온칩 메모리다. 논문은 최고 92 TOPS라는 연산률뿐 아니라 실제 서비스의 MLP, CNN, LSTM 작업과 [[꼬리 지연 시간|99백분위 응답 시간]] 제약을 평가한다.
 

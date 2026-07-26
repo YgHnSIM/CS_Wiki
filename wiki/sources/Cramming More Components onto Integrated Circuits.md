@@ -22,7 +22,7 @@ status: active
 
 ## 개요
 
-[[Cramming More Components onto Integrated Circuits]]는 Fairchild Semiconductor의 Gordon E. Moore가 1965년 《Electronics》에 발표한 글이다. Moore는 집적 회로가 더 많은 부품을 한 칩에 넣으면서 비용, 신뢰성, 성능 면에서 이점을 얻을 것이라고 전망했다. 이 글은 훗날 [[무어의 법칙]]이라 불린 경험적 추세의 출발점이다.
+[[Cramming More Components onto Integrated Circuits]]는 Fairchild Semiconductor의 Gordon E. Moore가 1965년 《Electronics》에 발표한 글이다. Moore는 집적 회로가 더 많은 부품을 한 칩에 집적하면서 비용, 신뢰성, 성능 면에서 이점을 얻을 것이라고 전망했다. 이 글은 훗날 [[무어의 법칙]]이라 불린 경험적 추세의 출발점이다.
 
 논문의 핵심 변수는 단순한 트랜지스터 크기가 아니라 **부품당 비용을 최소화하는 집적 회로의 복잡도**다. 집적도가 너무 낮으면 칩 제조와 패키징의 고정비가 충분히 분산되지 않고, 너무 높으면 수율 저하가 비용을 올린다. Moore는 이 최소 비용 지점의 부품 수가 당시 해마다 약 두 배로 증가했다고 보았다.
 

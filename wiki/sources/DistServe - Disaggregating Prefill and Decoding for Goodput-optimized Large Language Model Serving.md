@@ -24,7 +24,7 @@ graph_visibility: public
 
 ## 개요
 
-[[DistServe - Disaggregating Prefill and Decoding for Goodput-optimized Large Language Model Serving]]는 Zhong 등 연구진이 OSDI 2024에서 발표한 LLM 서빙 시스템 연구다. 자동회귀 요청을 한 종류의 반복 작업으로 보지 않고, 입력 토큰을 병렬로 처리해 첫 토큰과 [[KV 캐시]]를 만드는 **프리필(prefill)**과 이후 토큰을 순차 생성하는 **디코드(decode)**로 나눈다.
+[[DistServe - Disaggregating Prefill and Decoding for Goodput-optimized Large Language Model Serving]]는 Zhong 등 연구진이 OSDI 2024에서 발표한 LLM 서빙 시스템 연구다. 자동회귀 요청을 동일한 반복 작업으로 보지 않고, 입력 토큰을 병렬로 처리해 첫 토큰과 [[KV 캐시]]를 만드는 **프리필(prefill)**과 이후 토큰을 순차 생성하는 **디코드(decode)**로 나눈다.
 
 두 단계는 같은 Transformer 연산을 사용하지만 자원 특성이 다르다. 충분히 긴 입력의 프리필은 큰 행렬 연산으로 계산 자원을 활용하기 쉽고, 요청별로 한 토큰씩 진행하는 디코드는 단독 실행 시 메모리 대역폭과 배치 구성의 영향을 크게 받는다. 두 단계를 같은 GPU와 [[연속 배칭]] 안에 함께 두면 긴 프리필이 디코드 토큰 간 지연을 늘리거나, 디코드를 우선한 스케줄링이 첫 토큰 대기를 늘릴 수 있다. 또한 두 단계에 같은 병렬화와 복제 수를 적용해야 해 각 단계의 자원 구성을 독립적으로 고르기 어렵다.
 

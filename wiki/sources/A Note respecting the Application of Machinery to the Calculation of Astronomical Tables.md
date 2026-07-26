@@ -22,7 +22,7 @@ status: active
 
 ## 개요
 
-[[A Note respecting the Application of Machinery to the Calculation of Astronomical Tables]]는 [[찰스 배비지]]가 1822년 6월 14일 천문학회에서 읽은 발표문이다. 배비지는 표 계산에 차분법(method of differences)을 적용한 기계를 보고하고, 계산된 값의 순서에 맞춰 기계가 활자를 배치하는 구상을 함께 설명한다. 이 원문은 [[차분 기관]]을 단순 산술 장치가 아니라 인쇄 가능한 [[수학 표]]를 만드는 장치로 해석하는 직접 근거다.
+[[A Note respecting the Application of Machinery to the Calculation of Astronomical Tables]]는 [[찰스 배비지]]가 1822년 6월 14일 천문학회에서 읽은 발표문이다. 배비지는 표 계산에 차분법(method of differences)을 적용한 기계를 보고하고, 계산된 값의 순서에 맞춰 기계가 활자를 배치하는 구상을 함께 설명한다. 이 원문은 [[차분 기관]]을 단순한 산술 장치가 아니라 인쇄 가능한 [[수학 표]]를 만드는 장치로 해석할 수 있게 하는 직접 근거다.
 
 ## 원문이 직접 보고한 내용
 

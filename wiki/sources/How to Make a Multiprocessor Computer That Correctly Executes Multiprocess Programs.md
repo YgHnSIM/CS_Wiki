@@ -24,7 +24,7 @@ graph_visibility: public
 
 ## 개요
 
-[[How to Make a Multiprocessor Computer That Correctly Executes Multiprocess Programs]]은 Leslie Lamport가 1979년에 발표한 짧은 논문으로, 다중 프로세서의 메모리 실행이 언제 올바르다고 할 수 있는지 순차 일관성(sequential consistency)으로 정의한다. 결과는 모든 프로세서의 메모리 연산이 어떤 하나의 순차적 순서로 실행된 것처럼 보이고, 각 프로세서의 연산은 자기 프로그램이 지정한 순서로 나타날 때 순차 일관적이다.
+[[How to Make a Multiprocessor Computer That Correctly Executes Multiprocess Programs]]은 Leslie Lamport가 1979년에 발표한 짧은 논문으로, 다중 프로세서의 메모리 실행이 언제 올바르다고 할 수 있는지 순차 일관성(sequential consistency)으로 정의한다. 모든 프로세서의 메모리 연산이 어떤 하나의 순차적 순서로 실행된 것처럼 보이고 각 프로세서의 연산이 자기 프로그램이 지정한 순서로 나타날 때, 그 실행은 순차 일관적이다.
 
 논문은 각 프로세서가 개별적으로 순차 실행한다고 해도, 프로세서와 메모리 모듈의 결합 결과가 자동으로 순차 일관적이지는 않다고 지적한다. 특히 동기화 알고리즘은 한 프로세서 안에서 명령이 어떻게 보이는지뿐 아니라 다른 프로세서가 읽고 쓰는 공유 상태의 관찰 순서에 의존한다.
 

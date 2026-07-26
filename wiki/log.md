@@ -201,7 +201,7 @@ status: active
 
 ## [2026-07-09] reference | The Preparation of Programs for an Electronic Digital Computer
 
-Internet Archive의 `The Preparation of Programs for an Electronic Digital Computer` 전문을 참고 자료로 읽고, EDSAC의 서브루틴 라이브러리를 현대 API의 전사로 해석하는 페이지들을 추가했다.
+Internet Archive의 `The Preparation of Programs for an Electronic Digital Computer` 전문을 참고 자료로 읽고, EDSAC의 서브루틴 라이브러리를 현대 API의 전신으로 해석하는 페이지들을 추가했다.
 
 변경된 페이지:
 
@@ -228,7 +228,7 @@ Internet Archive의 `The Preparation of Programs for an Electronic Digital Compu
 처리 메모:
 
 - `raw/` 원본은 수정하지 않고 외부 참고 자료 링크를 출처로 기록했다.
-- EDSAC 라이브러리 카탈로그를 API 문서의 전사로 정리하되, 현대 API와 직접 동일시하지 않도록 분석 페이지에 한계를 명시했다.
+- EDSAC 라이브러리 카탈로그를 API 문서의 전신으로 정리하되, 현대 API와 직접 동일시하지 않도록 분석 페이지에 한계를 명시했다.
 - 포스트모템 루틴을 디버깅 도구이자 라이브러리의 일부로 연결했다.
 - 자동 프로그래밍을 주소 보정, 서브루틴 조립, 변환·해석 루틴의 초기 흐름으로 정리했다.
 
@@ -359,7 +359,7 @@ Turing의 `On Computable Numbers with an Application to the Entscheidungsproblem
 처리 메모:
 
 - 계산을 유한한 규칙에 따른 기호 상태 변환으로 정리했다.
-- 보편 튜링 기계를 저장 프로그램 컴퓨터와 직접 동일시하지 않고, 프로그램 기술을 데이터처럼 다루는 이론적 전사로 연결했다.
+- 보편 튜링 기계를 저장 프로그램 컴퓨터와 직접 동일시하지 않고, 프로그램 기술을 데이터처럼 다루는 이론적 전신으로 연결했다.
 - 정지 문제와 Entscheidungsproblem을 "명확한 문제라도 일반 판정 절차가 없을 수 있다"는 계산 불가능성의 사례로 정리했다.
 - Church의 effective calculability와 Turing의 computability 연결을 처치-튜링 논제로 정리했다.
 - `raw/` 원본은 수정하지 않고 외부 참고 자료 링크를 출처로 기록했다.
@@ -3053,6 +3053,19 @@ CAP의 네트워크 분할 경계, Raft의 crash fault 복제 로그, Spanner의
 
 - 정적 사이트 빌드와 출력 검증, Node·Python 단위 테스트, Chromium 브라우저 회귀 검사를 실행했다.
 - 위키 lint와 유지보수 dry-run을 통과했고, `raw/` 원본과 첨부 파일은 변경하지 않았다.
+
+## [2026-07-26] update | 전체 문서 문장 윤문·교열
+
+전체 위키 문서를 대상으로 기술적 의미와 문서 구조를 유지하면서 한국어 문장, 조사·호응, 번역투 표현과 오탈자를 점검하고 윤문했다. `raw/` 원본은 수정하지 않았으며, 수정 후 전체 위키 린트와 차이 검사를 다시 실행했다.
+
+### 변경된 페이지
+
+- `wiki/` 문서 전반
+
+### 검증
+
+- 위키 페이지 340개에서 린트 오류·경고 0건을 확인했다.
+- `git diff --check`를 통과했다.
 
 <!-- wiki-maintenance: global-sections -->
 ## 출처

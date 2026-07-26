@@ -25,7 +25,7 @@ graph_visibility: public
 
 ## 개요
 
-[[MLPerf Inference Power Measurement]]는 [[MLPerf Inference Benchmark]]의 성능 실행과 같은 구간에서 시스템이 실제로 끌어온 전력과 에너지를 재현 가능하게 측정하는 공식 방법론이다. MLCommons는 2021년 Inference v1.0 결과에서 처음으로 선택적 전력 측정을 공개했고, 이후 전력 계측 문서와 제출 규칙을 벤치마크 판본에 맞춰 유지한다.
+[[MLPerf Inference Power Measurement]]는 [[MLPerf Inference Benchmark]]의 성능 실행과 같은 구간에서 시스템이 실제로 소비한 전력과 에너지를 재현 가능하게 측정하는 공식 방법론이다. MLCommons는 2021년 Inference v1.0 결과에서 처음으로 선택적 전력 측정을 공개했고, 이후 전력 계측 문서와 제출 규칙을 벤치마크 판본에 맞춰 유지한다.
 
 공식 방법은 전원 공급 경로에 인증된 전력 분석기를 연결하고 SPEC PTDaemon을 통해 샘플을 수집한다. 공개 결과의 전력 열은 Server·Offline에서는 시스템 평균 전력, 스트림 시나리오에서는 스트림당 에너지로 해석된다. 값은 벤치마크 실행 동안 벽면에서 측정한 전체 시스템 AC 전력 또는 에너지에 기반한다.
 
