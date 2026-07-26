@@ -1764,6 +1764,15 @@ console.log(
 );
 
 const outputTotals = await verifyOutputEnvelope(dist);
+
+const publicHtmlFiles = (await relativeFiles(dist)).filter((file) => file.endsWith(".html"));
+const leakedWikiMarkup = [];
+for (const file of publicHtmlFiles) {
+  const html = await read(file);
+  if (/wiki-v2:|\[!(?:NOTE|WARNING)\]/.test(html)) leakedWikiMarkup.push(file);
+}
+assert.deepEqual(leakedWikiMarkup, [], "public HTML contains internal wiki markers or unnormalized callouts");
+
 console.log(
   `Verified output envelope: ${outputTotals.files} files, `
   + `${(outputTotals.totalBytes / 1024 / 1024).toFixed(2)} MiB total, `

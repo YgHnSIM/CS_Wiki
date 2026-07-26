@@ -15,6 +15,7 @@ import { graphNodeId } from "./graph/schema.mjs";
 import { describeRelationship, indexGraphEdges, relationLabel, selectLocalGraph } from "./graph/selectors.mjs";
 import { createDataOutputPath, createOutputWriter } from "./output.mjs";
 import { loadSiteCss } from "./styles/index.mjs";
+import { prepareWikiMarkdown } from "./markdown.mjs";
 import {
   cleanInline,
   escapeHtml,
@@ -303,7 +304,7 @@ function renderWikiLinks(body) {
 function renderMarkdown(page) {
   headingSlugs.clear();
   const body = page.body.replace(/\r?\n## 관련 항목\s*[\s\S]*$/m, "").trim();
-  return md.render(renderWikiLinks(body));
+  return md.render(renderWikiLinks(prepareWikiMarkdown(body)));
 }
 
 function pageHeadings(page) {
