@@ -1,9 +1,10 @@
-import { cp, mkdir, readFile, rm } from "node:fs/promises";
+import { cp, mkdir, rm } from "node:fs/promises";
 import { existsSync } from "node:fs";
 import { join } from "node:path";
 import { createHash } from "node:crypto";
 import MarkdownIt from "markdown-it";
 import anchor from "markdown-it-anchor";
+import { createAssetHash } from "./asset-fingerprint.mjs";
 import { connectionSummary, createConnectionIndex, findConnectionPaths } from "./assets/connection-paths.js";
 import { buildLearningMap } from "./assets/learning-lines.js";
 import { categoryMeta, domainMeta, historyPeriods, learningPaths, navCategories, statusMeta } from "./catalog.mjs";
@@ -37,19 +38,10 @@ const siteUrl = (process.env.SITE_URL || "").replace(/\/$/, "");
 const repositoryUrl = "https://github.com/YgHnSIM/CS_Wiki";
 const withBase = (pathname = "/") => addBase(pathname, siteBase);
 const siteCss = await loadSiteCss(root);
-const assetHash = createHash("sha256")
-  .update(siteCss)
-  .update(await readFile(join(root, "site", "assets", "site.js")))
-  .update(await readFile(join(root, "site", "assets", "article-relationships.js")))
-  .update(await readFile(join(root, "site", "assets", "connection-paths.js")))
-  .update(await readFile(join(root, "site", "assets", "connection-explorer.js")))
-  .update(await readFile(join(root, "site", "assets", "connection-worker.js")))
-  .update(await readFile(join(root, "site", "assets", "learning-lines.js")))
-  .update(await readFile(join(root, "site", "assets", "learning-map.js")))
-  .update(await readFile(join(root, "site", "assets", "history-state.js")))
-  .update(await readFile(join(root, "site", "assets", "history-lens.js")))
-  .update(await readFile(join(root, "site", "assets", "evidence-state.js")))
-  .update(await readFile(join(root, "site", "assets", "evidence-lens.js")));
+const assetHash = await createAssetHash({
+  assetRoot: join(root, "site", "assets"),
+  generatedAssets: [{ path: "site.css", bytes: siteCss }]
+});
 
 const historyFacetMeta = Object.freeze({
   historical: {

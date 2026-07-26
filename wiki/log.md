@@ -16,7 +16,7 @@ created: 2026-05-03
 updated: 2026-07-26
 review:
   mode: legacy-baseline
-  revision: sha256:7f55fe0fb61a112990f07b3568280ff347e878030cfdef4d8d89a0d68c82b477
+  revision: sha256:c649a350ac41fa1e93df5f30a7e121908335af8319cbf5ae7de3175fdf290a78
   reviewed_at: null
   reviewed_by: legacy-baseline
 evidence_ids: []
@@ -117,6 +117,8 @@ redirect_from:
 - [2026-07-26 update | 모바일 회로 패널 모서리 장식 정리](logs/log-2026-07-26-085-모바일-회로-패널-모서리-장식-정리.md)
 - [2026-07-26 update | CS Wiki UI 전면 개선](logs/log-2026-07-26-086-cs-wiki-ui-전면-개선.md)
 - [2026-07-26 update | 전체 문서 문장 윤문·교열](logs/log-2026-07-26-087-전체-문서-문장-윤문-교열.md)
+- [2026-07-26 create | CS_Wiki 프로젝트 학습 해설서](logs/log-2026-07-26-088-CS-Wiki-프로젝트-학습-해설서.md)
+- [2026-07-26 update | 프로젝트 검증 도구와 자산 해시 리팩터링](logs/log-2026-07-26-089-프로젝트-검증-도구와-자산-해시-리팩터링.md)
 
 ## 출처
 
