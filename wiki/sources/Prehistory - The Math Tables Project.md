@@ -1,26 +1,76 @@
 ---
+schema_version: 2
+id: ref-057
+kind: reference
 title: "Prehistory: The Math Tables Project"
-aliases: ["Prehistory: The Math Tables Project", Prehistory - The Math Tables Project, NBS Math Tables Project, Mathematical Tables Project, 수학 표 프로젝트]
-summary: "1938–1946년 WPA 사업으로 운영되고 NBS가 지도부·시설·장비를 지원한 Mathematical Tables Project의 인간 계산자 약 450명, 알고리즘·작업표 중심 분업, 37권의 표와 전시 계산 업무를 정리한 NIST 공식 역사 자료."
-tags: [type/reference, domain/computer-history, domain/mathematics, status/active]
+aliases:
+  - "Prehistory: The Math Tables Project"
+  - Prehistory - The Math Tables Project
+  - NBS Math Tables Project
+  - Mathematical Tables Project
+  - 수학 표 프로젝트
+summary: 1938–1946년 WPA 사업으로 운영되고 NBS가 지도부·시설·장비를 지원한 Mathematical Tables Project의 인간 계산자 약 450명, 알고리즘·작업표 중심 분업, 37권의 표와 전시 계산 업무를 정리한 NIST 공식 역사 자료.
+domains:
+  - computer-history
+  - mathematics
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-07-20
-updated: 2026-07-20
-publication_year: 2022
-event_start: 1938
-event_end: 1946
-historical_note: "NIST가 2022년에 공개한 역사 페이지가 1938–1946년 WPA/NBS Mathematical Tables Project를 회고한다."
-historical_layer: system
-capability_layers: [resource-efficiency, reliable-results]
-sources: ["NIST, Prehistory: The Math Tables Project", "David Alan Grier, The Math Tables Project: The Reluctant Start of the Computing Era", "NIST, Mathematics and Statistics at NIST - A Timeline"]
-source_id: ref-057
-source_kind: external
-primary_sources: ["NIST, Prehistory: The Math Tables Project"]
-supporting_sources: ["David Alan Grier, The Math Tables Project: The Reluctant Start of the Computing Era", "NIST, Mathematics and Statistics at NIST - A Timeline"]
-source_urls: ["https://www.nist.gov/mathematics-statistics/prehistory-math-tables-project", "https://doi.org/10.1109/85.707573", "https://www.nist.gov/mathematics-statistics/mathematics-and-statistics-nist-timeline"]
-retrieved: 2026-07-20
-version: "MTP page created 2022-03-11, updated 2022-06-19; NIST timeline updated 2022-06-08"
-snapshot_status: external-only
-status: active
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:a87c91a649ec872aaf07268c629c145af3ce37a3947fe0c0671f735826cdcc86
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers:
+  - resource-efficiency
+  - reliable-results
+history:
+  publication_year: 2022
+  event:
+    start: 1938
+    end: 1946
+    basis: publication-process
+    evidence_id: null
+  note: NIST가 2022년에 공개한 역사 페이지가 1938–1946년 WPA/NBS Mathematical Tables Project를 회고한다.
+  layer: system
+redirect_from:
+  - /references/prehistory-the-math-tables-project/
+  - /sources/prehistory-the-math-tables-project/
+origin: external
+works:
+  primary:
+    - citation: "NIST, Prehistory: The Math Tables Project"
+      genre: standard
+      identifiers: []
+      edition: MTP page created 2022-03-11, updated 2022-06-19; NIST timeline updated 2022-06-08
+  supporting:
+    - citation: "David Alan Grier, The Math Tables Project: The Reluctant Start of the Computing Era"
+      genre: official-record
+      identifiers: []
+      edition: null
+    - citation: NIST, Mathematics and Statistics at NIST - A Timeline
+      genre: standard
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: canonical
+    url: https://www.nist.gov/mathematics-statistics/prehistory-math-tables-project
+    retrieved: 2026-07-20
+    version: MTP page created 2022-03-11, updated 2022-06-19; NIST timeline updated 2022-06-08
+  - kind: url
+    role: doi
+    url: https://doi.org/10.1109/85.707573
+    retrieved: 2026-07-20
+    version: MTP page created 2022-03-11, updated 2022-06-19; NIST timeline updated 2022-06-08
+  - kind: url
+    role: mirror
+    url: https://www.nist.gov/mathematics-statistics/mathematics-and-statistics-nist-timeline
+    retrieved: 2026-07-20
+    version: MTP page created 2022-03-11, updated 2022-06-19; NIST timeline updated 2022-06-08
 ---
 
 ## 개요
@@ -56,6 +106,11 @@ NIST는 전쟁 이후에도 프로젝트가 해군 지원을 받았지만 인간
 이 자료는 [[인간 계산자]]의 직업적 의미와 [[인간 계산자와 계산 공장]]의 핵심 사례를 뒷받침한다. [[수학 표]]에서는 표 한 권이 계산, 검산, 편집과 배포로 이루어진 집단적 생산물이라는 점을 구체화한다.
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - NIST, [Prehistory: The Math Tables Project](https://www.nist.gov/mathematics-statistics/prehistory-math-tables-project)
 - David Alan Grier, [The Math Tables Project: The Reluctant Start of the Computing Era](https://doi.org/10.1109/85.707573), IEEE Annals of the History of Computing 20(3), 1998, pp. 33–50.

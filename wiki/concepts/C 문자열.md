@@ -1,13 +1,35 @@
 ---
+schema_version: 2
+id: concept-3d371068dd880445
+kind: concept
 title: C 문자열
-aliases: [C string, C-style string, Null terminator, 널 종단 문자열]
-summary: "Null terminator로 문자열 경계를 표시하는 C 스타일 문자열 표현."
-tags: [type/concept, domain/software-engineering, domain/security, status/active]
+aliases:
+  - C string
+  - C-style string
+  - Null terminator
+  - 널 종단 문자열
+summary: Null terminator로 문자열 경계를 표시하는 C 스타일 문자열 표현.
+domains:
+  - software-engineering
+  - security
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-05-12
-updated: 2026-07-25
-sources: ["데이터 표현과 인코딩.md", "The Development of the C Language", CWE-20 Improper Input Validation, CWE-190 Integer Overflow or Wraparound]
-status: active
-graph_id: concept-3d371068dd880445
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:be0d66c20798f274a6f3def9b004460628a8da90da4d10ee19950e9164ed67b9
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids:
+  - src-006
+  - ref-019
+  - ref-090
+  - ref-091
+capability_layers: []
+redirect_from:
+  - /concepts/c-문자열/
 ---
 
 ## 개요
@@ -37,6 +59,14 @@ C 문자열은 [[데이터 표현]]에서 경계 정보가 얼마나 중요한�
 | constrains | [[입력 검증]] | 바이트열·선언 길이·널 종단·소비 함수가 기대하는 길이 단위가 일치하도록 경계 계약을 요구한다. | [[CWE-20 Improper Input Validation]], [[CWE-190 Integer Overflow or Wraparound]] |
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- `src-006`
+- `ref-019`
+- `ref-090`
+- `ref-091`
+<!-- wiki-v2:evidence-end -->
 
 - [[데이터 표현과 인코딩]]
 - [[The Development of the C Language]]

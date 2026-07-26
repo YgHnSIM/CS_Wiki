@@ -1,20 +1,47 @@
 ---
+schema_version: 2
+id: src-004
+kind: source
 title: 서브루틴과 스택(Stack)의 원리
-aliases: [서브루틴과 스택, Subroutine and Stack]
-summary: "서브루틴의 본질을 복귀 주소 관리로 설명하고 Wheeler Jump에서 스택 프레임까지의 발전을 정리한 소스."
-tags: [type/source, domain/software-engineering, domain/computer-architecture, domain/computer-history, status/active]
+aliases:
+  - 서브루틴과 스택
+  - Subroutine and Stack
+summary: 서브루틴의 본질을 복귀 주소 관리로 설명하고 Wheeler Jump에서 스택 프레임까지의 발전을 정리한 소스.
+domains:
+  - software-engineering
+  - computer-architecture
+  - computer-history
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-05-04
-updated: 2026-07-10
-sources: ["서브루틴과 스택(Stack)의 원리.md"]
-source_id: src-004
-source_kind: raw
-primary_sources: ["서브루틴과 스택(Stack)의 원리.md"]
-supporting_sources: []
-source_urls: []
-retrieved: 2026-07-10
-version: null
-snapshot_status: local
-status: active
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:0314a9f1306c5f28266967685caee4fdb2e9368c01666c151bf9439f9a1b9617
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers: []
+redirect_from:
+  - /sources/서브루틴과-스택-stack-의-원리/
+origin: local
+works:
+  primary:
+    - citation: 서브루틴과 스택(Stack)의 원리.md
+      genre: raw-note
+      identifiers: []
+      edition: null
+  supporting: []
+access:
+  - kind: local
+    role: original
+    path: raw/서브루틴과 스택(Stack)의 원리.md
+    retrieved: 2026-07-10
+    version: null
+    sha256: 543cd233a03d8e8f15cf91f3eecebdf3ca15c69ad0febf5052d4745f36f858f3
+    media_type: text/markdown
+    bytes: 20586
 ---
 
 ## 핵심 요약
@@ -38,10 +65,13 @@ status: active
 ## 인용할 만한 구절
 
 > 서브루틴의 역사는 곧 복귀 주소(return address)를 어떻게 기억하고 복원할 것인가의 역사라고 볼 수 있다.
+<!-- wiki-v2:quote-locator evidence="src-004" locator="wiki/sources/서브루틴과 스택(Stack)의 원리.md:line-21#인용할-만한-구절" status="recorded" -->
 
 > 스택은 복귀 주소를 하나만 기억하는 구조에서, 호출 깊이만큼 여러 개 기억하는 구조로의 전환이다.
+<!-- wiki-v2:quote-locator evidence="src-004" locator="wiki/sources/서브루틴과 스택(Stack)의 원리.md:line-23#인용할-만한-구절" status="recorded" -->
 
 > 결국 스택은 다음 질문에 대한 역사적 답이다.
+<!-- wiki-v2:quote-locator evidence="src-004" locator="wiki/sources/서브루틴과 스택(Stack)의 원리.md:line-25#인용할-만한-구절" status="recorded" -->
 
 ## 관련 위키 페이지
 
@@ -54,6 +84,11 @@ status: active
 - [[소프트웨어 공학]]
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - `raw/서브루틴과 스택(Stack)의 원리.md`
 

@@ -1,13 +1,33 @@
 ---
+schema_version: 2
+id: concept-60bcdf34d9470eea
+kind: concept
 title: GOTO 문
-aliases: [goto, go to statement, 점프 문, 무조건 분기]
-summary: "프로그램 실행을 지정된 라벨이나 주소로 직접 이동시키는 제어문."
-tags: [type/concept, domain/programming-languages, domain/software-engineering, status/active]
+aliases:
+  - goto
+  - go to statement
+  - 점프 문
+  - 무조건 분기
+summary: 프로그램 실행을 지정된 라벨이나 주소로 직접 이동시키는 제어문.
+domains:
+  - programming-languages
+  - software-engineering
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-07-10
-updated: 2026-07-22
-sources: ["A Case against the GO TO Statement", "Structured Programming with go to Statements"]
-status: active
-graph_id: concept-60bcdf34d9470eea
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:2cd10bdce9cbd972e1a3789ee85f7e8ed0266697ad5390bd8454969039983c90
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids:
+  - ref-011
+  - ref-014
+capability_layers: []
+redirect_from:
+  - /concepts/goto-문/
 ---
 
 ## 개요
@@ -23,6 +43,12 @@ graph_id: concept-60bcdf34d9470eea
 Dijkstra의 비판은 `goto`가 계산 능력에 필요 없다는 주장에 머물지 않는다. 더 중요한 문제는 무제한 `goto`가 실행 진행을 설명할 독립적인 좌표계를 흐리게 만든다는 점이다. Knuth는 이후 논쟁을 정리하며 더 나은 반복 구문과 오류 탈출 구문이 많은 `goto` 사용을 대체할 수 있지만 모든 경우를 단순 금지 규칙으로 처리하는 것도 충분하지 않다고 보았다.
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- `ref-011`
+- `ref-014`
+<!-- wiki-v2:evidence-end -->
 
 - [[A Case against the GO TO Statement]]
 - [[Structured Programming with go to Statements]]

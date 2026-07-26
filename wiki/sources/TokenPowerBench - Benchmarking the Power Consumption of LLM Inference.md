@@ -1,25 +1,71 @@
 ---
+schema_version: 2
+id: ref-083
+kind: reference
 title: "TokenPowerBench: Benchmarking the Power Consumption of LLM Inference"
-aliases: ["TokenPowerBench: Benchmarking the Power Consumption of LLM Inference", TokenPowerBench, LLM inference power benchmark, 토큰파워벤치]
-summary: "LLM 추론의 GPU·노드·전체 시스템 전력을 같은 실행 구간에서 수집하고 프리필·디코드에 맞춰 에너지와 토큰당 줄을 분석하는 2026년 AAAI 연구."
-tags: [type/reference, domain/machine-learning, domain/performance, domain/systems, status/active]
-created: 2026-07-25
-updated: 2026-07-25
-publication_year: 2026
-historical_layer: measurement
-capability_layers: [realized-performance, resource-efficiency, reliable-results]
-sources: ["TokenPowerBench: Benchmarking the Power Consumption of LLM Inference"]
-source_id: ref-083
-source_kind: external
-primary_sources: ["TokenPowerBench: Benchmarking the Power Consumption of LLM Inference, AAAI-26"]
-supporting_sources: ["AAAI proceedings metadata record", "DOI metadata"]
-source_urls: ["https://ojs.aaai.org/index.php/AAAI/article/view/40535", "https://ojs.aaai.org/index.php/AAAI/article/download/40535/44496", "https://doi.org/10.1609/aaai.v40i38.40535"]
-retrieved: 2026-07-25
-version: "AAAI-26, vol. 40 no. 38, pp. 32582-32590"
-snapshot_status: external-only
-status: active
-graph_id: reference-tokenpowerbench
+aliases:
+  - "TokenPowerBench: Benchmarking the Power Consumption of LLM Inference"
+  - TokenPowerBench
+  - LLM inference power benchmark
+  - 토큰파워벤치
+summary: LLM 추론의 GPU·노드·전체 시스템 전력을 같은 실행 구간에서 수집하고 프리필·디코드에 맞춰 에너지와 토큰당 줄을 분석하는 2026년 AAAI 연구.
+domains:
+  - machine-learning
+  - performance
+  - systems
+editorial_status: active
+publication_visibility: public
 graph_visibility: public
+created: 2026-07-25
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:18109cab16af9d92e5d464696b0f2aa13d4b23908b8796d7da80ac7fedbb4658
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers:
+  - realized-performance
+  - resource-efficiency
+  - reliable-results
+history:
+  publication_year: 2026
+  layer: measurement
+redirect_from:
+  - /references/tokenpowerbench-benchmarking-the-power-consumption-of-llm-inference/
+  - /sources/tokenpowerbench-benchmarking-the-power-consumption-of-llm-inference/
+origin: external
+works:
+  primary:
+    - citation: "TokenPowerBench: Benchmarking the Power Consumption of LLM Inference, AAAI-26"
+      genre: other
+      identifiers: []
+      edition: AAAI-26, vol. 40 no. 38, pp. 32582-32590
+  supporting:
+    - citation: AAAI proceedings metadata record
+      genre: official-record
+      identifiers: []
+      edition: null
+    - citation: DOI metadata
+      genre: primary-literature
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: canonical
+    url: https://ojs.aaai.org/index.php/AAAI/article/view/40535
+    retrieved: 2026-07-25
+    version: AAAI-26, vol. 40 no. 38, pp. 32582-32590
+  - kind: url
+    role: mirror
+    url: https://ojs.aaai.org/index.php/AAAI/article/download/40535/44496
+    retrieved: 2026-07-25
+    version: AAAI-26, vol. 40 no. 38, pp. 32582-32590
+  - kind: url
+    role: doi
+    url: https://doi.org/10.1609/aaai.v40i38.40535
+    retrieved: 2026-07-25
+    version: AAAI-26, vol. 40 no. 38, pp. 32582-32590
 ---
 
 ## 개요
@@ -43,6 +89,7 @@ graph_visibility: public
 ## 인용할 만한 구절
 
 > “GPU-, node-, and system-level power”
+<!-- wiki-v2:quote-locator evidence="ref-083" locator="wiki/sources/TokenPowerBench - Benchmarking the Power Consumption of LLM Inference.md:line-21#인용할-만한-구절" status="recorded" -->
 
 전력 계측이 한 장치의 센서값에서 끝나지 않고 비교 목적에 맞는 시스템 경계를 요구한다는 점을 압축한다.
 
@@ -61,6 +108,11 @@ graph_visibility: public
 | exemplifies | [[컴퓨팅 능력이란 무엇인가]] | LLM 추론 능력을 지연·처리량뿐 아니라 지정 경계의 전력과 에너지로 측정하는 사례다. | [[TokenPowerBench - Benchmarking the Power Consumption of LLM Inference]] |
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - AAAI, [article and proceedings record](https://ojs.aaai.org/index.php/AAAI/article/view/40535)
 - AAAI, [open-access paper PDF](https://ojs.aaai.org/index.php/AAAI/article/download/40535/44496)

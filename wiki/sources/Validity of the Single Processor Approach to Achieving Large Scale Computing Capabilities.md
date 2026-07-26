@@ -1,23 +1,65 @@
 ---
+schema_version: 2
+id: ref-035
+kind: reference
 title: Validity of the Single Processor Approach to Achieving Large Scale Computing Capabilities
-aliases: [Amdahl 1967, Amdahl single processor paper]
-summary: "병렬화되지 않는 순차 작업과 데이터 관리 오버헤드가 다중 프로세서의 전체 가속을 제한한다는 주장을 제시해 암달의 법칙의 기원이 된 1967년 논문."
-tags: [type/reference, domain/computer-architecture, domain/computer-history, status/active]
+aliases:
+  - Amdahl 1967
+  - Amdahl single processor paper
+summary: 병렬화되지 않는 순차 작업과 데이터 관리 오버헤드가 다중 프로세서의 전체 가속을 제한한다는 주장을 제시해 암달의 법칙의 기원이 된 1967년 논문.
+domains:
+  - computer-architecture
+  - computer-history
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-07-15
-updated: 2026-07-18
-publication_year: 1967
-historical_layer: theory
-capability_layers: [scalability]
-sources: ["1967_Amdahl_Single_Processor_Approach.pdf", "AFIPS Spring Joint Computer Conference 1967"]
-source_id: ref-035
-source_kind: external
-primary_sources: ["AFIPS Spring Joint Computer Conference 1967"]
-supporting_sources: ["1967_Amdahl_Single_Processor_Approach.pdf", "ACM DOI record", "Carnegie Mellon University access copy"]
-source_urls: ["https://doi.org/10.1145/1465482.1465560", "https://www.cs.cmu.edu/~18742/papers/Amdahl1967.pdf"]
-retrieved: 2026-07-15
-version: null
-snapshot_status: archived
-status: active
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:b1f24f3ac0f0e7015c85feb30b3c2f0629be5a76de72dd387bd6b11a8fb14978
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers:
+  - scalability
+history:
+  publication_year: 1967
+  layer: theory
+redirect_from:
+  - /references/validity-of-the-single-processor-approach-to-achieving-large-scale-computing-capabilities/
+  - /sources/validity-of-the-single-processor-approach-to-achieving-large-scale-computing-capabilities/
+origin: external
+works:
+  primary:
+    - citation: AFIPS Spring Joint Computer Conference 1967
+      genre: other
+      identifiers: []
+      edition: null
+  supporting:
+    - citation: 1967_Amdahl_Single_Processor_Approach.pdf
+      genre: other
+      identifiers: []
+      edition: null
+    - citation: ACM DOI record
+      genre: official-record
+      identifiers: []
+      edition: null
+    - citation: Carnegie Mellon University access copy
+      genre: other
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: doi
+    url: https://doi.org/10.1145/1465482.1465560
+    retrieved: 2026-07-15
+    version: null
+  - kind: url
+    role: mirror
+    url: https://www.cs.cmu.edu/~18742/papers/Amdahl1967.pdf
+    retrieved: 2026-07-15
+    version: null
 ---
 
 ## 개요
@@ -39,12 +81,18 @@ Amdahl은 당시 생산 프로그램에서 데이터 관리와 housekeeping 작�
 ## 인용할 만한 구절
 
 > “effort expended on achieving high parallel processing rates is wasted unless it is accompanied by achievements in sequential processing rates”
+<!-- wiki-v2:quote-locator evidence="ref-035" locator="wiki/sources/Validity of the Single Processor Approach to Achieving Large Scale Computing Capabilities.md:line-19#인용할-만한-구절" status="recorded" -->
 
 ## 위키 반영
 
 이 자료는 [[제어 흐름]], [[서브루틴]], [[스택]]처럼 순차적 의존성을 갖는 실행 구조가 병렬 성능과 어떤 관계를 갖는지 확장한다. [[컴퓨팅 능력이란 무엇인가]]에서는 자원을 추가했을 때의 확장성과 이론적 최대 가속의 한계를 설명하는 근거로 사용한다. Amdahl은 모든 요구에 단일 프로세서가 항상 우월하다는 포괄적 주장을 의도하지 않았으며 각 요구를 단일·다중 프로세서 접근에서 검토해야 한다고 단서를 달았다. [[Reevaluating Amdahl's Law]]과 함께 읽으면 고정 문제 크기와 확대 문제 크기의 차이를 [[병렬 확장성]]과 [[병렬 컴퓨팅은 시간을 줄이는가 문제를 키우는가]]로 이어서 볼 수 있다.
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - 로컬 보존본: `raw/assets/1967_Amdahl_Single_Processor_Approach.pdf`
 - ACM, [Validity of the Single Processor Approach to Achieving Large Scale Computing Capabilities](https://doi.org/10.1145/1465482.1465560)

@@ -1,23 +1,67 @@
 ---
+schema_version: 2
+id: ref-046
+kind: reference
 title: The Case for Energy-Proportional Computing
-aliases: [Barroso-Hölzle 2007, Energy-proportional computing paper, 에너지 비례 컴퓨팅 논문]
-summary: "서버가 자주 머무는 중간 부하에서 전력 효율이 가장 낮았던 2007년의 불일치를 분석하고, 소비 전력이 유효 작업량에 비례하는 시스템을 설계 목표로 제안한 논문."
-tags: [type/reference, domain/computer-architecture, domain/computer-history, status/active]
+aliases:
+  - Barroso-Hölzle 2007
+  - Energy-proportional computing paper
+  - 에너지 비례 컴퓨팅 논문
+summary: 서버가 자주 머무는 중간 부하에서 전력 효율이 가장 낮았던 2007년의 불일치를 분석하고, 소비 전력이 유효 작업량에 비례하는 시스템을 설계 목표로 제안한 논문.
+domains:
+  - computer-architecture
+  - computer-history
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-07-16
-updated: 2026-07-18
-publication_year: 2007
-historical_layer: system
-capability_layers: [resource-efficiency]
-sources: ["Computer 40(12), 2007", "Google Research publication record", "Google Research author copy"]
-source_id: ref-046
-source_kind: external
-primary_sources: ["Barroso and Hölzle, Computer 40(12), 2007"]
-supporting_sources: ["Google Research publication record", "Google Research author copy"]
-source_urls: ["https://doi.org/10.1109/MC.2007.443", "https://research.google/pubs/the-case-for-energy-proportional-computing/", "https://research.google.com/pubs/archive/33387.pdf"]
-retrieved: 2026-07-16
-version: "Computer 40(12), December 2007, pp. 33–37"
-snapshot_status: external-only
-status: active
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:9cafeac75f19fb624a90b92fb0d52042e9ecb1357a8176447b6ab9469cfdc01e
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers:
+  - resource-efficiency
+history:
+  publication_year: 2007
+  layer: system
+redirect_from:
+  - /references/the-case-for-energy-proportional-computing/
+  - /sources/the-case-for-energy-proportional-computing/
+origin: external
+works:
+  primary:
+    - citation: Barroso and Hölzle, Computer 40(12), 2007
+      genre: other
+      identifiers: []
+      edition: Computer 40(12), December 2007, pp. 33–37
+  supporting:
+    - citation: Google Research publication record
+      genre: official-record
+      identifiers: []
+      edition: null
+    - citation: Google Research author copy
+      genre: other
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: doi
+    url: https://doi.org/10.1109/MC.2007.443
+    retrieved: 2026-07-16
+    version: Computer 40(12), December 2007, pp. 33–37
+  - kind: url
+    role: mirror
+    url: https://research.google/pubs/the-case-for-energy-proportional-computing/
+    retrieved: 2026-07-16
+    version: Computer 40(12), December 2007, pp. 33–37
+  - kind: url
+    role: mirror
+    url: https://research.google.com/pubs/archive/33387.pdf
+    retrieved: 2026-07-16
+    version: Computer 40(12), December 2007, pp. 33–37
 ---
 
 ## 개요
@@ -73,6 +117,7 @@ CPU는 전압과 주파수를 낮춘 상태에서도 명령을 수행하는 활�
 ## 인용할 만한 구절
 
 > 서버의 가장 흔한 운용 구간과 가장 낮은 에너지 효율 구간이 겹쳤다.
+<!-- wiki-v2:quote-locator evidence="ref-046" locator="wiki/sources/The Case for Energy-Proportional Computing.md:line-53#인용할-만한-구절" status="recorded" -->
 
 논문의 문제 설정을 한국어로 요약한 문장이다.
 
@@ -88,6 +133,11 @@ CPU는 전압과 주파수를 낮춘 상태에서도 명령을 수행하는 활�
 | enables | [[에너지 비례 컴퓨팅]] | 유휴부터 첨두까지 유용한 처리량에 맞춰 전력이 변하는지를 시스템 능력의 평가 기준으로 만든다. | [[The Case for Energy-Proportional Computing]] |
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - IEEE, [DOI record](https://doi.org/10.1109/MC.2007.443)
 - Google Research, [publication record](https://research.google/pubs/the-case-for-energy-proportional-computing/)

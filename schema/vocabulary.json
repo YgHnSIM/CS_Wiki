@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cs-wiki.local/schema/vocabulary.json",
+  "schema_version": 2,
+  "kinds": ["source", "reference", "entity", "concept", "analysis", "meta"],
+  "editorial_statuses": ["draft", "review", "active", "retired"],
+  "publication_visibilities": ["public", "unlisted", "private"],
+  "graph_visibilities": ["public", "context", "hidden"],
+  "source_origins": ["local", "external"],
+  "access_kinds": ["url", "local", "snapshot"],
+  "access_roles": ["original", "preservation", "canonical", "publisher", "doi", "mirror", "metadata", "archive"],
+  "genres": ["primary-literature", "secondary-literature", "standard", "manual", "official-record", "dataset", "web", "raw-note", "metadata", "other"],
+  "historical_layers": ["theory", "machine", "architecture", "software", "system", "service", "measurement"],
+  "capability_layers": ["computability", "complexity", "programmability", "realized-performance", "scalability", "resource-efficiency", "reliable-results"],
+  "history_bases": ["introduced", "designed", "implemented", "released", "observed", "representative", "period", "publication-process"],
+  "relation_kinds": ["broader", "narrower", "prerequisite_for", "enables", "constrains", "measures", "implements", "exemplifies", "precedes", "responds_to", "contradicts", "synthesizes"],
+  "source_id_pattern": "^(?:src|ref)-[0-9]{3,}$",
+  "page_id_pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+}

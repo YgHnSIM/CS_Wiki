@@ -1,25 +1,65 @@
 ---
+schema_version: 2
+id: ref-095
+kind: reference
 title: "Linearizability: A Correctness Condition for Concurrent Objects"
-aliases: [Herlihy Wing 1990, "Linearizability: A Correctness Condition for Concurrent Objects", "Linearizability A Correctness Condition for Concurrent Objects", linearizability paper, 동시 객체의 선형화 가능성]
-summary: "동시 객체의 각 연산이 호출과 응답 사이 한 순간에 일어난 것처럼 보이고 겹치지 않는 연산의 실제 시간 순서를 보존해야 한다는 선형화 가능성을 정의한 Herlihy와 Wing의 1990년 논문."
-tags: [type/reference, domain/computer-science, domain/software-engineering, domain/distributed-systems, status/active]
-created: 2026-07-25
-updated: 2026-07-25
-publication_year: 1990
-historical_layer: theory
-capability_layers: [reliable-results]
-sources: ["Linearizability: A Correctness Condition for Concurrent Objects"]
-source_id: ref-095
-source_kind: external
-primary_sources: ["Maurice P. Herlihy and Jeannette M. Wing, Linearizability: A Correctness Condition for Concurrent Objects, ACM Transactions on Programming Languages and Systems 12(3), 1990, pp. 463–492"]
-supporting_sources: ["ACM Digital Library publication record", "Carnegie Mellon University author-hosted paper PDF"]
-source_urls: ["https://dl.acm.org/doi/10.1145/78969.78972", "https://www.cs.cmu.edu/~wing/publications/HerlihyWing90.pdf"]
-retrieved: 2026-07-25
-version: "ACM Transactions on Programming Languages and Systems 12(3), July 1990, pp. 463–492"
-snapshot_status: external-only
-status: active
-graph_id: reference-herlihy-wing-linearizability
+aliases:
+  - Herlihy Wing 1990
+  - "Linearizability: A Correctness Condition for Concurrent Objects"
+  - Linearizability A Correctness Condition for Concurrent Objects
+  - linearizability paper
+  - 동시 객체의 선형화 가능성
+summary: 동시 객체의 각 연산이 호출과 응답 사이 한 순간에 일어난 것처럼 보이고 겹치지 않는 연산의 실제 시간 순서를 보존해야 한다는 선형화 가능성을 정의한 Herlihy와 Wing의 1990년 논문.
+domains:
+  - computer-science
+  - software-engineering
+  - distributed-systems
+editorial_status: active
+publication_visibility: public
 graph_visibility: public
+created: 2026-07-25
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:b2f72ca029a5be1aa1a249692476f37913e24557621f4899dd9ac2b8b948f707
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers:
+  - reliable-results
+history:
+  publication_year: 1990
+  layer: theory
+redirect_from:
+  - /references/linearizability-a-correctness-condition-for-concurrent-objects/
+  - /sources/linearizability-a-correctness-condition-for-concurrent-objects/
+origin: external
+works:
+  primary:
+    - citation: "Maurice P. Herlihy and Jeannette M. Wing, Linearizability: A Correctness Condition for Concurrent Objects, ACM Transactions on Programming Languages and Systems 12(3), 1990, pp. 463–492"
+      genre: other
+      identifiers: []
+      edition: ACM Transactions on Programming Languages and Systems 12(3), July 1990, pp. 463–492
+  supporting:
+    - citation: ACM Digital Library publication record
+      genre: official-record
+      identifiers: []
+      edition: null
+    - citation: Carnegie Mellon University author-hosted paper PDF
+      genre: primary-literature
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: canonical
+    url: https://dl.acm.org/doi/10.1145/78969.78972
+    retrieved: 2026-07-25
+    version: ACM Transactions on Programming Languages and Systems 12(3), July 1990, pp. 463–492
+  - kind: url
+    role: mirror
+    url: https://www.cs.cmu.edu/~wing/publications/HerlihyWing90.pdf
+    retrieved: 2026-07-25
+    version: ACM Transactions on Programming Languages and Systems 12(3), July 1990, pp. 463–492
 ---
 
 ## 개요
@@ -41,6 +81,7 @@ graph_visibility: public
 ## 인용할 만한 구절
 
 > “takes effect instantaneously at some point”
+<!-- wiki-v2:quote-locator evidence="ref-095" locator="wiki/sources/Linearizability A Correctness Condition for Concurrent Objects.md:line-19#인용할-만한-구절" status="recorded" -->
 
 이 표현은 실제 실행 단계가 한 번에 끝난다는 뜻이 아니라, 외부 이력을 설명할 수 있는 논리적 효과 시점을 뜻한다.
 
@@ -56,6 +97,11 @@ graph_visibility: public
 | constrains | [[동시성]] | 겹치지 않은 객체 연산의 실제 시간 선후관계를 보존해야 하므로, 동시 실행의 관찰 가능한 결과에 안전성 조건을 부과한다. | [[Linearizability: A Correctness Condition for Concurrent Objects]] |
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - ACM Digital Library, [Linearizability: A Correctness Condition for Concurrent Objects](https://dl.acm.org/doi/10.1145/78969.78972)
 - Carnegie Mellon University, [author-hosted paper PDF](https://www.cs.cmu.edu/~wing/publications/HerlihyWing90.pdf)

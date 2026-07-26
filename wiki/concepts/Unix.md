@@ -1,16 +1,41 @@
 ---
+schema_version: 2
+id: concept-092a889f122121cb
+kind: concept
 title: Unix
-aliases: [UNIX, 유닉스]
-summary: "파일, 프로세스, 셸, 파이프, 시스템 호출을 중심으로 구성된 Bell Labs의 다중 사용자 대화형 운영체제."
-tags: [type/concept, domain/operating-systems, domain/computer-history, domain/software-engineering, status/active]
+aliases:
+  - UNIX
+  - 유닉스
+summary: 파일, 프로세스, 셸, 파이프, 시스템 호출을 중심으로 구성된 Bell Labs의 다중 사용자 대화형 운영체제.
+domains:
+  - operating-systems
+  - computer-history
+  - software-engineering
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-07-10
-updated: 2026-07-22
-sources: ["The UNIX Time-Sharing System", "The Development of the C Language", "The Evolution of the Unix Time-sharing System", "Portability of C Programs and the UNIX System"]
-status: active
-graph_id: concept-092a889f122121cb
-event_start: 1969
-historical_layer: system
-historical_note: "초기 Unix 시스템 개발이 시작된 1969년을 대표 시점으로 둔다."
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:1cd7b838dc3832e6f9e5f59a3e4b26031ad79307663e369a84fc09b0d6cf385b
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids:
+  - ref-018
+  - ref-019
+  - ref-020
+  - ref-021
+capability_layers: []
+history:
+  event:
+    start: 1969
+    basis: representative
+    evidence_id: ref-018
+  note: 초기 Unix 시스템 개발이 시작된 1969년을 대표 시점으로 둔다.
+  layer: system
+redirect_from:
+  - /concepts/unix/
 ---
 
 ## 개요
@@ -26,6 +51,14 @@ Unix의 핵심은 모든 기능을 하나의 거대한 프로그램 안에 넣�
 초기 Unix는 어셈블리 언어로 시작했지만 1973년 커널을 [[C 언어]]로 다시 작성하면서 현대적 형태를 갖추었다. 이 전환은 Unix가 특정 기계의 어셈블리 코드에 묶이지 않고 C 컴파일러와 함께 다른 기계로 옮겨질 수 있는 기반을 만들었다.
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- `ref-018`
+- `ref-019`
+- `ref-020`
+- `ref-021`
+<!-- wiki-v2:evidence-end -->
 
 - [[The UNIX Time-Sharing System]]
 - [[The Development of the C Language]]

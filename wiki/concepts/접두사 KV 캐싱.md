@@ -1,17 +1,39 @@
 ---
+schema_version: 2
+id: concept-prefix-kv-caching
+kind: concept
 title: 접두사 KV 캐싱
-aliases: [prefix KV caching, prefix caching, prompt KV cache reuse, RadixAttention]
-summary: "같은 모델 실행 조건에서 토큰 단위로 동일한 프롬프트 접두사의 KV 상태를 요청·호출 사이에 보존하고 재사용해 중복 프리필 계산을 줄이는 캐시 방법."
-tags: [type/concept, domain/machine-learning, domain/systems, status/active]
-created: 2026-07-25
-updated: 2026-07-25
-publication_year: 2024
-historical_layer: system
-capability_layers: [realized-performance, scalability, resource-efficiency]
-sources: ["SGLang - Efficient Execution of Structured Language Model Programs", "Efficient Memory Management for Large Language Model Serving with PagedAttention"]
-status: active
-graph_id: concept-prefix-kv-caching
+aliases:
+  - prefix KV caching
+  - prefix caching
+  - prompt KV cache reuse
+  - RadixAttention
+summary: 같은 모델 실행 조건에서 토큰 단위로 동일한 프롬프트 접두사의 KV 상태를 요청·호출 사이에 보존하고 재사용해 중복 프리필 계산을 줄이는 캐시 방법.
+domains:
+  - machine-learning
+  - systems
+editorial_status: active
+publication_visibility: public
 graph_visibility: public
+created: 2026-07-25
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:e50a4a07d2d262172a0013584b4a318533e6ac2c8cd83a79819add8bece5570d
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids:
+  - ref-080
+  - ref-076
+capability_layers:
+  - realized-performance
+  - scalability
+  - resource-efficiency
+history:
+  publication_year: 2024
+  layer: system
+redirect_from:
+  - /concepts/접두사-kv-캐싱/
 ---
 
 ## 개요
@@ -60,6 +82,12 @@ SGLang의 RadixAttention은 토큰 시퀀스와 KV 페이지를 radix tree에 �
 | implements | [[메모리 장벽]] | 중복 프리필 계산과 KV 메모리를 줄이는 대신 캐시 점유·조회·퇴거 비용을 추가한다. | [[SGLang - Efficient Execution of Structured Language Model Programs]] |
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- `ref-080`
+- `ref-076`
+<!-- wiki-v2:evidence-end -->
 
 - [[SGLang - Efficient Execution of Structured Language Model Programs]]
 - [[Efficient Memory Management for Large Language Model Serving with PagedAttention]]

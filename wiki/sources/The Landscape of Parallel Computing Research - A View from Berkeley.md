@@ -1,23 +1,59 @@
 ---
+schema_version: 2
+id: ref-040
+kind: reference
 title: The Landscape of Parallel Computing Research - A View from Berkeley
-aliases: [Berkeley View, Berkeley parallel computing report, 병렬 컴퓨팅의 전망]
-summary: "전력·명령 수준 병렬성·메모리 병목으로 단일 프로세서 성능 향상의 수익이 감소한 상황에서 병렬 하드웨어와 소프트웨어를 함께 재설계해야 한다고 제안한 2006년 보고서."
-tags: [type/reference, domain/computer-architecture, domain/computer-science, status/active]
+aliases:
+  - Berkeley View
+  - Berkeley parallel computing report
+  - 병렬 컴퓨팅의 전망
+summary: 전력·명령 수준 병렬성·메모리 병목으로 단일 프로세서 성능 향상의 수익이 감소한 상황에서 병렬 하드웨어와 소프트웨어를 함께 재설계해야 한다고 제안한 2006년 보고서.
+domains:
+  - computer-architecture
+  - computer-science
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-07-16
-updated: 2026-07-18
-publication_year: 2006
-historical_layer: system
-capability_layers: [scalability, resource-efficiency]
-sources: ["UC Berkeley Technical Report EECS-2006-183", "UC Berkeley report page"]
-source_id: ref-040
-source_kind: external
-primary_sources: ["UC Berkeley Technical Report EECS-2006-183"]
-supporting_sources: ["UC Berkeley report page"]
-source_urls: ["https://www2.eecs.berkeley.edu/Pubs/TechRpts/2006/EECS-2006-183.pdf", "https://www2.eecs.berkeley.edu/Pubs/TechRpts/2006/EECS-2006-183.html"]
-retrieved: 2026-07-16
-version: "EECS-2006-183, December 2006"
-snapshot_status: external-only
-status: active
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:9c1a8785d1924936494c15f9014de5dbd843412c0e24ef7223e69e8a565e7da9
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers:
+  - scalability
+  - resource-efficiency
+history:
+  publication_year: 2006
+  layer: system
+redirect_from:
+  - /references/the-landscape-of-parallel-computing-research-a-view-from-berkeley/
+  - /sources/the-landscape-of-parallel-computing-research-a-view-from-berkeley/
+origin: external
+works:
+  primary:
+    - citation: UC Berkeley Technical Report EECS-2006-183
+      genre: other
+      identifiers: []
+      edition: EECS-2006-183, December 2006
+  supporting:
+    - citation: UC Berkeley report page
+      genre: web
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: canonical
+    url: https://www2.eecs.berkeley.edu/Pubs/TechRpts/2006/EECS-2006-183.pdf
+    retrieved: 2026-07-16
+    version: EECS-2006-183, December 2006
+  - kind: url
+    role: mirror
+    url: https://www2.eecs.berkeley.edu/Pubs/TechRpts/2006/EECS-2006-183.html
+    retrieved: 2026-07-16
+    version: EECS-2006-183, December 2006
 ---
 
 ## 개요
@@ -41,6 +77,7 @@ status: active
 ## 인용할 만한 구절
 
 > 병렬 컴퓨팅의 성공은 응용, 소프트웨어와 하드웨어를 함께 다루는 데 달려 있다.
+<!-- wiki-v2:quote-locator evidence="ref-040" locator="wiki/sources/The Landscape of Parallel Computing Research - A View from Berkeley.md:line-21#인용할-만한-구절" status="recorded" -->
 
 보고서의 연구 방향을 한국어로 요약한 문장이다.
 
@@ -49,6 +86,11 @@ status: active
 이 자료는 [[Dennard 스케일링]] 이후의 전력 제약, [[메모리 장벽]], 멀티코어와 [[도메인 특화 가속기]]의 부상을 하나의 전환으로 연결한다. [[컴퓨팅 능력의 발달사]]에서는 “더 빠른 코어”에서 “더 많은 병렬 자원과 더 나은 소프트웨어 매핑”으로 성능 향상 방식이 바뀐 근거로 사용한다. [[병렬 확장성]]과 [[병렬 컴퓨팅은 시간을 줄이는가 문제를 키우는가]]에서는 암달·Gustafson의 이상 모델에 통신, 동기화와 소프트웨어 공동 설계의 실제 비용을 더하는 자료로 사용한다.
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - UC Berkeley, [technical report PDF](https://www2.eecs.berkeley.edu/Pubs/TechRpts/2006/EECS-2006-183.pdf)
 - UC Berkeley, [report page](https://www2.eecs.berkeley.edu/Pubs/TechRpts/2006/EECS-2006-183.html)

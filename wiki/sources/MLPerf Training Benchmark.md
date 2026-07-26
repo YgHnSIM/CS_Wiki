@@ -1,25 +1,60 @@
 ---
+schema_version: 2
+id: ref-070
+kind: reference
 title: MLPerf Training Benchmark
-aliases: [Mattson et al. 2020, MLPerf Training, MLPerf 학습 벤치마크]
-summary: "서로 다른 하드웨어·소프트웨어 구성의 기계 학습 학습 성능을 정해진 품질 목표까지의 시간으로 비교하기 위해 규칙과 작업 부하를 정의한 2020년 MLSys 논문."
-tags: [type/reference, domain/machine-learning, domain/computer-architecture, status/active]
-created: 2026-07-24
-updated: 2026-07-24
-publication_year: 2020
-historical_layer: measurement
-capability_layers: [realized-performance, scalability, reliable-results]
-sources: ["MLPerf Training Benchmark"]
-source_id: ref-070
-source_kind: external
-primary_sources: ["Peter Mattson et al., MLPerf Training Benchmark, Proceedings of Machine Learning and Systems 2, 2020"]
-supporting_sources: ["MLSys 2020 proceedings landing page"]
-source_urls: ["https://proceedings.mlsys.org/paper_files/paper/2020/hash/411e39b117e885341f25efb8912945f7-Abstract.html", "https://proceedings.mlsys.org/paper_files/paper/2020/file/411e39b117e885341f25efb8912945f7-Paper.pdf"]
-retrieved: 2026-07-24
-version: "Proceedings of Machine Learning and Systems 2, 2020"
-snapshot_status: external-only
-status: active
-graph_id: reference-mlperf-training-benchmark
+aliases:
+  - Mattson et al. 2020
+  - MLPerf Training
+  - MLPerf 학습 벤치마크
+summary: 서로 다른 하드웨어·소프트웨어 구성의 기계 학습 학습 성능을 정해진 품질 목표까지의 시간으로 비교하기 위해 규칙과 작업 부하를 정의한 2020년 MLSys 논문.
+domains:
+  - machine-learning
+  - computer-architecture
+editorial_status: active
+publication_visibility: public
 graph_visibility: public
+created: 2026-07-24
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:560aa0a0f6439796fc3efd4b65e96a928dfe0ff46bafa2964d77dcbd9a16e271
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers:
+  - realized-performance
+  - scalability
+  - reliable-results
+history:
+  publication_year: 2020
+  layer: measurement
+redirect_from:
+  - /references/mlperf-training-benchmark/
+  - /sources/mlperf-training-benchmark/
+origin: external
+works:
+  primary:
+    - citation: Peter Mattson et al., MLPerf Training Benchmark, Proceedings of Machine Learning and Systems 2, 2020
+      genre: primary-literature
+      identifiers: []
+      edition: Proceedings of Machine Learning and Systems 2, 2020
+  supporting:
+    - citation: MLSys 2020 proceedings landing page
+      genre: primary-literature
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: canonical
+    url: https://proceedings.mlsys.org/paper_files/paper/2020/hash/411e39b117e885341f25efb8912945f7-Abstract.html
+    retrieved: 2026-07-24
+    version: Proceedings of Machine Learning and Systems 2, 2020
+  - kind: url
+    role: mirror
+    url: https://proceedings.mlsys.org/paper_files/paper/2020/file/411e39b117e885341f25efb8912945f7-Paper.pdf
+    retrieved: 2026-07-24
+    version: Proceedings of Machine Learning and Systems 2, 2020
 ---
 
 ## 개요
@@ -41,6 +76,7 @@ graph_visibility: public
 ## 인용할 만한 구절
 
 > “some optimizations that improve training throughput actually increase time to solution”
+<!-- wiki-v2:quote-locator evidence="ref-070" locator="wiki/sources/MLPerf Training Benchmark.md:line-19#인용할-만한-구절" status="recorded" -->
 
 논문 초록은 처리량과 해결 시간의 방향이 항상 같지 않다는 벤치마크 설계상의 난점을 지적한다.
 
@@ -56,6 +92,11 @@ graph_visibility: public
 | constrains | [[낮은 정밀도는 AI의 컴퓨팅 능력을 어떻게 바꾸는가]] | 처리량만으로 학습 성능을 판단하지 않고 목표 품질까지의 시간과 규칙을 함께 보고하게 한다. | [[MLPerf Training Benchmark]] |
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - MLSys Proceedings, [abstract and metadata](https://proceedings.mlsys.org/paper_files/paper/2020/hash/411e39b117e885341f25efb8912945f7-Abstract.html)
 - MLSys Proceedings, [paper PDF](https://proceedings.mlsys.org/paper_files/paper/2020/file/411e39b117e885341f25efb8912945f7-Paper.pdf)

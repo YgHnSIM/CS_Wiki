@@ -1,23 +1,84 @@
 ---
+schema_version: 2
+id: ref-050
+kind: reference
 title: What Every Computer Scientist Should Know About Floating-Point Arithmetic
-aliases: [Goldberg 1991, What Every Computer Scientist Should Know About Floating Point Arithmetic, 모든 컴퓨터 과학자가 부동소수점 연산에 대해 알아야 할 것]
-summary: "부동소수점의 표현·반올림 오차·상쇄·정확한 반올림과 IEEE 754-1985의 시스템적 의미를 연결한 David Goldberg의 1991년 해설 논문."
-tags: [type/reference, domain/computer-architecture, domain/mathematics, status/active]
+aliases:
+  - Goldberg 1991
+  - What Every Computer Scientist Should Know About Floating Point Arithmetic
+  - 모든 컴퓨터 과학자가 부동소수점 연산에 대해 알아야 할 것
+summary: 부동소수점의 표현·반올림 오차·상쇄·정확한 반올림과 IEEE 754-1985의 시스템적 의미를 연결한 David Goldberg의 1991년 해설 논문.
+domains:
+  - computer-architecture
+  - mathematics
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-07-16
-updated: 2026-07-18
-publication_year: 1991
-historical_layer: measurement
-capability_layers: [reliable-results]
-sources: ["David Goldberg, What Every Computer Scientist Should Know About Floating-Point Arithmetic, ACM Computing Surveys 23(1), 1991, pp. 5-48", "Corrigendum, ACM Computing Surveys 23(3), 1991, p. 413", "Internet Archive access copy of the corrigendum", "Oracle Numerical Computation Guide edited reprint", "IEEE 754 Working Group background addendum on implementation differences"]
-source_id: ref-050
-source_kind: external
-primary_sources: ["David Goldberg, What Every Computer Scientist Should Know About Floating-Point Arithmetic, ACM Computing Surveys 23(1), 1991, pp. 5-48", "Corrigendum, ACM Computing Surveys 23(3), 1991, p. 413"]
-supporting_sources: ["ACM DOI record", "Internet Archive access copy of the corrigendum", "Oracle Numerical Computation Guide edited reprint", "IEEE 754 Working Group background addendum on implementation differences"]
-source_urls: ["https://doi.org/10.1145/103162.103163", "https://archive.org/details/sim_acm-computing-surveys_1991-09_23_3/page/n150/mode/1up", "https://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html", "https://grouper.ieee.org/groups/msc/ANSI_IEEE-Std-754-2019/background/addendum.html"]
-retrieved: 2026-07-16
-version: "ACM Computing Surveys 23(1), March 1991, pp. 5-48; corrigendum 23(3), September 1991, p. 413"
-snapshot_status: external-only
-status: active
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:3cd70e65fcebc00f52d209366b3725dd438d6039374521b1de619a93919cb745
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers:
+  - reliable-results
+history:
+  publication_year: 1991
+  layer: measurement
+redirect_from:
+  - /references/what-every-computer-scientist-should-know-about-floating-point-arithmetic/
+  - /sources/what-every-computer-scientist-should-know-about-floating-point-arithmetic/
+origin: external
+works:
+  primary:
+    - citation: David Goldberg, What Every Computer Scientist Should Know About Floating-Point Arithmetic, ACM Computing Surveys 23(1), 1991, pp. 5-48
+      genre: other
+      identifiers: []
+      edition: ACM Computing Surveys 23(1), March 1991, pp. 5-48; corrigendum 23(3), September 1991, p. 413
+    - citation: Corrigendum, ACM Computing Surveys 23(3), 1991, p. 413
+      genre: other
+      identifiers: []
+      edition: ACM Computing Surveys 23(1), March 1991, pp. 5-48; corrigendum 23(3), September 1991, p. 413
+  supporting:
+    - citation: ACM DOI record
+      genre: official-record
+      identifiers: []
+      edition: null
+    - citation: Internet Archive access copy of the corrigendum
+      genre: official-record
+      identifiers: []
+      edition: null
+    - citation: Oracle Numerical Computation Guide edited reprint
+      genre: other
+      identifiers: []
+      edition: null
+    - citation: IEEE 754 Working Group background addendum on implementation differences
+      genre: other
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: doi
+    url: https://doi.org/10.1145/103162.103163
+    retrieved: 2026-07-16
+    version: ACM Computing Surveys 23(1), March 1991, pp. 5-48; corrigendum 23(3), September 1991, p. 413
+  - kind: url
+    role: archive
+    url: https://archive.org/details/sim_acm-computing-surveys_1991-09_23_3/page/n150/mode/1up
+    retrieved: 2026-07-16
+    version: ACM Computing Surveys 23(1), March 1991, pp. 5-48; corrigendum 23(3), September 1991, p. 413
+  - kind: url
+    role: mirror
+    url: https://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html
+    retrieved: 2026-07-16
+    version: ACM Computing Surveys 23(1), March 1991, pp. 5-48; corrigendum 23(3), September 1991, p. 413
+  - kind: url
+    role: mirror
+    url: https://grouper.ieee.org/groups/msc/ANSI_IEEE-Std-754-2019/background/addendum.html
+    retrieved: 2026-07-16
+    version: ACM Computing Surveys 23(1), March 1991, pp. 5-48; corrigendum 23(3), September 1991, p. 413
 ---
 
 ## 개요
@@ -75,6 +136,11 @@ IEEE 연산이 정밀하게 규정되면 같은 입력·연산 순서·목적 �
 이 자료는 [[부동소수점 정확성]]의 표현·반올림·상쇄 개념과 [[컴파일러 최적화]]가 수치 의미에 미치는 영향을 설명하는 직접 근거다. [[더 빠른 계산은 같은 답을 내는가]]에서는 연산 속도를 높이는 변환이 어떤 결과 계약을 지켜야 같은 성능 비교가 되는지 분석한다.
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - ACM, [DOI record](https://doi.org/10.1145/103162.103163)
 - Internet Archive, [corrigendum page in ACM Computing Surveys 23(3)](https://archive.org/details/sim_acm-computing-surveys_1991-09_23_3/page/n150/mode/1up)

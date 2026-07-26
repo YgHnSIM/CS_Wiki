@@ -1,25 +1,55 @@
 ---
+schema_version: 2
+id: ref-068
+kind: reference
 title: There's Plenty of Room at the Top
-aliases: ["There’s plenty of room at the Top: What will drive computer performance after Moore’s law?", Leiserson et al. 2020, 포스트 무어 시대의 성능]
-summary: "반도체 미세화 둔화 이후 성능 향상의 주요 여지를 소프트웨어, 알고리즘과 하드웨어 아키텍처의 공동 개선에서 찾는 Leiserson 등 연구진의 2020년 Science 논문."
-tags: [type/reference, domain/computer-architecture, domain/computer-science, status/active]
-created: 2026-07-24
-updated: 2026-07-24
-publication_year: 2020
-historical_layer: architecture
-capability_layers: [complexity, realized-performance, resource-efficiency]
-sources: ["There's Plenty of Room at the Top"]
-source_id: ref-068
-source_kind: external
-primary_sources: ["Charles E. Leiserson et al., There’s plenty of room at the Top: What will drive computer performance after Moore’s law?, Science 368(6495), 2020"]
-supporting_sources: ["Science article landing page"]
-source_urls: ["https://doi.org/10.1126/science.aam9744"]
-retrieved: 2026-07-24
-version: "Science 368(6495), 5 June 2020"
-snapshot_status: external-only
-status: active
-graph_id: reference-plenty-room-at-top
+aliases:
+  - "There’s plenty of room at the Top: What will drive computer performance after Moore’s law?"
+  - Leiserson et al. 2020
+  - 포스트 무어 시대의 성능
+summary: 반도체 미세화 둔화 이후 성능 향상의 주요 여지를 소프트웨어, 알고리즘과 하드웨어 아키텍처의 공동 개선에서 찾는 Leiserson 등 연구진의 2020년 Science 논문.
+domains:
+  - computer-architecture
+  - computer-science
+editorial_status: active
+publication_visibility: public
 graph_visibility: public
+created: 2026-07-24
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:5d5ac459b516ae5624de76d4387e30e8e626bb5519ec31b54110703fb5867d55
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers:
+  - complexity
+  - realized-performance
+  - resource-efficiency
+history:
+  publication_year: 2020
+  layer: architecture
+redirect_from:
+  - /references/there-s-plenty-of-room-at-the-top/
+  - /sources/there-s-plenty-of-room-at-the-top/
+origin: external
+works:
+  primary:
+    - citation: "Charles E. Leiserson et al., There’s plenty of room at the Top: What will drive computer performance after Moore’s law?, Science 368(6495), 2020"
+      genre: other
+      identifiers: []
+      edition: Science 368(6495), 5 June 2020
+  supporting:
+    - citation: Science article landing page
+      genre: web
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: doi
+    url: https://doi.org/10.1126/science.aam9744
+    retrieved: 2026-07-24
+    version: Science 368(6495), 5 June 2020
 ---
 
 ## 개요
@@ -41,6 +71,7 @@ graph_visibility: public
 ## 인용할 만한 구절
 
 > “opportunistic, uneven, and sporadic”
+<!-- wiki-v2:quote-locator evidence="ref-068" locator="wiki/sources/There's Plenty of Room at the Top.md:line-19#인용할-만한-구절" status="recorded" -->
 
 저자들은 상위 스택에서의 성능 향상이 미세화 시대의 자동적인 개선과 다르다고 설명한다.
 
@@ -56,6 +87,11 @@ graph_visibility: public
 | responds_to | [[더 빠른 하드웨어는 더 나은 알고리즘을 대신할 수 있는가]] | 공정 미세화 둔화 뒤 성능 향상을 소프트웨어·알고리즘·아키텍처의 공동 문제로 재구성한다. | [[There's Plenty of Room at the Top]] |
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - Science, [DOI record and article page](https://doi.org/10.1126/science.aam9744)
 

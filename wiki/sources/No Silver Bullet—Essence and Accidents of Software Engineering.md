@@ -1,25 +1,69 @@
 ---
+schema_version: 2
+id: ref-071
+kind: reference
 title: No Silver Bullet—Essence and Accidents of Software Engineering
-aliases: [No Silver Bullet, Brooks 1987, 은탄환은 없다, 소프트웨어 공학의 본질과 부수성]
-summary: "소프트웨어 개발의 본질적 어려움과 표현·도구상의 부수적 어려움을 구분하고, 단일 기술이나 관리 기법이 생산성·신뢰성·단순성을 한 번에 10배 높일 것이라는 기대를 비판한 Brooks의 1987년 논문."
-tags: [type/reference, domain/software-engineering, domain/computer-history, status/active]
-created: 2026-07-24
-updated: 2026-07-24
-publication_year: 1987
-historical_layer: software
-capability_layers: [programmability, reliable-results]
-sources: ["No Silver Bullet—Essence and Accidents of Software Engineering"]
-source_id: ref-071
-source_kind: external
-primary_sources: ["Frederick P. Brooks, Jr., No Silver Bullet—Essence and Accidents of Software Engineering, Computer 20(4), 1987, pp. 10–19"]
-supporting_sources: ["IEEE Xplore record", "text transcription for access"]
-source_urls: ["https://doi.org/10.1109/MC.1987.1663532", "https://ieeexplore.ieee.org/document/1663532", "https://www.cin.ufpe.br/~phmb/ip/MaterialDeEnsino/BrooksNoSilverBullet.html"]
-retrieved: 2026-07-24
-version: "Computer 20(4), April 1987; earlier IFIP 1986 invited-paper version"
-snapshot_status: external-only
-status: active
-graph_id: reference-no-silver-bullet
+aliases:
+  - No Silver Bullet
+  - Brooks 1987
+  - 은탄환은 없다
+  - 소프트웨어 공학의 본질과 부수성
+summary: 소프트웨어 개발의 본질적 어려움과 표현·도구상의 부수적 어려움을 구분하고, 단일 기술이나 관리 기법이 생산성·신뢰성·단순성을 한 번에 10배 높일 것이라는 기대를 비판한 Brooks의 1987년 논문.
+domains:
+  - software-engineering
+  - computer-history
+editorial_status: active
+publication_visibility: public
 graph_visibility: public
+created: 2026-07-24
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:bc04b8330b55076632bda153c905b7113115ae2dc444d62a95b76fa882323b5a
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers:
+  - programmability
+  - reliable-results
+history:
+  publication_year: 1987
+  layer: software
+redirect_from:
+  - /references/no-silver-bullet-essence-and-accidents-of-software-engineering/
+  - /sources/no-silver-bullet-essence-and-accidents-of-software-engineering/
+origin: external
+works:
+  primary:
+    - citation: Frederick P. Brooks, Jr., No Silver Bullet—Essence and Accidents of Software Engineering, Computer 20(4), 1987, pp. 10–19
+      genre: other
+      identifiers: []
+      edition: Computer 20(4), April 1987; earlier IFIP 1986 invited-paper version
+  supporting:
+    - citation: IEEE Xplore record
+      genre: official-record
+      identifiers: []
+      edition: null
+    - citation: text transcription for access
+      genre: other
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: doi
+    url: https://doi.org/10.1109/MC.1987.1663532
+    retrieved: 2026-07-24
+    version: Computer 20(4), April 1987; earlier IFIP 1986 invited-paper version
+  - kind: url
+    role: mirror
+    url: https://ieeexplore.ieee.org/document/1663532
+    retrieved: 2026-07-24
+    version: Computer 20(4), April 1987; earlier IFIP 1986 invited-paper version
+  - kind: url
+    role: mirror
+    url: https://www.cin.ufpe.br/~phmb/ip/MaterialDeEnsino/BrooksNoSilverBullet.html
+    retrieved: 2026-07-24
+    version: Computer 20(4), April 1987; earlier IFIP 1986 invited-paper version
 ---
 
 ## 개요
@@ -41,6 +85,7 @@ Brooks는 본질적 어려움의 성질로 복잡성, 적합성(conformity), 변
 ## 인용할 만한 구절
 
 > “There is no royal road, but there is a road.”
+<!-- wiki-v2:quote-locator evidence="ref-071" locator="wiki/sources/No Silver Bullet—Essence and Accidents of Software Engineering.md:line-19#인용할-만한-구절" status="recorded" -->
 
 Brooks는 마법 같은 단일 해법을 부정하면서도, 누적적 개선의 가능성까지 부정하지는 않았다.
 
@@ -56,6 +101,11 @@ Brooks는 마법 같은 단일 해법을 부정하면서도, 누적적 개선의
 | constrains | [[개발자 생산성]] | 단일 기술·관리 기법이나 활동량만으로 생산성·신뢰성·단순성을 함께 판단할 수 없게 한다. | [[No Silver Bullet—Essence and Accidents of Software Engineering]] |
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - IEEE Xplore, [article record](https://ieeexplore.ieee.org/document/1663532)
 - IEEE, [DOI record](https://doi.org/10.1109/MC.1987.1663532)

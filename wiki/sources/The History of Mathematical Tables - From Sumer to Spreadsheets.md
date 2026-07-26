@@ -1,23 +1,78 @@
 ---
+schema_version: 2
+id: ref-052
+kind: reference
 title: "The History of Mathematical Tables: From Sumer to Spreadsheets"
-aliases: ["The History of Mathematical Tables: From Sumer to Spreadsheets", The History of Mathematical Tables - From Sumer to Spreadsheets, The History of Mathematical Tables, 수학 표의 역사]
-summary: "2003년 Oxford University Press 연구서와 Eleanor Robson의 고대 메소포타미아 장을 중심으로, 수학 표가 계산 결과를 저장·배포하는 정보 처리 매체로 발달한 역사를 정리한 참고 자료."
-tags: [type/reference, domain/computer-history, domain/mathematics, status/active]
+aliases:
+  - "The History of Mathematical Tables: From Sumer to Spreadsheets"
+  - The History of Mathematical Tables - From Sumer to Spreadsheets
+  - The History of Mathematical Tables
+  - 수학 표의 역사
+summary: 2003년 Oxford University Press 연구서와 Eleanor Robson의 고대 메소포타미아 장을 중심으로, 수학 표가 계산 결과를 저장·배포하는 정보 처리 매체로 발달한 역사를 정리한 참고 자료.
+domains:
+  - computer-history
+  - mathematics
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-07-20
-updated: 2026-07-20
-publication_year: 2003
-historical_note: "2003년 출판된 역사 연구서가 기원전 약 2600년부터 20세기까지의 표 제작을 다룬다. 역사 연도는 이 참고 자료의 출판 시점을 나타낸다."
-capability_layers: [resource-efficiency, reliable-results]
-sources: ["The History of Mathematical Tables: From Sumer to Spreadsheets", "Eleanor Robson, Tables and tabular formatting in Sumer, Babylonia, and Assyria, 2500 BCE-50 CE", "CDLI SF 082 artifact entry (P010678, VAT 12593)", "Uruk-Warka access copy of the Robson chapter"]
-source_id: ref-052
-source_kind: external
-primary_sources: ["The History of Mathematical Tables: From Sumer to Spreadsheets", "Eleanor Robson, Tables and tabular formatting in Sumer, Babylonia, and Assyria, 2500 BCE-50 CE", "CDLI SF 082 artifact entry (P010678, VAT 12593)"]
-supporting_sources: ["Uruk-Warka access copy of the Robson chapter"]
-source_urls: ["https://academic.oup.com/book/4975", "https://academic.oup.com/book/4975/chapter/147431903", "https://cdli.earth/P010678", "https://uruk-warka.dk/mathematics/ER6%20tables.pdf"]
-retrieved: 2026-07-20
-version: "Oxford, 2003; Oxford Academic online edition, 2007; Robson chapter, pp. 19-48"
-snapshot_status: external-only
-status: active
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:b475b61594530ba5c3b10aa4093ba7713513528b487b286b8bcf247ec290013e
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers:
+  - resource-efficiency
+  - reliable-results
+history:
+  publication_year: 2003
+  note: 2003년 출판된 역사 연구서가 기원전 약 2600년부터 20세기까지의 표 제작을 다룬다. 역사 연도는 이 참고 자료의 출판 시점을 나타낸다.
+redirect_from:
+  - /references/the-history-of-mathematical-tables-from-sumer-to-spreadsheets/
+  - /sources/the-history-of-mathematical-tables-from-sumer-to-spreadsheets/
+origin: external
+works:
+  primary:
+    - citation: "The History of Mathematical Tables: From Sumer to Spreadsheets"
+      genre: official-record
+      identifiers: []
+      edition: Oxford, 2003; Oxford Academic online edition, 2007; Robson chapter, pp. 19-48
+    - citation: Eleanor Robson, Tables and tabular formatting in Sumer, Babylonia, and Assyria, 2500 BCE-50 CE
+      genre: official-record
+      identifiers: []
+      edition: Oxford, 2003; Oxford Academic online edition, 2007; Robson chapter, pp. 19-48
+    - citation: CDLI SF 082 artifact entry (P010678, VAT 12593)
+      genre: official-record
+      identifiers: []
+      edition: Oxford, 2003; Oxford Academic online edition, 2007; Robson chapter, pp. 19-48
+  supporting:
+    - citation: Uruk-Warka access copy of the Robson chapter
+      genre: official-record
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: canonical
+    url: https://academic.oup.com/book/4975
+    retrieved: 2026-07-20
+    version: Oxford, 2003; Oxford Academic online edition, 2007; Robson chapter, pp. 19-48
+  - kind: url
+    role: mirror
+    url: https://academic.oup.com/book/4975/chapter/147431903
+    retrieved: 2026-07-20
+    version: Oxford, 2003; Oxford Academic online edition, 2007; Robson chapter, pp. 19-48
+  - kind: url
+    role: mirror
+    url: https://cdli.earth/P010678
+    retrieved: 2026-07-20
+    version: Oxford, 2003; Oxford Academic online edition, 2007; Robson chapter, pp. 19-48
+  - kind: url
+    role: mirror
+    url: https://uruk-warka.dk/mathematics/ER6%20tables.pdf
+    retrieved: 2026-07-20
+    version: Oxford, 2003; Oxford Academic online edition, 2007; Robson chapter, pp. 19-48
 ---
 
 ## 개요
@@ -73,6 +128,11 @@ Oxford의 책 소개는 수학 표를 1960년대까지 수백 년 동안 중요�
 이 자료는 [[수학 표]]에서 개념의 장기적 범위, 표 형식과 계산값 목록의 차이, 가장 이른 연대가 확정된 현존 사례와 “가장 흔히 쓰인 표”의 범위 조건을 설명하는 근거다. 배비지와 20세기 함수표에 관한 세부 주장은 위에서 분리한 동시대 원자료 및 기관 기록을 직접 연결한다.
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - Oxford University Press, [The History of Mathematical Tables: From Sumer to Spreadsheets](https://academic.oup.com/book/4975)
 - Oxford University Press, Eleanor Robson, [Tables and tabular formatting in Sumer, Babylonia, and Assyria, 2500 BCE–50 CE](https://academic.oup.com/book/4975/chapter/147431903)

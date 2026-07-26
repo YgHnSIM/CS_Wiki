@@ -1,23 +1,73 @@
 ---
+schema_version: 2
+id: ref-049
+kind: reference
 title: The Tail at Scale
-aliases: [Dean and Barroso 2013, Tail at Scale, 규모에서의 꼬리 지연]
-summary: "대규모 온라인 서비스에서 드문 구성요소 지연이 모든 응답을 기다리는 팬아웃을 통해 흔한 서비스 지연으로 증폭되는 원리와 꼬리 내성 기법을 정리한 2013년 논문."
-tags: [type/reference, domain/systems, status/active]
+aliases:
+  - Dean and Barroso 2013
+  - Tail at Scale
+  - 규모에서의 꼬리 지연
+summary: 대규모 온라인 서비스에서 드문 구성요소 지연이 모든 응답을 기다리는 팬아웃을 통해 흔한 서비스 지연으로 증폭되는 원리와 꼬리 내성 기법을 정리한 2013년 논문.
+domains:
+  - systems
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-07-16
-updated: 2026-07-18
-publication_year: 2013
-historical_layer: service
-capability_layers: [realized-performance, scalability, reliable-results]
-sources: ["Jeffrey Dean and Luiz André Barroso, The Tail at Scale, Communications of the ACM 56(2), 2013, pp. 74-80", "Google Research publication page", "University of Utah access copy"]
-source_id: ref-049
-source_kind: external
-primary_sources: ["Jeffrey Dean and Luiz André Barroso, The Tail at Scale, Communications of the ACM 56(2), 2013, pp. 74-80"]
-supporting_sources: ["Google Research publication page", "University of Utah access copy"]
-source_urls: ["https://doi.org/10.1145/2408776.2408794", "https://research.google/pubs/the-tail-at-scale/", "https://cacm.acm.org/research/the-tail-at-scale/", "https://users.cs.utah.edu/~stutsman/cs6450/public/papers/tail-at-scale.pdf"]
-retrieved: 2026-07-16
-version: "Communications of the ACM 56(2), February 2013, pp. 74-80"
-snapshot_status: external-only
-status: active
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:464c8a6b92b8c90d4ecae0c0d3b1ab647ecd2b3d802817d0b369d757ddd2c289
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers:
+  - realized-performance
+  - scalability
+  - reliable-results
+history:
+  publication_year: 2013
+  layer: service
+redirect_from:
+  - /references/the-tail-at-scale/
+  - /sources/the-tail-at-scale/
+origin: external
+works:
+  primary:
+    - citation: Jeffrey Dean and Luiz André Barroso, The Tail at Scale, Communications of the ACM 56(2), 2013, pp. 74-80
+      genre: other
+      identifiers: []
+      edition: Communications of the ACM 56(2), February 2013, pp. 74-80
+  supporting:
+    - citation: Google Research publication page
+      genre: primary-literature
+      identifiers: []
+      edition: null
+    - citation: University of Utah access copy
+      genre: other
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: doi
+    url: https://doi.org/10.1145/2408776.2408794
+    retrieved: 2026-07-16
+    version: Communications of the ACM 56(2), February 2013, pp. 74-80
+  - kind: url
+    role: mirror
+    url: https://research.google/pubs/the-tail-at-scale/
+    retrieved: 2026-07-16
+    version: Communications of the ACM 56(2), February 2013, pp. 74-80
+  - kind: url
+    role: mirror
+    url: https://cacm.acm.org/research/the-tail-at-scale/
+    retrieved: 2026-07-16
+    version: Communications of the ACM 56(2), February 2013, pp. 74-80
+  - kind: url
+    role: mirror
+    url: https://users.cs.utah.edu/~stutsman/cs6450/public/papers/tail-at-scale.pdf
+    retrieved: 2026-07-16
+    version: Communications of the ACM 56(2), February 2013, pp. 74-80
 ---
 
 ## 개요
@@ -61,6 +111,7 @@ status: active
 ## 인용할 만한 구절
 
 > “predictably responsive whole out of less-predictable parts”
+<!-- wiki-v2:quote-locator evidence="ref-049" locator="wiki/sources/The Tail at Scale.md:line-41#인용할-만한-구절" status="recorded" -->
 
 덜 예측 가능한 부분들로부터 예측 가능하게 응답하는 전체를 만든다. (번역)
 
@@ -75,6 +126,11 @@ status: active
 | responds_to | [[꼬리 지연 시간]] | 많은 구성요소에 팬아웃하는 서비스에서 드문 느린 응답이 종단 지연을 지배하는 문제에 중복·분산 기법으로 대응한다. | [[The Tail at Scale]] |
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - ACM, [DOI record](https://doi.org/10.1145/2408776.2408794)
 - Google Research, [The Tail at Scale](https://research.google/pubs/the-tail-at-scale/)

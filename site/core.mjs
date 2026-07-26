@@ -113,7 +113,7 @@ export function buildPageLookup(pages) {
   const lookup = new Map();
   for (const page of pages) {
     const filename = basename(page.filePath, ".md");
-    for (const name of [page.title, filename, ...page.aliases]) {
+    for (const name of [page.id, page.title, filename, ...page.aliases]) {
       const normalized = key(name);
       if (!normalized) continue;
       const existing = lookup.get(normalized);

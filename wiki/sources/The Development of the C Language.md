@@ -1,21 +1,70 @@
 ---
+schema_version: 2
+id: ref-019
+kind: reference
 title: The Development of the C Language
-aliases: [Ritchie C history, C language history, Development of C]
-summary: "Ritchie의 C 언어 발전사 논문을 바탕으로 B에서 C로의 전환, PDP-11, Unix 커널 재작성을 정리한 참고 자료."
-tags: [type/reference, domain/programming-languages, domain/software-engineering, domain/computer-history, status/active]
+aliases:
+  - Ritchie C history
+  - C language history
+  - Development of C
+summary: Ritchie의 C 언어 발전사 논문을 바탕으로 B에서 C로의 전환, PDP-11, Unix 커널 재작성을 정리한 참고 자료.
+domains:
+  - programming-languages
+  - software-engineering
+  - computer-history
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-07-10
-updated: 2026-07-22
-sources: ["HOPL-II 1993", "Bell Labs/Lucent electronic reprint"]
-source_id: ref-019
-source_kind: external
-primary_sources: ["HOPL-II 1993"]
-supporting_sources: ["Bell Labs/Lucent electronic reprint", "ACM DOI", "PDF copy"]
-source_urls: ["https://www.nokia.com/bell-labs/about/dennis-m-ritchie/chist.html", "https://dl.acm.org/doi/10.1145/234286.1057834", "https://brent.hailpern.com/wp-content/uploads/2020/02/p671-ritchie.pdf"]
-retrieved: 2026-07-10
-version: null
-snapshot_status: external-only
-status: active
-publication_year: 1993
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:2d0f419799bc0aa6d16296cc5a9489f69887e9e0260ac2241e2b05cea7fa781d
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers: []
+history:
+  publication_year: 1993
+redirect_from:
+  - /references/the-development-of-the-c-language/
+  - /sources/the-development-of-the-c-language/
+origin: external
+works:
+  primary:
+    - citation: HOPL-II 1993
+      genre: other
+      identifiers: []
+      edition: null
+  supporting:
+    - citation: Bell Labs/Lucent electronic reprint
+      genre: other
+      identifiers: []
+      edition: null
+    - citation: ACM DOI
+      genre: primary-literature
+      identifiers: []
+      edition: null
+    - citation: PDF copy
+      genre: other
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: canonical
+    url: https://www.nokia.com/bell-labs/about/dennis-m-ritchie/chist.html
+    retrieved: 2026-07-10
+    version: null
+  - kind: url
+    role: mirror
+    url: https://dl.acm.org/doi/10.1145/234286.1057834
+    retrieved: 2026-07-10
+    version: null
+  - kind: url
+    role: mirror
+    url: https://brent.hailpern.com/wp-content/uploads/2020/02/p671-ritchie.pdf
+    retrieved: 2026-07-10
+    version: null
 ---
 
 ## 개요
@@ -37,6 +86,11 @@ Ritchie의 핵심 설명은 C가 추상적인 언어 설계에서 출발한 것�
 이 자료는 [[C 언어]], [[시스템 프로그래밍]], [[C 문자열]], [[메모리 안전성]], [[컴파일러]], [[이식성]]을 보강하는 데 사용한다. [[Unix와 C]]는 이 자료를 중심으로 C가 Unix의 구현 언어가 되고, Unix가 C의 실험장과 배포 환경이 되는 상호작용을 정리한다.
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - Nokia Bell Labs, [The Development of the C Language](https://www.nokia.com/bell-labs/about/dennis-m-ritchie/chist.html)
 - ACM Digital Library, [The development of the C programming language](https://dl.acm.org/doi/10.1145/234286.1057834)

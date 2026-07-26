@@ -1,25 +1,63 @@
 ---
+schema_version: 2
+id: ref-094
+kind: reference
 title: How to Make a Multiprocessor Computer That Correctly Executes Multiprocess Programs
-aliases: [Lamport 1979, Lamport sequential consistency paper, 다중 프로세서 순차 일관성]
-summary: "각 프로세서의 프로그램 순서와 하나의 전역 순서를 함께 보존하는 순차 일관성을 다중 프로세서의 정확성 조건으로 정의한 Lamport의 1979년 논문."
-tags: [type/reference, domain/computer-architecture, domain/computer-science, domain/operating-systems, status/active]
-created: 2026-07-25
-updated: 2026-07-25
-publication_year: 1979
-historical_layer: architecture
-capability_layers: [reliable-results]
-sources: [How to Make a Multiprocessor Computer That Correctly Executes Multiprocess Programs]
-source_id: ref-094
-source_kind: external
-primary_sources: ["Leslie Lamport, How to Make a Multiprocessor Computer That Correctly Executes Multiprocess Programs, IEEE Transactions on Computers C-28(9), 1979, pp. 690–691"]
-supporting_sources: ["Microsoft Research publication record", "Microsoft Research author-hosted paper PDF"]
-source_urls: ["https://www.microsoft.com/en-us/research/publication/make-multiprocessor-computer-correctly-executes-multiprocess-programs/", "https://www.microsoft.com/en-us/research/wp-content/uploads/2016/12/How-to-Make-a-Multiprocessor-Computer-That-Correctly-Executes-Multiprocess-Programs.pdf"]
-retrieved: 2026-07-25
-version: "IEEE Transactions on Computers C-28(9), September 1979, pp. 690–691"
-snapshot_status: external-only
-status: active
-graph_id: reference-lamport-sequential-consistency
+aliases:
+  - Lamport 1979
+  - Lamport sequential consistency paper
+  - 다중 프로세서 순차 일관성
+summary: 각 프로세서의 프로그램 순서와 하나의 전역 순서를 함께 보존하는 순차 일관성을 다중 프로세서의 정확성 조건으로 정의한 Lamport의 1979년 논문.
+domains:
+  - computer-architecture
+  - computer-science
+  - operating-systems
+editorial_status: active
+publication_visibility: public
 graph_visibility: public
+created: 2026-07-25
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:3b225c47bacc29c1bef2bf20aa57f20be8ce3e294a53525fac857c280d775047
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers:
+  - reliable-results
+history:
+  publication_year: 1979
+  layer: architecture
+redirect_from:
+  - /references/how-to-make-a-multiprocessor-computer-that-correctly-executes-multiprocess-programs/
+  - /sources/how-to-make-a-multiprocessor-computer-that-correctly-executes-multiprocess-programs/
+origin: external
+works:
+  primary:
+    - citation: Leslie Lamport, How to Make a Multiprocessor Computer That Correctly Executes Multiprocess Programs, IEEE Transactions on Computers C-28(9), 1979, pp. 690–691
+      genre: other
+      identifiers: []
+      edition: IEEE Transactions on Computers C-28(9), September 1979, pp. 690–691
+  supporting:
+    - citation: Microsoft Research publication record
+      genre: official-record
+      identifiers: []
+      edition: null
+    - citation: Microsoft Research author-hosted paper PDF
+      genre: primary-literature
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: publisher
+    url: https://www.microsoft.com/en-us/research/publication/make-multiprocessor-computer-correctly-executes-multiprocess-programs/
+    retrieved: 2026-07-25
+    version: IEEE Transactions on Computers C-28(9), September 1979, pp. 690–691
+  - kind: url
+    role: publisher
+    url: https://www.microsoft.com/en-us/research/wp-content/uploads/2016/12/How-to-Make-a-Multiprocessor-Computer-That-Correctly-Executes-Multiprocess-Programs.pdf
+    retrieved: 2026-07-25
+    version: IEEE Transactions on Computers C-28(9), September 1979, pp. 690–691
 ---
 
 ## 개요
@@ -41,6 +79,7 @@ graph_visibility: public
 ## 인용할 만한 구절
 
 > “the result of any execution is the same as if”
+<!-- wiki-v2:quote-locator evidence="ref-094" locator="wiki/sources/How to Make a Multiprocessor Computer That Correctly Executes Multiprocess Programs.md:line-19#인용할-만한-구절" status="recorded" -->
 
 순차 일관성은 실제 내부 실행이 직렬이라는 뜻이 아니라, 관찰 가능한 결과가 가능한 하나의 순차 실행과 같아야 한다는 조건이다.
 
@@ -56,6 +95,11 @@ graph_visibility: public
 | constrains | [[동시성]] | 공유 메모리에서 겹쳐 진행하는 프로세서의 읽기·쓰기가 관찰될 수 있는 순서에 전역 조건을 부과한다. | [[How to Make a Multiprocessor Computer That Correctly Executes Multiprocess Programs]] |
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - Microsoft Research, [publication record](https://www.microsoft.com/en-us/research/publication/make-multiprocessor-computer-correctly-executes-multiprocess-programs/)
 - Microsoft Research, [paper PDF](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/12/How-to-Make-a-Multiprocessor-Computer-That-Correctly-Executes-Multiprocess-Programs.pdf)

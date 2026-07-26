@@ -1,25 +1,57 @@
 ---
+schema_version: 2
+id: ref-103
+kind: reference
 title: The Google File System
-aliases: [GFS 논문, Google File System, Ghemawat Gobioff Leung 2003, 구글 파일 시스템]
-summary: "대규모 데이터 집약 작업에서 빈번한 구성 요소 고장을 전제로, 마스터·청크 서버·복제·임대와 확장된 파일 인터페이스를 결합한 Google의 2003년 분산 파일 시스템 연구."
-tags: [type/reference, domain/distributed-systems, domain/operating-systems, domain/systems, status/active]
-created: 2026-07-25
-updated: 2026-07-25
-publication_year: 2003
-historical_layer: system
-capability_layers: [scalability, reliable-results, realized-performance]
-sources: ["The Google File System"]
-source_id: ref-103
-source_kind: external
-primary_sources: ["Sanjay Ghemawat, Howard Gobioff, and Shun-Tak Leung, The Google File System, Proceedings of the 19th ACM Symposium on Operating Systems Principles, 2003, pp. 20–43"]
-supporting_sources: ["Google Research publication record"]
-source_urls: ["https://research.google/pubs/the-google-file-system/"]
-retrieved: 2026-07-25
-version: "SOSP 2003 proceedings, pp. 20–43"
-snapshot_status: external-only
-status: active
-graph_id: reference-google-file-system
+aliases:
+  - GFS 논문
+  - Google File System
+  - Ghemawat Gobioff Leung 2003
+  - 구글 파일 시스템
+summary: 대규모 데이터 집약 작업에서 빈번한 구성 요소 고장을 전제로, 마스터·청크 서버·복제·임대와 확장된 파일 인터페이스를 결합한 Google의 2003년 분산 파일 시스템 연구.
+domains:
+  - distributed-systems
+  - operating-systems
+  - systems
+editorial_status: active
+publication_visibility: public
 graph_visibility: public
+created: 2026-07-25
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:be84adf73e8ded0e5ecf830111426676dec63087c62542b2d98e879fea2954a6
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers:
+  - scalability
+  - reliable-results
+  - realized-performance
+history:
+  publication_year: 2003
+  layer: system
+redirect_from:
+  - /references/the-google-file-system/
+  - /sources/the-google-file-system/
+origin: external
+works:
+  primary:
+    - citation: Sanjay Ghemawat, Howard Gobioff, and Shun-Tak Leung, The Google File System, Proceedings of the 19th ACM Symposium on Operating Systems Principles, 2003, pp. 20–43
+      genre: primary-literature
+      identifiers: []
+      edition: SOSP 2003 proceedings, pp. 20–43
+  supporting:
+    - citation: Google Research publication record
+      genre: official-record
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: canonical
+    url: https://research.google/pubs/the-google-file-system/
+    retrieved: 2026-07-25
+    version: SOSP 2003 proceedings, pp. 20–43
 ---
 
 ## 개요
@@ -43,6 +75,7 @@ GFS가 제시한 높은 처리량은 당시의 작업 부하, 파일 크기, 청
 ## 인용할 만한 구절
 
 > “component failures are the norm rather than the exception”
+<!-- wiki-v2:quote-locator evidence="ref-103" locator="wiki/sources/The Google File System.md:line-21#인용할-만한-구절" status="recorded" -->
 
 고장을 복구 절차의 예외가 아니라 저장 시스템의 기본 가정으로 두는 설계 전환을 압축한다.
 
@@ -58,6 +91,11 @@ GFS가 제시한 높은 처리량은 당시의 작업 부하, 파일 크기, 청
 | exemplifies | [[부분 실패]] | 일부 구성 요소의 고장을 정상 조건으로 두고 복제·검출·복구를 설계에 포함한 저장 시스템 사례를 제공한다. | [[The Google File System]] |
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - Google Research, [publication record and paper download](https://research.google/pubs/the-google-file-system/)
 

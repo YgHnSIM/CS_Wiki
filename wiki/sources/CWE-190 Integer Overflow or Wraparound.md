@@ -1,26 +1,56 @@
 ---
+schema_version: 2
+id: ref-091
+kind: reference
 title: CWE-190 Integer Overflow or Wraparound
-aliases: ["CWE-190: Integer Overflow or Wraparound", CWE-190, CWE 정수 오버플로, MITRE CWE-190]
-summary: "계산 결과가 정수 표현 범위를 넘어 매우 작거나 음수인 값으로 바뀌어 할당·인덱스·권한·루프 제어를 잘못 만들 수 있는 정수 오버플로 또는 래핑 약점을 정리한 MITRE CWE 항목."
-tags: [type/reference, domain/security, domain/software-engineering, domain/systems, status/active]
-created: 2026-07-25
-updated: 2026-07-25
-publication_year: 2026
-historical_note: "확인한 현재 CWE 항목은 CWE 4.20(2026-04-30) 판본이다. 언어별 실제 오버플로 의미는 별도 언어 명세와 함께 읽어야 한다."
-historical_layer: measurement
-capability_layers: [reliable-results]
-sources: [CWE-190 Integer Overflow or Wraparound]
-source_id: ref-091
-source_kind: external
-primary_sources: ["MITRE, CWE-190: Integer Overflow or Wraparound, CWE 4.20"]
-supporting_sources: ["MITRE Common Weakness Enumeration current catalog"]
-source_urls: ["https://cwe.mitre.org/data/definitions/190.html"]
-retrieved: 2026-07-25
-version: "CWE 4.20"
-snapshot_status: external-only
-status: active
-graph_id: reference-cwe-190-integer-overflow
+aliases:
+  - "CWE-190: Integer Overflow or Wraparound"
+  - CWE-190
+  - CWE 정수 오버플로
+  - MITRE CWE-190
+summary: 계산 결과가 정수 표현 범위를 넘어 매우 작거나 음수인 값으로 바뀌어 할당·인덱스·권한·루프 제어를 잘못 만들 수 있는 정수 오버플로 또는 래핑 약점을 정리한 MITRE CWE 항목.
+domains:
+  - security
+  - software-engineering
+  - systems
+editorial_status: active
+publication_visibility: public
 graph_visibility: public
+created: 2026-07-25
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:71977f4384102c57914a9ed86902916229295cdb1f2f35f7fe83807024c377bd
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers:
+  - reliable-results
+history:
+  publication_year: 2026
+  note: 확인한 현재 CWE 항목은 CWE 4.20(2026-04-30) 판본이다. 언어별 실제 오버플로 의미는 별도 언어 명세와 함께 읽어야 한다.
+  layer: measurement
+redirect_from:
+  - /references/cwe-190-integer-overflow-or-wraparound/
+  - /sources/cwe-190-integer-overflow-or-wraparound/
+origin: external
+works:
+  primary:
+    - citation: "MITRE, CWE-190: Integer Overflow or Wraparound, CWE 4.20"
+      genre: standard
+      identifiers: []
+      edition: CWE 4.20
+  supporting:
+    - citation: MITRE Common Weakness Enumeration current catalog
+      genre: standard
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: canonical
+    url: https://cwe.mitre.org/data/definitions/190.html
+    retrieved: 2026-07-25
+    version: CWE 4.20
 ---
 
 ## 개요
@@ -42,6 +72,7 @@ graph_visibility: public
 ## 인용할 만한 구절
 
 > “Integer Overflow or Wraparound”
+<!-- wiki-v2:quote-locator evidence="ref-091" locator="wiki/sources/CWE-190 Integer Overflow or Wraparound.md:line-19#인용할-만한-구절" status="recorded" -->
 
 표현 범위를 넘는 계산이 값의 의미를 바꾸는 약점의 이름 자체를 간결하게 보여 준다.
 
@@ -57,6 +88,11 @@ graph_visibility: public
 | constrains | [[입력 검증]] | 수치 입력의 범위뿐 아니라 곱셈·덧셈·변환으로 생긴 길이·오프셋·할당 크기의 범위도 확인하게 한다. | [[CWE-190 Integer Overflow or Wraparound]] |
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - MITRE, [CWE-190: Integer Overflow or Wraparound](https://cwe.mitre.org/data/definitions/190.html)
 

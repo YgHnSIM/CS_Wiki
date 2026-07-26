@@ -1,18 +1,40 @@
 ---
+schema_version: 2
+id: concept-llm-weight-quantization
+kind: concept
 title: LLM 가중치 양자화
-aliases: [LLM weight quantization, weight-only quantization, LLM PTQ, 저비트 LLM 가중치]
-summary: "학습된 LLM 가중치를 보정 데이터와 스케일·제로포인트·그룹 규칙으로 낮은 비트 표현에 매핑해 모델 용량과 가중치 메모리 이동을 줄이되 품질과 커널 지원을 함께 관리하는 방법."
-tags: [type/concept, domain/machine-learning, domain/computer-architecture, status/active]
-created: 2026-07-25
-updated: 2026-07-25
-publication_year: 2023
-historical_note: "신경망 양자화는 더 오래된 기법이지만, GPTQ의 ICLR 2023 출판을 대규모 생성 Transformer의 3–4비트 가중치 PTQ를 대표하는 시점으로 둔다."
-historical_layer: system
-capability_layers: [realized-performance, resource-efficiency, reliable-results]
-sources: ["GPTQ - Accurate Post-Training Quantization for Generative Pre-trained Transformers", "AWQ - Activation-aware Weight Quantization for On-Device LLM Compression and Acceleration"]
-status: active
-graph_id: concept-llm-weight-quantization
+aliases:
+  - LLM weight quantization
+  - weight-only quantization
+  - LLM PTQ
+  - 저비트 LLM 가중치
+summary: 학습된 LLM 가중치를 보정 데이터와 스케일·제로포인트·그룹 규칙으로 낮은 비트 표현에 매핑해 모델 용량과 가중치 메모리 이동을 줄이되 품질과 커널 지원을 함께 관리하는 방법.
+domains:
+  - machine-learning
+  - computer-architecture
+editorial_status: active
+publication_visibility: public
 graph_visibility: public
+created: 2026-07-25
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:e118932d22737a4c310a6f553bad73c6dbac2f0b56dc8e91c0ccdf8e224bc967
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids:
+  - ref-081
+  - ref-082
+capability_layers:
+  - realized-performance
+  - resource-efficiency
+  - reliable-results
+history:
+  publication_year: 2023
+  note: 신경망 양자화는 더 오래된 기법이지만, GPTQ의 ICLR 2023 출판을 대규모 생성 Transformer의 3–4비트 가중치 PTQ를 대표하는 시점으로 둔다.
+  layer: system
+redirect_from:
+  - /concepts/llm-가중치-양자화/
 ---
 
 ## 개요
@@ -55,6 +77,12 @@ graph_visibility: public
 | constrains | [[컴퓨팅 능력이란 무엇인가]] | 압축률·커널 속도와 모델 과업 품질을 함께 만족한 실행만 유효한 능력 향상으로 셀 수 있다. | [[AWQ - Activation-aware Weight Quantization for On-Device LLM Compression and Acceleration]] |
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- `ref-081`
+- `ref-082`
+<!-- wiki-v2:evidence-end -->
 
 - [[GPTQ - Accurate Post-Training Quantization for Generative Pre-trained Transformers]]
 - [[AWQ - Activation-aware Weight Quantization for On-Device LLM Compression and Acceleration]]

@@ -1,23 +1,59 @@
 ---
+schema_version: 2
+id: ref-038
+kind: reference
 title: Design of Ion-Implanted MOSFET's with Very Small Physical Dimensions
-aliases: [Dennard scaling paper, Dennard et al. 1974, 작은 MOSFET 설계]
-summary: "MOSFET의 치수와 전압을 함께 축소할 때 회로 지연과 전력은 낮추면서 전력 밀도를 일정하게 유지할 수 있음을 분석한 1974년 논문."
-tags: [type/reference, domain/computer-architecture, domain/computer-history, status/active]
+aliases:
+  - Dennard scaling paper
+  - Dennard et al. 1974
+  - 작은 MOSFET 설계
+summary: MOSFET의 치수와 전압을 함께 축소할 때 회로 지연과 전력은 낮추면서 전력 밀도를 일정하게 유지할 수 있음을 분석한 1974년 논문.
+domains:
+  - computer-architecture
+  - computer-history
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-07-16
-updated: 2026-07-18
-publication_year: 1974
-historical_layer: architecture
-capability_layers: [realized-performance, resource-efficiency]
-sources: ["IEEE Journal of Solid-State Circuits 9(5), 1974", "Stanford University access copy"]
-source_id: ref-038
-source_kind: external
-primary_sources: ["IEEE Journal of Solid-State Circuits 9(5), 1974"]
-supporting_sources: ["Stanford University access copy"]
-source_urls: ["https://doi.org/10.1109/JSSC.1974.1050511", "https://web.stanford.edu/class/cs114/readings/dennard.pdf"]
-retrieved: 2026-07-16
-version: "IEEE JSSC 9(5), October 1974"
-snapshot_status: external-only
-status: active
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:9ebf5f662c65c42c6faca8a07cec7e334286262d921e37b49c71cdc5e30953af
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers:
+  - realized-performance
+  - resource-efficiency
+history:
+  publication_year: 1974
+  layer: architecture
+redirect_from:
+  - /references/design-of-ion-implanted-mosfet-s-with-very-small-physical-dimensions/
+  - /sources/design-of-ion-implanted-mosfet-s-with-very-small-physical-dimensions/
+origin: external
+works:
+  primary:
+    - citation: IEEE Journal of Solid-State Circuits 9(5), 1974
+      genre: primary-literature
+      identifiers: []
+      edition: IEEE JSSC 9(5), October 1974
+  supporting:
+    - citation: Stanford University access copy
+      genre: other
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: doi
+    url: https://doi.org/10.1109/JSSC.1974.1050511
+    retrieved: 2026-07-16
+    version: IEEE JSSC 9(5), October 1974
+  - kind: url
+    role: mirror
+    url: https://web.stanford.edu/class/cs114/readings/dennard.pdf
+    retrieved: 2026-07-16
+    version: IEEE JSSC 9(5), October 1974
 ---
 
 ## 개요
@@ -41,6 +77,7 @@ status: active
 ## 인용할 만한 구절
 
 > 치수와 전압을 함께 축소하면 지연은 줄고 이상적인 전력 밀도는 유지된다.
+<!-- wiki-v2:quote-locator evidence="ref-038" locator="wiki/sources/Design of Ion-Implanted MOSFET's with Very Small Physical Dimensions.md:line-21#인용할-만한-구절" status="recorded" -->
 
 논문의 스케일링 결과를 한국어로 요약한 문장이다.
 
@@ -49,6 +86,11 @@ status: active
 이 자료는 [[Dennard 스케일링]]의 정의와 성립 조건을 제공한다. [[컴퓨팅 능력의 발달사]]에서는 집적도 증가가 오랫동안 클럭과 단일 코어 성능 향상으로 이어질 수 있었던 이유, 그리고 전압 축소가 멈추면서 전력 장벽이 부상한 배경을 설명하는 데 사용한다.
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - IEEE, [DOI record](https://doi.org/10.1109/JSSC.1974.1050511)
 - Stanford University, [access copy](https://web.stanford.edu/class/cs114/readings/dennard.pdf)

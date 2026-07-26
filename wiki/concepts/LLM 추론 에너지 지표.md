@@ -1,18 +1,42 @@
 ---
+schema_version: 2
+id: concept-llm-inference-energy-metrics
+kind: concept
 title: LLM 추론 에너지 지표
-aliases: [LLM inference energy metrics, LLM energy per token, LLM 요청당 에너지, LLM 추론 전력 지표]
-summary: "LLM 추론의 전력과 에너지를 GPU·노드·전체 시스템 경계, 프리필·디코드 단계와 품질·지연 조건에 맞춰 요청·입력 토큰·출력 토큰당 자원으로 기록하는 측정 체계."
-tags: [type/concept, domain/machine-learning, domain/performance, domain/systems, status/active]
-created: 2026-07-25
-updated: 2026-07-25
-publication_year: 2021
-historical_note: "MLPerf Inference v1.0의 첫 전력 결과가 공개된 2021년을 대표 시점으로 두고, 2026년 TokenPowerBench의 단계별 LLM 계측을 후속 구체화로 본다."
-historical_layer: measurement
-capability_layers: [realized-performance, resource-efficiency, reliable-results]
-sources: ["TokenPowerBench - Benchmarking the Power Consumption of LLM Inference", "MLPerf Inference Power Measurement", "MLPerf Inference Benchmark"]
-status: active
-graph_id: concept-llm-inference-energy-metrics
+aliases:
+  - LLM inference energy metrics
+  - LLM energy per token
+  - LLM 요청당 에너지
+  - LLM 추론 전력 지표
+summary: LLM 추론의 전력과 에너지를 GPU·노드·전체 시스템 경계, 프리필·디코드 단계와 품질·지연 조건에 맞춰 요청·입력 토큰·출력 토큰당 자원으로 기록하는 측정 체계.
+domains:
+  - machine-learning
+  - performance
+  - systems
+editorial_status: active
+publication_visibility: public
 graph_visibility: public
+created: 2026-07-25
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:56b1d59f61181d6cc50f868880e0ff7c5eb9f8f15b43453227485c7968e22a11
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids:
+  - ref-083
+  - ref-084
+  - ref-078
+capability_layers:
+  - realized-performance
+  - resource-efficiency
+  - reliable-results
+history:
+  publication_year: 2021
+  note: MLPerf Inference v1.0의 첫 전력 결과가 공개된 2021년을 대표 시점으로 두고, 2026년 TokenPowerBench의 단계별 LLM 계측을 후속 구체화로 본다.
+  layer: measurement
+redirect_from:
+  - /concepts/llm-추론-에너지-지표/
 ---
 
 ## 개요
@@ -94,6 +118,13 @@ graph_visibility: public
 | measures | [[컴퓨팅 능력이란 무엇인가]] | 동일 작업·품질·SLO 아래의 전체 시스템 에너지와 제한 자원 시간을 자원 효율로 측정한다. | [[MLPerf Inference Power Measurement]] |
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- `ref-083`
+- `ref-084`
+- `ref-078`
+<!-- wiki-v2:evidence-end -->
 
 - [[TokenPowerBench - Benchmarking the Power Consumption of LLM Inference]]
 - [[MLPerf Inference Power Measurement]]

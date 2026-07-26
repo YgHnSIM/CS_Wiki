@@ -1037,6 +1037,11 @@ kbd {
   border-radius: 50%;
 }
 
+.status-dot.retired {
+  border: 1px dotted var(--status-archived);
+  border-radius: 50%;
+}
+
 .source-file {
   color: var(--muted);
 }

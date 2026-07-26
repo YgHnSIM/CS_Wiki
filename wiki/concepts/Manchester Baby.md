@@ -1,16 +1,39 @@
 ---
+schema_version: 2
+id: concept-30fac639582288be
+kind: concept
 title: Manchester Baby
-aliases: [Small Scale Experimental Machine, SSEM, Baby, 맨체스터 베이비]
-summary: "1948년 저장된 프로그램을 전자식 디지털 컴퓨터에서 실제로 실행한 실험 장치."
-tags: [type/concept, domain/computer-history, domain/computer-architecture, status/active]
+aliases:
+  - Small Scale Experimental Machine
+  - SSEM
+  - Baby
+  - 맨체스터 베이비
+summary: 1948년 저장된 프로그램을 전자식 디지털 컴퓨터에서 실제로 실행한 실험 장치.
+domains:
+  - computer-history
+  - computer-architecture
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-07-10
-updated: 2026-07-22
-event_start: 1948
-historical_layer: machine
-capability_layers: [programmability]
-sources: ["The Manchester Small Scale Experimental Machine - The Baby"]
-status: active
-graph_id: concept-30fac639582288be
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:32ac28bb166179b05d7940641dec5e8ac4e33cd58a58d8234b7b25975ac23ecc
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids:
+  - ref-007
+capability_layers:
+  - programmability
+history:
+  event:
+    start: 1948
+    basis: representative
+    evidence_id: ref-007
+  layer: machine
+redirect_from:
+  - /concepts/manchester-baby/
 ---
 
 ## 개요
@@ -34,6 +57,11 @@ Baby는 "처음 저장 프로그램을 실행한 전자식 디지털 컴퓨터"�
 | precedes | [[EDSAC]] | 1948년 저장 프로그램 실행은 1949년 EDSAC의 정규 계산 서비스와 실용 운영보다 앞선다. | [[The Manchester Small Scale Experimental Machine - The Baby]] |
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- `ref-007`
+<!-- wiki-v2:evidence-end -->
 
 - [[The Manchester Small Scale Experimental Machine - The Baby]]
 

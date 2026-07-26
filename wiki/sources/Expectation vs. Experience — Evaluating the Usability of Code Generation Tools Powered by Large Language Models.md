@@ -1,25 +1,60 @@
 ---
+schema_version: 2
+id: ref-105
+kind: reference
 title: "Expectation vs. Experience: Evaluating the Usability of Code Generation Tools Powered by Large Language Models"
-aliases: ["Expectation vs. Experience: Evaluating the Usability of Code Generation Tools Powered by Large Language Models", Copilot usability study, Vaithilingam Zhang Glassman 2022, AI 코드 생성 도구 사용성]
-summary: "Copilot과 일반 코드 완성을 비교한 24명 대상 사용자 연구로, AI 코드 생성 도구의 선호와 작업 완료·이해·편집·디버깅 부담을 함께 다룬 2022년 CHI 연구."
-tags: [type/reference, domain/software-engineering, domain/machine-learning, status/active]
-created: 2026-07-25
-updated: 2026-07-25
-publication_year: 2022
-historical_layer: measurement
-capability_layers: [programmability, reliable-results]
-sources: ["Expectation vs. Experience — Evaluating the Usability of Code Generation Tools Powered by Large Language Models"]
-source_id: ref-105
-source_kind: external
-primary_sources: ["Priyan Vaithilingam, Tianyi Zhang, and Elena L. Glassman, Expectation vs. Experience: Evaluating the Usability of Code Generation Tools Powered by Large Language Models, CHI EA 2022, Article 332, pp. 1–7"]
-supporting_sources: ["ACM Digital Library record and authors' open PDF"]
-source_urls: ["https://dl.acm.org/doi/10.1145/3491101.3519665", "https://glassmanlab.seas.harvard.edu/papers/copilot_lbw_chi22.pdf"]
-retrieved: 2026-07-25
-version: "CHI '22 Extended Abstracts, Article 332"
-snapshot_status: external-only
-status: active
-graph_id: reference-ai-code-generation-usability
+aliases:
+  - "Expectation vs. Experience: Evaluating the Usability of Code Generation Tools Powered by Large Language Models"
+  - Copilot usability study
+  - Vaithilingam Zhang Glassman 2022
+  - AI 코드 생성 도구 사용성
+summary: Copilot과 일반 코드 완성을 비교한 24명 대상 사용자 연구로, AI 코드 생성 도구의 선호와 작업 완료·이해·편집·디버깅 부담을 함께 다룬 2022년 CHI 연구.
+domains:
+  - software-engineering
+  - machine-learning
+editorial_status: active
+publication_visibility: public
 graph_visibility: public
+created: 2026-07-25
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:bd33b1a7ea7722d580b6737b54780b3586170adff78e521ec885f3ea052ac22e
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers:
+  - programmability
+  - reliable-results
+history:
+  publication_year: 2022
+  layer: measurement
+redirect_from:
+  - /references/expectation-vs-experience-evaluating-the-usability-of-code-generation-tools-powered-by-large-language-models/
+  - /sources/expectation-vs-experience-evaluating-the-usability-of-code-generation-tools-powered-by-large-language-models/
+origin: external
+works:
+  primary:
+    - citation: "Priyan Vaithilingam, Tianyi Zhang, and Elena L. Glassman, Expectation vs. Experience: Evaluating the Usability of Code Generation Tools Powered by Large Language Models, CHI EA 2022, Article 332, pp. 1–7"
+      genre: other
+      identifiers: []
+      edition: CHI '22 Extended Abstracts, Article 332
+  supporting:
+    - citation: ACM Digital Library record and authors' open PDF
+      genre: official-record
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: canonical
+    url: https://dl.acm.org/doi/10.1145/3491101.3519665
+    retrieved: 2026-07-25
+    version: CHI '22 Extended Abstracts, Article 332
+  - kind: url
+    role: mirror
+    url: https://glassmanlab.seas.harvard.edu/papers/copilot_lbw_chi22.pdf
+    retrieved: 2026-07-25
+    version: CHI '22 Extended Abstracts, Article 332
 ---
 
 ## 개요
@@ -50,6 +85,11 @@ graph_visibility: public
 | enables | [[검증 노동]] | 생성된 제안을 이해·수정·디버깅해야 한다는 관찰은 검증과 통합을 독립 작업으로 분석할 근거를 제공한다. | [[Expectation vs. Experience: Evaluating the Usability of Code Generation Tools Powered by Large Language Models]] |
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - ACM, [DOI record](https://dl.acm.org/doi/10.1145/3491101.3519665)
 - Glassman Lab, [open paper PDF](https://glassmanlab.seas.harvard.edu/papers/copilot_lbw_chi22.pdf)

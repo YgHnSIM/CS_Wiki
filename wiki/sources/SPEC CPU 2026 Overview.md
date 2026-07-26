@@ -1,21 +1,58 @@
 ---
+schema_version: 2
+id: ref-032
+kind: reference
 title: SPEC CPU 2026 Overview
-aliases: [SPEC CPU2026 overview]
-summary: "표준 성능 벤치마크의 조건과 한계를 설명하고, 실행 시간 중심 SPECspeed와 처리량 중심 SPECrate를 구분하는 SPEC 공식 개요."
-tags: [type/reference, domain/computer-architecture, domain/computer-science, status/active]
+aliases:
+  - SPEC CPU2026 overview
+summary: 표준 성능 벤치마크의 조건과 한계를 설명하고, 실행 시간 중심 SPECspeed와 처리량 중심 SPECrate를 구분하는 SPEC 공식 개요.
+domains:
+  - computer-architecture
+  - computer-science
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-07-15
-updated: 2026-07-22
-sources: ["SPEC_CPU_2026_Overview.html", "SPEC official CPU 2026 overview webpage", "SPEC CPU 2026 Run and Reporting Rules"]
-source_id: ref-032
-source_kind: external
-primary_sources: ["SPEC official CPU 2026 overview webpage", "SPEC CPU 2026 Run and Reporting Rules"]
-supporting_sources: ["SPEC_CPU_2026_Overview.html"]
-source_urls: ["https://www.spec.org/cpu2026/docs/overview.html", "https://www.spec.org/cpu2026/docs/runrules.html#rule_2.3.3"]
-retrieved: 2026-07-15
-version: "SPEC CPU 2026 overview and run rules retrieved 2026-07-16"
-snapshot_status: archived
-status: active
-publication_year: 2026
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:f94b497d5b224f60055896f2d5d8748b317866b7c63f84906f385ff0c2dcc458
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers: []
+history:
+  publication_year: 2026
+redirect_from:
+  - /references/spec-cpu-2026-overview/
+  - /sources/spec-cpu-2026-overview/
+origin: external
+works:
+  primary:
+    - citation: SPEC official CPU 2026 overview webpage
+      genre: web
+      identifiers: []
+      edition: SPEC CPU 2026 overview and run rules retrieved 2026-07-16
+    - citation: SPEC CPU 2026 Run and Reporting Rules
+      genre: web
+      identifiers: []
+      edition: SPEC CPU 2026 overview and run rules retrieved 2026-07-16
+  supporting:
+    - citation: SPEC_CPU_2026_Overview.html
+      genre: web
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: canonical
+    url: https://www.spec.org/cpu2026/docs/overview.html
+    retrieved: 2026-07-15
+    version: SPEC CPU 2026 overview and run rules retrieved 2026-07-16
+  - kind: url
+    role: mirror
+    url: https://www.spec.org/cpu2026/docs/runrules.html#rule_2.3.3
+    retrieved: 2026-07-15
+    version: SPEC CPU 2026 overview and run rules retrieved 2026-07-16
 ---
 
 ## 개요
@@ -40,12 +77,18 @@ SPEC CPU 2026은 프로세서만 따로 떼어 측정하지 않는다. 계산 �
 ## 인용할 만한 구절
 
 > “Time”과 “Throughput”은 각각 작업 완료 시간과 단위 시간당 완료 작업을 가리킨다.
+<!-- wiki-v2:quote-locator evidence="ref-032" locator="wiki/sources/SPEC CPU 2026 Overview.md:line-22#인용할-만한-구절" status="recorded" -->
 
 ## 위키 반영
 
 이 자료는 [[컴파일러]], [[컴파일러 최적화]], 메모리 계층과 작업 부하가 함께 실현 성능을 만든다는 근거다. “컴퓨팅 능력이란 무엇인가”에서는 지연 시간과 처리량의 구분, 벤치마크의 작업 의존성, 정답 검증의 필요성을 설명하는 데 사용할 수 있다.
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - 로컬 보존본: `raw/assets/SPEC_CPU_2026_Overview.html`
 - SPEC, [SPEC CPU 2026 Overview](https://www.spec.org/cpu2026/docs/overview.html)

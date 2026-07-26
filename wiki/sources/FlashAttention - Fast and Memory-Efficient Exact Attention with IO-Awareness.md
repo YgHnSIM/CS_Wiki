@@ -1,25 +1,61 @@
 ---
+schema_version: 2
+id: ref-074
+kind: reference
 title: "FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness"
-aliases: ["FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness", FlashAttention, Dao et al. 2022, IO-aware exact attention]
-summary: "GPU의 HBM과 온칩 SRAM 사이 데이터 이동을 고려해 타일링과 재계산으로 큰 어텐션 중간 행렬의 구체화를 피하는 2022년 입출력 인지 정확 어텐션 논문."
-tags: [type/reference, domain/machine-learning, domain/computer-architecture, domain/systems, status/active]
-created: 2026-07-24
-updated: 2026-07-24
-publication_year: 2022
-historical_layer: software
-capability_layers: [realized-performance, resource-efficiency]
-sources: ["FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness"]
-source_id: ref-074
-source_kind: external
-primary_sources: ["Tri Dao et al., FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness, NeurIPS 2022"]
-supporting_sources: ["NeurIPS proceedings abstract, paper PDF, and supplemental record"]
-source_urls: ["https://proceedings.neurips.cc/paper_files/paper/2022/hash/67d57c32e20fd0a7a302cb81d36e40d5-Abstract.html", "https://proceedings.neurips.cc/paper_files/paper/2022/file/67d57c32e20fd0a7a302cb81d36e40d5-Paper-Conference.pdf"]
-retrieved: 2026-07-24
-version: "NeurIPS 2022 main conference"
-snapshot_status: external-only
-status: active
-graph_id: reference-flashattention
+aliases:
+  - "FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness"
+  - FlashAttention
+  - Dao et al. 2022
+  - IO-aware exact attention
+summary: GPU의 HBM과 온칩 SRAM 사이 데이터 이동을 고려해 타일링과 재계산으로 큰 어텐션 중간 행렬의 구체화를 피하는 2022년 입출력 인지 정확 어텐션 논문.
+domains:
+  - machine-learning
+  - computer-architecture
+  - systems
+editorial_status: active
+publication_visibility: public
 graph_visibility: public
+created: 2026-07-24
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:f3be8561ac7edf0f1698305b133b5fdc29ef30877d7abd8b3f5cb2ab8efb4953
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers:
+  - realized-performance
+  - resource-efficiency
+history:
+  publication_year: 2022
+  layer: software
+redirect_from:
+  - /references/flashattention-fast-and-memory-efficient-exact-attention-with-io-awareness/
+  - /sources/flashattention-fast-and-memory-efficient-exact-attention-with-io-awareness/
+origin: external
+works:
+  primary:
+    - citation: "Tri Dao et al., FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness, NeurIPS 2022"
+      genre: other
+      identifiers: []
+      edition: NeurIPS 2022 main conference
+  supporting:
+    - citation: NeurIPS proceedings abstract, paper PDF, and supplemental record
+      genre: official-record
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: canonical
+    url: https://proceedings.neurips.cc/paper_files/paper/2022/hash/67d57c32e20fd0a7a302cb81d36e40d5-Abstract.html
+    retrieved: 2026-07-24
+    version: NeurIPS 2022 main conference
+  - kind: url
+    role: mirror
+    url: https://proceedings.neurips.cc/paper_files/paper/2022/file/67d57c32e20fd0a7a302cb81d36e40d5-Paper-Conference.pdf
+    retrieved: 2026-07-24
+    version: NeurIPS 2022 main conference
 ---
 
 ## 개요
@@ -43,6 +79,7 @@ graph_visibility: public
 ## 인용할 만한 구절
 
 > “computes exact attention with far fewer memory accesses”
+<!-- wiki-v2:quote-locator evidence="ref-074" locator="wiki/sources/FlashAttention - Fast and Memory-Efficient Exact Attention with IO-Awareness.md:line-21#인용할-만한-구절" status="recorded" -->
 
 수학적 어텐션을 근사하지 않으면서 병목을 메모리 접근에서 줄인다는 논문의 핵심을 나타낸다.
 
@@ -59,6 +96,11 @@ graph_visibility: public
 | implements | [[자기 주의]] | 어텐션 정의를 근사하지 않고 밀집 자기 주의를 메모리 계층에 맞게 재구성한다. | [[FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness]] |
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - NeurIPS Proceedings, [abstract and bibliographic record](https://proceedings.neurips.cc/paper_files/paper/2022/hash/67d57c32e20fd0a7a302cb81d36e40d5-Abstract.html)
 - NeurIPS Proceedings, [conference paper PDF](https://proceedings.neurips.cc/paper_files/paper/2022/file/67d57c32e20fd0a7a302cb81d36e40d5-Paper-Conference.pdf)

@@ -1,23 +1,71 @@
 ---
+schema_version: 2
+id: ref-034
+kind: reference
 title: Roofline An Insightful Visual Performance Model
-aliases: [Williams-Waterman-Patterson 2009, Roofline performance model paper]
-summary: "연산 집약도와 메모리 대역폭을 결합해 프로그램의 달성 가능한 성능 상한과 계산·메모리 병목을 시각화한 Roofline 모델 논문."
-tags: [type/reference, domain/computer-architecture, domain/computer-science, status/active]
+aliases:
+  - Williams-Waterman-Patterson 2009
+  - Roofline performance model paper
+summary: 연산 집약도와 메모리 대역폭을 결합해 프로그램의 달성 가능한 성능 상한과 계산·메모리 병목을 시각화한 Roofline 모델 논문.
+domains:
+  - computer-architecture
+  - computer-science
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-07-15
-updated: 2026-07-18
-publication_year: 2009
-historical_layer: measurement
-capability_layers: [realized-performance, resource-efficiency]
-sources: ["2009_Williams_Waterman_Patterson_Roofline.pdf", "Communications of the ACM 52(4), 2009"]
-source_id: ref-034
-source_kind: external
-primary_sources: ["Communications of the ACM 52(4), 2009"]
-supporting_sources: ["2009_Williams_Waterman_Patterson_Roofline.pdf", "UC Berkeley access copy", "Berkeley Lab Roofline overview"]
-source_urls: ["https://doi.org/10.1145/1498765.1498785", "https://people.eecs.berkeley.edu/~kubitron/cs252/handouts/papers/RooflineVyNoYellow.pdf", "https://amcr.lbl.gov/departments/computer-science-department/ppan/roofline-performance-model/"]
-retrieved: 2026-07-15
-version: "Revised October 2008"
-snapshot_status: archived
-status: active
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:e276ccb7fbc4559c8c6beed9867fe9426cb2684da1578475e18a933d936adeba
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers:
+  - realized-performance
+  - resource-efficiency
+history:
+  publication_year: 2009
+  layer: measurement
+redirect_from:
+  - /references/roofline-an-insightful-visual-performance-model/
+  - /sources/roofline-an-insightful-visual-performance-model/
+origin: external
+works:
+  primary:
+    - citation: Communications of the ACM 52(4), 2009
+      genre: other
+      identifiers: []
+      edition: Revised October 2008
+  supporting:
+    - citation: 2009_Williams_Waterman_Patterson_Roofline.pdf
+      genre: other
+      identifiers: []
+      edition: null
+    - citation: UC Berkeley access copy
+      genre: other
+      identifiers: []
+      edition: null
+    - citation: Berkeley Lab Roofline overview
+      genre: web
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: doi
+    url: https://doi.org/10.1145/1498765.1498785
+    retrieved: 2026-07-15
+    version: Revised October 2008
+  - kind: url
+    role: mirror
+    url: https://people.eecs.berkeley.edu/~kubitron/cs252/handouts/papers/RooflineVyNoYellow.pdf
+    retrieved: 2026-07-15
+    version: Revised October 2008
+  - kind: url
+    role: mirror
+    url: https://amcr.lbl.gov/departments/computer-science-department/ppan/roofline-performance-model/
+    retrieved: 2026-07-15
+    version: Revised October 2008
 ---
 
 ## 개요
@@ -43,12 +91,18 @@ Roofline은 원래 부동소수점 연산과 DRAM 트래픽을 사용하지만, 
 ## 인용할 만한 구절
 
 > “A model need not be perfect, just insightful.”
+<!-- wiki-v2:quote-locator evidence="ref-034" locator="wiki/sources/Roofline An Insightful Visual Performance Model.md:line-23#인용할-만한-구절" status="recorded" -->
 
 ## 위키 반영
 
 이 자료는 [[비트와 바이트]], [[컴파일러 최적화]], [[비트 연산]]에서 다룬 데이터 표현과 소프트웨어 변환을 실제 성능 병목에 연결한다. “컴퓨팅 능력이란 무엇인가”에서는 최고 성능과 달성 성능, 계산 제한과 메모리 제한을 구분하는 핵심 모델로 사용할 수 있다.
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - 로컬 보존본: `raw/assets/2009_Williams_Waterman_Patterson_Roofline.pdf`
 - ACM, [Roofline: An Insightful Visual Performance Model](https://doi.org/10.1145/1498765.1498785)

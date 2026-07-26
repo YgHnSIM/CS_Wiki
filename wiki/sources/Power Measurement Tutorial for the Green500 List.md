@@ -1,23 +1,55 @@
 ---
+schema_version: 2
+id: ref-036
+kind: reference
 title: Power Measurement Tutorial for the Green500 List
-aliases: [Green500 power tutorial 2007]
-summary: "LINPACK 달성 성능과 같은 실행 구간의 평균 전력을 결합해 GFLOPS/W를 산출하는 Green500의 2007년 전력 측정 지침."
-tags: [type/reference, domain/computer-architecture, domain/computer-science, status/active]
+aliases:
+  - Green500 power tutorial 2007
+summary: LINPACK 달성 성능과 같은 실행 구간의 평균 전력을 결합해 GFLOPS/W를 산출하는 Green500의 2007년 전력 측정 지침.
+domains:
+  - computer-architecture
+  - computer-science
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-07-15
-updated: 2026-07-25
-publication_year: 2007
-historical_layer: measurement
-capability_layers: [resource-efficiency]
-sources: ["Green500_Power_Measurement_Tutorial.pdf", "Power Measurement Tutorial for the Green500 List (2007)"]
-source_id: ref-036
-source_kind: external
-primary_sources: ["Power Measurement Tutorial for the Green500 List (2007)"]
-supporting_sources: ["Green500_Power_Measurement_Tutorial.pdf", "TOP500-hosted access copy"]
-source_urls: ["https://top500.org/files/green500/tutorial.pdf"]
-retrieved: 2026-07-15
-version: "2007-06-27"
-snapshot_status: archived
-status: active
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:1f9d1f5d1cd4d2bc4ec8b2569c88f2cf133bf512cc769d8d9c20d4f3bf4642f9
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers:
+  - resource-efficiency
+history:
+  publication_year: 2007
+  layer: measurement
+redirect_from:
+  - /references/power-measurement-tutorial-for-the-green500-list/
+  - /sources/power-measurement-tutorial-for-the-green500-list/
+origin: external
+works:
+  primary:
+    - citation: Power Measurement Tutorial for the Green500 List (2007)
+      genre: other
+      identifiers: []
+      edition: 2007-06-27
+  supporting:
+    - citation: Green500_Power_Measurement_Tutorial.pdf
+      genre: other
+      identifiers: []
+      edition: null
+    - citation: TOP500-hosted access copy
+      genre: other
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: canonical
+    url: https://top500.org/files/green500/tutorial.pdf
+    retrieved: 2026-07-15
+    version: 2007-06-27
 ---
 
 ## 개요
@@ -41,6 +73,7 @@ status: active
 ## 인용할 만한 구절
 
 > “There is no ideal power-performance efficiency metric for supercomputers.”
+<!-- wiki-v2:quote-locator evidence="ref-036" locator="wiki/sources/Power Measurement Tutorial for the Green500 List.md:line-21#인용할-만한-구절" status="recorded" -->
 
 ## 위키 반영
 
@@ -54,6 +87,11 @@ status: active
 | exemplifies | [[전력 장벽은 성능 향상의 의미를 어떻게 바꾸었는가]] | 최고 성능만이 아니라 작업·시스템 경계가 고정된 성능/W를 비교하는 초기 측정 사례를 제공한다. | [[Power Measurement Tutorial for the Green500 List]] |
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - 로컬 보존본: `raw/assets/Green500_Power_Measurement_Tutorial.pdf`
 - TOP500-hosted copy, [Power Measurement Tutorial for the Green500 List](https://top500.org/files/green500/tutorial.pdf)

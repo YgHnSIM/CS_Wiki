@@ -1,25 +1,66 @@
 ---
+schema_version: 2
+id: ref-093
+kind: reference
 title: "Monitors: An Operating System Structuring Concept"
-aliases: [Hoare monitors, Hoare 1974, "Monitors: An Operating System Structuring Concept", "Monitors An Operating System Structuring Concept", 운영체제 구조화 개념으로서의 모니터]
-summary: "공유 자원의 상태와 접근 절차를 모듈 안에 묶고 상호 배제와 조건 대기를 제공하는 모니터를 운영체제 구조화 방법으로 제시한 Hoare의 1974년 논문."
-tags: [type/reference, domain/operating-systems, domain/software-engineering, domain/computer-science, status/active]
-created: 2026-07-25
-updated: 2026-07-25
-publication_year: 1974
-historical_layer: system
-capability_layers: [scalability, reliable-results]
-sources: ["Monitors: An Operating System Structuring Concept"]
-source_id: ref-093
-source_kind: external
-primary_sources: ["C. A. R. Hoare, Monitors: An Operating System Structuring Concept, Communications of the ACM 17(10), 1974, pp. 549–557"]
-supporting_sources: ["ACM Digital Library publication record", "University of Oxford author publication record"]
-source_urls: ["https://dl.acm.org/doi/10.1145/355620.361161", "https://www.cs.ox.ac.uk/publications/publication8229-abstract.html"]
-retrieved: 2026-07-25
-version: "Communications of the ACM 17(10), October 1974, pp. 549–557"
-snapshot_status: external-only
-status: active
-graph_id: reference-hoare-monitors
+aliases:
+  - Hoare monitors
+  - Hoare 1974
+  - "Monitors: An Operating System Structuring Concept"
+  - Monitors An Operating System Structuring Concept
+  - 운영체제 구조화 개념으로서의 모니터
+summary: 공유 자원의 상태와 접근 절차를 모듈 안에 묶고 상호 배제와 조건 대기를 제공하는 모니터를 운영체제 구조화 방법으로 제시한 Hoare의 1974년 논문.
+domains:
+  - operating-systems
+  - software-engineering
+  - computer-science
+editorial_status: active
+publication_visibility: public
 graph_visibility: public
+created: 2026-07-25
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:0f8f67e581fc1a3292722b263c79ef8a2320fc1d7107a59dfd4f74deb2f0af71
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers:
+  - scalability
+  - reliable-results
+history:
+  publication_year: 1974
+  layer: system
+redirect_from:
+  - /references/monitors-an-operating-system-structuring-concept/
+  - /sources/monitors-an-operating-system-structuring-concept/
+origin: external
+works:
+  primary:
+    - citation: "C. A. R. Hoare, Monitors: An Operating System Structuring Concept, Communications of the ACM 17(10), 1974, pp. 549–557"
+      genre: other
+      identifiers: []
+      edition: Communications of the ACM 17(10), October 1974, pp. 549–557
+  supporting:
+    - citation: ACM Digital Library publication record
+      genre: official-record
+      identifiers: []
+      edition: null
+    - citation: University of Oxford author publication record
+      genre: official-record
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: canonical
+    url: https://dl.acm.org/doi/10.1145/355620.361161
+    retrieved: 2026-07-25
+    version: Communications of the ACM 17(10), October 1974, pp. 549–557
+  - kind: url
+    role: mirror
+    url: https://www.cs.ox.ac.uk/publications/publication8229-abstract.html
+    retrieved: 2026-07-25
+    version: Communications of the ACM 17(10), October 1974, pp. 549–557
 ---
 
 ## 개요
@@ -41,6 +82,7 @@ Hoare의 모니터는 특정 언어의 `synchronized` 키워드나 현대 런타
 ## 인용할 만한 구절
 
 > “a method of structuring an operating system”
+<!-- wiki-v2:quote-locator evidence="ref-093" locator="wiki/sources/Monitors An Operating System Structuring Concept.md:line-19#인용할-만한-구절" status="recorded" -->
 
 제목의 표현처럼 모니터는 잠금 하나가 아니라 운영체제 구조를 조직하는 방법으로 제안됐다.
 
@@ -56,6 +98,11 @@ Hoare의 모니터는 특정 언어의 `synchronized` 키워드나 현대 런타
 | exemplifies | [[운영체제]] | 공유 자원 관리와 프로세스 대기를 운영체제의 구조화 문제로 다루는 사례를 제시한다. | [[Monitors: An Operating System Structuring Concept]] |
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - ACM Digital Library, [Monitors: An Operating System Structuring Concept](https://dl.acm.org/doi/10.1145/355620.361161)
 - University of Oxford, [author publication record](https://www.cs.ox.ac.uk/publications/publication8229-abstract.html)

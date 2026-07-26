@@ -1,16 +1,43 @@
 ---
+schema_version: 2
+id: concept-00b55ff0f7a3581b
+kind: concept
 title: EDSAC
-aliases: [Electronic Delay Storage Automatic Calculator]
-summary: "초기 저장 프로그램 컴퓨터로, 소프트웨어의 입력·적재·디버깅·재사용 계층이 선명하게 드러난 사례."
-tags: [type/concept, domain/computer-history, domain/software-engineering, status/active]
+aliases:
+  - Electronic Delay Storage Automatic Calculator
+summary: 초기 저장 프로그램 컴퓨터로, 소프트웨어의 입력·적재·디버깅·재사용 계층이 선명하게 드러난 사례.
+domains:
+  - computer-history
+  - software-engineering
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-05-04
-updated: 2026-07-22
-event_start: 1949
-historical_layer: machine
-capability_layers: [programmability, reliable-results]
-sources: ["초기 소프트웨어의 탄생.md", "초기 소프트웨어의 탄생_해설.md", "EDSAC과 Initial Orders.md", "EDSAC과 Initial Orders_해설.md", "서브루틴과 스택(Stack)의 원리.md", "폐쇄형 서브루틴과 Wheeler Jump.md", "The Preparation of Programs for an Electronic Digital Computer", "First Draft of a Report on the EDVAC", "The Manchester Small Scale Experimental Machine - The Baby"]
-status: active
-graph_id: concept-00b55ff0f7a3581b
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:ce622541989a3a69fada3cefaeb97a22f814d15328eb0f9773cd0038b2555a8f
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids:
+  - src-002
+  - src-003
+  - src-004
+  - src-005
+  - ref-001
+  - ref-006
+  - ref-007
+capability_layers:
+  - programmability
+  - reliable-results
+history:
+  event:
+    start: 1949
+    basis: representative
+    evidence_id: src-002
+  layer: machine
+redirect_from:
+  - /concepts/edsac/
 ---
 
 ## 개요
@@ -38,6 +65,17 @@ Wilkes의 EDSAC 설계는 [[First Draft of a Report on the EDVAC]]와 Moore Scho
 - [[The Preparation of Programs for an Electronic Digital Computer]]를 통해 EDSAC의 라이브러리, 오류 진단, [[자동 프로그래밍]] 경험이 저장 프로그램 컴퓨터 일반을 위한 프로그래밍 지식으로 정리되었다.
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- `src-002`
+- `src-003`
+- `src-004`
+- `src-005`
+- `ref-001`
+- `ref-006`
+- `ref-007`
+<!-- wiki-v2:evidence-end -->
 
 - [[초기 소프트웨어의 탄생]]
 - [[EDSAC과 Initial Orders]]

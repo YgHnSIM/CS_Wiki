@@ -1,23 +1,58 @@
 ---
+schema_version: 2
+id: ref-043
+kind: reference
 title: Slave Memories and Dynamic Storage Allocation
-aliases: [Wilkes 1965, 초기 캐시 메모리 논문, slave memory paper]
-summary: "빠른 소용량 기억장치에 최근 사용한 명령과 데이터를 자동으로 축적해 느린 주기억장치의 접근 비용을 줄이는 초기 캐시 구조를 제안한 1965년 논문."
-tags: [type/reference, domain/computer-architecture, domain/computer-history, status/active]
+aliases:
+  - Wilkes 1965
+  - 초기 캐시 메모리 논문
+  - slave memory paper
+summary: 빠른 소용량 기억장치에 최근 사용한 명령과 데이터를 자동으로 축적해 느린 주기억장치의 접근 비용을 줄이는 초기 캐시 구조를 제안한 1965년 논문.
+domains:
+  - computer-architecture
+  - computer-history
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-07-16
-updated: 2026-07-18
-publication_year: 1965
-historical_layer: architecture
-capability_layers: [realized-performance]
-sources: ["IEEE Transactions on Electronic Computers EC-14(2), 1965", "University of Cambridge access copy"]
-source_id: ref-043
-source_kind: external
-primary_sources: ["IEEE Transactions on Electronic Computers EC-14(2), 1965"]
-supporting_sources: ["University of Cambridge access copy"]
-source_urls: ["https://doi.org/10.1109/PGEC.1965.264263", "https://www.cl.cam.ac.uk/teaching/2324/P56/files/wilkes1965cache.pdf"]
-retrieved: 2026-07-16
-version: "IEEE Transactions on Electronic Computers EC-14(2), April 1965"
-snapshot_status: external-only
-status: active
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:0a3d2dc052b814c14cc431fbecdbbd16e1b2db76a0891b1ba202b0e2d07547c3
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers:
+  - realized-performance
+history:
+  publication_year: 1965
+  layer: architecture
+redirect_from:
+  - /references/slave-memories-and-dynamic-storage-allocation/
+  - /sources/slave-memories-and-dynamic-storage-allocation/
+origin: external
+works:
+  primary:
+    - citation: IEEE Transactions on Electronic Computers EC-14(2), 1965
+      genre: other
+      identifiers: []
+      edition: IEEE Transactions on Electronic Computers EC-14(2), April 1965
+  supporting:
+    - citation: University of Cambridge access copy
+      genre: other
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: doi
+    url: https://doi.org/10.1109/PGEC.1965.264263
+    retrieved: 2026-07-16
+    version: IEEE Transactions on Electronic Computers EC-14(2), April 1965
+  - kind: url
+    role: mirror
+    url: https://www.cl.cam.ac.uk/teaching/2324/P56/files/wilkes1965cache.pdf
+    retrieved: 2026-07-16
+    version: IEEE Transactions on Electronic Computers EC-14(2), April 1965
 ---
 
 ## 개요
@@ -51,6 +86,7 @@ Wilkes는 빠른 층의 용량, 주소 변환, 교체할 블록의 선택, 변�
 ## 인용할 만한 구절
 
 > 빠른 기억장치는 주기억장치에서 실제로 요구된 단어를 자동으로 축적하고, 다시 요구될 때 주기억장치 접근의 불이익을 피한다.
+<!-- wiki-v2:quote-locator evidence="ref-043" locator="wiki/sources/Slave Memories and Dynamic Storage Allocation.md:line-31#인용할-만한-구절" status="recorded" -->
 
 논문의 중심 메커니즘을 한국어로 요약한 문장이다.
 
@@ -66,6 +102,11 @@ Wilkes는 빠른 층의 용량, 주소 변환, 교체할 블록의 선택, 변�
 | enables | [[캐시 메모리]] | 최근 요구된 단어를 빠른 소용량 기억장치에 유지해 계층적 기억장치의 실용 설계 공간을 연다. | [[Slave Memories and Dynamic Storage Allocation]] |
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - IEEE, [DOI record](https://doi.org/10.1109/PGEC.1965.264263)
 - University of Cambridge, [access copy](https://www.cl.cam.ac.uk/teaching/2324/P56/files/wilkes1965cache.pdf)

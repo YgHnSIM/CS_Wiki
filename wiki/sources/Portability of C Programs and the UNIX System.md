@@ -1,21 +1,69 @@
 ---
+schema_version: 2
+id: ref-021
+kind: reference
 title: Portability of C Programs and the UNIX System
-aliases: [C and Unix portability, Johnson Ritchie portability paper]
-summary: "Johnson과 Ritchie의 1978년 논문을 바탕으로 C 프로그램과 Unix 시스템의 이식성, 도구, 기계 의존성 관리를 정리한 참고 자료."
-tags: [type/reference, domain/software-engineering, domain/programming-languages, domain/operating-systems, status/active]
+aliases:
+  - C and Unix portability
+  - Johnson Ritchie portability paper
+summary: Johnson과 Ritchie의 1978년 논문을 바탕으로 C 프로그램과 Unix 시스템의 이식성, 도구, 기계 의존성 관리를 정리한 참고 자료.
+domains:
+  - software-engineering
+  - programming-languages
+  - operating-systems
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-07-10
-updated: 2026-07-22
-sources: ["Bell System Technical Journal 1978"]
-source_id: ref-021
-source_kind: external
-primary_sources: ["Bell System Technical Journal 1978"]
-supporting_sources: ["Nokia Bell Labs copy", "Wiley record", "Bell System Technical Journal copy"]
-source_urls: ["https://www.nokia.com/bell-labs/about/dennis-m-ritchie/portpap.pdf", "https://onlinelibrary.wiley.com/doi/abs/10.1002/j.1538-7305.1978.tb02141.x", "https://vtda.org/pubs/BSTJ/vol57-1978/articles/bstj57-6-2021.pdf"]
-retrieved: 2026-07-10
-version: null
-snapshot_status: external-only
-status: active
-publication_year: 1978
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:d432e9ffede5c2594aa6251e1e86437410203fdd35184096472f5c5bdd1ae92a
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers: []
+history:
+  publication_year: 1978
+redirect_from:
+  - /references/portability-of-c-programs-and-the-unix-system/
+  - /sources/portability-of-c-programs-and-the-unix-system/
+origin: external
+works:
+  primary:
+    - citation: Bell System Technical Journal 1978
+      genre: primary-literature
+      identifiers: []
+      edition: null
+  supporting:
+    - citation: Nokia Bell Labs copy
+      genre: other
+      identifiers: []
+      edition: null
+    - citation: Wiley record
+      genre: official-record
+      identifiers: []
+      edition: null
+    - citation: Bell System Technical Journal copy
+      genre: primary-literature
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: canonical
+    url: https://www.nokia.com/bell-labs/about/dennis-m-ritchie/portpap.pdf
+    retrieved: 2026-07-10
+    version: null
+  - kind: url
+    role: mirror
+    url: https://onlinelibrary.wiley.com/doi/abs/10.1002/j.1538-7305.1978.tb02141.x
+    retrieved: 2026-07-10
+    version: null
+  - kind: url
+    role: mirror
+    url: https://vtda.org/pubs/BSTJ/vol57-1978/articles/bstj57-6-2021.pdf
+    retrieved: 2026-07-10
+    version: null
 ---
 
 ## 개요
@@ -37,6 +85,11 @@ publication_year: 1978
 이 자료는 [[이식성]], [[C 언어]], [[컴파일러]], [[시스템 프로그래밍]], [[소프트웨어 공학]]을 보강하는 데 사용한다. [[Unix와 C]]에서는 이 논문을 통해 Unix와 C의 결합이 단지 구현 편의가 아니라, 운영체제와 도구를 다른 기계로 옮길 수 있게 한 공학적 전환으로 정리한다.
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - Nokia Bell Labs, [Portability of C Programs and the UNIX System](https://www.nokia.com/bell-labs/about/dennis-m-ritchie/portpap.pdf)
 - Wiley Online Library, [Portability of C Programs and the UNIX System](https://onlinelibrary.wiley.com/doi/abs/10.1002/j.1538-7305.1978.tb02141.x)

@@ -1,24 +1,70 @@
 ---
+schema_version: 2
+id: ref-056
+kind: reference
 title: "The computation factory: de Prony's project for making tables in the 1790s"
-aliases: ["The computation factory: de Prony's project for making tables in the 1790s", "The computation factory - de Prony's project for making tables in the 1790s", 드 프로니의 계산 공장, de Prony computation factory]
-summary: "드 프로니가 1790년대에 대규모 로그·삼각함수표를 분업으로 제작했으나 출판 비용 때문에 완성된 표를 널리 배포하지 못한 프로젝트와 배비지에 준 영향을 분석한 연구 장."
-tags: [type/reference, domain/computer-history, domain/mathematics, status/active]
+aliases:
+  - "The computation factory: de Prony's project for making tables in the 1790s"
+  - The computation factory - de Prony's project for making tables in the 1790s
+  - 드 프로니의 계산 공장
+  - de Prony computation factory
+summary: 드 프로니가 1790년대에 대규모 로그·삼각함수표를 분업으로 제작했으나 출판 비용 때문에 완성된 표를 널리 배포하지 못한 프로젝트와 배비지에 준 영향을 분석한 연구 장.
+domains:
+  - computer-history
+  - mathematics
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-07-20
-updated: 2026-07-20
-publication_year: 2003
-historical_note: "연구 장은 1790년대에 시작되어 1801년 계산이 완료된 표 제작 프로젝트와 1891년 일부 축약판 출판을 다룬다. 역사 지도 연도는 연구 장의 출판 시점이다."
-historical_layer: system
-capability_layers: [resource-efficiency, reliable-results]
-sources: ["Ivor Grattan-Guinness, The computation factory: de Prony's project for making tables in the 1790s", "The History of Mathematical Tables: From Sumer to Spreadsheets", "Raymond Flood, Babbage and Lovelace, Gresham College, 2016"]
-source_id: ref-056
-source_kind: external
-primary_sources: ["Ivor Grattan-Guinness, The computation factory: de Prony's project for making tables in the 1790s"]
-supporting_sources: ["The History of Mathematical Tables: From Sumer to Spreadsheets", "Raymond Flood, Babbage and Lovelace, Gresham College, 2016"]
-source_urls: ["https://academic.oup.com/book/4975/chapter/147436585", "https://academic.oup.com/book/4975", "https://www.gresham.ac.uk/watch-now/babbage-and-lovelace"]
-retrieved: 2026-07-20
-version: "Oxford University Press, 2003, chapter 4, pp. 105-122, DOI 10.1093/acprof:oso/9780198508410.003.0005; Gresham lecture transcript, 2016-01-19"
-snapshot_status: external-only
-status: active
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:abe066c38ec5fe94fb0b95c5913180dd97d9b18283b3d53ad4b85b4feb7ed910
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers:
+  - resource-efficiency
+  - reliable-results
+history:
+  publication_year: 2003
+  note: 연구 장은 1790년대에 시작되어 1801년 계산이 완료된 표 제작 프로젝트와 1891년 일부 축약판 출판을 다룬다. 역사 지도 연도는 연구 장의 출판 시점이다.
+  layer: system
+redirect_from:
+  - /references/the-computation-factory-de-prony-s-project-for-making-tables-in-the-1790s/
+  - /sources/the-computation-factory-de-prony-s-project-for-making-tables-in-the-1790s/
+origin: external
+works:
+  primary:
+    - citation: "Ivor Grattan-Guinness, The computation factory: de Prony's project for making tables in the 1790s"
+      genre: other
+      identifiers: []
+      edition: Oxford University Press, 2003, chapter 4, pp. 105-122, DOI 10.1093/acprof:oso/9780198508410.003.0005; Gresham lecture transcript, 2016-01-19
+  supporting:
+    - citation: "The History of Mathematical Tables: From Sumer to Spreadsheets"
+      genre: official-record
+      identifiers: []
+      edition: null
+    - citation: Raymond Flood, Babbage and Lovelace, Gresham College, 2016
+      genre: other
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: canonical
+    url: https://academic.oup.com/book/4975/chapter/147436585
+    retrieved: 2026-07-20
+    version: Oxford University Press, 2003, chapter 4, pp. 105-122, DOI 10.1093/acprof:oso/9780198508410.003.0005; Gresham lecture transcript, 2016-01-19
+  - kind: url
+    role: mirror
+    url: https://academic.oup.com/book/4975
+    retrieved: 2026-07-20
+    version: Oxford University Press, 2003, chapter 4, pp. 105-122, DOI 10.1093/acprof:oso/9780198508410.003.0005; Gresham lecture transcript, 2016-01-19
+  - kind: url
+    role: mirror
+    url: https://www.gresham.ac.uk/watch-now/babbage-and-lovelace
+    retrieved: 2026-07-20
+    version: Oxford University Press, 2003, chapter 4, pp. 105-122, DOI 10.1093/acprof:oso/9780198508410.003.0005; Gresham lecture transcript, 2016-01-19
 ---
 
 ## 개요
@@ -48,6 +94,11 @@ Oxford Academic의 초록에 따르면 표의 계산은 1801년에 완료되었�
 이 자료는 [[인간 계산자]]와 [[인간 계산자와 계산 공장]]에서 기계 이전의 계산이 이미 작업 분해, 조정, 검산과 출판을 포함한 생산 체계였다는 근거로 사용한다. [[수학 표]]에서는 “계산 완료”와 “배포 가능한 표 완성”을 구분하는 사례로 연결한다.
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - Oxford University Press, Ivor Grattan-Guinness, [The computation factory: de Prony's project for making tables in the 1790s](https://academic.oup.com/book/4975/chapter/147436585)
 - Oxford University Press, [The History of Mathematical Tables: From Sumer to Spreadsheets](https://academic.oup.com/book/4975)

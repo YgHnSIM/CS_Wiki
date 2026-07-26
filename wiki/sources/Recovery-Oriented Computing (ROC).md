@@ -1,25 +1,76 @@
 ---
+schema_version: 2
+id: ref-065
+kind: reference
 title: Recovery-Oriented Computing (ROC)
-aliases: ["Recovery-Oriented Computing: Motivation, Definition, Techniques, and Case Studies", 복구 지향 컴퓨팅, ROC]
-summary: "하드웨어 고장, 소프트웨어 버그와 운영자 오류를 전제로 평균 고장 간격뿐 아니라 평균 복구 시간을 줄이는 시스템 설계를 제안한 2002년 Berkeley 기술 보고서."
-tags: [type/reference, domain/systems, domain/software-engineering, status/active]
-created: 2026-07-24
-updated: 2026-07-24
-publication_year: 2002
-historical_layer: system
-capability_layers: [reliable-results]
-sources: ["Recovery-Oriented Computing (ROC)"]
-source_id: ref-065
-source_kind: external
-primary_sources: ["David A. Patterson, Aaron Brown, Pete Broadwell, George Candea, Mike Chen, James Cutler, Patricia Enriquez, Armando Fox, Emre Kiciman, Matthew Merzbacher, David Oppenheimer, Naveen Sastry, William Tetzlaff, Jeongyeon Traupman, and Noah Treuhaft, Recovery-Oriented Computing (ROC): Motivation, Definition, Techniques, and Case Studies, Technical Report UCB/CSD-02-1175, 2002"]
-supporting_sources: ["UC Berkeley technical report catalog", "Microsoft Research publication page", "Berkeley Digital Collections record"]
-source_urls: ["https://www2.eecs.berkeley.edu/Pubs/TechRpts/2002/5574.html", "https://www2.eecs.berkeley.edu/Pubs/TechRpts/2002/Archive/CSD-02-1175.pdf", "https://www.microsoft.com/en-us/research/publication/recovery-oriented-computing-motivation-definition-principles-and-examples/?lang=ko-kr", "https://digicoll.lib.berkeley.edu/record/137942"]
-retrieved: 2026-07-24
-version: "Technical Report UCB/CSD-02-1175, 2002"
-snapshot_status: external-only
-status: active
-graph_id: reference-recovery-oriented-computing
+aliases:
+  - "Recovery-Oriented Computing: Motivation, Definition, Techniques, and Case Studies"
+  - 복구 지향 컴퓨팅
+  - ROC
+summary: 하드웨어 고장, 소프트웨어 버그와 운영자 오류를 전제로 평균 고장 간격뿐 아니라 평균 복구 시간을 줄이는 시스템 설계를 제안한 2002년 Berkeley 기술 보고서.
+domains:
+  - systems
+  - software-engineering
+editorial_status: active
+publication_visibility: public
 graph_visibility: public
+created: 2026-07-24
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:bf300af5ff2a99824618783328e66c4eea181557e947850b7b32defbae22f016
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers:
+  - reliable-results
+history:
+  publication_year: 2002
+  layer: system
+redirect_from:
+  - /references/recovery-oriented-computing-roc/
+  - /sources/recovery-oriented-computing-roc/
+origin: external
+works:
+  primary:
+    - citation: "David A. Patterson, Aaron Brown, Pete Broadwell, George Candea, Mike Chen, James Cutler, Patricia Enriquez, Armando Fox, Emre Kiciman, Matthew Merzbacher, David Oppenheimer, Naveen Sastry, William Tetzlaff, Jeongyeon Traupman, and Noah Treuhaft, Recovery-Oriented Computing (ROC): Motivation, Definition, Techniques, and Case Studies, Technical Report UCB/CSD-02-1175, 2002"
+      genre: other
+      identifiers: []
+      edition: Technical Report UCB/CSD-02-1175, 2002
+  supporting:
+    - citation: UC Berkeley technical report catalog
+      genre: other
+      identifiers: []
+      edition: null
+    - citation: Microsoft Research publication page
+      genre: primary-literature
+      identifiers: []
+      edition: null
+    - citation: Berkeley Digital Collections record
+      genre: official-record
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: canonical
+    url: https://www2.eecs.berkeley.edu/Pubs/TechRpts/2002/5574.html
+    retrieved: 2026-07-24
+    version: Technical Report UCB/CSD-02-1175, 2002
+  - kind: url
+    role: mirror
+    url: https://www2.eecs.berkeley.edu/Pubs/TechRpts/2002/Archive/CSD-02-1175.pdf
+    retrieved: 2026-07-24
+    version: Technical Report UCB/CSD-02-1175, 2002
+  - kind: url
+    role: publisher
+    url: https://www.microsoft.com/en-us/research/publication/recovery-oriented-computing-motivation-definition-principles-and-examples/?lang=ko-kr
+    retrieved: 2026-07-24
+    version: Technical Report UCB/CSD-02-1175, 2002
+  - kind: url
+    role: mirror
+    url: https://digicoll.lib.berkeley.edu/record/137942
+    retrieved: 2026-07-24
+    version: Technical Report UCB/CSD-02-1175, 2002
 ---
 
 ## 개요
@@ -41,6 +92,7 @@ graph_visibility: public
 ## 인용할 만한 구절
 
 > “mean time to repair”
+<!-- wiki-v2:quote-locator evidence="ref-065" locator="wiki/sources/Recovery-Oriented Computing (ROC).md:line-19#인용할-만한-구절" status="recorded" -->
 
 보고서는 평균 고장 간격만이 아니라 평균 복구 시간을 가용성 설계의 독립된 축으로 다룬다.
 
@@ -56,6 +108,11 @@ graph_visibility: public
 | broader | [[결함 허용]] | 고장을 견디는 설계를 예방, 격리와 복구 절차까지 포함하는 운영 문제로 확장한다. | [[Recovery-Oriented Computing (ROC)]] |
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - UC Berkeley, [technical report catalog](https://www2.eecs.berkeley.edu/Pubs/TechRpts/2002/5574.html)
 - UC Berkeley, [technical report PDF](https://www2.eecs.berkeley.edu/Pubs/TechRpts/2002/Archive/CSD-02-1175.pdf)

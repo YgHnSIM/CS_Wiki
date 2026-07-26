@@ -1,13 +1,35 @@
 ---
+schema_version: 2
+id: analysis-fc1fa74eef57ee33
+kind: analysis
 title: goto와 점프에서 구조적 프로그래밍으로
-aliases: [goto/점프에서 구조적 프로그래밍으로, jump to structured programming, goto에서 구조적 프로그래밍으로]
-summary: "기계 점프와 고급 언어 `goto`의 차이를 구분하고, 제어 흐름이 구조적 프로그래밍으로 정리되는 과정을 분석."
-tags: [type/analysis, domain/software-engineering, domain/programming-languages, domain/computer-history, status/active]
+aliases:
+  - goto/점프에서 구조적 프로그래밍으로
+  - jump to structured programming
+  - goto에서 구조적 프로그래밍으로
+summary: 기계 점프와 고급 언어 goto의 차이를 구분하고, 제어 흐름이 구조적 프로그래밍으로 정리되는 과정을 분석.
+domains:
+  - software-engineering
+  - programming-languages
+  - computer-history
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-07-10
-updated: 2026-07-22
-sources: ["A Case against the GO TO Statement", "Flow Diagrams, Turing Machines and Languages with Only Two Formation Rules", "Structured Programming", "Structured Programming with go to Statements"]
-status: active
-graph_id: analysis-fc1fa74eef57ee33
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:834ebd5c107fcb7cd9acd1e760bfa8d3aa9233e8ef9ee07015c11f8bb1320c95
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids:
+  - ref-011
+  - ref-012
+  - ref-013
+  - ref-014
+capability_layers: []
+redirect_from:
+  - /analyses/goto와-점프에서-구조적-프로그래밍으로/
 ---
 
 ## 핵심 주장
@@ -39,6 +61,14 @@ graph_id: analysis-fc1fa74eef57ee33
 따라서 `goto/점프`에서 구조적 프로그래밍으로의 전환은 제어 명령 하나의 유행 변화가 아니다. 그것은 소프트웨어가 기계 실행을 직접 지시하는 명령열에서, 사람이 읽고 추론하고 검증할 수 있는 구조적 텍스트로 바뀌는 과정이다. 이 전환은 [[프로그래밍 언어]] 설계, [[소프트웨어 공학]], 테스트와 검증, API와 모듈화의 역사와 직접 연결된다.
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- `ref-011`
+- `ref-012`
+- `ref-013`
+- `ref-014`
+<!-- wiki-v2:evidence-end -->
 
 - [[A Case against the GO TO Statement]]
 - [[Flow Diagrams, Turing Machines and Languages with Only Two Formation Rules]]

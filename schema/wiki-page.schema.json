@@ -1,0 +1,137 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cs-wiki.local/schema/wiki-page.schema.json",
+  "title": "CS Wiki page metadata",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "id",
+    "kind",
+    "title",
+    "aliases",
+    "summary",
+    "domains",
+    "editorial_status",
+    "publication_visibility",
+    "graph_visibility",
+    "created",
+    "updated",
+    "review",
+    "evidence_ids",
+    "capability_layers"
+  ],
+  "properties": {
+    "schema_version": { "const": 2 },
+    "id": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+    "kind": { "enum": ["source", "reference", "entity", "concept", "analysis", "meta"] },
+    "title": { "type": "string", "minLength": 1 },
+    "aliases": { "type": "array", "items": { "type": "string", "minLength": 1 }, "uniqueItems": true },
+    "summary": { "type": "string", "minLength": 20, "maxLength": 200 },
+    "domains": { "type": "array", "items": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" }, "uniqueItems": true },
+    "editorial_status": { "enum": ["draft", "review", "active", "retired"] },
+    "publication_visibility": { "enum": ["public", "unlisted", "private"] },
+    "graph_visibility": { "enum": ["public", "context", "hidden"] },
+    "created": { "type": "string", "format": "date" },
+    "updated": { "type": "string", "format": "date" },
+    "review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mode", "revision", "reviewed_at", "reviewed_by"],
+      "properties": {
+        "mode": { "enum": ["legacy-baseline", "attested", "pending"] },
+        "revision": { "type": ["string", "null"], "pattern": "^sha256:[a-f0-9]{64}$" },
+        "reviewed_at": { "type": ["string", "null"], "format": "date" },
+        "reviewed_by": { "type": ["string", "null"], "minLength": 1 }
+      }
+    },
+    "evidence_ids": { "type": "array", "items": { "type": "string", "pattern": "^(?:src|ref)-[0-9]{3,}$" }, "uniqueItems": true },
+    "capability_layers": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+    "history": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "publication_year": { "type": ["integer", "null"], "minimum": -9999, "maximum": 9999 },
+        "event": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["start", "basis"],
+          "properties": {
+            "start": { "type": "integer", "minimum": -9999, "maximum": 9999 },
+            "end": { "type": ["integer", "null"], "minimum": -9999, "maximum": 9999 },
+            "basis": { "enum": ["introduced", "designed", "implemented", "released", "observed", "representative", "period", "publication-process"] },
+            "evidence_id": { "type": ["string", "null"], "pattern": "^(?:src|ref)-[0-9]{3,}$" }
+          }
+        },
+        "note": { "type": "string", "maxLength": 300 },
+        "layer": { "enum": ["theory", "machine", "architecture", "software", "system", "service", "measurement"] }
+      }
+    },
+    "origin": {},
+    "works": {},
+    "access": {},
+    "planned_links": { "type": "array", "items": { "type": "string", "minLength": 1 }, "uniqueItems": true },
+    "redirect_from": { "type": "array", "items": { "type": "string", "pattern": "^/[^?#]*/*$" }, "uniqueItems": true }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "kind": { "enum": ["source", "reference"] } } },
+      "then": {
+        "required": ["origin", "works", "access"],
+        "properties": {
+          "origin": { "enum": ["local", "external"] },
+          "works": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["primary", "supporting"],
+            "properties": {
+              "primary": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/work" } },
+              "supporting": { "type": "array", "items": { "$ref": "#/$defs/work" } }
+            }
+          },
+          "access": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/access" } }
+        }
+      },
+      "else": {
+        "properties": {
+          "origin": { "not": {} },
+          "works": { "not": {} },
+          "access": { "not": {} }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "work": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["citation", "genre", "identifiers", "edition"],
+      "properties": {
+        "citation": { "type": "string", "minLength": 1 },
+        "genre": { "enum": ["primary-literature", "secondary-literature", "standard", "manual", "official-record", "dataset", "web", "raw-note", "metadata", "other"] },
+        "identifiers": { "type": "array", "items": { "type": "object", "additionalProperties": false, "required": ["type", "value"], "properties": { "type": { "type": "string", "minLength": 1 }, "value": { "type": "string", "minLength": 1 } } } },
+        "edition": { "type": ["string", "null"] }
+      }
+    },
+    "access": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "role", "retrieved"],
+      "properties": {
+        "kind": { "enum": ["url", "local", "snapshot"] },
+        "role": { "enum": ["original", "preservation", "canonical", "publisher", "doi", "mirror", "metadata", "archive"] },
+        "url": { "type": "string", "format": "uri" },
+        "path": { "type": "string", "pattern": "^raw/[^\\x00]+$" },
+        "retrieved": { "type": "string", "format": "date" },
+        "version": { "type": ["string", "null"] },
+        "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "media_type": { "type": "string", "minLength": 1 },
+        "bytes": { "type": "integer", "minimum": 0 }
+      },
+      "anyOf": [
+        { "required": ["url"], "properties": { "kind": { "enum": ["url"] } } },
+        { "required": ["path", "sha256", "media_type", "bytes"], "properties": { "kind": { "enum": ["local", "snapshot"] } } }
+      ]
+    }
+  }
+}

@@ -10,9 +10,13 @@
     "build": "node site/build.mjs",
     "dev": "npm run build && node site/serve.mjs",
     "fonts:subset": "python scripts/subset_fonts.py",
-    "lint:wiki": "python scripts/wiki_lint.py",
-    "maintenance:check": "python scripts/wiki_maintenance.py --check",
-    "check:links": "python scripts/check_external_links.py --fail-on-broken",
+    "manifest": "node scripts/wiki_manifest.mjs",
+    "validate:changes": "node scripts/validate_change_set.mjs",
+    "lint:wiki": "node scripts/wiki_lint.mjs",
+    "maintenance:check": "node scripts/wiki_maintenance.mjs",
+    "maintenance:updated": "node scripts/update_wiki_updated.mjs",
+    "maintenance:generate": "node scripts/generate_operational_pages.mjs",
+    "check:links": "node scripts/check_external_links.mjs --fail-on-broken",
     "verify:site": "node site/verify-build.mjs",
     "test:site": "node --test tests/*.test.mjs",
     "test:python": "python -m unittest discover -s tests -p \"test_*.py\"",
@@ -22,8 +26,11 @@
     "check": "npm run lint:wiki && npm run maintenance:check && npm test && npm run build && npm run verify:site && npm run test:browser"
   },
   "dependencies": {
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1",
     "markdown-it": "^14.1.0",
-    "markdown-it-anchor": "^9.2.0"
+    "markdown-it-anchor": "^9.2.0",
+    "yaml": "^2.7.0"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.12.1",

@@ -1,21 +1,68 @@
 ---
+schema_version: 2
+id: ref-013
+kind: reference
 title: Structured Programming
-aliases: [Dahl Dijkstra Hoare 1972, Notes on Structured Programming]
-summary: "Dahl, Dijkstra, Hoare의 1972년 책을 바탕으로 구조적 프로그래밍, 단계적 정제, 데이터 구조화의 방법론을 정리한 참고 자료."
-tags: [type/reference, domain/software-engineering, domain/programming-languages, status/active]
+aliases:
+  - Dahl Dijkstra Hoare 1972
+  - Notes on Structured Programming
+summary: Dahl, Dijkstra, Hoare의 1972년 책을 바탕으로 구조적 프로그래밍, 단계적 정제, 데이터 구조화의 방법론을 정리한 참고 자료.
+domains:
+  - software-engineering
+  - programming-languages
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-07-10
-updated: 2026-07-22
-sources: ["Academic Press 1972", "Internet Archive: Structured_Programming__Dahl_Dijkstra_Hoare"]
-source_id: ref-013
-source_kind: external
-primary_sources: ["Academic Press 1972"]
-supporting_sources: ["Internet Archive: Structured_Programming__Dahl_Dijkstra_Hoare", "ACM Guide record", "PDF copy"]
-source_urls: ["https://archive.org/details/Structured_Programming__Dahl_Dijkstra_Hoare", "https://dl.acm.org/doi/book/10.5555/1243380", "https://www.dcs.gla.ac.uk/~pat/cpM/choco4/nqueens/cb-sp-dahl.pdf"]
-retrieved: 2026-07-10
-version: null
-snapshot_status: external-only
-status: active
-publication_year: 1972
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:ceb37b2aca66fdc84dd14f7443c1396ab0e7f405f41e4e1e817e93b10f42f94e
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers: []
+history:
+  publication_year: 1972
+redirect_from:
+  - /references/structured-programming/
+  - /sources/structured-programming/
+origin: external
+works:
+  primary:
+    - citation: Academic Press 1972
+      genre: other
+      identifiers: []
+      edition: null
+  supporting:
+    - citation: "Internet Archive: Structured_Programming__Dahl_Dijkstra_Hoare"
+      genre: official-record
+      identifiers: []
+      edition: null
+    - citation: ACM Guide record
+      genre: official-record
+      identifiers: []
+      edition: null
+    - citation: PDF copy
+      genre: other
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: archive
+    url: https://archive.org/details/Structured_Programming__Dahl_Dijkstra_Hoare
+    retrieved: 2026-07-10
+    version: null
+  - kind: url
+    role: mirror
+    url: https://dl.acm.org/doi/book/10.5555/1243380
+    retrieved: 2026-07-10
+    version: null
+  - kind: url
+    role: mirror
+    url: https://www.dcs.gla.ac.uk/~pat/cpM/choco4/nqueens/cb-sp-dahl.pdf
+    retrieved: 2026-07-10
+    version: null
 ---
 
 ## 개요
@@ -37,6 +84,11 @@ publication_year: 1972
 이 자료는 [[단계적 정제]], [[제어 구조]], [[프로그래밍 언어]], [[소프트웨어 공학]]을 연결하는 데 쓰인다. [[goto와 점프에서 구조적 프로그래밍으로]]는 이 책을 바탕으로 구조적 프로그래밍을 문법 금지가 아니라 프로그램을 이해 가능한 단위로 구성하는 공학적 전환으로 정리한다.
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - Internet Archive, [Structured Programming](https://archive.org/details/Structured_Programming__Dahl_Dijkstra_Hoare)
 - ACM Digital Library, [Structured programming: Guide books](https://dl.acm.org/doi/book/10.5555/1243380)

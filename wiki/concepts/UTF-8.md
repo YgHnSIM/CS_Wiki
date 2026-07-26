@@ -1,16 +1,40 @@
 ---
+schema_version: 2
+id: concept-f4f7573102f01723
+kind: concept
 title: UTF-8
-aliases: [Unicode Transformation Format 8-bit, UTF8]
-summary: "Unicode scalar value를 1-4개의 8비트 코드 유닛으로 표현하는 ASCII 호환 가변 길이 인코딩."
-tags: [type/concept, domain/computer-science, domain/internet, domain/text-processing, status/active]
+aliases:
+  - Unicode Transformation Format 8-bit
+  - UTF8
+summary: Unicode scalar value를 1-4개의 8비트 코드 유닛으로 표현하는 ASCII 호환 가변 길이 인코딩.
+domains:
+  - computer-science
+  - internet
+  - text-processing
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-07-10
-updated: 2026-07-22
-sources: ["The Unicode Standard 17.0.0", "RFC 3629 UTF-8", "WHATWG Encoding Standard"]
-status: active
-graph_id: concept-f4f7573102f01723
-event_start: 1992
-historical_layer: system
-historical_note: "UTF-8 설계가 제안된 1992년을 대표 시점으로 둔다."
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:409b3daefcf2e4c2ebb65d2921133e246d0ef931c63729ed192c98d0ab5245f6
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids:
+  - ref-022
+  - ref-023
+  - ref-026
+capability_layers: []
+history:
+  event:
+    start: 1992
+    basis: representative
+    evidence_id: ref-022
+  note: UTF-8 설계가 제안된 1992년을 대표 시점으로 둔다.
+  layer: system
+redirect_from:
+  - /concepts/utf-8/
 ---
 
 ## 개요
@@ -28,6 +52,13 @@ UTF-8은 선행 바이트가 전체 길이를 나타내고 이어지는 바이�
 UTF-8은 바이트 순서 문제가 없고, ASCII와 호환되며, 인터넷과 웹의 기본 텍스트 교환 인코딩으로 적합하다. 그러나 "한 문자 = 한 바이트"는 ASCII 범위에서만 맞다. 한글, 이모지, 결합 문자 시퀀스는 여러 바이트와 여러 코드 포인트가 필요할 수 있다.
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- `ref-022`
+- `ref-023`
+- `ref-026`
+<!-- wiki-v2:evidence-end -->
 
 - [[The Unicode Standard 17.0.0]]
 - [[RFC 3629 UTF-8]]

@@ -1,26 +1,66 @@
 ---
+schema_version: 2
+id: ref-092
+kind: reference
 title: Cooperating Sequential Processes
-aliases: [Dijkstra 1968, EWD 123, "Cooperating sequential processes", 협력하는 순차 프로세스]
-summary: "공유 변수와 통신을 통해 협력하는 순차 프로세스의 상호 배제, 세마포어, 대기 조건과 교착 상태를 다룬 Dijkstra의 1968년 고전적 동시성 연구."
-tags: [type/reference, domain/computer-science, domain/operating-systems, domain/software-engineering, status/active]
-created: 2026-07-25
-updated: 2026-07-25
-publication_year: 1968
-historical_note: "EWD 123 초고의 논의를 바탕으로 1968년 NATO Advanced Study Institute의 Programming Languages 수록본을 기준 판본으로 삼는다."
-historical_layer: theory
-capability_layers: [scalability, reliable-results]
-sources: [Cooperating Sequential Processes]
-source_id: ref-092
-source_kind: external
-primary_sources: ["Edsger W. Dijkstra, Cooperating Sequential Processes, in Programming Languages: NATO Advanced Study Institute, ed. F. Genuys, Academic Press, 1968, pp. 43–112"]
-supporting_sources: ["E.W. Dijkstra Archive EWD 123 transcription", "E.W. Dijkstra Archive BibTeX index"]
-source_urls: ["https://www.cs.utexas.edu/~EWD/transcriptions/EWD01xx/EWD123.html", "https://www.cs.utexas.edu/~EWD/indexBibTeX.html"]
-retrieved: 2026-07-25
-version: "Programming Languages: NATO Advanced Study Institute, 1968, pp. 43–112"
-snapshot_status: external-only
-status: active
-graph_id: reference-cooperating-sequential-processes
+aliases:
+  - Dijkstra 1968
+  - EWD 123
+  - Cooperating sequential processes
+  - 협력하는 순차 프로세스
+summary: 공유 변수와 통신을 통해 협력하는 순차 프로세스의 상호 배제, 세마포어, 대기 조건과 교착 상태를 다룬 Dijkstra의 1968년 고전적 동시성 연구.
+domains:
+  - computer-science
+  - operating-systems
+  - software-engineering
+editorial_status: active
+publication_visibility: public
 graph_visibility: public
+created: 2026-07-25
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:492a8d26e835d845c90a7bef4bb2241407ad6a0870c9aeab50bcc044f4a1dcb7
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers:
+  - scalability
+  - reliable-results
+history:
+  publication_year: 1968
+  note: EWD 123 초고의 논의를 바탕으로 1968년 NATO Advanced Study Institute의 Programming Languages 수록본을 기준 판본으로 삼는다.
+  layer: theory
+redirect_from:
+  - /references/cooperating-sequential-processes/
+  - /sources/cooperating-sequential-processes/
+origin: external
+works:
+  primary:
+    - citation: "Edsger W. Dijkstra, Cooperating Sequential Processes, in Programming Languages: NATO Advanced Study Institute, ed. F. Genuys, Academic Press, 1968, pp. 43–112"
+      genre: other
+      identifiers: []
+      edition: "Programming Languages: NATO Advanced Study Institute, 1968, pp. 43–112"
+  supporting:
+    - citation: E.W. Dijkstra Archive EWD 123 transcription
+      genre: official-record
+      identifiers: []
+      edition: null
+    - citation: E.W. Dijkstra Archive BibTeX index
+      genre: official-record
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: canonical
+    url: https://www.cs.utexas.edu/~EWD/transcriptions/EWD01xx/EWD123.html
+    retrieved: 2026-07-25
+    version: "Programming Languages: NATO Advanced Study Institute, 1968, pp. 43–112"
+  - kind: url
+    role: mirror
+    url: https://www.cs.utexas.edu/~EWD/indexBibTeX.html
+    retrieved: 2026-07-25
+    version: "Programming Languages: NATO Advanced Study Institute, 1968, pp. 43–112"
 ---
 
 ## 개요
@@ -42,6 +82,7 @@ graph_visibility: public
 ## 인용할 만한 구절
 
 > “the cooperation between two or more sequential processes”
+<!-- wiki-v2:quote-locator evidence="ref-092" locator="wiki/sources/Cooperating Sequential Processes.md:line-19#인용할-만한-구절" status="recorded" -->
 
 자료가 다루는 대상은 하나의 빠른 계산이 아니라 여러 순차 과정 사이의 협력이다.
 
@@ -57,6 +98,11 @@ graph_visibility: public
 | enables | [[상호 배제와 동기화]] | 임계 구역의 동시 진입 방지, 대기 조건, 세마포어를 통해 공유 자원 접근을 조정하는 문제를 구체화한다. | [[Cooperating Sequential Processes]] |
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - E.W. Dijkstra Archive, [EWD 123 transcription](https://www.cs.utexas.edu/~EWD/transcriptions/EWD01xx/EWD123.html)
 - E.W. Dijkstra Archive, [BibTeX index](https://www.cs.utexas.edu/~EWD/indexBibTeX.html)

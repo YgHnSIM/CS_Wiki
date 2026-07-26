@@ -1,25 +1,61 @@
 ---
+schema_version: 2
+id: ref-089
+kind: reference
 title: "Spanner: Google's Globally-Distributed Database"
-aliases: ["Spanner - Google's Globally-Distributed Database", Spanner, Spanner 논문, Corbett et al. 2012]
-summary: "Paxos 복제와 시간 불확실성 범위를 노출하는 TrueTime을 결합해 전역 분산 데이터베이스의 외부 일관성 트랜잭션을 구현한 Corbett 등의 2012년 Spanner 논문."
-tags: [type/reference, domain/distributed-systems, domain/systems, domain/database, status/active]
-created: 2026-07-25
-updated: 2026-07-25
-publication_year: 2012
-historical_layer: service
-capability_layers: [scalability, reliable-results]
-sources: ["Spanner - Google's Globally-Distributed Database"]
-source_id: ref-089
-source_kind: external
-primary_sources: ["James C. Corbett et al., Spanner: Google's Globally-Distributed Database, OSDI 2012, pp. 251–264"]
-supporting_sources: ["USENIX OSDI 2012 presentation and open-access proceedings record"]
-source_urls: ["https://www.usenix.org/conference/osdi12/technical-sessions/presentation/corbett", "https://www.usenix.org/system/files/conference/osdi12/osdi12-final-16.pdf"]
-retrieved: 2026-07-25
-version: "OSDI '12 proceedings, pp. 251–264"
-snapshot_status: external-only
-status: active
-graph_id: reference-spanner-globally-distributed-database
+aliases:
+  - Spanner - Google's Globally-Distributed Database
+  - Spanner
+  - Spanner 논문
+  - Corbett et al. 2012
+summary: Paxos 복제와 시간 불확실성 범위를 노출하는 TrueTime을 결합해 전역 분산 데이터베이스의 외부 일관성 트랜잭션을 구현한 Corbett 등의 2012년 Spanner 논문.
+domains:
+  - distributed-systems
+  - systems
+  - database
+editorial_status: active
+publication_visibility: public
 graph_visibility: public
+created: 2026-07-25
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:745644fad0be3cdac39fc8c9077c28e00a55fac3d08c76f8b83eb76f54701939
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers:
+  - scalability
+  - reliable-results
+history:
+  publication_year: 2012
+  layer: service
+redirect_from:
+  - /references/spanner-google-s-globally-distributed-database/
+  - /sources/spanner-google-s-globally-distributed-database/
+origin: external
+works:
+  primary:
+    - citation: "James C. Corbett et al., Spanner: Google's Globally-Distributed Database, OSDI 2012, pp. 251–264"
+      genre: other
+      identifiers: []
+      edition: OSDI '12 proceedings, pp. 251–264
+  supporting:
+    - citation: USENIX OSDI 2012 presentation and open-access proceedings record
+      genre: official-record
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: canonical
+    url: https://www.usenix.org/conference/osdi12/technical-sessions/presentation/corbett
+    retrieved: 2026-07-25
+    version: OSDI '12 proceedings, pp. 251–264
+  - kind: url
+    role: mirror
+    url: https://www.usenix.org/system/files/conference/osdi12/osdi12-final-16.pdf
+    retrieved: 2026-07-25
+    version: OSDI '12 proceedings, pp. 251–264
 ---
 
 ## 개요
@@ -44,6 +80,7 @@ Spanner의 TrueTime API는 하나의 정확한 현재 시각 대신 실제 시�
 ## 인용할 만한 구절
 
 > “bounded time uncertainty”
+<!-- wiki-v2:quote-locator evidence="ref-089" locator="wiki/sources/Spanner - Google's Globally-Distributed Database.md:line-22#인용할-만한-구절" status="recorded" -->
 
 TrueTime이 시간 오차를 무시하지 않고 경계가 있는 구간으로 시스템에 노출한다는 핵심을 압축한다.
 
@@ -59,6 +96,11 @@ TrueTime이 시간 오차를 무시하지 않고 경계가 있는 구간으로 �
 | implements | [[복제 로그와 합의]] | 데이터 조각을 Paxos 상태 기계로 동기 복제하고 리더가 쓰기를 순서화하는 구현 계층을 보여 준다. | [[Spanner - Google's Globally-Distributed Database]] |
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - USENIX, [OSDI 2012 presentation and bibliographic record](https://www.usenix.org/conference/osdi12/technical-sessions/presentation/corbett)
 - USENIX, [open-access paper PDF](https://www.usenix.org/system/files/conference/osdi12/osdi12-final-16.pdf)

@@ -1,23 +1,65 @@
 ---
+schema_version: 2
+id: ref-031
+kind: reference
 title: On the Computational Complexity of Algorithms
-aliases: [Hartmanis-Stearns 1965, computational complexity of algorithms]
-summary: "계산 가능한 대상들 사이에도 필요한 시간 자원에 따른 본질적 난이도 차이가 있음을 형식화하고 시간 복잡도 계층을 제시한 1965년 논문."
-tags: [type/reference, domain/computer-science, domain/computer-history, status/active]
+aliases:
+  - Hartmanis-Stearns 1965
+  - computational complexity of algorithms
+summary: 계산 가능한 대상들 사이에도 필요한 시간 자원에 따른 본질적 난이도 차이가 있음을 형식화하고 시간 복잡도 계층을 제시한 1965년 논문.
+domains:
+  - computer-science
+  - computer-history
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-07-15
-updated: 2026-07-24
-publication_year: 1965
-historical_layer: theory
-capability_layers: [complexity]
-sources: ["1965_Hartmanis_Stearns_Computational_Complexity.pdf", "Transactions of the American Mathematical Society 117 (1965)"]
-source_id: ref-031
-source_kind: external
-primary_sources: ["Transactions of the American Mathematical Society 117 (1965)"]
-supporting_sources: ["1965_Hartmanis_Stearns_Computational_Complexity.pdf", "American Mathematical Society DOI record", "Johannes Kepler University access copy"]
-source_urls: ["https://doi.org/10.1090/S0002-9947-1965-0170805-7", "https://www3.risc.jku.at/people/schreine/courses/compcomp/HartmanisStearns1965.pdf"]
-retrieved: 2026-07-15
-version: null
-snapshot_status: archived
-status: active
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:4b5cee8e6e613d43b55fc59c2410e7ea94572426878e2495661b1fdcd111749d
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers:
+  - complexity
+history:
+  publication_year: 1965
+  layer: theory
+redirect_from:
+  - /references/on-the-computational-complexity-of-algorithms/
+  - /sources/on-the-computational-complexity-of-algorithms/
+origin: external
+works:
+  primary:
+    - citation: Transactions of the American Mathematical Society 117 (1965)
+      genre: other
+      identifiers: []
+      edition: null
+  supporting:
+    - citation: 1965_Hartmanis_Stearns_Computational_Complexity.pdf
+      genre: other
+      identifiers: []
+      edition: null
+    - citation: American Mathematical Society DOI record
+      genre: official-record
+      identifiers: []
+      edition: null
+    - citation: Johannes Kepler University access copy
+      genre: other
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: doi
+    url: https://doi.org/10.1090/S0002-9947-1965-0170805-7
+    retrieved: 2026-07-15
+    version: null
+  - kind: url
+    role: mirror
+    url: https://www3.risc.jku.at/people/schreine/courses/compcomp/HartmanisStearns1965.pdf
+    retrieved: 2026-07-15
+    version: null
 ---
 
 ## 개요
@@ -39,6 +81,7 @@ status: active
 ## 인용할 만한 구절
 
 > “some computable sequences are very easy to compute whereas other computable sequences seem to have an inherent complexity”
+<!-- wiki-v2:quote-locator evidence="ref-031" locator="wiki/sources/On the Computational Complexity of Algorithms.md:line-19#인용할-만한-구절" status="recorded" -->
 
 ## 위키 반영
 
@@ -52,6 +95,11 @@ status: active
 | enables | [[계산 복잡도]] | 계산 가능한 수열 사이의 시간 자원 차이를 형식화해 복잡도 분류의 출발점을 제공한다. | [[On the Computational Complexity of Algorithms]] |
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - 로컬 보존본: `raw/assets/1965_Hartmanis_Stearns_Computational_Complexity.pdf`
 - American Mathematical Society, [On the Computational Complexity of Algorithms](https://doi.org/10.1090/S0002-9947-1965-0170805-7)

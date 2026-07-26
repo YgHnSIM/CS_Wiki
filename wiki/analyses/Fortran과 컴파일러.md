@@ -1,13 +1,37 @@
 ---
+schema_version: 2
+id: analysis-866096c7a9c8c715
+kind: analysis
 title: Fortran과 컴파일러
-aliases: [FORTRAN과 컴파일러, Fortran compiler, Fortran and compiler]
-summary: "Fortran을 고급 언어와 효율적 컴파일러가 결합된 시스템으로 보고, 소스 프로그램에서 목적 프로그램으로의 전환을 분석."
-tags: [type/analysis, domain/programming-languages, domain/software-engineering, domain/computer-history, status/active]
+aliases:
+  - FORTRAN과 컴파일러
+  - Fortran compiler
+  - Fortran and compiler
+summary: Fortran을 고급 언어와 효율적 컴파일러가 결합된 시스템으로 보고, 소스 프로그램에서 목적 프로그램으로의 전환을 분석.
+domains:
+  - programming-languages
+  - software-engineering
+  - computer-history
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-07-10
-updated: 2026-07-25
-sources: ["The Preparation of Programs for an Electronic Digital Computer", "FORTRAN Automatic Coding System for the IBM 704 EDPM", "The FORTRAN Automatic Coding System", "The History of FORTRAN I, II, and III", "What Every Computer Scientist Should Know About Floating-Point Arithmetic", "IEEE 754-2019 Standard for Floating-Point Arithmetic"]
-status: active
-graph_id: analysis-866096c7a9c8c715
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:7bde978ccd6e4de3059a018e3e4d2c3ac33fd2a68af25ab2df44ac4cea865aef
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids:
+  - ref-001
+  - ref-015
+  - ref-016
+  - ref-017
+  - ref-050
+  - ref-051
+capability_layers: []
+redirect_from:
+  - /analyses/fortran과-컴파일러/
 ---
 
 ## 핵심 주장
@@ -52,6 +76,16 @@ Fortran 이후 프로그래밍의 중심은 사람이 기계 명령을 직접 �
 | synthesizes | [[프로그래밍 가능성]] | 문제 영역의 표기와 효율적인 번역기를 결합해 더 많은 사용자가 기계의 계산 능력에 접근하게 한 전환을 종합한다. | [[FORTRAN Automatic Coding System for the IBM 704 EDPM]], [[The FORTRAN Automatic Coding System]] |
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- `ref-001`
+- `ref-015`
+- `ref-016`
+- `ref-017`
+- `ref-050`
+- `ref-051`
+<!-- wiki-v2:evidence-end -->
 
 - [[The Preparation of Programs for an Electronic Digital Computer]]
 - [[FORTRAN Automatic Coding System for the IBM 704 EDPM]]

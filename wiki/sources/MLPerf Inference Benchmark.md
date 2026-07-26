@@ -1,26 +1,77 @@
 ---
+schema_version: 2
+id: ref-078
+kind: reference
 title: MLPerf Inference Benchmark
-aliases: [MLPerf Inference, MLPerf 추론 벤치마크, MLPerf Inference rules, Reddi et al. 2020]
-summary: "모델·데이터셋·품질 문턱·시스템 유형과 요청 시나리오를 고정해 기계학습 추론 성능을 재현 가능하게 비교하고, 현대 LLM에는 TTFT·TPOT 지연 조건을 적용하는 MLCommons 벤치마크."
-tags: [type/reference, domain/machine-learning, domain/performance, domain/systems, status/active]
-created: 2026-07-24
-updated: 2026-07-24
-publication_year: 2020
-historical_note: "원 벤치마크 논문은 2019년 arXiv에 제출되고 2020년 ISCA에 출판되었다. 현재 규칙과 작업 부하는 판본별로 바뀌므로 2026년 v6.0 문서·결과를 별도로 확인했다."
-historical_layer: measurement
-capability_layers: [realized-performance, resource-efficiency, reliable-results]
-sources: ["MLPerf Inference Benchmark"]
-source_id: ref-078
-source_kind: external
-primary_sources: ["Vijay Janapa Reddi et al., MLPerf Inference Benchmark, ISCA 2020", "MLCommons MLPerf Inference Rules and official benchmark repository"]
-supporting_sources: ["MLCommons MLPerf Inference v6.0 results announcement"]
-source_urls: ["https://arxiv.org/abs/1911.02549", "https://github.com/mlcommons/inference_policies/blob/master/inference_rules.adoc", "https://docs.mlcommons.org/inference/submission/", "https://mlcommons.org/2026/04/mlperf-inference-v6-0-results/"]
-retrieved: 2026-07-24
-version: "ISCA 2020 / arXiv v2; MLPerf Inference v6.0 rules and suite"
-snapshot_status: external-only
-status: active
-graph_id: reference-mlperf-inference
+aliases:
+  - MLPerf Inference
+  - MLPerf 추론 벤치마크
+  - MLPerf Inference rules
+  - Reddi et al. 2020
+summary: 모델·데이터셋·품질 문턱·시스템 유형과 요청 시나리오를 고정해 기계학습 추론 성능을 재현 가능하게 비교하고, 현대 LLM에는 TTFT·TPOT 지연 조건을 적용하는 MLCommons 벤치마크.
+domains:
+  - machine-learning
+  - performance
+  - systems
+editorial_status: active
+publication_visibility: public
 graph_visibility: public
+created: 2026-07-24
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:75016a392d543e1f952071bb74a9e9343e8f3196ea58902497d88dda408124c9
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers:
+  - realized-performance
+  - resource-efficiency
+  - reliable-results
+history:
+  publication_year: 2020
+  note: 원 벤치마크 논문은 2019년 arXiv에 제출되고 2020년 ISCA에 출판되었다. 현재 규칙과 작업 부하는 판본별로 바뀌므로 2026년 v6.0 문서·결과를 별도로 확인했다.
+  layer: measurement
+redirect_from:
+  - /references/mlperf-inference-benchmark/
+  - /sources/mlperf-inference-benchmark/
+origin: external
+works:
+  primary:
+    - citation: Vijay Janapa Reddi et al., MLPerf Inference Benchmark, ISCA 2020
+      genre: other
+      identifiers: []
+      edition: ISCA 2020 / arXiv v2; MLPerf Inference v6.0 rules and suite
+    - citation: MLCommons MLPerf Inference Rules and official benchmark repository
+      genre: other
+      identifiers: []
+      edition: ISCA 2020 / arXiv v2; MLPerf Inference v6.0 rules and suite
+  supporting:
+    - citation: MLCommons MLPerf Inference v6.0 results announcement
+      genre: other
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: canonical
+    url: https://arxiv.org/abs/1911.02549
+    retrieved: 2026-07-24
+    version: ISCA 2020 / arXiv v2; MLPerf Inference v6.0 rules and suite
+  - kind: url
+    role: mirror
+    url: https://github.com/mlcommons/inference_policies/blob/master/inference_rules.adoc
+    retrieved: 2026-07-24
+    version: ISCA 2020 / arXiv v2; MLPerf Inference v6.0 rules and suite
+  - kind: url
+    role: mirror
+    url: https://docs.mlcommons.org/inference/submission/
+    retrieved: 2026-07-24
+    version: ISCA 2020 / arXiv v2; MLPerf Inference v6.0 rules and suite
+  - kind: url
+    role: mirror
+    url: https://mlcommons.org/2026/04/mlperf-inference-v6-0-results/
+    retrieved: 2026-07-24
+    version: ISCA 2020 / arXiv v2; MLPerf Inference v6.0 rules and suite
 ---
 
 ## 개요
@@ -46,6 +97,7 @@ MLPerf는 운영 중인 모든 LLM 서비스를 그대로 복제하지 않는다
 ## 인용할 만한 구절
 
 > “fair, useful, and reproducible”
+<!-- wiki-v2:quote-locator evidence="ref-078" locator="wiki/sources/MLPerf Inference Benchmark.md:line-23#인용할-만한-구절" status="recorded" -->
 
 원 논문의 목표는 하나의 최고 속도를 만드는 것이 아니라, 시스템이 달라도 의미 있는 조건에서 결과를 다시 비교할 수 있게 하는 데 있다.
 
@@ -63,6 +115,11 @@ MLPerf는 운영 중인 모든 LLM 서비스를 그대로 복제하지 않는다
 | constrains | [[목표 품질 도달 시간]] | 학습의 품질 도달 시간과 달리 추론에서는 이미 정한 모델 품질·출력 조건을 통과한 실행의 지연·처리량만 유효하게 센다. | [[MLPerf Inference Benchmark]] |
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - arXiv, [MLPerf Inference Benchmark paper record 1911.02549](https://arxiv.org/abs/1911.02549)
 - MLCommons, [current MLPerf Inference rules](https://github.com/mlcommons/inference_policies/blob/master/inference_rules.adoc)

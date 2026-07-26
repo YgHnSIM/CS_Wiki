@@ -1,16 +1,40 @@
 ---
+schema_version: 2
+id: analysis-kv-cache-throughput
+kind: analysis
 title: KV 캐시는 왜 LLM 추론 처리량을 제한하는가
-aliases: [KV cache throughput bottleneck, LLM 캐시와 배치 처리량, KV 캐시 병목]
-summary: "KV 캐시가 과거 토큰의 재계산을 줄이면서도 GPU 메모리 수용량·단편화·동적 할당을 통해 활성 배치와 LLM 서비스 처리량을 제한하는 과정을 연속 배칭과 PagedAttention의 관계로 분석한다."
-tags: [type/analysis, domain/machine-learning, domain/systems, domain/computer-architecture, status/active]
-created: 2026-07-24
-updated: 2026-07-24
-historical_layer: system
-capability_layers: [realized-performance, scalability, resource-efficiency]
-sources: ["Attention Is All You Need", "FlashAttention - Fast and Memory-Efficient Exact Attention with IO-Awareness", "Orca - A Distributed Serving System for Transformer-Based Generative Models", "Efficient Memory Management for Large Language Model Serving with PagedAttention"]
-status: active
-graph_id: analysis-kv-cache-throughput
+aliases:
+  - KV cache throughput bottleneck
+  - LLM 캐시와 배치 처리량
+  - KV 캐시 병목
+summary: KV 캐시가 과거 토큰의 재계산을 줄이면서도 GPU 메모리 수용량·단편화·동적 할당을 통해 활성 배치와 LLM 서비스 처리량을 제한하는 과정을 연속 배칭과 PagedAttention의 관계로 분석한다.
+domains:
+  - machine-learning
+  - systems
+  - computer-architecture
+editorial_status: active
+publication_visibility: public
 graph_visibility: public
+created: 2026-07-24
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:6746b1555983f120f06b5c9d29c21a4b1dc93c08a021e8a8465ce583429d7620
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids:
+  - ref-073
+  - ref-074
+  - ref-075
+  - ref-076
+capability_layers:
+  - realized-performance
+  - scalability
+  - resource-efficiency
+history:
+  layer: system
+redirect_from:
+  - /analyses/kv-캐시는-왜-llm-추론-처리량을-제한하는가/
 ---
 
 ## 문제 제기
@@ -78,6 +102,14 @@ KV 캐시는 계산을 저장 공간으로 바꾸는 최적화다. 한 요청에
 | synthesizes | [[입출력 인지 어텐션]] | 한 연산의 HBM 이동 최적화와 여러 요청 수명에 걸친 KV 캐시 배치 최적화의 경계를 구분한다. | [[FlashAttention - Fast and Memory-Efficient Exact Attention with IO-Awareness]] |
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- `ref-073`
+- `ref-074`
+- `ref-075`
+- `ref-076`
+<!-- wiki-v2:evidence-end -->
 
 - [[Attention Is All You Need]]
 - [[FlashAttention - Fast and Memory-Efficient Exact Attention with IO-Awareness]]

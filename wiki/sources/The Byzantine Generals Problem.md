@@ -1,25 +1,67 @@
 ---
+schema_version: 2
+id: ref-063
+kind: reference
 title: The Byzantine Generals Problem
-aliases: [비잔틴 장군 문제, Lamport Shostak Pease 1982]
-summary: "서로 다른 정보를 보내는 결함 구성요소가 있어도 분산된 참여자가 일관된 결정을 내리기 위한 조건과 한계를 정식화한 Lamport, Shostak, Pease의 1982년 논문."
-tags: [type/reference, domain/computer-science, domain/systems, status/active]
-created: 2026-07-24
-updated: 2026-07-24
-publication_year: 1982
-historical_layer: theory
-capability_layers: [scalability, reliable-results]
-sources: ["The Byzantine Generals Problem"]
-source_id: ref-063
-source_kind: external
-primary_sources: ["Leslie Lamport, Robert Shostak, and Marshall Pease, The Byzantine Generals Problem, ACM Transactions on Programming Languages and Systems 4(3), 1982, pp. 382–401"]
-supporting_sources: ["Microsoft Research publication page and author-hosted PDF", "ACM DOI record"]
-source_urls: ["https://doi.org/10.1145/357172.357176", "https://www.microsoft.com/en-us/research/?p=338450", "https://www.microsoft.com/en-us/research/wp-content/uploads/2016/12/The-Byzantine-Generals-Problem.pdf"]
-retrieved: 2026-07-24
-version: "ACM Transactions on Programming Languages and Systems 4(3), July 1982, pp. 382–401"
-snapshot_status: external-only
-status: active
-graph_id: reference-byzantine-generals-problem
+aliases:
+  - 비잔틴 장군 문제
+  - Lamport Shostak Pease 1982
+summary: 서로 다른 정보를 보내는 결함 구성요소가 있어도 분산된 참여자가 일관된 결정을 내리기 위한 조건과 한계를 정식화한 Lamport, Shostak, Pease의 1982년 논문.
+domains:
+  - computer-science
+  - systems
+editorial_status: active
+publication_visibility: public
 graph_visibility: public
+created: 2026-07-24
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:45354f274b589b90423d459717b9d9c38d77784a46e78e7383009ed397617b48
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers:
+  - scalability
+  - reliable-results
+history:
+  publication_year: 1982
+  layer: theory
+redirect_from:
+  - /references/the-byzantine-generals-problem/
+  - /sources/the-byzantine-generals-problem/
+origin: external
+works:
+  primary:
+    - citation: Leslie Lamport, Robert Shostak, and Marshall Pease, The Byzantine Generals Problem, ACM Transactions on Programming Languages and Systems 4(3), 1982, pp. 382–401
+      genre: other
+      identifiers: []
+      edition: ACM Transactions on Programming Languages and Systems 4(3), July 1982, pp. 382–401
+  supporting:
+    - citation: Microsoft Research publication page and author-hosted PDF
+      genre: primary-literature
+      identifiers: []
+      edition: null
+    - citation: ACM DOI record
+      genre: official-record
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: doi
+    url: https://doi.org/10.1145/357172.357176
+    retrieved: 2026-07-24
+    version: ACM Transactions on Programming Languages and Systems 4(3), July 1982, pp. 382–401
+  - kind: url
+    role: publisher
+    url: https://www.microsoft.com/en-us/research/?p=338450
+    retrieved: 2026-07-24
+    version: ACM Transactions on Programming Languages and Systems 4(3), July 1982, pp. 382–401
+  - kind: url
+    role: publisher
+    url: https://www.microsoft.com/en-us/research/wp-content/uploads/2016/12/The-Byzantine-Generals-Problem.pdf
+    retrieved: 2026-07-24
+    version: ACM Transactions on Programming Languages and Systems 4(3), July 1982, pp. 382–401
 ---
 
 ## 개요
@@ -41,6 +83,7 @@ graph_visibility: public
 ## 인용할 만한 구절
 
 > “reliable computer systems must handle malfunctioning components”
+<!-- wiki-v2:quote-locator evidence="ref-063" locator="wiki/sources/The Byzantine Generals Problem.md:line-19#인용할-만한-구절" status="recorded" -->
 
 신뢰할 수 있는 컴퓨터 시스템은 오작동하는 구성요소를 다뤄야 한다는 논문의 출발점이다.
 
@@ -56,6 +99,11 @@ graph_visibility: public
 | constrains | [[결함 허용]] | 가능한 보장의 범위가 실패 모형과 인증·시간 가정에 따라 달라짐을 보인다. | [[The Byzantine Generals Problem]] |
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - ACM, [DOI record](https://doi.org/10.1145/357172.357176)
 - Microsoft Research, [publication page](https://www.microsoft.com/en-us/research/?p=338450)

@@ -1,23 +1,69 @@
 ---
+schema_version: 2
+id: ref-042
+kind: reference
 title: In-Datacenter Performance Analysis of a Tensor Processing Unit
-aliases: [TPU paper, Jouppi et al. 2017, Tensor Processing Unit performance]
-summary: "Google의 1세대 TPU를 실제 데이터센터 신경망 추론 작업으로 평가해 도메인 특화 하드웨어의 성능·에너지·꼬리 지연 이점을 분석한 2017년 논문."
-tags: [type/reference, domain/computer-architecture, domain/machine-learning, status/active]
+aliases:
+  - TPU paper
+  - Jouppi et al. 2017
+  - Tensor Processing Unit performance
+summary: Google의 1세대 TPU를 실제 데이터센터 신경망 추론 작업으로 평가해 도메인 특화 하드웨어의 성능·에너지·꼬리 지연 이점을 분석한 2017년 논문.
+domains:
+  - computer-architecture
+  - machine-learning
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-07-16
-updated: 2026-07-24
-publication_year: 2017
-historical_layer: architecture
-capability_layers: [realized-performance, resource-efficiency, reliable-results]
-sources: ["ISCA 2017 proceedings paper", "arXiv:1704.04760", "Google Research publication page"]
-source_id: ref-042
-source_kind: external
-primary_sources: ["ISCA 2017 proceedings paper"]
-supporting_sources: ["arXiv:1704.04760", "Google Research publication page"]
-source_urls: ["https://doi.org/10.1145/3079856.3080246", "https://arxiv.org/abs/1704.04760", "https://research.google/pubs/in-datacenter-performance-analysis-of-a-tensor-processing-unit/"]
-retrieved: 2026-07-16
-version: "ISCA 2017; arXiv v1"
-snapshot_status: external-only
-status: active
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:1a71a36f2456695957bdde312eefd94dc9cfd6b0e03bdf3be2d85c418aeb2c22
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers:
+  - realized-performance
+  - resource-efficiency
+  - reliable-results
+history:
+  publication_year: 2017
+  layer: architecture
+redirect_from:
+  - /references/in-datacenter-performance-analysis-of-a-tensor-processing-unit/
+  - /sources/in-datacenter-performance-analysis-of-a-tensor-processing-unit/
+origin: external
+works:
+  primary:
+    - citation: ISCA 2017 proceedings paper
+      genre: primary-literature
+      identifiers: []
+      edition: ISCA 2017; arXiv v1
+  supporting:
+    - citation: arXiv:1704.04760
+      genre: other
+      identifiers: []
+      edition: null
+    - citation: Google Research publication page
+      genre: primary-literature
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: doi
+    url: https://doi.org/10.1145/3079856.3080246
+    retrieved: 2026-07-16
+    version: ISCA 2017; arXiv v1
+  - kind: url
+    role: mirror
+    url: https://arxiv.org/abs/1704.04760
+    retrieved: 2026-07-16
+    version: ISCA 2017; arXiv v1
+  - kind: url
+    role: mirror
+    url: https://research.google/pubs/in-datacenter-performance-analysis-of-a-tensor-processing-unit/
+    retrieved: 2026-07-16
+    version: ISCA 2017; arXiv v1
 ---
 
 ## 개요
@@ -41,6 +87,7 @@ TPU는 범용 프로세서의 캐시, 비순차 실행, 분기 예측 같은 복
 ## 인용할 만한 구절
 
 > 비용·에너지·성능의 큰 개선은 도메인 특화 하드웨어에서 올 수 있다.
+<!-- wiki-v2:quote-locator evidence="ref-042" locator="wiki/sources/In-Datacenter Performance Analysis of a Tensor Processing Unit.md:line-21#인용할-만한-구절" status="recorded" -->
 
 논문 초록의 문제의식을 한국어로 요약한 문장이다.
 
@@ -49,6 +96,11 @@ TPU는 범용 프로세서의 캐시, 비순차 실행, 분기 예측 같은 복
 이 자료는 [[도메인 특화 가속기]]의 대표 사례이자, [[컴퓨팅 능력이란 무엇인가]]에서 작업 부하·정밀도·꼬리 지연·에너지 조건을 함께 기록해야 하는 이유를 보여준다. [[컴퓨팅 능력의 발달사]]에서는 범용 단일 코어 향상 이후 성능이 특정 도메인과 전체 소프트웨어 스택의 공동 설계로 이동한 사례로 사용한다. 낮은 정밀도 추론의 측정 경계는 학습용 [[혼합 정밀도]]와 같지 않으므로, 두 결과를 비교할 때는 모델 품질과 작업 단계를 분리해야 한다. 평균과 높은 백분위가 다른 성능 질문이라는 점은 [[평균 성능은 왜 서비스의 컴퓨팅 능력을 설명하지 못하는가]]에서 확장한다.
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - ACM, [DOI record](https://doi.org/10.1145/3079856.3080246)
 - arXiv, [1704.04760](https://arxiv.org/abs/1704.04760)

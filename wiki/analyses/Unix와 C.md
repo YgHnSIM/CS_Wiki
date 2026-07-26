@@ -1,13 +1,35 @@
 ---
+schema_version: 2
+id: analysis-8d320775b8ff83eb
+kind: analysis
 title: Unix와 C
-aliases: [UNIX와 C, Unix and C]
-summary: "Unix 운영체제와 C 언어가 시스템 프로그래밍, 이식성, 도구 생태계 안에서 서로를 강화한 과정을 분석."
-tags: [type/analysis, domain/operating-systems, domain/programming-languages, domain/software-engineering, domain/computer-history, status/active]
+aliases:
+  - UNIX와 C
+  - Unix and C
+summary: Unix 운영체제와 C 언어가 시스템 프로그래밍, 이식성, 도구 생태계 안에서 서로를 강화한 과정을 분석.
+domains:
+  - operating-systems
+  - programming-languages
+  - software-engineering
+  - computer-history
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-07-10
-updated: 2026-07-25
-sources: ["The UNIX Time-Sharing System", "The Development of the C Language", "The Evolution of the Unix Time-sharing System", "Portability of C Programs and the UNIX System"]
-status: active
-graph_id: analysis-8d320775b8ff83eb
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:c98c14a92049f32273e2da51d245300677919d502d808e4d1b01ba779b5ab98b
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids:
+  - ref-018
+  - ref-019
+  - ref-020
+  - ref-021
+capability_layers: []
+redirect_from:
+  - /analyses/unix와-c/
 ---
 
 ## 핵심 주장
@@ -46,6 +68,14 @@ Unix와 C의 결합은 이후 운영체제, 컴파일러, 셸, 라이브러리, 
 | synthesizes | [[시스템 프로그래밍]] | C가 Unix의 파일·프로세스·시스템 호출 환경을 어셈블리보다 높은 수준에서 구현하고 도구 생태계와 결합한 방식을 종합한다. | [[The UNIX Time-Sharing System]], [[The Development of the C Language]] |
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- `ref-018`
+- `ref-019`
+- `ref-020`
+- `ref-021`
+<!-- wiki-v2:evidence-end -->
 
 - [[The UNIX Time-Sharing System]]
 - [[The Development of the C Language]]

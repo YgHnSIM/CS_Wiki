@@ -50,7 +50,7 @@ test("mobile navigation is a modal and restores its trigger focus", async ({ pag
 
 test("article table of contents moves without duplication and focuses its heading", async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
-  await page.goto("/concepts/edsac/");
+  await page.goto("/docs/concept-00b55ff0f7a3581b/");
   const toc = page.locator("[data-article-toc], .article-toc");
   await expect(toc).toHaveCount(1);
   await expect.poll(() => toc.evaluate((element) => (

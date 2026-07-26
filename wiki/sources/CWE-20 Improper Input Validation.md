@@ -1,26 +1,56 @@
 ---
+schema_version: 2
+id: ref-090
+kind: reference
 title: CWE-20 Improper Input Validation
-aliases: ["CWE-20: Improper Input Validation", CWE-20, CWE 입력 검증, MITRE CWE-20]
-summary: "입력이 안전하고 올바르게 처리되기 위해 필요한 속성을 검증하지 않거나 잘못 검증하는 약점을, 입력 형식·길이·타입·범위·일관성·도메인 규칙의 경계로 정리한 MITRE CWE 항목."
-tags: [type/reference, domain/security, domain/software-engineering, domain/systems, status/active]
-created: 2026-07-25
-updated: 2026-07-25
-publication_year: 2026
-historical_note: "확인한 현재 CWE 항목은 CWE 4.20(2026-04-30) 판본이다. CWE는 계속 갱신되는 약점 분류 체계이므로 특정 판본의 용어와 권고를 기록한다."
-historical_layer: measurement
-capability_layers: [reliable-results]
-sources: [CWE-20 Improper Input Validation]
-source_id: ref-090
-source_kind: external
-primary_sources: ["MITRE, CWE-20: Improper Input Validation, CWE 4.20"]
-supporting_sources: ["MITRE Common Weakness Enumeration current catalog"]
-source_urls: ["https://cwe.mitre.org/data/definitions/20.html"]
-retrieved: 2026-07-25
-version: "CWE 4.20"
-snapshot_status: external-only
-status: active
-graph_id: reference-cwe-20-input-validation
+aliases:
+  - "CWE-20: Improper Input Validation"
+  - CWE-20
+  - CWE 입력 검증
+  - MITRE CWE-20
+summary: 입력이 안전하고 올바르게 처리되기 위해 필요한 속성을 검증하지 않거나 잘못 검증하는 약점을, 입력 형식·길이·타입·범위·일관성·도메인 규칙의 경계로 정리한 MITRE CWE 항목.
+domains:
+  - security
+  - software-engineering
+  - systems
+editorial_status: active
+publication_visibility: public
 graph_visibility: public
+created: 2026-07-25
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:45934a86952ca77f1ad01023f4779f79f06d441f46bf581c0d925f1c4aea5b2d
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers:
+  - reliable-results
+history:
+  publication_year: 2026
+  note: 확인한 현재 CWE 항목은 CWE 4.20(2026-04-30) 판본이다. CWE는 계속 갱신되는 약점 분류 체계이므로 특정 판본의 용어와 권고를 기록한다.
+  layer: measurement
+redirect_from:
+  - /references/cwe-20-improper-input-validation/
+  - /sources/cwe-20-improper-input-validation/
+origin: external
+works:
+  primary:
+    - citation: "MITRE, CWE-20: Improper Input Validation, CWE 4.20"
+      genre: standard
+      identifiers: []
+      edition: CWE 4.20
+  supporting:
+    - citation: MITRE Common Weakness Enumeration current catalog
+      genre: standard
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: canonical
+    url: https://cwe.mitre.org/data/definitions/20.html
+    retrieved: 2026-07-25
+    version: CWE 4.20
 ---
 
 ## 개요
@@ -44,6 +74,7 @@ CWE는 허용된 명세에 맞는 입력을 받아들이는 accept-known-good �
 ## 인용할 만한 구절
 
 > “accept known good”
+<!-- wiki-v2:quote-locator evidence="ref-090" locator="wiki/sources/CWE-20 Improper Input Validation.md:line-21#인용할-만한-구절" status="recorded" -->
 
 정의된 명세에 맞는 입력을 받아들이고 나머지를 거부하는 검증 전략을 압축한다.
 
@@ -59,6 +90,11 @@ CWE는 허용된 명세에 맞는 입력을 받아들이는 accept-known-good �
 | constrains | [[입력을 해석하는 경계는 왜 보안 경계인가]] | 검증·필터링·출력 인코딩·정준화를 하나의 동의어로 합치지 않고, 각 단계의 원인과 소비 표현을 구분하게 한다. | [[CWE-20 Improper Input Validation]] |
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - MITRE, [CWE-20: Improper Input Validation](https://cwe.mitre.org/data/definitions/20.html)
 

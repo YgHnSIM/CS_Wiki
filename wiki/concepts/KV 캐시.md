@@ -1,18 +1,42 @@
 ---
+schema_version: 2
+id: concept-kv-cache
+kind: concept
 title: KV 캐시
-aliases: [KV cache, key-value cache, 키-값 캐시, 어텐션 KV 캐시]
-summary: "자동회귀 Transformer가 이전 토큰의 어텐션 키와 값을 층별로 보존해 재계산을 피하는 대신, 시퀀스 길이와 동시 요청 수에 비례하는 GPU 메모리를 요구하는 실행 상태."
-tags: [type/concept, domain/machine-learning, domain/systems, domain/computer-architecture, status/active]
-created: 2026-07-24
-updated: 2026-07-25
-publication_year: 2022
-historical_note: "Transformer의 키·값 재사용은 이전부터 가능했지만, 자동회귀 서빙의 요청별 상태와 스케줄링 문제를 명시한 Orca의 2022년 출판을 대표 시점으로 둔다."
-historical_layer: system
-capability_layers: [realized-performance, scalability, resource-efficiency]
-sources: ["Orca - A Distributed Serving System for Transformer-Based Generative Models", "Efficient Memory Management for Large Language Model Serving with PagedAttention", "SGLang - Efficient Execution of Structured Language Model Programs"]
-status: active
-graph_id: concept-kv-cache
+aliases:
+  - KV cache
+  - key-value cache
+  - 키-값 캐시
+  - 어텐션 KV 캐시
+summary: 자동회귀 Transformer가 이전 토큰의 어텐션 키와 값을 층별로 보존해 재계산을 피하는 대신, 시퀀스 길이와 동시 요청 수에 비례하는 GPU 메모리를 요구하는 실행 상태.
+domains:
+  - machine-learning
+  - systems
+  - computer-architecture
+editorial_status: active
+publication_visibility: public
 graph_visibility: public
+created: 2026-07-24
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:85b4935622d541e42af17957b8fbbe9127c83c59e7a68c87450490c11aa98fb4
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids:
+  - ref-075
+  - ref-076
+  - ref-080
+capability_layers:
+  - realized-performance
+  - scalability
+  - resource-efficiency
+history:
+  publication_year: 2022
+  note: Transformer의 키·값 재사용은 이전부터 가능했지만, 자동회귀 서빙의 요청별 상태와 스케줄링 문제를 명시한 Orca의 2022년 출판을 대표 시점으로 둔다.
+  layer: system
+redirect_from:
+  - /concepts/kv-캐시/
 ---
 
 ## 개요
@@ -56,6 +80,13 @@ PagedAttention은 논리 캐시를 고정 크기 블록으로 나누고 각 논�
 | constrains | [[컴퓨팅 능력이란 무엇인가]] | 토큰당 계산 절감과 요청당 상태 증가가 같은 시스템의 지연·처리량·자원 효율을 서로 다르게 바꾼다. | [[Efficient Memory Management for Large Language Model Serving with PagedAttention]] |
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- `ref-075`
+- `ref-076`
+- `ref-080`
+<!-- wiki-v2:evidence-end -->
 
 - [[Orca - A Distributed Serving System for Transformer-Based Generative Models]]
 - [[Efficient Memory Management for Large Language Model Serving with PagedAttention]]

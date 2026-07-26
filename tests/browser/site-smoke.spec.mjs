@@ -70,7 +70,7 @@ test("interactive knowledge lenses initialize and accept keyboard input", async 
 
 
 test("article connections stay compact and keyboard-switchable", async ({ page }) => {
-  await page.goto("/concepts/edsac/");
+  await page.goto("/docs/concept-00b55ff0f7a3581b/");
   const explorer = page.locator("[data-relationship-explorer]");
   const map = explorer.locator("[data-relationship-map]");
   const list = explorer.locator("[data-relationship-list]");
@@ -97,7 +97,7 @@ test("article connections stay compact and keyboard-switchable", async ({ page }
 
 
 test("core pages have no serious automated accessibility violations", async ({ page }) => {
-  for (const route of ["/", "/concepts/edsac/", "/map/", "/map/history/", "/map/evidence/"]) {
+  for (const route of ["/", "/docs/concept-00b55ff0f7a3581b/", "/map/", "/map/history/", "/map/evidence/"]) {
     await page.goto(route);
     const results = await new AxeBuilder({ page }).analyze();
     const serious = results.violations.filter((violation) => ["serious", "critical"].includes(violation.impact));

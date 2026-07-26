@@ -1,13 +1,32 @@
 ---
+schema_version: 2
+id: concept-be5e965404a672d3
+kind: concept
 title: Unicode scalar value
-aliases: [유니코드 스칼라 값, 스칼라 값, scalar value]
-summary: "Unicode 코드 포인트 가운데 surrogate 영역을 제외해 UTF 인코딩 형식의 입력이 되는 값."
-tags: [type/concept, domain/computer-science, domain/text-processing, status/active]
+aliases:
+  - 유니코드 스칼라 값
+  - 스칼라 값
+  - scalar value
+summary: Unicode 코드 포인트 가운데 surrogate 영역을 제외해 UTF 인코딩 형식의 입력이 되는 값.
+domains:
+  - computer-science
+  - text-processing
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-07-10
-updated: 2026-07-22
-sources: ["The Unicode Standard 17.0.0", "RFC 3629 UTF-8"]
-status: active
-graph_id: concept-be5e965404a672d3
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:ca37563cf5371c88c8ffb22ceddb21e493c6003b83699c60777cd7f2fbbd3e72
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids:
+  - ref-022
+  - ref-023
+capability_layers: []
+redirect_from:
+  - /concepts/unicode-scalar-value/
 ---
 
 ## 개요
@@ -25,6 +44,12 @@ scalar value라고 해서 반드시 현재 문자에 배정된 값이라는 뜻�
 [[UTF-8]]은 하나의 scalar value를 1–4개의 8비트 코드 유닛으로, [[UTF-16]]은 하나 또는 두 개의 16비트 코드 유닛으로 표현한다. 올바른 UTF 인코딩은 독립된 surrogate 값을 입력 문자처럼 인코딩하지 않는다. 이 구분은 잘못된 문자열을 검증하고, 코드 포인트 수·코드 유닛 수·[[그래핌 클러스터]] 수를 정확히 해석하는 데 필요하다.
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- `ref-022`
+- `ref-023`
+<!-- wiki-v2:evidence-end -->
 
 - [[The Unicode Standard 17.0.0]]
 - [[RFC 3629 UTF-8]]

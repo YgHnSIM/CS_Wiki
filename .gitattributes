@@ -1,0 +1,12 @@
+* text=auto eol=lf
+raw/** text eol=lf
+raw/컴퓨팅의* text eol=crlf
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.pdf binary
+*.woff binary
+*.woff2 binary
+*.ttf binary

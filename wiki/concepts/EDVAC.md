@@ -1,16 +1,36 @@
 ---
+schema_version: 2
+id: concept-4ac13a0d4fe8ec32
+kind: concept
 title: EDVAC
-aliases: [Electronic Discrete Variable Automatic Computer]
-summary: "저장 프로그램 컴퓨터의 논리 구조를 문서화하고 후속 기계 설계에 영향을 준 초기 전자식 컴퓨터 설계."
-tags: [type/concept, domain/computer-history, domain/computer-architecture, status/active]
+aliases:
+  - Electronic Discrete Variable Automatic Computer
+summary: 저장 프로그램 컴퓨터의 논리 구조를 문서화하고 후속 기계 설계에 영향을 준 초기 전자식 컴퓨터 설계.
+domains:
+  - computer-history
+  - computer-architecture
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-07-10
-updated: 2026-07-22
-sources: ["First Draft of a Report on the EDVAC"]
-status: active
-graph_id: concept-4ac13a0d4fe8ec32
-event_start: 1945
-historical_layer: architecture
-historical_note: "First Draft of a Report on the EDVAC이 배포된 1945년을 설계의 대표 시점으로 둔다."
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:6c0c5c6899aa4c52c4443b15c1bb615fb951f650c01002d4597cf231f19e1b33
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids:
+  - ref-006
+capability_layers: []
+history:
+  event:
+    start: 1945
+    basis: representative
+    evidence_id: ref-006
+  note: First Draft of a Report on the EDVAC이 배포된 1945년을 설계의 대표 시점으로 둔다.
+  layer: architecture
+redirect_from:
+  - /concepts/edvac/
 ---
 
 ## 개요
@@ -30,6 +50,11 @@ EDVAC은 저장 프로그램 컴퓨터의 초기 설계로 큰 영향을 주었�
 따라서 EDVAC의 지위는 "처음 설계된 현대적 저장 프로그램 컴퓨터"에 가깝다. "처음 작동한 저장 프로그램 전자식 컴퓨터"는 [[Manchester Baby]], "처음 실용적으로 일반 계산 서비스를 제공한 저장 프로그램 컴퓨터"는 [[EDSAC]] 쪽으로 구분하는 편이 더 정확하다.
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- `ref-006`
+<!-- wiki-v2:evidence-end -->
 
 - [[First Draft of a Report on the EDVAC]]
 

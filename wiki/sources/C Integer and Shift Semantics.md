@@ -1,22 +1,58 @@
 ---
+schema_version: 2
+id: ref-029
+kind: reference
 title: C Integer and Shift Semantics
-aliases: [C 정수와 시프트 의미론, C integer overflow rules, WG14 integer semantics]
-summary: "WG14 문서를 바탕으로 C의 unsigned 래핑, signed overflow, 시프트 연산 조건을 정리한 참고 자료."
-tags: [type/reference, domain/programming-languages, domain/systems, domain/security, status/active]
+aliases:
+  - C 정수와 시프트 의미론
+  - C integer overflow rules
+  - WG14 integer semantics
+summary: WG14 문서를 바탕으로 C의 unsigned 래핑, signed overflow, 시프트 연산 조건을 정리한 참고 자료.
+domains:
+  - programming-languages
+  - systems
+  - security
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-07-10
-updated: 2026-07-22
-sources: ["WG14 N1570", "WG14 N2817"]
-source_id: ref-029
-source_kind: external
-primary_sources: ["WG14 N1570 Committee Draft — ISO/IEC 9899:201x"]
-supporting_sources: ["WG14 N2817 — Can Signed Integers Overflow?"]
-source_urls: ["https://www.open-std.org/jtc1/sc22/wg14/www/docs/n1570.pdf", "https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2817.pdf"]
-retrieved: 2026-07-10
-version: "N1570 / N2817"
-snapshot_status: external-only
-status: active
-publication_year: 2011
-historical_note: "주요 직접 근거인 WG14 N1570 공개 위원회 초안의 발행 연도다."
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:1a764c1acca653c2034f64b4e160820da260df77a70bf7b0559bd80d756e6f9c
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers: []
+history:
+  publication_year: 2011
+  note: 주요 직접 근거인 WG14 N1570 공개 위원회 초안의 발행 연도다.
+redirect_from:
+  - /references/c-integer-and-shift-semantics/
+  - /sources/c-integer-and-shift-semantics/
+origin: external
+works:
+  primary:
+    - citation: WG14 N1570 Committee Draft — ISO/IEC 9899:201x
+      genre: standard
+      identifiers: []
+      edition: N1570 / N2817
+  supporting:
+    - citation: WG14 N2817 — Can Signed Integers Overflow?
+      genre: standard
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: canonical
+    url: https://www.open-std.org/jtc1/sc22/wg14/www/docs/n1570.pdf
+    retrieved: 2026-07-10
+    version: N1570 / N2817
+  - kind: url
+    role: mirror
+    url: https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2817.pdf
+    retrieved: 2026-07-10
+    version: N1570 / N2817
 ---
 
 ## 개요
@@ -36,6 +72,11 @@ historical_note: "주요 직접 근거인 WG14 N1570 공개 위원회 초안의 
 이 자료는 [[비트 연산]]의 곱셈·나눗셈 비유에 필요한 조건을 명시하고, [[정수 오버플로]]에서 unsigned wrapping과 signed undefined behavior를 구분하는 근거로 사용된다.
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - ISO/IEC JTC1/SC22/WG14, [N1570 Committee Draft — Programming Languages — C](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n1570.pdf)
 - ISO/IEC JTC1/SC22/WG14, [N2817 — Can Signed Integers Overflow?](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2817.pdf)

@@ -1,25 +1,59 @@
 ---
+schema_version: 2
+id: ref-108
+kind: reference
 title: GHG Protocol Product Life Cycle Accounting and Reporting Standard
-aliases: [GHG Protocol Product Standard, 제품 수명 주기 회계 표준, Product Life Cycle Standard]
-summary: "제품의 원료·제조·사용·폐기 단계를 포괄하는 온실가스 배출량을 일관되게 회계·보고하기 위한 GHG Protocol의 2011년 제품 수명 주기 표준."
-tags: [type/reference, domain/systems, domain/software-engineering, status/active]
-created: 2026-07-25
-updated: 2026-07-25
-publication_year: 2011
-historical_layer: measurement
-capability_layers: [resource-efficiency, reliable-results]
-sources: [GHG Protocol Product Life Cycle Accounting and Reporting Standard]
-source_id: ref-108
-source_kind: external
-primary_sources: ["Greenhouse Gas Protocol, Product Life Cycle Accounting and Reporting Standard, 2011"]
-supporting_sources: ["GHG Protocol Product Standard landing page and 2026 ISO joint-update notice"]
-source_urls: ["https://ghgprotocol.org/product-standard", "https://ghgprotocol.org/sites/default/files/standards/Product-Life-Cycle-Accounting-Reporting-Standard-EReader_041613_0.pdf"]
-retrieved: 2026-07-25
-version: "2011 Product Life Cycle Accounting and Reporting Standard"
-snapshot_status: external-only
-status: active
-graph_id: reference-ghg-product-lifecycle-standard
+aliases:
+  - GHG Protocol Product Standard
+  - 제품 수명 주기 회계 표준
+  - Product Life Cycle Standard
+summary: 제품의 원료·제조·사용·폐기 단계를 포괄하는 온실가스 배출량을 일관되게 회계·보고하기 위한 GHG Protocol의 2011년 제품 수명 주기 표준.
+domains:
+  - systems
+  - software-engineering
+editorial_status: active
+publication_visibility: public
 graph_visibility: public
+created: 2026-07-25
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:c93692483ae77b1c23063b793639c8c93a0fe60278b2cab030203b139c977f88
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers:
+  - resource-efficiency
+  - reliable-results
+history:
+  publication_year: 2011
+  layer: measurement
+redirect_from:
+  - /references/ghg-protocol-product-life-cycle-accounting-and-reporting-standard/
+  - /sources/ghg-protocol-product-life-cycle-accounting-and-reporting-standard/
+origin: external
+works:
+  primary:
+    - citation: Greenhouse Gas Protocol, Product Life Cycle Accounting and Reporting Standard, 2011
+      genre: standard
+      identifiers: []
+      edition: 2011 Product Life Cycle Accounting and Reporting Standard
+  supporting:
+    - citation: GHG Protocol Product Standard landing page and 2026 ISO joint-update notice
+      genre: standard
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: canonical
+    url: https://ghgprotocol.org/product-standard
+    retrieved: 2026-07-25
+    version: 2011 Product Life Cycle Accounting and Reporting Standard
+  - kind: url
+    role: mirror
+    url: https://ghgprotocol.org/sites/default/files/standards/Product-Life-Cycle-Accounting-Reporting-Standard-EReader_041613_0.pdf
+    retrieved: 2026-07-25
+    version: 2011 Product Life Cycle Accounting and Reporting Standard
 ---
 
 ## 개요
@@ -54,6 +88,11 @@ graph_visibility: public
 | constrains | [[운영 탄소와 내재 탄소]] | 운영 단계만 관찰한 값을 제품·서비스 전체 수명 주기 영향으로 일반화하지 않게 한다. | [[GHG Protocol Product Life Cycle Accounting and Reporting Standard]] |
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - GHG Protocol, [Product Standard page](https://ghgprotocol.org/product-standard)
 - GHG Protocol, [2011 standard PDF](https://ghgprotocol.org/sites/default/files/standards/Product-Life-Cycle-Accounting-Reporting-Standard-EReader_041613_0.pdf)

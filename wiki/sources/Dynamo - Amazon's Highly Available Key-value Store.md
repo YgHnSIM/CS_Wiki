@@ -1,25 +1,61 @@
 ---
+schema_version: 2
+id: ref-104
+kind: reference
 title: "Dynamo: Amazon's Highly Available Key-value Store"
-aliases: ["Dynamo - Amazon's Highly Available Key-value Store", Dynamo 논문, DeCandia et al. 2007, Amazon Dynamo]
-summary: "지속적인 서버·네트워크 구성 요소 실패를 전제로, 일관된 해싱·복제·버전 벡터·정족수형 통신·애플리케이션 보조 충돌 해결을 조합한 Amazon의 2007년 고가용 키-값 저장소 연구."
-tags: [type/reference, domain/distributed-systems, domain/database, domain/systems, status/active]
-created: 2026-07-25
-updated: 2026-07-25
-publication_year: 2007
-historical_layer: service
-capability_layers: [scalability, reliable-results]
-sources: ["Dynamo - Amazon's Highly Available Key-value Store"]
-source_id: ref-104
-source_kind: external
-primary_sources: ["Giuseppe DeCandia, Deniz Hastorun, Madan Jampani, Gunavardhan Kakulapati, Avinash Lakshman, Alex Pilchin, Swaminathan Sivasubramanian, Peter Vosshall, and Werner Vogels, Dynamo: Amazon's Highly Available Key-value Store, SOSP 2007, pp. 205–220"]
-supporting_sources: ["Amazon Science publication record and author-hosted paper PDF"]
-source_urls: ["https://www.amazon.science/publications/dynamo-amazons-highly-available-key-value-store", "https://cdn.amazon.science/ac/1d/eb50c4064c538c8ac440ce6a1d91/dynamo-amazons-highly-available-key-value-store.pdf"]
-retrieved: 2026-07-25
-version: "SOSP 2007 proceedings, pp. 205–220"
-snapshot_status: external-only
-status: active
-graph_id: reference-dynamo-highly-available-key-value-store
+aliases:
+  - Dynamo - Amazon's Highly Available Key-value Store
+  - Dynamo 논문
+  - DeCandia et al. 2007
+  - Amazon Dynamo
+summary: 지속적인 서버·네트워크 구성 요소 실패를 전제로, 일관된 해싱·복제·버전 벡터·정족수형 통신·애플리케이션 보조 충돌 해결을 조합한 Amazon의 2007년 고가용 키-값 저장소 연구.
+domains:
+  - distributed-systems
+  - database
+  - systems
+editorial_status: active
+publication_visibility: public
 graph_visibility: public
+created: 2026-07-25
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:315cf157622b479295b8a6b1eea14c42911ab08e902f22c3974c8e992e8c5bca
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers:
+  - scalability
+  - reliable-results
+history:
+  publication_year: 2007
+  layer: service
+redirect_from:
+  - /references/dynamo-amazon-s-highly-available-key-value-store/
+  - /sources/dynamo-amazon-s-highly-available-key-value-store/
+origin: external
+works:
+  primary:
+    - citation: "Giuseppe DeCandia, Deniz Hastorun, Madan Jampani, Gunavardhan Kakulapati, Avinash Lakshman, Alex Pilchin, Swaminathan Sivasubramanian, Peter Vosshall, and Werner Vogels, Dynamo: Amazon's Highly Available Key-value Store, SOSP 2007, pp. 205–220"
+      genre: other
+      identifiers: []
+      edition: SOSP 2007 proceedings, pp. 205–220
+  supporting:
+    - citation: Amazon Science publication record and author-hosted paper PDF
+      genre: official-record
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: canonical
+    url: https://www.amazon.science/publications/dynamo-amazons-highly-available-key-value-store
+    retrieved: 2026-07-25
+    version: SOSP 2007 proceedings, pp. 205–220
+  - kind: url
+    role: mirror
+    url: https://cdn.amazon.science/ac/1d/eb50c4064c538c8ac440ce6a1d91/dynamo-amazons-highly-available-key-value-store.pdf
+    retrieved: 2026-07-25
+    version: SOSP 2007 proceedings, pp. 205–220
 ---
 
 ## 개요
@@ -43,6 +79,7 @@ Dynamo는 오늘날의 DynamoDB나 모든 NoSQL 제품의 정확한 구현 명�
 ## 인용할 만한 구절
 
 > “failure handling as the normal case”
+<!-- wiki-v2:quote-locator evidence="ref-104" locator="wiki/sources/Dynamo - Amazon's Highly Available Key-value Store.md:line-21#인용할-만한-구절" status="recorded" -->
 
 대규모 서비스에서 고장을 특별한 예외가 아니라 정상적인 운영 조건으로 받아들이는 태도를 압축한다.
 
@@ -58,6 +95,11 @@ Dynamo는 오늘날의 DynamoDB나 모든 NoSQL 제품의 정확한 구현 명�
 | enables | [[로컬 호출과 파일은 원격 상태가 될 때 무엇을 잃는가]] | 단일 키 갱신의 결과가 원격 복제 환경에서는 버전 병존·정족수·충돌 해결의 계약으로 바뀌는 사례를 제공한다. | [[Dynamo - Amazon's Highly Available Key-value Store]] |
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - Amazon Science, [publication record](https://www.amazon.science/publications/dynamo-amazons-highly-available-key-value-store)
 - Amazon Science, [paper PDF](https://cdn.amazon.science/ac/1d/eb50c4064c538c8ac440ce6a1d91/dynamo-amazons-highly-available-key-value-store.pdf)

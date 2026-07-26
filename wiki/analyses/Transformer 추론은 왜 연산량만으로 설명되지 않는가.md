@@ -1,16 +1,40 @@
 ---
+schema_version: 2
+id: analysis-transformer-io-bottleneck
+kind: analysis
 title: Transformer 추론은 왜 연산량만으로 설명되지 않는가
-aliases: [Transformer IO 병목, Transformer inference beyond FLOPs, 어텐션 메모리 병목]
-summary: "Transformer의 학습 병렬성·자동회귀 생성 순차성·밀집 어텐션 산술량을 구분하고, FlashAttention이 더 많은 재계산으로도 메모리 이동을 줄여 실제 시간을 단축하는 이유를 분석한다."
-tags: [type/analysis, domain/machine-learning, domain/computer-architecture, domain/systems, status/active]
-created: 2026-07-24
-updated: 2026-07-24
-historical_layer: architecture
-capability_layers: [realized-performance, scalability, resource-efficiency]
-sources: ["Attention Is All You Need", "FlashAttention - Fast and Memory-Efficient Exact Attention with IO-Awareness", "Hitting the Memory Wall", "Roofline An Insightful Visual Performance Model"]
-status: active
-graph_id: analysis-transformer-io-bottleneck
+aliases:
+  - Transformer IO 병목
+  - Transformer inference beyond FLOPs
+  - 어텐션 메모리 병목
+summary: Transformer의 학습 병렬성·자동회귀 생성 순차성·밀집 어텐션 산술량을 구분하고, FlashAttention이 더 많은 재계산으로도 메모리 이동을 줄여 실제 시간을 단축하는 이유를 분석한다.
+domains:
+  - machine-learning
+  - computer-architecture
+  - systems
+editorial_status: active
+publication_visibility: public
 graph_visibility: public
+created: 2026-07-24
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:8a9de0e18ef20764bd13f9ceefe77d6935f6237037a6e7110c4ca25dc4b7ba67
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids:
+  - ref-073
+  - ref-074
+  - ref-039
+  - ref-034
+capability_layers:
+  - realized-performance
+  - scalability
+  - resource-efficiency
+history:
+  layer: architecture
+redirect_from:
+  - /analyses/transformer-추론은-왜-연산량만으로-설명되지-않는가/
 ---
 
 ## 문제 제기
@@ -71,6 +95,14 @@ Transformer의 컴퓨팅 능력은 모델의 산술 복잡도만으로 결정되
 | responds_to | [[메모리 장벽]] | Transformer 성능 비교에 HBM 이동·부가 메모리와 벽시계 시간을 포함한다. | [[FlashAttention - Fast and Memory-Efficient Exact Attention with IO-Awareness]] |
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- `ref-073`
+- `ref-074`
+- `ref-039`
+- `ref-034`
+<!-- wiki-v2:evidence-end -->
 
 - [[Attention Is All You Need]]
 - [[FlashAttention - Fast and Memory-Efficient Exact Attention with IO-Awareness]]

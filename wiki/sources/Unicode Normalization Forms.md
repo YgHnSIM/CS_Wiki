@@ -1,22 +1,58 @@
 ---
+schema_version: 2
+id: ref-024
+kind: reference
 title: Unicode Normalization Forms
-aliases: [UAX #15, Unicode Standard Annex #15, 유니코드 정규화 형식]
+aliases:
+  - "UAX #15"
+  - "Unicode Standard Annex #15"
+  - 유니코드 정규화 형식
 summary: "UAX #15를 바탕으로 NFC, NFD, NFKC, NFKD와 문자열 동등성 문제를 정리한 참고 자료."
-tags: [type/reference, domain/computer-science, domain/text-processing, domain/security, status/active]
+domains:
+  - computer-science
+  - text-processing
+  - security
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-07-10
-updated: 2026-07-22
-sources: ["Unicode Standard Annex #15"]
-source_id: ref-024
-source_kind: external
-primary_sources: ["Unicode Standard Annex #15, Unicode 17.0.0, Revision 57"]
-supporting_sources: ["Unicode Standard Annex #15 latest-version pointer"]
-source_urls: ["https://www.unicode.org/reports/tr15/tr15-57.html", "https://www.unicode.org/reports/tr15/"]
-retrieved: 2026-07-10
-version: "Unicode 17.0.0 / Revision 57"
-snapshot_status: external-only
-status: active
-publication_year: 2025
-historical_note: "Unicode 17.0.0에 맞춘 UAX #15 Revision 57의 발행 연도다."
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:b19fa6954d0f0b3b139bbd94b78b12b56954e00ceaabd39f67a7e2f19a1c4ea6
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers: []
+history:
+  publication_year: 2025
+  note: "Unicode 17.0.0에 맞춘 UAX #15 Revision 57의 발행 연도다."
+redirect_from:
+  - /references/unicode-normalization-forms/
+  - /sources/unicode-normalization-forms/
+origin: external
+works:
+  primary:
+    - citation: "Unicode Standard Annex #15, Unicode 17.0.0, Revision 57"
+      genre: standard
+      identifiers: []
+      edition: Unicode 17.0.0 / Revision 57
+  supporting:
+    - citation: "Unicode Standard Annex #15 latest-version pointer"
+      genre: standard
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: canonical
+    url: https://www.unicode.org/reports/tr15/tr15-57.html
+    retrieved: 2026-07-10
+    version: Unicode 17.0.0 / Revision 57
+  - kind: url
+    role: mirror
+    url: https://www.unicode.org/reports/tr15/
+    retrieved: 2026-07-10
+    version: Unicode 17.0.0 / Revision 57
 ---
 
 ## 개요
@@ -38,6 +74,11 @@ historical_note: "Unicode 17.0.0에 맞춘 UAX #15 Revision 57의 발행 연도�
 이 자료는 [[유니코드 정규화]], [[그래핌 클러스터]], [[유니코드]], [[인코딩 심화]]를 정리하는 데 사용한다. 특히 "같아 보이는 문자열"과 "바이트가 같은 문자열"이 다를 수 있다는 점을 설명하는 핵심 근거로 사용된다.
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - Unicode Consortium, [UAX #15 Revision 57 — Unicode 17.0.0](https://www.unicode.org/reports/tr15/tr15-57.html)
 - Unicode Consortium, [UAX #15 최신 판본 포인터](https://www.unicode.org/reports/tr15/)

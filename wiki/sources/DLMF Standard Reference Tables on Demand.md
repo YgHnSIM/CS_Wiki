@@ -1,24 +1,63 @@
 ---
+schema_version: 2
+id: ref-060
+kind: reference
 title: DLMF Standard Reference Tables on Demand
-aliases: [DLMF Tables, DLMF 표준 참조표, DLMF on-demand tables]
-summary: "NIST가 특수함수 값을 요청 시 생성하고 보증된 오차 경계와 비교 기능을 제공해 수치 소프트웨어의 시험 기준으로 삼으려 한 DLMF Tables 프로젝트를 정리한 공식 보고서 자료."
-tags: [type/reference, domain/mathematics, domain/software-engineering, status/active]
+aliases:
+  - DLMF Tables
+  - DLMF 표준 참조표
+  - DLMF on-demand tables
+summary: NIST가 특수함수 값을 요청 시 생성하고 보증된 오차 경계와 비교 기능을 제공해 수치 소프트웨어의 시험 기준으로 삼으려 한 DLMF Tables 프로젝트를 정리한 공식 보고서 자료.
+domains:
+  - mathematics
+  - software-engineering
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-07-20
-updated: 2026-07-25
-publication_year: 2015
-historical_note: "NISTIR 8056은 2013년 10월–2014년 12월의 활동을 정리해 2015년 4월 발행됐으며, 본문은 당시 베타 단계의 DLMF Tables 설계를 보고한다."
-historical_layer: measurement
-capability_layers: [reliable-results]
-sources: ["NISTIR 8056 - Applied and Computational Mathematics Division Summary of Activities for Fiscal Year 2014", "NIST publication record for NISTIR 8056", "DLMF - Possible Errors in DLMF"]
-source_id: ref-060
-source_kind: external
-primary_sources: ["NISTIR 8056 - Applied and Computational Mathematics Division Summary of Activities for Fiscal Year 2014"]
-supporting_sources: ["NIST publication record for NISTIR 8056", "DLMF - Possible Errors in DLMF"]
-source_urls: ["https://www.nist.gov/publications/applied-and-computational-mathematics-division-summary-activities-fiscal-year-2014-0", "https://dlmf.nist.gov/help/errors"]
-retrieved: 2026-07-25
-version: "NISTIR 8056, April 2015; supporting DLMF error page Version 1.2.7, 2026-06-15"
-snapshot_status: external-only
-status: active
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:e1390acb7b44c5b01eabb362ffd68c271f10b0b50310e5eb43694b86967f08b3
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers:
+  - reliable-results
+history:
+  publication_year: 2015
+  note: NISTIR 8056은 2013년 10월–2014년 12월의 활동을 정리해 2015년 4월 발행됐으며, 본문은 당시 베타 단계의 DLMF Tables 설계를 보고한다.
+  layer: measurement
+redirect_from:
+  - /references/dlmf-standard-reference-tables-on-demand/
+  - /sources/dlmf-standard-reference-tables-on-demand/
+origin: external
+works:
+  primary:
+    - citation: NISTIR 8056 - Applied and Computational Mathematics Division Summary of Activities for Fiscal Year 2014
+      genre: standard
+      identifiers: []
+      edition: NISTIR 8056, April 2015; supporting DLMF error page Version 1.2.7, 2026-06-15
+  supporting:
+    - citation: NIST publication record for NISTIR 8056
+      genre: standard
+      identifiers: []
+      edition: null
+    - citation: DLMF - Possible Errors in DLMF
+      genre: standard
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: canonical
+    url: https://www.nist.gov/publications/applied-and-computational-mathematics-division-summary-activities-fiscal-year-2014-0
+    retrieved: 2026-07-25
+    version: NISTIR 8056, April 2015; supporting DLMF error page Version 1.2.7, 2026-06-15
+  - kind: url
+    role: mirror
+    url: https://dlmf.nist.gov/help/errors
+    retrieved: 2026-07-25
+    version: NISTIR 8056, April 2015; supporting DLMF error page Version 1.2.7, 2026-06-15
 ---
 
 ## 자료 개요
@@ -60,6 +99,11 @@ DLMF의 오류 안내 페이지는 내부·외부 전문가 검토를 거쳤더�
 이전의 소문자 NIST PDF 경로는 2026-07-25 링크 점검에서 404였다. 원자료의 식별자와 발행 정보를 보존하는 NIST 출판물 레코드를 새 접근 경로로 등록했다. 이는 2014년 활동 보고서가 설명한 베타 단계의 프로젝트 범위를 바꾸지 않으며, 현재 DLMF 오류·정오표 안내는 별도 보조 자료로 유지한다.
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - NIST, [NIST IR 8056 publication record](https://www.nist.gov/publications/applied-and-computational-mathematics-division-summary-activities-fiscal-year-2014-0), NISTIR 8056, April 2015, pp. 38–40.
 - NIST Digital Library of Mathematical Functions, [Possible Errors in DLMF](https://dlmf.nist.gov/help/errors), Version 1.2.7.

@@ -1,22 +1,50 @@
 ---
+schema_version: 2
+id: ref-058
+kind: reference
 title: Human Computer Project
-aliases: [Smithsonian Human Computer Project, 인간 계산자 프로젝트, Computer Was a Job Description]
-summary: "전자식 컴퓨터가 널리 보급되기 전과 초기의 computer라는 직업, 여성 계산 노동, Mathematical Tables Project, ENIAC 운영 및 프로그래밍으로의 전환을 정리한 Smithsonian 자료."
-tags: [type/reference, domain/computer-history, domain/software-engineering, status/active]
+aliases:
+  - Smithsonian Human Computer Project
+  - 인간 계산자 프로젝트
+  - Computer Was a Job Description
+summary: 전자식 컴퓨터가 널리 보급되기 전과 초기의 computer라는 직업, 여성 계산 노동, Mathematical Tables Project, ENIAC 운영 및 프로그래밍으로의 전환을 정리한 Smithsonian 자료.
+domains:
+  - computer-history
+  - software-engineering
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-07-20
-updated: 2026-07-20
-historical_layer: system
-capability_layers: [programmability, resource-efficiency, reliable-results]
-sources: ["Smithsonian American Women's History Museum, Human Computer Project"]
-source_id: ref-058
-source_kind: external
-primary_sources: ["Smithsonian American Women's History Museum, Human Computer Project"]
-supporting_sources: []
-source_urls: ["https://womenshistory.si.edu/human-computer-project"]
-retrieved: 2026-07-20
-version: null
-snapshot_status: external-only
-status: active
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:d1164c109c70a51df51676e98061303824881bfc6195fec652aafc2c443058ec
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers:
+  - programmability
+  - resource-efficiency
+  - reliable-results
+history:
+  layer: system
+redirect_from:
+  - /references/human-computer-project/
+  - /sources/human-computer-project/
+origin: external
+works:
+  primary:
+    - citation: Smithsonian American Women's History Museum, Human Computer Project
+      genre: official-record
+      identifiers: []
+      edition: null
+  supporting: []
+access:
+  - kind: url
+    role: canonical
+    url: https://womenshistory.si.edu/human-computer-project
+    retrieved: 2026-07-20
+    version: null
 ---
 
 ## 개요
@@ -48,6 +76,11 @@ Smithsonian은 이 조직적 분업이 후대 기계 계산 방식의 일부를 
 이 자료는 [[인간 계산자]]를 단순한 기계 이전 단계가 아니라 직업, 분업과 지식의 위계로 설명하는 근거다. [[인간 계산자와 계산 공장]]에서는 전자식 컴퓨터가 계산 노동을 없애기보다 작업 경계와 직무 명칭을 재편했다는 사례로 사용한다.
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - Smithsonian American Women’s History Museum, [Human Computer Project](https://womenshistory.si.edu/human-computer-project)
 

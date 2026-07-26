@@ -1,25 +1,60 @@
 ---
+schema_version: 2
+id: ref-079
+kind: reference
 title: Fast Inference from Transformers via Speculative Decoding
-aliases: [Speculative Decoding paper, Leviathan et al. 2023, 추측 디코딩 논문]
-summary: "작은 근사 모델이 제안한 여러 토큰을 큰 타깃 모델이 병렬 검증하고 수락·보정해, 타깃 모델의 출력 분포를 유지하면서 자동회귀 디코딩의 직렬 실행 횟수를 줄이는 2023년 연구."
-tags: [type/reference, domain/machine-learning, domain/systems, status/active]
-created: 2026-07-25
-updated: 2026-07-25
-publication_year: 2023
-historical_layer: system
-capability_layers: [realized-performance, resource-efficiency, reliable-results]
-sources: ["Fast Inference from Transformers via Speculative Decoding"]
-source_id: ref-079
-source_kind: external
-primary_sources: ["Yaniv Leviathan, Matan Kalman, and Yossi Matias, Fast Inference from Transformers via Speculative Decoding, ICML 2023"]
-supporting_sources: ["PMLR volume 202 bibliographic record"]
-source_urls: ["https://proceedings.mlr.press/v202/leviathan23a.html", "https://proceedings.mlr.press/v202/leviathan23a/leviathan23a.pdf"]
-retrieved: 2026-07-25
-version: "PMLR 202, pp. 19274-19286"
-snapshot_status: external-only
-status: active
-graph_id: reference-speculative-decoding
+aliases:
+  - Speculative Decoding paper
+  - Leviathan et al. 2023
+  - 추측 디코딩 논문
+summary: 작은 근사 모델이 제안한 여러 토큰을 큰 타깃 모델이 병렬 검증하고 수락·보정해, 타깃 모델의 출력 분포를 유지하면서 자동회귀 디코딩의 직렬 실행 횟수를 줄이는 2023년 연구.
+domains:
+  - machine-learning
+  - systems
+editorial_status: active
+publication_visibility: public
 graph_visibility: public
+created: 2026-07-25
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:8e9edfd8513acdbc37989a2e54f76bd04a3fdea6eb72f1728ca3b070e3f5959f
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers:
+  - realized-performance
+  - resource-efficiency
+  - reliable-results
+history:
+  publication_year: 2023
+  layer: system
+redirect_from:
+  - /references/fast-inference-from-transformers-via-speculative-decoding/
+  - /sources/fast-inference-from-transformers-via-speculative-decoding/
+origin: external
+works:
+  primary:
+    - citation: Yaniv Leviathan, Matan Kalman, and Yossi Matias, Fast Inference from Transformers via Speculative Decoding, ICML 2023
+      genre: other
+      identifiers: []
+      edition: PMLR 202, pp. 19274-19286
+  supporting:
+    - citation: PMLR volume 202 bibliographic record
+      genre: official-record
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: canonical
+    url: https://proceedings.mlr.press/v202/leviathan23a.html
+    retrieved: 2026-07-25
+    version: PMLR 202, pp. 19274-19286
+  - kind: url
+    role: mirror
+    url: https://proceedings.mlr.press/v202/leviathan23a/leviathan23a.pdf
+    retrieved: 2026-07-25
+    version: PMLR 202, pp. 19274-19286
 ---
 
 ## 개요
@@ -43,6 +78,7 @@ T5-XXL 평가에서 표준 T5X 구현보다 2–3배의 지연 단축을 보고�
 ## 인용할 만한 구절
 
 > “without changing the distribution”
+<!-- wiki-v2:quote-locator evidence="ref-079" locator="wiki/sources/Fast Inference from Transformers via Speculative Decoding.md:line-21#인용할-만한-구절" status="recorded" -->
 
 이 표현은 논문의 결과 계약을 압축한다. 추측 실행의 목적은 큰 모델과 비슷한 텍스트를 더 빨리 만드는 것이 아니라, 정해진 샘플링 규칙 아래 타깃 모델의 분포를 유지하면서 직렬 경로를 줄이는 것이다.
 
@@ -59,6 +95,11 @@ T5-XXL 평가에서 표준 T5X 구현보다 2–3배의 지연 단축을 보고�
 | exemplifies | [[LLM 추론 서비스 지표]] | 지연 가속과 출력 분포 보존을 함께 요구해 원시 토큰률과 결과 계약을 분리한다. | [[Fast Inference from Transformers via Speculative Decoding]] |
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - PMLR, [paper and bibliographic record](https://proceedings.mlr.press/v202/leviathan23a.html)
 - PMLR, [open-access paper PDF](https://proceedings.mlr.press/v202/leviathan23a/leviathan23a.pdf)

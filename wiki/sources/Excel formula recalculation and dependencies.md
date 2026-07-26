@@ -1,22 +1,76 @@
 ---
+schema_version: 2
+id: ref-062
+kind: reference
 title: Excel formula recalculation and dependencies
-aliases: [Excel recalculation, Excel formula dependencies, Excel 수식 재계산과 의존 관계]
-summary: "Excel의 선행·종속 셀, 자동·수동 재계산, 순환 참조, 상대·절대 참조, 수치 정밀도와 변경 추적을 설명해 현대 스프레드시트의 실행 구조와 오류 경계를 정리하는 공식 문서 묶음."
-tags: [type/reference, domain/software-engineering, domain/mathematics, status/active]
+aliases:
+  - Excel recalculation
+  - Excel formula dependencies
+  - Excel 수식 재계산과 의존 관계
+summary: Excel의 선행·종속 셀, 자동·수동 재계산, 순환 참조, 상대·절대 참조, 수치 정밀도와 변경 추적을 설명해 현대 스프레드시트의 실행 구조와 오류 경계를 정리하는 공식 문서 묶음.
+domains:
+  - software-engineering
+  - mathematics
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-07-20
-updated: 2026-07-20
-historical_layer: software
-capability_layers: [programmability, reliable-results]
-sources: ["Microsoft Support - Change formula recalculation, iteration, or precision in Excel", "Microsoft Support - Display the relationships between formulas and cells", "Microsoft Support - Switch between relative, absolute, and mixed references", "Microsoft Support - Get help with Show Changes in Excel"]
-source_id: ref-062
-source_kind: external
-primary_sources: ["Microsoft Support - Change formula recalculation, iteration, or precision in Excel", "Microsoft Support - Display the relationships between formulas and cells", "Microsoft Support - Switch between relative, absolute, and mixed references", "Microsoft Support - Get help with Show Changes in Excel"]
-supporting_sources: []
-source_urls: ["https://support.microsoft.com/en-US/Excel/change-formula-recalculation-iteration-or-precision-in-excel", "https://support.microsoft.com/en-us/excel/display-the-relationships-between-formulas-and-cells", "https://support.microsoft.com/en-us/excel/switch-between-relative-absolute-and-mixed-references", "https://support.microsoft.com/en-us/excel/get-help-with-show-changes-in-excel"]
-retrieved: 2026-07-20
-version: "Continuously updated Microsoft Support pages; common scope Microsoft 365 / Excel 2024 / Excel 2021, retrieved 2026-07-20"
-snapshot_status: external-only
-status: active
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:eec5d62d0dba8bfba9a3bd434d251d38a5779c8be74711dc415702f7f908f55f
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers:
+  - programmability
+  - reliable-results
+history:
+  layer: software
+redirect_from:
+  - /references/excel-formula-recalculation-and-dependencies/
+  - /sources/excel-formula-recalculation-and-dependencies/
+origin: external
+works:
+  primary:
+    - citation: Microsoft Support - Change formula recalculation, iteration, or precision in Excel
+      genre: manual
+      identifiers: []
+      edition: Continuously updated Microsoft Support pages; common scope Microsoft 365 / Excel 2024 / Excel 2021, retrieved 2026-07-20
+    - citation: Microsoft Support - Display the relationships between formulas and cells
+      genre: manual
+      identifiers: []
+      edition: Continuously updated Microsoft Support pages; common scope Microsoft 365 / Excel 2024 / Excel 2021, retrieved 2026-07-20
+    - citation: Microsoft Support - Switch between relative, absolute, and mixed references
+      genre: manual
+      identifiers: []
+      edition: Continuously updated Microsoft Support pages; common scope Microsoft 365 / Excel 2024 / Excel 2021, retrieved 2026-07-20
+    - citation: Microsoft Support - Get help with Show Changes in Excel
+      genre: manual
+      identifiers: []
+      edition: Continuously updated Microsoft Support pages; common scope Microsoft 365 / Excel 2024 / Excel 2021, retrieved 2026-07-20
+  supporting: []
+access:
+  - kind: url
+    role: publisher
+    url: https://support.microsoft.com/en-US/Excel/change-formula-recalculation-iteration-or-precision-in-excel
+    retrieved: 2026-07-20
+    version: Continuously updated Microsoft Support pages; common scope Microsoft 365 / Excel 2024 / Excel 2021, retrieved 2026-07-20
+  - kind: url
+    role: publisher
+    url: https://support.microsoft.com/en-us/excel/display-the-relationships-between-formulas-and-cells
+    retrieved: 2026-07-20
+    version: Continuously updated Microsoft Support pages; common scope Microsoft 365 / Excel 2024 / Excel 2021, retrieved 2026-07-20
+  - kind: url
+    role: publisher
+    url: https://support.microsoft.com/en-us/excel/switch-between-relative-absolute-and-mixed-references
+    retrieved: 2026-07-20
+    version: Continuously updated Microsoft Support pages; common scope Microsoft 365 / Excel 2024 / Excel 2021, retrieved 2026-07-20
+  - kind: url
+    role: publisher
+    url: https://support.microsoft.com/en-us/excel/get-help-with-show-changes-in-excel
+    retrieved: 2026-07-20
+    version: Continuously updated Microsoft Support pages; common scope Microsoft 365 / Excel 2024 / Excel 2021, retrieved 2026-07-20
 ---
 
 ## 자료 개요
@@ -67,6 +121,11 @@ Excel의 Show Changes는 지원되는 공동 작성 환경에서 셀 값과 수�
 이 자료는 [[스프레드시트]]의 의존 관계, 수식 복사와 재계산을 설명하고, [[수학 표에서 스프레드시트로]]에서 오류가 잘못 인쇄된 값에서 잘못된 수식·참조·의존 관계·계산 상태로 이동한 과정을 분석하는 근거로 사용한다.
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - Microsoft Support, [Change formula recalculation, iteration, or precision in Excel](https://support.microsoft.com/en-US/Excel/change-formula-recalculation-iteration-or-precision-in-excel).
 - Microsoft Support, [Display the relationships between formulas and cells](https://support.microsoft.com/en-us/excel/display-the-relationships-between-formulas-and-cells).

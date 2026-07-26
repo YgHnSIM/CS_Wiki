@@ -1,25 +1,61 @@
 ---
+schema_version: 2
+id: ref-085
+kind: reference
 title: "A Proof for the Queuing Formula: L = λ W"
-aliases: ["A Proof for the Queuing Formula L = λW", "Little의 법칙 원 논문", "John D. C. Little 1961", "Little 1961 queueing proof"]
-summary: "시스템 안의 평균 작업 수, 평균 처리율, 평균 체류 시간의 관계 L = λW를 유한 평균·정상성·비영 평균 도착 과정의 조건 아래 증명한 John D. C. Little의 1961년 대기열 이론 논문."
-tags: [type/reference, domain/mathematics, domain/performance, domain/systems, status/active]
-created: 2026-07-25
-updated: 2026-07-25
-publication_year: 1961
-historical_layer: theory
-capability_layers: [realized-performance, scalability]
-sources: ["A Proof for the Queuing Formula L = λW"]
-source_id: ref-085
-source_kind: external
-primary_sources: ["John D. C. Little, A Proof for the Queuing Formula: L = λ W, Operations Research 9(3), pp. 383–387, 1961"]
-supporting_sources: ["INFORMS article record and DOI metadata"]
-source_urls: ["https://pubsonline.informs.org/doi/abs/10.1287/opre.9.3.383?journalCode=opre", "https://doi.org/10.1287/opre.9.3.383"]
-retrieved: 2026-07-25
-version: "Operations Research 9(3), pp. 383–387"
-snapshot_status: external-only
-status: active
-graph_id: reference-littles-law-proof
+aliases:
+  - A Proof for the Queuing Formula L = λW
+  - Little의 법칙 원 논문
+  - John D. C. Little 1961
+  - Little 1961 queueing proof
+summary: 시스템 안의 평균 작업 수, 평균 처리율, 평균 체류 시간의 관계 L = λW를 유한 평균·정상성·비영 평균 도착 과정의 조건 아래 증명한 John D. C. Little의 1961년 대기열 이론 논문.
+domains:
+  - mathematics
+  - performance
+  - systems
+editorial_status: active
+publication_visibility: public
 graph_visibility: public
+created: 2026-07-25
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:21aa67842167d1a6187801a3bc1ab85b7d9d957ade67e915478201cc8f124c23
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers:
+  - realized-performance
+  - scalability
+history:
+  publication_year: 1961
+  layer: theory
+redirect_from:
+  - /references/a-proof-for-the-queuing-formula-l-λ-w/
+  - /sources/a-proof-for-the-queuing-formula-l-λ-w/
+origin: external
+works:
+  primary:
+    - citation: "John D. C. Little, A Proof for the Queuing Formula: L = λ W, Operations Research 9(3), pp. 383–387, 1961"
+      genre: primary-literature
+      identifiers: []
+      edition: Operations Research 9(3), pp. 383–387
+  supporting:
+    - citation: INFORMS article record and DOI metadata
+      genre: official-record
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: canonical
+    url: https://pubsonline.informs.org/doi/abs/10.1287/opre.9.3.383?journalCode=opre
+    retrieved: 2026-07-25
+    version: Operations Research 9(3), pp. 383–387
+  - kind: url
+    role: doi
+    url: https://doi.org/10.1287/opre.9.3.383
+    retrieved: 2026-07-25
+    version: Operations Research 9(3), pp. 383–387
 ---
 
 ## 개요
@@ -51,6 +87,7 @@ LLM 서빙에서는 요청·활성 시퀀스·토큰처럼 서로 다른 단위�
 ## 인용할 만한 구절
 
 > “L = λ W.”
+<!-- wiki-v2:quote-locator evidence="ref-085" locator="wiki/sources/A Proof for the Queuing Formula L = λW.md:line-29#인용할-만한-구절" status="recorded" -->
 
 논문의 제목과 결론을 이루는 식으로, 평균 시스템 내 작업 수·처리율·체류 시간의 관계를 압축한다.
 
@@ -66,6 +103,11 @@ LLM 서빙에서는 요청·활성 시퀀스·토큰처럼 서로 다른 단위�
 | enables | [[대기열과 부하 제어]] | 입장·대기·서비스를 포함한 작업 수와 체류 시간을 유량과 함께 점검할 수 있게 한다. | [[A Proof for the Queuing Formula L = λW]] |
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - INFORMS, [article record](https://pubsonline.informs.org/doi/abs/10.1287/opre.9.3.383?journalCode=opre)
 - [DOI: 10.1287/opre.9.3.383](https://doi.org/10.1287/opre.9.3.383)

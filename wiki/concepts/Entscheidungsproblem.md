@@ -1,13 +1,33 @@
 ---
+schema_version: 2
+id: concept-145622bcdc913103
+kind: concept
 title: Entscheidungsproblem
-aliases: [결정 문제, decision problem, Hilbert's Entscheidungsproblem, 힐베르트 결정 문제]
-summary: "수학 명제의 증명 가능성을 일반 기계 절차로 판정할 수 있는지를 묻는 결정 문제."
-tags: [type/concept, domain/computer-science, domain/computer-history, status/active]
+aliases:
+  - 결정 문제
+  - decision problem
+  - Hilbert's Entscheidungsproblem
+  - 힐베르트 결정 문제
+summary: 수학 명제의 증명 가능성을 일반 기계 절차로 판정할 수 있는지를 묻는 결정 문제.
+domains:
+  - computer-science
+  - computer-history
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-07-10
-updated: 2026-07-22
-sources: ["On Computable Numbers with an Application to the Entscheidungsproblem", "An Unsolvable Problem of Elementary Number Theory"]
-status: active
-graph_id: concept-145622bcdc913103
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:9c77241cf0f9e1abbd322d8c775e7dbc268d986fa1cc48bc62a1093257beef7e
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids:
+  - ref-009
+  - ref-010
+capability_layers: []
+redirect_from:
+  - /concepts/entscheidungsproblem/
 ---
 
 ## 개요
@@ -27,6 +47,12 @@ graph_id: concept-145622bcdc913103
 Entscheidungsproblem의 부정적 해결은 계산 가능성 이론의 핵심 전환이다. 이는 단순히 아직 좋은 알고리즘을 찾지 못했다는 뜻이 아니라 명확히 형식화된 문제 중에도 모든 입력에 답하는 일반적인 기계 절차가 존재하지 않는 문제가 있음을 의미한다. 개별 공식의 타당성을 증명하거나 반증할 수 있는 경우가 있다는 사실과 모든 공식에 통하는 하나의 판정 절차가 없다는 사실은 구분해야 한다.
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- `ref-009`
+- `ref-010`
+<!-- wiki-v2:evidence-end -->
 
 - [[On Computable Numbers with an Application to the Entscheidungsproblem]]
 - [[An Unsolvable Problem of Elementary Number Theory]]

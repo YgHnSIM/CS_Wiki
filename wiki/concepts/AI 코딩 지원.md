@@ -1,16 +1,38 @@
 ---
+schema_version: 2
+id: concept-ai-coding-assistance
+kind: concept
 title: AI 코딩 지원
-aliases: [AI coding assistance, AI pair programming, 생성형 AI 코딩 도구, 코드 생성 지원]
-summary: "자연어·코드·저장소 맥락을 바탕으로 구현 후보, 설명, 수정안, 테스트 등을 제안하고 사람이 선택·수정·검증하는 개발 지원 방식."
-tags: [type/concept, domain/software-engineering, domain/machine-learning, status/active]
-created: 2026-07-25
-updated: 2026-07-25
-historical_layer: software
-capability_layers: [programmability, reliable-results]
-sources: ["Expectation vs. Experience — Evaluating the Usability of Code Generation Tools Powered by Large Language Models", "The Impact of AI on Developer Productivity — Evidence from GitHub Copilot", "Measuring the Impact of Early-2025 AI on Experienced Open-Source Developer Productivity"]
-status: active
-graph_id: concept-ai-coding-assistance
+aliases:
+  - AI coding assistance
+  - AI pair programming
+  - 생성형 AI 코딩 도구
+  - 코드 생성 지원
+summary: 자연어·코드·저장소 맥락을 바탕으로 구현 후보, 설명, 수정안, 테스트 등을 제안하고 사람이 선택·수정·검증하는 개발 지원 방식.
+domains:
+  - software-engineering
+  - machine-learning
+editorial_status: active
+publication_visibility: public
 graph_visibility: public
+created: 2026-07-25
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:3780008a5940bbc89f5f005c3f31bb6faa66fa330c7c85bcffb3dca88e6642c5
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids:
+  - ref-105
+  - ref-106
+  - ref-107
+capability_layers:
+  - programmability
+  - reliable-results
+history:
+  layer: software
+redirect_from:
+  - /concepts/ai-코딩-지원/
 ---
 
 ## 개요
@@ -36,6 +58,13 @@ AI 코딩 지원의 효과는 제안 생성 속도뿐 아니라 요청의 경계
 | enables | [[검증 노동]] | 생성된 제안을 실제 시스템에 사용할지 판단하기 위한 이해·편집·테스트·리뷰 작업을 발생시킨다. | [[Expectation vs. Experience: Evaluating the Usability of Code Generation Tools Powered by Large Language Models]], [[Measuring the Impact of Early-2025 AI on Experienced Open-Source Developer Productivity]] |
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- `ref-105`
+- `ref-106`
+- `ref-107`
+<!-- wiki-v2:evidence-end -->
 
 - [[Expectation vs. Experience: Evaluating the Usability of Code Generation Tools Powered by Large Language Models]]
 - [[The Impact of AI on Developer Productivity: Evidence from GitHub Copilot]]

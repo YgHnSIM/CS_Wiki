@@ -1,16 +1,42 @@
 ---
+schema_version: 2
+id: analysis-llm-reuse-speculation-work
+kind: analysis
 title: 재사용과 추측은 LLM 추론 작업량을 어떻게 바꾸는가
-aliases: [LLM reuse and speculation analysis, LLM 작업량 재사용, 캐싱과 추측 디코딩 비교]
-summary: "요청 내부 KV 재사용, 요청·호출 사이 접두사 KV 캐싱과 드래프트–타깃 추측 디코딩을 비교해, 각각 피한 타깃 작업과 추가 캐시·검증 작업이 지연·메모리·에너지에 미치는 영향을 분석한다."
-tags: [type/analysis, domain/machine-learning, domain/systems, domain/performance, status/active]
-created: 2026-07-25
-updated: 2026-07-25
-historical_layer: service
-capability_layers: [realized-performance, scalability, resource-efficiency, reliable-results]
-sources: ["Attention Is All You Need", "Efficient Memory Management for Large Language Model Serving with PagedAttention", "SGLang - Efficient Execution of Structured Language Model Programs", "Fast Inference from Transformers via Speculative Decoding", "DistServe - Disaggregating Prefill and Decoding for Goodput-optimized Large Language Model Serving"]
-status: active
-graph_id: analysis-llm-reuse-speculation-work
+aliases:
+  - LLM reuse and speculation analysis
+  - LLM 작업량 재사용
+  - 캐싱과 추측 디코딩 비교
+summary: 요청 내부 KV 재사용, 요청·호출 사이 접두사 KV 캐싱과 드래프트–타깃 추측 디코딩을 비교해, 각각 피한 타깃 작업과 추가 캐시·검증 작업이 지연·메모리·에너지에 미치는 영향을 분석한다.
+domains:
+  - machine-learning
+  - systems
+  - performance
+editorial_status: active
+publication_visibility: public
 graph_visibility: public
+created: 2026-07-25
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:f70ec2afbb5bbf45bbd9c286b77146970ef038a5e65708e7e7614378e0b05ec3
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids:
+  - ref-073
+  - ref-076
+  - ref-080
+  - ref-079
+  - ref-077
+capability_layers:
+  - realized-performance
+  - scalability
+  - resource-efficiency
+  - reliable-results
+history:
+  layer: service
+redirect_from:
+  - /analyses/재사용과-추측은-llm-추론-작업량을-어떻게-바꾸는가/
 ---
 
 ## 문제 제기
@@ -75,6 +101,15 @@ LLM 추론 최적화는 흔히 “계산을 줄인다”라고 묶이지만 [[KV
 | measures | [[LLM 추론 서비스 지표]] | 작업량 변화가 TTFT·TPOT·goodput과 결과 품질로 이어지는지를 동일 SLO에서 평가한다. | [[DistServe - Disaggregating Prefill and Decoding for Goodput-optimized Large Language Model Serving]] |
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- `ref-073`
+- `ref-076`
+- `ref-080`
+- `ref-079`
+- `ref-077`
+<!-- wiki-v2:evidence-end -->
 
 - [[Attention Is All You Need]]
 - [[Efficient Memory Management for Large Language Model Serving with PagedAttention]]

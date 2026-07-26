@@ -1,21 +1,60 @@
 ---
+schema_version: 2
+id: ref-004
+kind: reference
 title: Software Reuse
-aliases: [Krueger Software Reuse, ACM Computing Surveys Software Reuse, 소프트웨어 재사용 Krueger]
-summary: "Krueger의 1992년 조사 논문을 바탕으로 재사용을 추상화, 선택, 특수화, 통합의 문제로 정리한 참고 자료."
-tags: [type/reference, domain/software-engineering, domain/computer-history, status/active]
+aliases:
+  - Krueger Software Reuse
+  - ACM Computing Surveys Software Reuse
+  - 소프트웨어 재사용 Krueger
+summary: Krueger의 1992년 조사 논문을 바탕으로 재사용을 추상화, 선택, 특수화, 통합의 문제로 정리한 참고 자료.
+domains:
+  - software-engineering
+  - computer-history
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-07-10
-updated: 2026-07-24
-sources: ["ACM Computing Surveys 1992", "ACM DOI", "PDF copy"]
-source_id: ref-004
-source_kind: external
-primary_sources: ["ACM Computing Surveys 1992"]
-supporting_sources: ["ACM DOI", "PDF copy"]
-source_urls: ["https://dl.acm.org/doi/10.1145/130844.130856", "https://grosskurth.ca/bib/1992/krueger.pdf"]
-retrieved: 2026-07-10
-version: null
-snapshot_status: external-only
-status: active
-publication_year: 1992
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:7f8a128ce23e50df8c67e49d7bd5964f662322b998904795a80f4783256301ff
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers: []
+history:
+  publication_year: 1992
+redirect_from:
+  - /references/software-reuse/
+  - /sources/software-reuse/
+origin: external
+works:
+  primary:
+    - citation: ACM Computing Surveys 1992
+      genre: other
+      identifiers: []
+      edition: null
+  supporting:
+    - citation: ACM DOI
+      genre: primary-literature
+      identifiers: []
+      edition: null
+    - citation: PDF copy
+      genre: other
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: canonical
+    url: https://dl.acm.org/doi/10.1145/130844.130856
+    retrieved: 2026-07-10
+    version: null
+  - kind: url
+    role: mirror
+    url: https://grosskurth.ca/bib/1992/krueger.pdf
+    retrieved: 2026-07-10
+    version: null
 ---
 
 ## 개요
@@ -37,6 +76,11 @@ Krueger의 핵심 틀은 재사용 기법을 재사용 산출물과 그 산출�
 이 자료는 [[소프트웨어 재사용]], [[소프트웨어 컴포넌트]], [[모듈화]], [[API]], [[소프트웨어 공학]]을 정리하는 근거로 사용한다. [[소프트웨어 재사용의 역사]]에서는 재사용의 초점이 코드 보관에서 추상화, 검색, 특수화, 통합으로 넓어지는 단계를 설명하는 데 사용한다. 재사용 과정이 새 코드 작성량보다 선택·이해·특수화·통합 비용을 포함한다는 점은 [[코드 생산량은 왜 개발 생산성을 설명하지 못하는가]]의 보조 근거가 된다.
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - ACM Digital Library, [Software reuse](https://dl.acm.org/doi/10.1145/130844.130856)
 - PDF copy, [Software Reuse](https://grosskurth.ca/bib/1992/krueger.pdf)

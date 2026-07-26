@@ -1,25 +1,64 @@
 ---
+schema_version: 2
+id: ref-101
+kind: reference
 title: End-to-End Arguments in System Design
-aliases: [Saltzer Reed Clark 1984, SRC84, 종단간 논증 원 논문]
-summary: "통신·저장 하위 계층이 제공하는 신뢰성 기능만으로는 응용의 정확성 요구를 완결할 수 없으며, 필요한 보장은 종단 응용이 확인해야 한다는 설계 원칙을 정리한 1984년 논문."
-tags: [type/reference, domain/computer-science, domain/distributed-systems, domain/systems, status/active]
-created: 2026-07-25
-updated: 2026-07-25
-publication_year: 1984
-historical_layer: architecture
-capability_layers: [reliable-results, programmability]
-sources: [End-to-End Arguments in System Design]
-source_id: ref-101
-source_kind: external
-primary_sources: ["J. H. Saltzer, David P. Reed, and David D. Clark, End-to-End Arguments in System Design, ACM Transactions on Computer Systems 2(4), November 1984, pp. 277–288"]
-supporting_sources: ["MIT author-hosted ACM-permitted PDF", "ACM DOI record"]
-source_urls: ["https://web.mit.edu/saltzer/www/publications/endtoend/endtoendA4.pdf", "https://doi.org/10.1145/357401.357402"]
-retrieved: 2026-07-25
-version: "ACM Transactions on Computer Systems 2(4), November 1984, pp. 277–288"
-snapshot_status: external-only
-status: active
-graph_id: reference-end-to-end-arguments
+aliases:
+  - Saltzer Reed Clark 1984
+  - SRC84
+  - 종단간 논증 원 논문
+summary: 통신·저장 하위 계층이 제공하는 신뢰성 기능만으로는 응용의 정확성 요구를 완결할 수 없으며, 필요한 보장은 종단 응용이 확인해야 한다는 설계 원칙을 정리한 1984년 논문.
+domains:
+  - computer-science
+  - distributed-systems
+  - systems
+editorial_status: active
+publication_visibility: public
 graph_visibility: public
+created: 2026-07-25
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:309062ba6e82074b5e76326bc238455d1ad0bce25b01a0f1b75411165f45dd9c
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers:
+  - reliable-results
+  - programmability
+history:
+  publication_year: 1984
+  layer: architecture
+redirect_from:
+  - /references/end-to-end-arguments-in-system-design/
+  - /sources/end-to-end-arguments-in-system-design/
+origin: external
+works:
+  primary:
+    - citation: J. H. Saltzer, David P. Reed, and David D. Clark, End-to-End Arguments in System Design, ACM Transactions on Computer Systems 2(4), November 1984, pp. 277–288
+      genre: other
+      identifiers: []
+      edition: ACM Transactions on Computer Systems 2(4), November 1984, pp. 277–288
+  supporting:
+    - citation: MIT author-hosted ACM-permitted PDF
+      genre: other
+      identifiers: []
+      edition: null
+    - citation: ACM DOI record
+      genre: official-record
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: canonical
+    url: https://web.mit.edu/saltzer/www/publications/endtoend/endtoendA4.pdf
+    retrieved: 2026-07-25
+    version: ACM Transactions on Computer Systems 2(4), November 1984, pp. 277–288
+  - kind: url
+    role: doi
+    url: https://doi.org/10.1145/357401.357402
+    retrieved: 2026-07-25
+    version: ACM Transactions on Computer Systems 2(4), November 1984, pp. 277–288
 ---
 
 ## 개요
@@ -43,6 +82,7 @@ graph_visibility: public
 ## 인용할 만한 구절
 
 > “only with the knowledge and help of the application”
+<!-- wiki-v2:quote-locator evidence="ref-101" locator="wiki/sources/End-to-End Arguments in System Design.md:line-21#인용할-만한-구절" status="recorded" -->
 
 완전하고 올바른 구현에 필요한 의미는 응용 종단이 가장 잘 안다는 원리를 간결하게 보여 준다.
 
@@ -58,6 +98,11 @@ graph_visibility: public
 | constrains | [[로컬 호출과 파일은 원격 상태가 될 때 무엇을 잃는가]] | 패킷·호스트·중간 저장소의 확인만으로는 응용 작업의 성공을 확정할 수 없다는 해석 경계를 제공한다. | [[End-to-End Arguments in System Design]] |
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - MIT, [ACM-permitted paper PDF](https://web.mit.edu/saltzer/www/publications/endtoend/endtoendA4.pdf)
 - ACM, [DOI: 10.1145/357401.357402](https://doi.org/10.1145/357401.357402)

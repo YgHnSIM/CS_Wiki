@@ -1,16 +1,38 @@
 ---
+schema_version: 2
+id: concept-ef0b337a520af324
+kind: concept
 title: Initial Orders
-aliases: [초기 명령, EDSAC Initial Orders]
-summary: "EDSAC에서 종이 테이프 프로그램을 읽고 해석해 메모리에 적재한 초기 로더·어셈블러 절차."
-tags: [type/concept, domain/computer-history, domain/software-engineering, status/active]
+aliases:
+  - 초기 명령
+  - EDSAC Initial Orders
+summary: EDSAC에서 종이 테이프 프로그램을 읽고 해석해 메모리에 적재한 초기 로더·어셈블러 절차.
+domains:
+  - computer-history
+  - software-engineering
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-05-04
-updated: 2026-07-22
-sources: ["초기 소프트웨어의 탄생.md", "초기 소프트웨어의 탄생_해설.md", "EDSAC과 Initial Orders.md", "EDSAC과 Initial Orders_해설.md"]
-status: active
-graph_id: concept-ef0b337a520af324
-event_start: 1949
-historical_layer: software
-historical_note: "EDSAC의 실용 운전과 함께 Initial Orders가 사용된 1949년을 대표 시점으로 둔다."
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:4b7277f43d1850cc03473abd20ad8603736358001db3e33823e0a413382bd39a
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids:
+  - src-002
+  - src-003
+capability_layers: []
+history:
+  event:
+    start: 1949
+    basis: representative
+    evidence_id: src-002
+  note: EDSAC의 실용 운전과 함께 Initial Orders가 사용된 1949년을 대표 시점으로 둔다.
+  layer: software
+redirect_from:
+  - /concepts/initial-orders/
 ---
 
 ## 개요
@@ -37,6 +59,12 @@ Initial Orders 2는 `θ`를 현재 서브루틴의 기준 적재 주소로 사�
 Initial Orders는 오늘날의 부트로더, 로더, 어셈블러, 초기 번역기의 성격을 기초적인 형태로 함께 갖는다. 중요한 점은 사용자가 기계 내부 상태를 직접 조작하는 대신, 더 높은 수준의 표현을 작성하고 다른 절차가 이를 해석해 실행하게 했다는 것이다.
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- `src-002`
+- `src-003`
+<!-- wiki-v2:evidence-end -->
 
 - [[초기 소프트웨어의 탄생]]
 - [[EDSAC과 Initial Orders]]

@@ -1,13 +1,33 @@
 ---
+schema_version: 2
+id: concept-2ff6633d43e61407
+kind: concept
 title: API
-aliases: [Application Programming Interface, 응용 프로그래밍 인터페이스, 인터페이스]
-summary: "기능 제공자와 사용자 사이의 동작, 호출 규약, 비용, 전제 조건을 정리한 프로그래밍 인터페이스."
-tags: [type/concept, domain/software-engineering, status/active]
+aliases:
+  - Application Programming Interface
+  - 응용 프로그래밍 인터페이스
+  - 인터페이스
+summary: 기능 제공자와 사용자 사이의 동작, 호출 규약, 비용, 전제 조건을 정리한 프로그래밍 인터페이스.
+domains:
+  - software-engineering
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-07-09
-updated: 2026-07-22
-sources: ["The Preparation of Programs for an Electronic Digital Computer", "The UNIX Time-Sharing System", "On the Criteria To Be Used in Decomposing Systems into Modules", "Software Reuse"]
-status: active
-graph_id: concept-2ff6633d43e61407
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:c2870ff24fe8a286579aaf657d2929470473d24a1382b7f974e0bd7c0e10d0c6
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids:
+  - ref-001
+  - ref-018
+  - ref-003
+  - ref-004
+capability_layers: []
+redirect_from:
+  - /concepts/api/
 ---
 
 ## 개요
@@ -40,6 +60,14 @@ API는 [[소프트웨어 공학]]의 추상화와 책임 분리를 구체화한�
 [[On the Criteria To Be Used in Decomposing Systems into Modules]]의 [[정보 은닉]] 관점에서 API는 변경 가능한 설계 결정을 감추는 경계다. [[Software Reuse]]의 관점에서는 재사용할 산출물을 선택하고 통합할 수 있게 하는 고수준 설명이다. 따라서 API는 단순 호출 목록이 아니라 [[소프트웨어 재사용]]을 가능하게 하는 계약이다.
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- `ref-001`
+- `ref-018`
+- `ref-003`
+- `ref-004`
+<!-- wiki-v2:evidence-end -->
 
 - [[The Preparation of Programs for an Electronic Digital Computer]]
 - [[The UNIX Time-Sharing System]]

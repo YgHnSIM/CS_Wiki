@@ -1,21 +1,69 @@
 ---
+schema_version: 2
+id: ref-017
+kind: reference
 title: The History of FORTRAN I, II, and III
-aliases: [Backus 1978 Fortran history, History of Fortran I II III]
-summary: "Backus의 1978년 회고를 바탕으로 자동 프로그래밍에서 Fortran 컴파일러로 이어지는 역사적 맥락을 정리한 참고 자료."
-tags: [type/reference, domain/programming-languages, domain/software-engineering, domain/computer-history, status/active]
+aliases:
+  - Backus 1978 Fortran history
+  - History of Fortran I II III
+summary: Backus의 1978년 회고를 바탕으로 자동 프로그래밍에서 Fortran 컴파일러로 이어지는 역사적 맥락을 정리한 참고 자료.
+domains:
+  - programming-languages
+  - software-engineering
+  - computer-history
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-07-10
-updated: 2026-07-22
-sources: ["ACM SIGPLAN Notices 1978", "IBM Research publication record"]
-source_id: ref-017
-source_kind: external
-primary_sources: ["ACM SIGPLAN Notices 1978"]
-supporting_sources: ["IBM Research publication record", "ACM DOI", "PDF copy"]
-source_urls: ["https://research.ibm.com/publications/the-history-of-fortran-i-ii-and-iii", "https://dl.acm.org/doi/10.1145/800025.1198345", "https://www.cs.toronto.edu/~bor/199y08/backus-fortran-copy.pdf"]
-retrieved: 2026-07-10
-version: null
-snapshot_status: external-only
-status: active
-publication_year: 1978
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:7fa7cad5cae9fe74a69a7176075d91e437ab1967f08130d1a337318f13c66d91
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers: []
+history:
+  publication_year: 1978
+redirect_from:
+  - /references/the-history-of-fortran-i-ii-and-iii/
+  - /sources/the-history-of-fortran-i-ii-and-iii/
+origin: external
+works:
+  primary:
+    - citation: ACM SIGPLAN Notices 1978
+      genre: official-record
+      identifiers: []
+      edition: null
+  supporting:
+    - citation: IBM Research publication record
+      genre: official-record
+      identifiers: []
+      edition: null
+    - citation: ACM DOI
+      genre: official-record
+      identifiers: []
+      edition: null
+    - citation: PDF copy
+      genre: official-record
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: canonical
+    url: https://research.ibm.com/publications/the-history-of-fortran-i-ii-and-iii
+    retrieved: 2026-07-10
+    version: null
+  - kind: url
+    role: mirror
+    url: https://dl.acm.org/doi/10.1145/800025.1198345
+    retrieved: 2026-07-10
+    version: null
+  - kind: url
+    role: mirror
+    url: https://www.cs.toronto.edu/~bor/199y08/backus-fortran-copy.pdf
+    retrieved: 2026-07-10
+    version: null
 ---
 
 ## 개요
@@ -36,6 +84,11 @@ Backus는 1954년 이전에는 대부분의 프로그래밍이 기계어 또는 
 이 자료는 [[자동 프로그래밍]]에서 [[컴파일러]]로 넘어가는 역사적 맥락을 정리하는 데 사용한다. [[Fortran과 컴파일러]]는 이 회고를 바탕으로, Fortran의 등장을 "사람이 기계어를 덜 쓰게 된 사건"보다 "프로그램을 다루는 프로그램이 소프트웨어 생산의 중심이 된 사건"으로 해석한다.
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - IBM Research, [The history of Fortran I, II, and III](https://research.ibm.com/publications/the-history-of-fortran-i-ii-and-iii)
 - ACM Digital Library, [The history of Fortran I, II, and III](https://dl.acm.org/doi/10.1145/800025.1198345)

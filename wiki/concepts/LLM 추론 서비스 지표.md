@@ -1,18 +1,50 @@
 ---
+schema_version: 2
+id: concept-llm-inference-service-metrics
+kind: concept
 title: LLM 추론 서비스 지표
-aliases: [LLM inference service metrics, LLM serving metrics, TTFT와 TPOT, LLM goodput, LLM 서비스 성능 지표]
-summary: "LLM 추론 서비스를 첫 토큰 시간·출력 토큰당 시간·종단 지연, 요청·토큰 처리량, SLO 달성률과 goodput으로 나누고 작업·품질·시나리오 조건을 함께 기록하는 측정 체계."
-tags: [type/concept, domain/machine-learning, domain/performance, domain/systems, status/active]
-created: 2026-07-24
-updated: 2026-07-25
-publication_year: 2024
-historical_note: "TTFT와 토큰 간 지연은 더 앞선 시스템에도 있었지만, 두 SLO를 만족하는 goodput을 명시한 DistServe의 2024년 출판을 대표 시점으로 둔다. MLPerf 규칙은 판본별로 갱신된다."
-historical_layer: measurement
-capability_layers: [realized-performance, scalability, resource-efficiency, reliable-results]
-sources: ["DistServe - Disaggregating Prefill and Decoding for Goodput-optimized Large Language Model Serving", "MLPerf Inference Benchmark", "The Tail at Scale", "SGLang - Efficient Execution of Structured Language Model Programs", "Fast Inference from Transformers via Speculative Decoding", "TokenPowerBench - Benchmarking the Power Consumption of LLM Inference", "MLPerf Inference Power Measurement", "A Proof for the Queuing Formula L = λW", "Serving DNNs like Clockwork Performance Predictability from the Bottom Up"]
-status: active
-graph_id: concept-llm-inference-service-metrics
+aliases:
+  - LLM inference service metrics
+  - LLM serving metrics
+  - TTFT와 TPOT
+  - LLM goodput
+  - LLM 서비스 성능 지표
+summary: LLM 추론 서비스를 첫 토큰 시간·출력 토큰당 시간·종단 지연, 요청·토큰 처리량, SLO 달성률과 goodput으로 나누고 작업·품질·시나리오 조건을 함께 기록하는 측정 체계.
+domains:
+  - machine-learning
+  - performance
+  - systems
+editorial_status: active
+publication_visibility: public
 graph_visibility: public
+created: 2026-07-24
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:b0168e560935c8169d1c93de48d822fd958c35b5dd6c4b4a9594eeb338e9b082
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids:
+  - ref-077
+  - ref-078
+  - ref-049
+  - ref-080
+  - ref-079
+  - ref-083
+  - ref-084
+  - ref-085
+  - ref-086
+capability_layers:
+  - realized-performance
+  - scalability
+  - resource-efficiency
+  - reliable-results
+history:
+  publication_year: 2024
+  note: TTFT와 토큰 간 지연은 더 앞선 시스템에도 있었지만, 두 SLO를 만족하는 goodput을 명시한 DistServe의 2024년 출판을 대표 시점으로 둔다. MLPerf 규칙은 판본별로 갱신된다.
+  layer: measurement
+redirect_from:
+  - /concepts/llm-추론-서비스-지표/
 ---
 
 ## 개요
@@ -95,6 +127,19 @@ goodput은 실패·시간 초과·지연 위반 요청을 원시 처리량과 �
 | enables | [[대기열과 부하 제어]] | TTFT·TPOT SLO, 기한 초과와 goodput을 승인·대기·완료 정책의 결과로 기록하게 한다. | [[Serving DNNs like Clockwork Performance Predictability from the Bottom Up]], [[DistServe - Disaggregating Prefill and Decoding for Goodput-optimized Large Language Model Serving]] |
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- `ref-077`
+- `ref-078`
+- `ref-049`
+- `ref-080`
+- `ref-079`
+- `ref-083`
+- `ref-084`
+- `ref-085`
+- `ref-086`
+<!-- wiki-v2:evidence-end -->
 
 - [[DistServe - Disaggregating Prefill and Decoding for Goodput-optimized Large Language Model Serving]]
 - [[MLPerf Inference Benchmark]]

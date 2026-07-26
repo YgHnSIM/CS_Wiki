@@ -1,21 +1,64 @@
 ---
+schema_version: 2
+id: ref-014
+kind: reference
 title: Structured Programming with go to Statements
-aliases: [Knuth 1974, structured programming with goto]
-summary: "Knuth의 1974년 논문을 바탕으로 `goto` 논쟁의 균형, 오류 탈출 구문, 프로그램 변환 방법론을 정리한 참고 자료."
-tags: [type/reference, domain/software-engineering, domain/programming-languages, status/active]
+aliases:
+  - Knuth 1974
+  - structured programming with goto
+summary: Knuth의 1974년 논문을 바탕으로 goto 논쟁의 균형, 오류 탈출 구문, 프로그램 변환 방법론을 정리한 참고 자료.
+domains:
+  - software-engineering
+  - programming-languages
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-07-10
-updated: 2026-07-22
-sources: ["ACM Computing Surveys 1974"]
-source_id: ref-014
-source_kind: external
-primary_sources: ["ACM Computing Surveys 1974"]
-supporting_sources: ["OpenAIRE metadata", "PDF copy"]
-source_urls: ["https://dl.acm.org/doi/10.1145/356635.356640", "https://oamonitor.ireland.openaire.eu/national/search/publication?pid=10.1145%2F356635.356640", "https://pic.plover.com/knuth-GOTO.pdf"]
-retrieved: 2026-07-10
-version: null
-snapshot_status: external-only
-status: active
-publication_year: 1974
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:6104ed9e90be7aecc19ecaae5a2deae92ff005afb8cb61cc37cba654a0dbd1fb
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers: []
+history:
+  publication_year: 1974
+redirect_from:
+  - /references/structured-programming-with-go-to-statements/
+  - /sources/structured-programming-with-go-to-statements/
+origin: external
+works:
+  primary:
+    - citation: ACM Computing Surveys 1974
+      genre: other
+      identifiers: []
+      edition: null
+  supporting:
+    - citation: OpenAIRE metadata
+      genre: other
+      identifiers: []
+      edition: null
+    - citation: PDF copy
+      genre: other
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: canonical
+    url: https://dl.acm.org/doi/10.1145/356635.356640
+    retrieved: 2026-07-10
+    version: null
+  - kind: url
+    role: mirror
+    url: https://oamonitor.ireland.openaire.eu/national/search/publication?pid=10.1145%2F356635.356640
+    retrieved: 2026-07-10
+    version: null
+  - kind: url
+    role: mirror
+    url: https://pic.plover.com/knuth-GOTO.pdf
+    retrieved: 2026-07-10
+    version: null
 ---
 
 ## 개요
@@ -37,6 +80,11 @@ Knuth의 핵심은 `goto`를 무조건 되살리자는 것이 아니다. 더 나
 이 자료는 [[GOTO 문]]과 [[구조적 프로그래밍]]을 교조적으로 대립시키지 않도록 균형을 잡는 데 쓰인다. [[goto와 점프에서 구조적 프로그래밍으로]]에서는 Knuth의 논의를 바탕으로, 구조적 프로그래밍을 `goto`의 단순 제거가 아니라 더 좋은 [[제어 구조]]를 설계하려는 흐름으로 정리한다.
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - ACM Digital Library, [Structured Programming with go to Statements](https://dl.acm.org/doi/10.1145/356635.356640)
 - OpenAIRE, [Structured Programming with go to Statements](https://oamonitor.ireland.openaire.eu/national/search/publication?pid=10.1145%2F356635.356640)

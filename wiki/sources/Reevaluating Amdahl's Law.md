@@ -1,23 +1,68 @@
 ---
+schema_version: 2
+id: ref-045
+kind: reference
 title: Reevaluating Amdahl's Law
-aliases: [Gustafson 1988, Gustafson's law paper, Gustafson-Barsis law, 구스타프슨 법칙 논문]
-summary: "고정된 문제를 더 빨리 푸는 대신 병렬 자원에 맞춰 문제 크기를 늘리면 같은 시간에 더 많은 계산을 수행할 수 있다는 확대 크기 가속 관점을 제시한 1988년 논문."
-tags: [type/reference, domain/computer-architecture, domain/computer-history, status/active]
+aliases:
+  - Gustafson 1988
+  - Gustafson's law paper
+  - Gustafson-Barsis law
+  - 구스타프슨 법칙 논문
+summary: 고정된 문제를 더 빨리 푸는 대신 병렬 자원에 맞춰 문제 크기를 늘리면 같은 시간에 더 많은 계산을 수행할 수 있다는 확대 크기 가속 관점을 제시한 1988년 논문.
+domains:
+  - computer-architecture
+  - computer-history
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-07-16
-updated: 2026-07-18
-publication_year: 1988
-historical_layer: theory
-capability_layers: [scalability]
-sources: ["Communications of the ACM 31(5), 1988", "Carnegie Mellon University access copy", "John L. Gustafson author retrospective"]
-source_id: ref-045
-source_kind: external
-primary_sources: ["Communications of the ACM 31(5), 1988"]
-supporting_sources: ["Carnegie Mellon University access copy", "John L. Gustafson author retrospective"]
-source_urls: ["https://doi.org/10.1145/42411.42415", "https://course.ece.cmu.edu/~ece600/fall16/references/gustafson.pdf", "https://www.johngustafson.net/glaw.html"]
-retrieved: 2026-07-16
-version: "Communications of the ACM 31(5), May 1988, pp. 532–533"
-snapshot_status: external-only
-status: active
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:b28a113d2c42deb7bade382dc38a1df7c2f67337621d1c9fde117e711632d2e9
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers:
+  - scalability
+history:
+  publication_year: 1988
+  layer: theory
+redirect_from:
+  - /references/reevaluating-amdahl-s-law/
+  - /sources/reevaluating-amdahl-s-law/
+origin: external
+works:
+  primary:
+    - citation: Communications of the ACM 31(5), 1988
+      genre: other
+      identifiers: []
+      edition: Communications of the ACM 31(5), May 1988, pp. 532–533
+  supporting:
+    - citation: Carnegie Mellon University access copy
+      genre: other
+      identifiers: []
+      edition: null
+    - citation: John L. Gustafson author retrospective
+      genre: other
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: doi
+    url: https://doi.org/10.1145/42411.42415
+    retrieved: 2026-07-16
+    version: Communications of the ACM 31(5), May 1988, pp. 532–533
+  - kind: url
+    role: mirror
+    url: https://course.ece.cmu.edu/~ece600/fall16/references/gustafson.pdf
+    retrieved: 2026-07-16
+    version: Communications of the ACM 31(5), May 1988, pp. 532–533
+  - kind: url
+    role: mirror
+    url: https://www.johngustafson.net/glaw.html
+    retrieved: 2026-07-16
+    version: Communications of the ACM 31(5), May 1988, pp. 532–533
 ---
 
 ## 개요
@@ -70,6 +115,7 @@ Gustafson은 원문에서 암달 식의 오용이 대규모 병렬성에 대한 
 ## 인용할 만한 구절
 
 > 병렬 가속은 문제 크기를 고정할 때와 자원 수에 맞춰 키울 때 서로 다른 질문이 된다.
+<!-- wiki-v2:quote-locator evidence="ref-045" locator="wiki/sources/Reevaluating Amdahl's Law.md:line-50#인용할-만한-구절" status="recorded" -->
 
 논문의 두 모델을 한국어로 요약한 문장이다.
 
@@ -85,6 +131,11 @@ Gustafson은 원문에서 암달 식의 오용이 대규모 병렬성에 대한 
 | enables | [[병렬 확장성]] | 지연 시간 감소와 동일 시간 안의 문제 규모 확대를 서로 다른 확장 능력으로 비교하게 한다. | [[Reevaluating Amdahl's Law]] |
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - ACM, [DOI record](https://doi.org/10.1145/42411.42415)
 - Carnegie Mellon University, [access copy](https://course.ece.cmu.edu/~ece600/fall16/references/gustafson.pdf)
