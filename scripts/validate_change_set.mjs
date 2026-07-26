@@ -9,6 +9,7 @@ const root = process.cwd();
 const today = process.env.WIKI_TODAY || new Date().toISOString().slice(0, 10);
 const base = process.env.BASE_SHA || process.env.GITHUB_BASE_SHA || "";
 const errors = [];
+let legacyFrontmatterSkips = 0;
 const add = (code, path, message) => errors.push({ code, path, message });
 
 async function git(...args) {
@@ -62,8 +63,24 @@ async function main() {
       continue;
     }
     const currentText = await readFile(join(root, path), "utf8").catch(() => "");
-    const current = frontmatter(currentText);
-    const previous = await oldFile(base, path).then(frontmatter);
+    let current = null;
+    try {
+      current = frontmatter(currentText);
+    } catch (error) {
+      add("page.frontmatter", path, `current frontmatter is not valid YAML: ${error.message}`);
+      // Keep the schema check from adding a duplicate error for the same parse failure.
+      current = { schema_version: 2 };
+    }
+    let previous = null;
+    const previousText = await oldFile(base, path);
+    if (previousText) {
+      try {
+        previous = frontmatter(previousText);
+      } catch {
+        // Legacy pages can contain invalid flow values such as unquoted aliases with '#'.
+        legacyFrontmatterSkips += 1;
+      }
+    }
     if (!current || current.schema_version !== 2) add("page.schema", path, "변경된 위키 페이지는 schema_version: 2여야 한다.");
     if (previous?.id && current?.id && previous.id !== current.id) add("identity.immutable", path, `페이지 ID를 ${previous.id}에서 ${current.id}로 바꿀 수 없다.`);
     if (current?.editorial_status === "active" && current.updated !== today) add("updated.required", path, `active 페이지의 updated는 변경일(${today})이어야 한다.`);
@@ -73,6 +90,9 @@ async function main() {
   }
   const changedVisiblePage = changes.some((change) => change.path.startsWith("wiki/") && change.path.endsWith(".md") && !change.path.startsWith("wiki/logs/") && !["wiki/index.md", "wiki/overview.md", "wiki/log.md"].includes(change.path));
   if (changedVisiblePage && !changedLogs) add("log.coverage", "wiki/log.md", "문서 변경을 설명하는 새 로그 항목이 필요하다.");
+  if (legacyFrontmatterSkips) {
+    console.warn(`change-set: skipped legacy frontmatter parsing for ${legacyFrontmatterSkips} previous file(s)`);
+  }
   if (errors.length) {
     console.error(JSON.stringify({ errors }, null, 2));
     process.exitCode = 1;
