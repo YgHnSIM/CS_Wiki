@@ -1,24 +1,60 @@
 ---
+schema_version: 2
+id: ref-001
+kind: reference
 title: The Preparation of Programs for an Electronic Digital Computer
-aliases: [WWG, Preparation of Programs, 프로그램 준비, EDSAC programming textbook]
-summary: "Wilkes, Wheeler, Gill의 EDSAC 프로그래밍 문헌을 바탕으로 서브루틴 라이브러리, 카탈로그, 오류 진단, 자동 프로그래밍을 API의 전신으로 정리한 참고 자료."
-tags: [type/reference, domain/computer-history, domain/software-engineering, status/active]
+aliases:
+  - WWG
+  - Preparation of Programs
+  - 프로그램 준비
+  - EDSAC programming textbook
+summary: Wilkes, Wheeler, Gill의 EDSAC 프로그래밍 문헌을 바탕으로 서브루틴 라이브러리, 카탈로그, 오류 진단, 자동 프로그래밍을 API의 전신으로 정리한 참고 자료.
+domains:
+  - computer-history
+  - software-engineering
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-07-09
-updated: 2026-07-18
-publication_year: 1951
-historical_layer: software
-historical_note: "초판은 1951년이며 위키가 직접 대조한 접근 사본은 1957년 제2판이다."
-capability_layers: [programmability]
-sources: ["Internet Archive: programsforelect00wilk"]
-source_id: ref-001
-source_kind: external
-primary_sources: ["The Preparation of Programs for an Electronic Digital Computer (1951)"]
-supporting_sources: ["Internet Archive: programsforelect00wilk"]
-source_urls: ["https://archive.org/details/programsforelect00wilk", "https://archive.org/stream/programsforelect00wilk/programsforelect00wilk_djvu.txt"]
-retrieved: 2026-07-10
-version: null
-snapshot_status: external-only
-status: active
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:07145f17782943c4dc930c3f6fe84a4421a99db1d1e4d1f654e0caa07f72beac
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers:
+  - programmability
+history:
+  publication_year: 1951
+  note: 초판은 1951년이며 위키가 직접 대조한 접근 사본은 1957년 제2판이다.
+  layer: software
+redirect_from:
+  - /references/the-preparation-of-programs-for-an-electronic-digital-computer/
+  - /sources/the-preparation-of-programs-for-an-electronic-digital-computer/
+origin: external
+works:
+  primary:
+    - citation: The Preparation of Programs for an Electronic Digital Computer (1951)
+      genre: other
+      identifiers: []
+      edition: null
+  supporting:
+    - citation: "Internet Archive: programsforelect00wilk"
+      genre: official-record
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: archive
+    url: https://archive.org/details/programsforelect00wilk
+    retrieved: 2026-07-10
+    version: null
+  - kind: url
+    role: archive
+    url: https://archive.org/stream/programsforelect00wilk/programsforelect00wilk_djvu.txt
+    retrieved: 2026-07-10
+    version: null
 ---
 
 ## 개요
@@ -50,6 +86,11 @@ status: active
 | enables | [[라이브러리]] | 검증된 루틴을 카탈로그로 축적하고 다시 불러 쓰는 공용 프로그램 기반을 제시한다. | [[The Preparation of Programs for an Electronic Digital Computer]] |
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - Internet Archive, [The Preparation of Programs for an Electronic Digital Computer](https://archive.org/details/programsforelect00wilk)
 - Internet Archive, [Full text OCR](https://archive.org/stream/programsforelect00wilk/programsforelect00wilk_djvu.txt)

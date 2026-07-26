@@ -1,25 +1,65 @@
 ---
-title: "Time, Clocks, and the Ordering of Events in a Distributed System"
-aliases: [Lamport 논리 시계 원 논문, "Time, Clocks", Lamport 1978, 논리 시계]
-summary: "분산 시스템에서 사건의 인과적 선행 관계와 논리 시계를 정의하고, 인과 순서를 보존하는 전체 순서를 만드는 방법을 제시한 Leslie Lamport의 1978년 논문."
-tags: [type/reference, domain/computer-science, domain/distributed-systems, domain/systems, status/active]
-created: 2026-07-25
-updated: 2026-07-25
-publication_year: 1978
-historical_layer: theory
-capability_layers: [scalability, reliable-results]
-sources: ["Time, Clocks, and the Ordering of Events in a Distributed System"]
-source_id: ref-100
-source_kind: external
-primary_sources: ["Leslie Lamport, Time, Clocks, and the Ordering of Events in a Distributed System, Communications of the ACM 21(7), July 1978, pp. 558–565"]
-supporting_sources: ["Microsoft Research publication record", "ACM DOI record"]
-source_urls: ["https://www.microsoft.com/en-us/research/publication/time-clocks-ordering-events-distributed-system/", "https://doi.org/10.1145/359545.359563"]
-retrieved: 2026-07-25
-version: "Communications of the ACM 21(7), July 1978, pp. 558–565"
-snapshot_status: external-only
-status: active
-graph_id: reference-time-clocks-ordering-events
+schema_version: 2
+id: ref-100
+kind: reference
+title: Time, Clocks, and the Ordering of Events in a Distributed System
+aliases:
+  - Lamport 논리 시계 원 논문
+  - Time, Clocks
+  - Lamport 1978
+  - 논리 시계
+summary: 분산 시스템에서 사건의 인과적 선행 관계와 논리 시계를 정의하고, 인과 순서를 보존하는 전체 순서를 만드는 방법을 제시한 Leslie Lamport의 1978년 논문.
+domains:
+  - computer-science
+  - distributed-systems
+  - systems
+editorial_status: active
+publication_visibility: public
 graph_visibility: public
+created: 2026-07-25
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:daf42e753c3bad7db36a31e3784aeeec323853ff81e851229afa45871c587845
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers:
+  - scalability
+  - reliable-results
+history:
+  publication_year: 1978
+  layer: theory
+redirect_from:
+  - /references/time-clocks-and-the-ordering-of-events-in-a-distributed-system/
+  - /sources/time-clocks-and-the-ordering-of-events-in-a-distributed-system/
+origin: external
+works:
+  primary:
+    - citation: Leslie Lamport, Time, Clocks, and the Ordering of Events in a Distributed System, Communications of the ACM 21(7), July 1978, pp. 558–565
+      genre: other
+      identifiers: []
+      edition: Communications of the ACM 21(7), July 1978, pp. 558–565
+  supporting:
+    - citation: Microsoft Research publication record
+      genre: official-record
+      identifiers: []
+      edition: null
+    - citation: ACM DOI record
+      genre: official-record
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: publisher
+    url: https://www.microsoft.com/en-us/research/publication/time-clocks-ordering-events-distributed-system/
+    retrieved: 2026-07-25
+    version: Communications of the ACM 21(7), July 1978, pp. 558–565
+  - kind: url
+    role: doi
+    url: https://doi.org/10.1145/359545.359563
+    retrieved: 2026-07-25
+    version: Communications of the ACM 21(7), July 1978, pp. 558–565
 ---
 
 ## 개요
@@ -45,6 +85,7 @@ Lamport는 이 전체 순서를 이용해 분산된 프로세서 네트워크가
 ## 인용할 만한 구절
 
 > “There is only a partial order”
+<!-- wiki-v2:quote-locator evidence="ref-100" locator="wiki/sources/Time, Clocks, and the Ordering of Events in a Distributed System.md:line-23#인용할-만한-구절" status="recorded" -->
 
 분산 사건의 순서는 모든 사건을 하나의 자연스러운 전역 시간축에 올려놓는 문제가 아니라, 인과 관계와 동시성을 구분하는 문제라는 점을 압축한다.
 
@@ -60,6 +101,11 @@ Lamport는 이 전체 순서를 이용해 분산된 프로세서 네트워크가
 | enables | [[로컬 호출과 파일은 원격 상태가 될 때 무엇을 잃는가]] | 로컬의 단일 실행 순서가 원격 환경에서는 인과적 부분 순서와 선택된 전체 순서로 분리된다는 분석의 근거를 제공한다. | [[Time, Clocks, and the Ordering of Events in a Distributed System]] |
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - Microsoft Research, [publication record](https://www.microsoft.com/en-us/research/publication/time-clocks-ordering-events-distributed-system/)
 - ACM, [DOI: 10.1145/359545.359563](https://doi.org/10.1145/359545.359563)

@@ -1,25 +1,62 @@
 ---
+schema_version: 2
+id: ref-076
+kind: reference
 title: Efficient Memory Management for Large Language Model Serving with PagedAttention
-aliases: [PagedAttention, vLLM paper, Kwon et al. 2023, PagedAttention paper]
-summary: "동적으로 커지는 LLM의 KV 캐시를 고정 크기 블록과 논리–물리 매핑으로 관리해 단편화와 중복 복사를 줄이고 더 많은 요청을 배치에 수용한 2023년 vLLM 연구."
-tags: [type/reference, domain/machine-learning, domain/systems, domain/operating-systems, status/active]
-created: 2026-07-24
-updated: 2026-07-24
-publication_year: 2023
-historical_layer: system
-capability_layers: [realized-performance, scalability, resource-efficiency]
-sources: ["Efficient Memory Management for Large Language Model Serving with PagedAttention"]
-source_id: ref-076
-source_kind: external
-primary_sources: ["Woosuk Kwon et al., Efficient Memory Management for Large Language Model Serving with PagedAttention, SOSP 2023"]
-supporting_sources: ["ACM proceedings record and arXiv open-access version 2309.06180"]
-source_urls: ["https://doi.org/10.1145/3600006.3613165", "https://arxiv.org/abs/2309.06180"]
-retrieved: 2026-07-24
-version: "SOSP '23 proceedings; arXiv 2309.06180"
-snapshot_status: external-only
-status: active
-graph_id: reference-pagedattention
+aliases:
+  - PagedAttention
+  - vLLM paper
+  - Kwon et al. 2023
+  - PagedAttention paper
+summary: 동적으로 커지는 LLM의 KV 캐시를 고정 크기 블록과 논리–물리 매핑으로 관리해 단편화와 중복 복사를 줄이고 더 많은 요청을 배치에 수용한 2023년 vLLM 연구.
+domains:
+  - machine-learning
+  - systems
+  - operating-systems
+editorial_status: active
+publication_visibility: public
 graph_visibility: public
+created: 2026-07-24
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:ad82abab4ef01ff6eea7f05687a824ad63a1f03fb3aa8a3696785288e29c689a
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers:
+  - realized-performance
+  - scalability
+  - resource-efficiency
+history:
+  publication_year: 2023
+  layer: system
+redirect_from:
+  - /references/efficient-memory-management-for-large-language-model-serving-with-pagedattention/
+  - /sources/efficient-memory-management-for-large-language-model-serving-with-pagedattention/
+origin: external
+works:
+  primary:
+    - citation: Woosuk Kwon et al., Efficient Memory Management for Large Language Model Serving with PagedAttention, SOSP 2023
+      genre: web
+      identifiers: []
+      edition: SOSP '23 proceedings; arXiv 2309.06180
+  supporting:
+    - citation: ACM proceedings record and arXiv open-access version 2309.06180
+      genre: official-record
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: doi
+    url: https://doi.org/10.1145/3600006.3613165
+    retrieved: 2026-07-24
+    version: SOSP '23 proceedings; arXiv 2309.06180
+  - kind: url
+    role: mirror
+    url: https://arxiv.org/abs/2309.06180
+    retrieved: 2026-07-24
+    version: SOSP '23 proceedings; arXiv 2309.06180
 ---
 
 ## 개요
@@ -43,6 +80,7 @@ graph_visibility: public
 ## 인용할 만한 구절
 
 > “near-zero waste in KV cache memory”
+<!-- wiki-v2:quote-locator evidence="ref-076" locator="wiki/sources/Efficient Memory Management for Large Language Model Serving with PagedAttention.md:line-21#인용할-만한-구절" status="recorded" -->
 
 논문이 목표로 한 것은 KV 캐시 자체를 없애는 것이 아니라, 실제 토큰 상태 밖의 예약·단편화·중복 낭비를 최소화하는 것이다.
 
@@ -60,6 +98,11 @@ graph_visibility: public
 | responds_to | [[Orca - A Distributed Serving System for Transformer-Based Generative Models]] | Orca의 반복 단위 스케줄링을 비교 기준으로 삼고, 연속 KV 공간 예약이 남긴 메모리 비효율을 보완한다. | [[Efficient Memory Management for Large Language Model Serving with PagedAttention]] |
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - ACM Digital Library, [SOSP 2023 proceedings record](https://doi.org/10.1145/3600006.3613165)
 - arXiv, [open-access paper record 2309.06180](https://arxiv.org/abs/2309.06180)

@@ -1,21 +1,61 @@
 ---
+schema_version: 2
+id: ref-015
+kind: reference
 title: FORTRAN Automatic Coding System for the IBM 704 EDPM
-aliases: [FORTRAN Programmer's Reference Manual, IBM 704 FORTRAN Manual, FORTRAN 704 Reference Manual]
-summary: "1956년 IBM 704 FORTRAN 매뉴얼을 바탕으로 소스 프로그램, 목적 프로그램, DO 문, 최적화 힌트를 정리한 참고 자료."
-tags: [type/reference, domain/programming-languages, domain/software-engineering, domain/computer-history, status/active]
+aliases:
+  - FORTRAN Programmer's Reference Manual
+  - IBM 704 FORTRAN Manual
+  - FORTRAN 704 Reference Manual
+summary: 1956년 IBM 704 FORTRAN 매뉴얼을 바탕으로 소스 프로그램, 목적 프로그램, DO 문, 최적화 힌트를 정리한 참고 자료.
+domains:
+  - programming-languages
+  - software-engineering
+  - computer-history
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-07-10
-updated: 2026-07-22
-sources: ["IBM 704 Programmer's Reference Manual 1956", "Computer History Museum archive"]
-source_id: ref-015
-source_kind: external
-primary_sources: ["IBM 704 Programmer's Reference Manual 1956"]
-supporting_sources: ["Computer History Museum archive", "IBM history page"]
-source_urls: ["https://archive.computerhistory.org/resources/text/Fortran/102649787.05.01.acc.pdf", "https://www.ibm.com/history/fortran"]
-retrieved: 2026-07-10
-version: "1956-10-15"
-snapshot_status: external-only
-status: active
-publication_year: 1956
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:4ef85cc7358399bf7ad57850e71508cab448545420f84950b76ee02fe02ac9a3
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers: []
+history:
+  publication_year: 1956
+redirect_from:
+  - /references/fortran-automatic-coding-system-for-the-ibm-704-edpm/
+  - /sources/fortran-automatic-coding-system-for-the-ibm-704-edpm/
+origin: external
+works:
+  primary:
+    - citation: IBM 704 Programmer's Reference Manual 1956
+      genre: manual
+      identifiers: []
+      edition: 1956-10-15
+  supporting:
+    - citation: Computer History Museum archive
+      genre: official-record
+      identifiers: []
+      edition: null
+    - citation: IBM history page
+      genre: official-record
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: archive
+    url: https://archive.computerhistory.org/resources/text/Fortran/102649787.05.01.acc.pdf
+    retrieved: 2026-07-10
+    version: 1956-10-15
+  - kind: url
+    role: mirror
+    url: https://www.ibm.com/history/fortran
+    retrieved: 2026-07-10
+    version: 1956-10-15
 ---
 
 ## 개요
@@ -37,6 +77,11 @@ publication_year: 1956
 이 자료는 [[Fortran]], [[컴파일러]], [[목적 프로그램]], [[컴파일러 최적화]], [[IBM 704]]를 정리하는 데 사용한다. 특히 Fortran의 역사적 의의는 고급 표기를 허용했다는 점뿐 아니라, 그 표기를 실제 기계에서 충분히 빠르게 실행되는 코드로 번역했다는 점에 있다.
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - Computer History Museum, [The FORTRAN Automatic Coding System for the IBM 704 EDPM](https://archive.computerhistory.org/resources/text/Fortran/102649787.05.01.acc.pdf)
 - IBM, [Fortran](https://www.ibm.com/history/fortran)

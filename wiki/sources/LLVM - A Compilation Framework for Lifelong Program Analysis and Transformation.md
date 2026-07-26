@@ -1,25 +1,61 @@
 ---
+schema_version: 2
+id: ref-096
+kind: reference
 title: "LLVM: A Compilation Framework for Lifelong Program Analysis & Transformation"
-aliases: ["LLVM: A Compilation Framework for Lifelong Program Analysis & Transformation", LLVM, "Lattner and Adve 2004", LLVM IR]
-summary: "정적·링크·실행·유휴 단계에서 프로그램 분석과 변환을 이어 갈 수 있도록 SSA 기반의 저수준 공통 표현과 컴파일러 프레임워크를 제안한 2004년 LLVM 논문."
-tags: [type/reference, domain/software-engineering, domain/programming-languages, domain/computer-architecture, status/active]
-created: 2026-07-25
-updated: 2026-07-25
-publication_year: 2004
-historical_layer: software
-capability_layers: [programmability, realized-performance]
-sources: ["LLVM: A Compilation Framework for Lifelong Program Analysis & Transformation"]
-source_id: ref-096
-source_kind: external
-primary_sources: ["Chris Lattner and Vikram Adve, LLVM: A Compilation Framework for Lifelong Program Analysis & Transformation, CGO 2004"]
-supporting_sources: ["LLVM project publication page and author-hosted conference paper PDF"]
-source_urls: ["https://llvm.org/pubs/2004-01-30-CGO-LLVM.html", "https://llvm.org/pubs/2004-01-30-CGO-LLVM.pdf"]
-retrieved: 2026-07-25
-version: "CGO '04, pp. 75–88"
-snapshot_status: external-only
-status: active
-graph_id: reference-llvm-cgo-2004
+aliases:
+  - "LLVM: A Compilation Framework for Lifelong Program Analysis & Transformation"
+  - LLVM
+  - Lattner and Adve 2004
+  - LLVM IR
+summary: 정적·링크·실행·유휴 단계에서 프로그램 분석과 변환을 이어 갈 수 있도록 SSA 기반의 저수준 공통 표현과 컴파일러 프레임워크를 제안한 2004년 LLVM 논문.
+domains:
+  - software-engineering
+  - programming-languages
+  - computer-architecture
+editorial_status: active
+publication_visibility: public
 graph_visibility: public
+created: 2026-07-25
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:182d1dc9eea69f7dd6143f1d1aa6b5a8b9f654d49c8b0050faf9fd8e5a7f4cc8
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers:
+  - programmability
+  - realized-performance
+history:
+  publication_year: 2004
+  layer: software
+redirect_from:
+  - /references/llvm-a-compilation-framework-for-lifelong-program-analysis-transformation/
+  - /sources/llvm-a-compilation-framework-for-lifelong-program-analysis-transformation/
+origin: external
+works:
+  primary:
+    - citation: "Chris Lattner and Vikram Adve, LLVM: A Compilation Framework for Lifelong Program Analysis & Transformation, CGO 2004"
+      genre: other
+      identifiers: []
+      edition: CGO '04, pp. 75–88
+  supporting:
+    - citation: LLVM project publication page and author-hosted conference paper PDF
+      genre: primary-literature
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: canonical
+    url: https://llvm.org/pubs/2004-01-30-CGO-LLVM.html
+    retrieved: 2026-07-25
+    version: CGO '04, pp. 75–88
+  - kind: url
+    role: mirror
+    url: https://llvm.org/pubs/2004-01-30-CGO-LLVM.pdf
+    retrieved: 2026-07-25
+    version: CGO '04, pp. 75–88
 ---
 
 ## 개요
@@ -46,6 +82,11 @@ LLVM의 SSA 표현은 값의 정의와 사용 관계를 명시해 데이터 흐�
 | enables | [[컴파일러 최적화]] | 정적·링크·실행 시점에 데이터 흐름과 형식 정보를 이용할 수 있는 공통 변환 기반을 제공한다. | [[LLVM - A Compilation Framework for Lifelong Program Analysis and Transformation]] |
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - LLVM Project, [publication page](https://llvm.org/pubs/2004-01-30-CGO-LLVM.html)
 - LLVM Project, [conference paper PDF](https://llvm.org/pubs/2004-01-30-CGO-LLVM.pdf)

@@ -1,24 +1,56 @@
 ---
+schema_version: 2
+id: ref-055
+kind: reference
 title: "Mathematical Tables: Containing the Common, Hyperbolic, and Logistic Logarithms"
-aliases: ["Mathematical Tables: Containing the Common, Hyperbolic, and Logistic Logarithms", Hutton's Mathematical Tables, Hutton and Gregory Mathematical Tables, 허턴과 그레고리의 수학 표]
-summary: "Charles Hutton의 로그·삼각함수표를 Olinthus Gregory의 보충과 함께 수록한 1858년 제7판으로, 컴퓨터 이전 전문 계산에서 표의 중요성과 정확성 문제를 보여주는 참고 자료."
-tags: [type/reference, domain/computer-history, domain/mathematics, status/active]
+aliases:
+  - "Mathematical Tables: Containing the Common, Hyperbolic, and Logistic Logarithms"
+  - Hutton's Mathematical Tables
+  - Hutton and Gregory Mathematical Tables
+  - 허턴과 그레고리의 수학 표
+summary: Charles Hutton의 로그·삼각함수표를 Olinthus Gregory의 보충과 함께 수록한 1858년 제7판으로, 컴퓨터 이전 전문 계산에서 표의 중요성과 정확성 문제를 보여주는 참고 자료.
+domains:
+  - computer-history
+  - mathematics
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-07-20
-updated: 2026-07-20
-publication_year: 1858
-historical_note: "1858년 제7판을 Cambridge Library Collection이 2012년 종이책과 2013년 디지털 판본으로 재발행했다."
-historical_layer: measurement
-capability_layers: [resource-efficiency, reliable-results]
-sources: ["Charles Hutton, with additional material by Olinthus Gregory, Mathematical Tables: Containing the Common, Hyperbolic, and Logistic Logarithms, seventh edition, 1858", "Cambridge University Press official metadata and description for the Cambridge Library Collection reissue"]
-source_id: ref-055
-source_kind: external
-primary_sources: ["Charles Hutton, with additional material by Olinthus Gregory, Mathematical Tables: Containing the Common, Hyperbolic, and Logistic Logarithms, seventh edition, 1858"]
-supporting_sources: ["Cambridge University Press official metadata and description for the Cambridge Library Collection reissue"]
-source_urls: ["https://www.cambridge.org/core/books/mathematical-tables/37FE51CE8B66A078A8DFA3C895FFA457"]
-retrieved: 2026-07-20
-version: "Seventh edition, 1858; Cambridge Library Collection paperback reissue 2012 and digital edition 2013"
-snapshot_status: external-only
-status: active
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:833a8484cb817ac5fa12ac3d49435286529e17ac615e6cdcccb7d659b7e6481a
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers:
+  - resource-efficiency
+  - reliable-results
+history:
+  publication_year: 1858
+  note: 1858년 제7판을 Cambridge Library Collection이 2012년 종이책과 2013년 디지털 판본으로 재발행했다.
+  layer: measurement
+redirect_from:
+  - /references/mathematical-tables-containing-the-common-hyperbolic-and-logistic-logarithms/
+  - /sources/mathematical-tables-containing-the-common-hyperbolic-and-logistic-logarithms/
+origin: external
+works:
+  primary:
+    - citation: "Charles Hutton, with additional material by Olinthus Gregory, Mathematical Tables: Containing the Common, Hyperbolic, and Logistic Logarithms, seventh edition, 1858"
+      genre: other
+      identifiers: []
+      edition: Seventh edition, 1858; Cambridge Library Collection paperback reissue 2012 and digital edition 2013
+  supporting:
+    - citation: Cambridge University Press official metadata and description for the Cambridge Library Collection reissue
+      genre: official-record
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: canonical
+    url: https://www.cambridge.org/core/books/mathematical-tables/37FE51CE8B66A078A8DFA3C895FFA457
+    retrieved: 2026-07-20
+    version: Seventh edition, 1858; Cambridge Library Collection paperback reissue 2012 and digital edition 2013
 ---
 
 ## 개요
@@ -42,6 +74,11 @@ Hutton이 Royal Military Academy의 수학 교수였다는 사실은 Cambridge�
 이 자료는 [[수학 표]]에서 로그표와 삼각함수표가 컴퓨터 이전 전문 계산의 중요한 도구였다는 사례를 뒷받침한다. 가장 흔한 표를 비교할 때는 “수학자·물리학자·공학자의 전문 계산”이라는 모집단을 명시하고, 곱셈표의 교육·일상 사용과 별도로 다루는 근거로 사용한다.
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - Cambridge University Press, [Mathematical Tables: Containing the Common, Hyperbolic, and Logistic Logarithms](https://www.cambridge.org/core/books/mathematical-tables/37FE51CE8B66A078A8DFA3C895FFA457)
 - Charles Hutton, with additional material by Olinthus Gregory, *Mathematical Tables: Containing the Common, Hyperbolic, and Logistic Logarithms*, seventh edition, 1858.

@@ -1,23 +1,59 @@
 ---
+schema_version: 2
+id: ref-041
+kind: reference
 title: The Datacenter as a Computer
-aliases: [Warehouse-Scale Computing, WSC book, 데이터센터를 하나의 컴퓨터로]
-summary: "대규모 인터넷 서비스의 데이터센터를 독립 서버들의 모음이 아니라 하드웨어와 소프트웨어가 공동 설계된 하나의 창고 규모 컴퓨터로 다룬 2009년 저작."
-tags: [type/reference, domain/computer-architecture, domain/systems, status/active]
+aliases:
+  - Warehouse-Scale Computing
+  - WSC book
+  - 데이터센터를 하나의 컴퓨터로
+summary: 대규모 인터넷 서비스의 데이터센터를 독립 서버들의 모음이 아니라 하드웨어와 소프트웨어가 공동 설계된 하나의 창고 규모 컴퓨터로 다룬 2009년 저작.
+domains:
+  - computer-architecture
+  - systems
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-07-16
-updated: 2026-07-18
-publication_year: 2009
-historical_layer: system
-capability_layers: [scalability, resource-efficiency]
-sources: ["The Datacenter as a Computer, 1st edition, 2009", "Google Research publication page"]
-source_id: ref-041
-source_kind: external
-primary_sources: ["The Datacenter as a Computer, 1st edition, 2009"]
-supporting_sources: ["Google Research publication page"]
-source_urls: ["https://doi.org/10.2200/S00193ED1V01Y200905CAC006", "https://research.google/pubs/the-datacenter-as-a-computer-an-introduction-to-the-design-of-warehouse-scale-machines/"]
-retrieved: 2026-07-16
-version: "First edition, 2009"
-snapshot_status: external-only
-status: active
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:812ba361e72c8ba5fb508e1fa8931e128c8edfd0b40d963d5c79b47b5368bf38
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers:
+  - scalability
+  - resource-efficiency
+history:
+  publication_year: 2009
+  layer: system
+redirect_from:
+  - /references/the-datacenter-as-a-computer/
+  - /sources/the-datacenter-as-a-computer/
+origin: external
+works:
+  primary:
+    - citation: The Datacenter as a Computer, 1st edition, 2009
+      genre: other
+      identifiers: []
+      edition: First edition, 2009
+  supporting:
+    - citation: Google Research publication page
+      genre: primary-literature
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: doi
+    url: https://doi.org/10.2200/S00193ED1V01Y200905CAC006
+    retrieved: 2026-07-16
+    version: First edition, 2009
+  - kind: url
+    role: mirror
+    url: https://research.google/pubs/the-datacenter-as-a-computer-an-introduction-to-the-design-of-warehouse-scale-machines/
+    retrieved: 2026-07-16
+    version: First edition, 2009
 ---
 
 ## 개요
@@ -41,6 +77,7 @@ status: active
 ## 인용할 만한 구절
 
 > 창고 규모 컴퓨터는 서버의 모음이 아니라 하나의 거대한 컴퓨팅 플랫폼이다.
+<!-- wiki-v2:quote-locator evidence="ref-041" locator="wiki/sources/The Datacenter as a Computer.md:line-21#인용할-만한-구절" status="recorded" -->
 
 저작의 핵심 관점을 한국어로 요약한 문장이다.
 
@@ -49,6 +86,11 @@ status: active
 이 자료는 [[컴퓨팅 능력이란 무엇인가]]의 시스템 경계를 시설과 서비스 수준으로 확장한다. [[컴퓨팅 능력의 발달사]]에서는 멀티코어 이후 병렬성이 여러 칩과 서버로 확장되고, 처리량·[[꼬리 지연 시간]]·에너지·가용성이 함께 중요한 지표가 된 흐름을 설명하는 근거다. 이 경계에서 평균과 종단 응답 분포가 달라지는 문제는 [[평균 성능은 왜 서비스의 컴퓨팅 능력을 설명하지 못하는가]]에서 분석한다.
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - Morgan & Claypool, [DOI record](https://doi.org/10.2200/S00193ED1V01Y200905CAC006)
 - Google Research, [publication page](https://research.google/pubs/the-datacenter-as-a-computer-an-introduction-to-the-design-of-warehouse-scale-machines/)

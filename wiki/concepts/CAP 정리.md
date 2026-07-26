@@ -1,17 +1,38 @@
 ---
+schema_version: 2
+id: concept-cap-theorem
+kind: concept
 title: CAP 정리
-aliases: [CAP theorem, CAP, Brewer 정리, 일관성 가용성 분할 허용성]
-summary: "비동기 네트워크 분할 모형에서 선형화 가능한 원자적 일관성과 모든 비고장 노드의 응답 보장을 동시에 만족할 수 없다는 분산 시스템의 불가능성 정리."
-tags: [type/concept, domain/computer-science, domain/distributed-systems, domain/systems, status/active]
-created: 2026-07-25
-updated: 2026-07-25
-publication_year: 2002
-historical_layer: theory
-capability_layers: [scalability, reliable-results]
-sources: ["Brewer's Conjecture and the Feasibility of Consistent, Available, Partition-Tolerant Web Services"]
-status: active
-graph_id: concept-cap-theorem
+aliases:
+  - CAP theorem
+  - CAP
+  - Brewer 정리
+  - 일관성 가용성 분할 허용성
+summary: 비동기 네트워크 분할 모형에서 선형화 가능한 원자적 일관성과 모든 비고장 노드의 응답 보장을 동시에 만족할 수 없다는 분산 시스템의 불가능성 정리.
+domains:
+  - computer-science
+  - distributed-systems
+  - systems
+editorial_status: active
+publication_visibility: public
 graph_visibility: public
+created: 2026-07-25
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:c9acc0672a79804994bf80d44e88036d86518db00cdd2bdb7fe1e1c217d0f751
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids:
+  - ref-087
+capability_layers:
+  - scalability
+  - reliable-results
+history:
+  publication_year: 2002
+  layer: theory
+redirect_from:
+  - /concepts/cap-정리/
 ---
 
 ## 개요
@@ -43,6 +64,11 @@ graph_visibility: public
 | constrains | [[가용성과 복구]] | 분할 중의 응답 보장은 복제 상태의 선형화 가능성과 독립적으로 주장할 수 없으므로, 운영 가용성의 정의에 일관성·응답 의미를 함께 명시하게 한다. | [[Brewer's Conjecture and the Feasibility of Consistent, Available, Partition-Tolerant Web Services]] |
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- `ref-087`
+<!-- wiki-v2:evidence-end -->
 
 - [[Brewer's Conjecture and the Feasibility of Consistent, Available, Partition-Tolerant Web Services]]
 

@@ -1,13 +1,35 @@
 ---
+schema_version: 2
+id: concept-0fdf8f46e0e7b677
+kind: concept
 title: Koomey의 법칙
-aliases: [Koomey's law, 쿠미의 법칙, 계산 에너지 효율 추세, computations per joule trend]
-summary: "1946–2009년 컴퓨터 표본에서 최고 부하의 단위 에너지당 계산량이 평균 약 1.57년마다 배가했다는 경험적 역사 추세와 그 측정 범위·한계를 가리키는 후대의 이름."
-tags: [type/concept, domain/computer-history, domain/computer-architecture, status/active]
+aliases:
+  - Koomey's law
+  - 쿠미의 법칙
+  - 계산 에너지 효율 추세
+  - computations per joule trend
+summary: 1946–2009년 컴퓨터 표본에서 최고 부하의 단위 에너지당 계산량이 평균 약 1.57년마다 배가했다는 경험적 역사 추세와 그 측정 범위·한계를 가리키는 후대의 이름.
+domains:
+  - computer-history
+  - computer-architecture
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-07-16
-updated: 2026-07-25
-sources: ["Implications of Historical Trends in the Electrical Efficiency of Computing", "Cramming More Components onto Integrated Circuits", "Design of Ion-Implanted MOSFET's with Very Small Physical Dimensions", "The Case for Energy-Proportional Computing"]
-status: active
-graph_id: concept-0fdf8f46e0e7b677
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:1af77ae182d4d2cb4ba5d504e8b182c0757c8f5bbc5a2c9855a53010c3489e83
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids:
+  - ref-047
+  - ref-037
+  - ref-038
+  - ref-046
+capability_layers: []
+redirect_from:
+  - /concepts/koomey의-법칙/
 ---
 
 ## 개요
@@ -88,6 +110,14 @@ Koomey의 법칙이 보여주는 중요한 변화는 컴퓨팅 능력이 속도�
 | narrower | [[컴퓨팅 능력이란 무엇인가]] | 컴퓨팅 능력의 여러 층위 가운데 같은 에너지로 수행 가능한 환산 계산량의 역사적 변화에 초점을 맞춘다. | [[Implications of Historical Trends in the Electrical Efficiency of Computing]] |
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- `ref-047`
+- `ref-037`
+- `ref-038`
+- `ref-046`
+<!-- wiki-v2:evidence-end -->
 
 - [[Implications of Historical Trends in the Electrical Efficiency of Computing]]
 - [[Cramming More Components onto Integrated Circuits]]

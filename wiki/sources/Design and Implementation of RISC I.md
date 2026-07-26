@@ -1,23 +1,68 @@
 ---
+schema_version: 2
+id: ref-044
+kind: reference
 title: Design and Implementation of RISC I
-aliases: [RISC I report, UCB/CSD-82-106, Berkeley RISC I]
-summary: "초기 VLSI 제약에서 단순하고 규칙적인 명령어 집합, 레지스터 윈도, 컴파일러와 구현 도구를 함께 설계하고 시뮬레이션과 실제 칩의 차이까지 보고한 1982년 기술 보고서."
-tags: [type/reference, domain/computer-architecture, domain/computer-history, status/active]
+aliases:
+  - RISC I report
+  - UCB/CSD-82-106
+  - Berkeley RISC I
+summary: 초기 VLSI 제약에서 단순하고 규칙적인 명령어 집합, 레지스터 윈도, 컴파일러와 구현 도구를 함께 설계하고 시뮬레이션과 실제 칩의 차이까지 보고한 1982년 기술 보고서.
+domains:
+  - computer-architecture
+  - computer-history
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-07-16
-updated: 2026-07-18
-publication_year: 1982
-historical_layer: architecture
-capability_layers: [realized-performance, resource-efficiency]
-sources: ["UC Berkeley Technical Report UCB/CSD-82-106", "UC Berkeley EECS report page", "UC Berkeley Digital Collections record"]
-source_id: ref-044
-source_kind: external
-primary_sources: ["UC Berkeley Technical Report UCB/CSD-82-106"]
-supporting_sources: ["UC Berkeley EECS report page", "UC Berkeley Digital Collections record"]
-source_urls: ["https://www2.eecs.berkeley.edu/Pubs/TechRpts/1982/5449.html", "https://www2.eecs.berkeley.edu/Pubs/TechRpts/1982/Archive/CSD-82-106.pdf", "https://digicoll.lib.berkeley.edu/record/136008"]
-retrieved: 2026-07-16
-version: "UCB/CSD-82-106, October 1982"
-snapshot_status: external-only
-status: active
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:055069d47147b3ac79a0a672663f92811a8cc9bd3bf7ae42c405342eb5e945ec
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers:
+  - realized-performance
+  - resource-efficiency
+history:
+  publication_year: 1982
+  layer: architecture
+redirect_from:
+  - /references/design-and-implementation-of-risc-i/
+  - /sources/design-and-implementation-of-risc-i/
+origin: external
+works:
+  primary:
+    - citation: UC Berkeley Technical Report UCB/CSD-82-106
+      genre: other
+      identifiers: []
+      edition: UCB/CSD-82-106, October 1982
+  supporting:
+    - citation: UC Berkeley EECS report page
+      genre: web
+      identifiers: []
+      edition: null
+    - citation: UC Berkeley Digital Collections record
+      genre: official-record
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: canonical
+    url: https://www2.eecs.berkeley.edu/Pubs/TechRpts/1982/5449.html
+    retrieved: 2026-07-16
+    version: UCB/CSD-82-106, October 1982
+  - kind: url
+    role: mirror
+    url: https://www2.eecs.berkeley.edu/Pubs/TechRpts/1982/Archive/CSD-82-106.pdf
+    retrieved: 2026-07-16
+    version: UCB/CSD-82-106, October 1982
+  - kind: url
+    role: mirror
+    url: https://digicoll.lib.berkeley.edu/record/136008
+    retrieved: 2026-07-16
+    version: UCB/CSD-82-106, October 1982
 ---
 
 ## 개요
@@ -57,6 +102,7 @@ RISC I의 단순한 제어와 규칙적 데이터 경로는 짧은 사이클, �
 ## 인용할 만한 구절
 
 > 높은 성능은 작은 명령어 집합 하나가 아니라 그에 맞는 마이크로아키텍처와 소프트웨어의 결합에서 나온다.
+<!-- wiki-v2:quote-locator evidence="ref-044" locator="wiki/sources/Design and Implementation of RISC I.md:line-37#인용할-만한-구절" status="recorded" -->
 
 보고서의 설계 논지를 한국어로 요약한 문장이다.
 
@@ -65,6 +111,11 @@ RISC I의 단순한 제어와 규칙적 데이터 경로는 짧은 사이클, �
 이 자료는 [[축소 명령어 집합 컴퓨터]]를 “적은 명령어”라는 표어가 아니라 VLSI 면적, 메모리 트래픽, 레지스터, 파이프라인과 [[컴파일러 최적화]] 사이의 복잡성 배분으로 해석하는 직접 근거다. [[더 빠른 프로세서는 왜 더 빠른 프로그램을 보장하지 않는가]]에서는 목표 사이클과 시뮬레이션, 실제 칩의 결과가 달랐던 사례를 통해 잠재 성능과 실현 성능을 구분한다.
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - UC Berkeley EECS, [report page](https://www2.eecs.berkeley.edu/Pubs/TechRpts/1982/5449.html)
 - UC Berkeley EECS, [UCB/CSD-82-106 PDF](https://www2.eecs.berkeley.edu/Pubs/TechRpts/1982/Archive/CSD-82-106.pdf)

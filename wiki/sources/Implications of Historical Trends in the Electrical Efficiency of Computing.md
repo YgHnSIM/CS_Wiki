@@ -1,26 +1,91 @@
 ---
+schema_version: 2
+id: ref-047
+kind: reference
 title: Implications of Historical Trends in the Electrical Efficiency of Computing
-aliases: [Koomey et al. 2011, Koomey의 법칙 원전, Computing energy efficiency trends]
-summary: "1946–2009년 여러 종류의 컴퓨터에서 최고 부하의 계산량을 전력으로 나눈 장기 자료를 분석해 계산의 전기 효율이 약 1.57년마다 배가했다는 역사적 추세를 보고한 논문."
-tags: [type/reference, domain/computer-history, domain/computer-architecture, status/active]
+aliases:
+  - Koomey et al. 2011
+  - Koomey의 법칙 원전
+  - Computing energy efficiency trends
+summary: 1946–2009년 여러 종류의 컴퓨터에서 최고 부하의 계산량을 전력으로 나눈 장기 자료를 분석해 계산의 전기 효율이 약 1.57년마다 배가했다는 역사적 추세를 보고한 논문.
+domains:
+  - computer-history
+  - computer-architecture
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-07-16
-updated: 2026-07-25
-publication_year: 2011
-event_start: 1946
-event_end: 2009
-historical_layer: measurement
-historical_note: "1946–2009년 표본을 분석한 2011년 출판물이다. 관측 기간과 출판 시점을 구분한다."
-capability_layers: [resource-efficiency]
-sources: ["IEEE Annals of the History of Computing 33(3), 2011", "Web Extra Appendix", "koomeycomputertrendsreleaseversion-v36.xlsx", "Gwern access copy"]
-source_id: ref-047
-source_kind: external
-primary_sources: ["Jonathan G. Koomey, Stephen Berard, Marla Sanchez, and Henry Wong, IEEE Annals of the History of Computing 33(3), 2011, pp. 46–54", "Web Extra Appendix", "koomeycomputertrendsreleaseversion-v36.xlsx"]
-supporting_sources: ["IEEE DOI record", "Gwern access copy"]
-source_urls: ["https://doi.org/10.1109/MAHC.2010.28", "https://ieeexplore.ieee.org/document/5440129/", "https://gwern.net/doc/cs/hardware/2011-koomey.pdf", "https://www.researchgate.net/publication/236758748_Web_Extra_Appendix_Implications_of_Historical_Trends_in_the_Electrical_Efficiency_of_Computing", "https://github.com/AABoyles/AIPredict/blob/master/data-raw/koomeycomputertrendsreleaseversion-v36.xlsx"]
-retrieved: 2026-07-16
-version: "IEEE Annals of the History of Computing 33(3), July–September 2011, pp. 46–54"
-snapshot_status: external-only
-status: active
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:f636766d0a1f3344415cea3a2cdebe6a811f1cab287d042feb5a83aa9932be1f
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers:
+  - resource-efficiency
+history:
+  publication_year: 2011
+  event:
+    start: 1946
+    end: 2009
+    basis: publication-process
+    evidence_id: null
+  note: 1946–2009년 표본을 분석한 2011년 출판물이다. 관측 기간과 출판 시점을 구분한다.
+  layer: measurement
+redirect_from:
+  - /references/implications-of-historical-trends-in-the-electrical-efficiency-of-computing/
+  - /sources/implications-of-historical-trends-in-the-electrical-efficiency-of-computing/
+origin: external
+works:
+  primary:
+    - citation: Jonathan G. Koomey, Stephen Berard, Marla Sanchez, and Henry Wong, IEEE Annals of the History of Computing 33(3), 2011, pp. 46–54
+      genre: official-record
+      identifiers: []
+      edition: IEEE Annals of the History of Computing 33(3), July–September 2011, pp. 46–54
+    - citation: Web Extra Appendix
+      genre: web
+      identifiers: []
+      edition: IEEE Annals of the History of Computing 33(3), July–September 2011, pp. 46–54
+    - citation: koomeycomputertrendsreleaseversion-v36.xlsx
+      genre: other
+      identifiers: []
+      edition: IEEE Annals of the History of Computing 33(3), July–September 2011, pp. 46–54
+  supporting:
+    - citation: IEEE DOI record
+      genre: official-record
+      identifiers: []
+      edition: null
+    - citation: Gwern access copy
+      genre: other
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: doi
+    url: https://doi.org/10.1109/MAHC.2010.28
+    retrieved: 2026-07-16
+    version: IEEE Annals of the History of Computing 33(3), July–September 2011, pp. 46–54
+  - kind: url
+    role: mirror
+    url: https://ieeexplore.ieee.org/document/5440129/
+    retrieved: 2026-07-16
+    version: IEEE Annals of the History of Computing 33(3), July–September 2011, pp. 46–54
+  - kind: url
+    role: mirror
+    url: https://gwern.net/doc/cs/hardware/2011-koomey.pdf
+    retrieved: 2026-07-16
+    version: IEEE Annals of the History of Computing 33(3), July–September 2011, pp. 46–54
+  - kind: url
+    role: mirror
+    url: https://www.researchgate.net/publication/236758748_Web_Extra_Appendix_Implications_of_Historical_Trends_in_the_Electrical_Efficiency_of_Computing
+    retrieved: 2026-07-16
+    version: IEEE Annals of the History of Computing 33(3), July–September 2011, pp. 46–54
+  - kind: url
+    role: mirror
+    url: https://github.com/AABoyles/AIPredict/blob/master/data-raw/koomeycomputertrendsreleaseversion-v36.xlsx
+    retrieved: 2026-07-16
+    version: IEEE Annals of the History of Computing 33(3), July–September 2011, pp. 46–54
 ---
 
 ## 개요
@@ -79,6 +144,7 @@ status: active
 ## 인용할 만한 구절
 
 > 1946–2009년 표본에서 최고 부하의 계산/에너지는 평균 1.57년마다 두 배가 되었다.
+<!-- wiki-v2:quote-locator evidence="ref-047" locator="wiki/sources/Implications of Historical Trends in the Electrical Efficiency of Computing.md:line-56#인용할-만한-구절" status="recorded" -->
 
 논문의 회귀 결과와 측정 경계를 함께 붙여 한국어로 요약한 문장이다.
 
@@ -94,6 +160,11 @@ status: active
 | exemplifies | [[전력 장벽은 성능 향상의 의미를 어떻게 바꾸었는가]] | 세대 간 계산/J의 향상이 순간 전력·실제 부하 곡선과 구분되어야 하는 역사적 측정 축을 제공한다. | [[Implications of Historical Trends in the Electrical Efficiency of Computing]] |
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - IEEE, [DOI record](https://doi.org/10.1109/MAHC.2010.28)
 - IEEE Xplore, [publication record](https://ieeexplore.ieee.org/document/5440129/)

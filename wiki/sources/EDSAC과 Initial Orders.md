@@ -1,20 +1,57 @@
 ---
+schema_version: 2
+id: src-003
+kind: source
 title: EDSAC과 Initial Orders
-aliases: [EDSAC Initial Orders source]
-summary: "Initial Orders를 초기 로더·어셈블러·재배치 로더·원시적 링커로 해석하고 EDSAC의 실행 계층을 정리한 소스."
-tags: [type/source, domain/computer-history, domain/software-engineering, status/active]
+aliases:
+  - EDSAC Initial Orders source
+summary: Initial Orders를 초기 로더·어셈블러·재배치 로더·원시적 링커로 해석하고 EDSAC의 실행 계층을 정리한 소스.
+domains:
+  - computer-history
+  - software-engineering
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-05-04
-updated: 2026-07-10
-sources: ["EDSAC과 Initial Orders.md", "EDSAC과 Initial Orders_해설.md"]
-source_id: src-003
-source_kind: raw
-primary_sources: ["EDSAC과 Initial Orders.md"]
-supporting_sources: ["EDSAC과 Initial Orders_해설.md"]
-source_urls: []
-retrieved: 2026-07-10
-version: null
-snapshot_status: local
-status: active
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:15270b61a203753b1c967c5ad5690959f616b6eb05c550a8223ff34cc7c022a3
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers: []
+redirect_from:
+  - /sources/edsac과-initial-orders/
+origin: local
+works:
+  primary:
+    - citation: EDSAC과 Initial Orders.md
+      genre: raw-note
+      identifiers: []
+      edition: null
+  supporting:
+    - citation: EDSAC과 Initial Orders_해설.md
+      genre: raw-note
+      identifiers: []
+      edition: null
+access:
+  - kind: local
+    role: original
+    path: raw/EDSAC과 Initial Orders.md
+    retrieved: 2026-07-10
+    version: null
+    sha256: 366f69023c121e5d5f477df1bb9fb18aac86b0b0a6d0cd6b895d0e68f816d529
+    media_type: text/markdown
+    bytes: 12671
+  - kind: local
+    role: metadata
+    path: raw/EDSAC과 Initial Orders_해설.md
+    retrieved: 2026-07-10
+    version: null
+    sha256: 8702944edae30dde8c8ff4ae9613c88735081904f0a8da753f76e8b2ded15246
+    media_type: text/markdown
+    bytes: 17039
 ---
 
 ## 핵심 요약
@@ -38,10 +75,13 @@ Initial Orders 2는 고정 주소의 한계를 넘어 [[재배치]] 기능을 �
 ## 인용할 만한 구절
 
 > Initial Orders는 이 둘을 분리된 프로그램으로 갖고 있지 않았다. 작은 초기 명령열 하나가 로더이면서 어셈블러였다.
+<!-- wiki-v2:quote-locator evidence="src-003" locator="wiki/sources/EDSAC과 Initial Orders.md:line-21#인용할-만한-구절" status="recorded" -->
 
 > Initial Orders 2는 주소를 나중에 결정하는 프로그래밍을 가능하게 한 초기 시스템이다.
+<!-- wiki-v2:quote-locator evidence="src-003" locator="wiki/sources/EDSAC과 Initial Orders.md:line-23#인용할-만한-구절" status="recorded" -->
 
 > 소프트웨어는 기계 명령의 나열에서 시작했지만, 곧바로 "명령을 다루는 명령", "코드를 배치하는 코드", "복귀 주소를 만들어내는 코드"로 발전했다.
+<!-- wiki-v2:quote-locator evidence="src-003" locator="wiki/sources/EDSAC과 Initial Orders.md:line-25#인용할-만한-구절" status="recorded" -->
 
 ## 관련 위키 페이지
 
@@ -56,6 +96,11 @@ Initial Orders 2는 고정 주소의 한계를 넘어 [[재배치]] 기능을 �
 - [[초기 소프트웨어의 계층화]]
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - `raw/EDSAC과 Initial Orders.md`
 - `raw/EDSAC과 Initial Orders_해설.md`

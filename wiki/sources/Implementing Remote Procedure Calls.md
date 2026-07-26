@@ -1,25 +1,65 @@
 ---
+schema_version: 2
+id: ref-102
+kind: reference
 title: Implementing Remote Procedure Calls
-aliases: [RPC 원 논문, Birrell Nelson 1984, Cedar RPC, 원격 프로시저 호출 구현]
-summary: "클라이언트와 서버 사이의 원격 연산을 로컬 프로시저 호출과 유사한 인터페이스로 제공하기 위해 스텁, 바인딩, 메시지 전송, 재전송과 중복 호출 처리를 구성한 Birrell과 Nelson의 1984년 논문."
-tags: [type/reference, domain/software-engineering, domain/distributed-systems, domain/systems, status/active]
-created: 2026-07-25
-updated: 2026-07-25
-publication_year: 1984
-historical_layer: system
-capability_layers: [programmability, realized-performance]
-sources: [Implementing Remote Procedure Calls]
-source_id: ref-102
-source_kind: external
-primary_sources: ["Andrew D. Birrell and Bruce Jay Nelson, Implementing Remote Procedure Calls, ACM Transactions on Computer Systems 2(1), February 1984, pp. 39–59"]
-supporting_sources: ["Andrew Birrell author-hosted paper PDF", "ACM DOI record"]
-source_urls: ["https://birrell.org/andrew/papers/ImplementingRPC.pdf", "https://doi.org/10.1145/2080.357392"]
-retrieved: 2026-07-25
-version: "ACM Transactions on Computer Systems 2(1), February 1984, pp. 39–59"
-snapshot_status: external-only
-status: active
-graph_id: reference-implementing-remote-procedure-calls
+aliases:
+  - RPC 원 논문
+  - Birrell Nelson 1984
+  - Cedar RPC
+  - 원격 프로시저 호출 구현
+summary: 클라이언트와 서버 사이의 원격 연산을 로컬 프로시저 호출과 유사한 인터페이스로 제공하기 위해 스텁, 바인딩, 메시지 전송, 재전송과 중복 호출 처리를 구성한 Birrell과 Nelson의 1984년 논문.
+domains:
+  - software-engineering
+  - distributed-systems
+  - systems
+editorial_status: active
+publication_visibility: public
 graph_visibility: public
+created: 2026-07-25
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:10502a3762b15488c21232b513754c01e0e44c136a1a21ae9164ef165a1b448d
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers:
+  - programmability
+  - realized-performance
+history:
+  publication_year: 1984
+  layer: system
+redirect_from:
+  - /references/implementing-remote-procedure-calls/
+  - /sources/implementing-remote-procedure-calls/
+origin: external
+works:
+  primary:
+    - citation: Andrew D. Birrell and Bruce Jay Nelson, Implementing Remote Procedure Calls, ACM Transactions on Computer Systems 2(1), February 1984, pp. 39–59
+      genre: other
+      identifiers: []
+      edition: ACM Transactions on Computer Systems 2(1), February 1984, pp. 39–59
+  supporting:
+    - citation: Andrew Birrell author-hosted paper PDF
+      genre: primary-literature
+      identifiers: []
+      edition: null
+    - citation: ACM DOI record
+      genre: official-record
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: canonical
+    url: https://birrell.org/andrew/papers/ImplementingRPC.pdf
+    retrieved: 2026-07-25
+    version: ACM Transactions on Computer Systems 2(1), February 1984, pp. 39–59
+  - kind: url
+    role: doi
+    url: https://doi.org/10.1145/2080.357392
+    retrieved: 2026-07-25
+    version: ACM Transactions on Computer Systems 2(1), February 1984, pp. 39–59
 ---
 
 ## 개요
@@ -43,6 +83,7 @@ RPC의 목적은 네트워크를 없애는 것이 아니라, 프로그램이 원
 ## 인용할 만한 구절
 
 > “The communication is hidden by the stub”
+<!-- wiki-v2:quote-locator evidence="ref-102" locator="wiki/sources/Implementing Remote Procedure Calls.md:line-21#인용할-만한-구절" status="recorded" -->
 
 스텁이 통신 절차를 감추지만, 통신으로 생기는 결과 계약까지 사라지는 것은 아니라는 점을 드러낸다.
 
@@ -58,6 +99,11 @@ RPC의 목적은 네트워크를 없애는 것이 아니라, 프로그램이 원
 | enables | [[로컬 호출과 파일은 원격 상태가 될 때 무엇을 잃는가]] | 로컬 호출과 유사한 인터페이스가 원격 통신·재시작·응답 손실의 관찰 불가능성을 없애지 않는 사례를 제공한다. | [[Implementing Remote Procedure Calls]] |
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - Andrew Birrell, [paper PDF](https://birrell.org/andrew/papers/ImplementingRPC.pdf)
 - ACM, [DOI: 10.1145/2080.357392](https://doi.org/10.1145/2080.357392)

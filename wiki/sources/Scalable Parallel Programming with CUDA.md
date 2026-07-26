@@ -1,25 +1,63 @@
 ---
+schema_version: 2
+id: ref-097
+kind: reference
 title: Scalable Parallel Programming with CUDA
-aliases: [CUDA, "Scalable Parallel Programming with CUDA", "Nickolls et al. 2008", CUDA programming model]
-summary: "다수 코어 GPU의 병렬 자원을 일반 응용 프로그램이 활용하도록 커널·스레드 계층·메모리 계층을 노출한 CUDA 프로그래밍 모델을 설명한 2008년 논문."
-tags: [type/reference, domain/software-engineering, domain/programming-languages, domain/computer-architecture, domain/performance, status/active]
-created: 2026-07-25
-updated: 2026-07-25
-publication_year: 2008
-historical_layer: software
-capability_layers: [programmability, realized-performance, scalability]
-sources: [Scalable Parallel Programming with CUDA]
-source_id: ref-097
-source_kind: external
-primary_sources: ["John Nickolls, Ian Buck, Michael Garland, and Kevin Skadron, Scalable Parallel Programming with CUDA, ACM Queue, 2008"]
-supporting_sources: ["NVIDIA Research publication record and ACM Digital Library DOI record"]
-source_urls: ["https://research.nvidia.com/publication/2008-03_scalable-parallel-programming-cuda", "https://doi.org/10.1145/1365490.1365500"]
-retrieved: 2026-07-25
-version: "ACM Queue 6(2), March/April 2008"
-snapshot_status: external-only
-status: active
-graph_id: reference-cuda-programming-model-2008
+aliases:
+  - CUDA
+  - Scalable Parallel Programming with CUDA
+  - Nickolls et al. 2008
+  - CUDA programming model
+summary: 다수 코어 GPU의 병렬 자원을 일반 응용 프로그램이 활용하도록 커널·스레드 계층·메모리 계층을 노출한 CUDA 프로그래밍 모델을 설명한 2008년 논문.
+domains:
+  - software-engineering
+  - programming-languages
+  - computer-architecture
+  - performance
+editorial_status: active
+publication_visibility: public
 graph_visibility: public
+created: 2026-07-25
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:3958bc74a6874cc885bd60535acf4ffb3795944ac50c65b78817d92c1929f8f6
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers:
+  - programmability
+  - realized-performance
+  - scalability
+history:
+  publication_year: 2008
+  layer: software
+redirect_from:
+  - /references/scalable-parallel-programming-with-cuda/
+  - /sources/scalable-parallel-programming-with-cuda/
+origin: external
+works:
+  primary:
+    - citation: John Nickolls, Ian Buck, Michael Garland, and Kevin Skadron, Scalable Parallel Programming with CUDA, ACM Queue, 2008
+      genre: other
+      identifiers: []
+      edition: ACM Queue 6(2), March/April 2008
+  supporting:
+    - citation: NVIDIA Research publication record and ACM Digital Library DOI record
+      genre: official-record
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: canonical
+    url: https://research.nvidia.com/publication/2008-03_scalable-parallel-programming-cuda
+    retrieved: 2026-07-25
+    version: ACM Queue 6(2), March/April 2008
+  - kind: url
+    role: doi
+    url: https://doi.org/10.1145/1365490.1365500
+    retrieved: 2026-07-25
+    version: ACM Queue 6(2), March/April 2008
 ---
 
 ## 개요
@@ -46,6 +84,11 @@ CUDA는 호스트 코드와 GPU에서 실행되는 커널을 구분하고, 커�
 | enables | [[성능 이식성]] | 서로 다른 코어 수의 GPU에서 병렬 작업을 확장할 수 있는 프로그램 구조를 제공하지만, 실제 성능은 대상별 배치와 메모리 선택에 달려 있음을 드러낸다. | [[Scalable Parallel Programming with CUDA]] |
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - NVIDIA Research, [publication record](https://research.nvidia.com/publication/2008-03_scalable-parallel-programming-cuda)
 - ACM Digital Library, [DOI record](https://doi.org/10.1145/1365490.1365500)

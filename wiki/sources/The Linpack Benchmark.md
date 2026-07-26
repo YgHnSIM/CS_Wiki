@@ -1,20 +1,61 @@
 ---
+schema_version: 2
+id: ref-033
+kind: reference
 title: The Linpack Benchmark
-aliases: [TOP500 Linpack benchmark page, LINPACK benchmark overview]
-summary: "고밀도 선형방정식 풀이를 통해 부동소수점 실행률을 측정하는 LINPACK의 범위와 Rmax·Rpeak의 차이, 단일 벤치마크 수치의 한계를 설명하는 TOP500 공식 자료."
-tags: [type/reference, domain/computer-architecture, domain/computer-science, status/active]
+aliases:
+  - TOP500 Linpack benchmark page
+  - LINPACK benchmark overview
+summary: 고밀도 선형방정식 풀이를 통해 부동소수점 실행률을 측정하는 LINPACK의 범위와 Rmax·Rpeak의 차이, 단일 벤치마크 수치의 한계를 설명하는 TOP500 공식 자료.
+domains:
+  - computer-architecture
+  - computer-science
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-07-15
-updated: 2026-07-16
-sources: ["TOP500_Linpack_Benchmark.html", "TOP500_Linpack_FAQ.html", "TOP500 The Linpack Benchmark page", "TOP500 Linpack FAQ"]
-source_id: ref-033
-source_kind: external
-primary_sources: ["TOP500 The Linpack Benchmark page", "TOP500 Linpack FAQ"]
-supporting_sources: ["TOP500_Linpack_Benchmark.html", "TOP500_Linpack_FAQ.html"]
-source_urls: ["https://www.top500.org/project/linpack/", "https://www.top500.org/resources/frequently-asked-questions/"]
-retrieved: 2026-07-15
-version: null
-snapshot_status: archived
-status: active
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:e48d9a8e054114844733c573ded3fe207d9bdca2f88c8cc4ebc4ea18528bbd33
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers: []
+redirect_from:
+  - /references/the-linpack-benchmark/
+  - /sources/the-linpack-benchmark/
+origin: external
+works:
+  primary:
+    - citation: TOP500 The Linpack Benchmark page
+      genre: web
+      identifiers: []
+      edition: null
+    - citation: TOP500 Linpack FAQ
+      genre: other
+      identifiers: []
+      edition: null
+  supporting:
+    - citation: TOP500_Linpack_Benchmark.html
+      genre: other
+      identifiers: []
+      edition: null
+    - citation: TOP500_Linpack_FAQ.html
+      genre: other
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: canonical
+    url: https://www.top500.org/project/linpack/
+    retrieved: 2026-07-15
+    version: null
+  - kind: url
+    role: mirror
+    url: https://www.top500.org/resources/frequently-asked-questions/
+    retrieved: 2026-07-15
+    version: null
 ---
 
 ## 개요
@@ -39,12 +80,18 @@ TOP500 FAQ는 결과가 정해진 정확도 잔차를 만족해야 하고 계산
 ## 인용할 만한 구절
 
 > “This performance does not reflect the overall performance of a given system, as no single number ever can.”
+<!-- wiki-v2:quote-locator evidence="ref-033" locator="wiki/sources/The Linpack Benchmark.md:line-22#인용할-만한-구절" status="recorded" -->
 
 ## 위키 반영
 
 이 자료는 [[Fortran]], [[컴파일러 최적화]], 데이터 이동과 실제 하드웨어 성능을 하나의 측정 사례로 연결한다. “컴퓨팅 능력이란 무엇인가”에서는 최고 성능과 달성 성능의 차이, 작업별 벤치마크의 범위, 정확도 조건을 설명하는 핵심 사례로 사용할 수 있다.
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - 로컬 보존본: `raw/assets/TOP500_Linpack_Benchmark.html`
 - 로컬 보존본: `raw/assets/TOP500_Linpack_FAQ.html`

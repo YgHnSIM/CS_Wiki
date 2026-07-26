@@ -1,22 +1,57 @@
 ---
+schema_version: 2
+id: ref-026
+kind: reference
 title: WHATWG Encoding Standard
-aliases: [WHATWG Encoding, Web Encoding Standard]
-summary: "웹 플랫폼의 바이트-문자 변환 알고리즘, 인코딩 라벨, BOM, 오류 대체 정책을 정리한 참고 자료."
-tags: [type/reference, domain/computer-science, domain/web, domain/text-processing, status/active]
+aliases:
+  - WHATWG Encoding
+  - Web Encoding Standard
+summary: 웹 플랫폼의 바이트-문자 변환 알고리즘, 인코딩 라벨, BOM, 오류 대체 정책을 정리한 참고 자료.
+domains:
+  - computer-science
+  - web
+  - text-processing
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-07-10
-updated: 2026-07-22
-sources: ["WHATWG Encoding Standard"]
-source_id: ref-026
-source_kind: external
-primary_sources: ["WHATWG Encoding Living Standard"]
-supporting_sources: ["Commit snapshot a985b62a9b45c17da3e17a9f0a0b4e30c34c4a8a"]
-source_urls: ["https://encoding.spec.whatwg.org/", "https://encoding.spec.whatwg.org/commit-snapshots/a985b62a9b45c17da3e17a9f0a0b4e30c34c4a8a/"]
-retrieved: 2026-07-10
-version: "Living Standard / snapshot 2026-05-21 (a985b62a)"
-snapshot_status: external-only
-status: active
-publication_year: 2026
-historical_note: "Living Standard의 2026-05-21 고정 스냅샷을 기준으로 한 연도다."
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:120a8240b9ec0373befe92fbb51deb2af43859c12dfbaf2f3bad6c9099353f8a
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers: []
+history:
+  publication_year: 2026
+  note: Living Standard의 2026-05-21 고정 스냅샷을 기준으로 한 연도다.
+redirect_from:
+  - /references/whatwg-encoding-standard/
+  - /sources/whatwg-encoding-standard/
+origin: external
+works:
+  primary:
+    - citation: WHATWG Encoding Living Standard
+      genre: standard
+      identifiers: []
+      edition: Living Standard / snapshot 2026-05-21 (a985b62a)
+  supporting:
+    - citation: Commit snapshot a985b62a9b45c17da3e17a9f0a0b4e30c34c4a8a
+      genre: standard
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: canonical
+    url: https://encoding.spec.whatwg.org/
+    retrieved: 2026-07-10
+    version: Living Standard / snapshot 2026-05-21 (a985b62a)
+  - kind: url
+    role: mirror
+    url: https://encoding.spec.whatwg.org/commit-snapshots/a985b62a9b45c17da3e17a9f0a0b4e30c34c4a8a/
+    retrieved: 2026-07-10
+    version: Living Standard / snapshot 2026-05-21 (a985b62a)
 ---
 
 ## 개요
@@ -38,6 +73,11 @@ historical_note: "Living Standard의 2026-05-21 고정 스냅샷을 기준으로
 이 자료는 [[인코딩 오류]], [[바이트 순서 표식]], [[UTF-8]], [[유니코드]], [[인코딩 심화]]를 정리하는 데 사용한다. 특히 텍스트 처리에서 "정상적으로 디코딩할 것인가, 실패시킬 것인가, 대체 문자로 넘길 것인가"가 설계 선택이라는 점을 뒷받침한다.
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - WHATWG, [Encoding Living Standard](https://encoding.spec.whatwg.org/)
 - WHATWG, [2026-05-21 commit snapshot](https://encoding.spec.whatwg.org/commit-snapshots/a985b62a9b45c17da3e17a9f0a0b4e30c34c4a8a/)

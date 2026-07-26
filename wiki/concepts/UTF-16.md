@@ -1,13 +1,32 @@
 ---
+schema_version: 2
+id: concept-c854e2f6358212d1
+kind: concept
 title: UTF-16
-aliases: [Unicode Transformation Format 16-bit, surrogate pair, 서로게이트 페어]
-summary: "Unicode scalar value를 16비트 코드 유닛 하나 또는 surrogate pair 두 개로 표현하는 인코딩 형식."
-tags: [type/concept, domain/computer-science, domain/text-processing, status/active]
+aliases:
+  - Unicode Transformation Format 16-bit
+  - surrogate pair
+  - 서로게이트 페어
+summary: Unicode scalar value를 16비트 코드 유닛 하나 또는 surrogate pair 두 개로 표현하는 인코딩 형식.
+domains:
+  - computer-science
+  - text-processing
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-07-10
-updated: 2026-07-22
-sources: ["The Unicode Standard 17.0.0", "WHATWG Encoding Standard"]
-status: active
-graph_id: concept-c854e2f6358212d1
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:40a17e9b307f4d8e15330785c4ad18a69fc7f15c7a59c4d36b477a76b15214a8
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids:
+  - ref-022
+  - ref-026
+capability_layers: []
+redirect_from:
+  - /concepts/utf-16/
 ---
 
 ## 개요
@@ -27,6 +46,12 @@ UTF-16 코드 유닛은 16비트 값이므로 바이트열로 저장하거나 �
 많은 플랫폼과 언어가 내부 문자열 표현으로 UTF-16 또는 UTF-16에 가까운 코드 유닛 모델을 사용해 왔다. 이 경우 문자열 길이가 사용자 지각 문자 수가 아니라 UTF-16 코드 유닛 수일 수 있다. 이모지나 일부 역사 문자처럼 surrogate pair가 필요한 문자는 코드 유닛 두 개로 계산된다.
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- `ref-022`
+- `ref-026`
+<!-- wiki-v2:evidence-end -->
 
 - [[The Unicode Standard 17.0.0]]
 - [[WHATWG Encoding Standard]]

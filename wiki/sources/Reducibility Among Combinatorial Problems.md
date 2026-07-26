@@ -1,25 +1,66 @@
 ---
+schema_version: 2
+id: ref-067
+kind: reference
 title: Reducibility Among Combinatorial Problems
-aliases: [Karp 1972, Karp's 21 problems, 조합 문제 사이의 환원성]
-summary: "만족 가능성 문제에서 여러 조합적 결정 문제로의 다항시간 변환을 구성해 완전성 결과를 확장한 Richard M. Karp의 1972년 논문."
-tags: [type/reference, domain/computer-science, status/active]
-created: 2026-07-24
-updated: 2026-07-24
-publication_year: 1972
-historical_layer: theory
-capability_layers: [complexity]
-sources: ["Reducibility Among Combinatorial Problems"]
-source_id: ref-067
-source_kind: external
-primary_sources: ["Richard M. Karp, Reducibility Among Combinatorial Problems, in Complexity of Computer Computations, 1972, pp. 85–103"]
-supporting_sources: ["Springer chapter record", "Richard M. Karp introduction and reprint access copy"]
-source_urls: ["https://doi.org/10.1007/978-1-4684-2001-2_9", "https://link.springer.com/chapter/10.1007/978-1-4684-2001-2_9", "https://www.cs.umd.edu/~gasarch/BLOGPAPERS/Karp.pdf"]
-retrieved: 2026-07-24
-version: "Complexity of Computer Computations, 1972, pp. 85–103"
-snapshot_status: external-only
-status: active
-graph_id: reference-karp-combinatorial-reducibility
+aliases:
+  - Karp 1972
+  - Karp's 21 problems
+  - 조합 문제 사이의 환원성
+summary: 만족 가능성 문제에서 여러 조합적 결정 문제로의 다항시간 변환을 구성해 완전성 결과를 확장한 Richard M. Karp의 1972년 논문.
+domains:
+  - computer-science
+editorial_status: active
+publication_visibility: public
 graph_visibility: public
+created: 2026-07-24
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:50fb94949db3769905cf0ae74fb8e6e8ec4977b273769c09d91a5776ff3aaca1
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers:
+  - complexity
+history:
+  publication_year: 1972
+  layer: theory
+redirect_from:
+  - /references/reducibility-among-combinatorial-problems/
+  - /sources/reducibility-among-combinatorial-problems/
+origin: external
+works:
+  primary:
+    - citation: Richard M. Karp, Reducibility Among Combinatorial Problems, in Complexity of Computer Computations, 1972, pp. 85–103
+      genre: other
+      identifiers: []
+      edition: Complexity of Computer Computations, 1972, pp. 85–103
+  supporting:
+    - citation: Springer chapter record
+      genre: official-record
+      identifiers: []
+      edition: null
+    - citation: Richard M. Karp introduction and reprint access copy
+      genre: other
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: doi
+    url: https://doi.org/10.1007/978-1-4684-2001-2_9
+    retrieved: 2026-07-24
+    version: Complexity of Computer Computations, 1972, pp. 85–103
+  - kind: url
+    role: mirror
+    url: https://link.springer.com/chapter/10.1007/978-1-4684-2001-2_9
+    retrieved: 2026-07-24
+    version: Complexity of Computer Computations, 1972, pp. 85–103
+  - kind: url
+    role: mirror
+    url: https://www.cs.umd.edu/~gasarch/BLOGPAPERS/Karp.pdf
+    retrieved: 2026-07-24
+    version: Complexity of Computer Computations, 1972, pp. 85–103
 ---
 
 ## 개요
@@ -41,6 +82,7 @@ Karp가 사용한 환원은 입력 `x`를 다항 시간 안에 `f(x)`로 바꾸�
 ## 인용할 만한 구절
 
 > “Reducibility Among Combinatorial Problems”
+<!-- wiki-v2:quote-locator evidence="ref-067" locator="wiki/sources/Reducibility Among Combinatorial Problems.md:line-19#인용할-만한-구절" status="recorded" -->
 
 제목 그대로 이 장의 대상은 개별 조합 문제를 공통 환원 관계 안에서 비교하는 일이다.
 
@@ -56,6 +98,11 @@ Karp가 사용한 환원은 입력 `x`를 다항 시간 안에 `f(x)`로 바꾸�
 | exemplifies | [[NP-완전]] | 대표 완전 문제에서 조합적 결정 문제로 완전성 결과를 확장하는 사례를 제공한다. | [[Reducibility Among Combinatorial Problems]] |
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - Springer Nature, [DOI record](https://doi.org/10.1007/978-1-4684-2001-2_9)
 - Springer Nature, [chapter record](https://link.springer.com/chapter/10.1007/978-1-4684-2001-2_9)

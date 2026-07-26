@@ -1,25 +1,60 @@
 ---
+schema_version: 2
+id: ref-110
+kind: reference
 title: Carbon Emissions and Large Neural Network Training
-aliases: [Patterson et al. 2021, 대형 신경망 학습 탄소 배출, ML training carbon emissions]
-summary: "대형 신경망 학습의 에너지와 CO₂e를 모델 구조, 프로세서, 데이터센터 효율, 지역 전력망 조건과 함께 추정·비교한 2021년 연구."
-tags: [type/reference, domain/machine-learning, domain/systems, status/active]
-created: 2026-07-25
-updated: 2026-07-25
-publication_year: 2021
-historical_layer: measurement
-capability_layers: [resource-efficiency, realized-performance, reliable-results]
-sources: [Carbon Emissions and Large Neural Network Training]
-source_id: ref-110
-source_kind: external
-primary_sources: ["David Patterson et al., Carbon Emissions and Large Neural Network Training, arXiv:2104.10350, 2021"]
-supporting_sources: ["Google Research author publication record"]
-source_urls: ["https://arxiv.org/abs/2104.10350", "https://research.google/people/jeff/"]
-retrieved: 2026-07-25
-version: "arXiv v1, 2021-04-21"
-snapshot_status: external-only
-status: active
-graph_id: reference-ml-training-carbon-emissions
+aliases:
+  - Patterson et al. 2021
+  - 대형 신경망 학습 탄소 배출
+  - ML training carbon emissions
+summary: 대형 신경망 학습의 에너지와 CO₂e를 모델 구조, 프로세서, 데이터센터 효율, 지역 전력망 조건과 함께 추정·비교한 2021년 연구.
+domains:
+  - machine-learning
+  - systems
+editorial_status: active
+publication_visibility: public
 graph_visibility: public
+created: 2026-07-25
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:222bb356a0de1c55ed143331af0319ac2f2a873b1827d6cdbed1b83f9330dfd2
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers:
+  - resource-efficiency
+  - realized-performance
+  - reliable-results
+history:
+  publication_year: 2021
+  layer: measurement
+redirect_from:
+  - /references/carbon-emissions-and-large-neural-network-training/
+  - /sources/carbon-emissions-and-large-neural-network-training/
+origin: external
+works:
+  primary:
+    - citation: David Patterson et al., Carbon Emissions and Large Neural Network Training, arXiv:2104.10350, 2021
+      genre: other
+      identifiers: []
+      edition: arXiv v1, 2021-04-21
+  supporting:
+    - citation: Google Research author publication record
+      genre: official-record
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: canonical
+    url: https://arxiv.org/abs/2104.10350
+    retrieved: 2026-07-25
+    version: arXiv v1, 2021-04-21
+  - kind: url
+    role: mirror
+    url: https://research.google/people/jeff/
+    retrieved: 2026-07-25
+    version: arXiv v1, 2021-04-21
 ---
 
 ## 개요
@@ -51,6 +86,11 @@ graph_visibility: public
 | constrains | [[LLM 추론 에너지 지표]] | 특정 장비의 에너지 수치를 탄소 영향으로 읽으려면 위치·시간·시설과 작업 품질 조건을 추가해야 함을 보인다. | [[Carbon Emissions and Large Neural Network Training]] |
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - arXiv, [paper record](https://arxiv.org/abs/2104.10350)
 - Google Research, [author publication record](https://research.google/people/jeff/)

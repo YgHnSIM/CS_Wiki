@@ -1,13 +1,32 @@
 ---
+schema_version: 2
+id: analysis-35a2e99b2b062bf6
+kind: analysis
 title: EDSAC은 무엇의 최초인가
-aliases: [EDSAC 최초성, EDSAC first, first practical stored-program computer]
-summary: "EDSAC의 최초성을 절대적 최초가 아니라 실용적 범용 저장 프로그램 컴퓨터 기준으로 정리한 분석."
-tags: [type/analysis, domain/computer-history, domain/computer-architecture, status/active]
+aliases:
+  - EDSAC 최초성
+  - EDSAC first
+  - first practical stored-program computer
+summary: EDSAC의 최초성을 절대적 최초가 아니라 실용적 범용 저장 프로그램 컴퓨터 기준으로 정리한 분석.
+domains:
+  - computer-history
+  - computer-architecture
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-07-10
-updated: 2026-07-22
-sources: ["First Draft of a Report on the EDVAC", "The Manchester Small Scale Experimental Machine - The Baby"]
-status: active
-graph_id: analysis-35a2e99b2b062bf6
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:49608d3e25f13b36ab6ed47298ef3ab8dd0ae82c20cba45e5c6090f7eb6de1e7
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids:
+  - ref-006
+  - ref-007
+capability_layers: []
+redirect_from:
+  - /analyses/edsac은-무엇의-최초인가/
 ---
 
 ## 핵심 주장
@@ -38,6 +57,12 @@ EDSAC을 설명할 때는 다음 표현을 구분해 쓰는 것이 좋다.
 이 구분은 EDSAC의 중요성을 낮추지 않는다. 오히려 [[저장 프로그램 개념의 여러 기원]] 안에서 EDSAC의 고유한 의미를 더 정확히 드러낸다.
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- `ref-006`
+- `ref-007`
+<!-- wiki-v2:evidence-end -->
 
 - [[First Draft of a Report on the EDVAC]]
 - [[The Manchester Small Scale Experimental Machine - The Baby]]

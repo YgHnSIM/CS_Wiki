@@ -1,26 +1,67 @@
 ---
+schema_version: 2
+id: ref-109
+kind: reference
 title: "Chasing Carbon: The Elusive Environmental Footprint of Computing"
-aliases: ["Chasing Carbon: The Elusive Environmental Footprint of Computing", Gupta et al. 2021, Chasing Carbon, 컴퓨팅 탄소 발자국]
-summary: "컴퓨팅의 운영 에너지와 하드웨어 제조·인프라에서 나오는 탄소를 구분하고, 성능·전력 효율 개선만으로 전체 환경 영향을 판단할 수 없음을 분석한 2021년 HPCA 논문."
-tags: [type/reference, domain/computer-architecture, domain/systems, status/active]
-created: 2026-07-25
-updated: 2026-07-25
-publication_year: 2021
-historical_note: "HPCA 2021 발표를 기준 시점으로 두며, 2022년 IEEE Micro 확장판은 보조 판본으로 기록한다."
-historical_layer: measurement
-capability_layers: [resource-efficiency, scalability, reliable-results]
-sources: ["Chasing Carbon — The Elusive Environmental Footprint of Computing"]
-source_id: ref-109
-source_kind: external
-primary_sources: ["Udit Gupta et al., Chasing Carbon: The Elusive Environmental Footprint of Computing, IEEE HPCA 2021, pp. 854–867"]
-supporting_sources: ["Udit Gupta et al., IEEE Micro 42(4), 2022 expanded version"]
-source_urls: ["https://arxiv.org/abs/2011.02839", "https://hsienhsinlee.github.io/MARS/pub/hpca2021-carbon.pdf", "https://doi.org/10.1109/MM.2022.3163226"]
-retrieved: 2026-07-25
-version: "HPCA 2021; IEEE Micro 2022 expanded version"
-snapshot_status: external-only
-status: active
-graph_id: reference-chasing-carbon
+aliases:
+  - "Chasing Carbon: The Elusive Environmental Footprint of Computing"
+  - Gupta et al. 2021
+  - Chasing Carbon
+  - 컴퓨팅 탄소 발자국
+summary: 컴퓨팅의 운영 에너지와 하드웨어 제조·인프라에서 나오는 탄소를 구분하고, 성능·전력 효율 개선만으로 전체 환경 영향을 판단할 수 없음을 분석한 2021년 HPCA 논문.
+domains:
+  - computer-architecture
+  - systems
+editorial_status: active
+publication_visibility: public
 graph_visibility: public
+created: 2026-07-25
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:742c2ccad104401db5f3df7d0d7f79d91f43f3ef10897b58882ec5b1f5ab28d0
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers:
+  - resource-efficiency
+  - scalability
+  - reliable-results
+history:
+  publication_year: 2021
+  note: HPCA 2021 발표를 기준 시점으로 두며, 2022년 IEEE Micro 확장판은 보조 판본으로 기록한다.
+  layer: measurement
+redirect_from:
+  - /references/chasing-carbon-the-elusive-environmental-footprint-of-computing/
+  - /sources/chasing-carbon-the-elusive-environmental-footprint-of-computing/
+origin: external
+works:
+  primary:
+    - citation: "Udit Gupta et al., Chasing Carbon: The Elusive Environmental Footprint of Computing, IEEE HPCA 2021, pp. 854–867"
+      genre: other
+      identifiers: []
+      edition: HPCA 2021; IEEE Micro 2022 expanded version
+  supporting:
+    - citation: Udit Gupta et al., IEEE Micro 42(4), 2022 expanded version
+      genre: other
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: canonical
+    url: https://arxiv.org/abs/2011.02839
+    retrieved: 2026-07-25
+    version: HPCA 2021; IEEE Micro 2022 expanded version
+  - kind: url
+    role: mirror
+    url: https://hsienhsinlee.github.io/MARS/pub/hpca2021-carbon.pdf
+    retrieved: 2026-07-25
+    version: HPCA 2021; IEEE Micro 2022 expanded version
+  - kind: url
+    role: doi
+    url: https://doi.org/10.1109/MM.2022.3163226
+    retrieved: 2026-07-25
+    version: HPCA 2021; IEEE Micro 2022 expanded version
 ---
 
 ## 개요
@@ -51,6 +92,11 @@ graph_visibility: public
 | constrains | [[에너지 비례 컴퓨팅]] | 부하에 따른 운영 전력 개선을 전체 수명 주기 환경 영향의 충분조건으로 확대하지 않게 한다. | [[Chasing Carbon: The Elusive Environmental Footprint of Computing]] |
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - arXiv, [paper record](https://arxiv.org/abs/2011.02839)
 - authors, [HPCA 2021 paper PDF](https://hsienhsinlee.github.io/MARS/pub/hpca2021-carbon.pdf)

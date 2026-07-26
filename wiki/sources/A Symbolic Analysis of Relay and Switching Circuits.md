@@ -1,22 +1,71 @@
 ---
+schema_version: 2
+id: ref-008
+kind: reference
 title: A Symbolic Analysis of Relay and Switching Circuits
-aliases: [Shannon 1938, Symbolic Analysis, relay and switching circuits]
-summary: "Shannon의 릴레이·스위칭 회로 논문을 바탕으로 불 대수, 논리 게이트, 이진 덧셈 회로, 이진 표현의 회로적 기반을 정리한 참고 자료."
-tags: [type/reference, domain/computer-history, domain/computer-architecture, domain/computer-science, status/active]
+aliases:
+  - Shannon 1938
+  - Symbolic Analysis
+  - relay and switching circuits
+summary: Shannon의 릴레이·스위칭 회로 논문을 바탕으로 불 대수, 논리 게이트, 이진 덧셈 회로, 이진 표현의 회로적 기반을 정리한 참고 자료.
+domains:
+  - computer-history
+  - computer-architecture
+  - computer-science
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-07-10
-updated: 2026-07-18
-publication_year: 1938
-historical_layer: architecture
-sources: ["MIT DSpace: 34541425-MIT.pdf", "Transactions AIEE 1938"]
-source_id: ref-008
-source_kind: external
-primary_sources: ["Transactions AIEE 1938"]
-supporting_sources: ["MIT DSpace: 34541425-MIT.pdf", "IEEE Xplore record", "PDF copy"]
-source_urls: ["https://dspace.mit.edu/entities/publication/2dffdeb7-2862-4575-8a8e-b29fb59319e5", "https://harrymoreno.com/assets/greatPapersInCompSci/3.2_-_A_Symbolic_analysis_of_rela_and_switching_circuits-Claude_E._Shannon.pdf", "https://ieeexplore.ieee.org/document/5057767/"]
-retrieved: 2026-07-10
-version: null
-snapshot_status: external-only
-status: active
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:d4adbd0c1fb844cbaefa9ca7c9cfe23af6f06aa84e1d2452d8e4683c072bef14
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers: []
+history:
+  publication_year: 1938
+  layer: architecture
+redirect_from:
+  - /references/a-symbolic-analysis-of-relay-and-switching-circuits/
+  - /sources/a-symbolic-analysis-of-relay-and-switching-circuits/
+origin: external
+works:
+  primary:
+    - citation: Transactions AIEE 1938
+      genre: other
+      identifiers: []
+      edition: null
+  supporting:
+    - citation: "MIT DSpace: 34541425-MIT.pdf"
+      genre: other
+      identifiers: []
+      edition: null
+    - citation: IEEE Xplore record
+      genre: official-record
+      identifiers: []
+      edition: null
+    - citation: PDF copy
+      genre: other
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: canonical
+    url: https://dspace.mit.edu/entities/publication/2dffdeb7-2862-4575-8a8e-b29fb59319e5
+    retrieved: 2026-07-10
+    version: null
+  - kind: url
+    role: mirror
+    url: https://harrymoreno.com/assets/greatPapersInCompSci/3.2_-_A_Symbolic_analysis_of_rela_and_switching_circuits-Claude_E._Shannon.pdf
+    retrieved: 2026-07-10
+    version: null
+  - kind: url
+    role: mirror
+    url: https://ieeexplore.ieee.org/document/5057767/
+    retrieved: 2026-07-10
+    version: null
 ---
 
 ## 개요
@@ -38,6 +87,11 @@ status: active
 이 자료는 기존 [[이진법]], [[비트와 바이트]], [[데이터 표현]], [[비트 연산]], [[비트 패턴과 해석 규칙]]을 회로 수준과 연결하는 데 사용한다. 새 분석 페이지 [[논리 회로와 이진 표현]]은 0/1 표현이 단순한 표기법을 넘어 물리적 스위치, 논리식, 산술 회로를 잇는 구조임을 정리한다.
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - MIT DSpace, [A symbolic analysis of relay and switching circuits](https://dspace.mit.edu/entities/publication/2dffdeb7-2862-4575-8a8e-b29fb59319e5)
 - PDF copy, [A Symbolic Analysis of Relay and Switching Circuits](https://harrymoreno.com/assets/greatPapersInCompSci/3.2_-_A_Symbolic_analysis_of_rela_and_switching_circuits-Claude_E._Shannon.pdf)

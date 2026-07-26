@@ -1,16 +1,41 @@
 ---
+schema_version: 2
+id: concept-72af5ee2350eff99
+kind: concept
 title: Fortran
-aliases: [FORTRAN, Formula Translation, 포트란]
-summary: "수학적 수식과 과학 계산 표현을 IBM 704 목적 프로그램으로 번역하려 한 초기 고급 프로그래밍 언어."
-tags: [type/concept, domain/programming-languages, domain/computer-history, status/active]
+aliases:
+  - FORTRAN
+  - Formula Translation
+  - 포트란
+summary: 수학적 수식과 과학 계산 표현을 IBM 704 목적 프로그램으로 번역하려 한 초기 고급 프로그래밍 언어.
+domains:
+  - programming-languages
+  - computer-history
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-05-04
-updated: 2026-07-22
-sources: ["초기 소프트웨어의 탄생.md", "초기 소프트웨어의 탄생_해설.md", "FORTRAN Automatic Coding System for the IBM 704 EDPM", "The FORTRAN Automatic Coding System", "The History of FORTRAN I, II, and III"]
-status: active
-graph_id: concept-72af5ee2350eff99
-event_start: 1957
-historical_layer: software
-historical_note: "FORTRAN Automatic Coding System이 배포된 1957년을 대표 시점으로 둔다."
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:11d4b7d01af6f15ebcc717522e84bcd6831e1ff55734530646b05f67ee574257
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids:
+  - src-002
+  - ref-015
+  - ref-016
+  - ref-017
+capability_layers: []
+history:
+  event:
+    start: 1957
+    basis: representative
+    evidence_id: src-002
+  note: FORTRAN Automatic Coding System이 배포된 1957년을 대표 시점으로 둔다.
+  layer: software
+redirect_from:
+  - /concepts/fortran/
 ---
 
 ## 개요
@@ -34,6 +59,14 @@ Fortran의 `GO TO`는 후대의 [[구조적 프로그래밍]] 논쟁과도 연�
 Fortran은 [[Initial Orders]]에서 보이던 인간 표기와 기계 실행 사이의 번역 계층이 더 높은 수준의 언어 설계로 확장된 사례다. 동시에 [[자동 프로그래밍]]이 주소 보정과 서브루틴 조립을 넘어, 수식과 반복 구조 전체를 목적 프로그램으로 변환하는 컴파일러 체계로 발전할 수 있음을 보여준다.
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- `src-002`
+- `ref-015`
+- `ref-016`
+- `ref-017`
+<!-- wiki-v2:evidence-end -->
 
 - [[초기 소프트웨어의 탄생]]
 - [[FORTRAN Automatic Coding System for the IBM 704 EDPM]]

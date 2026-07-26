@@ -1,17 +1,42 @@
 ---
+schema_version: 2
+id: concept-f438fd4127b48dbb
+kind: concept
 title: C 언어
-aliases: [C, C programming language, C language]
-summary: "Unix 구현을 위해 발전한 시스템 프로그래밍 언어로, 포인터와 바이트 단위 제어를 고급 언어 구조와 결합한 언어."
-tags: [type/concept, domain/programming-languages, domain/software-engineering, domain/computer-history, status/active]
+aliases:
+  - C
+  - C programming language
+  - C language
+summary: Unix 구현을 위해 발전한 시스템 프로그래밍 언어로, 포인터와 바이트 단위 제어를 고급 언어 구조와 결합한 언어.
+domains:
+  - programming-languages
+  - software-engineering
+  - computer-history
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-07-10
-updated: 2026-07-22
-sources: ["The Development of the C Language", "The Evolution of the Unix Time-sharing System", "Portability of C Programs and the UNIX System"]
-status: active
-graph_id: concept-f438fd4127b48dbb
-event_start: 1969
-event_end: 1973
-historical_layer: software
-historical_note: "C가 Unix의 초기 발전과 나란히 형성된 1969~1973년을 사건 범위로 둔다."
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:286491ce18748b4c08ce1c4fb775bff727a8bf2aaa4b73f8524cdd737499c20a
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids:
+  - ref-019
+  - ref-020
+  - ref-021
+capability_layers: []
+history:
+  event:
+    start: 1969
+    end: 1973
+    basis: representative
+    evidence_id: ref-019
+  note: C가 Unix의 초기 발전과 나란히 형성된 1969~1973년을 사건 범위로 둔다.
+  layer: software
+redirect_from:
+  - /concepts/c-언어/
 ---
 
 ## 개요
@@ -31,6 +56,13 @@ C의 역사적 의미는 고급 언어와 기계에 가까운 제어 사이의 �
 C는 기계에 가까운 표현력을 제공하는 만큼 [[메모리 안전성]]의 책임을 프로그래머에게 많이 남긴다. [[C 문자열]]의 널 종단, 포인터 연산, 타입 변환, 정수 범위는 시스템 프로그래밍의 힘이면서 동시에 오류와 취약점의 원천이 될 수 있다.
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- `ref-019`
+- `ref-020`
+- `ref-021`
+<!-- wiki-v2:evidence-end -->
 
 - [[The Development of the C Language]]
 - [[The Evolution of the Unix Time-sharing System]]

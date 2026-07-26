@@ -1,21 +1,51 @@
 ---
+schema_version: 2
+id: ref-002
+kind: reference
 title: Mass Produced Software Components
-aliases: [Mass-Produced Software Components, 대량 생산 소프트웨어 컴포넌트, McIlroy software components]
-summary: "McIlroy의 1968년 발표를 바탕으로 소프트웨어 컴포넌트 제품군, 카탈로그, 재사용 산업화 구상을 정리한 참고 자료."
-tags: [type/reference, domain/software-engineering, domain/computer-history, status/active]
+aliases:
+  - Mass-Produced Software Components
+  - 대량 생산 소프트웨어 컴포넌트
+  - McIlroy software components
+summary: McIlroy의 1968년 발표를 바탕으로 소프트웨어 컴포넌트 제품군, 카탈로그, 재사용 산업화 구상을 정리한 참고 자료.
+domains:
+  - software-engineering
+  - computer-history
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-07-10
-updated: 2026-07-22
-sources: ["NATO Software Engineering Conference 1968", "Dartmouth text copy"]
-source_id: ref-002
-source_kind: external
-primary_sources: ["NATO Software Engineering Conference 1968"]
-supporting_sources: ["Dartmouth text copy"]
-source_urls: ["https://www.cs.dartmouth.edu/~doug/components.txt"]
-retrieved: 2026-07-10
-version: null
-snapshot_status: external-only
-status: active
-publication_year: 1968
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:f4d7bb73fcb92842d339fadb31a572a4aab33199f49a37514b0dc656991ce968
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers: []
+history:
+  publication_year: 1968
+redirect_from:
+  - /references/mass-produced-software-components/
+  - /sources/mass-produced-software-components/
+origin: external
+works:
+  primary:
+    - citation: NATO Software Engineering Conference 1968
+      genre: other
+      identifiers: []
+      edition: null
+  supporting:
+    - citation: Dartmouth text copy
+      genre: other
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: canonical
+    url: https://www.cs.dartmouth.edu/~doug/components.txt
+    retrieved: 2026-07-10
+    version: null
 ---
 
 ## 개요
@@ -37,6 +67,11 @@ McIlroy의 핵심 문제의식은 소프트웨어 생산이 하드웨어나 기�
 이 자료는 [[소프트웨어 재사용]], [[소프트웨어 컴포넌트]], [[라이브러리]], [[API]], [[소프트웨어 공학]]을 정리하는 근거로 사용한다. [[소프트웨어 재사용의 역사]]에서는 EDSAC의 서브루틴 라이브러리 이후 재사용이 개별 루틴의 보관을 넘어 컴포넌트 산업과 제품군 사고로 확장되는 전환점으로 다룬다.
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - Douglas McIlroy, [Mass Produced Software Components](https://www.cs.dartmouth.edu/~doug/components.txt)
 

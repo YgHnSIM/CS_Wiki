@@ -1,26 +1,80 @@
 ---
+schema_version: 2
+id: ref-084
+kind: reference
 title: MLPerf Inference Power Measurement
-aliases: [MLPerf Inference Power, MLPerf 추론 전력 측정, MLPerf power methodology]
-summary: "MLPerf Inference의 성능 실행과 같은 구간에서 인증 전력 분석기와 SPEC PTDaemon으로 전체 시스템의 벽면 AC 전력·에너지를 측정하는 공식 방법론."
-tags: [type/reference, domain/machine-learning, domain/performance, domain/systems, status/active]
-created: 2026-07-25
-updated: 2026-07-25
-publication_year: 2021
-historical_note: "MLPerf Inference v1.0은 2021년에 첫 선택적 전력 측정을 공개했다. 이 페이지는 2026-07-25에 확인한 v6.0 세대의 공식 문서와 master 규칙을 그 최초 공개 시점과 구분한다."
-historical_layer: measurement
-capability_layers: [realized-performance, resource-efficiency, reliable-results]
-sources: ["MLPerf Inference Power Measurement"]
-source_id: ref-084
-source_kind: external
-primary_sources: ["MLCommons MLPerf Inference power measurement documentation", "MLCommons MLPerf Inference rules", "MLPerf Inference v1.0 first power measurements announcement"]
-supporting_sources: ["MLCommons Inference Datacenter results and power metric description"]
-source_urls: ["https://docs.mlcommons.org/inference/power/", "https://mlcommons.org/benchmarks/inference-datacenter/", "https://github.com/mlcommons/inference_policies/blob/master/inference_rules.adoc", "https://mlcommons.org/2021/04/mlperf-inference-v1-0-results-with-first-power-measurements/"]
-retrieved: 2026-07-25
-version: "MLPerf Inference v1.0 first power methodology; current v6.0-era documentation and master rules as retrieved"
-snapshot_status: external-only
-status: active
-graph_id: reference-mlperf-inference-power
+aliases:
+  - MLPerf Inference Power
+  - MLPerf 추론 전력 측정
+  - MLPerf power methodology
+summary: MLPerf Inference의 성능 실행과 같은 구간에서 인증 전력 분석기와 SPEC PTDaemon으로 전체 시스템의 벽면 AC 전력·에너지를 측정하는 공식 방법론.
+domains:
+  - machine-learning
+  - performance
+  - systems
+editorial_status: active
+publication_visibility: public
 graph_visibility: public
+created: 2026-07-25
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:453d7b1ce27e97cbf4562d49344e24c50806ef3dd9dff6ab4c2ba70f0b5d4cef
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers:
+  - realized-performance
+  - resource-efficiency
+  - reliable-results
+history:
+  publication_year: 2021
+  note: MLPerf Inference v1.0은 2021년에 첫 선택적 전력 측정을 공개했다. 이 페이지는 2026-07-25에 확인한 v6.0 세대의 공식 문서와 master 규칙을 그 최초 공개 시점과 구분한다.
+  layer: measurement
+redirect_from:
+  - /references/mlperf-inference-power-measurement/
+  - /sources/mlperf-inference-power-measurement/
+origin: external
+works:
+  primary:
+    - citation: MLCommons MLPerf Inference power measurement documentation
+      genre: manual
+      identifiers: []
+      edition: MLPerf Inference v1.0 first power methodology; current v6.0-era documentation and master rules as retrieved
+    - citation: MLCommons MLPerf Inference rules
+      genre: other
+      identifiers: []
+      edition: MLPerf Inference v1.0 first power methodology; current v6.0-era documentation and master rules as retrieved
+    - citation: MLPerf Inference v1.0 first power measurements announcement
+      genre: other
+      identifiers: []
+      edition: MLPerf Inference v1.0 first power methodology; current v6.0-era documentation and master rules as retrieved
+  supporting:
+    - citation: MLCommons Inference Datacenter results and power metric description
+      genre: other
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: canonical
+    url: https://docs.mlcommons.org/inference/power/
+    retrieved: 2026-07-25
+    version: MLPerf Inference v1.0 first power methodology; current v6.0-era documentation and master rules as retrieved
+  - kind: url
+    role: mirror
+    url: https://mlcommons.org/benchmarks/inference-datacenter/
+    retrieved: 2026-07-25
+    version: MLPerf Inference v1.0 first power methodology; current v6.0-era documentation and master rules as retrieved
+  - kind: url
+    role: mirror
+    url: https://github.com/mlcommons/inference_policies/blob/master/inference_rules.adoc
+    retrieved: 2026-07-25
+    version: MLPerf Inference v1.0 first power methodology; current v6.0-era documentation and master rules as retrieved
+  - kind: url
+    role: mirror
+    url: https://mlcommons.org/2021/04/mlperf-inference-v1-0-results-with-first-power-measurements/
+    retrieved: 2026-07-25
+    version: MLPerf Inference v1.0 first power methodology; current v6.0-era documentation and master rules as retrieved
 ---
 
 ## 개요
@@ -44,6 +98,7 @@ graph_visibility: public
 ## 인용할 만한 구절
 
 > “System Power”
+<!-- wiki-v2:quote-locator evidence="ref-084" locator="wiki/sources/MLPerf Inference Power Measurement.md:line-21#인용할-만한-구절" status="recorded" -->
 
 공식 결과의 전력값이 개별 가속기 사양이 아니라 제출 시스템 전체의 계측 경계를 가리킨다는 점이 중요하다.
 
@@ -60,6 +115,11 @@ graph_visibility: public
 | exemplifies | [[컴퓨팅 능력이란 무엇인가]] | 지정 작업과 결과 계약, 시스템 경계를 고정한 뒤 성능과 자원 효율을 함께 비교하는 사례다. | [[MLPerf Inference Power Measurement]] |
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - MLCommons, [official inference power measurement documentation](https://docs.mlcommons.org/inference/power/)
 - MLCommons, [Inference Datacenter benchmark and power metric description](https://mlcommons.org/benchmarks/inference-datacenter/)

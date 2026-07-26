@@ -1,21 +1,70 @@
 ---
+schema_version: 2
+id: ref-020
+kind: reference
 title: The Evolution of the Unix Time-sharing System
-aliases: [Ritchie Unix evolution, Unix evolution, Evolution of Unix]
-summary: "Ritchie의 Unix 초기 진화 회고를 바탕으로 파일 시스템, 프로세스 제어, 파이프라인 명령, C 재작성을 정리한 참고 자료."
-tags: [type/reference, domain/computer-history, domain/operating-systems, domain/software-engineering, status/active]
+aliases:
+  - Ritchie Unix evolution
+  - Unix evolution
+  - Evolution of Unix
+summary: Ritchie의 Unix 초기 진화 회고를 바탕으로 파일 시스템, 프로세스 제어, 파이프라인 명령, C 재작성을 정리한 참고 자료.
+domains:
+  - computer-history
+  - operating-systems
+  - software-engineering
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-07-10
-updated: 2026-07-22
-sources: ["AT&T Bell Laboratories Technical Journal 1984"]
-source_id: ref-020
-source_kind: external
-primary_sources: ["AT&T Bell Laboratories Technical Journal 1984"]
-supporting_sources: ["Nokia Bell Labs copy", "Harvard SEAS copy", "Wiley record"]
-source_urls: ["https://www.nokia.com/bell-labs/about/dennis-m-ritchie/hist.pdf", "https://www.read.seas.harvard.edu/~kohler/class/aosref/ritchie84evolution.pdf", "https://onlinelibrary.wiley.com/doi/abs/10.1002/j.1538-7305.1984.tb00054.x"]
-retrieved: 2026-07-10
-version: null
-snapshot_status: external-only
-status: active
-publication_year: 1984
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:51c844315e36ca8b113c3a05b0a56730d0331fd319472dafc27675852d5b22f0
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers: []
+history:
+  publication_year: 1984
+redirect_from:
+  - /references/the-evolution-of-the-unix-time-sharing-system/
+  - /sources/the-evolution-of-the-unix-time-sharing-system/
+origin: external
+works:
+  primary:
+    - citation: AT&T Bell Laboratories Technical Journal 1984
+      genre: primary-literature
+      identifiers: []
+      edition: null
+  supporting:
+    - citation: Nokia Bell Labs copy
+      genre: other
+      identifiers: []
+      edition: null
+    - citation: Harvard SEAS copy
+      genre: other
+      identifiers: []
+      edition: null
+    - citation: Wiley record
+      genre: official-record
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: canonical
+    url: https://www.nokia.com/bell-labs/about/dennis-m-ritchie/hist.pdf
+    retrieved: 2026-07-10
+    version: null
+  - kind: url
+    role: mirror
+    url: https://www.read.seas.harvard.edu/~kohler/class/aosref/ritchie84evolution.pdf
+    retrieved: 2026-07-10
+    version: null
+  - kind: url
+    role: mirror
+    url: https://onlinelibrary.wiley.com/doi/abs/10.1002/j.1538-7305.1984.tb00054.x
+    retrieved: 2026-07-10
+    version: null
 ---
 
 ## 개요
@@ -37,6 +86,11 @@ publication_year: 1984
 이 자료는 [[Unix]], [[운영체제]], [[유닉스 파이프]], [[시스템 프로그래밍]], [[C 언어]]를 역사적으로 연결하는 데 사용한다. 특히 [[Unix와 C]] 분석에서는 C 재작성이 Unix의 이식성과 구조적 정리를 가능하게 한 전환점으로 다룬다.
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - Nokia Bell Labs, [The Evolution of the Unix Time-sharing System](https://www.nokia.com/bell-labs/about/dennis-m-ritchie/hist.pdf)
 - Harvard SEAS copy, [The Evolution of the Unix Time-sharing System](https://www.read.seas.harvard.edu/~kohler/class/aosref/ritchie84evolution.pdf)

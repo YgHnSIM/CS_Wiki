@@ -1859,9 +1859,11 @@ for (const edge of evidencedRelationEdges) {
   }
 }
 for (const page of pages) {
-  await output(join(page.category, page.slug, "index.html"), articlePage(page));
-  if (page.category === "references") {
-    await output(join("sources", page.slug, "index.html"), redirectPage(page.url));
+  await output(join("docs", page.id, "index.html"), articlePage(page));
+  for (const legacyUrl of page.legacyUrls || [page.legacyUrl]) {
+    const legacyPath = String(legacyUrl || "").split("?")[0].split("#")[0];
+    if (!legacyPath || legacyPath === page.url || !legacyPath.startsWith("/")) continue;
+    await output(join(...legacyPath.split("/").filter(Boolean), "index.html"), redirectPage(page.url));
   }
 }
 

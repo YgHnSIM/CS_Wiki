@@ -1,13 +1,31 @@
 ---
+schema_version: 2
+id: analysis-4095b0c80dbee408
+kind: analysis
 title: 서브루틴 라이브러리에서 API로
-aliases: [EDSAC API, API의 전신, 서브루틴과 API]
-summary: "EDSAC 서브루틴 라이브러리의 카탈로그, 사용 규약, 비용 정보, 오류 진단을 현대 API의 전신으로 해석한 분석."
-tags: [type/analysis, domain/software-engineering, domain/computer-history, status/active]
+aliases:
+  - EDSAC API
+  - API의 전신
+  - 서브루틴과 API
+summary: EDSAC 서브루틴 라이브러리의 카탈로그, 사용 규약, 비용 정보, 오류 진단을 현대 API의 전신으로 해석한 분석.
+domains:
+  - software-engineering
+  - computer-history
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-07-09
-updated: 2026-07-22
-sources: ["The Preparation of Programs for an Electronic Digital Computer"]
-status: active
-graph_id: analysis-4095b0c80dbee408
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:b6d662f0cf7628ce495569f27090ad90a4806550a7ec9196fe2ba2ba7c043b38
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids:
+  - ref-001
+capability_layers: []
+redirect_from:
+  - /analyses/서브루틴-라이브러리에서-api로/
 ---
 
 ## 핵심 주장
@@ -40,6 +58,11 @@ EDSAC의 라이브러리는 단순히 자주 쓰는 코드를 모아 둔 창고�
 EDSAC 라이브러리를 현대 API와 그대로 동일시하면 안 된다. 당시 루틴은 특정 기계의 메모리 구조, 종이 테이프 입력, 절대·상대 주소, 제한된 저장 공간에 강하게 묶여 있었다. 또한 버전 관리, 타입 시스템, 네트워크 호출, 권한 모델 같은 현대 API의 많은 요소는 아직 없었다. 따라서 정확한 표현은 "API 그 자체"가 아니라 "API적 사고의 전사"다.
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- `ref-001`
+<!-- wiki-v2:evidence-end -->
 
 - [[The Preparation of Programs for an Electronic Digital Computer]]
 

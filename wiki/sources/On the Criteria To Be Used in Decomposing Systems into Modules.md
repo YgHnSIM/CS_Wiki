@@ -1,21 +1,60 @@
 ---
+schema_version: 2
+id: ref-003
+kind: reference
 title: On the Criteria To Be Used in Decomposing Systems into Modules
-aliases: [Criteria for Modularization, 모듈 분해 기준, Parnas modularization paper]
-summary: "Parnas의 1972년 논문을 바탕으로 모듈화, 정보 은닉, 변경 가능한 설계 결정 중심의 분해 기준을 정리한 참고 자료."
-tags: [type/reference, domain/software-engineering, domain/computer-history, status/active]
+aliases:
+  - Criteria for Modularization
+  - 모듈 분해 기준
+  - Parnas modularization paper
+summary: Parnas의 1972년 논문을 바탕으로 모듈화, 정보 은닉, 변경 가능한 설계 결정 중심의 분해 기준을 정리한 참고 자료.
+domains:
+  - software-engineering
+  - computer-history
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-07-10
-updated: 2026-07-22
-sources: ["Communications of the ACM 1972", "ACM DOI", "PDF copy"]
-source_id: ref-003
-source_kind: external
-primary_sources: ["Communications of the ACM 1972"]
-supporting_sources: ["ACM DOI", "PDF copy"]
-source_urls: ["https://dl.acm.org/doi/10.1145/361598.361623", "https://wstomv.win.tue.nl/edu/2ip30/references/criteria_for_modularization.pdf"]
-retrieved: 2026-07-10
-version: null
-snapshot_status: external-only
-status: active
-publication_year: 1972
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:beaa4330c961a93cfde6cfb68040e7024214e14f62ab0d57263cf5af26f6bb87
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers: []
+history:
+  publication_year: 1972
+redirect_from:
+  - /references/on-the-criteria-to-be-used-in-decomposing-systems-into-modules/
+  - /sources/on-the-criteria-to-be-used-in-decomposing-systems-into-modules/
+origin: external
+works:
+  primary:
+    - citation: Communications of the ACM 1972
+      genre: other
+      identifiers: []
+      edition: null
+  supporting:
+    - citation: ACM DOI
+      genre: primary-literature
+      identifiers: []
+      edition: null
+    - citation: PDF copy
+      genre: other
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: canonical
+    url: https://dl.acm.org/doi/10.1145/361598.361623
+    retrieved: 2026-07-10
+    version: null
+  - kind: url
+    role: mirror
+    url: https://wstomv.win.tue.nl/edu/2ip30/references/criteria_for_modularization.pdf
+    retrieved: 2026-07-10
+    version: null
 ---
 
 ## 개요
@@ -37,6 +76,11 @@ publication_year: 1972
 이 자료는 [[모듈화]], [[정보 은닉]], [[소프트웨어 재사용]], [[API]], [[소프트웨어 공학]]을 정리하는 근거로 사용한다. [[소프트웨어 재사용의 역사]]에서는 재사용 가능한 코드를 많이 모으는 것만으로는 충분하지 않으며, 변경 가능한 세부를 숨기는 모듈 경계가 재사용의 전제가 된다는 전환으로 다룬다.
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - ACM Digital Library, [On the criteria to be used in decomposing systems into modules](https://dl.acm.org/doi/10.1145/361598.361623)
 - PDF copy, [On the Criteria To Be Used in Decomposing Systems into Modules](https://wstomv.win.tue.nl/edu/2ip30/references/criteria_for_modularization.pdf)

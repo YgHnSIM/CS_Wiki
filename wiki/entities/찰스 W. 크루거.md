@@ -1,13 +1,31 @@
 ---
+schema_version: 2
+id: entity-1a2d36f59369083d
+kind: entity
 title: 찰스 W. 크루거
-aliases: [Charles W. Krueger, Charles Krueger, C. W. Krueger]
-summary: "소프트웨어 재사용을 추상화, 선택, 특수화, 통합의 문제로 정리한 컴퓨터 과학자."
-tags: [type/entity, domain/software-engineering, domain/computer-history, status/active]
+aliases:
+  - Charles W. Krueger
+  - Charles Krueger
+  - C. W. Krueger
+summary: 소프트웨어 재사용을 추상화, 선택, 특수화, 통합의 문제로 정리한 컴퓨터 과학자.
+domains:
+  - software-engineering
+  - computer-history
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-07-10
-updated: 2026-07-25
-sources: ["Software Reuse"]
-status: active
-graph_id: entity-1a2d36f59369083d
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:fbccb429c40387b37857d54af87117bfbf7772b08559b37508deeccf130a31cb
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids:
+  - ref-004
+capability_layers: []
+redirect_from:
+  - /entities/찰스-w-크루거/
 ---
 
 ## 개요
@@ -25,6 +43,11 @@ Krueger의 논의는 McIlroy의 컴포넌트 구상을 1990년대 재사용 연�
 | synthesizes | [[소프트웨어 재사용]] | 재사용 접근을 재사용물의 추상화·선택·특수화·통합 방식으로 비교하고, 인지적 거리를 활용 난이도의 기준으로 제시했다. | [[Software Reuse]] |
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- `ref-004`
+<!-- wiki-v2:evidence-end -->
 
 - [[Software Reuse]]
 

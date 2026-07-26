@@ -1,16 +1,43 @@
 ---
+schema_version: 2
+id: analysis-llm-slo-resource-cost
+kind: analysis
 title: 같은 SLO의 LLM 서비스는 무엇을 비용으로 세어야 하는가
-aliases: [LLM SLO resource cost analysis, LLM 유효 요청당 비용, LLM 추론 자원 회계]
-summary: "같은 모델 품질과 TTFT·TPOT SLO를 만족한 LLM 서비스를 에너지·가속기 시간·유휴 용량·실패 요청까지 포함한 유효 요청당 물리 자원 비용으로 비교하는 분석."
-tags: [type/analysis, domain/machine-learning, domain/performance, domain/systems, status/active]
-created: 2026-07-25
-updated: 2026-07-25
-historical_layer: measurement
-capability_layers: [realized-performance, scalability, resource-efficiency, reliable-results]
-sources: ["TokenPowerBench - Benchmarking the Power Consumption of LLM Inference", "MLPerf Inference Power Measurement", "MLPerf Inference Benchmark", "The Case for Energy-Proportional Computing", "A Proof for the Queuing Formula L = λW", "Serving DNNs like Clockwork Performance Predictability from the Bottom Up"]
-status: active
-graph_id: analysis-llm-slo-resource-cost
+aliases:
+  - LLM SLO resource cost analysis
+  - LLM 유효 요청당 비용
+  - LLM 추론 자원 회계
+summary: 같은 모델 품질과 TTFT·TPOT SLO를 만족한 LLM 서비스를 에너지·가속기 시간·유휴 용량·실패 요청까지 포함한 유효 요청당 물리 자원 비용으로 비교하는 분석.
+domains:
+  - machine-learning
+  - performance
+  - systems
+editorial_status: active
+publication_visibility: public
 graph_visibility: public
+created: 2026-07-25
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:92358c12e2c34344cb701ebf151d7ee811c3026738ee5a85069619393ac4e7ff
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids:
+  - ref-083
+  - ref-084
+  - ref-078
+  - ref-046
+  - ref-085
+  - ref-086
+capability_layers:
+  - realized-performance
+  - scalability
+  - resource-efficiency
+  - reliable-results
+history:
+  layer: measurement
+redirect_from:
+  - /analyses/같은-slo의-llm-서비스는-무엇을-비용으로-세어야-하는가/
 ---
 
 ## 문제 제기
@@ -88,6 +115,16 @@ GPU 텔레메트리는 단계별 변화를 보기 좋지만 CPU·DRAM·네트워
 | synthesizes | [[대기열과 부하 제어]] | 승인·거부·시간 초과가 있는 부하에서 유효 요청 분모와 이미 소비한 자원 분자를 함께 보존한다. | [[A Proof for the Queuing Formula L = λW]], [[Serving DNNs like Clockwork Performance Predictability from the Bottom Up]] |
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- `ref-083`
+- `ref-084`
+- `ref-078`
+- `ref-046`
+- `ref-085`
+- `ref-086`
+<!-- wiki-v2:evidence-end -->
 
 - [[TokenPowerBench - Benchmarking the Power Consumption of LLM Inference]]
 - [[MLPerf Inference Power Measurement]]

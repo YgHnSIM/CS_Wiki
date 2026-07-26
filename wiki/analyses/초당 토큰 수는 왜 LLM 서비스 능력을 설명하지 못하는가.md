@@ -1,16 +1,44 @@
 ---
+schema_version: 2
+id: analysis-token-rate-service-capability
+kind: analysis
 title: 초당 토큰 수는 왜 LLM 서비스 능력을 설명하지 못하는가
-aliases: [tokens per second is not enough, LLM 토큰 처리량의 한계, 토큰률과 LLM 서비스 능력]
-summary: "초당 토큰 수가 토큰 종류·요청 길이·사용자 지연·품질·SLO 위반을 숨기는 이유를 프리필·디코드, goodput과 MLPerf의 시나리오 계약으로 분석한다."
-tags: [type/analysis, domain/machine-learning, domain/performance, domain/systems, status/active]
-created: 2026-07-24
-updated: 2026-07-25
-historical_layer: measurement
-capability_layers: [realized-performance, scalability, resource-efficiency, reliable-results]
-sources: ["Orca - A Distributed Serving System for Transformer-Based Generative Models", "Efficient Memory Management for Large Language Model Serving with PagedAttention", "DistServe - Disaggregating Prefill and Decoding for Goodput-optimized Large Language Model Serving", "MLPerf Inference Benchmark", "The Tail at Scale", "A Proof for the Queuing Formula L = λW", "Serving DNNs like Clockwork Performance Predictability from the Bottom Up"]
-status: active
-graph_id: analysis-token-rate-service-capability
+aliases:
+  - tokens per second is not enough
+  - LLM 토큰 처리량의 한계
+  - 토큰률과 LLM 서비스 능력
+summary: 초당 토큰 수가 토큰 종류·요청 길이·사용자 지연·품질·SLO 위반을 숨기는 이유를 프리필·디코드, goodput과 MLPerf의 시나리오 계약으로 분석한다.
+domains:
+  - machine-learning
+  - performance
+  - systems
+editorial_status: active
+publication_visibility: public
 graph_visibility: public
+created: 2026-07-24
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:bb597f124f7368808e61714bf99b6d9578bbba396c4bd037bf8b11e3d58d0227
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids:
+  - ref-075
+  - ref-076
+  - ref-077
+  - ref-078
+  - ref-049
+  - ref-085
+  - ref-086
+capability_layers:
+  - realized-performance
+  - scalability
+  - resource-efficiency
+  - reliable-results
+history:
+  layer: measurement
+redirect_from:
+  - /analyses/초당-토큰-수는-왜-llm-서비스-능력을-설명하지-못하는가/
 ---
 
 ## 문제 제기
@@ -89,6 +117,17 @@ MLPerf Inference는 모델·데이터셋·품질과 생성 길이 기준, 시스
 | synthesizes | [[대기열과 부하 제어]] | 요청·토큰 단위를 구분하고 배치 처리율, 기한 초과·거부, SLO 안에 완료한 goodput을 하나의 운영 결과로 비교한다. | [[A Proof for the Queuing Formula L = λW]], [[Serving DNNs like Clockwork Performance Predictability from the Bottom Up]] |
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- `ref-075`
+- `ref-076`
+- `ref-077`
+- `ref-078`
+- `ref-049`
+- `ref-085`
+- `ref-086`
+<!-- wiki-v2:evidence-end -->
 
 - [[Orca - A Distributed Serving System for Transformer-Based Generative Models]]
 - [[Efficient Memory Management for Large Language Model Serving with PagedAttention]]

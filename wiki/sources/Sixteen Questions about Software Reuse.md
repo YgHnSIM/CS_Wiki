@@ -1,21 +1,60 @@
 ---
+schema_version: 2
+id: ref-005
+kind: reference
 title: Sixteen Questions about Software Reuse
-aliases: [16 Questions about Software Reuse, Frakes Fox software reuse, 소프트웨어 재사용 16문답]
-summary: "Frakes와 Fox의 1995년 논문을 바탕으로 재사용과 이식성의 구분, 체계적 재사용의 실무 질문을 정리한 참고 자료."
-tags: [type/reference, domain/software-engineering, domain/computer-history, status/active]
+aliases:
+  - 16 Questions about Software Reuse
+  - Frakes Fox software reuse
+  - 소프트웨어 재사용 16문답
+summary: Frakes와 Fox의 1995년 논문을 바탕으로 재사용과 이식성의 구분, 체계적 재사용의 실무 질문을 정리한 참고 자료.
+domains:
+  - software-engineering
+  - computer-history
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-07-10
-updated: 2026-07-22
-sources: ["Communications of the ACM 1995", "ACM DOI", "ResearchGate metadata"]
-source_id: ref-005
-source_kind: external
-primary_sources: ["Communications of the ACM 1995"]
-supporting_sources: ["ACM DOI", "ResearchGate metadata"]
-source_urls: ["https://dl.acm.org/doi/10.1145/203241.203260", "https://www.researchgate.net/publication/220425619_Sixteen_Questions_About_Software_Reuse"]
-retrieved: 2026-07-10
-version: null
-snapshot_status: external-only
-status: active
-publication_year: 1995
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:a60218067b96ac4dc2dbd18b2b742cf1b36035e21645040f11d58cb2284e978e
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers: []
+history:
+  publication_year: 1995
+redirect_from:
+  - /references/sixteen-questions-about-software-reuse/
+  - /sources/sixteen-questions-about-software-reuse/
+origin: external
+works:
+  primary:
+    - citation: Communications of the ACM 1995
+      genre: other
+      identifiers: []
+      edition: null
+  supporting:
+    - citation: ACM DOI
+      genre: primary-literature
+      identifiers: []
+      edition: null
+    - citation: ResearchGate metadata
+      genre: other
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: canonical
+    url: https://dl.acm.org/doi/10.1145/203241.203260
+    retrieved: 2026-07-10
+    version: null
+  - kind: url
+    role: mirror
+    url: https://www.researchgate.net/publication/220425619_Sixteen_Questions_About_Software_Reuse
+    retrieved: 2026-07-10
+    version: null
 ---
 
 ## 개요
@@ -36,6 +75,11 @@ publication_year: 1995
 이 자료는 [[소프트웨어 재사용]], [[이식성]], [[소프트웨어 공학]]을 정리하는 데 사용한다. [[소프트웨어 재사용의 역사]]에서는 재사용 담론이 1990년대에 기술적 컴포넌트 논의를 넘어 조직적·경험적 질문으로 이동한 단계로 다룬다.
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - ACM Digital Library, [Sixteen questions about software reuse](https://dl.acm.org/doi/10.1145/203241.203260)
 - ResearchGate metadata, [Sixteen Questions About Software Reuse](https://www.researchgate.net/publication/220425619_Sixteen_Questions_About_Software_Reuse)

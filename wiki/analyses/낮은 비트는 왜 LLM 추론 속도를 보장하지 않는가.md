@@ -1,16 +1,41 @@
 ---
+schema_version: 2
+id: analysis-low-bit-llm-inference
+kind: analysis
 title: 낮은 비트는 왜 LLM 추론 속도를 보장하지 않는가
-aliases: [low-bit LLM inference analysis, LLM 양자화 성능 조건, 저비트 추론 병목]
-summary: "LLM 가중치 비트 수 감소가 모델 용량·메모리 대역폭을 줄여도 패킹·역양자화·메타데이터·커널과 하드웨어 지원, 배치·품질 조건 때문에 실제 지연 단축을 자동으로 보장하지 않는 이유를 분석한다."
-tags: [type/analysis, domain/machine-learning, domain/computer-architecture, domain/performance, status/active]
-created: 2026-07-25
-updated: 2026-07-25
-historical_layer: system
-capability_layers: [realized-performance, resource-efficiency, reliable-results]
-sources: ["Hitting the Memory Wall", "Mixed Precision Training", "GPTQ - Accurate Post-Training Quantization for Generative Pre-trained Transformers", "AWQ - Activation-aware Weight Quantization for On-Device LLM Compression and Acceleration", "TokenPowerBench - Benchmarking the Power Consumption of LLM Inference"]
-status: active
-graph_id: analysis-low-bit-llm-inference
+aliases:
+  - low-bit LLM inference analysis
+  - LLM 양자화 성능 조건
+  - 저비트 추론 병목
+summary: LLM 가중치 비트 수 감소가 모델 용량·메모리 대역폭을 줄여도 패킹·역양자화·메타데이터·커널과 하드웨어 지원, 배치·품질 조건 때문에 실제 지연 단축을 자동으로 보장하지 않는 이유를 분석한다.
+domains:
+  - machine-learning
+  - computer-architecture
+  - performance
+editorial_status: active
+publication_visibility: public
 graph_visibility: public
+created: 2026-07-25
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:e79451d1708f40c2819de1b96fde546092624a408f6127d2d54f31385e7322d0
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids:
+  - ref-039
+  - ref-069
+  - ref-081
+  - ref-082
+  - ref-083
+capability_layers:
+  - realized-performance
+  - resource-efficiency
+  - reliable-results
+history:
+  layer: system
+redirect_from:
+  - /analyses/낮은-비트는-왜-llm-추론-속도를-보장하지-않는가/
 ---
 
 ## 문제 제기
@@ -73,6 +98,15 @@ GPTQ와 AWQ는 여러 평가에서 낮은 perplexity 저하를 보고하지만, 
 | constrains | [[컴퓨팅 능력이란 무엇인가]] | 압축률이나 저비트 TOPS가 아니라 같은 작업·품질·시스템 경계의 달성 성능을 요구한다. | [[AWQ - Activation-aware Weight Quantization for On-Device LLM Compression and Acceleration]] |
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- `ref-039`
+- `ref-069`
+- `ref-081`
+- `ref-082`
+- `ref-083`
+<!-- wiki-v2:evidence-end -->
 
 - [[Hitting the Memory Wall]]
 - [[Mixed Precision Training]]

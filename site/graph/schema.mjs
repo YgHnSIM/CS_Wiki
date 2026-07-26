@@ -86,6 +86,12 @@ export function parseYear(value) {
 }
 
 export function graphNodeId(page) {
+  if (page.id) {
+    if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(page.id)) {
+      throw new Error(`Invalid page id '${page.id}' on '${page.title}'; use a lowercase ASCII slug`);
+    }
+    return page.id;
+  }
   if (page.sourceId) return page.sourceId;
   const explicit = String(page.graphId || "").trim();
   if (explicit) {

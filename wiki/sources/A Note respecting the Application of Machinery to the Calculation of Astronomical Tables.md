@@ -1,23 +1,63 @@
 ---
+schema_version: 2
+id: ref-053
+kind: reference
 title: A Note respecting the Application of Machinery to the Calculation of Astronomical Tables
-aliases: [Babbage 1822, 배비지 1822년 차분 기관 발표문, A Note respecting the Application of Machinery]
-summary: "찰스 배비지가 1822년 차분법 기반 기계로 수학 표를 계산하고 계산 결과에 따라 활자를 자동 배치하려 한 구상을 직접 보고한 발표문."
-tags: [type/reference, domain/computer-history, domain/mathematics, status/active]
+aliases:
+  - Babbage 1822
+  - 배비지 1822년 차분 기관 발표문
+  - A Note respecting the Application of Machinery
+summary: 찰스 배비지가 1822년 차분법 기반 기계로 수학 표를 계산하고 계산 결과에 따라 활자를 자동 배치하려 한 구상을 직접 보고한 발표문.
+domains:
+  - computer-history
+  - mathematics
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-07-20
-updated: 2026-07-20
-publication_year: 1822
-historical_layer: machine
-capability_layers: [resource-efficiency, reliable-results]
-sources: ["Charles Babbage, A Note respecting the Application of Machinery to the Calculation of Astronomical Tables, Memoirs of the Astronomical Society of London 1 (1822), article XXVI", "Wikisource validated scan and transcription of Memoirs of the Astronomical Society of London 1", "Science Museum, Charles Babbage's Difference Engines and the Science Museum"]
-source_id: ref-053
-source_kind: external
-primary_sources: ["Charles Babbage, A Note respecting the Application of Machinery to the Calculation of Astronomical Tables, Memoirs of the Astronomical Society of London 1 (1822), article XXVI"]
-supporting_sources: ["Wikisource validated scan and transcription of Memoirs of the Astronomical Society of London 1", "Science Museum, Charles Babbage's Difference Engines and the Science Museum"]
-source_urls: ["https://en.wikisource.org/wiki/Page%3AMemoirs_of_Royal_Astronomical_Society_Volume_01.djvu/332", "https://www.sciencemuseum.org.uk/objects-and-stories/charles-babbages-difference-engines-and-science-museum"]
-retrieved: 2026-07-20
-version: "Read 14 June 1822; Memoirs of the Astronomical Society of London, vol. 1, article XXVI"
-snapshot_status: external-only
-status: active
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:2a350a6c0e1fbb58f7b795f9d8a4325c41b4f7196a7f155ba230d1e52bd50665
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers:
+  - resource-efficiency
+  - reliable-results
+history:
+  publication_year: 1822
+  layer: machine
+redirect_from:
+  - /references/a-note-respecting-the-application-of-machinery-to-the-calculation-of-astronomical-tables/
+  - /sources/a-note-respecting-the-application-of-machinery-to-the-calculation-of-astronomical-tables/
+origin: external
+works:
+  primary:
+    - citation: Charles Babbage, A Note respecting the Application of Machinery to the Calculation of Astronomical Tables, Memoirs of the Astronomical Society of London 1 (1822), article XXVI
+      genre: other
+      identifiers: []
+      edition: Read 14 June 1822; Memoirs of the Astronomical Society of London, vol. 1, article XXVI
+  supporting:
+    - citation: Wikisource validated scan and transcription of Memoirs of the Astronomical Society of London 1
+      genre: standard
+      identifiers: []
+      edition: null
+    - citation: Science Museum, Charles Babbage's Difference Engines and the Science Museum
+      genre: official-record
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: archive
+    url: https://en.wikisource.org/wiki/Page%3AMemoirs_of_Royal_Astronomical_Society_Volume_01.djvu/332
+    retrieved: 2026-07-20
+    version: Read 14 June 1822; Memoirs of the Astronomical Society of London, vol. 1, article XXVI
+  - kind: url
+    role: mirror
+    url: https://www.sciencemuseum.org.uk/objects-and-stories/charles-babbages-difference-engines-and-science-museum
+    retrieved: 2026-07-20
+    version: Read 14 June 1822; Memoirs of the Astronomical Society of London, vol. 1, article XXVI
 ---
 
 ## 개요
@@ -47,6 +87,11 @@ Science Museum은 당시 수학 표의 오류가 계산, 전사, 조판과 인�
 이 자료는 [[수학 표]]와 [[차분 기관]]에서 차분법, 두 계의 차분, 제곱수·삼각수·다항식 표의 시험 제작과 자동 조판 제안을 설명하는 직접 근거다. [[컴퓨팅의 기원 - 배비지와 러브레이스]]가 제시한 “표 제작 전체의 오류를 줄이는 자동화”라는 해석에서는 원문에 기록된 사실과 후대의 시스템적 해석을 구분하는 기준으로 사용한다.
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - Charles Babbage, Wikisource의 검증된 원권 스캔·전사, [A Note respecting the Application of Machinery to the Calculation of Astronomical Tables](https://en.wikisource.org/wiki/Page%3AMemoirs_of_Royal_Astronomical_Society_Volume_01.djvu/332)
 - Science Museum, [Charles Babbage's Difference Engines and the Science Museum](https://www.sciencemuseum.org.uk/objects-and-stories/charles-babbages-difference-engines-and-science-museum)

@@ -16,7 +16,8 @@ export const statusMeta = {
   },
   draft: { label: "초안", description: "근거 또는 교차 검토를 보강하는 문서" },
   review: { label: "검토 중", description: "본문과 출처 매핑을 원문과 대조하는 문서" },
-  archived: { label: "보관", description: "현재 지식에서는 대체되었지만 이력을 보존하는 문서" }
+  archived: { label: "보관", description: "현재 지식에서는 대체되었지만 이력을 보존하는 문서" },
+  retired: { label: "보관", description: "현재 지식에서는 대체되었지만 이력을 보존하는 문서" }
 };
 
 export const domainMeta = {

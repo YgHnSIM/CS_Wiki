@@ -1,25 +1,96 @@
 ---
+schema_version: 2
+id: ref-061
+kind: reference
 title: VisiCalc Apple II Version 1.0 Manual
-aliases: [VisiCalc manual, VisiCalc 매뉴얼, VisiCalc Apple II 매뉴얼]
-summary: "셀에 값과 수식을 함께 두고 자동 모드에서 시트 전체 수식을 고정 순서로 재계산하며 수동 모드도 지원한 VisiCalc의 작동을 설명하는 1979년 원 매뉴얼 자료."
-tags: [type/reference, domain/computer-history, domain/software-engineering, status/active]
+aliases:
+  - VisiCalc manual
+  - VisiCalc 매뉴얼
+  - VisiCalc Apple II 매뉴얼
+summary: 셀에 값과 수식을 함께 두고 자동 모드에서 시트 전체 수식을 고정 순서로 재계산하며 수동 모드도 지원한 VisiCalc의 작동을 설명하는 1979년 원 매뉴얼 자료.
+domains:
+  - computer-history
+  - software-engineering
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-07-20
-updated: 2026-07-20
-publication_year: 1979
-event_start: 1979
-historical_note: "Software Arts가 개발하고 Personal Software가 1979년 Apple II용으로 배포한 VisiCalc Version 1.0 매뉴얼과 동시대 제품의 기관 기록을 함께 대조한다."
-historical_layer: software
-capability_layers: [programmability, resource-efficiency]
-sources: ["VisiCalc Apple II Version 1.0 Manual", "Bitsavers access copy of the VisiCalc Apple II Version 1.0 Manual", "Dan Bricklin's VisiCalc archive", "Computer History Museum VisiCalc records", "Smithsonian VisiCalc object record"]
-source_id: ref-061
-source_kind: external
-primary_sources: ["VisiCalc Apple II Version 1.0 Manual"]
-supporting_sources: ["Bitsavers access copy of the VisiCalc Apple II Version 1.0 Manual", "Dan Bricklin's VisiCalc archive", "Computer History Museum VisiCalc records", "Smithsonian VisiCalc object record"]
-source_urls: ["https://mirrors.apple2.org.za/ftp.apple.asimov.net/documentation/applications/misc/personalsoftware_visicalc_v1.0_manual_ocr.pdf", "https://bitsavers.org/pdf/visicorp/apple2/VisiCalc_Apple_2_Ver_1.0_1979.pdf", "https://www.bricklin.com/visicalc.htm", "https://computerhistory.org/events/origins-impact-visicalc/", "https://computerhistory.org/profile/bob-frankston/", "https://americanhistory.si.edu/collections/object/nmah_1696121"]
-retrieved: 2026-07-20
-version: "Apple II Version 1.0, 1979"
-snapshot_status: external-only
-status: active
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:02acdffb12949fd5ebcfa7b6004bda70eab49cf2f83aa110255a77067e8923ad
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers:
+  - programmability
+  - resource-efficiency
+history:
+  publication_year: 1979
+  event:
+    start: 1979
+    basis: publication-process
+    evidence_id: null
+  note: Software Arts가 개발하고 Personal Software가 1979년 Apple II용으로 배포한 VisiCalc Version 1.0 매뉴얼과 동시대 제품의 기관 기록을 함께 대조한다.
+  layer: software
+redirect_from:
+  - /references/visicalc-apple-ii-version-1-0-manual/
+  - /sources/visicalc-apple-ii-version-1-0-manual/
+origin: external
+works:
+  primary:
+    - citation: VisiCalc Apple II Version 1.0 Manual
+      genre: manual
+      identifiers: []
+      edition: Apple II Version 1.0, 1979
+  supporting:
+    - citation: Bitsavers access copy of the VisiCalc Apple II Version 1.0 Manual
+      genre: manual
+      identifiers: []
+      edition: null
+    - citation: Dan Bricklin's VisiCalc archive
+      genre: manual
+      identifiers: []
+      edition: null
+    - citation: Computer History Museum VisiCalc records
+      genre: manual
+      identifiers: []
+      edition: null
+    - citation: Smithsonian VisiCalc object record
+      genre: manual
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: canonical
+    url: https://mirrors.apple2.org.za/ftp.apple.asimov.net/documentation/applications/misc/personalsoftware_visicalc_v1.0_manual_ocr.pdf
+    retrieved: 2026-07-20
+    version: Apple II Version 1.0, 1979
+  - kind: url
+    role: mirror
+    url: https://bitsavers.org/pdf/visicorp/apple2/VisiCalc_Apple_2_Ver_1.0_1979.pdf
+    retrieved: 2026-07-20
+    version: Apple II Version 1.0, 1979
+  - kind: url
+    role: mirror
+    url: https://www.bricklin.com/visicalc.htm
+    retrieved: 2026-07-20
+    version: Apple II Version 1.0, 1979
+  - kind: url
+    role: mirror
+    url: https://computerhistory.org/events/origins-impact-visicalc/
+    retrieved: 2026-07-20
+    version: Apple II Version 1.0, 1979
+  - kind: url
+    role: mirror
+    url: https://computerhistory.org/profile/bob-frankston/
+    retrieved: 2026-07-20
+    version: Apple II Version 1.0, 1979
+  - kind: url
+    role: mirror
+    url: https://americanhistory.si.edu/collections/object/nmah_1696121
+    retrieved: 2026-07-20
+    version: Apple II Version 1.0, 1979
 ---
 
 ## 자료 개요
@@ -68,6 +139,11 @@ VisiCalc가 고대나 인쇄 수학 표에서 직접 기술적으로 파생되�
 이 자료는 [[스프레드시트]]의 셀, 수식, 참조와 자동 재계산을 역사적 원문으로 설명한다. [[수학 표에서 스프레드시트로]]에서는 계산 결과를 배포하는 정적 표가 사용자가 계산 규칙을 작성하고 가정을 바꾸는 실행 환경으로 전환된 사례로 사용한다.
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - Personal Software / Software Arts, [VisiCalc Apple II Version 1.0 Manual](https://mirrors.apple2.org.za/ftp.apple.asimov.net/documentation/applications/misc/personalsoftware_visicalc_v1.0_manual_ocr.pdf), 1979.
 - Bitsavers, [VisiCalc Apple II Version 1.0 Manual 접근용 사본](https://bitsavers.org/pdf/visicorp/apple2/VisiCalc_Apple_2_Ver_1.0_1979.pdf).

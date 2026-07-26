@@ -1,25 +1,62 @@
 ---
+schema_version: 2
+id: ref-098
+kind: reference
 title: Decoupling Algorithms from Schedules for Easy Optimization of Image Processing Pipelines
-aliases: [Halide, "Decoupling Algorithms from Schedules for Easy Optimization of Image Processing Pipelines", "Ragan-Kelley et al. 2012", Halide schedule paper]
-summary: "영상 처리 파이프라인의 계산 정의와 저장·계산 순서·타일링·병렬화 선택을 분리해 가독성·이식성·고성능을 함께 추구한 Halide의 2012년 논문."
-tags: [type/reference, domain/software-engineering, domain/programming-languages, domain/performance, status/active]
-created: 2026-07-25
-updated: 2026-07-25
-publication_year: 2012
-historical_layer: software
-capability_layers: [programmability, realized-performance, resource-efficiency]
-sources: [Decoupling Algorithms from Schedules for Easy Optimization of Image Processing Pipelines]
-source_id: ref-098
-source_kind: external
-primary_sources: ["Jonathan Ragan-Kelley et al., Decoupling Algorithms from Schedules for Easy Optimization of Image Processing Pipelines, ACM Transactions on Graphics, SIGGRAPH 2012"]
-supporting_sources: ["MIT CSAIL author-hosted paper page and conference paper PDF"]
-source_urls: ["https://people.csail.mit.edu/jrk/halide12/", "https://people.csail.mit.edu/jrk/halide12/halide12.pdf"]
-retrieved: 2026-07-25
-version: "ACM Transactions on Graphics 31(4), SIGGRAPH 2012"
-snapshot_status: external-only
-status: active
-graph_id: reference-halide-schedule-separation-2012
+aliases:
+  - Halide
+  - Decoupling Algorithms from Schedules for Easy Optimization of Image Processing Pipelines
+  - Ragan-Kelley et al. 2012
+  - Halide schedule paper
+summary: 영상 처리 파이프라인의 계산 정의와 저장·계산 순서·타일링·병렬화 선택을 분리해 가독성·이식성·고성능을 함께 추구한 Halide의 2012년 논문.
+domains:
+  - software-engineering
+  - programming-languages
+  - performance
+editorial_status: active
+publication_visibility: public
 graph_visibility: public
+created: 2026-07-25
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:011c99622a753bf8671d092fbfeff77eea98c823f5a2f65e8cce944f1cfedb35
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers:
+  - programmability
+  - realized-performance
+  - resource-efficiency
+history:
+  publication_year: 2012
+  layer: software
+redirect_from:
+  - /references/decoupling-algorithms-from-schedules-for-easy-optimization-of-image-processing-pipelines/
+  - /sources/decoupling-algorithms-from-schedules-for-easy-optimization-of-image-processing-pipelines/
+origin: external
+works:
+  primary:
+    - citation: Jonathan Ragan-Kelley et al., Decoupling Algorithms from Schedules for Easy Optimization of Image Processing Pipelines, ACM Transactions on Graphics, SIGGRAPH 2012
+      genre: other
+      identifiers: []
+      edition: ACM Transactions on Graphics 31(4), SIGGRAPH 2012
+  supporting:
+    - citation: MIT CSAIL author-hosted paper page and conference paper PDF
+      genre: primary-literature
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: canonical
+    url: https://people.csail.mit.edu/jrk/halide12/
+    retrieved: 2026-07-25
+    version: ACM Transactions on Graphics 31(4), SIGGRAPH 2012
+  - kind: url
+    role: mirror
+    url: https://people.csail.mit.edu/jrk/halide12/halide12.pdf
+    retrieved: 2026-07-25
+    version: ACM Transactions on Graphics 31(4), SIGGRAPH 2012
 ---
 
 ## 개요
@@ -46,6 +83,11 @@ Halide는 알고리즘을 함수들의 조합으로 표현하고, 스케줄로 �
 | enables | [[성능 이식성]] | 하나의 영상 처리 알고리즘에 대상별 스케줄을 적용해 ARM, x86, GPU를 위한 실행을 탐색하게 한다. | [[Decoupling Algorithms from Schedules for Easy Optimization of Image Processing Pipelines]] |
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - MIT CSAIL, [paper page](https://people.csail.mit.edu/jrk/halide12/)
 - MIT CSAIL, [conference paper PDF](https://people.csail.mit.edu/jrk/halide12/halide12.pdf)

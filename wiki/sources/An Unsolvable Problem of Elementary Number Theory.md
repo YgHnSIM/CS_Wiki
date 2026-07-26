@@ -1,21 +1,60 @@
 ---
+schema_version: 2
+id: ref-010
+kind: reference
 title: An Unsolvable Problem of Elementary Number Theory
-aliases: [Church 1936, Unsolvable Problem, Church's theorem]
-summary: "Church의 1936년 논문을 바탕으로 효과적 계산 가능성, 람다 정의 가능성, 재귀 함수, 처치-튜링 논제를 보강한 참고 자료."
-tags: [type/reference, domain/computer-history, domain/computer-science, status/active]
+aliases:
+  - Church 1936
+  - Unsolvable Problem
+  - Church's theorem
+summary: Church의 1936년 논문을 바탕으로 효과적 계산 가능성, 람다 정의 가능성, 재귀 함수, 처치-튜링 논제를 보강한 참고 자료.
+domains:
+  - computer-history
+  - computer-science
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-07-10
-updated: 2026-07-22
-sources: ["American Journal of Mathematics 1936"]
-source_id: ref-010
-source_kind: external
-primary_sources: ["American Journal of Mathematics 1936"]
-supporting_sources: ["PDF copy", "Cambridge University Press record"]
-source_urls: ["https://www.ics.uci.edu/~lopes/teaching/inf212W12/readings/church.pdf", "https://www.cambridge.org/core/journals/journal-of-symbolic-logic/article/alonzo-church-an-unsolvable-problem-of-elementary-number-theory-american-journal-of-mathematics-vol-58-1936-pp-345363/CF193EF55C779CCD1D42C3333721E166"]
-retrieved: 2026-07-10
-version: null
-snapshot_status: external-only
-status: active
-publication_year: 1936
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:abcaa50cbe9a18ec2a14d7cdd0106e7dc44d0b8faefeb833356204a231f4a26c
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers: []
+history:
+  publication_year: 1936
+redirect_from:
+  - /references/an-unsolvable-problem-of-elementary-number-theory/
+  - /sources/an-unsolvable-problem-of-elementary-number-theory/
+origin: external
+works:
+  primary:
+    - citation: American Journal of Mathematics 1936
+      genre: primary-literature
+      identifiers: []
+      edition: null
+  supporting:
+    - citation: PDF copy
+      genre: other
+      identifiers: []
+      edition: null
+    - citation: Cambridge University Press record
+      genre: official-record
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: canonical
+    url: https://www.ics.uci.edu/~lopes/teaching/inf212W12/readings/church.pdf
+    retrieved: 2026-07-10
+    version: null
+  - kind: url
+    role: mirror
+    url: https://www.cambridge.org/core/journals/journal-of-symbolic-logic/article/alonzo-church-an-unsolvable-problem-of-elementary-number-theory-american-journal-of-mathematics-vol-58-1936-pp-345363/CF193EF55C779CCD1D42C3333721E166
+    retrieved: 2026-07-10
+    version: null
 ---
 
 ## 개요
@@ -36,6 +75,11 @@ publication_year: 1936
 이 참고 자료는 [[처치-튜링 논제]], [[계산 가능성]], [[Entscheidungsproblem]], [[정지 문제]]를 보강하는 데 사용한다. 특히 계산 가능성의 이론은 Turing만의 단일 모델이 아니라 여러 독립 형식화가 만나는 지점으로 정리한다.
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - PDF copy, [An Unsolvable Problem of Elementary Number Theory](https://www.ics.uci.edu/~lopes/teaching/inf212W12/readings/church.pdf)
 - Cambridge University Press record, [An unsolvable problem of elementary number theory](https://www.cambridge.org/core/journals/journal-of-symbolic-logic/article/alonzo-church-an-unsolvable-problem-of-elementary-number-theory-american-journal-of-mathematics-vol-58-1936-pp-345363/CF193EF55C779CCD1D42C3333721E166)

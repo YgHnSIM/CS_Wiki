@@ -1,25 +1,64 @@
 ---
-title: "Brewer's Conjecture and the Feasibility of Consistent, Available, Partition-Tolerant Web Services"
-aliases: [CAP 원 논문, Gilbert Lynch 2002, CAP theorem paper]
-summary: "비동기 네트워크 분할 모형에서 원자적 일관성, 가용성, 분할 허용성을 동시에 보장할 수 없음을 보인 Gilbert와 Lynch의 2002년 CAP 정리 논문."
-tags: [type/reference, domain/computer-science, domain/distributed-systems, domain/systems, status/active]
-created: 2026-07-25
-updated: 2026-07-25
-publication_year: 2002
-historical_layer: theory
-capability_layers: [scalability, reliable-results]
-sources: ["Brewer's Conjecture and the Feasibility of Consistent, Available, Partition-Tolerant Web Services"]
-source_id: ref-087
-source_kind: external
-primary_sources: ["Seth Gilbert and Nancy Lynch, Brewer's Conjecture and the Feasibility of Consistent, Available, Partition-Tolerant Web Services, SIGACT News 33(2), 2002, pp. 51–59"]
-supporting_sources: ["Princeton COS 418 course copy of the paper PDF", "ACM DOI record"]
-source_urls: ["https://www.cs.princeton.edu/courses/archive/fall19/cos418/papers/cap.pdf", "https://doi.org/10.1145/564585.564601"]
-retrieved: 2026-07-25
-version: "SIGACT News 33(2), 2002, pp. 51–59"
-snapshot_status: external-only
-status: active
-graph_id: reference-cap-feasibility
+schema_version: 2
+id: ref-087
+kind: reference
+title: Brewer's Conjecture and the Feasibility of Consistent, Available, Partition-Tolerant Web Services
+aliases:
+  - CAP 원 논문
+  - Gilbert Lynch 2002
+  - CAP theorem paper
+summary: 비동기 네트워크 분할 모형에서 원자적 일관성, 가용성, 분할 허용성을 동시에 보장할 수 없음을 보인 Gilbert와 Lynch의 2002년 CAP 정리 논문.
+domains:
+  - computer-science
+  - distributed-systems
+  - systems
+editorial_status: active
+publication_visibility: public
 graph_visibility: public
+created: 2026-07-25
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:be4e190288de4743bef11e84a3429246df2061408af87fee5f0e3c1c81f09042
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers:
+  - scalability
+  - reliable-results
+history:
+  publication_year: 2002
+  layer: theory
+redirect_from:
+  - /references/brewer-s-conjecture-and-the-feasibility-of-consistent-available-partition-tolerant-web-services/
+  - /sources/brewer-s-conjecture-and-the-feasibility-of-consistent-available-partition-tolerant-web-services/
+origin: external
+works:
+  primary:
+    - citation: Seth Gilbert and Nancy Lynch, Brewer's Conjecture and the Feasibility of Consistent, Available, Partition-Tolerant Web Services, SIGACT News 33(2), 2002, pp. 51–59
+      genre: primary-literature
+      identifiers: []
+      edition: SIGACT News 33(2), 2002, pp. 51–59
+  supporting:
+    - citation: Princeton COS 418 course copy of the paper PDF
+      genre: primary-literature
+      identifiers: []
+      edition: null
+    - citation: ACM DOI record
+      genre: official-record
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: canonical
+    url: https://www.cs.princeton.edu/courses/archive/fall19/cos418/papers/cap.pdf
+    retrieved: 2026-07-25
+    version: SIGACT News 33(2), 2002, pp. 51–59
+  - kind: url
+    role: doi
+    url: https://doi.org/10.1145/564585.564601
+    retrieved: 2026-07-25
+    version: SIGACT News 33(2), 2002, pp. 51–59
 ---
 
 ## 개요
@@ -43,6 +82,7 @@ graph_visibility: public
 ## 인용할 만한 구절
 
 > “consistent, available, partition-tolerant web services”
+<!-- wiki-v2:quote-locator evidence="ref-087" locator="wiki/sources/Brewer's Conjecture and the Feasibility of Consistent, Available, Partition-Tolerant Web Services.md:line-21#인용할-만한-구절" status="recorded" -->
 
 논문 제목의 세 성질은 구호가 아니라, 명시된 네트워크 모형 아래 함께 만족할 수 있는지를 묻는 형식적 대상이다.
 
@@ -58,6 +98,11 @@ graph_visibility: public
 | constrains | [[가용성과 복구]] | 서비스 가용성 주장을 복제 상태의 일관성·분할·응답 의미와 분리하지 않도록 이론적 경계를 제공한다. | [[Brewer's Conjecture and the Feasibility of Consistent, Available, Partition-Tolerant Web Services]] |
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - Princeton COS 418, [paper PDF](https://www.cs.princeton.edu/courses/archive/fall19/cos418/papers/cap.pdf)
 - ACM, [DOI: 10.1145/564585.564601](https://doi.org/10.1145/564585.564601)

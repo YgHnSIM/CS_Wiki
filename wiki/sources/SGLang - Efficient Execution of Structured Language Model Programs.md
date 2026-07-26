@@ -1,25 +1,62 @@
 ---
+schema_version: 2
+id: ref-080
+kind: reference
 title: "SGLang: Efficient Execution of Structured Language Model Programs"
-aliases: [SGLang paper, RadixAttention paper, Zheng et al. 2024]
-summary: "여러 LLM 호출과 제어 흐름을 가진 프로그램을 위한 언어·런타임을 공동 설계하고, RadixAttention의 radix tree·LRU·캐시 인지 스케줄링으로 호출 사이의 동일 접두사 KV 상태를 재사용한 2024년 연구."
-tags: [type/reference, domain/machine-learning, domain/systems, domain/software-engineering, status/active]
-created: 2026-07-25
-updated: 2026-07-25
-publication_year: 2024
-historical_layer: system
-capability_layers: [programmability, realized-performance, scalability, resource-efficiency]
-sources: ["SGLang: Efficient Execution of Structured Language Model Programs"]
-source_id: ref-080
-source_kind: external
-primary_sources: ["Lianmin Zheng et al., SGLang: Efficient Execution of Structured Language Model Programs, NeurIPS 2024"]
-supporting_sources: ["NeurIPS 2024 proceedings abstract record"]
-source_urls: ["https://proceedings.nips.cc/paper_files/paper/2024/hash/724be4472168f31ba1c9ac630f15dec8-Abstract-Conference.html", "https://proceedings.nips.cc/paper_files/paper/2024/file/724be4472168f31ba1c9ac630f15dec8-Paper-Conference.pdf"]
-retrieved: 2026-07-25
-version: "NeurIPS 2024 proceedings, volume 37"
-snapshot_status: external-only
-status: active
-graph_id: reference-sglang
+aliases:
+  - SGLang paper
+  - RadixAttention paper
+  - Zheng et al. 2024
+summary: 여러 LLM 호출과 제어 흐름을 가진 프로그램을 위한 언어·런타임을 공동 설계하고, RadixAttention의 radix tree·LRU·캐시 인지 스케줄링으로 호출 사이의 동일 접두사 KV 상태를 재사용한 2024년 연구.
+domains:
+  - machine-learning
+  - systems
+  - software-engineering
+editorial_status: active
+publication_visibility: public
 graph_visibility: public
+created: 2026-07-25
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:8bf8f878caa8d94c2b05abd259ec3e964185e7befeccdc5a6c06cc276b6f5db2
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers:
+  - programmability
+  - realized-performance
+  - scalability
+  - resource-efficiency
+history:
+  publication_year: 2024
+  layer: system
+redirect_from:
+  - /references/sglang-efficient-execution-of-structured-language-model-programs/
+  - /sources/sglang-efficient-execution-of-structured-language-model-programs/
+origin: external
+works:
+  primary:
+    - citation: "Lianmin Zheng et al., SGLang: Efficient Execution of Structured Language Model Programs, NeurIPS 2024"
+      genre: other
+      identifiers: []
+      edition: NeurIPS 2024 proceedings, volume 37
+  supporting:
+    - citation: NeurIPS 2024 proceedings abstract record
+      genre: official-record
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: canonical
+    url: https://proceedings.nips.cc/paper_files/paper/2024/hash/724be4472168f31ba1c9ac630f15dec8-Abstract-Conference.html
+    retrieved: 2026-07-25
+    version: NeurIPS 2024 proceedings, volume 37
+  - kind: url
+    role: mirror
+    url: https://proceedings.nips.cc/paper_files/paper/2024/file/724be4472168f31ba1c9ac630f15dec8-Paper-Conference.pdf
+    retrieved: 2026-07-25
+    version: NeurIPS 2024 proceedings, volume 37
 ---
 
 ## 개요
@@ -45,6 +82,7 @@ graph_visibility: public
 ## 인용할 만한 구절
 
 > “requests with the same prompt prefix can reuse the KV cache”
+<!-- wiki-v2:quote-locator evidence="ref-080" locator="wiki/sources/SGLang - Efficient Execution of Structured Language Model Programs.md:line-23#인용할-만한-구절" status="recorded" -->
 
 재사용의 안전한 단위를 의미가 아니라 토큰 접두사와 그 접두사로부터 계산된 모델 상태로 한정하는 문장이다.
 
@@ -61,6 +99,11 @@ graph_visibility: public
 | constrains | [[연속 배칭]] | 긴 접두사 적중을 우선하는 순서가 캐시 적중률과 처리량을 높이는 대신 공정성·대기 지연과 충돌할 수 있다. | [[SGLang - Efficient Execution of Structured Language Model Programs]] |
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - NeurIPS, [abstract and proceedings record](https://proceedings.nips.cc/paper_files/paper/2024/hash/724be4472168f31ba1c9ac630f15dec8-Abstract-Conference.html)
 - NeurIPS, [open-access paper PDF](https://proceedings.nips.cc/paper_files/paper/2024/file/724be4472168f31ba1c9ac630f15dec8-Paper-Conference.pdf)

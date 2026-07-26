@@ -1,16 +1,42 @@
 ---
+schema_version: 2
+id: analysis-low-precision-ai-result-contract
+kind: analysis
 title: 낮은 정밀도는 AI의 컴퓨팅 능력을 어떻게 바꾸는가
-aliases: [AI 저정밀도 성능, 혼합 정밀도와 모델 품질, low precision AI capability]
-summary: "혼합 정밀도가 메모리·데이터 이동·전용 연산 자원의 비용을 낮추는 동시에 수치 안정성과 모델 품질이라는 결과 계약을 바꾸며, 이를 목표 품질 도달 시간으로 비교해야 하는 이유를 분석한다."
-tags: [type/analysis, domain/machine-learning, domain/computer-architecture, domain/computer-science, status/active]
-created: 2026-07-24
-updated: 2026-07-25
-historical_layer: measurement
-capability_layers: [realized-performance, resource-efficiency, reliable-results]
-sources: ["Mixed Precision Training", "MLPerf Training Benchmark", "IEEE 754-2019 Standard for Floating-Point Arithmetic", "In-Datacenter Performance Analysis of a Tensor Processing Unit", "GPTQ - Accurate Post-Training Quantization for Generative Pre-trained Transformers", "AWQ - Activation-aware Weight Quantization for On-Device LLM Compression and Acceleration"]
-status: active
-graph_id: analysis-low-precision-ai-result-contract
+aliases:
+  - AI 저정밀도 성능
+  - 혼합 정밀도와 모델 품질
+  - low precision AI capability
+summary: 혼합 정밀도가 메모리·데이터 이동·전용 연산 자원의 비용을 낮추는 동시에 수치 안정성과 모델 품질이라는 결과 계약을 바꾸며, 이를 목표 품질 도달 시간으로 비교해야 하는 이유를 분석한다.
+domains:
+  - machine-learning
+  - computer-architecture
+  - computer-science
+editorial_status: active
+publication_visibility: public
 graph_visibility: public
+created: 2026-07-24
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:139805a5b89c55597503ebe0493793d201368ff70b80fbf90370dc64b3001365
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids:
+  - ref-069
+  - ref-070
+  - ref-051
+  - ref-042
+  - ref-081
+  - ref-082
+capability_layers:
+  - realized-performance
+  - resource-efficiency
+  - reliable-results
+history:
+  layer: measurement
+redirect_from:
+  - /analyses/낮은-정밀도는-ai의-컴퓨팅-능력을-어떻게-바꾸는가/
 ---
 
 ## 문제 제기
@@ -66,6 +92,16 @@ AI 시스템에서 낮은 정밀도는 메모리 용량, 데이터 이동과 전
 | synthesizes | [[LLM 가중치 양자화]] | 추론 가중치의 압축·대역폭 이득과 보정·커널·과업 품질 조건을 혼합 정밀도 측정 틀에 연결한다. | [[AWQ - Activation-aware Weight Quantization for On-Device LLM Compression and Acceleration]] |
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- `ref-069`
+- `ref-070`
+- `ref-051`
+- `ref-042`
+- `ref-081`
+- `ref-082`
+<!-- wiki-v2:evidence-end -->
 
 - [[Mixed Precision Training]]
 - [[MLPerf Training Benchmark]]

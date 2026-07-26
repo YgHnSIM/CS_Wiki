@@ -1,25 +1,58 @@
 ---
+schema_version: 2
+id: ref-073
+kind: reference
 title: Attention Is All You Need
-aliases: [Vaswani et al. 2017, Transformer paper]
-summary: "순환이나 합성곱 없이 어텐션을 중심으로 인코더와 디코더를 구성해 시퀀스 위치의 병렬 계산 가능성과 전역 의존성 모델링을 결합한 2017년 Transformer 논문."
-tags: [type/reference, domain/machine-learning, domain/computer-architecture, status/active]
-created: 2026-07-24
-updated: 2026-07-24
-publication_year: 2017
-historical_layer: architecture
-capability_layers: [realized-performance, scalability]
-sources: ["Attention Is All You Need"]
-source_id: ref-073
-source_kind: external
-primary_sources: ["Ashish Vaswani et al., Attention Is All You Need, NIPS 2017"]
-supporting_sources: ["NeurIPS proceedings abstract and bibliographic record"]
-source_urls: ["https://proceedings.neurips.cc/paper_files/paper/2017/hash/3f5ee243547dee91fbd053c1c4a845aa-Abstract.html", "https://proceedings.neurips.cc/paper_files/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf"]
-retrieved: 2026-07-24
-version: "NIPS 2017 proceedings"
-snapshot_status: external-only
-status: active
-graph_id: reference-attention-is-all-you-need
+aliases:
+  - Vaswani et al. 2017
+  - Transformer paper
+summary: 순환이나 합성곱 없이 어텐션을 중심으로 인코더와 디코더를 구성해 시퀀스 위치의 병렬 계산 가능성과 전역 의존성 모델링을 결합한 2017년 Transformer 논문.
+domains:
+  - machine-learning
+  - computer-architecture
+editorial_status: active
+publication_visibility: public
 graph_visibility: public
+created: 2026-07-24
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:ce0fd85844f9e94ac969998b0d63c21b2494e8ef7127602fe30ce8f7ba8d7126
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers:
+  - realized-performance
+  - scalability
+history:
+  publication_year: 2017
+  layer: architecture
+redirect_from:
+  - /references/attention-is-all-you-need/
+  - /sources/attention-is-all-you-need/
+origin: external
+works:
+  primary:
+    - citation: Ashish Vaswani et al., Attention Is All You Need, NIPS 2017
+      genre: other
+      identifiers: []
+      edition: NIPS 2017 proceedings
+  supporting:
+    - citation: NeurIPS proceedings abstract and bibliographic record
+      genre: official-record
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: canonical
+    url: https://proceedings.neurips.cc/paper_files/paper/2017/hash/3f5ee243547dee91fbd053c1c4a845aa-Abstract.html
+    retrieved: 2026-07-24
+    version: NIPS 2017 proceedings
+  - kind: url
+    role: mirror
+    url: https://proceedings.neurips.cc/paper_files/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf
+    retrieved: 2026-07-24
+    version: NIPS 2017 proceedings
 ---
 
 ## 개요
@@ -45,6 +78,7 @@ graph_visibility: public
 ## 인용할 만한 구절
 
 > “relying entirely on an attention mechanism”
+<!-- wiki-v2:quote-locator evidence="ref-073" locator="wiki/sources/Attention Is All You Need.md:line-23#인용할-만한-구절" status="recorded" -->
 
 Transformer가 순환이나 합성곱 대신 무엇을 중심 계산으로 삼았는지를 압축한 표현이다.
 
@@ -61,6 +95,11 @@ Transformer가 순환이나 합성곱 대신 무엇을 중심 계산으로 삼�
 | precedes | [[입출력 인지 어텐션]] | 전역 자기 주의가 만든 계산 구조는 후대에 GPU 메모리 계층을 고려한 정확한 어텐션 구현의 대상이 되었다. | [[FlashAttention - Fast and Memory-Efficient Exact Attention with IO-Awareness]] |
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - NeurIPS Proceedings, [abstract and bibliographic record](https://proceedings.neurips.cc/paper_files/paper/2017/hash/3f5ee243547dee91fbd053c1c4a845aa-Abstract.html)
 - NeurIPS Proceedings, [conference paper PDF](https://proceedings.neurips.cc/paper_files/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf)

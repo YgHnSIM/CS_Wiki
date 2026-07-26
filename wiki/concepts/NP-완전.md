@@ -1,17 +1,35 @@
 ---
+schema_version: 2
+id: concept-np-completeness
+kind: concept
 title: NP-완전
-aliases: [NP-complete, NP 완전성, NP complete]
-summary: "지정한 다항 시간 환원 아래 NP에 속하고 NP의 모든 문제를 그 문제로 환원할 수 있을 때 부여하는, 문제 클래스 안의 대표 난이도 개념."
-tags: [type/concept, domain/computer-science, status/active]
-created: 2026-07-24
-updated: 2026-07-24
-publication_year: 1971
-historical_layer: theory
-capability_layers: [complexity]
-sources: ["The Complexity of Theorem-Proving Procedures", "Reducibility Among Combinatorial Problems"]
-status: active
-graph_id: concept-np-completeness
+aliases:
+  - NP-complete
+  - NP 완전성
+  - NP complete
+summary: 지정한 다항 시간 환원 아래 NP에 속하고 NP의 모든 문제를 그 문제로 환원할 수 있을 때 부여하는, 문제 클래스 안의 대표 난이도 개념.
+domains:
+  - computer-science
+editorial_status: active
+publication_visibility: public
 graph_visibility: public
+created: 2026-07-24
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:a7d8feb660bfc903e0e3e7504c2d34664a8489cb2c41f9cd082f7b041a920697
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids:
+  - ref-066
+  - ref-067
+capability_layers:
+  - complexity
+history:
+  publication_year: 1971
+  layer: theory
+redirect_from:
+  - /concepts/np-완전/
 ---
 
 ## 개요
@@ -49,6 +67,12 @@ NP-완전성은 “더 빠른 기계”라는 말을 해석할 때 입력 규모
 | prerequisite_for | [[더 빠른 하드웨어는 더 나은 알고리즘을 대신할 수 있는가]] | 하드웨어 속도 향상과 알고리즘·문제 구조의 변화가 서로 다른 질문임을 판단하는 이론적 기준을 제공한다. | [[Reducibility Among Combinatorial Problems]] |
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- `ref-066`
+- `ref-067`
+<!-- wiki-v2:evidence-end -->
 
 - [[The Complexity of Theorem-Proving Procedures]]
 - [[Reducibility Among Combinatorial Problems]]

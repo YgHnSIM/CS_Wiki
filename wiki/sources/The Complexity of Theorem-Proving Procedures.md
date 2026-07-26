@@ -1,25 +1,70 @@
 ---
+schema_version: 2
+id: ref-066
+kind: reference
 title: The Complexity of Theorem-Proving Procedures
-aliases: [Cook 1971, Cook's theorem, 정리 증명 절차의 복잡도]
-summary: "다항 시간 비결정적 튜링 기계가 푸는 인식 문제를 명제 논리의 항진식 판정 문제로 환원해 다항 환원과 완전 문제의 틀을 제시한 Stephen A. Cook의 1971년 논문."
-tags: [type/reference, domain/computer-science, status/active]
-created: 2026-07-24
-updated: 2026-07-24
-publication_year: 1971
-historical_layer: theory
-capability_layers: [complexity]
-sources: ["The Complexity of Theorem-Proving Procedures"]
-source_id: ref-066
-source_kind: external
-primary_sources: ["Stephen A. Cook, The Complexity of Theorem-Proving Procedures, Proceedings of the Third Annual ACM Symposium on Theory of Computing, 1971, pp. 151–158"]
-supporting_sources: ["ACM DOI record", "CMU transcript of the 1971 typewritten paper", "MIT Press classic-paper record"]
-source_urls: ["https://doi.org/10.1145/800157.805047", "https://www.cs.cmu.edu/~15455/resources/Cook1971-complx-thm-proof.pdf", "https://direct.mit.edu/books/edited-volume/5003/chapter/2657057/The-Complexity-of-Theorem-Proving-Procedures-1971"]
-retrieved: 2026-07-24
-version: "Proceedings of the Third Annual ACM Symposium on Theory of Computing, 1971, pp. 151–158"
-snapshot_status: external-only
-status: active
-graph_id: reference-cook-theorem-proving-procedures
+aliases:
+  - Cook 1971
+  - Cook's theorem
+  - 정리 증명 절차의 복잡도
+summary: 다항 시간 비결정적 튜링 기계가 푸는 인식 문제를 명제 논리의 항진식 판정 문제로 환원해 다항 환원과 완전 문제의 틀을 제시한 Stephen A. Cook의 1971년 논문.
+domains:
+  - computer-science
+editorial_status: active
+publication_visibility: public
 graph_visibility: public
+created: 2026-07-24
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:a4e07be96adc1b4f3be0b7423b1f168e18773f0d954846eebcbb4da7c31fb917
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers:
+  - complexity
+history:
+  publication_year: 1971
+  layer: theory
+redirect_from:
+  - /references/the-complexity-of-theorem-proving-procedures/
+  - /sources/the-complexity-of-theorem-proving-procedures/
+origin: external
+works:
+  primary:
+    - citation: Stephen A. Cook, The Complexity of Theorem-Proving Procedures, Proceedings of the Third Annual ACM Symposium on Theory of Computing, 1971, pp. 151–158
+      genre: primary-literature
+      identifiers: []
+      edition: Proceedings of the Third Annual ACM Symposium on Theory of Computing, 1971, pp. 151–158
+  supporting:
+    - citation: ACM DOI record
+      genre: official-record
+      identifiers: []
+      edition: null
+    - citation: CMU transcript of the 1971 typewritten paper
+      genre: primary-literature
+      identifiers: []
+      edition: null
+    - citation: MIT Press classic-paper record
+      genre: official-record
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: doi
+    url: https://doi.org/10.1145/800157.805047
+    retrieved: 2026-07-24
+    version: Proceedings of the Third Annual ACM Symposium on Theory of Computing, 1971, pp. 151–158
+  - kind: url
+    role: mirror
+    url: https://www.cs.cmu.edu/~15455/resources/Cook1971-complx-thm-proof.pdf
+    retrieved: 2026-07-24
+    version: Proceedings of the Third Annual ACM Symposium on Theory of Computing, 1971, pp. 151–158
+  - kind: url
+    role: mirror
+    url: https://direct.mit.edu/books/edited-volume/5003/chapter/2657057/The-Complexity-of-Theorem-Proving-Procedures-1971
+    retrieved: 2026-07-24
+    version: Proceedings of the Third Annual ACM Symposium on Theory of Computing, 1971, pp. 151–158
 ---
 
 ## 개요
@@ -41,6 +86,7 @@ Cook은 다항 시간 비결정적 튜링 기계의 계산 과정을 명제 변�
 ## 인용할 만한 구절
 
 > “a polynomial time-bounded nondeterministic Turing machine”
+<!-- wiki-v2:quote-locator evidence="ref-066" locator="wiki/sources/The Complexity of Theorem-Proving Procedures.md:line-19#인용할-만한-구절" status="recorded" -->
 
 논문은 이 모형이 인식하는 문제와 항진식 판정 문제의 환원 관계를 연결한다.
 
@@ -56,6 +102,11 @@ Cook은 다항 시간 비결정적 튜링 기계의 계산 과정을 명제 변�
 | enables | [[NP-완전]] | 다항 시간 비결정적 계산과 대표적인 어려운 문제를 연결하는 완전성 틀을 제공한다. | [[The Complexity of Theorem-Proving Procedures]] |
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - ACM, [DOI record](https://doi.org/10.1145/800157.805047)
 - Carnegie Mellon University, [1971 typewritten-paper transcript](https://www.cs.cmu.edu/~15455/resources/Cook1971-complx-thm-proof.pdf)

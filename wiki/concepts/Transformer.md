@@ -1,17 +1,39 @@
 ---
+schema_version: 2
+id: concept-transformer
+kind: concept
 title: Transformer
-aliases: [트랜스포머, Transformer architecture, Transformer 모델]
-summary: "순환 상태 대신 자기 주의와 위치별 피드포워드 층을 중심으로 시퀀스를 처리해 학습 위치의 병렬 계산과 전역 의존성 모델링을 결합한 신경망 구조."
-tags: [type/concept, domain/machine-learning, domain/computer-architecture, status/active]
-created: 2026-07-24
-updated: 2026-07-24
-publication_year: 2017
-historical_layer: architecture
-capability_layers: [realized-performance, scalability]
-sources: ["Attention Is All You Need", "FlashAttention - Fast and Memory-Efficient Exact Attention with IO-Awareness", "Orca - A Distributed Serving System for Transformer-Based Generative Models", "Efficient Memory Management for Large Language Model Serving with PagedAttention"]
-status: active
-graph_id: concept-transformer
+aliases:
+  - 트랜스포머
+  - Transformer architecture
+  - Transformer 모델
+summary: 순환 상태 대신 자기 주의와 위치별 피드포워드 층을 중심으로 시퀀스를 처리해 학습 위치의 병렬 계산과 전역 의존성 모델링을 결합한 신경망 구조.
+domains:
+  - machine-learning
+  - computer-architecture
+editorial_status: active
+publication_visibility: public
 graph_visibility: public
+created: 2026-07-24
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:fa62cd6e54a09cd188f0769a49349a1a5f4c3269185f9386b934dcd06d3402cd
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids:
+  - ref-073
+  - ref-074
+  - ref-075
+  - ref-076
+capability_layers:
+  - realized-performance
+  - scalability
+history:
+  publication_year: 2017
+  layer: architecture
+redirect_from:
+  - /concepts/transformer/
 ---
 
 ## 개요
@@ -49,6 +71,14 @@ graph_visibility: public
 | constrains | [[KV 캐시]] | 자동회귀 디코딩은 과거 위치의 키·값 상태를 요청별로 유지하므로 동시 요청 수가 GPU 메모리에 제한된다. | [[Efficient Memory Management for Large Language Model Serving with PagedAttention]] |
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- `ref-073`
+- `ref-074`
+- `ref-075`
+- `ref-076`
+<!-- wiki-v2:evidence-end -->
 
 - [[Attention Is All You Need]]
 - [[FlashAttention - Fast and Memory-Efficient Exact Attention with IO-Awareness]]

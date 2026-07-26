@@ -1,25 +1,60 @@
 ---
+schema_version: 2
+id: ref-072
+kind: reference
 title: The SPACE of Developer Productivity
-aliases: [Forsgren et al. 2021, SPACE framework, SPACE 생산성 프레임워크, 개발자 생산성 SPACE]
-summary: "개발자 생산성을 만족·웰빙, 성과, 활동, 소통·협업, 효율·몰입의 다섯 차원으로 다루며 단일 지표 측정의 한계를 설명한 2021년 ACM Queue 논문."
-tags: [type/reference, domain/software-engineering, domain/computer-science, status/active]
-created: 2026-07-24
-updated: 2026-07-24
-publication_year: 2021
-historical_layer: measurement
-capability_layers: [programmability, reliable-results]
-sources: ["The SPACE of Developer Productivity"]
-source_id: ref-072
-source_kind: external
-primary_sources: ["Nicole Forsgren et al., The SPACE of Developer Productivity: There’s more to it than you think, ACM Queue 19(1), 2021, pp. 20–48"]
-supporting_sources: ["Microsoft Research publication page"]
-source_urls: ["https://www.microsoft.com/en-us/research/publication/the-space-of-developer-productivity-theres-more-to-it-than-you-think/", "https://queue.acm.org/detail.cfm?id=3454124"]
-retrieved: 2026-07-24
-version: "ACM Queue 19(1), February 2021, pp. 20–48"
-snapshot_status: external-only
-status: active
-graph_id: reference-space-developer-productivity
+aliases:
+  - Forsgren et al. 2021
+  - SPACE framework
+  - SPACE 생산성 프레임워크
+  - 개발자 생산성 SPACE
+summary: 개발자 생산성을 만족·웰빙, 성과, 활동, 소통·협업, 효율·몰입의 다섯 차원으로 다루며 단일 지표 측정의 한계를 설명한 2021년 ACM Queue 논문.
+domains:
+  - software-engineering
+  - computer-science
+editorial_status: active
+publication_visibility: public
 graph_visibility: public
+created: 2026-07-24
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:b7dc464bb5df29e78ce97323ea9a2a3aaf5cd1cfd06e8d920e746cbf9e8e8beb
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers:
+  - programmability
+  - reliable-results
+history:
+  publication_year: 2021
+  layer: measurement
+redirect_from:
+  - /references/the-space-of-developer-productivity/
+  - /sources/the-space-of-developer-productivity/
+origin: external
+works:
+  primary:
+    - citation: "Nicole Forsgren et al., The SPACE of Developer Productivity: There’s more to it than you think, ACM Queue 19(1), 2021, pp. 20–48"
+      genre: other
+      identifiers: []
+      edition: ACM Queue 19(1), February 2021, pp. 20–48
+  supporting:
+    - citation: Microsoft Research publication page
+      genre: primary-literature
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: publisher
+    url: https://www.microsoft.com/en-us/research/publication/the-space-of-developer-productivity-theres-more-to-it-than-you-think/
+    retrieved: 2026-07-24
+    version: ACM Queue 19(1), February 2021, pp. 20–48
+  - kind: url
+    role: mirror
+    url: https://queue.acm.org/detail.cfm?id=3454124
+    retrieved: 2026-07-24
+    version: ACM Queue 19(1), February 2021, pp. 20–48
 ---
 
 ## 개요
@@ -41,6 +76,7 @@ SPACE는 다섯 차원을 제안한다. 만족과 웰빙(Satisfaction and well-b
 ## 인용할 만한 구절
 
 > “cannot be measured by a single metric or dimension”
+<!-- wiki-v2:quote-locator evidence="ref-072" locator="wiki/sources/The SPACE of Developer Productivity.md:line-19#인용할-만한-구절" status="recorded" -->
 
 저자들은 개발자 생산성을 단일 수치로 정리할 수 없다는 점을 논문의 출발점으로 둔다.
 
@@ -56,6 +92,11 @@ SPACE는 다섯 차원을 제안한다. 만족과 웰빙(Satisfaction and well-b
 | constrains | [[코드 생산량은 왜 개발 생산성을 설명하지 못하는가]] | 코드량·커밋 등 활동 지표를 전체 생산성의 단일 대리값으로 쓰지 않게 한다. | [[The SPACE of Developer Productivity]] |
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - Microsoft Research, [publication page](https://www.microsoft.com/en-us/research/publication/the-space-of-developer-productivity-theres-more-to-it-than-you-think/)
 - ACM Queue, [article page](https://queue.acm.org/detail.cfm?id=3454124)

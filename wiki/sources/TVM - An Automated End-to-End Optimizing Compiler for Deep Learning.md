@@ -1,25 +1,63 @@
 ---
+schema_version: 2
+id: ref-099
+kind: reference
 title: "TVM: An Automated End-to-End Optimizing Compiler for Deep Learning"
-aliases: ["TVM: An Automated End-to-End Optimizing Compiler for Deep Learning", TVM, "Chen et al. 2018", TVM compiler]
-summary: "계산 그래프와 텐서 연산자 수준의 최적화를 결합하고 대상 하드웨어별 코드 탐색을 자동화해 딥러닝 작업의 성능 이식성을 추구한 2018년 TVM 논문."
-tags: [type/reference, domain/machine-learning, domain/software-engineering, domain/computer-architecture, domain/performance, status/active]
-created: 2026-07-25
-updated: 2026-07-25
-publication_year: 2018
-historical_layer: software
-capability_layers: [programmability, realized-performance, resource-efficiency]
-sources: ["TVM: An Automated End-to-End Optimizing Compiler for Deep Learning"]
-source_id: ref-099
-source_kind: external
-primary_sources: ["Tianqi Chen et al., TVM: An Automated End-to-End Optimizing Compiler for Deep Learning, OSDI 2018"]
-supporting_sources: ["USENIX OSDI 2018 presentation record and open-access conference paper PDF"]
-source_urls: ["https://www.usenix.org/conference/osdi18/presentation/chen", "https://www.usenix.org/system/files/osdi18-chen.pdf"]
-retrieved: 2026-07-25
-version: "OSDI '18, pp. 578–594"
-snapshot_status: external-only
-status: active
-graph_id: reference-tvm-osdi-2018
+aliases:
+  - "TVM: An Automated End-to-End Optimizing Compiler for Deep Learning"
+  - TVM
+  - Chen et al. 2018
+  - TVM compiler
+summary: 계산 그래프와 텐서 연산자 수준의 최적화를 결합하고 대상 하드웨어별 코드 탐색을 자동화해 딥러닝 작업의 성능 이식성을 추구한 2018년 TVM 논문.
+domains:
+  - machine-learning
+  - software-engineering
+  - computer-architecture
+  - performance
+editorial_status: active
+publication_visibility: public
 graph_visibility: public
+created: 2026-07-25
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:85935f5cc254f27d19e13f01b2eff7f542e8754555a395bfad08754963454783
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers:
+  - programmability
+  - realized-performance
+  - resource-efficiency
+history:
+  publication_year: 2018
+  layer: software
+redirect_from:
+  - /references/tvm-an-automated-end-to-end-optimizing-compiler-for-deep-learning/
+  - /sources/tvm-an-automated-end-to-end-optimizing-compiler-for-deep-learning/
+origin: external
+works:
+  primary:
+    - citation: "Tianqi Chen et al., TVM: An Automated End-to-End Optimizing Compiler for Deep Learning, OSDI 2018"
+      genre: other
+      identifiers: []
+      edition: OSDI '18, pp. 578–594
+  supporting:
+    - citation: USENIX OSDI 2018 presentation record and open-access conference paper PDF
+      genre: official-record
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: canonical
+    url: https://www.usenix.org/conference/osdi18/presentation/chen
+    retrieved: 2026-07-25
+    version: OSDI '18, pp. 578–594
+  - kind: url
+    role: mirror
+    url: https://www.usenix.org/system/files/osdi18-chen.pdf
+    retrieved: 2026-07-25
+    version: OSDI '18, pp. 578–594
 ---
 
 ## 개요
@@ -47,6 +85,11 @@ TVM은 텐서 연산의 선언과 대상별 변환을 분리하고, 비용 모�
 | enables | [[이기종 실행 모델]] | CPU·GPU·가속기별 계산 원시 연산과 메모리 구조에 맞춰 코드와 실행 모듈을 생성할 수 있게 한다. | [[TVM - An Automated End-to-End Optimizing Compiler for Deep Learning]] |
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - USENIX, [OSDI 2018 presentation and bibliographic record](https://www.usenix.org/conference/osdi18/presentation/chen)
 - USENIX, [open-access conference paper PDF](https://www.usenix.org/system/files/osdi18-chen.pdf)

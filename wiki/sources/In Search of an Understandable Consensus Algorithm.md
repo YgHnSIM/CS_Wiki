@@ -1,25 +1,61 @@
 ---
+schema_version: 2
+id: ref-088
+kind: reference
 title: In Search of an Understandable Consensus Algorithm
-aliases: [Raft, Raft 논문, Ongaro Ousterhout 2014, Raft consensus paper]
-summary: "리더 선출, 로그 복제, 안전성을 분리해 강한 리더 기반 복제 로그 합의를 설명한 Ongaro와 Ousterhout의 2014년 Raft 논문."
-tags: [type/reference, domain/computer-science, domain/distributed-systems, domain/systems, status/active]
-created: 2026-07-25
-updated: 2026-07-25
-publication_year: 2014
-historical_layer: system
-capability_layers: [scalability, reliable-results]
-sources: [In Search of an Understandable Consensus Algorithm]
-source_id: ref-088
-source_kind: external
-primary_sources: ["Diego Ongaro and John Ousterhout, In Search of an Understandable Consensus Algorithm, USENIX ATC 2014, pp. 305–319"]
-supporting_sources: ["USENIX ATC 2014 presentation and open-access proceedings record"]
-source_urls: ["https://www.usenix.org/conference/atc14/technical-sessions/presentation/ongaro", "https://www.usenix.org/system/files/conference/atc14/atc14-paper-ongaro.pdf"]
-retrieved: 2026-07-25
-version: "USENIX ATC '14 proceedings, pp. 305–319"
-snapshot_status: external-only
-status: active
-graph_id: reference-raft-consensus
+aliases:
+  - Raft
+  - Raft 논문
+  - Ongaro Ousterhout 2014
+  - Raft consensus paper
+summary: 리더 선출, 로그 복제, 안전성을 분리해 강한 리더 기반 복제 로그 합의를 설명한 Ongaro와 Ousterhout의 2014년 Raft 논문.
+domains:
+  - computer-science
+  - distributed-systems
+  - systems
+editorial_status: active
+publication_visibility: public
 graph_visibility: public
+created: 2026-07-25
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:f78bb2c20a7bee7d65eb73cd1c15eae9023aa7e7528c565e086b1e0f0c33fe2f
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers:
+  - scalability
+  - reliable-results
+history:
+  publication_year: 2014
+  layer: system
+redirect_from:
+  - /references/in-search-of-an-understandable-consensus-algorithm/
+  - /sources/in-search-of-an-understandable-consensus-algorithm/
+origin: external
+works:
+  primary:
+    - citation: Diego Ongaro and John Ousterhout, In Search of an Understandable Consensus Algorithm, USENIX ATC 2014, pp. 305–319
+      genre: other
+      identifiers: []
+      edition: USENIX ATC '14 proceedings, pp. 305–319
+  supporting:
+    - citation: USENIX ATC 2014 presentation and open-access proceedings record
+      genre: official-record
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: canonical
+    url: https://www.usenix.org/conference/atc14/technical-sessions/presentation/ongaro
+    retrieved: 2026-07-25
+    version: USENIX ATC '14 proceedings, pp. 305–319
+  - kind: url
+    role: mirror
+    url: https://www.usenix.org/system/files/conference/atc14/atc14-paper-ongaro.pdf
+    retrieved: 2026-07-25
+    version: USENIX ATC '14 proceedings, pp. 305–319
 ---
 
 ## 개요
@@ -41,6 +77,7 @@ Raft의 안전성은 같은 로그 위치에 서로 다른 명령이 확정되�
 ## 인용할 만한 구절
 
 > “leader election, log replication, and safety”
+<!-- wiki-v2:quote-locator evidence="ref-088" locator="wiki/sources/In Search of an Understandable Consensus Algorithm.md:line-19#인용할-만한-구절" status="recorded" -->
 
 Raft가 합의 문제를 세 부분으로 분해해 설명하는 핵심 구성을 압축한다.
 
@@ -56,6 +93,11 @@ Raft가 합의 문제를 세 부분으로 분해해 설명하는 핵심 구성�
 | constrains | [[결함 허용]] | 정지·재시작을 가정한 Raft의 보장을 비잔틴 행동까지 포함하는 일반 결함 허용으로 확대하지 않도록 실패 모형을 제한한다. | [[In Search of an Understandable Consensus Algorithm]] |
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - USENIX, [ATC 2014 presentation and bibliographic record](https://www.usenix.org/conference/atc14/technical-sessions/presentation/ongaro)
 - USENIX, [open-access paper PDF](https://www.usenix.org/system/files/conference/atc14/atc14-paper-ongaro.pdf)

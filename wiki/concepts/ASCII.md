@@ -1,13 +1,32 @@
 ---
+schema_version: 2
+id: concept-6a0c16a9841c87e8
+kind: concept
 title: ASCII
-aliases: [American Standard Code for Information Interchange, 아스키]
-summary: "문자에 숫자 값을 대응시키는 7비트 문자 인코딩 표준이자 UTF-8 ASCII 범위 호환성의 기반."
-tags: [type/concept, domain/computer-science, domain/systems, status/active]
+aliases:
+  - American Standard Code for Information Interchange
+  - 아스키
+summary: 문자에 숫자 값을 대응시키는 7비트 문자 인코딩 표준이자 UTF-8 ASCII 범위 호환성의 기반.
+domains:
+  - computer-science
+  - systems
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-05-12
-updated: 2026-07-22
-sources: ["데이터 표현과 인코딩.md", "The Unicode Standard 17.0.0", "RFC 3629 UTF-8"]
-status: active
-graph_id: concept-6a0c16a9841c87e8
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:35cd55d732c01cdd732958ba948db34e76111643b14607cca61831270562523f
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids:
+  - src-006
+  - ref-022
+  - ref-023
+capability_layers: []
+redirect_from:
+  - /concepts/ascii/
 ---
 
 ## 개요
@@ -27,6 +46,13 @@ ASCII는 로마자 중심의 7비트 표준이므로 다른 언어의 문자나 
 [[UTF-8]]은 ASCII 범위 `U+0000`부터 `U+007F`까지를 같은 한 바이트 값으로 표현한다. 그래서 순수 ASCII 텍스트는 그대로 유효한 UTF-8 텍스트이기도 하다. 다만 이 호환성은 ASCII 범위에만 해당하며, 한글이나 이모지처럼 ASCII 밖의 문자는 여러 바이트가 필요하다.
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- `src-006`
+- `ref-022`
+- `ref-023`
+<!-- wiki-v2:evidence-end -->
 
 - [[데이터 표현과 인코딩]]
 - [[The Unicode Standard 17.0.0]]

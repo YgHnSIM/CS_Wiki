@@ -1,21 +1,56 @@
 ---
+schema_version: 2
+id: ref-022
+kind: reference
 title: The Unicode Standard 17.0.0
-aliases: [Unicode 17.0.0, The Unicode Standard]
-summary: "Unicode 17.0.0의 핵심 명세를 바탕으로 코드 포인트, scalar value, 코드 유닛, UTF-8, UTF-16, BOM의 구분을 정리한 참고 자료."
-tags: [type/reference, domain/computer-science, domain/systems, domain/text-processing, status/active]
+aliases:
+  - Unicode 17.0.0
+  - The Unicode Standard
+summary: Unicode 17.0.0의 핵심 명세를 바탕으로 코드 포인트, scalar value, 코드 유닛, UTF-8, UTF-16, BOM의 구분을 정리한 참고 자료.
+domains:
+  - computer-science
+  - systems
+  - text-processing
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-07-10
-updated: 2026-07-22
-sources: ["Unicode 17.0.0 Core Specification"]
-source_id: ref-022
-source_kind: external
-primary_sources: ["Unicode 17.0.0 Core Specification"]
-supporting_sources: ["Unicode 17.0.0 Chapter 3: Conformance"]
-source_urls: ["https://www.unicode.org/versions/Unicode17.0.0/", "https://www.unicode.org/versions/Unicode17.0.0/core-spec/chapter-3/"]
-retrieved: 2026-07-10
-version: "17.0.0"
-snapshot_status: external-only
-status: active
-publication_year: 2025
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:daf19858298f8f479fd0bdeb53b36363a90756795230c0c4b1117ea887e933fd
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers: []
+history:
+  publication_year: 2025
+redirect_from:
+  - /references/the-unicode-standard-17-0-0/
+  - /sources/the-unicode-standard-17-0-0/
+origin: external
+works:
+  primary:
+    - citation: Unicode 17.0.0 Core Specification
+      genre: standard
+      identifiers: []
+      edition: 17.0.0
+  supporting:
+    - citation: "Unicode 17.0.0 Chapter 3: Conformance"
+      genre: standard
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: canonical
+    url: https://www.unicode.org/versions/Unicode17.0.0/
+    retrieved: 2026-07-10
+    version: 17.0.0
+  - kind: url
+    role: mirror
+    url: https://www.unicode.org/versions/Unicode17.0.0/core-spec/chapter-3/
+    retrieved: 2026-07-10
+    version: 17.0.0
 ---
 
 ## 개요
@@ -38,6 +73,11 @@ Unicode 17.0.0은 2025년 9월 9일 발표되었고, 이전 버전을 대체한�
 이 자료는 [[유니코드]], [[코드 포인트]], [[코드 유닛]], [[UTF-8]], [[UTF-16]], [[바이트 순서 표식]], [[인코딩 심화]]를 정리하는 데 사용한다. 특히 "문자 수", "바이트 수", "코드 포인트 수", "코드 유닛 수", "사용자가 보는 글자 수"가 서로 다를 수 있다는 점을 설명하는 기준 문헌으로 둔다.
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - Unicode Consortium, [The Unicode Standard, Version 17.0.0](https://www.unicode.org/versions/Unicode17.0.0/)
 - Unicode Consortium, [Chapter 3, Conformance](https://www.unicode.org/versions/Unicode17.0.0/core-spec/chapter-3/)

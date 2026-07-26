@@ -1,23 +1,72 @@
 ---
+schema_version: 2
+id: ref-018
+kind: reference
 title: The UNIX Time-Sharing System
-aliases: [UNIX Time-Sharing System, Unix 1974, Ritchie Thompson Unix paper]
-summary: "Ritchie와 Thompson의 1974년 논문을 바탕으로 Unix의 파일 시스템, 셸, 프로세스, 파이프, 시스템 호출을 정리한 참고 자료."
-tags: [type/reference, domain/computer-history, domain/operating-systems, domain/software-engineering, status/active]
+aliases:
+  - UNIX Time-Sharing System
+  - Unix 1974
+  - Ritchie Thompson Unix paper
+summary: Ritchie와 Thompson의 1974년 논문을 바탕으로 Unix의 파일 시스템, 셸, 프로세스, 파이프, 시스템 호출을 정리한 참고 자료.
+domains:
+  - computer-history
+  - operating-systems
+  - software-engineering
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-07-10
-updated: 2026-07-18
-publication_year: 1974
-historical_layer: system
-capability_layers: [programmability]
-sources: ["Communications of the ACM 1974", "Bell System Technical Journal reprint"]
-source_id: ref-018
-source_kind: external
-primary_sources: ["Communications of the ACM 1974"]
-supporting_sources: ["Bell System Technical Journal reprint", "PDF copy", "Wiley record"]
-source_urls: ["https://dl.acm.org/doi/10.1145/361011.361061", "https://dsf.berkeley.edu/cs262/unix.pdf", "https://onlinelibrary.wiley.com/doi/abs/10.1002/j.1538-7305.1978.tb02136.x"]
-retrieved: 2026-07-10
-version: null
-snapshot_status: external-only
-status: active
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:2ca499b92438355734ec14ec84f0b52c67d562632f7b2a15cfb2c7b5f762ff24
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers:
+  - programmability
+history:
+  publication_year: 1974
+  layer: system
+redirect_from:
+  - /references/the-unix-time-sharing-system/
+  - /sources/the-unix-time-sharing-system/
+origin: external
+works:
+  primary:
+    - citation: Communications of the ACM 1974
+      genre: other
+      identifiers: []
+      edition: null
+  supporting:
+    - citation: Bell System Technical Journal reprint
+      genre: primary-literature
+      identifiers: []
+      edition: null
+    - citation: PDF copy
+      genre: other
+      identifiers: []
+      edition: null
+    - citation: Wiley record
+      genre: official-record
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: canonical
+    url: https://dl.acm.org/doi/10.1145/361011.361061
+    retrieved: 2026-07-10
+    version: null
+  - kind: url
+    role: mirror
+    url: https://dsf.berkeley.edu/cs262/unix.pdf
+    retrieved: 2026-07-10
+    version: null
+  - kind: url
+    role: mirror
+    url: https://onlinelibrary.wiley.com/doi/abs/10.1002/j.1538-7305.1978.tb02136.x
+    retrieved: 2026-07-10
+    version: null
 ---
 
 ## 개요
@@ -39,6 +88,11 @@ status: active
 이 자료는 [[Unix]], [[운영체제]], [[파일 시스템]], [[시스템 호출]], [[유닉스 파이프]], [[시스템 프로그래밍]]을 정리하는 데 사용한다. [[Unix와 C]] 분석에서는 이 문헌을 통해 Unix의 구조가 C와 결합되기 전부터 파일·프로세스·셸이라는 단순하고 조합 가능한 모델을 갖추고 있었음을 정리한다.
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - ACM Digital Library, [The UNIX time-sharing system](https://dl.acm.org/doi/10.1145/361011.361061)
 - PDF copy, [The UNIX Time-Sharing System](https://dsf.berkeley.edu/cs262/unix.pdf)

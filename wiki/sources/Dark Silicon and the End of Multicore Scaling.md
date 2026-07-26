@@ -1,23 +1,77 @@
 ---
+schema_version: 2
+id: ref-048
+kind: reference
 title: Dark Silicon and the End of Multicore Scaling
-aliases: [Esmaeilzadeh et al. 2011, ISCA dark silicon paper, 다크 실리콘 논문]
-summary: "전압과 전력의 축소가 트랜지스터 면적 축소를 따라가지 못할 때 고정된 칩 전력 안에서 일부 영역을 동시에 활용할 수 없게 된다는 다크 실리콘 문제를 2011년의 기술 세대·멀티코어 모델로 전망한 논문."
-tags: [type/reference, domain/computer-architecture, domain/computer-history, status/active]
+aliases:
+  - Esmaeilzadeh et al. 2011
+  - ISCA dark silicon paper
+  - 다크 실리콘 논문
+summary: 전압과 전력의 축소가 트랜지스터 면적 축소를 따라가지 못할 때 고정된 칩 전력 안에서 일부 영역을 동시에 활용할 수 없게 된다는 다크 실리콘 문제를 2011년의 기술 세대·멀티코어 모델로 전망한 논문.
+domains:
+  - computer-architecture
+  - computer-history
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-07-16
-updated: 2026-07-25
-publication_year: 2011
-historical_layer: architecture
-capability_layers: [scalability, resource-efficiency]
-sources: ["Proceedings of ISCA 2011", "UW-Madison Vertical Research Group author copy", "UW-Madison publication record", "ISCA@50 author retrospective"]
-source_id: ref-048
-source_kind: external
-primary_sources: ["Esmaeilzadeh et al., Proceedings of ISCA 2011, pp. 365–376", "Esmaeilzadeh et al., ISCA@50 author retrospective, 2023"]
-supporting_sources: ["UW-Madison Vertical Research Group author copy", "UW-Madison publication record"]
-source_urls: ["https://doi.org/10.1145/2000064.2000108", "https://research.cs.wisc.edu/vertical/papers/2011/isca11-darksilicon.pdf", "https://research.cs.wisc.edu/vertical/wiki/index.php/Pubs2/B2hd-isca11darksilicon", "https://www.microsoft.com/en-us/research/publication/retrospective-dark-silicon-and-the-end-of-multicore-scaling/"]
-retrieved: 2026-07-16
-version: "ISCA '11, June 4–8, 2011, pp. 365–376"
-snapshot_status: external-only
-status: active
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:26edc5f6be0f4761bea0b17b99f944c074a703e00962487dc4dffa236e82009d
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers:
+  - scalability
+  - resource-efficiency
+history:
+  publication_year: 2011
+  layer: architecture
+redirect_from:
+  - /references/dark-silicon-and-the-end-of-multicore-scaling/
+  - /sources/dark-silicon-and-the-end-of-multicore-scaling/
+origin: external
+works:
+  primary:
+    - citation: Esmaeilzadeh et al., Proceedings of ISCA 2011, pp. 365–376
+      genre: primary-literature
+      identifiers: []
+      edition: ISCA '11, June 4–8, 2011, pp. 365–376
+    - citation: Esmaeilzadeh et al., ISCA@50 author retrospective, 2023
+      genre: other
+      identifiers: []
+      edition: ISCA '11, June 4–8, 2011, pp. 365–376
+  supporting:
+    - citation: UW-Madison Vertical Research Group author copy
+      genre: standard
+      identifiers: []
+      edition: null
+    - citation: UW-Madison publication record
+      genre: standard
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: doi
+    url: https://doi.org/10.1145/2000064.2000108
+    retrieved: 2026-07-16
+    version: ISCA '11, June 4–8, 2011, pp. 365–376
+  - kind: url
+    role: mirror
+    url: https://research.cs.wisc.edu/vertical/papers/2011/isca11-darksilicon.pdf
+    retrieved: 2026-07-16
+    version: ISCA '11, June 4–8, 2011, pp. 365–376
+  - kind: url
+    role: mirror
+    url: https://research.cs.wisc.edu/vertical/wiki/index.php/Pubs2/B2hd-isca11darksilicon
+    retrieved: 2026-07-16
+    version: ISCA '11, June 4–8, 2011, pp. 365–376
+  - kind: url
+    role: publisher
+    url: https://www.microsoft.com/en-us/research/publication/retrospective-dark-silicon-and-the-end-of-multicore-scaling/
+    retrieved: 2026-07-16
+    version: ISCA '11, June 4–8, 2011, pp. 365–376
 ---
 
 ## 개요
@@ -44,9 +98,11 @@ status: active
 
 > [!WARNING] 모순 발견
 > UW-Madison 연구그룹의 서지 페이지 초록은 22nm에서 25%, 8nm에서 70% 넘는 다크 실리콘을 적지만, 그 페이지가 연결하는 최종 ISCA proceedings PDF의 초록과 본문은 각각 21%, 50% 초과로 기록한다. 이 페이지는 DOI와 쪽수 365–376이 확인되는 최종 PDF를 직접 근거로 사용한다. 또한 논문의 표 2와 서술 사이에도 ITRS·보수적 시나리오의 노드별 예상 연도가 일관되지 않으므로, 공정 노드와 연도를 보편적으로 대응시키지 않는다.
+<!-- wiki-v2:quote-locator evidence="ref-048" locator="wiki/sources/Dark Silicon and the End of Multicore Scaling.md:line-24#최종-논문의-예측" status="recorded" -->
 
 > [!WARNING] 모순 발견
 > 모델 설명과 검증 절은 실제형 모델이 대체로 성능을 낙관적으로 과대예측한다고 설명하지만, 제한점 절의 마지막 문장은 모델이 항상 과소예측한다고 적는다. 앞선 검증 도표와도 충돌하므로 이 페이지는 예측 오차의 방향을 “항상” 한쪽이라고 일반화하지 않는다.
+<!-- wiki-v2:quote-locator evidence="ref-048" locator="wiki/sources/Dark Silicon and the End of Multicore Scaling.md:line-27#최종-논문의-예측" status="recorded" -->
 
 ## 왜 코어 수만 늘려서는 부족한가
 
@@ -88,6 +144,7 @@ status: active
 ## 인용할 만한 구절
 
 > 더 많은 트랜지스터가 곧 더 많은 동시 계산 자원을 뜻하지는 않는다.
+<!-- wiki-v2:quote-locator evidence="ref-048" locator="wiki/sources/Dark Silicon and the End of Multicore Scaling.md:line-68#인용할-만한-구절" status="recorded" -->
 
 논문의 역사적 문제 제기를 한국어로 요약한 문장이다.
 
@@ -105,6 +162,11 @@ status: active
 | constrains | [[병렬 확장성]] | 집적 가능한 코어 수가 늘어도 전력 예산과 프로그램 병렬성 때문에 동시에 유용하게 활성화할 수 있는 코어 수를 제한한다. | [[Dark Silicon and the End of Multicore Scaling]] |
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - ACM, [DOI record](https://doi.org/10.1145/2000064.2000108)
 - UW-Madison Vertical Research Group, [author copy](https://research.cs.wisc.edu/vertical/papers/2011/isca11-darksilicon.pdf)

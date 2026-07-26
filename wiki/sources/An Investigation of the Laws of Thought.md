@@ -1,22 +1,61 @@
 ---
+schema_version: 2
+id: ref-030
+kind: reference
 title: An Investigation of the Laws of Thought
-aliases: [The Laws of Thought, Boole 1854, Laws of Thought]
-summary: "Boole의 1854년 저작을 바탕으로 논리를 기호와 연산의 체계로 다루는 관점과 Boolean이라는 명칭의 기원을 정리한 참고 자료."
-tags: [type/reference, domain/computer-history, domain/computer-science, status/active]
+aliases:
+  - The Laws of Thought
+  - Boole 1854
+  - Laws of Thought
+summary: Boole의 1854년 저작을 바탕으로 논리를 기호와 연산의 체계로 다루는 관점과 Boolean이라는 명칭의 기원을 정리한 참고 자료.
+domains:
+  - computer-history
+  - computer-science
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-07-11
-updated: 2026-07-18
-publication_year: 1854
-historical_layer: theory
-sources: ["George Boole, An Investigation of the Laws of Thought (1854)", "Project Gutenberg transcription", "Open Library digitized scan"]
-source_id: ref-030
-source_kind: external
-primary_sources: ["George Boole, An Investigation of the Laws of Thought (1854)"]
-supporting_sources: ["Project Gutenberg transcription", "Open Library digitized scan"]
-source_urls: ["https://www.gutenberg.org/ebooks/15114", "https://openlibrary.org/books/OL7150849M/An_investigation_of_the_laws_of_thought"]
-retrieved: 2026-07-11
-version: "1854 first edition"
-snapshot_status: external-only
-status: active
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:2eb1e79b76772d62d51e6f784b18b8032e2e2112e0da4961766d0c942c7c6a8a
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers: []
+history:
+  publication_year: 1854
+  layer: theory
+redirect_from:
+  - /references/an-investigation-of-the-laws-of-thought/
+  - /sources/an-investigation-of-the-laws-of-thought/
+origin: external
+works:
+  primary:
+    - citation: George Boole, An Investigation of the Laws of Thought (1854)
+      genre: other
+      identifiers: []
+      edition: 1854 first edition
+  supporting:
+    - citation: Project Gutenberg transcription
+      genre: other
+      identifiers: []
+      edition: null
+    - citation: Open Library digitized scan
+      genre: other
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: canonical
+    url: https://www.gutenberg.org/ebooks/15114
+    retrieved: 2026-07-11
+    version: 1854 first edition
+  - kind: url
+    role: mirror
+    url: https://openlibrary.org/books/OL7150849M/An_investigation_of_the_laws_of_thought
+    retrieved: 2026-07-11
+    version: 1854 first edition
 ---
 
 ## 개요
@@ -37,6 +76,11 @@ status: active
 이 자료는 [[불 대수]]가 숫자 계산이 아닌데도 `대수`라고 불리는 이유와 `Boolean`이라는 명칭의 역사적 배경을 설명하는 근거로 사용한다. 또한 [[기호 조작]]이 수량 계산을 넘어 논리 명제의 변형까지 포함한다는 점을 보여준다.
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - Project Gutenberg, [An Investigation of the Laws of Thought](https://www.gutenberg.org/ebooks/15114)
 - Open Library, [An investigation of the laws of thought](https://openlibrary.org/books/OL7150849M/An_investigation_of_the_laws_of_thought)

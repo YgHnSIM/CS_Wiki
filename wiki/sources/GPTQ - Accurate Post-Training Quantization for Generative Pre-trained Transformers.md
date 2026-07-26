@@ -1,26 +1,61 @@
 ---
+schema_version: 2
+id: ref-081
+kind: reference
 title: "GPTQ: Accurate Post-Training Quantization for Generative Pre-trained Transformers"
-aliases: [GPTQ paper, Frantar et al. 2023, GPTQ]
-summary: "대규모 생성 Transformer의 가중치를 재학습 없이 한 번에 3–4비트까지 줄이기 위해 근사 2차 정보를 사용하고, 압축된 가중치용 커널에서 메모리 이동 감소를 추론 가속으로 연결한 2023년 ICLR 연구."
-tags: [type/reference, domain/machine-learning, domain/computer-architecture, status/active]
-created: 2026-07-25
-updated: 2026-07-25
-publication_year: 2023
-historical_note: "arXiv 초판은 2022년에 제출되었고, ICLR 2023에 출판되었다."
-historical_layer: system
-capability_layers: [realized-performance, resource-efficiency, reliable-results]
-sources: ["GPTQ: Accurate Post-Training Quantization for Generative Pre-trained Transformers"]
-source_id: ref-081
-source_kind: external
-primary_sources: ["Elias Frantar, Saleh Ashkboos, Torsten Hoefler, and Dan Alistarh, GPTQ: Accurate Post-Training Quantization for Generative Pre-trained Transformers, ICLR 2023"]
-supporting_sources: ["ETH Zurich Research Collection bibliographic record"]
-source_urls: ["https://arxiv.org/abs/2210.17323", "https://www.research-collection.ethz.ch/items/00736213-37b2-4e99-b015-141349b71413"]
-retrieved: 2026-07-25
-version: "arXiv v2, ICLR 2023"
-snapshot_status: external-only
-status: active
-graph_id: reference-gptq
+aliases:
+  - GPTQ paper
+  - Frantar et al. 2023
+  - GPTQ
+summary: 대규모 생성 Transformer의 가중치를 재학습 없이 한 번에 3–4비트까지 줄이기 위해 근사 2차 정보를 사용하고, 압축된 가중치용 커널에서 메모리 이동 감소를 추론 가속으로 연결한 2023년 ICLR 연구.
+domains:
+  - machine-learning
+  - computer-architecture
+editorial_status: active
+publication_visibility: public
 graph_visibility: public
+created: 2026-07-25
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:8be363c9501d13617a65299cd37d17e8eb44a2068ce7c6454bc7310799329a40
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers:
+  - realized-performance
+  - resource-efficiency
+  - reliable-results
+history:
+  publication_year: 2023
+  note: arXiv 초판은 2022년에 제출되었고, ICLR 2023에 출판되었다.
+  layer: system
+redirect_from:
+  - /references/gptq-accurate-post-training-quantization-for-generative-pre-trained-transformers/
+  - /sources/gptq-accurate-post-training-quantization-for-generative-pre-trained-transformers/
+origin: external
+works:
+  primary:
+    - citation: "Elias Frantar, Saleh Ashkboos, Torsten Hoefler, and Dan Alistarh, GPTQ: Accurate Post-Training Quantization for Generative Pre-trained Transformers, ICLR 2023"
+      genre: other
+      identifiers: []
+      edition: arXiv v2, ICLR 2023
+  supporting:
+    - citation: ETH Zurich Research Collection bibliographic record
+      genre: official-record
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: canonical
+    url: https://arxiv.org/abs/2210.17323
+    retrieved: 2026-07-25
+    version: arXiv v2, ICLR 2023
+  - kind: url
+    role: mirror
+    url: https://www.research-collection.ethz.ch/items/00736213-37b2-4e99-b015-141349b71413
+    retrieved: 2026-07-25
+    version: arXiv v2, ICLR 2023
 ---
 
 ## 개요
@@ -44,6 +79,7 @@ graph_visibility: public
 ## 인용할 만한 구절
 
 > “one-shot weight quantization method”
+<!-- wiki-v2:quote-locator evidence="ref-081" locator="wiki/sources/GPTQ - Accurate Post-Training Quantization for Generative Pre-trained Transformers.md:line-21#인용할-만한-구절" status="recorded" -->
 
 GPTQ가 학습 중 정밀도를 혼합하는 방법이 아니라, 이미 학습된 모델의 가중치를 한 번의 후처리로 압축하는 방법임을 보여준다.
 
@@ -60,6 +96,11 @@ GPTQ가 학습 중 정밀도를 혼합하는 방법이 아니라, 이미 학습�
 | exemplifies | [[혼합 정밀도]] | 낮은 비트 가중치와 더 높은 정밀도의 활성값·누산을 역할별로 조합한다. | [[GPTQ - Accurate Post-Training Quantization for Generative Pre-trained Transformers]] |
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - arXiv, [paper record and version history](https://arxiv.org/abs/2210.17323)
 - ETH Zurich Research Collection, [ICLR 2023 bibliographic record](https://www.research-collection.ethz.ch/items/00736213-37b2-4e99-b015-141349b71413)

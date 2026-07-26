@@ -1,16 +1,43 @@
 ---
+schema_version: 2
+id: concept-3b07c7d6f11aed09
+kind: concept
 title: Dennard 스케일링
-aliases: [Dennard scaling, 데나드 스케일링, 일정 전계 스케일링, constant-field scaling]
-summary: "MOSFET의 치수와 전압을 함께 축소해 회로 속도와 집적도를 높이면서 이상적인 전력 밀도를 일정하게 유지하는 소자 스케일링 규칙."
-tags: [type/concept, domain/computer-history, domain/computer-architecture, status/active]
+aliases:
+  - Dennard scaling
+  - 데나드 스케일링
+  - 일정 전계 스케일링
+  - constant-field scaling
+summary: MOSFET의 치수와 전압을 함께 축소해 회로 속도와 집적도를 높이면서 이상적인 전력 밀도를 일정하게 유지하는 소자 스케일링 규칙.
+domains:
+  - computer-history
+  - computer-architecture
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-07-16
-updated: 2026-07-22
-sources: ["Design of Ion-Implanted MOSFET's with Very Small Physical Dimensions", "Cramming More Components onto Integrated Circuits", "The Landscape of Parallel Computing Research - A View from Berkeley", "Implications of Historical Trends in the Electrical Efficiency of Computing", "Dark Silicon and the End of Multicore Scaling"]
-status: active
-graph_id: concept-3b07c7d6f11aed09
-event_start: 1974
-historical_layer: architecture
-historical_note: "MOSFET 축소 규칙을 제시한 Dennard 등의 논문이 출판된 1974년을 대표 시점으로 둔다."
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:16f80b5ac68b32cefbfcc4aa89325f1a247205707aeea9a1ce3cc1024e69334d
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids:
+  - ref-038
+  - ref-037
+  - ref-040
+  - ref-047
+  - ref-048
+capability_layers: []
+history:
+  event:
+    start: 1974
+    basis: representative
+    evidence_id: ref-038
+  note: MOSFET 축소 규칙을 제시한 Dennard 등의 논문이 출판된 1974년을 대표 시점으로 둔다.
+  layer: architecture
+redirect_from:
+  - /concepts/dennard-스케일링/
 ---
 
 ## 개요
@@ -49,6 +76,15 @@ historical_note: "MOSFET 축소 규칙을 제시한 Dennard 등의 논문이 출
 전압 축소가 약해진 뒤에는 칩 면적과 전력 예산이 독립적인 제약이 되었다. [[Dark Silicon and the End of Multicore Scaling]]의 [[다크 실리콘]]은 트랜지스터를 구현할 면적이 있어도 전력·열과 프로그램의 병렬성 때문에 일부 회로를 동시에 유용하게 사용하지 못하는 간극을 모델링했다. 이는 Dennard 스케일링의 약화를 “더 이상 작게 만들 수 없다”보다 “작게 만든 회로를 모두 같은 방식으로 켤 수 없다”는 문제로 구체화한다.
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- `ref-038`
+- `ref-037`
+- `ref-040`
+- `ref-047`
+- `ref-048`
+<!-- wiki-v2:evidence-end -->
 
 - [[Design of Ion-Implanted MOSFET's with Very Small Physical Dimensions]]
 - [[Cramming More Components onto Integrated Circuits]]

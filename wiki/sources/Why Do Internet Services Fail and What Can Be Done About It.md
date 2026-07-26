@@ -1,25 +1,67 @@
 ---
+schema_version: 2
+id: ref-064
+kind: reference
 title: Why Do Internet Services Fail and What Can Be Done About It
-aliases: ["Why Do Internet Services Fail, and What Can Be Done About It?", Oppenheimer Ganapathi Patterson 2003, 인터넷 서비스는 왜 실패하는가]
-summary: "세 대형 인터넷 서비스의 장애 보고를 분석해 하드웨어·소프트웨어·네트워크·운영자 오류와 탐지·복구 시간을 함께 다룬 Oppenheimer, Ganapathi, Patterson의 2003년 연구."
-tags: [type/reference, domain/systems, domain/internet, status/active]
-created: 2026-07-24
-updated: 2026-07-24
-publication_year: 2003
-historical_layer: service
-capability_layers: [reliable-results]
-sources: ["Why Do Internet Services Fail and What Can Be Done About It"]
-source_id: ref-064
-source_kind: external
-primary_sources: ["David Oppenheimer, Archana Ganapathi, and David A. Patterson, Why Do Internet Services Fail, and What Can Be Done About It?, 4th USENIX Symposium on Internet Technologies and Systems (USITS '03), 2003"]
-supporting_sources: ["USENIX conference record", "USENIX full-text HTML and PDF"]
-source_urls: ["https://www.usenix.org/conference/usits-03/why-do-internet-services-fail-and-what-can-be-done-about-it", "https://www.usenix.org/legacy/events/usits03/tech/full_papers/oppenheimer/oppenheimer_html/index.html", "https://www.usenix.org/legacy/events/usits03/tech/full_papers/oppenheimer/oppenheimer.pdf"]
-retrieved: 2026-07-24
-version: "USITS '03, 2003"
-snapshot_status: external-only
-status: active
-graph_id: reference-internet-service-failures
+aliases:
+  - Why Do Internet Services Fail, and What Can Be Done About It?
+  - Oppenheimer Ganapathi Patterson 2003
+  - 인터넷 서비스는 왜 실패하는가
+summary: 세 대형 인터넷 서비스의 장애 보고를 분석해 하드웨어·소프트웨어·네트워크·운영자 오류와 탐지·복구 시간을 함께 다룬 Oppenheimer, Ganapathi, Patterson의 2003년 연구.
+domains:
+  - systems
+  - internet
+editorial_status: active
+publication_visibility: public
 graph_visibility: public
+created: 2026-07-24
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:fa3e71008e35b594756757ea99fb2816db88244dde9784153dee56ffd4d3fcf5
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers:
+  - reliable-results
+history:
+  publication_year: 2003
+  layer: service
+redirect_from:
+  - /references/why-do-internet-services-fail-and-what-can-be-done-about-it/
+  - /sources/why-do-internet-services-fail-and-what-can-be-done-about-it/
+origin: external
+works:
+  primary:
+    - citation: David Oppenheimer, Archana Ganapathi, and David A. Patterson, Why Do Internet Services Fail, and What Can Be Done About It?, 4th USENIX Symposium on Internet Technologies and Systems (USITS '03), 2003
+      genre: other
+      identifiers: []
+      edition: USITS '03, 2003
+  supporting:
+    - citation: USENIX conference record
+      genre: official-record
+      identifiers: []
+      edition: null
+    - citation: USENIX full-text HTML and PDF
+      genre: other
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: canonical
+    url: https://www.usenix.org/conference/usits-03/why-do-internet-services-fail-and-what-can-be-done-about-it
+    retrieved: 2026-07-24
+    version: USITS '03, 2003
+  - kind: url
+    role: mirror
+    url: https://www.usenix.org/legacy/events/usits03/tech/full_papers/oppenheimer/oppenheimer_html/index.html
+    retrieved: 2026-07-24
+    version: USITS '03, 2003
+  - kind: url
+    role: mirror
+    url: https://www.usenix.org/legacy/events/usits03/tech/full_papers/oppenheimer/oppenheimer.pdf
+    retrieved: 2026-07-24
+    version: USITS '03, 2003
 ---
 
 ## 개요
@@ -41,6 +83,7 @@ graph_visibility: public
 ## 인용할 만한 구절
 
 > “What can be done about it?”
+<!-- wiki-v2:quote-locator evidence="ref-064" locator="wiki/sources/Why Do Internet Services Fail and What Can Be Done About It.md:line-19#인용할-만한-구절" status="recorded" -->
 
 논문은 장애 원인 분류에 그치지 않고, 예방·탐지·복구 단계별 대응의 여지를 함께 묻는다.
 
@@ -56,6 +99,11 @@ graph_visibility: public
 | constrains | [[결함 허용]] | 중복이 운영자·설정 오류처럼 공통 원인을 가진 실패를 자동으로 가리지 못함을 관찰한다. | [[Why Do Internet Services Fail and What Can Be Done About It]] |
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - USENIX, [conference record](https://www.usenix.org/conference/usits-03/why-do-internet-services-fail-and-what-can-be-done-about-it)
 - USENIX, [full-text HTML](https://www.usenix.org/legacy/events/usits03/tech/full_papers/oppenheimer/oppenheimer_html/index.html)

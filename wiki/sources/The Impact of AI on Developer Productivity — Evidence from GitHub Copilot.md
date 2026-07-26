@@ -1,25 +1,51 @@
 ---
+schema_version: 2
+id: ref-106
+kind: reference
 title: "The Impact of AI on Developer Productivity: Evidence from GitHub Copilot"
-aliases: ["The Impact of AI on Developer Productivity: Evidence from GitHub Copilot", Peng et al. 2023, GitHub Copilot productivity experiment, Copilot 생산성 실험]
-summary: "JavaScript HTTP 서버 구현 과제에서 GitHub Copilot 접근 여부를 무작위 배정해 완료 시간을 비교한 2023년 통제 실험."
-tags: [type/reference, domain/software-engineering, domain/machine-learning, status/active]
-created: 2026-07-25
-updated: 2026-07-25
-publication_year: 2023
-historical_layer: measurement
-capability_layers: [programmability, realized-performance]
-sources: ["The Impact of AI on Developer Productivity — Evidence from GitHub Copilot"]
-source_id: ref-106
-source_kind: external
-primary_sources: ["Sida Peng, Eirini Kalliamvakou, Peter Cihon, and Mert Demirer, The Impact of AI on Developer Productivity: Evidence from GitHub Copilot, arXiv:2302.06590, 2023"]
-supporting_sources: []
-source_urls: ["https://arxiv.org/abs/2302.06590"]
-retrieved: 2026-07-25
-version: "arXiv v1, 2023-02-13"
-snapshot_status: external-only
-status: active
-graph_id: reference-github-copilot-productivity
+aliases:
+  - "The Impact of AI on Developer Productivity: Evidence from GitHub Copilot"
+  - Peng et al. 2023
+  - GitHub Copilot productivity experiment
+  - Copilot 생산성 실험
+summary: JavaScript HTTP 서버 구현 과제에서 GitHub Copilot 접근 여부를 무작위 배정해 완료 시간을 비교한 2023년 통제 실험.
+domains:
+  - software-engineering
+  - machine-learning
+editorial_status: active
+publication_visibility: public
 graph_visibility: public
+created: 2026-07-25
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:b04ff5f6f42b69bf3859d4da81813015d44661b303a5ef6105e3e8f9be4af819
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers:
+  - programmability
+  - realized-performance
+history:
+  publication_year: 2023
+  layer: measurement
+redirect_from:
+  - /references/the-impact-of-ai-on-developer-productivity-evidence-from-github-copilot/
+  - /sources/the-impact-of-ai-on-developer-productivity-evidence-from-github-copilot/
+origin: external
+works:
+  primary:
+    - citation: "Sida Peng, Eirini Kalliamvakou, Peter Cihon, and Mert Demirer, The Impact of AI on Developer Productivity: Evidence from GitHub Copilot, arXiv:2302.06590, 2023"
+      genre: other
+      identifiers: []
+      edition: arXiv v1, 2023-02-13
+  supporting: []
+access:
+  - kind: url
+    role: canonical
+    url: https://arxiv.org/abs/2302.06590
+    retrieved: 2026-07-25
+    version: arXiv v1, 2023-02-13
 ---
 
 ## 개요
@@ -50,6 +76,11 @@ graph_visibility: public
 | measures | [[개발자 생산성]] | 과제 완료 시간을 생산성의 한 측정값으로 제공하지만 전체 개발 성과를 대신하지는 않는다. | [[The Impact of AI on Developer Productivity: Evidence from GitHub Copilot]] |
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - arXiv, [paper record](https://arxiv.org/abs/2302.06590)
 

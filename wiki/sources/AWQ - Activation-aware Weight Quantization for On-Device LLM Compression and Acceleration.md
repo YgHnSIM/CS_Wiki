@@ -1,25 +1,61 @@
 ---
+schema_version: 2
+id: ref-082
+kind: reference
 title: "AWQ: Activation-aware Weight Quantization for On-Device LLM Compression and Acceleration"
-aliases: [AWQ paper, Activation-aware Weight Quantization, Lin et al. 2024]
-summary: "보정 입력의 활성값으로 중요한 가중치 채널을 식별하고 채널별 스케일을 조정해 양자화 오차를 줄이며, 가중치 전용 저비트 커널로 데스크톱·모바일 GPU 추론을 가속한 2024년 MLSys 연구."
-tags: [type/reference, domain/machine-learning, domain/computer-architecture, domain/edge-computing, status/active]
-created: 2026-07-25
-updated: 2026-07-25
-publication_year: 2024
-historical_layer: system
-capability_layers: [realized-performance, resource-efficiency, reliable-results]
-sources: ["AWQ: Activation-aware Weight Quantization for On-Device LLM Compression and Acceleration"]
-source_id: ref-082
-source_kind: external
-primary_sources: ["Ji Lin et al., AWQ: Activation-aware Weight Quantization for On-Device LLM Compression and Acceleration, MLSys 2024"]
-supporting_sources: ["MLSys 2024 proceedings abstract record"]
-source_urls: ["https://proceedings.mlsys.org/paper_files/paper/2024/hash/42a452cbafa9dd64e9ba4aa95cc1ef21-Abstract-Conference.html", "https://proceedings.mlsys.org/paper_files/paper/2024/file/42a452cbafa9dd64e9ba4aa95cc1ef21-Paper-Conference.pdf"]
-retrieved: 2026-07-25
-version: "Proceedings of Machine Learning and Systems 6"
-snapshot_status: external-only
-status: active
-graph_id: reference-awq
+aliases:
+  - AWQ paper
+  - Activation-aware Weight Quantization
+  - Lin et al. 2024
+summary: 보정 입력의 활성값으로 중요한 가중치 채널을 식별하고 채널별 스케일을 조정해 양자화 오차를 줄이며, 가중치 전용 저비트 커널로 데스크톱·모바일 GPU 추론을 가속한 2024년 MLSys 연구.
+domains:
+  - machine-learning
+  - computer-architecture
+  - edge-computing
+editorial_status: active
+publication_visibility: public
 graph_visibility: public
+created: 2026-07-25
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:a1c6742bd1fa324e7730a85debec8fc858b2ee6b6be3192b6357c5d292dfc96e
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers:
+  - realized-performance
+  - resource-efficiency
+  - reliable-results
+history:
+  publication_year: 2024
+  layer: system
+redirect_from:
+  - /references/awq-activation-aware-weight-quantization-for-on-device-llm-compression-and-acceleration/
+  - /sources/awq-activation-aware-weight-quantization-for-on-device-llm-compression-and-acceleration/
+origin: external
+works:
+  primary:
+    - citation: "Ji Lin et al., AWQ: Activation-aware Weight Quantization for On-Device LLM Compression and Acceleration, MLSys 2024"
+      genre: other
+      identifiers: []
+      edition: Proceedings of Machine Learning and Systems 6
+  supporting:
+    - citation: MLSys 2024 proceedings abstract record
+      genre: official-record
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: canonical
+    url: https://proceedings.mlsys.org/paper_files/paper/2024/hash/42a452cbafa9dd64e9ba4aa95cc1ef21-Abstract-Conference.html
+    retrieved: 2026-07-25
+    version: Proceedings of Machine Learning and Systems 6
+  - kind: url
+    role: mirror
+    url: https://proceedings.mlsys.org/paper_files/paper/2024/file/42a452cbafa9dd64e9ba4aa95cc1ef21-Paper-Conference.pdf
+    retrieved: 2026-07-25
+    version: Proceedings of Machine Learning and Systems 6
 ---
 
 ## 개요
@@ -43,6 +79,7 @@ AWQ는 역전파나 가중치 재구성 최적화를 사용하지 않아 작은 
 ## 인용할 만한 구절
 
 > “weights are not equally important”
+<!-- wiki-v2:quote-locator evidence="ref-082" locator="wiki/sources/AWQ - Activation-aware Weight Quantization for On-Device LLM Compression and Acceleration.md:line-21#인용할-만한-구절" status="recorded" -->
 
 균일한 비트 수를 사용하더라도 채널별 스케일과 보정 통계가 품질을 크게 바꿀 수 있음을 압축한다.
 
@@ -59,6 +96,11 @@ AWQ는 역전파나 가중치 재구성 최적화를 사용하지 않아 작은 
 | exemplifies | [[혼합 정밀도]] | 저비트 가중치와 높은 정밀도의 활성값·누산을 역할별로 배치하고 채널별 스케일로 오차를 조절한다. | [[AWQ - Activation-aware Weight Quantization for On-Device LLM Compression and Acceleration]] |
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - MLSys, [abstract and proceedings record](https://proceedings.mlsys.org/paper_files/paper/2024/hash/42a452cbafa9dd64e9ba4aa95cc1ef21-Abstract-Conference.html)
 - MLSys, [open-access paper PDF](https://proceedings.mlsys.org/paper_files/paper/2024/file/42a452cbafa9dd64e9ba4aa95cc1ef21-Paper-Conference.pdf)

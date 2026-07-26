@@ -1,23 +1,72 @@
 ---
+schema_version: 2
+id: ref-016
+kind: reference
 title: The FORTRAN Automatic Coding System
-aliases: [Backus 1957 FORTRAN paper, FORTRAN automatic coding paper]
-summary: "Backus 팀의 1957년 논문을 바탕으로 Fortran 언어와 번역기, 제어 흐름 분석, 인덱스 레지스터 최적화를 정리한 참고 자료."
-tags: [type/reference, domain/programming-languages, domain/software-engineering, domain/computer-history, status/active]
+aliases:
+  - Backus 1957 FORTRAN paper
+  - FORTRAN automatic coding paper
+summary: Backus 팀의 1957년 논문을 바탕으로 Fortran 언어와 번역기, 제어 흐름 분석, 인덱스 레지스터 최적화를 정리한 참고 자료.
+domains:
+  - programming-languages
+  - software-engineering
+  - computer-history
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-07-10
-updated: 2026-07-24
-publication_year: 1957
-historical_layer: software
-capability_layers: [programmability, realized-performance]
-sources: ["Western Computer Proceedings 1957", "Computer History Museum archive"]
-source_id: ref-016
-source_kind: external
-primary_sources: ["Western Computer Proceedings 1957"]
-supporting_sources: ["Computer History Museum archive", "ACM DOI", "Bitsavers copy"]
-source_urls: ["https://archive.computerhistory.org/resources/text/Fortran/102663113.05.01.acc.pdf", "https://dl.acm.org/doi/10.1145/1455567.1455599", "https://bitsavers.trailing-edge.com/pdf/ibm/704/FORTRAN_paper_1957.pdf"]
-retrieved: 2026-07-10
-version: null
-snapshot_status: external-only
-status: active
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:4e14261dce80c402377dcb7c8e731a217bfc093d067ab93c950d1655c4671e21
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers:
+  - programmability
+  - realized-performance
+history:
+  publication_year: 1957
+  layer: software
+redirect_from:
+  - /references/the-fortran-automatic-coding-system/
+  - /sources/the-fortran-automatic-coding-system/
+origin: external
+works:
+  primary:
+    - citation: Western Computer Proceedings 1957
+      genre: primary-literature
+      identifiers: []
+      edition: null
+  supporting:
+    - citation: Computer History Museum archive
+      genre: official-record
+      identifiers: []
+      edition: null
+    - citation: ACM DOI
+      genre: primary-literature
+      identifiers: []
+      edition: null
+    - citation: Bitsavers copy
+      genre: other
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: archive
+    url: https://archive.computerhistory.org/resources/text/Fortran/102663113.05.01.acc.pdf
+    retrieved: 2026-07-10
+    version: null
+  - kind: url
+    role: mirror
+    url: https://dl.acm.org/doi/10.1145/1455567.1455599
+    retrieved: 2026-07-10
+    version: null
+  - kind: url
+    role: mirror
+    url: https://bitsavers.trailing-edge.com/pdf/ibm/704/FORTRAN_paper_1957.pdf
+    retrieved: 2026-07-10
+    version: null
 ---
 
 ## 개요
@@ -46,6 +95,11 @@ status: active
 | enables | [[Fortran]] | 수학에 가까운 소스 표기를 IBM 704 목적 프로그램으로 번역하는 언어·컴파일러 체계를 실현한다. | [[The FORTRAN Automatic Coding System]] |
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - Computer History Museum, [The Fortran Automatic Coding System](https://archive.computerhistory.org/resources/text/Fortran/102663113.05.01.acc.pdf)
 - ACM Digital Library, [The FORTRAN Automatic Coding System](https://dl.acm.org/doi/10.1145/1455567.1455599)

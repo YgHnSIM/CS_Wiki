@@ -1,23 +1,81 @@
 ---
+schema_version: 2
+id: ref-006
+kind: reference
 title: First Draft of a Report on the EDVAC
-aliases: [EDVAC 보고서, First Draft, von Neumann report]
-summary: "EDVAC 설계 보고서를 중심으로 저장 프로그램 컴퓨터의 논리 구조, 폰 노이만 구조, 설계상 최초성을 정리한 참고 자료."
-tags: [type/reference, domain/computer-history, domain/computer-architecture, status/active]
+aliases:
+  - EDVAC 보고서
+  - First Draft
+  - von Neumann report
+summary: EDVAC 설계 보고서를 중심으로 저장 프로그램 컴퓨터의 논리 구조, 폰 노이만 구조, 설계상 최초성을 정리한 참고 자료.
+domains:
+  - computer-history
+  - computer-architecture
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-07-10
-updated: 2026-07-18
-publication_year: 1945
-historical_layer: architecture
-capability_layers: [programmability]
-sources: ["Internet Archive: firstdraftofrepo00vonn", "Williams 1993", "Godfrey and Hendry 1993"]
-source_id: ref-006
-source_kind: external
-primary_sources: ["First Draft of a Report on the EDVAC (1945)"]
-supporting_sources: ["Internet Archive: firstdraftofrepo00vonn", "Williams 1993", "Godfrey and Hendry 1993"]
-source_urls: ["https://archive.org/details/firstdraftofrepo00vonn", "https://archive.org/stream/firstdraftofrepo00vonn/firstdraftofrepo00vonn_djvu.txt", "https://web.mit.edu/sts.035/www/PDFs/edvac.pdf", "https://web2.qatar.cmu.edu/~mhhammou/15346-s13/resources/OriginsOfComputers/Origins%20Fate%20of%20EDVAC.pdf", "https://web2.qatar.cmu.edu/~mhhammou/15346-s13/resources/OriginsOfComputers/The%20Computer%20as%20von%20Neumann%20planned%20it.pdf"]
-retrieved: 2026-07-10
-version: null
-snapshot_status: external-only
-status: active
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:83dd215150ce38cdfe9f18f17b82d4a8de0bf366ea70d8bd0052df14e5c08fad
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers:
+  - programmability
+history:
+  publication_year: 1945
+  layer: architecture
+redirect_from:
+  - /references/first-draft-of-a-report-on-the-edvac/
+  - /sources/first-draft-of-a-report-on-the-edvac/
+origin: external
+works:
+  primary:
+    - citation: First Draft of a Report on the EDVAC (1945)
+      genre: other
+      identifiers: []
+      edition: null
+  supporting:
+    - citation: "Internet Archive: firstdraftofrepo00vonn"
+      genre: official-record
+      identifiers: []
+      edition: null
+    - citation: Williams 1993
+      genre: other
+      identifiers: []
+      edition: null
+    - citation: Godfrey and Hendry 1993
+      genre: other
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: archive
+    url: https://archive.org/details/firstdraftofrepo00vonn
+    retrieved: 2026-07-10
+    version: null
+  - kind: url
+    role: archive
+    url: https://archive.org/stream/firstdraftofrepo00vonn/firstdraftofrepo00vonn_djvu.txt
+    retrieved: 2026-07-10
+    version: null
+  - kind: url
+    role: mirror
+    url: https://web.mit.edu/sts.035/www/PDFs/edvac.pdf
+    retrieved: 2026-07-10
+    version: null
+  - kind: url
+    role: mirror
+    url: https://web2.qatar.cmu.edu/~mhhammou/15346-s13/resources/OriginsOfComputers/Origins%20Fate%20of%20EDVAC.pdf
+    retrieved: 2026-07-10
+    version: null
+  - kind: url
+    role: mirror
+    url: https://web2.qatar.cmu.edu/~mhhammou/15346-s13/resources/OriginsOfComputers/The%20Computer%20as%20von%20Neumann%20planned%20it.pdf
+    retrieved: 2026-07-10
+    version: null
 ---
 
 ## 개요
@@ -46,6 +104,11 @@ status: active
 | enables | [[저장 프로그램 컴퓨터]] | 명령과 수를 같은 고속 기억장치에 두는 구조를 명시해 저장 프로그램 설계를 구체화한다. | [[First Draft of a Report on the EDVAC]] |
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - Internet Archive, [First draft of a report on the EDVAC](https://archive.org/details/firstdraftofrepo00vonn)
 - Internet Archive, [Full text OCR](https://archive.org/stream/firstdraftofrepo00vonn/firstdraftofrepo00vonn_djvu.txt)

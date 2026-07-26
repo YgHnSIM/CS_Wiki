@@ -1,25 +1,63 @@
 ---
+schema_version: 2
+id: ref-075
+kind: reference
 title: "Orca: A Distributed Serving System for Transformer-Based Generative Models"
-aliases: ["Orca: A Distributed Serving System for Transformer-Based Generative Models", Orca, ORCA, Yu et al. 2022, Orca serving system]
-summary: "자동회귀 생성 요청을 고정 배치가 끝날 때까지 묶는 대신 모델 반복마다 실행 대상을 다시 선택하고, 선택적 배칭으로 서로 다른 길이의 요청을 함께 처리한 2022년 분산 Transformer 서빙 연구."
-tags: [type/reference, domain/machine-learning, domain/systems, domain/distributed-systems, status/active]
-created: 2026-07-24
-updated: 2026-07-24
-publication_year: 2022
-historical_layer: system
-capability_layers: [realized-performance, scalability, resource-efficiency]
-sources: ["Orca: A Distributed Serving System for Transformer-Based Generative Models"]
-source_id: ref-075
-source_kind: external
-primary_sources: ["Gyeong-In Yu et al., Orca: A Distributed Serving System for Transformer-Based Generative Models, OSDI 2022"]
-supporting_sources: ["USENIX OSDI 2022 presentation and bibliographic record"]
-source_urls: ["https://www.usenix.org/conference/osdi22/presentation/yu", "https://www.usenix.org/system/files/osdi22-yu.pdf"]
-retrieved: 2026-07-24
-version: "OSDI '22 proceedings, pp. 521-538"
-snapshot_status: external-only
-status: active
-graph_id: reference-orca-serving-system
+aliases:
+  - "Orca: A Distributed Serving System for Transformer-Based Generative Models"
+  - Orca
+  - ORCA
+  - Yu et al. 2022
+  - Orca serving system
+summary: 자동회귀 생성 요청을 고정 배치가 끝날 때까지 묶는 대신 모델 반복마다 실행 대상을 다시 선택하고, 선택적 배칭으로 서로 다른 길이의 요청을 함께 처리한 2022년 분산 Transformer 서빙 연구.
+domains:
+  - machine-learning
+  - systems
+  - distributed-systems
+editorial_status: active
+publication_visibility: public
 graph_visibility: public
+created: 2026-07-24
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:4b2821b0fde526bf165121ac32315e67b05e24025ae1a76f1303459014fc743b
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers:
+  - realized-performance
+  - scalability
+  - resource-efficiency
+history:
+  publication_year: 2022
+  layer: system
+redirect_from:
+  - /references/orca-a-distributed-serving-system-for-transformer-based-generative-models/
+  - /sources/orca-a-distributed-serving-system-for-transformer-based-generative-models/
+origin: external
+works:
+  primary:
+    - citation: "Gyeong-In Yu et al., Orca: A Distributed Serving System for Transformer-Based Generative Models, OSDI 2022"
+      genre: other
+      identifiers: []
+      edition: OSDI '22 proceedings, pp. 521-538
+  supporting:
+    - citation: USENIX OSDI 2022 presentation and bibliographic record
+      genre: official-record
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: canonical
+    url: https://www.usenix.org/conference/osdi22/presentation/yu
+    retrieved: 2026-07-24
+    version: OSDI '22 proceedings, pp. 521-538
+  - kind: url
+    role: mirror
+    url: https://www.usenix.org/system/files/osdi22-yu.pdf
+    retrieved: 2026-07-24
+    version: OSDI '22 proceedings, pp. 521-538
 ---
 
 ## 개요
@@ -43,6 +81,7 @@ Orca의 첫 번째 핵심은 **반복 단위 스케줄링**(iteration-level sche
 ## 인용할 만한 구절
 
 > “iteration-level scheduling”
+<!-- wiki-v2:quote-locator evidence="ref-075" locator="wiki/sources/Orca - A Distributed Serving System for Transformer-Based Generative Models.md:line-21#인용할-만한-구절" status="recorded" -->
 
 요청 전체가 아니라 모델 한 번의 반복을 스케줄링 단위로 삼는 논문의 핵심 설계를 가장 짧게 드러내는 표현이다.
 
@@ -59,6 +98,11 @@ Orca의 첫 번째 핵심은 **반복 단위 스케줄링**(iteration-level sche
 | precedes | [[Efficient Memory Management for Large Language Model Serving with PagedAttention]] | 반복 단위 스케줄링을 확립했지만 KV 캐시의 연속 할당과 단편화 문제는 후속 PagedAttention 연구의 비교 기준이 되었다. | [[Efficient Memory Management for Large Language Model Serving with PagedAttention]] |
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - USENIX, [OSDI 2022 presentation and bibliographic record](https://www.usenix.org/conference/osdi22/presentation/yu)
 - USENIX, [open-access paper PDF](https://www.usenix.org/system/files/osdi22-yu.pdf)

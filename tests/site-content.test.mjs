@@ -30,6 +30,40 @@ Body with [[Target#Section|label]] and ![[asset.png]].`, { filePath, root, wikiR
   assert.deepEqual(page.sourceUrls, ["https://example.com/source"]);
 });
 
+test("v2 pages use stable document routes while retaining their legacy route", () => {
+  const root = join("workspace");
+  const wikiRoot = join(root, "wiki");
+  const page = parseWikiPage(`---
+schema_version: 2
+id: concept-example
+kind: concept
+title: Example concept
+aliases: []
+summary: A stable example concept summary for the parser test.
+domains: [computer-science]
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
+created: 2026-07-26
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:${"0".repeat(64)}
+  reviewed_at: null
+  reviewed_by: test
+evidence_ids: []
+capability_layers: []
+redirect_from: [/concepts/example-concept/]
+---
+
+본문`, { filePath: join(wikiRoot, "concepts", "Example concept.md"), root, wikiRoot });
+
+  assert.equal(page.id, "concept-example");
+  assert.equal(page.url, "/docs/concept-example/");
+  assert.deepEqual(page.legacyUrls, ["/concepts/example-concept/"]);
+  assert.equal(page.status, "active");
+});
+
 test("category selection keeps top-level operational pages in meta", () => {
   const wikiRoot = join("workspace", "wiki");
   assert.equal(categoryForPath(join(wikiRoot, "index.md"), wikiRoot), "meta");

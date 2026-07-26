@@ -1,21 +1,65 @@
 ---
+schema_version: 2
+id: ref-011
+kind: reference
 title: A Case against the GO TO Statement
-aliases: [Go To Statement Considered Harmful, EWD215, GOTO Considered Harmful]
-summary: "Dijkstra의 `goto` 비판을 바탕으로 프로그램 텍스트와 실행 과정의 대응, 제어 흐름의 추적 가능성을 정리한 참고 자료."
-tags: [type/reference, domain/software-engineering, domain/programming-languages, status/active]
+aliases:
+  - Go To Statement Considered Harmful
+  - EWD215
+  - GOTO Considered Harmful
+summary: Dijkstra의 goto 비판을 바탕으로 프로그램 텍스트와 실행 과정의 대응, 제어 흐름의 추적 가능성을 정리한 참고 자료.
+domains:
+  - software-engineering
+  - programming-languages
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-07-10
-updated: 2026-07-22
-sources: ["EWD Archive EWD215", "Communications of the ACM 1968"]
-source_id: ref-011
-source_kind: external
-primary_sources: ["Communications of the ACM 1968"]
-supporting_sources: ["EWD Archive EWD215", "PDF copy"]
-source_urls: ["https://www.cs.utexas.edu/~EWD/transcriptions/EWD02xx/EWD215.html", "https://dl.acm.org/doi/10.1145/362929.362947", "https://homepages.cwi.nl/~storm/teaching/reader/Dijkstra68.pdf"]
-retrieved: 2026-07-10
-version: null
-snapshot_status: external-only
-status: active
-publication_year: 1968
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:c7451c8aad9520be56a29f718416e4cbf23bc8578f27ebf9ad2d535625f490ae
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers: []
+history:
+  publication_year: 1968
+redirect_from:
+  - /references/a-case-against-the-go-to-statement/
+  - /sources/a-case-against-the-go-to-statement/
+origin: external
+works:
+  primary:
+    - citation: Communications of the ACM 1968
+      genre: other
+      identifiers: []
+      edition: null
+  supporting:
+    - citation: EWD Archive EWD215
+      genre: official-record
+      identifiers: []
+      edition: null
+    - citation: PDF copy
+      genre: other
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: canonical
+    url: https://www.cs.utexas.edu/~EWD/transcriptions/EWD02xx/EWD215.html
+    retrieved: 2026-07-10
+    version: null
+  - kind: url
+    role: mirror
+    url: https://dl.acm.org/doi/10.1145/362929.362947
+    retrieved: 2026-07-10
+    version: null
+  - kind: url
+    role: mirror
+    url: https://homepages.cwi.nl/~storm/teaching/reader/Dijkstra68.pdf
+    retrieved: 2026-07-10
+    version: null
 ---
 
 ## 개요
@@ -37,6 +81,11 @@ Dijkstra의 핵심 논점은 프로그래머가 실제로 다루는 대상이 �
 이 자료는 [[Wheeler Jump]] 같은 저수준 점프 기법과 고급 언어의 무제한 `goto`를 구분하는 데 쓰인다. 기계 수준의 점프는 실행을 구현하는 장치지만, 고급 언어의 제어 구조는 사람이 프로그램을 추적할 수 있도록 실행 경로를 제한하고 이름 붙이는 장치다. 이 관점은 [[goto와 점프에서 구조적 프로그래밍으로]]에서 분석한다.
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - E.W. Dijkstra Archive, [A Case against the GO TO Statement](https://www.cs.utexas.edu/~EWD/transcriptions/EWD02xx/EWD215.html)
 - ACM Digital Library, [Letters to the editor: go to statement considered harmful](https://dl.acm.org/doi/10.1145/362929.362947)

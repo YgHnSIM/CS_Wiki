@@ -1,26 +1,81 @@
 ---
+schema_version: 2
+id: ref-009
+kind: reference
 title: On Computable Numbers with an Application to the Entscheidungsproblem
-aliases: [On Computable Numbers, Turing 1936, computable numbers]
-summary: "Turing의 1936년 논문을 바탕으로 튜링 기계, 보편 튜링 기계, 계산 가능성, 정지 문제, Entscheidungsproblem을 정리한 참고 자료."
-tags: [type/reference, domain/computer-history, domain/computer-science, status/active]
+aliases:
+  - On Computable Numbers
+  - Turing 1936
+  - computable numbers
+summary: Turing의 1936년 논문을 바탕으로 튜링 기계, 보편 튜링 기계, 계산 가능성, 정지 문제, Entscheidungsproblem을 정리한 참고 자료.
+domains:
+  - computer-history
+  - computer-science
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-07-10
-updated: 2026-07-18
-publication_year: 1937
-event_start: 1936
-event_end: 1937
-historical_layer: theory
-historical_note: "1936년 제출·1937년 출판을 구분한다."
-capability_layers: [computability]
-sources: ["1936_Turing_On_Computable_Numbers.pdf", "Proceedings of the London Mathematical Society 1937", "Turing Digital Archive AMT-B-12"]
-source_id: ref-009
-source_kind: external
-primary_sources: ["Proceedings of the London Mathematical Society 1937"]
-supporting_sources: ["1936_Turing_On_Computable_Numbers.pdf", "Turing Digital Archive AMT-B-12", "Wiley record", "PDF copy"]
-source_urls: ["https://turingarchive.kings.cam.ac.uk/publications-lectures-and-talks-amtb/amt-b-12", "https://londmathsoc.onlinelibrary.wiley.com/doi/10.1112/plms/s2-42.1.230", "https://www.cs.virginia.edu/~robins/Turing_Paper_1936.pdf"]
-retrieved: 2026-07-10
-version: null
-snapshot_status: archived
-status: active
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:209e8783d611dd8b1abdbea4df6c6abc051397f4231964957a991a0d878470cb
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers:
+  - computability
+history:
+  publication_year: 1937
+  event:
+    start: 1936
+    end: 1937
+    basis: publication-process
+    evidence_id: null
+  note: 1936년 제출·1937년 출판을 구분한다.
+  layer: theory
+redirect_from:
+  - /references/on-computable-numbers-with-an-application-to-the-entscheidungsproblem/
+  - /sources/on-computable-numbers-with-an-application-to-the-entscheidungsproblem/
+origin: external
+works:
+  primary:
+    - citation: Proceedings of the London Mathematical Society 1937
+      genre: primary-literature
+      identifiers: []
+      edition: null
+  supporting:
+    - citation: 1936_Turing_On_Computable_Numbers.pdf
+      genre: other
+      identifiers: []
+      edition: null
+    - citation: Turing Digital Archive AMT-B-12
+      genre: official-record
+      identifiers: []
+      edition: null
+    - citation: Wiley record
+      genre: official-record
+      identifiers: []
+      edition: null
+    - citation: PDF copy
+      genre: other
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: archive
+    url: https://turingarchive.kings.cam.ac.uk/publications-lectures-and-talks-amtb/amt-b-12
+    retrieved: 2026-07-10
+    version: null
+  - kind: url
+    role: mirror
+    url: https://londmathsoc.onlinelibrary.wiley.com/doi/10.1112/plms/s2-42.1.230
+    retrieved: 2026-07-10
+    version: null
+  - kind: url
+    role: mirror
+    url: https://www.cs.virginia.edu/~robins/Turing_Paper_1936.pdf
+    retrieved: 2026-07-10
+    version: null
 ---
 
 ## 개요
@@ -49,6 +104,11 @@ status: active
 | enables | [[계산 가능성]] | 유한한 규칙을 수행하는 기계 모델로 “기계적으로 계산 가능하다”는 범위를 분석할 수 있게 한다. | [[On Computable Numbers with an Application to the Entscheidungsproblem]] |
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - 로컬 보존본: `raw/assets/1936_Turing_On_Computable_Numbers.pdf`
 - Turing Digital Archive, [AMT/B/12](https://turingarchive.kings.cam.ac.uk/publications-lectures-and-talks-amtb/amt-b-12)

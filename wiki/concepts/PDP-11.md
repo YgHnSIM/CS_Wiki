@@ -1,16 +1,41 @@
 ---
+schema_version: 2
+id: concept-18a0ce4363c25093
+kind: concept
 title: PDP-11
-aliases: [DEC PDP-11, PDP-11/40, PDP-11/45]
-summary: "초기 Unix와 C 언어가 실용화된 DEC 미니컴퓨터 계열."
-tags: [type/concept, domain/computer-history, domain/computer-architecture, status/active]
+aliases:
+  - DEC PDP-11
+  - PDP-11/40
+  - PDP-11/45
+summary: 초기 Unix와 C 언어가 실용화된 DEC 미니컴퓨터 계열.
+domains:
+  - computer-history
+  - computer-architecture
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-07-10
-updated: 2026-07-25
-sources: ["The UNIX Time-Sharing System", "The Development of the C Language", "The Evolution of the Unix Time-sharing System", "Portability of C Programs and the UNIX System"]
-status: active
-graph_id: concept-18a0ce4363c25093
-event_start: 1970
-historical_layer: machine
-historical_note: "PDP-11이 출시된 1970년을 대표 시점으로 둔다."
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:8f0af9c954feccf296b9d5eaa4034277d539ee305ca51e0bc2eb1c70ec86a22c
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids:
+  - ref-018
+  - ref-019
+  - ref-020
+  - ref-021
+capability_layers: []
+history:
+  event:
+    start: 1970
+    basis: representative
+    evidence_id: ref-018
+  note: PDP-11이 출시된 1970년을 대표 시점으로 둔다.
+  layer: machine
+redirect_from:
+  - /concepts/pdp-11/
 ---
 
 ## 개요
@@ -30,6 +55,14 @@ PDP-11은 C의 발전에 중요한 영향을 주었다. B와 BCPL의 단일 워�
 | enables | [[Unix]] | 1974년 논문이 설명한 Unix는 PDP-11/40·/45 위에서 동작했으며, 이 계열은 초기 시스템 설계와 구현의 하드웨어 맥락을 제공했다. | [[The UNIX Time-Sharing System]] |
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- `ref-018`
+- `ref-019`
+- `ref-020`
+- `ref-021`
+<!-- wiki-v2:evidence-end -->
 
 - [[The UNIX Time-Sharing System]]
 - [[The Development of the C Language]]

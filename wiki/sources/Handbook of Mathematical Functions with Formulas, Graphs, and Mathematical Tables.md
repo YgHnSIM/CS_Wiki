@@ -1,26 +1,61 @@
 ---
+schema_version: 2
+id: ref-054
+kind: reference
 title: Handbook of Mathematical Functions with Formulas, Graphs, and Mathematical Tables
-aliases: [Handbook of Mathematical Functions, Abramowitz and Stegun, A&S, 수학 함수 편람]
-summary: "미국 국립표준국이 1964년 발행한 함수·공식·그래프·수학 표 편람으로, 손 계산용 표 제작과 전자 컴퓨터 기반 함수 계산이 공존하던 전환기를 보여주는 참고 자료."
-tags: [type/reference, domain/computer-history, domain/mathematics, status/active]
+aliases:
+  - Handbook of Mathematical Functions
+  - Abramowitz and Stegun
+  - A&S
+  - 수학 함수 편람
+summary: 미국 국립표준국이 1964년 발행한 함수·공식·그래프·수학 표 편람으로, 손 계산용 표 제작과 전자 컴퓨터 기반 함수 계산이 공존하던 전환기를 보여주는 참고 자료.
+domains:
+  - computer-history
+  - mathematics
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-07-20
-updated: 2026-07-25
-publication_year: 1964
-event_start: 1938
-event_end: 1964
-historical_note: "1938년 WPA 지원 Mathematical Tables Project에 참여한 NBS 계산 조직의 작업이 1964년 Applied Mathematics Series 55 발행으로 이어졌다."
-historical_layer: measurement
-capability_layers: [resource-efficiency, reliable-results]
-sources: ["Milton Abramowitz and Irene A. Stegun, eds., Handbook of Mathematical Functions with Formulas, Graphs, and Mathematical Tables, NBS Applied Mathematics Series 55, 1964", "NIST official historical record for the Handbook of Mathematical Functions"]
-source_id: ref-054
-source_kind: external
-primary_sources: ["Milton Abramowitz and Irene A. Stegun, eds., Handbook of Mathematical Functions with Formulas, Graphs, and Mathematical Tables, NBS Applied Mathematics Series 55, 1964", "NIST official historical record for the Handbook of Mathematical Functions"]
-supporting_sources: []
-source_urls: ["https://www.nist.gov/mathematics-statistics/handbook-mathematical-functions-abramowitz-and-stegun"]
-retrieved: 2026-07-25
-version: "NBS Applied Mathematics Series 55, June 1964, 1046 pages"
-snapshot_status: external-only
-status: active
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:24da76ba87a6686b9656d517fdefd637085944613a206aa7c8eaf291f76b36b1
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers:
+  - resource-efficiency
+  - reliable-results
+history:
+  publication_year: 1964
+  event:
+    start: 1938
+    end: 1964
+    basis: publication-process
+    evidence_id: null
+  note: 1938년 WPA 지원 Mathematical Tables Project에 참여한 NBS 계산 조직의 작업이 1964년 Applied Mathematics Series 55 발행으로 이어졌다.
+  layer: measurement
+redirect_from:
+  - /references/handbook-of-mathematical-functions-with-formulas-graphs-and-mathematical-tables/
+  - /sources/handbook-of-mathematical-functions-with-formulas-graphs-and-mathematical-tables/
+origin: external
+works:
+  primary:
+    - citation: Milton Abramowitz and Irene A. Stegun, eds., Handbook of Mathematical Functions with Formulas, Graphs, and Mathematical Tables, NBS Applied Mathematics Series 55, 1964
+      genre: primary-literature
+      identifiers: []
+      edition: NBS Applied Mathematics Series 55, June 1964, 1046 pages
+    - citation: NIST official historical record for the Handbook of Mathematical Functions
+      genre: standard
+      identifiers: []
+      edition: NBS Applied Mathematics Series 55, June 1964, 1046 pages
+  supporting: []
+access:
+  - kind: url
+    role: canonical
+    url: https://www.nist.gov/mathematics-statistics/handbook-mathematical-functions-abramowitz-and-stegun
+    retrieved: 2026-07-25
+    version: NBS Applied Mathematics Series 55, June 1964, 1046 pages
 ---
 
 ## 개요
@@ -57,6 +92,11 @@ NIST는 이 편람을 기관 역사상 가장 널리 배포되고 가장 많이 
 NIST Special Publication 958의 개별 135–139쪽 PDF 경로는 2026-07-25 링크 점검에서 404였고, 이어서 확인한 HTML 해설 경로도 이 자동 점검 환경에서 404였다. 이 페이지는 현재 200 응답하는 NIST 공식 편람 기록을 보존 접근 경로로 유지하며, 편람의 직접 역사적 근거는 1964년 NBS 판본과 그 기관 기록으로 한정한다.
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - NIST, [Handbook of Mathematical Functions: Abramowitz and Stegun](https://www.nist.gov/mathematics-statistics/handbook-mathematical-functions-abramowitz-and-stegun)
 - Milton Abramowitz and Irene A. Stegun, eds., *Handbook of Mathematical Functions with Formulas, Graphs, and Mathematical Tables*, NBS Applied Mathematics Series 55, 1964.

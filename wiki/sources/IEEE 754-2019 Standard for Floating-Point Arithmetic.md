@@ -1,26 +1,82 @@
 ---
+schema_version: 2
+id: ref-051
+kind: reference
 title: IEEE 754-2019 Standard for Floating-Point Arithmetic
-aliases: [IEEE 754-2019, IEEE Standard for Floating-Point Arithmetic, IEEE 부동소수점 표준]
-summary: "이진·십진 부동소수점의 교환·산술 형식과 연산 방법, 예외 조건을 규정하는 현행 IEEE 754-2019의 공개 범위와 보장 경계를 정리한 공식 표준 기록."
-tags: [type/reference, domain/computer-architecture, domain/mathematics, status/active]
+aliases:
+  - IEEE 754-2019
+  - IEEE Standard for Floating-Point Arithmetic
+  - IEEE 부동소수점 표준
+summary: 이진·십진 부동소수점의 교환·산술 형식과 연산 방법, 예외 조건을 규정하는 현행 IEEE 754-2019의 공개 범위와 보장 경계를 정리한 공식 표준 기록.
+domains:
+  - computer-architecture
+  - mathematics
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-07-16
-updated: 2026-07-18
-publication_year: 2019
-event_start: 1985
-event_end: 2019
-historical_layer: measurement
-historical_note: "최초 IEEE 754 표준(1985)에서 현행 2019 개정까지의 표준화 계보를 나타낸다."
-capability_layers: [reliable-results]
-sources: ["IEEE 754-2019 official standard record", "IEEE P754 official project record", "ISO/IEC/IEEE 60559-2020 official standard record", "IEEE SA copyright and permissions policy"]
-source_id: ref-051
-source_kind: external
-primary_sources: ["IEEE 754-2019 official standard record", "IEEE P754 official project record", "ISO/IEC/IEEE 60559-2020 official standard record"]
-supporting_sources: ["IEEE SA copyright and permissions policy"]
-source_urls: ["https://standards.ieee.org/ieee/754/6210/", "https://standards.ieee.org/ieee/754/11684/", "https://standards.ieee.org/ieee/60559/10226/", "https://standards.ieee.org/ipr/stdspermission/"]
-retrieved: 2026-07-16
-version: "IEEE Std 754-2019; P754 revision project active as of 2026-07-16"
-snapshot_status: external-only
-status: active
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:5fa8ed750a1f0adafeef436f67d9b3b2f9af51e8195948ca61f88166ae4646fc
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers:
+  - reliable-results
+history:
+  publication_year: 2019
+  event:
+    start: 1985
+    end: 2019
+    basis: publication-process
+    evidence_id: null
+  note: 최초 IEEE 754 표준(1985)에서 현행 2019 개정까지의 표준화 계보를 나타낸다.
+  layer: measurement
+redirect_from:
+  - /references/ieee-754-2019-standard-for-floating-point-arithmetic/
+  - /sources/ieee-754-2019-standard-for-floating-point-arithmetic/
+origin: external
+works:
+  primary:
+    - citation: IEEE 754-2019 official standard record
+      genre: standard
+      identifiers: []
+      edition: IEEE Std 754-2019; P754 revision project active as of 2026-07-16
+    - citation: IEEE P754 official project record
+      genre: standard
+      identifiers: []
+      edition: IEEE Std 754-2019; P754 revision project active as of 2026-07-16
+    - citation: ISO/IEC/IEEE 60559-2020 official standard record
+      genre: standard
+      identifiers: []
+      edition: IEEE Std 754-2019; P754 revision project active as of 2026-07-16
+  supporting:
+    - citation: IEEE SA copyright and permissions policy
+      genre: standard
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: canonical
+    url: https://standards.ieee.org/ieee/754/6210/
+    retrieved: 2026-07-16
+    version: IEEE Std 754-2019; P754 revision project active as of 2026-07-16
+  - kind: url
+    role: mirror
+    url: https://standards.ieee.org/ieee/754/11684/
+    retrieved: 2026-07-16
+    version: IEEE Std 754-2019; P754 revision project active as of 2026-07-16
+  - kind: url
+    role: mirror
+    url: https://standards.ieee.org/ieee/60559/10226/
+    retrieved: 2026-07-16
+    version: IEEE Std 754-2019; P754 revision project active as of 2026-07-16
+  - kind: url
+    role: mirror
+    url: https://standards.ieee.org/ipr/stdspermission/
+    retrieved: 2026-07-16
+    version: IEEE Std 754-2019; P754 revision project active as of 2026-07-16
 ---
 
 ## 개요
@@ -77,6 +133,11 @@ IEEE의 공개 카탈로그에는 754-2019에 별도 amendment나 corrigendum이
 | responds_to | [[부동소수점 정확성]] | 구현마다 달랐던 형식·반올림·예외 조건을 공통 연산 계약으로 규정해 결과를 추론하고 교환하는 문제에 대응한다. | [[IEEE 754-2019 Standard for Floating-Point Arithmetic]] |
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - IEEE Standards Association, [IEEE 754-2019](https://standards.ieee.org/ieee/754/6210/)
 - IEEE Standards Association, [P754 revision project](https://standards.ieee.org/ieee/754/11684/)

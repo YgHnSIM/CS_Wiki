@@ -1,21 +1,63 @@
 ---
+schema_version: 2
+id: ref-012
+kind: reference
 title: Flow Diagrams, Turing Machines and Languages with Only Two Formation Rules
-aliases: [Böhm-Jacopini 1966]
-summary: "Böhm-Jacopini의 흐름도 정규화와 구조화 프로그램 정리를 바탕으로 `goto` 없는 표현 가능성을 정리한 참고 자료."
-tags: [type/reference, domain/computer-science, domain/programming-languages, status/active]
+aliases:
+  - Böhm-Jacopini 1966
+summary: Böhm-Jacopini의 흐름도 정규화와 구조화 프로그램 정리를 바탕으로 goto 없는 표현 가능성을 정리한 참고 자료.
+domains:
+  - computer-science
+  - programming-languages
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-07-10
-updated: 2026-07-22
-sources: ["Communications of the ACM 1966"]
-source_id: ref-012
-source_kind: external
-primary_sources: ["Communications of the ACM 1966"]
-supporting_sources: ["ACM DOI", "PDF copy"]
-source_urls: ["https://cacm.acm.org/research/flow-diagrams-turing-machines-and-languages-with-only-two-formation-rules/", "https://dl.acm.org/doi/10.1145/355592.365646", "https://www.cs.unibo.it/~martini/PP/bohm-jac.pdf"]
-retrieved: 2026-07-10
-version: null
-snapshot_status: external-only
-status: active
-publication_year: 1966
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:d4b54f39a7170ca6deab3ef14d13e42785f088633942a54e4d31faea52fec3e1
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers: []
+history:
+  publication_year: 1966
+redirect_from:
+  - /references/flow-diagrams-turing-machines-and-languages-with-only-two-formation-rules/
+  - /sources/flow-diagrams-turing-machines-and-languages-with-only-two-formation-rules/
+origin: external
+works:
+  primary:
+    - citation: Communications of the ACM 1966
+      genre: other
+      identifiers: []
+      edition: null
+  supporting:
+    - citation: ACM DOI
+      genre: primary-literature
+      identifiers: []
+      edition: null
+    - citation: PDF copy
+      genre: other
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: canonical
+    url: https://cacm.acm.org/research/flow-diagrams-turing-machines-and-languages-with-only-two-formation-rules/
+    retrieved: 2026-07-10
+    version: null
+  - kind: url
+    role: mirror
+    url: https://dl.acm.org/doi/10.1145/355592.365646
+    retrieved: 2026-07-10
+    version: null
+  - kind: url
+    role: mirror
+    url: https://www.cs.unibo.it/~martini/PP/bohm-jac.pdf
+    retrieved: 2026-07-10
+    version: null
 ---
 
 ## 개요
@@ -37,6 +79,11 @@ publication_year: 1966
 이 자료는 [[구조적 프로그래밍]]을 이론과 방법론으로 나누어 설명하는 데 쓰인다. 표현 가능성의 정리는 [[GOTO 문]] 없이도 계산을 표현할 수 있음을 보여주지만, 실제 프로그래밍 방법론은 [[제어 구조]], [[단계적 정제]], 검증 가능한 프로그램 구성 문제를 별도로 다룬다.
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - Communications of the ACM, [Flow diagrams, turing machines and languages with only two formation rules](https://cacm.acm.org/research/flow-diagrams-turing-machines-and-languages-with-only-two-formation-rules/)
 - ACM Digital Library, [DOI 10.1145/355592.365646](https://dl.acm.org/doi/10.1145/355592.365646)

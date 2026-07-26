@@ -1,20 +1,45 @@
 ---
+schema_version: 2
+id: src-005
+kind: source
 title: 폐쇄형 서브루틴과 Wheeler Jump
-aliases: [Closed Subroutine and Wheeler Jump]
-summary: "EDSAC의 폐쇄형 서브루틴과 Wheeler Jump의 호출·복귀 구조를 단계별로 설명한 소스."
-tags: [type/source, domain/computer-history, domain/software-engineering, status/active]
+aliases:
+  - Closed Subroutine and Wheeler Jump
+summary: EDSAC의 폐쇄형 서브루틴과 Wheeler Jump의 호출·복귀 구조를 단계별로 설명한 소스.
+domains:
+  - computer-history
+  - software-engineering
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-05-04
-updated: 2026-07-10
-sources: ["폐쇄형 서브루틴과 Wheeler Jump.md"]
-source_id: src-005
-source_kind: raw
-primary_sources: ["폐쇄형 서브루틴과 Wheeler Jump.md"]
-supporting_sources: []
-source_urls: []
-retrieved: 2026-07-10
-version: null
-snapshot_status: local
-status: active
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:e642c8ec4612fc1b634ed08a79126791504dedca035a031aa068ec037ae10cc7
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers: []
+redirect_from:
+  - /sources/폐쇄형-서브루틴과-wheeler-jump/
+origin: local
+works:
+  primary:
+    - citation: 폐쇄형 서브루틴과 Wheeler Jump.md
+      genre: raw-note
+      identifiers: []
+      edition: null
+  supporting: []
+access:
+  - kind: local
+    role: original
+    path: raw/폐쇄형 서브루틴과 Wheeler Jump.md
+    retrieved: 2026-07-10
+    version: null
+    sha256: f12b47e7257478f2b83a000eb22a5ac3bad2c26fd932e08745b005aa1889ea9d
+    media_type: text/markdown
+    bytes: 14944
 ---
 
 ## 핵심 요약
@@ -38,10 +63,13 @@ Wheeler Jump는 호출부의 첫 명령 `A m F`를 accumulator에 넣고, 서브
 ## 인용할 만한 구절
 
 > 호출부의 명령어를 이용해 복귀 점프 명령을 생성
+<!-- wiki-v2:quote-locator evidence="src-005" locator="wiki/sources/폐쇄형 서브루틴과 Wheeler Jump.md:line-21#인용할-만한-구절" status="recorded" -->
 
 > `A m F + Memory[3] = E (m+2) F`
+<!-- wiki-v2:quote-locator evidence="src-005" locator="wiki/sources/폐쇄형 서브루틴과 Wheeler Jump.md:line-23#인용할-만한-구절" status="recorded" -->
 
 > 호출, 실행, 복귀까지의 제어 흐름이 서브루틴 내부에서 완결된다는 뜻이다.
+<!-- wiki-v2:quote-locator evidence="src-005" locator="wiki/sources/폐쇄형 서브루틴과 Wheeler Jump.md:line-25#인용할-만한-구절" status="recorded" -->
 
 ## 관련 위키 페이지
 
@@ -53,6 +81,11 @@ Wheeler Jump는 호출부의 첫 명령 `A m F`를 accumulator에 넣고, 서브
 - [[데이비드 휠러]]
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - `raw/폐쇄형 서브루틴과 Wheeler Jump.md`
 

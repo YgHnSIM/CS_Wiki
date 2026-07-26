@@ -1,21 +1,48 @@
 ---
+schema_version: 2
+id: ref-023
+kind: reference
 title: RFC 3629 UTF-8
-aliases: [RFC 3629, UTF-8 RFC, UTF-8 a transformation format of ISO 10646]
-summary: "IETF의 UTF-8 표준을 바탕으로 ASCII 호환성, 1-4 octet 구조, 잘못된 바이트열 처리 문제를 정리한 참고 자료."
-tags: [type/reference, domain/computer-science, domain/internet, domain/text-processing, status/active]
+aliases:
+  - RFC 3629
+  - UTF-8 RFC
+  - UTF-8 a transformation format of ISO 10646
+summary: IETF의 UTF-8 표준을 바탕으로 ASCII 호환성, 1-4 octet 구조, 잘못된 바이트열 처리 문제를 정리한 참고 자료.
+domains:
+  - computer-science
+  - internet
+  - text-processing
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-07-10
-updated: 2026-07-22
-sources: ["RFC 3629"]
-source_id: ref-023
-source_kind: external
-primary_sources: ["RFC 3629"]
-supporting_sources: []
-source_urls: ["https://datatracker.ietf.org/doc/html/rfc3629"]
-retrieved: 2026-07-10
-version: "RFC 3629"
-snapshot_status: external-only
-status: active
-publication_year: 2003
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:af6ffd26ed6f6520a6f33296c9de3b376e2801a0177590b9658622318d77ed54
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers: []
+history:
+  publication_year: 2003
+redirect_from:
+  - /references/rfc-3629-utf-8/
+  - /sources/rfc-3629-utf-8/
+origin: external
+works:
+  primary:
+    - citation: RFC 3629
+      genre: standard
+      identifiers: []
+      edition: RFC 3629
+  supporting: []
+access:
+  - kind: url
+    role: canonical
+    url: https://datatracker.ietf.org/doc/html/rfc3629
+    retrieved: 2026-07-10
+    version: RFC 3629
 ---
 
 ## 개요
@@ -37,6 +64,11 @@ RFC 3629의 중요한 의미는 UTF-8을 인터넷 프로토콜과 파일 형식
 이 자료는 [[UTF-8]], [[인코딩 오류]], [[ASCII]], [[바이트 순서 표식]], [[인코딩 심화]]를 정리하는 데 사용한다. 특히 UTF-8이 "유니코드 전체를 담는 바이트 직렬화 방식"이지 "문자 집합 자체"가 아니라는 구분을 뒷받침한다.
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - IETF Datatracker, [RFC 3629 - UTF-8, a transformation format of ISO 10646](https://datatracker.ietf.org/doc/html/rfc3629)
 

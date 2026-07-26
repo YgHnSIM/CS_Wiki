@@ -1,25 +1,64 @@
 ---
+schema_version: 2
+id: ref-107
+kind: reference
 title: Measuring the Impact of Early-2025 AI on Experienced Open-Source Developer Productivity
-aliases: [METR developer productivity RCT, METR 2025 AI 생산성 연구, experienced OSS developers and AI]
-summary: "숙련된 오픈소스 기여자가 익숙한 대규모 저장소의 실제 이슈를 수행할 때 초기 2025년 AI 도구 사용 허용 여부를 무작위 배정해 시간을 비교한 METR의 2025년 연구."
-tags: [type/reference, domain/software-engineering, domain/machine-learning, status/active]
-created: 2026-07-25
-updated: 2026-07-25
-publication_year: 2025
-historical_layer: measurement
-capability_layers: [programmability, reliable-results]
-sources: [Measuring the Impact of Early-2025 AI on Experienced Open-Source Developer Productivity]
-source_id: ref-107
-source_kind: external
-primary_sources: ["Joel Becker, Nate Rush, Beth Barnes, and David Rein, Measuring the Impact of Early-2025 AI on Experienced Open-Source Developer Productivity, METR, 2025"]
-supporting_sources: ["METR, We are Changing our Developer Productivity Experiment Design, 2026"]
-source_urls: ["https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/", "https://metr.org/Early_2025_AI_Experienced_OS_Devs_Study-paper.pdf", "https://metr.org/blog/2026-02-24-uplift-update/"]
-retrieved: 2026-07-25
-version: "early-2025 tool setting; 2026 methodology update recorded as supporting material"
-snapshot_status: external-only
-status: active
-graph_id: reference-metr-ai-open-source-productivity
+aliases:
+  - METR developer productivity RCT
+  - METR 2025 AI 생산성 연구
+  - experienced OSS developers and AI
+summary: 숙련된 오픈소스 기여자가 익숙한 대규모 저장소의 실제 이슈를 수행할 때 초기 2025년 AI 도구 사용 허용 여부를 무작위 배정해 시간을 비교한 METR의 2025년 연구.
+domains:
+  - software-engineering
+  - machine-learning
+editorial_status: active
+publication_visibility: public
 graph_visibility: public
+created: 2026-07-25
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:766654b1d11825d37a8fedd040add92fa852a5c2b6965ea1489e04e23dcdf6b6
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers:
+  - programmability
+  - reliable-results
+history:
+  publication_year: 2025
+  layer: measurement
+redirect_from:
+  - /references/measuring-the-impact-of-early-2025-ai-on-experienced-open-source-developer-productivity/
+  - /sources/measuring-the-impact-of-early-2025-ai-on-experienced-open-source-developer-productivity/
+origin: external
+works:
+  primary:
+    - citation: Joel Becker, Nate Rush, Beth Barnes, and David Rein, Measuring the Impact of Early-2025 AI on Experienced Open-Source Developer Productivity, METR, 2025
+      genre: other
+      identifiers: []
+      edition: early-2025 tool setting; 2026 methodology update recorded as supporting material
+  supporting:
+    - citation: METR, We are Changing our Developer Productivity Experiment Design, 2026
+      genre: other
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: canonical
+    url: https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/
+    retrieved: 2026-07-25
+    version: early-2025 tool setting; 2026 methodology update recorded as supporting material
+  - kind: url
+    role: mirror
+    url: https://metr.org/Early_2025_AI_Experienced_OS_Devs_Study-paper.pdf
+    retrieved: 2026-07-25
+    version: early-2025 tool setting; 2026 methodology update recorded as supporting material
+  - kind: url
+    role: mirror
+    url: https://metr.org/blog/2026-02-24-uplift-update/
+    retrieved: 2026-07-25
+    version: early-2025 tool setting; 2026 methodology update recorded as supporting material
 ---
 
 ## 개요
@@ -51,6 +90,11 @@ graph_visibility: public
 | exemplifies | [[검증 노동]] | 사람이 만족할 PR의 성공 정의가 테스트·문서·스타일과 통합 비용을 시간 측정에 포함한다. | [[Measuring the Impact of Early-2025 AI on Experienced Open-Source Developer Productivity]] |
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - METR, [study page](https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/)
 - METR, [study paper PDF](https://metr.org/Early_2025_AI_Experienced_OS_Devs_Study-paper.pdf)

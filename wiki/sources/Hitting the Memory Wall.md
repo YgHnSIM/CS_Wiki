@@ -1,23 +1,59 @@
 ---
+schema_version: 2
+id: ref-039
+kind: reference
 title: Hitting the Memory Wall
-aliases: [Wulf-McKee 1995, 메모리 장벽 논문, Memory wall paper]
-summary: "프로세서 속도와 DRAM 속도의 격차가 커지면 전체 실행 시간이 메모리 접근에 지배될 수 있다고 경고하며 메모리 장벽이라는 문제를 제기한 논문."
-tags: [type/reference, domain/computer-architecture, domain/computer-history, status/active]
+aliases:
+  - Wulf-McKee 1995
+  - 메모리 장벽 논문
+  - Memory wall paper
+summary: 프로세서 속도와 DRAM 속도의 격차가 커지면 전체 실행 시간이 메모리 접근에 지배될 수 있다고 경고하며 메모리 장벽이라는 문제를 제기한 논문.
+domains:
+  - computer-architecture
+  - computer-history
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-07-16
-updated: 2026-07-18
-publication_year: 1995
-historical_layer: architecture
-capability_layers: [realized-performance, scalability]
-sources: ["ACM SIGARCH Computer Architecture News 23(1), 1995", "University of Virginia repository record"]
-source_id: ref-039
-source_kind: external
-primary_sources: ["ACM SIGARCH Computer Architecture News 23(1), 1995"]
-supporting_sources: ["University of Virginia repository record"]
-source_urls: ["https://doi.org/10.1145/216585.216588", "https://libraopen.library.virginia.edu/entities/publication/a6907010-027d-405e-8f0b-4707e1263ad9"]
-retrieved: 2026-07-16
-version: "Computer Architecture News 23(1), March 1995"
-snapshot_status: external-only
-status: active
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:0add371f058eef8fbc7be64f54c06dfa3b6b8dcd9bb9cb8aeeac6192968527a0
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers:
+  - realized-performance
+  - scalability
+history:
+  publication_year: 1995
+  layer: architecture
+redirect_from:
+  - /references/hitting-the-memory-wall/
+  - /sources/hitting-the-memory-wall/
+origin: external
+works:
+  primary:
+    - citation: ACM SIGARCH Computer Architecture News 23(1), 1995
+      genre: other
+      identifiers: []
+      edition: Computer Architecture News 23(1), March 1995
+  supporting:
+    - citation: University of Virginia repository record
+      genre: official-record
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: doi
+    url: https://doi.org/10.1145/216585.216588
+    retrieved: 2026-07-16
+    version: Computer Architecture News 23(1), March 1995
+  - kind: url
+    role: mirror
+    url: https://libraopen.library.virginia.edu/entities/publication/a6907010-027d-405e-8f0b-4707e1263ad9
+    retrieved: 2026-07-16
+    version: Computer Architecture News 23(1), March 1995
 ---
 
 ## 개요
@@ -41,6 +77,7 @@ status: active
 ## 인용할 만한 구절
 
 > 실행 시간이 거의 전적으로 메모리 접근에 의해 결정되는 지점이 메모리 장벽이다.
+<!-- wiki-v2:quote-locator evidence="ref-039" locator="wiki/sources/Hitting the Memory Wall.md:line-21#인용할-만한-구절" status="recorded" -->
 
 논문의 문제 정의를 한국어로 요약한 문장이다.
 
@@ -49,6 +86,11 @@ status: active
 이 자료는 [[메모리 장벽]]의 역사적 문제 제기를 제공한다. [[컴퓨팅 능력의 발달사]]에서는 클럭과 명령 처리량 중심의 향상이 데이터 이동 비용과 충돌하면서 성능의 중심이 메모리 계층·병렬성·지역성으로 이동한 전환점으로 사용한다.
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - ACM, [DOI record](https://doi.org/10.1145/216585.216588)
 - University of Virginia, [repository record](https://libraopen.library.virginia.edu/entities/publication/a6907010-027d-405e-8f0b-4707e1263ad9)

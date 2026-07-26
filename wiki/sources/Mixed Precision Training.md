@@ -1,25 +1,63 @@
 ---
+schema_version: 2
+id: ref-069
+kind: reference
 title: Mixed Precision Training
-aliases: [Micikevicius et al. 2018, mixed-precision deep learning]
-summary: "반정밀도 저장·연산과 단정밀도 마스터 가중치·손실 스케일링을 결합해 심층 신경망 학습의 메모리 사용량과 계산 비용을 줄이는 방법을 제시한 2018년 ICLR 논문."
-tags: [type/reference, domain/machine-learning, domain/computer-architecture, status/active]
-created: 2026-07-24
-updated: 2026-07-24
-publication_year: 2018
-historical_layer: software
-capability_layers: [realized-performance, resource-efficiency, reliable-results]
-sources: ["Mixed Precision Training"]
-source_id: ref-069
-source_kind: external
-primary_sources: ["Paulius Micikevicius et al., Mixed Precision Training, ICLR 2018"]
-supporting_sources: ["arXiv:1710.03740", "OpenReview ICLR 2018 record"]
-source_urls: ["https://arxiv.org/abs/1710.03740", "https://openreview.net/forum?id=r1gs9JgRZ"]
-retrieved: 2026-07-24
-version: "arXiv v3, 15 February 2018; ICLR 2018"
-snapshot_status: external-only
-status: active
-graph_id: reference-mixed-precision-training
+aliases:
+  - Micikevicius et al. 2018
+  - mixed-precision deep learning
+summary: 반정밀도 저장·연산과 단정밀도 마스터 가중치·손실 스케일링을 결합해 심층 신경망 학습의 메모리 사용량과 계산 비용을 줄이는 방법을 제시한 2018년 ICLR 논문.
+domains:
+  - machine-learning
+  - computer-architecture
+editorial_status: active
+publication_visibility: public
 graph_visibility: public
+created: 2026-07-24
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:94fc241fe7cac54d40204bd6b3c57d337ab6fb1c5155fa9ae5b6c66db0072716
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers:
+  - realized-performance
+  - resource-efficiency
+  - reliable-results
+history:
+  publication_year: 2018
+  layer: software
+redirect_from:
+  - /references/mixed-precision-training/
+  - /sources/mixed-precision-training/
+origin: external
+works:
+  primary:
+    - citation: Paulius Micikevicius et al., Mixed Precision Training, ICLR 2018
+      genre: other
+      identifiers: []
+      edition: arXiv v3, 15 February 2018; ICLR 2018
+  supporting:
+    - citation: arXiv:1710.03740
+      genre: other
+      identifiers: []
+      edition: null
+    - citation: OpenReview ICLR 2018 record
+      genre: official-record
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: canonical
+    url: https://arxiv.org/abs/1710.03740
+    retrieved: 2026-07-24
+    version: arXiv v3, 15 February 2018; ICLR 2018
+  - kind: url
+    role: mirror
+    url: https://openreview.net/forum?id=r1gs9JgRZ
+    retrieved: 2026-07-24
+    version: arXiv v3, 15 February 2018; ICLR 2018
 ---
 
 ## 개요
@@ -41,6 +79,7 @@ graph_visibility: public
 ## 인용할 만한 구절
 
 > “maintaining a single-precision copy of the weights”
+<!-- wiki-v2:quote-locator evidence="ref-069" locator="wiki/sources/Mixed Precision Training.md:line-19#인용할-만한-구절" status="recorded" -->
 
 저자들이 반정밀도 학습의 정보 손실을 다루기 위해 제시한 핵심 장치를 간결하게 나타낸 표현이다.
 
@@ -56,6 +95,11 @@ graph_visibility: public
 | constrains | [[부동소수점 정확성]] | 낮은 정밀도의 범위·반올림 손실을 관리하지 않으면 학습 결과 계약을 만족하지 못할 수 있음을 보여준다. | [[Mixed Precision Training]] |
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - arXiv, [1710.03740](https://arxiv.org/abs/1710.03740)
 - OpenReview, [ICLR 2018 record](https://openreview.net/forum?id=r1gs9JgRZ)

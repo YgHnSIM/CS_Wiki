@@ -1,25 +1,63 @@
 ---
+schema_version: 2
+id: ref-077
+kind: reference
 title: "DistServe: Disaggregating Prefill and Decoding for Goodput-optimized Large Language Model Serving"
-aliases: ["DistServe: Disaggregating Prefill and Decoding for Goodput-optimized Large Language Model Serving", DistServe, DistServe paper, Zhong et al. 2024]
-summary: "LLM 요청의 프리필과 디코드 단계를 서로 다른 GPU에 배치해 단계 간 간섭과 자원 결합을 줄이고, TTFT·TPOT 서비스 수준 목표를 만족하는 goodput을 최적화한 2024년 OSDI 연구."
-tags: [type/reference, domain/machine-learning, domain/systems, domain/distributed-systems, status/active]
-created: 2026-07-24
-updated: 2026-07-24
-publication_year: 2024
-historical_layer: service
-capability_layers: [realized-performance, scalability, resource-efficiency, reliable-results]
-sources: ["DistServe - Disaggregating Prefill and Decoding for Goodput-optimized Large Language Model Serving"]
-source_id: ref-077
-source_kind: external
-primary_sources: ["Yinmin Zhong et al., DistServe: Disaggregating Prefill and Decoding for Goodput-optimized Large Language Model Serving, OSDI 2024"]
-supporting_sources: ["USENIX OSDI 2024 presentation and proceedings record"]
-source_urls: ["https://www.usenix.org/conference/osdi24/presentation/zhong-yinmin", "https://www.usenix.org/system/files/osdi24-zhong-yinmin.pdf"]
-retrieved: 2026-07-24
-version: "OSDI '24 proceedings, pp. 193–210"
-snapshot_status: external-only
-status: active
-graph_id: reference-distserve
+aliases:
+  - "DistServe: Disaggregating Prefill and Decoding for Goodput-optimized Large Language Model Serving"
+  - DistServe
+  - DistServe paper
+  - Zhong et al. 2024
+summary: LLM 요청의 프리필과 디코드 단계를 서로 다른 GPU에 배치해 단계 간 간섭과 자원 결합을 줄이고, TTFT·TPOT 서비스 수준 목표를 만족하는 goodput을 최적화한 2024년 OSDI 연구.
+domains:
+  - machine-learning
+  - systems
+  - distributed-systems
+editorial_status: active
+publication_visibility: public
 graph_visibility: public
+created: 2026-07-24
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:065a8245cf505b69fb7ffb3933073ace21c33d7c60ae5a4031ec578d84e4f40c
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers:
+  - realized-performance
+  - scalability
+  - resource-efficiency
+  - reliable-results
+history:
+  publication_year: 2024
+  layer: service
+redirect_from:
+  - /references/distserve-disaggregating-prefill-and-decoding-for-goodput-optimized-large-language-model-serving/
+  - /sources/distserve-disaggregating-prefill-and-decoding-for-goodput-optimized-large-language-model-serving/
+origin: external
+works:
+  primary:
+    - citation: "Yinmin Zhong et al., DistServe: Disaggregating Prefill and Decoding for Goodput-optimized Large Language Model Serving, OSDI 2024"
+      genre: other
+      identifiers: []
+      edition: OSDI '24 proceedings, pp. 193–210
+  supporting:
+    - citation: USENIX OSDI 2024 presentation and proceedings record
+      genre: official-record
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: canonical
+    url: https://www.usenix.org/conference/osdi24/presentation/zhong-yinmin
+    retrieved: 2026-07-24
+    version: OSDI '24 proceedings, pp. 193–210
+  - kind: url
+    role: mirror
+    url: https://www.usenix.org/system/files/osdi24-zhong-yinmin.pdf
+    retrieved: 2026-07-24
+    version: OSDI '24 proceedings, pp. 193–210
 ---
 
 ## 개요
@@ -45,6 +83,7 @@ DistServe는 [[프리필과 디코드]]를 서로 다른 GPU 군에 배치한다
 ## 인용할 만한 구절
 
 > “prefill-decoding interference”
+<!-- wiki-v2:quote-locator evidence="ref-077" locator="wiki/sources/DistServe - Disaggregating Prefill and Decoding for Goodput-optimized Large Language Model Serving.md:line-23#인용할-만한-구절" status="recorded" -->
 
 핵심은 두 단계가 각각 느리다는 것이 아니라, 서로 다른 자원 특성을 가진 단계가 공배치될 때 한 단계의 작업이 다른 단계의 서비스 지연을 흔든다는 점이다.
 
@@ -62,6 +101,11 @@ DistServe는 [[프리필과 디코드]]를 서로 다른 GPU 군에 배치한다
 | constrains | [[KV 캐시]] | 단계 분리 뒤에도 프리필에서 만든 요청별 KV 상태를 디코드 군으로 옮겨 보존해야 한다. | [[DistServe - Disaggregating Prefill and Decoding for Goodput-optimized Large Language Model Serving]] |
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - USENIX, [OSDI 2024 presentation and proceedings record](https://www.usenix.org/conference/osdi24/presentation/zhong-yinmin)
 - USENIX, [open-access proceedings paper](https://www.usenix.org/system/files/osdi24-zhong-yinmin.pdf)

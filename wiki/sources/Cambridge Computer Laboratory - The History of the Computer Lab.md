@@ -1,20 +1,44 @@
 ---
+schema_version: 2
+id: ref-028
+kind: reference
 title: Cambridge Computer Laboratory - The History of the Computer Lab
-aliases: [Cambridge Computer Lab history, 케임브리지 컴퓨터 연구소 역사]
-summary: "EDSAC I의 운영과 EDSAC II의 마이크로프로그램 제어부 계보를 구분하는 케임브리지 공식 역사 자료."
-tags: [type/reference, domain/computer-history, domain/computer-architecture, status/active]
+aliases:
+  - Cambridge Computer Lab history
+  - 케임브리지 컴퓨터 연구소 역사
+summary: EDSAC I의 운영과 EDSAC II의 마이크로프로그램 제어부 계보를 구분하는 케임브리지 공식 역사 자료.
+domains:
+  - computer-history
+  - computer-architecture
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-07-10
-updated: 2026-07-10
-sources: ["University of Cambridge Computer Laboratory history page"]
-source_id: ref-028
-source_kind: external
-primary_sources: ["University of Cambridge Computer Laboratory history page"]
-supporting_sources: []
-source_urls: ["https://www.cl.cam.ac.uk/relics/history.html"]
-retrieved: 2026-07-10
-version: null
-snapshot_status: external-only
-status: active
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:364459cf5182a2280bce0de28eb414a7abf18735b5a1e8e9fcedcbbbb6cbb8ae
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers: []
+redirect_from:
+  - /references/cambridge-computer-laboratory-the-history-of-the-computer-lab/
+  - /sources/cambridge-computer-laboratory-the-history-of-the-computer-lab/
+origin: external
+works:
+  primary:
+    - citation: University of Cambridge Computer Laboratory history page
+      genre: official-record
+      identifiers: []
+      edition: null
+  supporting: []
+access:
+  - kind: url
+    role: canonical
+    url: https://www.cl.cam.ac.uk/relics/history.html
+    retrieved: 2026-07-10
+    version: null
 ---
 
 ## 개요
@@ -33,6 +57,11 @@ status: active
 이 자료는 [[초기 소프트웨어의 계층화]]에서 EDSAC I 내부 실행 책임과 후대의 하드웨어 제어 계보를 분리하는 데 사용한다. [[마이크로프로그래밍]]과 [[모리스 윌크스]] 페이지를 보강할 때도 공식 기관 연표의 기준점으로 활용한다.
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - University of Cambridge Computer Laboratory, [The History of the Computer Lab](https://www.cl.cam.ac.uk/relics/history.html)
 

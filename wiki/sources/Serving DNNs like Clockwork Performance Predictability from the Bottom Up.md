@@ -1,25 +1,62 @@
 ---
+schema_version: 2
+id: ref-086
+kind: reference
 title: "Serving DNNs like Clockwork: Performance Predictability from the Bottom Up"
-aliases: ["Serving DNNs like Clockwork Performance Predictability from the Bottom Up", Clockwork, "Clockwork serving system", "Gujarati et al. 2020"]
-summary: "DNN 추론의 예측 가능한 실행 시간을 바탕으로 요청별 기한을 만족할 수 있는 작업만 예약하고, 처리량·꼬리 지연·요청별 SLO를 함께 평가한 2020년 OSDI 모델 서빙 시스템 연구."
-tags: [type/reference, domain/machine-learning, domain/performance, domain/systems, status/active]
-created: 2026-07-25
-updated: 2026-07-25
-publication_year: 2020
-historical_layer: service
-capability_layers: [realized-performance, scalability, reliable-results]
-sources: ["Serving DNNs like Clockwork Performance Predictability from the Bottom Up"]
-source_id: ref-086
-source_kind: external
-primary_sources: ["Arpan Gujarati et al., Serving DNNs like Clockwork: Performance Predictability from the Bottom Up, OSDI 2020"]
-supporting_sources: ["USENIX OSDI 2020 presentation and open-access proceedings record"]
-source_urls: ["https://www.usenix.org/conference/osdi20/presentation/gujarati", "https://www.usenix.org/system/files/osdi20-gujarati.pdf"]
-retrieved: 2026-07-25
-version: "OSDI '20 proceedings, pp. 443–462"
-snapshot_status: external-only
-status: active
-graph_id: reference-clockwork-serving
+aliases:
+  - Serving DNNs like Clockwork Performance Predictability from the Bottom Up
+  - Clockwork
+  - Clockwork serving system
+  - Gujarati et al. 2020
+summary: DNN 추론의 예측 가능한 실행 시간을 바탕으로 요청별 기한을 만족할 수 있는 작업만 예약하고, 처리량·꼬리 지연·요청별 SLO를 함께 평가한 2020년 OSDI 모델 서빙 시스템 연구.
+domains:
+  - machine-learning
+  - performance
+  - systems
+editorial_status: active
+publication_visibility: public
 graph_visibility: public
+created: 2026-07-25
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:da75600d254ae3d4151234673af84ccee29257c1ff634bbdd893583af9da8d96
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids: []
+capability_layers:
+  - realized-performance
+  - scalability
+  - reliable-results
+history:
+  publication_year: 2020
+  layer: service
+redirect_from:
+  - /references/serving-dnns-like-clockwork-performance-predictability-from-the-bottom-up/
+  - /sources/serving-dnns-like-clockwork-performance-predictability-from-the-bottom-up/
+origin: external
+works:
+  primary:
+    - citation: "Arpan Gujarati et al., Serving DNNs like Clockwork: Performance Predictability from the Bottom Up, OSDI 2020"
+      genre: other
+      identifiers: []
+      edition: OSDI '20 proceedings, pp. 443–462
+  supporting:
+    - citation: USENIX OSDI 2020 presentation and open-access proceedings record
+      genre: official-record
+      identifiers: []
+      edition: null
+access:
+  - kind: url
+    role: canonical
+    url: https://www.usenix.org/conference/osdi20/presentation/gujarati
+    retrieved: 2026-07-25
+    version: OSDI '20 proceedings, pp. 443–462
+  - kind: url
+    role: mirror
+    url: https://www.usenix.org/system/files/osdi20-gujarati.pdf
+    retrieved: 2026-07-25
+    version: OSDI '20 proceedings, pp. 443–462
 ---
 
 ## 개요
@@ -43,6 +80,7 @@ Clockwork의 대상은 보통 한 번의 DNN 실행으로 끝나는 요청이며
 ## 인용할 만한 구절
 
 > “only execute an inference request if it is confident”
+<!-- wiki-v2:quote-locator evidence="ref-086" locator="wiki/sources/Serving DNNs like Clockwork Performance Predictability from the Bottom Up.md:line-21#인용할-만한-구절" status="recorded" -->
 
 요청을 받은 뒤 무조건 실행하는 대신, 기한을 만족할 수 있는지 먼저 판단한다는 Clockwork의 스케줄링 원칙을 보여 준다.
 
@@ -58,6 +96,11 @@ Clockwork의 대상은 보통 한 번의 DNN 실행으로 끝나는 요청이며
 | measures | [[꼬리 지연 시간]] | 목표 기한을 만족한 요청만 세는 goodput과 모든 요청의 지연 분포를 구분해 평가한다. | [[Serving DNNs like Clockwork Performance Predictability from the Bottom Up]] |
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- 없음
+<!-- wiki-v2:evidence-end -->
 
 - USENIX, [OSDI 2020 presentation and bibliographic record](https://www.usenix.org/conference/osdi20/presentation/gujarati)
 - USENIX, [open-access paper PDF](https://www.usenix.org/system/files/osdi20-gujarati.pdf)

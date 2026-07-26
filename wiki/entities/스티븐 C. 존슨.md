@@ -1,13 +1,33 @@
 ---
+schema_version: 2
+id: entity-2f17a71c2815f89f
+kind: entity
 title: 스티븐 C. 존슨
-aliases: [Stephen C. Johnson, S. C. Johnson, Steve Johnson]
-summary: "C/Unix 이식성, pcc, lint 같은 도구 흐름을 통해 C 프로그램의 이식성과 인터페이스 점검에 기여한 연구자."
-tags: [type/entity, domain/software-engineering, domain/programming-languages, domain/operating-systems, status/active]
+aliases:
+  - Stephen C. Johnson
+  - S. C. Johnson
+  - Steve Johnson
+summary: C/Unix 이식성, pcc, lint 같은 도구 흐름을 통해 C 프로그램의 이식성과 인터페이스 점검에 기여한 연구자.
+domains:
+  - software-engineering
+  - programming-languages
+  - operating-systems
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-07-10
-updated: 2026-07-25
-sources: ["The Development of the C Language", "Portability of C Programs and the UNIX System"]
-status: active
-graph_id: entity-2f17a71c2815f89f
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:7b22935d39520fcd5d30d2aec5af4ac869ae7d8fdfce406bdbfa0a34049f4f14
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids:
+  - ref-019
+  - ref-021
+capability_layers: []
+redirect_from:
+  - /entities/스티븐-c-존슨/
 ---
 
 ## 개요
@@ -25,6 +45,12 @@ Johnson의 기여는 C와 Unix의 성공이 언어 문법만으로 이루어진 
 | enables | [[이식성]] | C의 언어 확장과 비이식적 구성을 찾아내는 도구는 Unix와 C 프로그램을 다른 기계 환경으로 옮기는 비용을 낮췄다. | [[Portability of C Programs and the UNIX System]], [[The Development of the C Language]] |
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- `ref-019`
+- `ref-021`
+<!-- wiki-v2:evidence-end -->
 
 - [[The Development of the C Language]]
 - [[Portability of C Programs and the UNIX System]]

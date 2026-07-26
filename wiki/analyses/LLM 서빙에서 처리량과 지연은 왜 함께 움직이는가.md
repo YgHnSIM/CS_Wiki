@@ -1,16 +1,43 @@
 ---
+schema_version: 2
+id: analysis-llm-throughput-latency-queueing
+kind: analysis
 title: LLM 서빙에서 처리량과 지연은 왜 함께 움직이는가
-aliases: [LLM throughput latency queueing analysis, LLM 대기열과 SLO, LLM 서빙 부하 제어 분석]
-summary: "LLM 서빙에서 배칭과 동시성을 높여 원시 처리량을 키울수록 활성 작업·큐·메모리 수용량과 요청별 기한이 함께 바뀌는 이유를 Little의 법칙, SLO 기반 스케줄링, 프리필·디코드와 에너지 여유의 관점에서 분석."
-tags: [type/analysis, domain/machine-learning, domain/performance, domain/systems, status/active]
-created: 2026-07-25
-updated: 2026-07-25
-historical_layer: service
-capability_layers: [realized-performance, scalability, resource-efficiency, reliable-results]
-sources: ["A Proof for the Queuing Formula L = λW", "Serving DNNs like Clockwork Performance Predictability from the Bottom Up", "Orca - A Distributed Serving System for Transformer-Based Generative Models", "DistServe - Disaggregating Prefill and Decoding for Goodput-optimized Large Language Model Serving", "The Tail at Scale", "The Case for Energy-Proportional Computing"]
-status: active
-graph_id: analysis-llm-throughput-latency-queueing
+aliases:
+  - LLM throughput latency queueing analysis
+  - LLM 대기열과 SLO
+  - LLM 서빙 부하 제어 분석
+summary: LLM 서빙에서 배칭과 동시성을 높여 원시 처리량을 키울수록 활성 작업·큐·메모리 수용량과 요청별 기한이 함께 바뀌는 이유를 Little의 법칙, SLO 기반 스케줄링, 프리필·디코드와 에너지 여유의 관점에서 분석.
+domains:
+  - machine-learning
+  - performance
+  - systems
+editorial_status: active
+publication_visibility: public
 graph_visibility: public
+created: 2026-07-25
+updated: 2026-07-26
+review:
+  mode: legacy-baseline
+  revision: sha256:c8461d883742f478034ea7d8703c91a26adfc4a399396c9b17c0f6d6604e603c
+  reviewed_at: null
+  reviewed_by: legacy-baseline
+evidence_ids:
+  - ref-085
+  - ref-086
+  - ref-075
+  - ref-077
+  - ref-049
+  - ref-046
+capability_layers:
+  - realized-performance
+  - scalability
+  - resource-efficiency
+  - reliable-results
+history:
+  layer: service
+redirect_from:
+  - /analyses/llm-서빙에서-처리량과-지연은-왜-함께-움직이는가/
 ---
 
 ## 문제 제기
@@ -75,6 +102,16 @@ LLM 서빙의 처리량과 지연은 같은 시스템을 두 번 보는 값이�
 | constrains | [[에너지 비례 컴퓨팅]] | 짧은 큐를 위한 여유 용량이 낮은 부하의 기저 전력과 자원 비용을 남긴다는 조건을 서비스 처리량 비교에 포함한다. | [[Serving DNNs like Clockwork Performance Predictability from the Bottom Up]], [[The Case for Energy-Proportional Computing]] |
 
 ## 출처
+
+<!-- wiki-v2:evidence-start -->
+### 근거 ID
+- `ref-085`
+- `ref-086`
+- `ref-075`
+- `ref-077`
+- `ref-049`
+- `ref-046`
+<!-- wiki-v2:evidence-end -->
 
 - [[A Proof for the Queuing Formula L = λW]]
 - [[Serving DNNs like Clockwork Performance Predictability from the Bottom Up]]
