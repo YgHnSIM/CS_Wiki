@@ -1,296 +1,82 @@
-# CS_Wiki — 운영 스키마 & 작업 지침
+# CS_Wiki 프로젝트 지식 기반
 
-이 문서는 CS_Wiki를 유지·관리할 때 따라야 할 규칙, 구조, 워크플로를 정의합니다.
-사용자가 소스를 추가하거나, 질문을 던지거나, 위키를 점검하라고 요청할 때 이 스키마를 참조합니다.
+**언어:** 한국어 기본, 고유명사·전문용어는 원어를 병기한다.
+**범위:** 이 문서는 저장소 전체에 적용되며, 하위 `AGENTS.md`는 해당 디렉터리의 추가 규칙만 정의한다.
 
----
+## 개요
 
-## 1. 디렉토리 구조
+CS_Wiki는 컴퓨터 과학 역사·이론·시스템 자료를 원본과 위키 문서로 분리해 관리하고, Node.js 기반 매니페스트·린트·정적 사이트 도구로 검증·게시하는 지식 저장소다. Node.js 22와 Python 3.12를 기준으로 한다.
 
-```
-CS_Wiki/
-├── AGENTS.md              # 이 파일 (스키마 & 운영 지침)
-├── raw/                   # 원본 소스 (불변, 작업자가 수정하지 않음)
-│   ├── assets/            # 이미지, PDF 등 첨부파일
-│   └── ...                # 사용자가 추가하는 원본 문서들
-├── wiki/                  # 작업자가 생성·관리하는 위키 페이지
-│   ├── index.md           # 전체 페이지 카탈로그
-│   ├── log.md             # 작업 시간순 기록
-│   ├── overview.md        # 위키 홈페이지 / 전체 개요
-│   ├── sources/           # 소스 요약 페이지
-│   ├── entities/          # 인물, 조직, 장소 등 개체 페이지
-│   ├── concepts/          # 개념, 이론, 프레임워크 페이지
-│   ├── analyses/          # 분석, 비교, 합성 페이지
-│   └── meta/              # 메타 페이지 (방법론, 용어집 등)
-└── .obsidian/             # 옵시디언 설정
+## 구조
+
+```text
+raw/       불변 원본과 첨부 자료
+wiki/      schema v2 위키 문서 및 생성 운영 페이지
+scripts/   매니페스트·린트·유지보수·링크 검사 도구
+site/      정적 사이트 생성·그래프·서버·산출물 검증
+schema/    페이지 스키마와 어휘
+tests/     Node/Python/Playwright 검증
 ```
 
-### 1.1 스키마 v2 운영 기준
+## 먼저 볼 곳
 
-현재 저장소는 모든 위키 문서를 `schema_version: 2`로 관리한다. Node 매니페스트(`scripts/wiki_manifest.mjs`)가 YAML, ID, 출처, 위키링크를 해석하는 단일 기준이며, `scripts/wiki_lint.mjs`와 `scripts/wiki_maintenance.mjs`가 같은 매니페스트를 사용한다. Python 도구는 호환성·외부 링크 보조용으로만 남긴다.
+| 작업 | 위치 |
+|---|---|
+| 문서 스키마·출처·관계 규칙 | `AGENTS.md`, `schema/` |
+| 소스·참고 자료 페이지 | `wiki/sources/` |
+| 개념·개체·분석 페이지 | `wiki/concepts/`, `wiki/entities/`, `wiki/analyses/` |
+| 생성 목록과 작업 기록 | `wiki/index.md`, `wiki/overview.md`, `wiki/log.md`, `wiki/logs/` |
+| 매니페스트·린트·생성 블록 | `scripts/wiki_manifest.mjs`, `scripts/wiki_lint.mjs`, `scripts/wiki_maintenance.mjs` |
+| 사이트 출력과 그래프 | `site/` |
+| 변경 검증 | `scripts/validate_change_set.mjs`, `tests/` |
 
-- 문서의 안정 식별자는 `id`이며 공개 주소는 `/docs/{id}/`다. 기존 유형별 주소는 `redirect_from`에 보존한 정적 리디렉션으로 유지한다.
-- 공통 상태는 `editorial_status`, 공개 범위는 `publication_visibility`, 그래프 노출은 `graph_visibility`로 분리한다. 기존 `active` 문서는 `review.mode: legacy-baseline`과 현재 revision을 갖고, 실질 변경은 새 attestation 없이는 병합하지 않는다.
-- 문서가 사용하는 근거는 `evidence_ids`에 `src-NNN`·`ref-NNN`으로 기록한다. 소스·참고 자료의 문헌(`works`)과 접근 수단(`access`)은 분리하며, 로컬 snapshot의 SHA-256·바이트 수를 검증한다.
-- `wiki/logs/`의 항목별 로그가 원 기록이고 `wiki/log.md`는 생성된 목록이다. `wiki/index.md`와 `wiki/overview.md`도 생성 표식 블록을 포함한다.
-- 새 문서를 추가하거나 기존 문서를 수정할 때는 `npm run lint:wiki && npm run maintenance:check`를 먼저 실행한다. 원본 `raw/`는 계속 불변이며, 줄바꿈은 LF로 통일한다.
+## 문서 계약
 
-## 2. 페이지 규칙
+- 모든 위키 페이지는 `schema_version: 2`와 고유한 소문자 ASCII `id`를 가진다.
+- 공통 상태는 `editorial_status`, 공개 범위는 `publication_visibility`, 그래프 노출은 `graph_visibility`로 분리한다.
+- 일반 지식 문서는 `evidence_ids`와 하단 `## 출처`, 마지막 `## 관련 항목`을 가진다.
+- 의미 관계는 본문의 `## 관계` 표에 방향·대상·설명·근거를 함께 기록한다. 대상은 위키링크여야 한다.
+- 관련 항목은 다음 읽을거리 추천이며 이유를 붙여 최대 5개만 둔다.
+- 새 문서는 원칙적으로 `draft → review → active` 순서로 승격한다.
+- `raw/`의 원본은 절대 수정하지 않는다. 줄바꿈은 LF, 텍스트는 UTF-8을 사용한다.
+- `index.md`, `overview.md`, `log.md`의 생성 블록은 유지보수 도구를 기준으로 갱신한다.
 
-### 2.1 YAML 프론트매터
-모든 위키 페이지는 다음 v2 frontmatter를 포함합니다:
+### 문서군별 초점
 
-```yaml
----
-schema_version: 2
-id: concept-computing-capability
-kind: concept
-title: 페이지 제목
-aliases: [대안 이름, 약어]
-summary: 목록·검색·웹 메타 설명에 사용하는 독립적인 1-2문장 요약
-domains: [computer-science]
-editorial_status: draft | active | review | retired
-publication_visibility: public
-graph_visibility: public | context | hidden
-created: YYYY-MM-DD
-updated: YYYY-MM-DD
-review:
-  mode: pending | legacy-baseline | attested
-  revision: sha256:...
-  reviewed_at: null
-  reviewed_by: null
-evidence_ids: [src-001, ref-002]
-capability_layers: []
----
+- `wiki/sources/`: `source/reference`, `works`, `access`, raw snapshot provenance를 엄격히 관리한다.
+- `wiki/concepts/`: 정의·역사 메타데이터·의미 관계와 최대 5개 추천을 관리한다.
+- `wiki/analyses/`: 비교 기준·종합 근거·모순과 불확실성을 명시한다.
+- `wiki/logs/`: 항목별 원 기록이며 `wiki/log.md`는 생성 목록이다.
+- `wiki/meta/`: 운영·스키마 문서이며 공개 지식 문서와 그래프 노출을 구분한다.
+
+`wiki/` 하위에는 별도 `AGENTS.md`를 만들지 않는다. 모든 Markdown을 위키 페이지로 파싱하는 manifest/lint 계약과 충돌하기 때문이다.
+
+## 검증 명령
+
+```bash
+npm ci
+npm run lint:wiki
+npm run maintenance:check
+npm run validate:changes
+npm test
+npm run build
+npm run verify:site
+npm run test:browser
 ```
 
-- `summary`는 본문 첫 문단을 기계적으로 잘라 쓰지 않고 페이지의 범위와 핵심을 독립적으로 설명한다. 목록과 검색 결과에서 단독으로 읽어도 의미가 통하도록 작성하며, Markdown 링크나 각주를 넣지 않는다.
+콘텐츠 수정의 최소 검증은 `npm run lint:wiki && npm run maintenance:check`다. 전체 통합 검증은 `npm run check`이며, 외부 URL은 별도로 `npm run check:links`로 점검한다. Chromium이 없으면 먼저 `npm run test:browser:install`을 실행한다.
 
-`kind: source`와 `kind: reference` 페이지에는 문헌과 접근 수단을 분리한 다음 필드를 추가합니다. 문헌의 직접·보조 계보는 `works`에, URL·로컬 snapshot은 `access`에 기록합니다.
+## 운영 규칙
 
-```yaml
-origin: local | external
-works:
-  primary:
-    - citation: 원 출판물
-      genre: primary-literature
-      identifiers: []
-      edition: null
-  supporting: []
-access:
-  - kind: url | local | snapshot
-    role: canonical | original | mirror | archive
-    retrieved: YYYY-MM-DD
-    url: "https://example.org/source"
-```
+- 작업 전 원본·기존 페이지·생성 블록을 읽고, 큰 변경은 사용자에게 범위를 알린다.
+- 모든 작업은 `wiki/logs/`에 원 기록을 남기고 생성 목록을 재생성한다.
+- 소스 페이지는 문헌 계보(`works`)와 접근 수단(`access`)을 분리한다.
+- 모순은 숨기지 말고 `> [!WARNING] 모순 발견`으로 기록한다.
+- 커밋 메시지는 영어로 `ingest: number_title` 또는 `reference: short_title` 형식을 따른다.
 
-- `id`는 위키 전체에서 고유하며, 소스는 `src-NNN`, 참고 자료는 `ref-NNN` 형식을 사용합니다.
-- `origin: local`은 불변 `raw/` 원본을 직접 처리한 자료, `origin: external`은 외부 URL에 의존하는 자료입니다.
-- `access`의 local/snapshot 항목은 `raw/` 경로, SHA-256, 바이트 수, 미디어 유형을 함께 기록하며 린트가 실제 파일과 대조합니다.
+## 금지 사항
 
-### 2.1.1 상태 전이 기준
-
-- `draft`: 기본 구조와 출처 후보를 갖췄지만 사실 검증, 출처 필드 또는 교차 링크가 아직 미완성인 상태
-- `review`: 본문 작성과 출처 매핑을 마쳤고, 원문 대조·모순 점검·링크 및 프론트매터 검사를 기다리는 상태
-- `active`: 원문 대조를 통과하고, 출처 재현성 필드·내부 링크·index 반영·lint가 모두 확인되었으며 해결되지 않은 중대 정확성 문제가 없는 상태
-- `retired`: 대체되었거나 더 이상 유지하지 않는 페이지로, 보존은 하되 활성 지식으로 사용하지 않는 상태
-
-새 페이지는 원칙적으로 `draft → review → active` 순서로 승격합니다. 내용이 바뀌어 재검토가 필요하면 `active`에서 `review`로 되돌리고, `review.mode: attested`와 revision을 갱신합니다.
-
-### 2.1.2 지식 그래프 메타데이터
-
-웹 지식 지도는 기존 위키링크와 학습 경로를 자동으로 관계화한다. 앞으로 추가하는 문서는 제목이나 파일명이 바뀌어도 탐색 이력이 유지되도록 다음 선택 필드를 사용할 수 있다.
-
-```yaml
-id: concept-computing-capability
-graph_visibility: public
-history:
-  publication_year: 1937
-  event:
-    start: 1936
-    end: 1945
-    basis: representative
-    evidence_id: ref-009
-  note: "1936년 제출, 1937년 출판"
-  layer: theory
-capability_layers: [computability, complexity]
-```
-
-- `id`는 위키 전체에서 고유한 소문자 ASCII slug이며 한 번 배정한 뒤 제목이나 파일명이 바뀌어도 수정하지 않는다. 새 개념·개체·분석·메타 페이지에는 반드시 작성한다.
-- `graph_visibility`는 `public | context | hidden` 중 하나다. `public`은 일반 지도에 표시하고, `context`는 다른 문서의 관계 문맥에서만 표시하며, `hidden`은 운영 문서처럼 지도에서 숨긴다. `index.md`, `overview.md`, `log.md`는 기본적으로 `hidden`이다.
-- `history.publication_year`, `history.event.start`, `history.event.end`는 출판물이나 역사적 사건의 검증된 연도를 뜻한다. 제목·파일명이나 위키 작성·수정일인 `created`, `updated`에서 역사 연도를 추정하지 않는다. `event.end`는 `event.start` 없이 단독으로 기록할 수 없고, 기간의 시작은 종료보다 늦을 수 없다.
-- 출판 시점과 사건·관찰 기간이 다르면 두 값을 함께 기록하고, `history.note`에 제출·출판, 초판·확인 판본 같은 구분을 300자 이내로 설명한다. 확인할 수 없는 연도는 비워 두어 역사 지도에서 `연도 미상`으로 보존한다.
-- `history.layer`는 `theory | machine | architecture | software | system | service | measurement` 중 하나다.
-- `capability_layers`는 `computability | complexity | programmability | realized-performance | scalability | resource-efficiency | reliable-results` 가운데 해당하는 값을 배열로 기록한다.
-
-편집자의 해석이 필요한 의미 관계는 본문의 `## 관계` 표에 기록한다. 이 절은 `## 출처`와 마지막 `## 관련 항목`보다 앞에 둔다.
-
-```markdown
-## 관계
-
-| 관계 | 대상 | 설명 | 근거 |
-|---|---|---|---|
-| enables | [[저장 프로그램 컴퓨터]] | 프로그램 교체 비용을 물리적 재배선에서 기억장치 갱신으로 바꾼다. | [[First Draft of a Report on the EDVAC]] |
-```
-
-- 한 행은 `현재 문서 → 대상` 방향으로 읽는다. `대상`은 반드시 위키링크이며 `설명`은 관계가 성립하는 이유를 한 문장으로 적는다. `근거`에는 관계를 직접 뒷받침하는 `type/source` 또는 `type/reference` 페이지를 연결한다. 다른 개념·분석 페이지를 관계 근거로 대신할 수 없다. 역사·인과 렌즈에 쓰이는 `responds_to`, `enables`, `precedes`, `constrains`는 근거를 비워 둘 수 없다.
-- 허용 관계는 `broader`, `narrower`, `prerequisite_for`, `enables`, `constrains`, `measures`, `implements`, `exemplifies`, `precedes`, `responds_to`, `contradicts`, `synthesizes`다. 자동 관계인 `recommends`, `supports`와 이전 스키마 호환용 `related`는 관계 표에 직접 쓰지 않는다.
-- 단순 본문 언급, `## 관련 항목`, 프론트매터 `evidence_ids`, 학습 경로의 인접 단계는 각각 `mentions`, `recommends`, `supports`, `path_next`로 자동 생성하므로 표에 반복하지 않는다.
-- 한 문서 안에서 같은 `관계 종류 + 대상` 행을 여러 번 만들지 않는다. 설명이나 근거를 보강할 때는 기존 행에 통합하며, 별칭으로 같은 대상을 가리키는 중복도 lint가 거부한다.
-- 같은 도메인이라는 이유만으로 문서 쌍을 간선으로 만들지 않는다. 도메인은 문서 수가 늘어도 폭증하지 않는 군집 속성으로만 사용한다.
-
-그래프와 화면은 같은 두 문서 사이의 여러 간선을 **하나의 문서쌍 연결 묶음**으로 합치고 다음 네 채널로 나눠 보여 준다. 한 문서쌍은 목록과 지도에서 한 번만 표시하며, 세부 관계 종류와 방향은 그 묶음 안에 보존한다.
-
-| 채널 | 포함 관계 | 기본 노출 |
-|---|---|---|
-| 핵심 (`core`) | 편집자가 `## 관계`에 기록한 의미 관계 | 문서 화면의 첫 채널 |
-| 읽기 (`guide`) | `recommends`, `path_next`, 이전 `related` | 핵심 관계가 없을 때 첫 채널 |
-| 근거 (`evidence`) | 프론트매터에서 생성한 `supports` | 사용자가 선택할 때 |
-| 언급 (`trace`) | 본문에서 생성한 `mentions` | 사용자가 선택할 때 |
-
-일반 지식 문서의 마지막 `## 관련 항목`은 현재 문서에서 다음 읽을거리로 향하는 **방향 있는 추천**이다. 최대 5개만 두고 각 항목에 선택 이유를 한 줄로 적는다. 역방향 링크를 의무화하지 않으며, 같은 대상은 한 번만 기록한다.
-
-```markdown
-## 관련 항목
-
-- [[계산 가능성]] — 컴퓨팅 능력의 이론적 경계를 먼저 확인한다.
-```
-
-근거 계보 렌즈는 일반 지식 문서의 프론트매터 `evidence_ids`를 **문서 전체에 등록된 근거 묶음**으로만 해석한다. 이를 문장별 진위, 출처 독립성이나 신뢰도 점수로 바꾸지 않는다. 소스·참고 자료 페이지의 `works.primary/supporting`은 그 자료 페이지가 정리한 원자료와 보조 문헌의 재현 계보이며, `access`는 URL·로컬 보존본 같은 접근 수단이다. 이는 지식 문서의 개별 주장에 대한 직접·간접 근거 등급이 아니며 snapshot의 해시도 품질 점수가 아니라 다시 확인할 수 있는 보존 조건이다.
-
-새 `public` 지식 문서와 소스·참고 자료는 별도 목록을 손으로 갱신하지 않아도 근거 계보의 문서·자료 조회와 정적 주소에 자동 편입된다. 문서–근거 연결과 근거–사용 문서 역색인은 각각 정확히 한 번 보존하며, 고차수 문서·자료는 최대 48레코드·64KiB 상세 조각으로 나눈다. 정적 계보 화면은 근거·하류 문서·검토 관계를 쪽당 최대 12개로 나누고, 쪽 이동은 첫 쪽·마지막 쪽과 현재 주변만 표시해 문서가 늘어도 한 화면의 HTML이 커지지 않게 한다. 직접 사용된 `context` 자료에는 초점 안에서만 따라갈 수 있는 정적 주소를 만들되 전역 검색·통계·사이트맵에는 넣지 않는다. 제목 앞부분 검색은 2–4글자 결정적 prefix 조각만 요청하고 전체 조회 버킷을 한꺼번에 내려받지 않는다. 안정 주소가 필요한 새 일반 문서에는 `id`를 반드시 부여한다.
-
-### 2.2 내부 링크
-- 옵시디언 `[[위키링크]]` 형식 사용
-- 처음 언급될 때 링크, 이후 반복은 링크 없이
-- 아직 페이지가 없는 개념도 `[[미래 페이지]]`로 링크 (빨간 링크)
-- 섹션 링크: `[[페이지명#섹션]]`
-
-### 2.3 태그 체계
-| 접두사       | 용도     | 예시                                                                              |
-| --------- | ------ | ------------------------------------------------------------------------------- |
-| `type/`   | 페이지 유형 | `type/source`, `type/reference`, `type/entity`, `type/concept`, `type/analysis` |
-| `domain/` | 주제 영역  | `domain/computer-history`, `domain/software-engineering`, `domain/computer-architecture` |
-| `status/` | 호환 표시(새 frontmatter는 `editorial_status`) | `status/active`, `status/review` |
-
-### 2.4 작성 원칙
-- **한국어** 기본, 고유명사·전문용어는 원어 병기 (예: 저장 프로그램 컴퓨터(Stored-program computer))
-- 중립적·백과사전적 톤
-- 일반 주장은 프론트매터 `evidence_ids`와 하단 `## 출처` 섹션으로 근거를 표시
-- 본문 중 반복적인 `[[소스 페이지]]` 인용은 피하고, 직접 인용·논쟁적 주장·모순·여러 소스 비교처럼 근거 위치가 특히 중요한 경우에만 짧은 각주 또는 `[[소스 페이지|출처]]` 표기를 사용
-- 모순이 발견되면 명시적으로 기록: `> [!WARNING] 모순 발견`
-- 각 페이지 하단에는 `## 출처` 섹션과 `## 관련 항목` 섹션을 두되, `## 관련 항목`이 마지막에 오도록 배치
-- 개념·개체·분석 페이지의 `## 관련 항목`은 이유가 적힌 추천 링크를 최대 5개만 두며 상호 링크를 만들기 위해 역방향 항목을 억지로 추가하지 않음
-- 깃 커밋 메세지는 영어로 작성하며, `ingest: number_title` 형식을 따름
-	- 예시 
-		- `ingest: 001_Computing Origins - Babbage and Lovelace`
-		- `ingest: 002_Early Software`
-	- 정규 번호 소스가 아닌 참고 자료 보강은 `reference: short_title` 형식을 사용
-
-## 3. 핵심 워크플로
-
-### 3.1 소스 수집 (Ingest)
-
-사용자가 새 소스를 `raw/`에 추가하고 처리를 요청하면:
-
-1. **소스 읽기** — 첨부 문서와 `raw/` 원본은 UTF-8 인코딩으로 읽고, 전체 내용을 정독
-2. **사용자와 논의** — 핵심 인사이트 3-5개를 간략히 공유하고 사용자의 관심사 확인
-3. **소스 요약 페이지 작성** — `wiki/sources/` 에 생성
-   - 프론트매터 포함
-   - 핵심 요약 (3-5 문단)
-   - 주요 인사이트 (불릿 포인트)
-   - 인용할 만한 구절
-   - 관련 위키 페이지 링크
-4. **기존 페이지 업데이트** — 새 소스와 관련된 개체·개념·분석 페이지를 갱신
-   - 새 정보 통합
-   - 기존 주장과 모순되면 경고 표시
-   - 교차 참조 추가
-5. **필요시 새 페이지 생성** — 새 개체/개념이 등장하면 페이지 생성
-6. **색인·개요 생성** — `npm run maintenance:check`가 검증하는 생성 블록을 갱신
-7. **로그 항목 기록** — `wiki/logs/`에 항목 파일을 추가하고 `wiki/log.md` 목록을 재생성
-
-### 3.1.1 참고 자료 보강 (Reference)
-
-사용자가 정규 번호 소스가 아닌 보충 참고 자료를 `raw/`에 추가하거나 외부 URL 자료의 처리를 요청하면:
-
-1. **정규 Ingest와 분리** — `NNN_연도_인물_주제` 번호를 새로 만들지 않음
-2. **참고 요약 페이지 작성** — `wiki/sources/<원문 제목 또는 안전한 slug>.md` 형식으로 생성
-   - 파일명에 `ref_` 접두사는 강제하지 않으며, 참고 자료 여부는 `id: ref-NNN`과 `kind: reference`로 판별
-   - `kind: reference`가 참고 자료 유형을 결정하며 호환용 태그를 새로 추가하지 않음
-   - 로컬 자료는 `origin: local`, 외부 자료는 `origin: external`로 구분
-   - 직접 문헌과 보조 문헌은 `works.primary`, `works.supporting`으로 분리
-   - 외부 URL과 접근일·판본은 `access` 항목에 기록하고, 로컬 snapshot에는 해시·바이트 수를 기록
-   - 본문 하단 `## 출처`에는 raw 파일 경로나 외부 URL을 표시
-3. **기존 페이지 보강 중심** — 새 지식이 주로 보충하는 기존 개체·개념·분석 페이지를 갱신
-4. **필요시 새 페이지 생성** — 참고 자료가 독립 개념을 충분히 제공할 때만 새 페이지 생성
-5. **색인·개요 생성** — 정규 `소스 (Sources)`와 `참고 자료 (References)` 수치를 자동 반영
-6. **로그 항목 기록** — 작업유형은 `reference`로 `wiki/logs/`에 보존
-
-### 3.2 질의 (Query)
-
-사용자가 질문하면:
-
-1. **index.md 탐색** — 관련 페이지 식별
-2. **관련 페이지 읽기** — 필요한 페이지 정독
-3. **답변 합성** — 위키 내용 기반으로 답변, `[[페이지]]` 인용 포함
-4. **가치 있는 답변은 위키에 보존** — 분석적 답변이면 `wiki/analyses/`에 페이지로 저장
-5. **index.md & log.md 갱신**
-
-### 3.3 점검 (Lint)
-
-사용자가 점검을 요청하거나 주기적으로:
-
-1. **모순 탐색** — 페이지 간 상충하는 주장 찾기
-2. **고아 페이지** — 들어오는 링크가 없는 페이지 찾기
-3. **빨간 링크** — `[[링크]]`는 있지만 페이지가 없는 것 찾기
-4. **오래된 정보** — 최근 소스로 대체된 주장 찾기
-5. **누락된 교차참조** — 관련되지만 연결되지 않은 페이지 찾기
-6. **제안** — 추가로 조사할 만한 질문이나 찾아볼 소스 제안
-7. **결과를 log.md에 기록**
-
-자동 점검은 저장소 루트에서 `npm run lint:wiki`로 실행합니다. Node 매니페스트를 기준으로 frontmatter, provenance, 링크·섹션, 별칭 충돌, 관련 항목 예산·이유, revision을 검사하며 오류가 있으면 종료 코드 1을 반환합니다. 기계 판독 결과는 `--json`으로 출력합니다.
-
-기계적으로 안전한 정리는 `npm run maintenance:check`로 먼저 확인합니다. 색인·개요를 재생성할 때는 `npm run maintenance:generate`, 줄바꿈 수선이 필요하면 `node scripts/wiki_maintenance.mjs --fix-eol`, 보이는 변경의 날짜를 자동 반영하려면 `npm run maintenance:updated`를 사용합니다. 이 도구는 `raw/`를 수정하지 않으며 반복 실행해도 결과가 달라지지 않아야 합니다.
-
-외부 참고 자료의 URL 가용성과 보존 우선순위는 `npm run check:links`로 점검합니다. 자동 접근을 제한하는 401·403·429 응답은 깨진 링크와 구분하고, 404·410만 명확한 링크 소실로 처리합니다. 일시 오류는 재시도 후 별도 상태로 남기며 GitHub Actions는 이 점검을 매주 실행합니다.
-
-웹사이트의 실제 브라우저 동작은 `npm run test:browser`로 확인합니다. 검색·모바일 탐색·지식 렌즈·키보드 입력·무자바스크립트 경로와 심각도 serious 이상 접근성 위반을 Chromium에서 검사하며, 처음 실행하는 환경은 `npm run test:browser:install`로 런타임을 준비합니다.
-
-## 4. 특수 파일
-
-### 4.1 index.md
-- 카테고리별로 `index.md` 자기 자신을 제외한 모든 위키 페이지 나열
-- 정규 소스는 `(raw 파일 N개)`, 참고 자료는 `(핵심 문헌 N개)`, 개체·개념·분석은 중복을 제거한 `(근거 N개)`로 표기
-- 새 페이지 생성/삭제 시 반드시 갱신
-
-### 4.2 log.md
-- 시간순 기록, 최신이 아래로
-- 형식: `## [YYYY-MM-DD] 작업유형 | 제목`
-  - 작업유형: `ingest`, `query`, `lint`, `create`, `update`
-  - 참고 자료 보강은 `reference` 사용
-- 각 항목에 변경된 페이지 목록 포함
-- 작업 항목 내부의 출처와 관련 항목은 `### 출처`, `### 관련 항목`을 사용하고, 페이지 전체 하단에만 전역 `## 출처`, `## 관련 항목` 한 쌍을 둠
-
-### 4.3 overview.md
-- 위키 홈페이지
-- 전체 지식 베이스의 요약과 현재 상태
-- 주요 주제 영역과 핵심 페이지로의 링크
-- 정기적으로 갱신
-
-## 5. 품질 기준
-
-- **정확성**: 모든 주장은 소스에 근거
-- **일관성**: 페이지 간 모순 없음 (있으면 명시)
-- **연결성**: 의미 관계는 방향과 이유를 보존하고, 읽기 추천은 필요한 방향에만 기록
-- **최신성**: 새 소스 수집 시 관련 페이지 모두 갱신
-- **가독성**: 구조적이고 스캔 가능한 형식
-
-## 6. 작업자 행동 원칙
-
-1. `raw/` 디렉토리의 파일은 **절대 수정하지 않는다**
-2. `wiki/` 디렉토리의 파일은 자유롭게 생성·수정·삭제한다
-3. 확실하지 않은 것은 사용자에게 물어본다
-4. 큰 변경을 하기 전에 무엇을 할지 먼저 설명한다
-5. 모든 작업은 `wiki/logs/` 항목 파일에 기록하고 `log.md` 목록을 재생성한다
-6. `index.md`·`overview.md`의 생성 블록은 항상 최신 상태를 유지한다
-7. 사용자의 관심사와 맥락을 기억하고 반영한다
+- `raw/` 파일을 수정하거나 원본을 위키 산출물로 덮어쓰지 않는다.
+- 생성 페이지를 수동 목록으로 대체하지 않는다.
+- 근거 없는 주장, 중복 관계 행, 이유 없는 관련 항목을 추가하지 않는다.
+- Python 도구를 Node 매니페스트의 대체 기준으로 사용하지 않는다.
