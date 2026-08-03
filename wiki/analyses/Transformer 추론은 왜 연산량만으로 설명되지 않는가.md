@@ -16,12 +16,12 @@ editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-24
-updated: 2026-07-26
+updated: 2026-08-03
 review:
-  mode: legacy-baseline
-  revision: sha256:03b27082738bbe1f1385a9064072f5435b84b44d0e391b4c5838a893bb5f692c
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+  mode: attested
+  revision: sha256:24aca6d61ade7462a21db7f60686e9ab8dcb3e7d7b941b63555804d1a1de9730
+  reviewed_at: 2026-08-03
+  reviewed_by: codex
 evidence_ids:
   - ref-073
   - ref-074

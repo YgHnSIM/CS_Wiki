@@ -15,10 +15,10 @@ graph_visibility: hidden
 created: 2026-05-03
 updated: 2026-08-03
 review:
-  mode: legacy-baseline
-  revision: sha256:6d9eb849a25d9bfd3cee4f6ef32470c85c8df433d01464931da7edcee2f1e72d
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+  mode: attested
+  revision: sha256:52421f73c8028b97a3d157b00aac21721ea890beddd8bf15a0b1332e0ec0872e
+  reviewed_at: 2026-08-03
+  reviewed_by: codex
 evidence_ids: []
 capability_layers: []
 redirect_from:
