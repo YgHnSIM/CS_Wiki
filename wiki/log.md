@@ -16,7 +16,7 @@ created: 2026-05-03
 updated: 2026-07-26
 review:
   mode: legacy-baseline
-  revision: sha256:c649a350ac41fa1e93df5f30a7e121908335af8319cbf5ae7de3175fdf290a78
+  revision: sha256:9aee9e3436d375ae5e9442f13f7393ee130e884823ddbd4e5d3b1a0e414e8821
   reviewed_at: null
   reviewed_by: legacy-baseline
 evidence_ids: []
@@ -119,6 +119,7 @@ redirect_from:
 - [2026-07-26 update | 전체 문서 문장 윤문·교열](logs/log-2026-07-26-087-전체-문서-문장-윤문-교열.md)
 - [2026-07-26 create | CS_Wiki 프로젝트 학습 해설서](logs/log-2026-07-26-088-CS-Wiki-프로젝트-학습-해설서.md)
 - [2026-07-26 update | 프로젝트 검증 도구와 자산 해시 리팩터링](logs/log-2026-07-26-089-프로젝트-검증-도구와-자산-해시-리팩터링.md)
+- [2026-08-04 update | AI 컴퓨팅 병목 지식 통합](logs/log-2026-08-04-090-ai-컴퓨팅-병목-지식-통합.md)
 
 ## 출처
 
