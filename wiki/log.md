@@ -16,7 +16,7 @@ created: 2026-05-03
 updated: 2026-08-05
 review:
   mode: attested
-  revision: sha256:8dfd1b3b5997074ca5c16fec06ecf38f0a167a68f5c8d5b0c8d1c97769933920
+  revision: sha256:eaece91a7f0a16277748738656039bb2d55fe63e3a880026cb7ebb3fc5469a0c
   reviewed_at: 2026-08-04
   reviewed_by: codex
 evidence_ids: []
@@ -122,6 +122,7 @@ redirect_from:
 - [2026-08-04 update | AI 컴퓨팅 병목 지식 통합](logs/log-2026-08-04-090-ai-컴퓨팅-병목-지식-통합.md)
 - [2026-08-04 update | 공개 근거 표시와 출처 매핑 수정](logs/log-2026-08-04-091-공개-근거-표시와-출처-매핑-수정.md)
 - [2026-08-05 ingest | 직렬 가능성과 멱등성 초안 생성](logs/log-2026-08-05-092-직렬-가능성과-멱등성-초안-생성.md)
+- [2026-08-05 ingest | 재시도와 장애 감지 초안 생성](logs/log-2026-08-05-093-재시도와-장애-감지-초안-생성.md)
 
 ## 출처
 

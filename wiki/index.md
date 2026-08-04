@@ -16,7 +16,7 @@ created: 2026-05-03
 updated: 2026-08-05
 review:
   mode: attested
-  revision: sha256:0dba0db8711d8d9b00313256cd1b5dd101f319afa59f59ff156181fc5408b417
+  revision: sha256:b0a2eb5bfbd9a19cabcb2637126ae849d8d5cfcc9ad10c0262a1395c3a4290d0
   reviewed_at: 2026-08-03
   reviewed_by: codex
 evidence_ids: []
@@ -75,7 +75,10 @@ redirect_from:
 - [[FORTRAN Automatic Coding System for the IBM 704 EDPM]] — 1956년 IBM 704 FORTRAN 매뉴얼을 바탕으로 소스 프로그램, 목적 프로그램, DO 문, 최적화 힌트를 정리한 참고 자료.
 - [[FoundationDB Transactions with Unknown Results]] — FoundationDB 트랜잭션의 커밋 결과를 클라이언트가 알 수 없는 경우와 재시도가 중복 효과를 만들 수 있는 부작용 경계를 설명하는 공식 개발자 문서.
 - [[GHG Protocol Product Life Cycle Accounting and Reporting Standard]] — 제품의 원료·제조·사용·폐기 단계를 포괄하는 온실가스 배출량을 일관되게 회계·보고하기 위한 GHG Protocol의 2011년 제품 수명 주기 표준.
+- [[Google SRE Addressing Cascading Failures]] — 과부하와 긍정적 피드백이 장애를 확산시키는 경로를 설명하고, exponential backoff·jitter·retry budget·load shedding으로 재시도 증폭을 제어하는 Google SRE 공식 장.
+- [[Google SRE Error Budget Policy]] — SLO에서 허용된 실패량을 error budget으로 계산하고, 예산 소진 상태를 배포·변경·안정화 의사결정과 연결하는 Google SRE 공식 정책.
 - [[GPTQ: Accurate Post-Training Quantization for Generative Pre-trained Transformers]] — 대규모 생성 Transformer의 가중치를 재학습 없이 한 번에 3–4비트까지 줄이기 위해 근사 2차 정보를 사용하고, 압축된 가중치용 커널에서 메모리 이동 감소를 추론 가속으로 연결한 2023년 ICLR 연구.
+- [[Gray Failure: The Achilles' Heel of Cloud-Scale Systems]] — 구성 요소가 완전히 죽지 않고 일부 요청·경로·관찰자에게만 다르게 보이는 gray failure를 정의하고, 이진 health 판단의 한계를 분석한 Microsoft Research 논문.
 - [[Handbook of Mathematical Functions with Formulas, Graphs, and Mathematical Tables]] — 미국 국립표준국이 1964년 발행한 함수·공식·그래프·수학 표 편람으로, 손 계산용 표 제작과 전자 컴퓨터 기반 함수 계산이 공존하던 전환기를 보여주는 참고 자료.
 - [[Hitting the Memory Wall]] — 프로세서 속도와 DRAM 속도의 격차가 커지면 전체 실행 시간이 메모리 접근에 지배될 수 있다고 경고하며 메모리 장벽이라는 문제를 제기한 논문.
 - [[How to Make a Multiprocessor Computer That Correctly Executes Multiprocess Programs]] — 각 프로세서의 프로그램 순서와 하나의 전역 순서를 함께 보존하는 순차 일관성을 다중 프로세서의 정확성 조건으로 정의한 Lamport의 1979년 논문.
@@ -90,6 +93,7 @@ redirect_from:
 - [[Mass Produced Software Components]] — McIlroy의 1968년 발표를 바탕으로 소프트웨어 컴포넌트 제품군, 카탈로그, 재사용 산업화 구상을 정리한 참고 자료.
 - [[Mathematical Tables: Containing the Common, Hyperbolic, and Logistic Logarithms]] — Charles Hutton의 로그·삼각함수표를 Olinthus Gregory의 보충과 함께 수록한 1858년 제7판으로, 컴퓨터 이전 전문 계산에서 표의 중요성과 정확성 문제를 보여주는 참고 자료.
 - [[Measuring the Impact of Early-2025 AI on Experienced Open-Source Developer Productivity]] — 숙련된 오픈소스 기여자가 익숙한 대규모 저장소의 실제 이슈를 수행할 때 초기 2025년 AI 도구 사용 허용 여부를 무작위 배정해 시간을 비교한 METR의 2025년 연구.
+- [[Metastable Failures]] — 장애가 단순히 사라지지 않고 부하·재시도·복구 상호작용으로 자기 유지되는 metastable failure를 정의하고, overload feedback의 운영 경계를 분석한 HotOS 논문.
 - [[Mixed Precision Training]] — 반정밀도 저장·연산과 단정밀도 마스터 가중치·손실 스케일링을 결합해 심층 신경망 학습의 메모리 사용량과 계산 비용을 줄이는 방법을 제시한 2018년 ICLR 논문.
 - [[MLPerf Inference Benchmark]] — 모델·데이터셋·품질 문턱·시스템 유형과 요청 시나리오를 고정해 기계학습 추론 성능을 재현 가능하게 비교하고, 현대 LLM에는 TTFT·TPOT 지연 조건을 적용하는 MLCommons 벤치마크.
 - [[MLPerf Inference Power Measurement]] — MLPerf Inference의 성능 실행과 같은 구간에서 인증 전력 분석기와 SPEC PTDaemon으로 전체 시스템의 벽면 AC 전력·에너지를 측정하는 공식 방법론.
@@ -99,6 +103,7 @@ redirect_from:
 - [[On Computable Numbers with an Application to the Entscheidungsproblem]] — Turing의 1936년 논문을 바탕으로 튜링 기계, 보편 튜링 기계, 계산 가능성, 정지 문제, Entscheidungsproblem을 정리한 참고 자료.
 - [[On the Computational Complexity of Algorithms]] — 계산 가능한 대상들 사이에도 필요한 시간 자원에 따른 본질적 난이도 차이가 있음을 형식화하고 시간 복잡도 계층을 제시한 1965년 논문.
 - [[On the Criteria To Be Used in Decomposing Systems into Modules]] — Parnas의 1972년 논문을 바탕으로 모듈화, 정보 은닉, 변경 가능한 설계 결정 중심의 분해 기준을 정리한 참고 자료.
+- [[OpenTelemetry Trace API]] — 분산 trace와 span의 생성·전파·종료 의미를 정의해 관측 데이터의 구조와 실행 상태의 의미를 연결하는 OpenTelemetry 공식 명세.
 - [[Orca: A Distributed Serving System for Transformer-Based Generative Models]] — 자동회귀 생성 요청을 고정 배치가 끝날 때까지 묶는 대신 모델 반복마다 실행 대상을 다시 선택하고, 선택적 배칭으로 서로 다른 길이의 요청을 함께 처리한 2022년 분산 Transformer 서빙 연구.
 - [[Portability of C Programs and the UNIX System]] — Johnson과 Ritchie의 1978년 논문을 바탕으로 C 프로그램과 Unix 시스템의 이식성, 도구, 기계 의존성 관리를 정리한 참고 자료.
 - [[PostgreSQL 17 Transaction Isolation]] — PostgreSQL 17의 Read Committed·Repeatable Read·Serializable 동작과 snapshot isolation, serialization failure, predicate locking을 설명하는 공식 매뉴얼.
@@ -138,6 +143,7 @@ redirect_from:
 - [[The Landscape of Parallel Computing Research - A View from Berkeley]] — 전력·명령 수준 병렬성·메모리 병목으로 단일 프로세서 성능 향상의 수익이 감소한 상황에서 병렬 하드웨어와 소프트웨어를 함께 재설계해야 한다고 제안한 2006년 보고서.
 - [[The Linpack Benchmark]] — 고밀도 선형방정식 풀이를 통해 부동소수점 실행률을 측정하는 LINPACK의 범위와 Rmax·Rpeak의 차이, 단일 벤치마크 수치의 한계를 설명하는 TOP500 공식 자료.
 - [[The Manchester Small Scale Experimental Machine - The Baby]] — Manchester Baby의 저장 프로그램 실행, Williams-Kilburn tube, EDSAC과의 최초성 기준 차이를 정리한 참고 자료.
+- [[The Phi Accrual Failure Detector]] — heartbeat 도착 간격의 통계적 분포에서 연속적인 suspicion 값을 계산해 장애 탐지 민감도와 거짓 양성의 절충을 설명하는 failure detector 연구 보고서.
 - [[The Preparation of Programs for an Electronic Digital Computer]] — Wilkes, Wheeler, Gill의 EDSAC 프로그래밍 문헌을 바탕으로 서브루틴 라이브러리, 카탈로그, 오류 진단, 자동 프로그래밍을 API의 전신으로 정리한 참고 자료.
 - [[The SPACE of Developer Productivity]] — 개발자 생산성을 만족·웰빙, 성과, 활동, 소통·협업, 효율·몰입의 다섯 차원으로 다루며 단일 지표 측정의 한계를 설명한 2021년 ACM Queue 논문.
 - [[The Tail at Scale]] — 대규모 온라인 서비스에서 드문 구성요소 지연이 모든 응답을 기다리는 팬아웃을 통해 흔한 서비스 지연으로 증폭되는 원리와 꼬리 내성 기법을 정리한 2013년 논문.
@@ -254,7 +260,9 @@ redirect_from:
 - [[자기 주의]] — 한 시퀀스에서 만든 질의·키·값으로 각 위치가 같은 시퀀스의 다른 위치를 얼마나 참조할지 계산해 새 표현을 만드는 어텐션 연산.
 - [[자동 프로그래밍]] — 주소 보정, 서브루틴 조립, 변환·해석 루틴처럼 프로그램 작성의 규칙적 작업을 기계에 맡기는 초기 기법.
 - [[자동화 경계]] — 도구가 특정 작업 단계를 수행하더라도 요구 정의, 결과 검증, 통합, 책임 귀속이 자동으로 사라지지 않는다는 인간과 도구 사이의 분업 경계.
+- [[장애 감지]] — 분산 시스템에서 관찰 가능한 지연·heartbeat·요청 결과로 구성 요소의 실패를 추정하고, 거짓 양성과 탐지 지연을 감수하며 격리·복구 결정을 내리는 관찰 계약.
 - [[재배치]] — 코드가 실제로 메모리에 놓이는 위치에 맞게 주소를 보정하는 과정.
+- [[재시도]] — 일시적 실패를 다시 시도해 성공 가능성을 높이는 동시에 추가 작업량·부하·중복 효과를 만들 수 있어 backoff·jitter·budget·admission 계약이 필요한 운영 제어.
 - [[저장 프로그램 컴퓨터]] — 프로그램 명령을 데이터처럼 메모리에 저장하고 실행하는 컴퓨터 구조.
 - [[전력 사용 효율]] — 데이터센터 전체 시설 전력과 IT 장비 전력의 관계를 측정해 전력 변환·냉각·배전 등 시설 오버헤드를 드러내는 운영 효율 개념.
 - [[접두사 KV 캐싱]] — 같은 모델 실행 조건에서 토큰 단위로 동일한 프롬프트 접두사의 KV 상태를 요청·호출 사이에 보존하고 재사용해 중복 프리필 계산을 줄이는 캐시 방법.
@@ -370,7 +378,9 @@ redirect_from:
 - [[인코딩 심화]] — 문자, 코드 포인트, 코드 유닛, 바이트, 정규화, 그래핌 클러스터, 동형이의 문자 문제를 층위별로 정리한 분석.
 - [[입력을 해석하는 경계는 왜 보안 경계인가]] — 바이트·문자열·수치·길이·식별자를 디코드·파싱·정규화·검증·인가·출력 처리하는 단계가 서로 다른 계약임을 보이고, Unicode 혼동과 정수 범위 오류가 같은 해석 경계에서 취약점으로 이어지는 과정을 분석한다.
 - [[자동화는 계산 노동을 없애는가 책임을 옮기는가]] — 인간 계산 조직, 컴파일러와 재사용, AI 코딩 지원을 비교해 자동화가 작업량을 없애기보다 표현·검증·통합·운영 책임의 위치와 측정 방식을 바꾸는 과정을 분석한다.
+- [[장애 감지는 실패와 느림을 어떻게 구분하는가]] — heartbeat·timeout·tail latency·semantic trace를 서로 다른 관찰 층으로 나누고, gray failure와 metastable failure를 binary crash detector의 한계에서 분석한다.
 - [[재사용과 추측은 LLM 추론 작업량을 어떻게 바꾸는가]] — 요청 내부 KV 재사용, 요청·호출 사이 접두사 KV 캐싱과 드래프트–타깃 추측 디코딩을 비교해, 각각 피한 타깃 작업과 추가 캐시·검증 작업이 지연·메모리·에너지에 미치는 영향을 분석한다.
+- [[재시도는 실패를 줄이면서 부하를 어디로 옮기는가]] — 재시도가 일시적 오류의 성공률을 높이는 동시에 하위 서비스의 시도량과 큐를 증폭시키는 경로를 retry budget·멱등성·backoff·admission 계약으로 분석한다.
 - [[저장 프로그램 개념의 여러 기원]] — EDVAC, Manchester Baby, EDSAC을 설계·실행·실용 운영 기준으로 나누어 정리한 분석.
 - [[전력 장벽은 성능 향상의 의미를 어떻게 바꾸었는가]] — Dennard 스케일링의 약화 뒤 성능 향상이 높은 클럭의 문제가 아니라 세대 간 환산 계산량/에너지, 실제 부하의 전력 곡선, 칩의 활성 면적과 작업 적합성을 관리하는 문제로 바뀐 과정을 분석한다.
 - [[정확히 한 번은 어디까지 가능한가]] — idempotency key·namespace·parameter binding·TTL·unknown commit과 외부 부작용을 따라가며, 정확히 한 번이라는 주장이 어떤 시스템 경계 안에서만 성립하는지 분석한다.
