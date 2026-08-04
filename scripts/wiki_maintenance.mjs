@@ -3,10 +3,7 @@ import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import YAML from "yaml";
 import { loadWikiManifest, revisionFor } from "./wiki_manifest.mjs";
-
-function runDate() {
-  return process.env.WIKI_TODAY || new Date().toISOString().slice(0, 10);
-}
+import { runDate } from "./wiki_date.mjs";
 
 async function resolveManifest({ root, manifest }) {
   if (manifest !== undefined) return { manifest: await manifest, error: null };

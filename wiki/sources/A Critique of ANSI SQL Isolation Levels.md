@@ -9,8 +9,8 @@ aliases:
   - ANSI SQL 격리 수준 비판
 summary: ANSI SQL 격리 수준의 현상 중심 정의가 실제 동시성 이상과 어떻게 어긋나는지 분석하고, serializability·snapshot isolation·write skew를 구분한 논문.
 domains:
-  - databases
-  - concurrency
+  - database
+  - systems
   - distributed-systems
 editorial_status: draft
 publication_visibility: unlisted
@@ -19,7 +19,7 @@ created: 2026-08-05
 updated: 2026-08-05
 review:
   mode: pending
-  revision: sha256:614fef4df19c8004b926d460b8281adde2a1d15a047e021bf9c7eca62ea01c2a
+  revision: sha256:63e266eef7d675c657bbf4207c82c58b81f6a6846438c2bbaded587e4662e08f
   reviewed_at: null
   reviewed_by: null
 evidence_ids: []

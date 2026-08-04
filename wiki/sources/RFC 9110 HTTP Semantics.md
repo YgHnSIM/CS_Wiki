@@ -9,7 +9,7 @@ aliases:
   - HTTP 멱등 메서드
 summary: HTTP 요청 의미론과 멱등 메서드의 정의를 규정하며, 동일 요청의 반복이 의도된 서버 효과를 바꾸지 않는 계약과 물리적 단일 실행을 구분하는 표준.
 domains:
-  - networks
+  - internet
   - web
   - distributed-systems
 editorial_status: draft
@@ -19,12 +19,11 @@ created: 2026-08-05
 updated: 2026-08-05
 review:
   mode: pending
-  revision: sha256:a41b80b277ee7a61092afe83333bfb6945113c59e711572b28a66c430c653515
+  revision: sha256:ba5a51b6271151a7163f1eb759635e05d4671fc792158a508896ea5907826abc
   reviewed_at: null
   reviewed_by: null
 evidence_ids: []
 capability_layers:
-  - service-contracts
   - reliable-results
 history:
   publication_year: 2022

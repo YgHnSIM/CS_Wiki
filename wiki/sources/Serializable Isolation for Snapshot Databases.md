@@ -9,8 +9,8 @@ aliases:
   - 스냅샷 데이터베이스의 직렬 가능 격리
 summary: snapshot isolation이 허용하는 write skew를 설명하고, 읽기와 쓰기의 비차단 특성을 유지하면서 직렬 가능성을 검사하는 SSI 알고리즘을 제안한 연구.
 domains:
-  - databases
-  - concurrency
+  - database
+  - systems
   - distributed-systems
 editorial_status: draft
 publication_visibility: unlisted
@@ -19,7 +19,7 @@ created: 2026-08-05
 updated: 2026-08-05
 review:
   mode: pending
-  revision: sha256:695a7a98289852fe6df496cd52c5296b3cf19f81a9970cb7df01740ebce7ba3c
+  revision: sha256:8830f1ab616f8fe5bfe2bef7ca609a2ed925d94cb7e262d015728ccf97c53208
   reviewed_at: null
   reviewed_by: null
 evidence_ids: []

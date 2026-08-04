@@ -5,11 +5,12 @@ import { basename, extname, join, relative } from "node:path";
 import YAML from "yaml";
 import { key, slugify } from "../site/core.mjs";
 import { loadWikiManifest, revisionFor } from "./wiki_manifest.mjs";
+import { runDate } from "./wiki_date.mjs";
 
 const root = process.cwd();
 const wikiRoot = join(root, "wiki");
 const rawRoot = join(root, "raw");
-const today = process.env.WIKI_TODAY || new Date().toISOString().slice(0, 10);
+const today = runDate();
 const report = { migrated: [], unresolvedEvidence: [], quoteLocators: [], logEntries: [], warnings: [] };
 
 const ALLOWED_CAPABILITY = new Set([

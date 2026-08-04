@@ -9,9 +9,8 @@ aliases:
   - error budget
 summary: SLO에서 허용된 실패량을 error budget으로 계산하고, 예산 소진 상태를 배포·변경·안정화 의사결정과 연결하는 Google SRE 공식 정책.
 domains:
-  - reliability
-  - operations
-  - service-management
+  - systems
+  - software-engineering
 editorial_status: draft
 publication_visibility: unlisted
 graph_visibility: context
@@ -19,12 +18,11 @@ created: 2026-08-05
 updated: 2026-08-05
 review:
   mode: pending
-  revision: sha256:6d5348aa13078d755c490ef6d5c6a16d637de0f54c0129a8afcf24a19e5182a5
+  revision: sha256:600485730de1d867d1c2efdd484fb1a54b692901993f1d412cf0c09989a68b23
   reviewed_at: null
   reviewed_by: null
 evidence_ids: []
 capability_layers:
-  - service-contracts
   - reliable-results
 history:
   layer: service

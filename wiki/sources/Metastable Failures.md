@@ -10,8 +10,7 @@ aliases:
 summary: 장애가 단순히 사라지지 않고 부하·재시도·복구 상호작용으로 자기 유지되는 metastable failure를 정의하고, overload feedback의 운영 경계를 분석한 HotOS 논문.
 domains:
   - distributed-systems
-  - reliability
-  - operations
+  - systems
 editorial_status: draft
 publication_visibility: unlisted
 graph_visibility: context
@@ -19,13 +18,12 @@ created: 2026-08-05
 updated: 2026-08-05
 review:
   mode: pending
-  revision: sha256:0994292f17345630aa4709ead39d5915075d426808a035a49aab46d4efb80ead
+  revision: sha256:ee79c639e7be4c4b5704fb698628997f821960fe0fe3ef3886d80893dbe0ce34
   reviewed_at: null
   reviewed_by: null
 evidence_ids: []
 capability_layers:
   - reliable-results
-  - service-contracts
 history:
   publication_year: 2021
   layer: system

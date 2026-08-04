@@ -9,9 +9,8 @@ aliases:
   - OpenTelemetry 관측성
 summary: 분산 trace와 span의 생성·전파·종료 의미를 정의해 관측 데이터의 구조와 실행 상태의 의미를 연결하는 OpenTelemetry 공식 명세.
 domains:
-  - observability
-  - distributed-systems
   - software-engineering
+  - distributed-systems
 editorial_status: draft
 publication_visibility: unlisted
 graph_visibility: context
@@ -19,12 +18,11 @@ created: 2026-08-05
 updated: 2026-08-05
 review:
   mode: pending
-  revision: sha256:cb3cbadeab4ee1451869d27a228ef8fc7c4e5215be4fe27303974e467bcdf6c4
+  revision: sha256:c421f410b28ce6169b56ce6097cce156280381c3b59bf0e45d91d2c89b09c521
   reviewed_at: null
   reviewed_by: null
 evidence_ids: []
 capability_layers:
-  - service-contracts
   - reliable-results
 origin: external
 works:

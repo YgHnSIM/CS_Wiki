@@ -9,9 +9,9 @@ aliases:
   - Stripe 멱등 요청
 summary: Stripe API가 멱등성 키로 최초 요청 결과를 재사용하고 매개변수 불일치와 키 보존 경계를 처리하는 공식 문서.
 domains:
-  - apis
+  - software-engineering
   - distributed-systems
-  - reliability
+  - systems
 editorial_status: draft
 publication_visibility: unlisted
 graph_visibility: context
@@ -19,12 +19,11 @@ created: 2026-08-05
 updated: 2026-08-05
 review:
   mode: pending
-  revision: sha256:fac64458a13f8fcd52cc82aef4709d54eec17aff4852b445372aba8bcbc27e1f
+  revision: sha256:7c2bec9f0cbc5b8ccc7dd255199676e33df74a13787c323d3644f11fc6193730
   reviewed_at: null
   reviewed_by: null
 evidence_ids: []
 capability_layers:
-  - service-contracts
   - reliable-results
 history:
   layer: service

@@ -10,8 +10,8 @@ aliases:
 summary: heartbeat 도착 간격의 통계적 분포에서 연속적인 suspicion 값을 계산해 장애 탐지 민감도와 거짓 양성의 절충을 설명하는 failure detector 연구 보고서.
 domains:
   - distributed-systems
-  - reliability
-  - algorithms
+  - systems
+  - computer-science
 editorial_status: draft
 publication_visibility: unlisted
 graph_visibility: context
@@ -19,13 +19,12 @@ created: 2026-08-05
 updated: 2026-08-05
 review:
   mode: pending
-  revision: sha256:40eea92832935d3bfe82d4fdf14212d491087c9f37154ce33f346329997b5bc6
+  revision: sha256:9eaaa06ea96db77a79e984367d35d2b5916604bdbc35d6886195c6754d91f9cc
   reviewed_at: null
   reviewed_by: null
 evidence_ids: []
 capability_layers:
   - reliable-results
-  - service-contracts
 history:
   publication_year: 2004
   layer: theory

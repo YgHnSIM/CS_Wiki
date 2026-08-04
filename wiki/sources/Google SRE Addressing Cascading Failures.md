@@ -9,9 +9,8 @@ aliases:
   - Google SRE 연쇄 장애
 summary: 과부하와 긍정적 피드백이 장애를 확산시키는 경로를 설명하고, exponential backoff·jitter·retry budget·load shedding으로 재시도 증폭을 제어하는 Google SRE 공식 장.
 domains:
-  - reliability
+  - systems
   - distributed-systems
-  - operations
 editorial_status: draft
 publication_visibility: unlisted
 graph_visibility: context
@@ -19,13 +18,12 @@ created: 2026-08-05
 updated: 2026-08-05
 review:
   mode: pending
-  revision: sha256:bfcda6c565a096c5015c13306fda2477482e686916f27a8f8ebd6afcfc3561cd
+  revision: sha256:d6cab1eef45c709d531e59df8f8af10d3fa292d3290b4ef60a74f3a4df86fcd1
   reviewed_at: null
   reviewed_by: null
 evidence_ids: []
 capability_layers:
   - reliable-results
-  - service-contracts
 history:
   layer: service
 origin: external

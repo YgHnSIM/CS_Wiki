@@ -9,9 +9,9 @@ aliases:
   - FoundationDB 미확정 커밋
 summary: FoundationDB 트랜잭션의 커밋 결과를 클라이언트가 알 수 없는 경우와 재시도가 중복 효과를 만들 수 있는 부작용 경계를 설명하는 공식 개발자 문서.
 domains:
-  - databases
+  - database
   - distributed-systems
-  - reliability
+  - systems
 editorial_status: draft
 publication_visibility: unlisted
 graph_visibility: context
@@ -19,13 +19,12 @@ created: 2026-08-05
 updated: 2026-08-05
 review:
   mode: pending
-  revision: sha256:99f48dff259cef85545abf99ec125fda21bc068d959a415caa4a632dbb8e2ed5
+  revision: sha256:c058bcfd0528ae8c1076e28a16632e4388950862a69e20134d2ff35afdeba1a9
   reviewed_at: null
   reviewed_by: null
 evidence_ids: []
 capability_layers:
   - reliable-results
-  - service-contracts
 history:
   layer: system
 origin: external

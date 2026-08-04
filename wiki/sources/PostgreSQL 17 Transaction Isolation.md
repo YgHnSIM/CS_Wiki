@@ -9,8 +9,7 @@ aliases:
   - PostgreSQL Serializable Snapshot Isolation
 summary: PostgreSQL 17의 Read Committed·Repeatable Read·Serializable 동작과 snapshot isolation, serialization failure, predicate locking을 설명하는 공식 매뉴얼.
 domains:
-  - databases
-  - concurrency
+  - database
   - systems
 editorial_status: draft
 publication_visibility: unlisted
@@ -19,13 +18,12 @@ created: 2026-08-05
 updated: 2026-08-05
 review:
   mode: pending
-  revision: sha256:274ade8c6c02f3af76f4519bcffe0241a5456eb28af3089533b0e47acd14cf66
+  revision: sha256:f12b2874eb40748617ccadacb4447f5580ff864107cc697dd826de480db58bea
   reviewed_at: null
   reviewed_by: null
 evidence_ids: []
 capability_layers:
   - reliable-results
-  - service-contracts
 history:
   layer: software
 origin: external

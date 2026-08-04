@@ -3,10 +3,11 @@ import { promisify } from "node:util";
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import YAML from "yaml";
+import { runDate } from "./wiki_date.mjs";
 
 const exec = promisify(execFile);
 const root = process.cwd();
-const today = process.env.WIKI_TODAY || new Date().toISOString().slice(0, 10);
+const today = runDate();
 const base = process.env.BASE_SHA || process.env.GITHUB_BASE_SHA || "";
 const errors = [];
 let legacyFrontmatterSkips = 0;

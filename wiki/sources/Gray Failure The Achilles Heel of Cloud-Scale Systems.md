@@ -10,8 +10,7 @@ aliases:
 summary: 구성 요소가 완전히 죽지 않고 일부 요청·경로·관찰자에게만 다르게 보이는 gray failure를 정의하고, 이진 health 판단의 한계를 분석한 Microsoft Research 논문.
 domains:
   - distributed-systems
-  - reliability
-  - cloud-computing
+  - systems
 editorial_status: draft
 publication_visibility: unlisted
 graph_visibility: context
@@ -19,13 +18,12 @@ created: 2026-08-05
 updated: 2026-08-05
 review:
   mode: pending
-  revision: sha256:3405d78a9992ce1c3f7a76a03f4f67bcac47ece7d0cf2df4b7f4f94861cd75a4
+  revision: sha256:9220b537104a08c4a5ca37b019bfc29a6c322fc58599f1e97dc16948dc6ec87c
   reviewed_at: null
   reviewed_by: null
 evidence_ids: []
 capability_layers:
   - reliable-results
-  - service-contracts
 history:
   publication_year: 2017
   layer: system

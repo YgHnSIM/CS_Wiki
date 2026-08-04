@@ -2,9 +2,10 @@ import { readFile, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import YAML from "yaml";
 import { loadWikiManifest, revisionFor } from "./wiki_manifest.mjs";
+import { runDate } from "./wiki_date.mjs";
 
 const root = process.cwd();
-const today = process.env.WIKI_TODAY || new Date().toISOString().slice(0, 10);
+const today = runDate();
 const excluded = new Set(["wiki/index.md", "wiki/overview.md", "wiki/log.md"]);
 const evidenceBlock = "<!-- wiki-v2:evidence-start -->\n### 근거 ID\n- 없음\n<!-- wiki-v2:evidence-end -->";
 
