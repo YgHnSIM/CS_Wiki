@@ -13,10 +13,10 @@ editorial_status: active
 publication_visibility: public
 graph_visibility: hidden
 created: 2026-05-03
-updated: 2026-08-04
+updated: 2026-08-05
 review:
   mode: attested
-  revision: sha256:910bcc38a6acfa44aa74da83ac2132b0156a7ca46d0b2f7c57ce62ad37944dbc
+  revision: sha256:8dfd1b3b5997074ca5c16fec06ecf38f0a167a68f5c8d5b0c8d1c97769933920
   reviewed_at: 2026-08-04
   reviewed_by: codex
 evidence_ids: []
@@ -121,6 +121,7 @@ redirect_from:
 - [2026-07-26 update | 프로젝트 검증 도구와 자산 해시 리팩터링](logs/log-2026-07-26-089-프로젝트-검증-도구와-자산-해시-리팩터링.md)
 - [2026-08-04 update | AI 컴퓨팅 병목 지식 통합](logs/log-2026-08-04-090-ai-컴퓨팅-병목-지식-통합.md)
 - [2026-08-04 update | 공개 근거 표시와 출처 매핑 수정](logs/log-2026-08-04-091-공개-근거-표시와-출처-매핑-수정.md)
+- [2026-08-05 ingest | 직렬 가능성과 멱등성 초안 생성](logs/log-2026-08-05-092-직렬-가능성과-멱등성-초안-생성.md)
 
 ## 출처
 

@@ -13,10 +13,10 @@ editorial_status: active
 publication_visibility: public
 graph_visibility: hidden
 created: 2026-05-03
-updated: 2026-08-04
+updated: 2026-08-05
 review:
   mode: attested
-  revision: sha256:744e4c4f426da2f4b4bc971862e9a3f20feecd1ec519bc54ea4d56f31512ece1
+  revision: sha256:0dba0db8711d8d9b00313256cd1b5dd101f319afa59f59ff156181fc5408b417
   reviewed_at: 2026-08-03
   reviewed_by: codex
 evidence_ids: []
@@ -40,6 +40,7 @@ redirect_from:
 ## 참고 자료
 
 - [[A Case against the GO TO Statement]] — Dijkstra의 goto 비판을 바탕으로 프로그램 텍스트와 실행 과정의 대응, 제어 흐름의 추적 가능성을 정리한 참고 자료.
+- [[A Critique of ANSI SQL Isolation Levels]] — ANSI SQL 격리 수준의 현상 중심 정의가 실제 동시성 이상과 어떻게 어긋나는지 분석하고, serializability·snapshot isolation·write skew를 구분한 논문.
 - [[A Note respecting the Application of Machinery to the Calculation of Astronomical Tables]] — 찰스 배비지가 1822년 차분법 기반 기계로 수학 표를 계산하고 계산 결과에 따라 활자를 자동 배치하려 한 구상을 직접 보고한 발표문.
 - [[A Proof for the Queuing Formula: L = λ W]] — 시스템 안의 평균 작업 수, 평균 처리율, 평균 체류 시간의 관계 L = λW를 유한 평균·정상성·비영 평균 도착 과정의 조건 아래 증명한 John D. C. Little의 1961년 대기열 이론 논문.
 - [[A Symbolic Analysis of Relay and Switching Circuits]] — Shannon의 릴레이·스위칭 회로 논문을 바탕으로 불 대수, 논리 게이트, 이진 덧셈 회로, 이진 표현의 회로적 기반을 정리한 참고 자료.
@@ -72,6 +73,7 @@ redirect_from:
 - [[FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness]] — GPU의 HBM과 온칩 SRAM 사이 데이터 이동을 고려해 타일링과 재계산으로 큰 어텐션 중간 행렬의 구체화를 피하는 2022년 입출력 인지 정확 어텐션 논문.
 - [[Flow Diagrams, Turing Machines and Languages with Only Two Formation Rules]] — Böhm-Jacopini의 흐름도 정규화와 구조화 프로그램 정리를 바탕으로 goto 없는 표현 가능성을 정리한 참고 자료.
 - [[FORTRAN Automatic Coding System for the IBM 704 EDPM]] — 1956년 IBM 704 FORTRAN 매뉴얼을 바탕으로 소스 프로그램, 목적 프로그램, DO 문, 최적화 힌트를 정리한 참고 자료.
+- [[FoundationDB Transactions with Unknown Results]] — FoundationDB 트랜잭션의 커밋 결과를 클라이언트가 알 수 없는 경우와 재시도가 중복 효과를 만들 수 있는 부작용 경계를 설명하는 공식 개발자 문서.
 - [[GHG Protocol Product Life Cycle Accounting and Reporting Standard]] — 제품의 원료·제조·사용·폐기 단계를 포괄하는 온실가스 배출량을 일관되게 회계·보고하기 위한 GHG Protocol의 2011년 제품 수명 주기 표준.
 - [[GPTQ: Accurate Post-Training Quantization for Generative Pre-trained Transformers]] — 대규모 생성 Transformer의 가중치를 재학습 없이 한 번에 3–4비트까지 줄이기 위해 근사 2차 정보를 사용하고, 압축된 가중치용 커널에서 메모리 이동 감소를 추론 가속으로 연결한 2023년 ICLR 연구.
 - [[Handbook of Mathematical Functions with Formulas, Graphs, and Mathematical Tables]] — 미국 국립표준국이 1964년 발행한 함수·공식·그래프·수학 표 편람으로, 손 계산용 표 제작과 전자 컴퓨터 기반 함수 계산이 공존하던 전환기를 보여주는 참고 자료.
@@ -99,14 +101,17 @@ redirect_from:
 - [[On the Criteria To Be Used in Decomposing Systems into Modules]] — Parnas의 1972년 논문을 바탕으로 모듈화, 정보 은닉, 변경 가능한 설계 결정 중심의 분해 기준을 정리한 참고 자료.
 - [[Orca: A Distributed Serving System for Transformer-Based Generative Models]] — 자동회귀 생성 요청을 고정 배치가 끝날 때까지 묶는 대신 모델 반복마다 실행 대상을 다시 선택하고, 선택적 배칭으로 서로 다른 길이의 요청을 함께 처리한 2022년 분산 Transformer 서빙 연구.
 - [[Portability of C Programs and the UNIX System]] — Johnson과 Ritchie의 1978년 논문을 바탕으로 C 프로그램과 Unix 시스템의 이식성, 도구, 기계 의존성 관리를 정리한 참고 자료.
+- [[PostgreSQL 17 Transaction Isolation]] — PostgreSQL 17의 Read Committed·Repeatable Read·Serializable 동작과 snapshot isolation, serialization failure, predicate locking을 설명하는 공식 매뉴얼.
 - [[Power Measurement Tutorial for the Green500 List]] — LINPACK 달성 성능과 같은 실행 구간의 평균 전력을 결합해 GFLOPS/W를 산출하는 Green500의 2007년 전력 측정 지침.
 - [[Prehistory: The Math Tables Project]] — 1938–1946년 WPA 사업으로 운영되고 NBS가 지도부·시설·장비를 지원한 Mathematical Tables Project의 인간 계산자 약 450명, 알고리즘·작업표 중심 분업, 37권의 표와 전시 계산 업무를 정리한 NIST 공식 역사 자료.
 - [[Recovery-Oriented Computing (ROC)]] — 하드웨어 고장, 소프트웨어 버그와 운영자 오류를 전제로 평균 고장 간격뿐 아니라 평균 복구 시간을 줄이는 시스템 설계를 제안한 2002년 Berkeley 기술 보고서.
 - [[Reducibility Among Combinatorial Problems]] — 만족 가능성 문제에서 여러 조합적 결정 문제로의 다항시간 변환을 구성해 완전성 결과를 확장한 Richard M. Karp의 1972년 논문.
 - [[Reevaluating Amdahl's Law]] — 고정된 문제를 더 빨리 푸는 대신 병렬 자원에 맞춰 문제 크기를 늘리면 같은 시간에 더 많은 계산을 수행할 수 있다는 확대 크기 가속 관점을 제시한 1988년 논문.
 - [[RFC 3629 UTF-8]] — IETF의 UTF-8 표준을 바탕으로 ASCII 호환성, 1-4 octet 구조, 잘못된 바이트열 처리 문제를 정리한 참고 자료.
+- [[RFC 9110 HTTP Semantics]] — HTTP 요청 의미론과 멱등 메서드의 정의를 규정하며, 동일 요청의 반복이 의도된 서버 효과를 바꾸지 않는 계약과 물리적 단일 실행을 구분하는 표준.
 - [[Roofline An Insightful Visual Performance Model]] — 연산 집약도와 메모리 대역폭을 결합해 프로그램의 달성 가능한 성능 상한과 계산·메모리 병목을 시각화한 Roofline 모델 논문.
 - [[Scalable Parallel Programming with CUDA]] — 다수 코어 GPU의 병렬 자원을 일반 응용 프로그램이 활용하도록 커널·스레드 계층·메모리 계층을 노출한 CUDA 프로그래밍 모델을 설명한 2008년 논문.
+- [[Serializable Isolation for Snapshot Databases]] — snapshot isolation이 허용하는 write skew를 설명하고, 읽기와 쓰기의 비차단 특성을 유지하면서 직렬 가능성을 검사하는 SSI 알고리즘을 제안한 연구.
 - [[Serving DNNs like Clockwork: Performance Predictability from the Bottom Up]] — DNN 추론의 예측 가능한 실행 시간을 바탕으로 요청별 기한을 만족할 수 있는 작업만 예약하고, 처리량·꼬리 지연·요청별 SLO를 함께 평가한 2020년 OSDI 모델 서빙 시스템 연구.
 - [[SGLang: Efficient Execution of Structured Language Model Programs]] — 여러 LLM 호출과 제어 흐름을 가진 프로그램을 위한 언어·런타임을 공동 설계하고, RadixAttention의 radix tree·LRU·캐시 인지 스케줄링으로 호출 사이의 동일 접두사 KV 상태를 재사용한 2024년 연구.
 - [[Sixteen Questions about Software Reuse]] — Frakes와 Fox의 1995년 논문을 바탕으로 재사용과 이식성의 구분, 체계적 재사용의 실무 질문을 정리한 참고 자료.
@@ -115,6 +120,7 @@ redirect_from:
 - [[Spanner: Google's Globally-Distributed Database]] — Paxos 복제와 시간 불확실성 범위를 노출하는 TrueTime을 결합해 전역 분산 데이터베이스의 외부 일관성 트랜잭션을 구현한 Corbett 등의 2012년 Spanner 논문.
 - [[SPEC CPU 2026 Overview]] — 표준 성능 벤치마크의 조건과 한계를 설명하고, 실행 시간 중심 SPECspeed와 처리량 중심 SPECrate를 구분하는 SPEC 공식 개요.
 - [[Standards Eastern Automatic Computer]] — 1950년 NBS에서 유용한 계산을 시작해 수학 표 제작, 수치 알고리즘 연구와 과학 모델링에 사용된 저장 프로그램 전자식 컴퓨터 SEAC의 공식 역사 자료.
+- [[Stripe Idempotent Requests]] — Stripe API가 멱등성 키로 최초 요청 결과를 재사용하고 매개변수 불일치와 키 보존 경계를 처리하는 공식 문서.
 - [[Structured Programming]] — Dahl, Dijkstra, Hoare의 1972년 책을 바탕으로 구조적 프로그래밍, 단계적 정제, 데이터 구조화의 방법론을 정리한 참고 자료.
 - [[Structured Programming with go to Statements]] — Knuth의 1974년 논문을 바탕으로 goto 논쟁의 균형, 오류 탈출 구문, 프로그램 변환 방법론을 정리한 참고 자료.
 - [[The Byzantine Generals Problem]] — 서로 다른 정보를 보내는 결함 구성요소가 있어도 분산된 참여자가 일관된 결정을 내리기 위한 조건과 한계를 정식화한 Lamport, Shostak, Pease의 1982년 논문.
@@ -185,6 +191,7 @@ redirect_from:
 - [[메모리 안전성]] — 프로그램이 할당된 메모리 범위와 생명주기 안에서 데이터를 다루도록 보장하는 성질.
 - [[메모리 이동과 병목 이동]] — 데이터 재사용과 메모리 계층 최적화가 한 병목을 완화하는 동시에 다른 계층의 용량·대역폭·통신 제약을 드러내는 과정.
 - [[메모리 장벽]] — 프로세서의 연산 속도와 메모리의 지연·대역폭 개선 사이의 격차 때문에 실제 실행 시간이 데이터 이동과 대기에 지배되는 성능 한계.
+- [[멱등성]] — 같은 논리적 요청을 반복해도 정의된 범위 안에서 의도된 효과가 한 번 수행한 것과 같아지도록 만드는 key·namespace·parameter·TTL·부작용 계약.
 - [[모듈화]] — 시스템을 독립적으로 이해·개발·변경할 수 있는 책임 단위로 나누는 설계 원리.
 - [[목적 프로그램]] — 컴파일러나 번역기가 소스 프로그램을 처리해 만든 낮은 수준의 실행 대상 프로그램.
 - [[목표 품질 도달 시간]] — 정의된 기계 학습 과업에서 사전에 정한 품질 문턱을 만족할 때까지 걸린 시간을 측정해, 처리량과 실제 학습 완료의 차이를 드러내는 성능 지표.
@@ -258,6 +265,7 @@ redirect_from:
 - [[제어 흐름]] — 프로그램 명령들이 실행되는 순서와 분기·반복·호출·복귀의 흐름을 가리키는 개념.
 - [[종단 간 원칙]] — 통신·저장·운영체제의 하위 계층이 제공하는 기능만으로는 응용이 요구하는 정확성 결과를 완결할 수 없으며, 그 결과를 아는 종단 응용이 검사·복구 책임을 가져야 한다는 시스템 설계 원칙.
 - [[중간 표현]] — 소스 언어의 구조와 목적 기계의 제약 사이에서 분석·최적화·코드 생성을 수행하도록 프로그램을 나타내는 컴파일러 내부 표현.
+- [[직렬 가능성]] — 겹쳐 실행된 트랜잭션의 커밋 결과가 어떤 순차 실행과 동등한지 판단하는 정확성 조건과 snapshot isolation·write skew·SSI의 경계를 설명하는 개념.
 - [[차분 기관]] — 유한 차분법을 이용해 수학 표 계산과 인쇄를 자동화하려 한 특수 목적 기계.
 - [[처치-튜링 논제]] — 효과적 계산 가능성의 직관이 튜링 기계 계산 가능성과 일치한다는 해석적 논제.
 - [[추측 디코딩]] — 작은 드래프트 모델이 여러 후보 토큰을 만들고 큰 타깃 모델이 후보를 병렬 검증한 뒤 정확한 수락·보정 규칙으로 타깃 출력 분포를 보존하면서 직렬 디코드 횟수를 줄이는 방법.
@@ -365,10 +373,12 @@ redirect_from:
 - [[재사용과 추측은 LLM 추론 작업량을 어떻게 바꾸는가]] — 요청 내부 KV 재사용, 요청·호출 사이 접두사 KV 캐싱과 드래프트–타깃 추측 디코딩을 비교해, 각각 피한 타깃 작업과 추가 캐시·검증 작업이 지연·메모리·에너지에 미치는 영향을 분석한다.
 - [[저장 프로그램 개념의 여러 기원]] — EDVAC, Manchester Baby, EDSAC을 설계·실행·실용 운영 기준으로 나누어 정리한 분석.
 - [[전력 장벽은 성능 향상의 의미를 어떻게 바꾸었는가]] — Dennard 스케일링의 약화 뒤 성능 향상이 높은 클럭의 문제가 아니라 세대 간 환산 계산량/에너지, 실제 부하의 전력 곡선, 칩의 활성 면적과 작업 적합성을 관리하는 문제로 바뀐 과정을 분석한다.
+- [[정확히 한 번은 어디까지 가능한가]] — idempotency key·namespace·parameter binding·TTL·unknown commit과 외부 부작용을 따라가며, 정확히 한 번이라는 주장이 어떤 시스템 경계 안에서만 성립하는지 분석한다.
 - [[초기 소프트웨어의 계층화]] — EDSAC에서 드러난 입력, 번역, 적재, 재배치, 호출 상태, 디버깅, 재사용, 언어 설계 계층을 현대 소프트웨어 스택과 비교한 분석.
 - [[초당 토큰 수는 왜 LLM 서비스 능력을 설명하지 못하는가]] — 초당 토큰 수가 토큰 종류·요청 길이·사용자 지연·품질·SLO 위반을 숨기는 이유를 프리필·디코드, goodput과 MLPerf의 시나리오 계약으로 분석한다.
 - [[컴퓨팅 능력의 발달사]] — 기계 이전의 계산 인프라와 계산 가능성의 형식화에서 프로그래밍 가능성·개발 생산성, 집적·수치 표준화, 메모리·전력 장벽, 병렬·분산 시스템과 Transformer의 실행·서비스·에너지 지표로 이어진 컴퓨팅 능력의 발전을 분석한다.
 - [[코드 생산량은 왜 개발 생산성을 설명하지 못하는가]] — 코드 줄 수·커밋 수 같은 활동량은 일부 작업의 흔적일 뿐 요구사항·품질·협업·몰입을 포함한 개발 생산성 전체를 대리하지 못하며, 다차원 측정이 필요한 이유를 분석한다.
+- [[트랜잭션 시스템은 어떤 순서 보장을 제공하는가]] — serializability·snapshot isolation·linearizability·external consistency를 실행 단위와 시간 순서로 비교해, 강한 일관성이라는 표현이 숨기는 재시도와 조정 비용을 분석한다.
 - [[평균 성능은 왜 서비스의 컴퓨팅 능력을 설명하지 못하는가]] — 대규모 서비스에서 평균 지연과 처리량이 팬아웃으로 증폭된 느린 요청, 기한·가용성·품질과 자원 비용을 숨기는 이유를 시스템 경계의 변화로 분석한다.
 - [[표현·배치·계약은 어떻게 컴퓨팅 능력을 만드는가]] — 수학 표와 인간 계산 조직에서 저장 프로그램·메모리 계층·분산 서비스와 LLM 서빙까지를 표현, 작업·상태 배치, 결과 계약의 세 경계로 비교해 컴퓨팅 능력이 형성되는 조건과 다음 연구 연결을 정리한다.
 - [[한 소스의 의미와 성능은 가속기로 어떻게 번역되는가]] — LLVM·CUDA·Halide·TVM을 통해 하나의 계산 정의가 중간 표현, 대상별 스케줄, 코드 생성, 런타임과 측정 계약을 거쳐 이기종 가속기 성능으로 번역되는 과정을 분석한다.
