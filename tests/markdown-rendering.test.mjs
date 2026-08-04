@@ -21,6 +21,23 @@ test("wiki operational comments stay out of public Markdown", () => {
   assert.match(html, /src-001/);
 });
 
+test("generated evidence IDs stay out of public Markdown while source links remain", () => {
+  const source = [
+    "## 출처",
+    "",
+    "<!-- wiki-v2:evidence-start -->",
+    "### 근거 ID",
+    "- `ref-034`",
+    "<!-- wiki-v2:evidence-end -->",
+    "",
+    "- [[Roofline An Insightful Visual Performance Model]]"
+  ].join("\n");
+  const prepared = prepareWikiMarkdown(source);
+
+  assert.doesNotMatch(prepared, /wiki-v2:|근거 ID|ref-034/);
+  assert.match(prepared, /\[\[Roofline An Insightful Visual Performance Model\]\]/);
+});
+
 test("Obsidian callout markers become readable blockquote labels", () => {
   const source = [
     "> [!WARNING] 기준의 주의점",

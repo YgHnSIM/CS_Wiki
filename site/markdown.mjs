@@ -1,4 +1,5 @@
 const WIKI_OPERATIONAL_COMMENT = /<!--[\t ]*wiki-v2:[\s\S]*?-->/g;
+const WIKI_EVIDENCE_BLOCK = /<!--[\t ]*wiki-v2:evidence-start[\t ]*-->[\s\S]*?<!--[\t ]*wiki-v2:evidence-end[\t ]*-->\s*/g;
 const WIKI_CALLOUT = /^> \[!(NOTE|WARNING)\][ \t]*(.*?)\r?$/gm;
 
 /**
@@ -7,6 +8,14 @@ const WIKI_CALLOUT = /^> \[!(NOTE|WARNING)\][ \t]*(.*?)\r?$/gm;
  */
 export function stripWikiOperationalMarkers(body) {
   return body.replace(WIKI_OPERATIONAL_COMMENT, "");
+}
+
+/**
+ * Keep internal evidence IDs in the source contract while showing only the
+ * human-readable source links on public article pages.
+ */
+export function stripWikiEvidenceBlocks(body) {
+  return body.replace(WIKI_EVIDENCE_BLOCK, "");
 }
 
 /**
@@ -22,5 +31,5 @@ export function normalizeWikiCallouts(body) {
 }
 
 export function prepareWikiMarkdown(body) {
-  return normalizeWikiCallouts(stripWikiOperationalMarkers(body));
+  return normalizeWikiCallouts(stripWikiOperationalMarkers(stripWikiEvidenceBlocks(body)));
 }

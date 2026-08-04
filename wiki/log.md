@@ -13,11 +13,11 @@ editorial_status: active
 publication_visibility: public
 graph_visibility: hidden
 created: 2026-05-03
-updated: 2026-08-03
+updated: 2026-08-04
 review:
   mode: attested
-  revision: sha256:1a3cb1953ff2bb5a2fde10459d9a3a012a493efbb0452fec918004f677934553
-  reviewed_at: 2026-08-03
+  revision: sha256:910bcc38a6acfa44aa74da83ac2132b0156a7ca46d0b2f7c57ce62ad37944dbc
+  reviewed_at: 2026-08-04
   reviewed_by: codex
 evidence_ids: []
 capability_layers: []
@@ -120,6 +120,7 @@ redirect_from:
 - [2026-07-26 create | CS_Wiki 프로젝트 학습 해설서](logs/log-2026-07-26-088-CS-Wiki-프로젝트-학습-해설서.md)
 - [2026-07-26 update | 프로젝트 검증 도구와 자산 해시 리팩터링](logs/log-2026-07-26-089-프로젝트-검증-도구와-자산-해시-리팩터링.md)
 - [2026-08-04 update | AI 컴퓨팅 병목 지식 통합](logs/log-2026-08-04-090-ai-컴퓨팅-병목-지식-통합.md)
+- [2026-08-04 update | 공개 근거 표시와 출처 매핑 수정](logs/log-2026-08-04-091-공개-근거-표시와-출처-매핑-수정.md)
 
 ## 출처
 

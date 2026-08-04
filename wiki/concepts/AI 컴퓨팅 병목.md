@@ -18,7 +18,7 @@ created: 2026-08-04
 updated: 2026-08-04
 review:
   mode: pending
-  revision: sha256:c22f1d1bfef8ec06883306178577cb509bb1186b01a2a13423eb920090bf010d
+  revision: sha256:6406ec1d4d68eacc36c36d9b2ca0e1106cb43d4bfb92066f61639b7005d66029
   reviewed_at: null
   reviewed_by: null
 evidence_ids:
@@ -27,7 +27,7 @@ evidence_ids:
   - ref-070
   - ref-077
   - ref-084
-  - ref-041
+  - ref-042
 capability_layers:
   - realized-performance
   - scalability
@@ -78,7 +78,7 @@ LLM 학습에서는 장치 간 gradient·parameter 통신, 입력 파이프라�
 - `ref-070`
 - `ref-077`
 - `ref-084`
-- `ref-041`
+- `ref-042`
 <!-- wiki-v2:evidence-end -->
 
 - [[Roofline An Insightful Visual Performance Model]]
