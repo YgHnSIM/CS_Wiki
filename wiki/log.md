@@ -16,7 +16,7 @@ created: 2026-05-03
 updated: 2026-08-05
 review:
   mode: attested
-  revision: sha256:eaece91a7f0a16277748738656039bb2d55fe63e3a880026cb7ebb3fc5469a0c
+  revision: sha256:1b97b5c680a221fd58422a57c65de5b54208f4e6224224b3d4b94da283094b1b
   reviewed_at: 2026-08-04
   reviewed_by: codex
 evidence_ids: []
@@ -123,6 +123,7 @@ redirect_from:
 - [2026-08-04 update | 공개 근거 표시와 출처 매핑 수정](logs/log-2026-08-04-091-공개-근거-표시와-출처-매핑-수정.md)
 - [2026-08-05 ingest | 직렬 가능성과 멱등성 초안 생성](logs/log-2026-08-05-092-직렬-가능성과-멱등성-초안-생성.md)
 - [2026-08-05 ingest | 재시도와 장애 감지 초안 생성](logs/log-2026-08-05-093-재시도와-장애-감지-초안-생성.md)
+- [2026-08-05 fix | CI 날짜 기준·로그 커버리지·빌드 메타데이터 안정화](logs/log-2026-08-05-094-CI-날짜-기준-로그-커버리지-빌드-메타데이터-안정화.md)
 
 ## 출처
 
