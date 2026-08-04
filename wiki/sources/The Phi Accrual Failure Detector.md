@@ -12,16 +12,16 @@ domains:
   - distributed-systems
   - systems
   - computer-science
-editorial_status: draft
-publication_visibility: unlisted
-graph_visibility: context
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-08-05
 updated: 2026-08-05
 review:
-  mode: pending
-  revision: sha256:9eaaa06ea96db77a79e984367d35d2b5916604bdbc35d6886195c6754d91f9cc
-  reviewed_at: null
-  reviewed_by: null
+  mode: attested
+  revision: sha256:ada87774edd3323b092b21a514f5e031d222bb65995dde00593ca393017666ab
+  reviewed_at: 2026-08-05
+  reviewed_by: codex
 evidence_ids: []
 capability_layers:
   - reliable-results

@@ -12,16 +12,16 @@ domains:
   - software-engineering
   - distributed-systems
   - systems
-editorial_status: draft
-publication_visibility: unlisted
-graph_visibility: context
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-08-05
 updated: 2026-08-05
 review:
-  mode: pending
-  revision: sha256:7c2bec9f0cbc5b8ccc7dd255199676e33df74a13787c323d3644f11fc6193730
-  reviewed_at: null
-  reviewed_by: null
+  mode: attested
+  revision: sha256:afa74d5c363bb1b3afbb88d184980c612ebb958c288791ab1fb4b4f8f7bd399b
+  reviewed_at: 2026-08-05
+  reviewed_by: codex
 evidence_ids: []
 capability_layers:
   - reliable-results

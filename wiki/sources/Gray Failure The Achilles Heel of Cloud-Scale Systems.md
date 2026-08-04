@@ -11,16 +11,16 @@ summary: 구성 요소가 완전히 죽지 않고 일부 요청·경로·관찰�
 domains:
   - distributed-systems
   - systems
-editorial_status: draft
-publication_visibility: unlisted
-graph_visibility: context
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-08-05
 updated: 2026-08-05
 review:
-  mode: pending
-  revision: sha256:9220b537104a08c4a5ca37b019bfc29a6c322fc58599f1e97dc16948dc6ec87c
-  reviewed_at: null
-  reviewed_by: null
+  mode: attested
+  revision: sha256:06581576351a4d0428946e7dc2dde0d6e0ea68407784032f58580cec6e5d5d1f
+  reviewed_at: 2026-08-05
+  reviewed_by: codex
 evidence_ids: []
 capability_layers:
   - reliable-results

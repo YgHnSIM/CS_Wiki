@@ -16,7 +16,7 @@ created: 2026-05-03
 updated: 2026-08-05
 review:
   mode: attested
-  revision: sha256:1b97b5c680a221fd58422a57c65de5b54208f4e6224224b3d4b94da283094b1b
+  revision: sha256:2f184e4c39155216cf01c8325e9eb59ef5a263512fe1bb2e1574b08ad427608e
   reviewed_at: 2026-08-04
   reviewed_by: codex
 evidence_ids: []
@@ -124,6 +124,7 @@ redirect_from:
 - [2026-08-05 ingest | 직렬 가능성과 멱등성 초안 생성](logs/log-2026-08-05-092-직렬-가능성과-멱등성-초안-생성.md)
 - [2026-08-05 ingest | 재시도와 장애 감지 초안 생성](logs/log-2026-08-05-093-재시도와-장애-감지-초안-생성.md)
 - [2026-08-05 fix | CI 날짜 기준·로그 커버리지·빌드 메타데이터 안정화](logs/log-2026-08-05-094-CI-날짜-기준-로그-커버리지-빌드-메타데이터-안정화.md)
+- [2026-08-05 promote | 092·093 초안 공개 승격](logs/log-2026-08-05-095-092-093-초안-공개-승격.md)
 
 ## 출처
 

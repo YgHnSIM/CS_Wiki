@@ -11,16 +11,16 @@ summary: 과부하와 긍정적 피드백이 장애를 확산시키는 경로를
 domains:
   - systems
   - distributed-systems
-editorial_status: draft
-publication_visibility: unlisted
-graph_visibility: context
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-08-05
 updated: 2026-08-05
 review:
-  mode: pending
-  revision: sha256:d6cab1eef45c709d531e59df8f8af10d3fa292d3290b4ef60a74f3a4df86fcd1
-  reviewed_at: null
-  reviewed_by: null
+  mode: attested
+  revision: sha256:9c9a55e31675f853fedb31e055614c6f953168f691fc3ed2b0228710193c75aa
+  reviewed_at: 2026-08-05
+  reviewed_by: codex
 evidence_ids: []
 capability_layers:
   - reliable-results

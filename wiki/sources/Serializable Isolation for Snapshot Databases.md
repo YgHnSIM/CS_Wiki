@@ -2,7 +2,7 @@
 schema_version: 2
 id: ref-112
 kind: reference
-title: "Serializable Isolation for Snapshot Databases"
+title: Serializable Isolation for Snapshot Databases
 aliases:
   - Cahill Röhm Fekete SSI
   - Serializable Snapshot Isolation
@@ -12,16 +12,16 @@ domains:
   - database
   - systems
   - distributed-systems
-editorial_status: draft
-publication_visibility: unlisted
-graph_visibility: context
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-08-05
 updated: 2026-08-05
 review:
-  mode: pending
-  revision: sha256:8830f1ab616f8fe5bfe2bef7ca609a2ed925d94cb7e262d015728ccf97c53208
-  reviewed_at: null
-  reviewed_by: null
+  mode: attested
+  revision: sha256:a89fd448441b18f8bc240c63342f0e7b07690613b0a72fd2818553fa9fb187ad
+  reviewed_at: 2026-08-05
+  reviewed_by: codex
 evidence_ids: []
 capability_layers:
   - reliable-results
@@ -32,7 +32,7 @@ history:
 origin: external
 works:
   primary:
-    - citation: "Michael J. Cahill, Uwe Röhm, and Alan D. Fekete, Serializable Isolation for Snapshot Databases, SIGMOD 2008"
+    - citation: Michael J. Cahill, Uwe Röhm, and Alan D. Fekete, Serializable Isolation for Snapshot Databases, SIGMOD 2008
       genre: primary-literature
       identifiers: []
       edition: SIGMOD 2008, June 2008

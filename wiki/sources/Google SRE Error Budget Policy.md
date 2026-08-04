@@ -11,16 +11,16 @@ summary: SLO에서 허용된 실패량을 error budget으로 계산하고, 예�
 domains:
   - systems
   - software-engineering
-editorial_status: draft
-publication_visibility: unlisted
-graph_visibility: context
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-08-05
 updated: 2026-08-05
 review:
-  mode: pending
-  revision: sha256:600485730de1d867d1c2efdd484fb1a54b692901993f1d412cf0c09989a68b23
-  reviewed_at: null
-  reviewed_by: null
+  mode: attested
+  revision: sha256:39eeee876884f780a367aae8190c5522c5a109a337be8cedc9e61f9d2515a208
+  reviewed_at: 2026-08-05
+  reviewed_by: codex
 evidence_ids: []
 capability_layers:
   - reliable-results

@@ -11,16 +11,16 @@ summary: 장애가 단순히 사라지지 않고 부하·재시도·복구 상�
 domains:
   - distributed-systems
   - systems
-editorial_status: draft
-publication_visibility: unlisted
-graph_visibility: context
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-08-05
 updated: 2026-08-05
 review:
-  mode: pending
-  revision: sha256:ee79c639e7be4c4b5704fb698628997f821960fe0fe3ef3886d80893dbe0ce34
-  reviewed_at: null
-  reviewed_by: null
+  mode: attested
+  revision: sha256:e23c3e2aaf5ed6345d2b07713ea6c38a165f749b47f000ed161e2e72770d3737
+  reviewed_at: 2026-08-05
+  reviewed_by: codex
 evidence_ids: []
 capability_layers:
   - reliable-results

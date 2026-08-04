@@ -12,16 +12,16 @@ domains:
   - database
   - distributed-systems
   - systems
-editorial_status: draft
-publication_visibility: unlisted
-graph_visibility: context
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-08-05
 updated: 2026-08-05
 review:
-  mode: pending
-  revision: sha256:c058bcfd0528ae8c1076e28a16632e4388950862a69e20134d2ff35afdeba1a9
-  reviewed_at: null
-  reviewed_by: null
+  mode: attested
+  revision: sha256:bbae4d2e416997d95b8d30ec9cd2aa5e21c695764ff31fc0f4bb7b272e60ce34
+  reviewed_at: 2026-08-05
+  reviewed_by: codex
 evidence_ids: []
 capability_layers:
   - reliable-results

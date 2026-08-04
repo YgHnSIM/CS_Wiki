@@ -12,16 +12,16 @@ domains:
   - internet
   - web
   - distributed-systems
-editorial_status: draft
-publication_visibility: unlisted
-graph_visibility: context
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-08-05
 updated: 2026-08-05
 review:
-  mode: pending
-  revision: sha256:ba5a51b6271151a7163f1eb759635e05d4671fc792158a508896ea5907826abc
-  reviewed_at: null
-  reviewed_by: null
+  mode: attested
+  revision: sha256:992cd039778f935716cf4093fe71457a0ba521dbe31ad0fc43e33137dd492761
+  reviewed_at: 2026-08-05
+  reviewed_by: codex
 evidence_ids: []
 capability_layers:
   - reliable-results

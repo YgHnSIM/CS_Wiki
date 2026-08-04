@@ -2,7 +2,7 @@
 schema_version: 2
 id: ref-111
 kind: reference
-title: "A Critique of ANSI SQL Isolation Levels"
+title: A Critique of ANSI SQL Isolation Levels
 aliases:
   - Berenson isolation levels
   - ANSI SQL isolation levels critique
@@ -12,16 +12,16 @@ domains:
   - database
   - systems
   - distributed-systems
-editorial_status: draft
-publication_visibility: unlisted
-graph_visibility: context
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-08-05
 updated: 2026-08-05
 review:
-  mode: pending
-  revision: sha256:63e266eef7d675c657bbf4207c82c58b81f6a6846438c2bbaded587e4662e08f
-  reviewed_at: null
-  reviewed_by: null
+  mode: attested
+  revision: sha256:4b8b8998686b15b799a2527136a398c692539354ba56977caa306c1a132885ec
+  reviewed_at: 2026-08-05
+  reviewed_by: codex
 evidence_ids: []
 capability_layers:
   - reliable-results
@@ -31,7 +31,7 @@ history:
 origin: external
 works:
   primary:
-    - citation: "Hal Berenson, Philip Bernstein, Jim Gray, Jim Melton, Elizabeth O'Neil, and Patrick O'Neil, A Critique of ANSI SQL Isolation Levels, SIGMOD Record 24(2), 1995"
+    - citation: Hal Berenson, Philip Bernstein, Jim Gray, Jim Melton, Elizabeth O'Neil, and Patrick O'Neil, A Critique of ANSI SQL Isolation Levels, SIGMOD Record 24(2), 1995
       genre: primary-literature
       identifiers: []
       edition: SIGMOD Record 24(2), June 1995

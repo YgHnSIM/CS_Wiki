@@ -11,16 +11,16 @@ summary: PostgreSQL 17의 Read Committed·Repeatable Read·Serializable 동작�
 domains:
   - database
   - systems
-editorial_status: draft
-publication_visibility: unlisted
-graph_visibility: context
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-08-05
 updated: 2026-08-05
 review:
-  mode: pending
-  revision: sha256:f12b2874eb40748617ccadacb4447f5580ff864107cc697dd826de480db58bea
-  reviewed_at: null
-  reviewed_by: null
+  mode: attested
+  revision: sha256:0d94d9e1a14cdb877d03ad3f46cb9f787aaeec46a5a3aaff6b2ddc3ab63005e5
+  reviewed_at: 2026-08-05
+  reviewed_by: codex
 evidence_ids: []
 capability_layers:
   - reliable-results
