@@ -16,7 +16,7 @@ created: 2026-05-03
 updated: 2026-08-05
 review:
   mode: attested
-  revision: sha256:f48ed23f20c764a89b400959daabd805b31726cad78f8d35325d19b6b09b2e96
+  revision: sha256:105a2c8d985d142264416d0e253a1d2b0483de3d994342201d1aba8036650c4d
   reviewed_at: 2026-08-04
   reviewed_by: codex
 evidence_ids: []
@@ -128,6 +128,7 @@ redirect_from:
 - [2026-08-05 promote | AI 컴퓨팅 병목 초안 공개 승격](logs/log-2026-08-05-096-AI-컴퓨팅-병목-초안-공개-승격.md)
 - [2026-08-05 restore | 작성 순서 재정렬과 AI 초안 복원](logs/log-2026-08-05-097-작성-순서-재정렬과-AI-초안-복원.md)
 - [2026-08-05 promote | 연구 보고서 다음 작성 순서 공개 승격](logs/log-2026-08-05-098-연구보고서-다음-작성순서-공개-승격.md)
+- [2026-08-05 promote | 작성 순서 공식 근거 공개 승격](logs/log-2026-08-05-099-작성순서-공식-근거-공개-승격.md)
 
 ## 출처
 

@@ -10,16 +10,16 @@ summary: 빌드 시스템 사이에서 결정적인 timestamp를 교환하기 �
 domains:
   - software-engineering
   - systems
-editorial_status: draft
-publication_visibility: unlisted
-graph_visibility: context
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-08-05
 updated: 2026-08-05
 review:
-  mode: pending
-  revision: sha256:a92a8a5862bbc70db8ff81d4b2dccc38841a0c4b6e4f1e0dcc5c17e8a4333bc1
-  reviewed_at: null
-  reviewed_by: null
+  mode: attested
+  revision: sha256:6c3f659eb17bb9093ebb079c93e30ace8b8205b1807ea2ada2af37949582406f
+  reviewed_at: 2026-08-05
+  reviewed_by: codex-research-097
 evidence_ids: []
 capability_layers:
   - reliable-results

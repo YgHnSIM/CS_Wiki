@@ -10,16 +10,16 @@ summary: npm 패키지가 어디서 빌드되고 누가 게시했는지를 sourc
 domains:
   - software-engineering
   - security
-editorial_status: draft
-publication_visibility: unlisted
-graph_visibility: context
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-08-05
 updated: 2026-08-05
 review:
-  mode: pending
-  revision: sha256:f373e97a628193f6ea3ae2da2217433113b69b5b992013184706b824829179c5
-  reviewed_at: null
-  reviewed_by: null
+  mode: attested
+  revision: sha256:f8082be7850faa846709c9472e62e014d108464942edafd1aba925469c7da536
+  reviewed_at: 2026-08-05
+  reviewed_by: codex-research-097
 evidence_ids: []
 capability_layers:
   - reliable-results

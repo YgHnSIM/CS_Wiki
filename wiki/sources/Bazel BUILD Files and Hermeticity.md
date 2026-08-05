@@ -12,16 +12,16 @@ domains:
   - software-engineering
   - systems
   - programming-languages
-editorial_status: draft
-publication_visibility: unlisted
-graph_visibility: context
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-08-05
 updated: 2026-08-05
 review:
-  mode: pending
-  revision: sha256:d96c3016ee696c6f6fedecff5a41c9cc8fd3762b63d40e085e9760a742815ad0
-  reviewed_at: null
-  reviewed_by: null
+  mode: attested
+  revision: sha256:4746f8b59770db430f7e370cf49dea23417c23c2c4a151387f6bae6cbf126883
+  reviewed_at: 2026-08-05
+  reviewed_by: codex-research-097
 evidence_ids: []
 capability_layers:
   - reliable-results

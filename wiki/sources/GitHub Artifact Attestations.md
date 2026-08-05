@@ -10,16 +10,16 @@ summary: GitHub Actions가 바이너리·컨테이너 이미지의 subject diges
 domains:
   - software-engineering
   - security
-editorial_status: draft
-publication_visibility: unlisted
-graph_visibility: context
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-08-05
 updated: 2026-08-05
 review:
-  mode: pending
-  revision: sha256:49ad442f5ef4f902e27ee1baef4642fc4cbb1ad8e864550e0bc3fb3878cfd744
-  reviewed_at: null
-  reviewed_by: null
+  mode: attested
+  revision: sha256:26513deac373e008c977abd43de89dd0519e280b25b93ddf9649e2a5788bb7dc
+  reviewed_at: 2026-08-05
+  reviewed_by: codex-research-097
 evidence_ids: []
 capability_layers:
   - reliable-results

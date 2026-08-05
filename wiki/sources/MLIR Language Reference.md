@@ -10,16 +10,16 @@ summary: MLIR의 operation·value·type·block·region·dialect 구조와 여러
 domains:
   - software-engineering
   - programming-languages
-editorial_status: draft
-publication_visibility: unlisted
-graph_visibility: context
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-08-05
 updated: 2026-08-05
 review:
-  mode: pending
-  revision: sha256:3b319ba8bde73cd176dde9c1530731525c6aecd259e4d7aebac7766e85731084
-  reviewed_at: null
-  reviewed_by: null
+  mode: attested
+  revision: sha256:90f4203124ef51c928ad7522cbeb01b9d5d218b2b94244ff8cd55f3bc2f7ba0b
+  reviewed_at: 2026-08-05
+  reviewed_by: codex-research-097
 evidence_ids: []
 capability_layers:
   - reliable-results

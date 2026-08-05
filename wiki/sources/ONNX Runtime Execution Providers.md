@@ -12,16 +12,16 @@ domains:
   - machine-learning
   - systems
   - software-engineering
-editorial_status: draft
-publication_visibility: unlisted
-graph_visibility: context
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-08-05
 updated: 2026-08-05
 review:
-  mode: pending
-  revision: sha256:2bb618aa2981e02701ba6bb9a56996b4d6780f101f5c1b39c87ca8f9817a1c4c
-  reviewed_at: null
-  reviewed_by: null
+  mode: attested
+  revision: sha256:327e9266d0869f97cfb2b9e00b86849919c63d6b33828bf3083a03aed0a14f78
+  reviewed_at: 2026-08-05
+  reviewed_by: codex-research-097
 evidence_ids: []
 capability_layers:
   - reliable-results

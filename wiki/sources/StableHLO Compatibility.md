@@ -11,16 +11,16 @@ domains:
   - machine-learning
   - programming-languages
   - software-engineering
-editorial_status: draft
-publication_visibility: unlisted
-graph_visibility: context
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-08-05
 updated: 2026-08-05
 review:
-  mode: pending
-  revision: sha256:45acfd2ba04cbb398f1da01959d07ebcc70ef513ee30f8753a58f0e8d9171307
-  reviewed_at: null
-  reviewed_by: null
+  mode: attested
+  revision: sha256:5ef09d61f7a0c1bef0ad658d179cc68f209afa982179e45a0eecd5abc96da875
+  reviewed_at: 2026-08-05
+  reviewed_by: codex-research-097
 evidence_ids: []
 capability_layers:
   - reliable-results
