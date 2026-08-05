@@ -12,16 +12,16 @@ domains:
   - software-engineering
   - programming-languages
   - computer-architecture
-editorial_status: draft
-publication_visibility: unlisted
-graph_visibility: context
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-08-05
 updated: 2026-08-05
 review:
-  mode: pending
-  revision: sha256:a450eba8f32ebbb9bfe6c18c92358f7f528eeca472ab71d20c431f8049e597d4
-  reviewed_at: null
-  reviewed_by: null
+  mode: attested
+  revision: sha256:d8dce7d47293663486c47249b20ecc3b7da36464e56f7faed874c59ad7d1e230
+  reviewed_at: 2026-08-05
+  reviewed_by: codex-research-097
 evidence_ids:
   - ref-130
   - ref-131

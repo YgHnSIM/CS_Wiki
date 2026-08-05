@@ -11,16 +11,16 @@ domains:
   - software-engineering
   - security
   - systems
-editorial_status: draft
-publication_visibility: unlisted
-graph_visibility: context
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-08-05
 updated: 2026-08-05
 review:
-  mode: pending
-  revision: sha256:fd8f1edb85a3a014e280d066d7d78a12142c92dd876b489270a054f5f862760a
-  reviewed_at: null
-  reviewed_by: null
+  mode: attested
+  revision: sha256:6073918d49892ecb142539338d439baa66ea8960f724b638331a4176a32675c5
+  reviewed_at: 2026-08-05
+  reviewed_by: codex-research-097
 evidence_ids:
   - ref-125
   - ref-127
