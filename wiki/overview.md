@@ -16,7 +16,7 @@ created: 2026-05-03
 updated: 2026-08-05
 review:
   mode: attested
-  revision: sha256:d783ba11a0f2184ae4447487e4d813d44e128cc681f311439fdffe569ee55015
+  revision: sha256:9d6dc70f1510fd522312a501a9a5083f0c1b68e00d2f176942bda740e629e63d
   reviewed_at: 2026-08-03
   reviewed_by: codex
 evidence_ids: []
@@ -32,12 +32,12 @@ redirect_from:
 
 ## 현재 규모
 
-- 전체 페이지: 363개
+- 전체 페이지: 385개
 - 정규 소스: 6개
-- 참고 자료: 122개
-- 개념: 158개
+- 참고 자료: 136개
+- 개념: 162개
 - 개체: 24개
-- 분석: 50개
+- 분석: 54개
 - 메타: 3개
 
 ## 주요 항목

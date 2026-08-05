@@ -11,16 +11,16 @@ domains:
   - machine-learning
   - computer-architecture
   - systems
-editorial_status: active
-publication_visibility: public
-graph_visibility: public
+editorial_status: draft
+publication_visibility: unlisted
+graph_visibility: context
 created: 2026-08-04
 updated: 2026-08-05
 review:
-  mode: attested
-  revision: sha256:7aa9c47141e57fb19a372be39ed564a91cc458410809bb2e3b1fac6bfd7a658e
-  reviewed_at: 2026-08-05
-  reviewed_by: codex
+  mode: pending
+  revision: sha256:80d9c94bb3ecb68bbe5c8415279b323eff2453c0caba0a76fa3d4090c69e9ab8
+  reviewed_at: null
+  reviewed_by: null
 evidence_ids:
   - ref-034
   - ref-039
