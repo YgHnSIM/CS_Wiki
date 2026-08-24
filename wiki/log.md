@@ -16,7 +16,7 @@ created: 2026-05-03
 updated: 2026-08-25
 review:
   mode: attested
-  revision: sha256:153b49cbb0110fd2098c440e43289a217ac40ed1afb6114e9009587b82969e79
+  revision: sha256:920e157a98f65a5f803f33a2cb2d67ee0bcb6e5a3a20beeff845b66631391a41
   reviewed_at: 2026-08-04
   reviewed_by: codex
 evidence_ids: []
@@ -131,6 +131,7 @@ redirect_from:
 - [2026-08-05 promote | 작성 순서 공식 근거 공개 승격](logs/log-2026-08-05-099-작성순서-공식-근거-공개-승격.md)
 - [2026-08-24 ingest | ASLR 개념 문서 초안 생성](logs/log-2026-08-24-100-aslr-개념-문서-초안-생성.md)
 - [2026-08-25 fix | CI 배포 테스트 타임아웃 및 변경 날짜 수정](logs/log-2026-08-25-101-ci-배포-테스트-타임아웃-및-변경-날짜-수정.md)
+- [2026-08-25 promote | ASLR 개념 및 출처 문서 공개 승격](logs/log-2026-08-25-102-aslr-개념-문서-공개-승격.md)
 
 ## 출처
 

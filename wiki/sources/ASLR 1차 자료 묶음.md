@@ -11,16 +11,16 @@ domains:
   - security
   - operating-systems
   - software-engineering
-editorial_status: draft
-publication_visibility: unlisted
-graph_visibility: context
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-08-24
-updated: 2026-08-24
+updated: 2026-08-25
 review:
-  mode: pending
-  revision: sha256:e0de24643cca5cd003e465bc673252732bb6d27abe9bca1bedcc41487e0a4263
-  reviewed_at: null
-  reviewed_by: null
+  mode: attested
+  revision: sha256:63babb0dc8aa745cdc7a0fcb5d76b18498d9410bb6290129dbc8abc5fdb0dbda
+  reviewed_at: 2026-08-25
+  reviewed_by: codex
 evidence_ids: []
 capability_layers: []
 origin: external

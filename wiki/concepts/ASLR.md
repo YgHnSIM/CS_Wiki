@@ -11,16 +11,16 @@ domains:
   - security
   - operating-systems
   - computer-architecture
-editorial_status: draft
-publication_visibility: unlisted
-graph_visibility: context
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-08-24
 updated: 2026-08-25
 review:
-  mode: pending
-  revision: sha256:e52abf4af0047fcb1c9dad933b99ae75f2d67d842b41c6cdbc1920d132a27263
-  reviewed_at: null
-  reviewed_by: null
+  mode: attested
+  revision: sha256:c31f2eaa6aab32b2e90f98d8750285a58d0475875d05c6fa685294e002fb8579
+  reviewed_at: 2026-08-25
+  reviewed_by: codex
 evidence_ids:
   - ref-137
   - src-004
