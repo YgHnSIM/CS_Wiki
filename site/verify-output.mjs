@@ -7,9 +7,9 @@ export const OUTPUT_BUDGETS = Object.freeze({
   // Public documents intentionally emit static no-JS evidence routes.
   // The P6–P10 expansion emits 3,560 bounded artifacts. These limits retain
   // explicit output ceilings while allowing the next bounded content increment.
-  files: 4_096,
-  totalBytes: 112 * 1024 * 1024,
-  htmlBytes: 64 * 1024 * 1024,
+  files: 6_144,
+  totalBytes: 128 * 1024 * 1024,
+  htmlBytes: 80 * 1024 * 1024,
   jsonBytes: 48 * 1024 * 1024
 });
 
