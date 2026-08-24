@@ -13,10 +13,10 @@ editorial_status: active
 publication_visibility: public
 graph_visibility: hidden
 created: 2026-05-03
-updated: 2026-08-05
+updated: 2026-08-24
 review:
   mode: attested
-  revision: sha256:9d6dc70f1510fd522312a501a9a5083f0c1b68e00d2f176942bda740e629e63d
+  revision: sha256:78eb32f6579ebec63b41d12a14f0b6cfcc95cbae5402404ba093cb3e43e10288
   reviewed_at: 2026-08-03
   reviewed_by: codex
 evidence_ids: []
@@ -32,10 +32,10 @@ redirect_from:
 
 ## 현재 규모
 
-- 전체 페이지: 385개
+- 전체 페이지: 387개
 - 정규 소스: 6개
-- 참고 자료: 136개
-- 개념: 162개
+- 참고 자료: 137개
+- 개념: 163개
 - 개체: 24개
 - 분석: 54개
 - 메타: 3개

@@ -13,10 +13,10 @@ editorial_status: active
 publication_visibility: public
 graph_visibility: hidden
 created: 2026-05-03
-updated: 2026-08-05
+updated: 2026-08-24
 review:
   mode: attested
-  revision: sha256:8de650ac7d318aa92bc86b12c5f63859baf2217be4327a2dfc6ad34da7bfbbf7
+  revision: sha256:ffff82ff6081aeeb3e000f6711cca02a9da2ef9e18800d7176fe1c53f1143f0a
   reviewed_at: 2026-08-03
   reviewed_by: codex
 evidence_ids: []
@@ -46,6 +46,7 @@ redirect_from:
 - [[A Symbolic Analysis of Relay and Switching Circuits]] — Shannon의 릴레이·스위칭 회로 논문을 바탕으로 불 대수, 논리 게이트, 이진 덧셈 회로, 이진 표현의 회로적 기반을 정리한 참고 자료.
 - [[An Investigation of the Laws of Thought]] — Boole의 1854년 저작을 바탕으로 논리를 기호와 연산의 체계로 다루는 관점과 Boolean이라는 명칭의 기원을 정리한 참고 자료.
 - [[An Unsolvable Problem of Elementary Number Theory]] — Church의 1936년 논문을 바탕으로 효과적 계산 가능성, 람다 정의 가능성, 재귀 함수, 처치-튜링 논제를 보강한 참고 자료.
+- [[ASLR 1차 자료 묶음]] — PaX 설계 문서와 Linux 커널 공식 문서를 바탕으로 ASLR의 대상, 프로세스 배치, PIE·KASLR의 연결과 한계를 정리한 1차 자료 묶음.
 - [[Attention Is All You Need]] — 순환이나 합성곱 없이 어텐션을 중심으로 인코더와 디코더를 구성해 시퀀스 위치의 병렬 계산 가능성과 전역 의존성 모델링을 결합한 2017년 Transformer 논문.
 - [[AWQ: Activation-aware Weight Quantization for On-Device LLM Compression and Acceleration]] — 보정 입력의 활성값으로 중요한 가중치 채널을 식별하고 채널별 스케일을 조정해 양자화 오차를 줄이며, 가중치 전용 저비트 커널로 데스크톱·모바일 GPU 추론을 가속한 2024년 MLSys 연구.
 - [[Bazel BUILD Files and Hermeticity]] — Bazel BUILD 파일의 알려진 입력 의존성과 임의 I/O 제한이 해석을 hermetic하게 만들어 재현 가능한 빌드에 기여한다는 공식 문서.
@@ -312,6 +313,7 @@ redirect_from:
 - [[AI 코딩 지원]] — 자연어·코드·저장소 맥락을 바탕으로 구현 후보, 설명, 수정안, 테스트 등을 제안하고 사람이 선택·수정·검증하는 개발 지원 방식.
 - [[API]] — 기능 제공자와 사용자 사이의 동작, 호출 규약, 비용, 전제 조건을 정리한 프로그래밍 인터페이스.
 - [[ASCII]] — 문자에 숫자 값을 대응시키는 7비트 문자 인코딩 표준이자 UTF-8 ASCII 범위 호환성의 기반.
+- [[ASLR (Address Space Layout Randomization)]] — 프로세스와 커널의 주요 메모리 영역을 실행마다 다른 위치에 배치해 주소 예측 가능성을 낮추는 보안 완화 기법.
 - [[C 문자열]] — Null terminator로 문자열 경계를 표시하는 C 스타일 문자열 표현.
 - [[C 언어]] — Unix 구현을 위해 발전한 시스템 프로그래밍 언어로, 포인터와 바이트 단위 제어를 고급 언어 구조와 결합한 언어.
 - [[CAP 정리]] — 비동기 네트워크 분할 모형에서 선형화 가능한 원자적 일관성과 모든 비고장 노드의 응답 보장을 동시에 만족할 수 없다는 분산 시스템의 불가능성 정리.
