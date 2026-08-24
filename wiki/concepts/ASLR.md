@@ -15,10 +15,10 @@ editorial_status: draft
 publication_visibility: unlisted
 graph_visibility: context
 created: 2026-08-24
-updated: 2026-08-24
+updated: 2026-08-25
 review:
   mode: pending
-  revision: sha256:a16041abda992ecc50bb534c99189a3463131aae84d11ff0ad392da9aa049095
+  revision: sha256:e52abf4af0047fcb1c9dad933b99ae75f2d67d842b41c6cdbc1920d132a27263
   reviewed_at: null
   reviewed_by: null
 evidence_ids:

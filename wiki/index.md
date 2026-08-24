@@ -13,10 +13,10 @@ editorial_status: active
 publication_visibility: public
 graph_visibility: hidden
 created: 2026-05-03
-updated: 2026-08-24
+updated: 2026-08-25
 review:
   mode: attested
-  revision: sha256:ffff82ff6081aeeb3e000f6711cca02a9da2ef9e18800d7176fe1c53f1143f0a
+  revision: sha256:cc7443502b20da1578da2610b9e8480e13b72ea0eba3e93f0b003c1b17c99485
   reviewed_at: 2026-08-03
   reviewed_by: codex
 evidence_ids: []

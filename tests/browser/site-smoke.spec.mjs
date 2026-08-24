@@ -96,14 +96,15 @@ test("article connections stay compact and keyboard-switchable", async ({ page }
 });
 
 
-test("core pages have no serious automated accessibility violations", async ({ page }) => {
-  for (const route of ["/", "/docs/concept-00b55ff0f7a3581b/", "/map/", "/map/history/", "/map/evidence/"]) {
+for (const route of ["/", "/docs/concept-00b55ff0f7a3581b/", "/map/", "/map/history/", "/map/evidence/"]) {
+  test(`core page ${route} has no serious automated accessibility violations`, async ({ page }) => {
+    test.slow();
     await page.goto(route);
     const results = await new AxeBuilder({ page }).analyze();
     const serious = results.violations.filter((violation) => ["serious", "critical"].includes(violation.impact));
     expect(serious, `${route}: ${serious.map((item) => item.id).join(", ")}`).toEqual([]);
-  }
-});
+  });
+}
 
 
 test("evidence navigation remains available without JavaScript", async ({ browser }) => {

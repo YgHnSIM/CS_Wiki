@@ -13,10 +13,10 @@ editorial_status: active
 publication_visibility: public
 graph_visibility: hidden
 created: 2026-05-03
-updated: 2026-08-24
+updated: 2026-08-25
 review:
   mode: attested
-  revision: sha256:f55b1135e26ed6c806dd6d0f5d8bbb47a3d75bc70dc613ed66dc087579f4b26c
+  revision: sha256:153b49cbb0110fd2098c440e43289a217ac40ed1afb6114e9009587b82969e79
   reviewed_at: 2026-08-04
   reviewed_by: codex
 evidence_ids: []
@@ -130,6 +130,7 @@ redirect_from:
 - [2026-08-05 promote | 연구 보고서 다음 작성 순서 공개 승격](logs/log-2026-08-05-098-연구보고서-다음-작성순서-공개-승격.md)
 - [2026-08-05 promote | 작성 순서 공식 근거 공개 승격](logs/log-2026-08-05-099-작성순서-공식-근거-공개-승격.md)
 - [2026-08-24 ingest | ASLR 개념 문서 초안 생성](logs/log-2026-08-24-100-aslr-개념-문서-초안-생성.md)
+- [2026-08-25 fix | CI 배포 테스트 타임아웃 및 변경 날짜 수정](logs/log-2026-08-25-101-ci-배포-테스트-타임아웃-및-변경-날짜-수정.md)
 
 ## 출처
 
