@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" width="960" height="600">
+  <defs>
+    <style>
+      .bg { fill: #f8fafc; stroke: #e2e8f0; stroke-width: 1.5px; }
+      .timeline-rail { stroke: #cbd5e1; stroke-width: 2.5px; stroke-dasharray: 4 4; }
+      .era-node { fill: #3b82f6; stroke: #ffffff; stroke-width: 2px; }
+      .era-label { fill: #1e293b; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Pretendard", sans-serif; font-size: 13.5px; font-weight: 700; }
+      
+      .shift-card { fill: #ffffff; stroke: #e2e8f0; stroke-width: 1.5px; }
+      .tech-badge { fill: #eff6ff; stroke: #bfdbfe; stroke-width: 1.5px; }
+      .tech-text { fill: #1d4ed8; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Pretendard", sans-serif; font-size: 11.5px; font-weight: 600; }
+      
+      .arrow-h { stroke: #94a3b8; stroke-width: 1.75; stroke-linecap: round; fill: none; }
+      .arrow-head { fill: #94a3b8; }
+      
+      .bottleneck-title { fill: #be123c; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Pretendard", sans-serif; font-size: 13px; font-weight: 700; }
+      .bottleneck-desc { fill: #64748b; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Pretendard", sans-serif; font-size: 11.5px; font-weight: 400; }
+
+      @media (prefers-color-scheme: dark) {
+        .bg { fill: #090d16; stroke: #1e293b; }
+        .timeline-rail { stroke: #334155; }
+        .era-node { fill: #60a5fa; stroke: #0f172a; }
+        .era-label { fill: #f8fafc; }
+        
+        .shift-card { fill: #131b2e; stroke: #1e293b; }
+        .tech-badge { fill: #1e293b; stroke: #3b82f6; }
+        .tech-text { fill: #93c5fd; }
+        
+        .arrow-h { stroke: #475569; }
+        .arrow-head { fill: #475569; }
+        
+        .bottleneck-title { fill: #fb7185; }
+        .bottleneck-desc { fill: #94a3b8; }
+      }
+    </style>
+    <marker id="arrow-c" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" class="arrow-head" />
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="960" height="600" rx="12" class="bg"/>
+
+  <!-- Vertical Timeline Rail -->
+  <line x1="40" y1="55" x2="40" y2="545" class="timeline-rail"/>
+
+  <!-- Era Rows -->
+  <!-- 1. 18C~20C 초 -->
+  <circle cx="40" cy="62" r="6" class="era-node"/>
+  <text x="60" y="66" class="era-label">18C ~ 20C 초 · 계산 인프라</text>
+  <rect x="275" y="37" width="185" height="34" rx="6" class="tech-badge"/>
+  <text x="367.5" y="58.5" text-anchor="middle" class="tech-text">작업표 분해 / 인간 계산자</text>
+  <path d="M 468 54 L 496 54" class="arrow-h" marker-end="url(#arrow-c)"/>
+  <rect x="504" y="27" width="436" height="54" rx="8" class="shift-card"/>
+  <text x="520" y="49" class="bottleneck-title">새로운 병목: 전달 지연, 전사 오류, 출판 한계</text>
+  <text x="520" y="68" class="bottleneck-desc">분해된 작업표 간 이동 지연 및 수동 집계 오류, 방대한 수치표 인쇄 배포 비용</text>
+
+  <!-- 2. 1930~50s -->
+  <circle cx="40" cy="158" r="6" class="era-node"/>
+  <text x="60" y="162" class="era-label">1930 ~ 50s · 이론 및 프로그래밍</text>
+  <rect x="275" y="133" width="185" height="34" rx="6" class="tech-badge"/>
+  <text x="367.5" y="154.5" text-anchor="middle" class="tech-text">튜링 기계 / EDVAC / 서브루틴</text>
+  <path d="M 468 150 L 496 150" class="arrow-h" marker-end="url(#arrow-c)"/>
+  <rect x="504" y="123" width="436" height="54" rx="8" class="shift-card"/>
+  <text x="520" y="145" class="bottleneck-title">새로운 병목: 복잡도 한계, 물리적 재배선 비용</text>
+  <text x="520" y="164" class="bottleneck-desc">기계적 계산 불가능 문제(정지 문제)와 NP 지수 자원 증가, 하드웨어 변경 비용</text>
+
+  <!-- 3. 1960~80s -->
+  <circle cx="40" cy="254" r="6" class="era-node"/>
+  <text x="60" y="258" class="era-label">1960 ~ 80s · 집적회로 및 축소</text>
+  <rect x="275" y="229" width="185" height="34" rx="6" class="tech-badge"/>
+  <text x="367.5" y="250.5" text-anchor="middle" class="tech-text">무어의 법칙 / Dennard 스케일링</text>
+  <path d="M 468 246 L 496 246" class="arrow-h" marker-end="url(#arrow-c)"/>
+  <rect x="504" y="219" width="436" height="54" rx="8" class="shift-card"/>
+  <text x="520" y="241" class="bottleneck-title">새로운 병목: 전력 밀도 상승, 느린 DRAM 속도</text>
+  <text x="520" y="260" class="bottleneck-desc">전압 축소 한계에 따른 발열 급증 및 연산 속도 대비 느린 주기억장치 접근 지연</text>
+
+  <!-- 4. 1980~90s -->
+  <circle cx="40" cy="350" r="6" class="era-node"/>
+  <text x="60" y="354" class="era-label">1980 ~ 90s · 마이크로아키텍처</text>
+  <rect x="275" y="325" width="185" height="34" rx="6" class="tech-badge"/>
+  <text x="367.5" y="346.5" text-anchor="middle" class="tech-text">캐시 계층 / RISC / IEEE 754</text>
+  <path d="M 468 342 L 496 342" class="arrow-h" marker-end="url(#arrow-c)"/>
+  <rect x="504" y="315" width="436" height="54" rx="8" class="shift-card"/>
+  <text x="520" y="337" class="bottleneck-title">새로운 병목: 메모리 장벽(Memory Wall), ILP 한계</text>
+  <text x="520" y="356" class="bottleneck-desc">CPU-메모리 성능 격차 심화, 단일 스레드 명령 수준 병렬성 추출의 수확 체감</text>
+
+  <!-- 5. 2000~10s -->
+  <circle cx="40" cy="446" r="6" class="era-node"/>
+  <text x="60" y="450" class="era-label">2000 ~ 10s · 병렬·전력·분산</text>
+  <rect x="275" y="421" width="185" height="34" rx="6" class="tech-badge"/>
+  <text x="367.5" y="442.5" text-anchor="middle" class="tech-text">멀티코어 / WSC / 에너지 비례성</text>
+  <path d="M 468 438 L 496 438" class="arrow-h" marker-end="url(#arrow-c)"/>
+  <rect x="504" y="411" width="436" height="54" rx="8" class="shift-card"/>
+  <text x="520" y="433" class="bottleneck-title">새로운 병목: 다크 실리콘, 암달의 순차 구간, 꼬리 지연</text>
+  <text x="520" y="452" class="bottleneck-desc">칩 전체 동시 구동 불가, 병렬화 불가능한 순차 구간, 대규모 분산 꼬리 지연</text>
+
+  <!-- 6. 2017s~현재 -->
+  <circle cx="40" cy="542" r="6" class="era-node"/>
+  <text x="60" y="546" class="era-label">2017s ~ 현재 · AI &amp; 특화 가속기</text>
+  <rect x="275" y="517" width="185" height="34" rx="6" class="tech-badge"/>
+  <text x="367.5" y="538.5" text-anchor="middle" class="tech-text">FlashAttn / TPU / 분리 서빙</text>
+  <path d="M 468 534 L 496 534" class="arrow-h" marker-end="url(#arrow-c)"/>
+  <rect x="504" y="507" width="436" height="54" rx="8" class="shift-card"/>
+  <text x="520" y="529" class="bottleneck-title">새로운 병목: HBM 대역폭, KV 캐시 용량, Goodput/W</text>
+  <text x="520" y="548" class="bottleneck-desc">자동회귀 어텐션 HBM 이동 한계, 요청 동시성 수용 메모리, 단위 전력당 유효 요청</text>
+</svg>
