@@ -13,12 +13,12 @@ editorial_status: active
 publication_visibility: public
 graph_visibility: hidden
 created: 2026-05-03
-updated: 2026-08-25
+updated: 2026-08-28
 review:
   mode: attested
-  revision: sha256:920e157a98f65a5f803f33a2cb2d67ee0bcb6e5a3a20beeff845b66631391a41
-  reviewed_at: 2026-08-04
-  reviewed_by: codex
+  revision: sha256:b146e19124ab4dc629bff3611e24f5165220af1f5ba4806394db80c67dbd9c42
+  reviewed_at: 2026-08-28
+  reviewed_by: antigravity
 evidence_ids: []
 capability_layers: []
 redirect_from:
@@ -132,6 +132,7 @@ redirect_from:
 - [2026-08-24 ingest | ASLR 개념 문서 초안 생성](logs/log-2026-08-24-100-aslr-개념-문서-초안-생성.md)
 - [2026-08-25 fix | CI 배포 테스트 타임아웃 및 변경 날짜 수정](logs/log-2026-08-25-101-ci-배포-테스트-타임아웃-및-변경-날짜-수정.md)
 - [2026-08-25 promote | ASLR 개념 및 출처 문서 공개 승격](logs/log-2026-08-25-102-aslr-개념-문서-공개-승격.md)
+- [2026-08-28 update | 컴퓨팅 능력의 발달사 내용 구성 및 시각화 개선](logs/log-2026-08-28-103-컴퓨팅-능력의-발달사-내용-구성-및-시각화-개선.md)
 
 ## 출처
 

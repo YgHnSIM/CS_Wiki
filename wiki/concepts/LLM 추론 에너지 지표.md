@@ -17,12 +17,12 @@ editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-25
-updated: 2026-07-26
+updated: 2026-08-28
 review:
-  mode: legacy-baseline
-  revision: sha256:56b1d59f61181d6cc50f868880e0ff7c5eb9f8f15b43453227485c7968e22a11
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+  mode: attested
+  revision: sha256:8f02329b277a08db72286632ac547562e117287859f4aa8b307e78433bc392d7
+  reviewed_at: 2026-08-28
+  reviewed_by: antigravity
 evidence_ids:
   - ref-083
   - ref-084
@@ -96,7 +96,7 @@ redirect_from:
 
 프리필 에너지는 입력 길이, 청크와 병렬 연산에 크게 좌우되고, 디코드 에너지는 출력 길이, 활성 요청 수와 반복적인 가중치·KV 접근에 좌우된다. 단계별 에너지를 얻으려면 전력 샘플을 요청 이벤트와 정렬하고, 겹친 배치에서는 여러 요청에 귀속하는 규칙을 명시해야 한다. 공배치된 프리필·디코드를 임의로 완전히 분리한 값처럼 보고해서는 안 된다.
 
-유휴 전력도 서비스 비용이다. 총 측정 에너지인 **총량(gross)**을 기본값으로 보존하고, 필요하면 `총량 - 유휴 기준 전력 × 시간`으로 **증분(incremental)** 에너지를 함께 계산한다. 증분값은 최적화가 추가한 동적 비용을 보여주지만, 대기 용량을 유지하는 실제 에너지를 지우므로 총량을 대체하지 않는다.
+유휴 전력도 서비스 비용이다. 총 측정 에너지인 **총량**(gross)을 기본값으로 보존하고, 필요하면 `총량 - 유휴 기준 전력 × 시간`으로 **증분(incremental)** 에너지를 함께 계산한다. 증분값은 최적화가 추가한 동적 비용을 보여주지만, 대기 용량을 유지하는 실제 에너지를 지우므로 총량을 대체하지 않는다.
 
 ## 최소 측정 벡터
 

@@ -24,6 +24,15 @@ function frontmatter(text) {
   return YAML.parse(match[1], { uniqueKeys: false }) || null;
 }
 
+async function commitExists(revision) {
+  try {
+    await git("rev-parse", "--verify", `${revision}^{commit}`);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 async function oldFile(revision, path) {
   try {
     return await git("show", `${revision}:${path}`);
@@ -37,7 +46,17 @@ async function main() {
     console.log("change-set: BASE_SHA is not set; diff gate skipped");
     return;
   }
-  const statusText = await git("diff", "--name-status", "-z", `${base}...HEAD`);
+  let targetBase = base;
+  if (!(await commitExists(base))) {
+    if (await commitExists("HEAD~1")) {
+      console.warn(`change-set: BASE_SHA ${base} is not reachable; falling back to HEAD~1`);
+      targetBase = "HEAD~1";
+    } else {
+      console.log(`change-set: BASE_SHA ${base} is not reachable and no parent commit exists; diff gate skipped`);
+      return;
+    }
+  }
+  const statusText = await git("diff", "--name-status", "-z", `${targetBase}...HEAD`);
   const tokens = statusText.split("\0").filter(Boolean);
   const changes = [];
   for (let index = 0; index < tokens.length; index += 1) {
@@ -73,7 +92,7 @@ async function main() {
       current = { schema_version: 2 };
     }
     let previous = null;
-    const previousText = await oldFile(base, path);
+    const previousText = await oldFile(targetBase, path);
     if (previousText) {
       try {
         previous = frontmatter(previousText);
