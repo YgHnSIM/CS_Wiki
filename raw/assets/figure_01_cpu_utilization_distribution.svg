@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" width="1200" height="900" role="img" aria-labelledby="title desc">
+  <title id="title">그림 1 재구성: 5,000대 이상 서버의 6개월 평균 CPU 활용률 분포</title>
+  <desc id="desc">CPU 활용률 0에서 100퍼센트까지의 시간 비율 히스토그램. 10에서 50퍼센트의 중간 부하 구간이 주요 운용 영역이며, 완전 유휴와 최대 활용률은 상대적으로 작은 꼬리로 나타난다.</desc>
+  <defs>
+    <style>
+      .bg { fill: #f6f8fb; }
+      .card { fill: #ffffff; stroke: #d9e2ec; stroke-width: 2; }
+      .ink { fill: #102a43; }
+      .muted { fill: #627d98; }
+      .coral { fill: #e85d5d; }
+      .teal { fill: #0f8b8d; }
+      .grid { stroke: #d9e2ec; stroke-width: 1; stroke-dasharray: 3 6; }
+      .grid.vertical { stroke: #e8eef4; stroke-dasharray: 2 8; }
+      .axis { stroke: #243b53; stroke-width: 2.2; stroke-linecap: round; }
+      .bar { fill: #fecdd3; stroke: #e85d5d; stroke-width: 1; }
+      .bar-focus { fill: #fb7185; stroke: #c2415a; }
+      .kicker { fill: #e85d5d; font: 700 15px "Pretendard", "Noto Sans KR", "Malgun Gothic", sans-serif; letter-spacing: 2px; }
+      .title { fill: #102a43; font: 800 35px "Pretendard", "Noto Sans KR", "Malgun Gothic", sans-serif; }
+      .subtitle { fill: #486581; font: 500 17px "Pretendard", "Noto Sans KR", "Malgun Gothic", sans-serif; }
+      .meta { fill: #0f8b8d; font: 700 14px "Pretendard", "Noto Sans KR", "Malgun Gothic", sans-serif; }
+      .axis-title { fill: #243b53; font: 700 18px "Pretendard", "Noto Sans KR", "Malgun Gothic", sans-serif; }
+      .tick { fill: #486581; font: 500 15px "Pretendard", "Noto Sans KR", "Malgun Gothic", sans-serif; }
+      .focus-label { fill: #0f766e; font: 800 16px "Pretendard", "Noto Sans KR", "Malgun Gothic", sans-serif; }
+      .callout-title { fill: #102a43; font: 800 16px "Pretendard", "Noto Sans KR", "Malgun Gothic", sans-serif; }
+      .callout-body { fill: #486581; font: 500 14px "Pretendard", "Noto Sans KR", "Malgun Gothic", sans-serif; }
+      .insight-label { fill: #ffffff; font: 800 14px "Pretendard", "Noto Sans KR", "Malgun Gothic", sans-serif; letter-spacing: 1px; }
+      .insight { fill: #ffffff; font: 700 18px "Pretendard", "Noto Sans KR", "Malgun Gothic", sans-serif; }
+      .caption { fill: #243b53; font: 600 16px "Pretendard", "Noto Sans KR", "Malgun Gothic", sans-serif; }
+      .note { fill: #829ab1; font: 500 13px "Pretendard", "Noto Sans KR", "Malgun Gothic", sans-serif; }
+    </style>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6.5" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#0f8b8d"/>
+    </marker>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#102a43" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="900" class="bg"/>
+  <text x="60" y="62" class="kicker">FIGURE 01  /  SERVER WORKLOAD</text>
+  <text x="60" y="107" class="title">서버는 대부분의 시간을 어디에서 보내는가?</text>
+  <text x="60" y="139" class="subtitle">The Case for Energy-Proportional Computing · Barroso &amp; Hölzle · 2007</text>
+  <rect x="925" y="42" width="215" height="34" rx="17" fill="#e6fffa"/>
+  <text x="1032.5" y="64" class="meta" text-anchor="middle">원문 Figure 1 재작성</text>
+
+  <rect x="50" y="170" width="1100" height="535" rx="24" class="card" filter="url(#shadow)"/>
+  <text x="150" y="203" class="axis-title">평균 CPU 활용률 분포</text>
+  <text x="1090" y="203" class="muted" font-size="14" font-family="Pretendard, Noto Sans KR, Malgun Gothic, sans-serif" text-anchor="end">5,000대 이상 서버 · 6개월</text>
+
+  <rect x="244.00" y="230" width="376.00" height="355" fill="#ccfbf1" opacity="0.58"/>
+  <line x1="150.00" y1="230" x2="150.00" y2="585" class="grid vertical"/>
+    <line x1="244.00" y1="230" x2="244.00" y2="585" class="grid vertical"/>
+    <line x1="338.00" y1="230" x2="338.00" y2="585" class="grid vertical"/>
+    <line x1="432.00" y1="230" x2="432.00" y2="585" class="grid vertical"/>
+    <line x1="526.00" y1="230" x2="526.00" y2="585" class="grid vertical"/>
+    <line x1="620.00" y1="230" x2="620.00" y2="585" class="grid vertical"/>
+    <line x1="714.00" y1="230" x2="714.00" y2="585" class="grid vertical"/>
+    <line x1="808.00" y1="230" x2="808.00" y2="585" class="grid vertical"/>
+    <line x1="902.00" y1="230" x2="902.00" y2="585" class="grid vertical"/>
+    <line x1="996.00" y1="230" x2="996.00" y2="585" class="grid vertical"/>
+    <line x1="1090.00" y1="230" x2="1090.00" y2="585" class="grid vertical"/>
+  <line x1="150" y1="585.00" x2="1090" y2="585.00" class="grid"/>
+    <line x1="150" y1="466.67" x2="1090" y2="466.67" class="grid"/>
+    <line x1="150" y1="348.33" x2="1090" y2="348.33" class="grid"/>
+    <line x1="150" y1="230.00" x2="1090" y2="230.00" class="grid"/>
+  <line x1="150" y1="585" x2="1100" y2="585" class="axis" marker-end="url(#arrow)"/>
+  <line x1="150" y1="585" x2="150" y2="220" class="axis" marker-end="url(#arrow)"/>
+  <rect x="150.45" y="309.11" width="8.50" height="275.89" rx="0.7" class="bar"/>
+      <rect x="159.85" y="311.96" width="8.50" height="273.04" rx="0.7" class="bar"/>
+      <rect x="169.25" y="230.00" width="8.50" height="355.00" rx="0.7" class="bar"/>
+      <rect x="178.65" y="327.78" width="8.50" height="257.22" rx="0.7" class="bar"/>
+      <rect x="188.05" y="400.15" width="8.50" height="184.85" rx="0.7" class="bar"/>
+      <rect x="197.45" y="448.53" width="8.50" height="136.47" rx="0.7" class="bar"/>
+      <rect x="206.85" y="471.60" width="8.50" height="113.40" rx="0.7" class="bar"/>
+      <rect x="216.25" y="498.19" width="8.50" height="86.81" rx="0.7" class="bar"/>
+      <rect x="225.65" y="509.35" width="8.50" height="75.65" rx="0.7" class="bar"/>
+      <rect x="235.05" y="510.77" width="8.50" height="74.23" rx="0.7" class="bar"/>
+      <rect x="244.45" y="498.84" width="8.50" height="86.16" rx="0.7" class="bar bar-focus"/>
+      <rect x="253.85" y="490.42" width="8.50" height="94.58" rx="0.7" class="bar bar-focus"/>
+      <rect x="263.25" y="485.74" width="8.50" height="99.26" rx="0.7" class="bar bar-focus"/>
+      <rect x="272.65" y="485.61" width="8.50" height="99.39" rx="0.7" class="bar bar-focus"/>
+      <rect x="282.05" y="488.33" width="8.50" height="96.67" rx="0.7" class="bar bar-focus"/>
+      <rect x="291.45" y="492.88" width="8.50" height="92.12" rx="0.7" class="bar bar-focus"/>
+      <rect x="300.85" y="490.79" width="8.50" height="94.21" rx="0.7" class="bar bar-focus"/>
+      <rect x="310.25" y="475.75" width="8.50" height="109.25" rx="0.7" class="bar bar-focus"/>
+      <rect x="319.65" y="456.30" width="8.50" height="128.70" rx="0.7" class="bar bar-focus"/>
+      <rect x="329.05" y="429.98" width="8.50" height="155.02" rx="0.7" class="bar bar-focus"/>
+      <rect x="338.45" y="377.06" width="8.50" height="207.94" rx="0.7" class="bar bar-focus"/>
+      <rect x="347.85" y="348.14" width="8.50" height="236.86" rx="0.7" class="bar bar-focus"/>
+      <rect x="357.25" y="324.02" width="8.50" height="260.98" rx="0.7" class="bar bar-focus"/>
+      <rect x="366.65" y="302.36" width="8.50" height="282.64" rx="0.7" class="bar bar-focus"/>
+      <rect x="376.05" y="282.00" width="8.50" height="303.00" rx="0.7" class="bar bar-focus"/>
+      <rect x="385.45" y="267.09" width="8.50" height="317.91" rx="0.7" class="bar bar-focus"/>
+      <rect x="394.85" y="262.16" width="8.50" height="322.84" rx="0.7" class="bar bar-focus"/>
+      <rect x="404.25" y="259.31" width="8.50" height="325.69" rx="0.7" class="bar bar-focus"/>
+      <rect x="413.65" y="263.71" width="8.50" height="321.29" rx="0.7" class="bar bar-focus"/>
+      <rect x="423.05" y="265.93" width="8.50" height="319.07" rx="0.7" class="bar bar-focus"/>
+      <rect x="432.45" y="269.68" width="8.50" height="315.32" rx="0.7" class="bar bar-focus"/>
+      <rect x="441.85" y="277.98" width="8.50" height="307.02" rx="0.7" class="bar bar-focus"/>
+      <rect x="451.25" y="288.75" width="8.50" height="296.25" rx="0.7" class="bar bar-focus"/>
+      <rect x="460.65" y="298.21" width="8.50" height="286.79" rx="0.7" class="bar bar-focus"/>
+      <rect x="470.05" y="308.45" width="8.50" height="276.55" rx="0.7" class="bar bar-focus"/>
+      <rect x="479.45" y="317.40" width="8.50" height="267.60" rx="0.7" class="bar bar-focus"/>
+      <rect x="488.85" y="326.23" width="8.50" height="258.77" rx="0.7" class="bar bar-focus"/>
+      <rect x="498.25" y="334.65" width="8.50" height="250.35" rx="0.7" class="bar bar-focus"/>
+      <rect x="507.65" y="343.48" width="8.50" height="241.52" rx="0.7" class="bar bar-focus"/>
+      <rect x="517.05" y="351.65" width="8.50" height="233.35" rx="0.7" class="bar bar-focus"/>
+      <rect x="526.45" y="360.46" width="8.50" height="224.54" rx="0.7" class="bar bar-focus"/>
+      <rect x="535.85" y="369.29" width="8.50" height="215.71" rx="0.7" class="bar bar-focus"/>
+      <rect x="545.25" y="378.48" width="8.50" height="206.52" rx="0.7" class="bar bar-focus"/>
+      <rect x="554.65" y="388.34" width="8.50" height="196.66" rx="0.7" class="bar bar-focus"/>
+      <rect x="564.05" y="397.68" width="8.50" height="187.32" rx="0.7" class="bar bar-focus"/>
+      <rect x="573.45" y="408.19" width="8.50" height="176.81" rx="0.7" class="bar bar-focus"/>
+      <rect x="582.85" y="418.95" width="8.50" height="166.05" rx="0.7" class="bar bar-focus"/>
+      <rect x="592.25" y="429.58" width="8.50" height="155.42" rx="0.7" class="bar bar-focus"/>
+      <rect x="601.65" y="439.18" width="8.50" height="145.82" rx="0.7" class="bar bar-focus"/>
+      <rect x="611.05" y="449.30" width="8.50" height="135.70" rx="0.7" class="bar bar-focus"/>
+      <rect x="620.45" y="459.93" width="8.50" height="125.07" rx="0.7" class="bar"/>
+      <rect x="629.85" y="468.88" width="8.50" height="116.12" rx="0.7" class="bar"/>
+      <rect x="639.25" y="478.22" width="8.50" height="106.78" rx="0.7" class="bar"/>
+      <rect x="648.65" y="485.87" width="8.50" height="99.13" rx="0.7" class="bar"/>
+      <rect x="658.05" y="493.02" width="8.50" height="91.98" rx="0.7" class="bar"/>
+      <rect x="667.45" y="500.17" width="8.50" height="84.83" rx="0.7" class="bar"/>
+      <rect x="676.85" y="505.60" width="8.50" height="79.40" rx="0.7" class="bar"/>
+      <rect x="686.25" y="511.75" width="8.50" height="73.25" rx="0.7" class="bar"/>
+      <rect x="695.65" y="518.12" width="8.50" height="66.88" rx="0.7" class="bar"/>
+      <rect x="705.05" y="522.64" width="8.50" height="62.36" rx="0.7" class="bar"/>
+      <rect x="714.45" y="528.01" width="8.50" height="56.99" rx="0.7" class="bar"/>
+      <rect x="723.85" y="533.28" width="8.50" height="51.72" rx="0.7" class="bar"/>
+      <rect x="733.25" y="537.31" width="8.50" height="47.69" rx="0.7" class="bar"/>
+      <rect x="742.65" y="541.88" width="8.50" height="43.12" rx="0.7" class="bar"/>
+      <rect x="752.05" y="545.39" width="8.50" height="39.61" rx="0.7" class="bar"/>
+      <rect x="761.45" y="548.02" width="8.50" height="36.98" rx="0.7" class="bar"/>
+      <rect x="770.85" y="551.70" width="8.50" height="33.30" rx="0.7" class="bar"/>
+      <rect x="780.25" y="554.34" width="8.50" height="30.66" rx="0.7" class="bar"/>
+      <rect x="789.65" y="556.79" width="8.50" height="28.21" rx="0.7" class="bar"/>
+      <rect x="799.05" y="559.25" width="8.50" height="25.75" rx="0.7" class="bar"/>
+      <rect x="808.45" y="561.53" width="8.50" height="23.47" rx="0.7" class="bar"/>
+      <rect x="817.85" y="564.16" width="8.50" height="20.84" rx="0.7" class="bar"/>
+      <rect x="827.25" y="565.91" width="8.50" height="19.09" rx="0.7" class="bar"/>
+      <rect x="836.65" y="567.50" width="8.50" height="17.50" rx="0.7" class="bar"/>
+      <rect x="846.05" y="569.43" width="8.50" height="15.57" rx="0.7" class="bar"/>
+      <rect x="855.45" y="570.48" width="8.50" height="14.52" rx="0.7" class="bar"/>
+      <rect x="864.85" y="571.88" width="8.50" height="13.12" rx="0.7" class="bar"/>
+      <rect x="874.25" y="572.75" width="8.50" height="12.25" rx="0.7" class="bar"/>
+      <rect x="883.65" y="573.64" width="8.50" height="11.36" rx="0.7" class="bar"/>
+      <rect x="893.05" y="574.52" width="8.50" height="10.48" rx="0.7" class="bar"/>
+      <rect x="902.45" y="575.57" width="8.50" height="9.43" rx="0.7" class="bar"/>
+      <rect x="911.85" y="575.39" width="8.50" height="9.61" rx="0.7" class="bar"/>
+      <rect x="921.25" y="576.09" width="8.50" height="8.91" rx="0.7" class="bar"/>
+      <rect x="930.65" y="576.09" width="8.50" height="8.91" rx="0.7" class="bar"/>
+      <rect x="940.05" y="576.09" width="8.50" height="8.91" rx="0.7" class="bar"/>
+      <rect x="949.45" y="576.27" width="8.50" height="8.73" rx="0.7" class="bar"/>
+      <rect x="958.85" y="574.87" width="8.50" height="10.13" rx="0.7" class="bar"/>
+      <rect x="968.25" y="574.87" width="8.50" height="10.13" rx="0.7" class="bar"/>
+      <rect x="977.65" y="575.04" width="8.50" height="9.96" rx="0.7" class="bar"/>
+      <rect x="987.05" y="576.09" width="8.50" height="8.91" rx="0.7" class="bar"/>
+      <rect x="996.45" y="577.68" width="8.50" height="7.32" rx="0.7" class="bar"/>
+      <rect x="1005.85" y="578.55" width="8.50" height="6.45" rx="0.7" class="bar"/>
+      <rect x="1015.25" y="579.60" width="8.50" height="5.40" rx="0.7" class="bar"/>
+      <rect x="1024.65" y="580.66" width="8.50" height="4.34" rx="0.7" class="bar"/>
+      <rect x="1034.05" y="580.66" width="8.50" height="4.34" rx="0.7" class="bar"/>
+      <rect x="1043.45" y="578.89" width="8.50" height="6.11" rx="0.7" class="bar"/>
+      <rect x="1052.85" y="573.81" width="8.50" height="11.19" rx="0.7" class="bar"/>
+      <rect x="1062.25" y="571.71" width="8.50" height="13.29" rx="0.7" class="bar"/>
+      <rect x="1071.65" y="567.50" width="8.50" height="17.50" rx="0.7" class="bar"/>
+      <rect x="1081.05" y="547.13" width="8.50" height="37.87" rx="0.7" class="bar"/>
+  <line x1="244.00" y1="216" x2="244.00" y2="228" stroke="#0f8b8d" stroke-width="2"/>
+  <line x1="620.00" y1="216" x2="620.00" y2="228" stroke="#0f8b8d" stroke-width="2"/>
+  <text x="432.00" y="208" class="focus-label" text-anchor="middle">주 운용 구간 10–50%</text>
+  <text x="150.00" y="612" class="tick" text-anchor="middle">0</text>
+    <text x="244.00" y="612" class="tick" text-anchor="middle">10</text>
+    <text x="338.00" y="612" class="tick" text-anchor="middle">20</text>
+    <text x="432.00" y="612" class="tick" text-anchor="middle">30</text>
+    <text x="526.00" y="612" class="tick" text-anchor="middle">40</text>
+    <text x="620.00" y="612" class="tick" text-anchor="middle">50</text>
+    <text x="714.00" y="612" class="tick" text-anchor="middle">60</text>
+    <text x="808.00" y="612" class="tick" text-anchor="middle">70</text>
+    <text x="902.00" y="612" class="tick" text-anchor="middle">80</text>
+    <text x="996.00" y="612" class="tick" text-anchor="middle">90</text>
+    <text x="1090.00" y="612" class="tick" text-anchor="middle">100</text>
+  <text x="132" y="591.00" class="tick" text-anchor="end">0</text>
+    <text x="132" y="472.67" class="tick" text-anchor="end">0.01</text>
+    <text x="132" y="354.33" class="tick" text-anchor="end">0.02</text>
+    <text x="132" y="236.00" class="tick" text-anchor="end">0.03</text>
+  <text x="620" y="647" class="axis-title" text-anchor="middle">CPU 활용률 (%)</text>
+  <text x="77" y="407.5" class="axis-title" text-anchor="middle" transform="rotate(-90 77 407.5)">시간 비율</text>
+
+  <g transform="translate(175 665)">
+    <circle cx="0" cy="-5" r="6" fill="#e85d5d"/>
+    <text x="16" y="0" class="callout-title">분포의 꼬리</text>
+    <text x="16" y="23" class="callout-body">완전 유휴와 최대 활용률은 주류가 아니다</text>
+  </g>
+  <g transform="translate(615 665)">
+    <circle cx="0" cy="-5" r="6" fill="#0f8b8d"/>
+    <text x="16" y="0" class="callout-title">분포의 중심</text>
+    <text x="16" y="23" class="callout-body">서버는 10–50% 중간 부하에서 많은 시간을 보낸다</text>
+  </g>
+
+  <rect x="50" y="730" width="1100" height="58" rx="16" fill="#102a43"/>
+  <rect x="70" y="746" width="90" height="26" rx="13" fill="#e85d5d"/>
+  <text x="115" y="764" class="insight-label" text-anchor="middle">핵심 관찰</text>
+  <text x="185" y="766" class="insight">최대 성능 한 점보다, 실제로 오래 머무는 중간 부하에서 전력 효율을 설계해야 한다.</text>
+
+  <text x="60" y="830" class="caption">그림 1. 5,000대가 넘는 서버를 6개월 동안 관찰한 평균 CPU 활용률 분포.</text>
+  <text x="60" y="855" class="note">원문 Figure 1의 축·분포 형태를 기준으로 재작성한 도표이며, 원자료의 개별 관측값은 논문에 공개되지 않았다.</text>
+</svg>

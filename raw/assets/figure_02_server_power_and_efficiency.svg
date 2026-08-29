@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" width="1200" height="900" role="img" aria-labelledby="title desc">
+  <title id="title">그림 2 재작성: 활용률에 따른 서버 전력 사용량과 상대 효율</title>
+  <desc id="desc">대표적인 에너지 효율형 서버의 정규화된 전력 곡선과 상대 효율 곡선. 유휴에 가까운 상태에서도 전력은 최대치의 약 50퍼센트이며, 20에서 30퍼센트 활용률에서는 상대 효율이 최대 부하의 절반 미만이다.</desc>
+
+  <defs>
+    <style>
+      .bg { fill: #f6f8fb; }
+      .card { fill: #ffffff; stroke: #d9e2ec; stroke-width: 2; }
+      .ink { fill: #102a43; }
+      .muted { fill: #627d98; }
+      .coral { fill: #e85d5d; }
+      .teal { fill: #0f8b8d; }
+      .grid { stroke: #d9e2ec; stroke-width: 1; }
+      .grid.vertical { stroke: #e8eef4; stroke-dasharray: 2 8; }
+      .axis { stroke: #243b53; stroke-width: 2.2; stroke-linecap: round; }
+      .tick-mark { stroke: #829ab1; stroke-width: 1.2; }
+      .power { fill: none; stroke: #0f8b8d; stroke-width: 7; stroke-linecap: round; stroke-linejoin: round; }
+      .efficiency { fill: none; stroke: #e85d5d; stroke-width: 7; stroke-linecap: round; stroke-linejoin: round; }
+      .threshold { fill: none; stroke: #f2a3a3; stroke-width: 1.4; stroke-dasharray: 6 6; }
+      .kicker { fill: #e85d5d; font: 700 15px "Pretendard", "Noto Sans KR", "Malgun Gothic", sans-serif; letter-spacing: 2px; }
+      .title { fill: #102a43; font: 800 35px "Pretendard", "Noto Sans KR", "Malgun Gothic", sans-serif; }
+      .subtitle { fill: #486581; font: 500 17px "Pretendard", "Noto Sans KR", "Malgun Gothic", sans-serif; }
+      .meta { fill: #0f8b8d; font: 700 14px "Pretendard", "Noto Sans KR", "Malgun Gothic", sans-serif; }
+      .axis-title { fill: #243b53; font: 700 18px "Pretendard", "Noto Sans KR", "Malgun Gothic", sans-serif; }
+      .tick { fill: #486581; font: 500 15px "Pretendard", "Noto Sans KR", "Malgun Gothic", sans-serif; }
+      .focus-label { fill: #0f766e; font: 800 16px "Pretendard", "Noto Sans KR", "Malgun Gothic", sans-serif; }
+      .callout-title { fill: #102a43; font: 800 16px "Pretendard", "Noto Sans KR", "Malgun Gothic", sans-serif; }
+      .callout-body { fill: #486581; font: 500 14px "Pretendard", "Noto Sans KR", "Malgun Gothic", sans-serif; }
+      .insight-label { fill: #ffffff; font: 800 14px "Pretendard", "Noto Sans KR", "Malgun Gothic", sans-serif; letter-spacing: 1px; }
+      .insight { fill: #ffffff; font: 700 18px "Pretendard", "Noto Sans KR", "Malgun Gothic", sans-serif; }
+      .caption { fill: #243b53; font: 600 16px "Pretendard", "Noto Sans KR", "Malgun Gothic", sans-serif; }
+      .note { fill: #829ab1; font: 500 13px "Pretendard", "Noto Sans KR", "Malgun Gothic", sans-serif; }
+      .legend-text { fill: #243b53; font: 600 15px "Pretendard", "Noto Sans KR", "Malgun Gothic", sans-serif; }
+      .point-label { fill: #243b53; font: 700 14px "Pretendard", "Noto Sans KR", "Malgun Gothic", sans-serif; }
+
+    </style>
+    <marker id="figure2-arrow" markerWidth="8" markerHeight="8" refX="6.5" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#0f8b8d"/>
+    </marker>
+    <filter id="figure2-shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#102a43" flood-opacity="0.08"/>
+    </filter>
+    <clipPath id="figure2-plot-clip">
+      <rect x="150" y="230" width="940" height="330"/>
+    </clipPath>
+  </defs>
+
+  <rect width="1200" height="900" class="bg"/>
+  <text x="60" y="62" class="kicker">FIGURE 02  /  POWER &amp; EFFICIENCY</text>
+  <text x="60" y="107" class="title">일을 거의 안 해도 전력은 절반 가까이 든다</text>
+  <text x="60" y="139" class="subtitle">The Case for Energy-Proportional Computing · Barroso · Hölzle · 2007</text>
+  <rect x="925" y="42" width="215" height="34" rx="17" fill="#e6fffa"/>
+  <text x="1032.5" y="64" class="meta" text-anchor="middle">원문 Figure 2 재작성</text>
+
+
+  <rect x="50" y="170" width="1100" height="540" rx="24" class="card" filter="url(#figure2-shadow)"/>
+  <text x="150" y="203" class="axis-title">서버 전력과 상대 효율</text>
+  <text x="1090" y="203" class="muted" font-size="14" font-family="Pretendard, Noto Sans KR, Malgun Gothic, sans-serif" text-anchor="end">정규화된 개념 곡선 · 최대치 대비 (%)</text>
+
+  <rect x="244.00" y="230" width="376.00" height="330" fill="#fecaca" opacity="0.5"/>
+  <line x1="150.00" y1="230" x2="150.00" y2="560" class="grid vertical"/>
+  <line x1="244.00" y1="230" x2="244.00" y2="560" class="grid vertical"/>
+  <line x1="338.00" y1="230" x2="338.00" y2="560" class="grid vertical"/>
+  <line x1="432.00" y1="230" x2="432.00" y2="560" class="grid vertical"/>
+  <line x1="526.00" y1="230" x2="526.00" y2="560" class="grid vertical"/>
+  <line x1="620.00" y1="230" x2="620.00" y2="560" class="grid vertical"/>
+  <line x1="714.00" y1="230" x2="714.00" y2="560" class="grid vertical"/>
+  <line x1="808.00" y1="230" x2="808.00" y2="560" class="grid vertical"/>
+  <line x1="902.00" y1="230" x2="902.00" y2="560" class="grid vertical"/>
+  <line x1="996.00" y1="230" x2="996.00" y2="560" class="grid vertical"/>
+  <line x1="1090.00" y1="230" x2="1090.00" y2="560" class="grid vertical"/>
+  <line x1="150" y1="560.00" x2="1090" y2="560.00" class="grid"/>
+  <line x1="150" y1="527.00" x2="1090" y2="527.00" class="grid"/>
+  <line x1="150" y1="494.00" x2="1090" y2="494.00" class="grid"/>
+  <line x1="150" y1="461.00" x2="1090" y2="461.00" class="grid"/>
+  <line x1="150" y1="428.00" x2="1090" y2="428.00" class="grid"/>
+  <line x1="150" y1="395.00" x2="1090" y2="395.00" class="grid"/>
+  <line x1="150" y1="362.00" x2="1090" y2="362.00" class="grid"/>
+  <line x1="150" y1="329.00" x2="1090" y2="329.00" class="grid"/>
+  <line x1="150" y1="296.00" x2="1090" y2="296.00" class="grid"/>
+  <line x1="150" y1="263.00" x2="1090" y2="263.00" class="grid"/>
+  <line x1="150" y1="230.00" x2="1090" y2="230.00" class="grid"/>
+  <text x="432.00" y="255" class="focus-label" text-anchor="middle">주 운용 구간 10–50%</text>
+
+  <g clip-path="url(#figure2-plot-clip)">
+    <path d="M 150.00 395.00 L 168.80 391.70 L 187.60 388.40 L 206.40 385.10 L 225.20 381.80 L 244.00 378.50 L 262.80 375.20 L 281.60 371.90 L 300.40 368.60 L 319.20 365.30 L 338.00 362.00 L 356.80 358.70 L 375.60 355.40 L 394.40 352.10 L 413.20 348.80 L 432.00 345.50 L 450.80 342.20 L 469.60 338.90 L 488.40 335.60 L 507.20 332.30 L 526.00 329.00 L 544.80 325.70 L 563.60 322.40 L 582.40 319.10 L 601.20 315.80 L 620.00 312.50 L 638.80 309.20 L 657.60 305.90 L 676.40 302.60 L 695.20 299.30 L 714.00 296.00 L 732.80 292.70 L 751.60 289.40 L 770.40 286.10 L 789.20 282.80 L 808.00 279.50 L 826.80 276.20 L 845.60 272.90 L 864.40 269.60 L 883.20 266.30 L 902.00 263.00 L 920.80 259.70 L 939.60 256.40 L 958.40 253.10 L 977.20 249.80 L 996.00 246.50 L 1014.80 243.20 L 1033.60 239.90 L 1052.40 236.60 L 1071.20 233.30 L 1090.00 230.00" class="power"/>
+    <path d="M 150.00 560.00 L 168.80 547.06 L 187.60 534.62 L 206.40 522.64 L 225.20 511.11 L 244.00 500.00 L 262.80 489.29 L 281.60 478.95 L 300.40 468.97 L 319.20 459.32 L 338.00 450.00 L 356.80 440.98 L 375.60 432.26 L 394.40 423.81 L 413.20 415.63 L 432.00 407.69 L 450.80 400.00 L 469.60 392.54 L 488.40 385.29 L 507.20 378.26 L 526.00 371.43 L 544.80 364.79 L 563.60 358.33 L 582.40 352.05 L 601.20 345.95 L 620.00 340.00 L 638.80 334.21 L 657.60 328.57 L 676.40 323.08 L 695.20 317.72 L 714.00 312.50 L 732.80 307.41 L 751.60 302.44 L 770.40 297.59 L 789.20 292.86 L 808.00 288.24 L 826.80 283.72 L 845.60 279.31 L 864.40 275.00 L 883.20 270.79 L 902.00 266.67 L 920.80 262.64 L 939.60 258.70 L 958.40 254.84 L 977.20 251.06 L 996.00 247.37 L 1014.80 243.75 L 1033.60 240.21 L 1052.40 236.73 L 1071.20 233.33 L 1090.00 230.00" class="efficiency"/>
+
+  </g>
+
+  <line x1="150" y1="560" x2="1100" y2="560" class="axis" marker-end="url(#figure2-arrow)"/>
+  <line x1="150" y1="560" x2="150" y2="220" class="axis" marker-end="url(#figure2-arrow)"/>
+  <line x1="150.00" y1="560" x2="150.00" y2="569" class="tick-mark"/>
+  <text x="150.00" y="594" class="tick" text-anchor="middle">0</text>
+  <line x1="244.00" y1="560" x2="244.00" y2="569" class="tick-mark"/>
+  <text x="244.00" y="594" class="tick" text-anchor="middle">10</text>
+  <line x1="338.00" y1="560" x2="338.00" y2="569" class="tick-mark"/>
+  <text x="338.00" y="594" class="tick" text-anchor="middle">20</text>
+  <line x1="432.00" y1="560" x2="432.00" y2="569" class="tick-mark"/>
+  <text x="432.00" y="594" class="tick" text-anchor="middle">30</text>
+  <line x1="526.00" y1="560" x2="526.00" y2="569" class="tick-mark"/>
+  <text x="526.00" y="594" class="tick" text-anchor="middle">40</text>
+  <line x1="620.00" y1="560" x2="620.00" y2="569" class="tick-mark"/>
+  <text x="620.00" y="594" class="tick" text-anchor="middle">50</text>
+  <line x1="714.00" y1="560" x2="714.00" y2="569" class="tick-mark"/>
+  <text x="714.00" y="594" class="tick" text-anchor="middle">60</text>
+  <line x1="808.00" y1="560" x2="808.00" y2="569" class="tick-mark"/>
+  <text x="808.00" y="594" class="tick" text-anchor="middle">70</text>
+  <line x1="902.00" y1="560" x2="902.00" y2="569" class="tick-mark"/>
+  <text x="902.00" y="594" class="tick" text-anchor="middle">80</text>
+  <line x1="996.00" y1="560" x2="996.00" y2="569" class="tick-mark"/>
+  <text x="996.00" y="594" class="tick" text-anchor="middle">90</text>
+  <line x1="1090.00" y1="560" x2="1090.00" y2="569" class="tick-mark"/>
+  <text x="1090.00" y="594" class="tick" text-anchor="middle">100</text>
+  <text x="132" y="565.00" class="tick" text-anchor="end">0</text>
+  <text x="132" y="532.00" class="tick" text-anchor="end">10</text>
+  <text x="132" y="499.00" class="tick" text-anchor="end">20</text>
+  <text x="132" y="466.00" class="tick" text-anchor="end">30</text>
+  <text x="132" y="433.00" class="tick" text-anchor="end">40</text>
+  <text x="132" y="400.00" class="tick" text-anchor="end">50</text>
+  <text x="132" y="367.00" class="tick" text-anchor="end">60</text>
+  <text x="132" y="334.00" class="tick" text-anchor="end">70</text>
+  <text x="132" y="301.00" class="tick" text-anchor="end">80</text>
+  <text x="132" y="268.00" class="tick" text-anchor="end">90</text>
+  <text x="132" y="235.00" class="tick" text-anchor="end">100</text>
+  <text x="620.00" y="621" class="axis-title" text-anchor="middle">활용률 (%)</text>
+  <text x="77" y="395" class="axis-title" text-anchor="middle" transform="rotate(-90 77 395)">서버 전력·상대 효율 (최대치 대비, %)</text>
+
+  <rect x="820" y="438" width="250" height="83" rx="12" fill="#ffffff" fill-opacity="0.95" stroke="#b8c7d9" stroke-width="1.5"/>
+  <line x1="842" y1="466" x2="883" y2="466" class="power"/>
+  <text x="897" y="471" class="legend-text">전력 p(u)</text>
+  <line x1="842" y1="495" x2="883" y2="495" class="efficiency"/>
+  <text x="897" y="500" class="legend-text">상대 효율 u/p(u)</text>
+
+  <rect x="150" y="646" width="410" height="48" rx="12" fill="#fff4f4" stroke="#f4b4b4" stroke-width="1.5"/>
+  <circle cx="173" cy="670" r="6" fill="#e85d5d"/>
+  <text x="190" y="667" class="callout-title">유휴 전력 ≈ 50%</text>
+  <text x="190" y="686" class="callout-body">거의 일을 하지 않아도 최대 전력의 절반을 소비</text>
+  <rect x="580" y="646" width="510" height="48" rx="12" fill="#eefcf9" stroke="#a8ded4" stroke-width="1.5"/>
+  <circle cx="603" cy="670" r="6" fill="#0f8b8d"/>
+  <text x="620" y="667" class="callout-title">흔한 운용 구간에서 효율 하락</text>
+  <text x="620" y="686" class="callout-body">20–30% 활용률의 상대 효율은 최대 부하의 절반 미만</text>
+
+  <rect x="50" y="730" width="1100" height="58" rx="16" fill="#102a43"/>
+  <rect x="70" y="746" width="90" height="26" rx="13" fill="#e85d5d"/>
+  <text x="115" y="764" class="insight-label" text-anchor="middle">핵심 관찰</text>
+  <text x="185" y="766" class="insight">최대 부하에서 효율적인 서버도, 중간 부하에서는 전력을 낭비할 수 있다.</text>
+
+  <text x="60" y="830" class="caption">그림 2. 활용률에 따른 서버 전력 사용량과 상대 에너지 효율.</text>
+  <text x="60" y="855" class="note">원문 Figure 2의 축·곡선·주 운용 구간을 기준으로 재작성했으며, 논문은 원자료의 개별 관측값을 제공하지 않는다.</text>
+</svg>

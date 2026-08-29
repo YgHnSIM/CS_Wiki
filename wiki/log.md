@@ -13,10 +13,10 @@ editorial_status: active
 publication_visibility: public
 graph_visibility: hidden
 created: 2026-05-03
-updated: 2026-08-28
+updated: 2026-08-29
 review:
   mode: attested
-  revision: sha256:9ea8adbf022745b0f2b9f1dd2358c412613ffe9ce6fc888cb8598513bb86be7b
+  revision: sha256:639486dad5988fe2f11a851244649466fb14d25bb1b1f904030504f400d408c7
   reviewed_at: 2026-08-28
   reviewed_by: antigravity
 evidence_ids: []
@@ -134,6 +134,9 @@ redirect_from:
 - [2026-08-25 promote | ASLR 개념 및 출처 문서 공개 승격](logs/log-2026-08-25-102-aslr-개념-문서-공개-승격.md)
 - [2026-08-28 update | 컴퓨팅 능력의 발달사 내용 구성 및 시각화 개선](logs/log-2026-08-28-103-컴퓨팅-능력의-발달사-내용-구성-및-시각화-개선.md)
 - [2026-08-28 update | 컴퓨팅 능력의 발달사 SVG 시각화 전면 전환](logs/log-2026-08-28-104-컴퓨팅-능력의-발달사-svg-시각화-전면-전환.md)
+- [2026-08-29 update | The Case Figure 1 시각화 삽입](logs/log-2026-08-29-105-The-Case-Figure-1-시각화-삽입.md)
+- [2026-08-29 update | The Case Figures 2·4 시각화 삽입](logs/log-2026-08-29-106-The-Case-Figures-2-4-시각화-삽입.md)
+- [2026-08-29 update | 에너지 비례 컴퓨팅 용어 정리 반영](logs/log-2026-08-29-107-에너지-비례-컴퓨팅-용어-정리-반영.md)
 
 ## 출처
 

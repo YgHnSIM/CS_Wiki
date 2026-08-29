@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" width="1200" height="900" role="img" aria-labelledby="title desc">
+  <title id="title">그림 4 재작성: 에너지 비례 서버의 전력 사용량과 상대 효율</title>
+  <desc id="desc">유휴 전력을 최대치의 10퍼센트로 낮춘 에너지 비례 서버의 정규화된 전력 곡선과 상대 효율 곡선. 상대 효율은 10퍼센트 활용률에서 50퍼센트를 넘고 30퍼센트 이상에서 80퍼센트를 넘는다.</desc>
+
+  <defs>
+    <style>
+      .bg { fill: #f6f8fb; }
+      .card { fill: #ffffff; stroke: #d9e2ec; stroke-width: 2; }
+      .ink { fill: #102a43; }
+      .muted { fill: #627d98; }
+      .coral { fill: #e85d5d; }
+      .teal { fill: #0f8b8d; }
+      .grid { stroke: #d9e2ec; stroke-width: 1; }
+      .grid.vertical { stroke: #e8eef4; stroke-dasharray: 2 8; }
+      .axis { stroke: #243b53; stroke-width: 2.2; stroke-linecap: round; }
+      .tick-mark { stroke: #829ab1; stroke-width: 1.2; }
+      .power { fill: none; stroke: #0f8b8d; stroke-width: 7; stroke-linecap: round; stroke-linejoin: round; }
+      .efficiency { fill: none; stroke: #e85d5d; stroke-width: 7; stroke-linecap: round; stroke-linejoin: round; }
+      .threshold { fill: none; stroke: #f2a3a3; stroke-width: 1.4; stroke-dasharray: 6 6; }
+      .kicker { fill: #e85d5d; font: 700 15px "Pretendard", "Noto Sans KR", "Malgun Gothic", sans-serif; letter-spacing: 2px; }
+      .title { fill: #102a43; font: 800 35px "Pretendard", "Noto Sans KR", "Malgun Gothic", sans-serif; }
+      .subtitle { fill: #486581; font: 500 17px "Pretendard", "Noto Sans KR", "Malgun Gothic", sans-serif; }
+      .meta { fill: #0f8b8d; font: 700 14px "Pretendard", "Noto Sans KR", "Malgun Gothic", sans-serif; }
+      .axis-title { fill: #243b53; font: 700 18px "Pretendard", "Noto Sans KR", "Malgun Gothic", sans-serif; }
+      .tick { fill: #486581; font: 500 15px "Pretendard", "Noto Sans KR", "Malgun Gothic", sans-serif; }
+      .focus-label { fill: #0f766e; font: 800 16px "Pretendard", "Noto Sans KR", "Malgun Gothic", sans-serif; }
+      .callout-title { fill: #102a43; font: 800 16px "Pretendard", "Noto Sans KR", "Malgun Gothic", sans-serif; }
+      .callout-body { fill: #486581; font: 500 14px "Pretendard", "Noto Sans KR", "Malgun Gothic", sans-serif; }
+      .insight-label { fill: #ffffff; font: 800 14px "Pretendard", "Noto Sans KR", "Malgun Gothic", sans-serif; letter-spacing: 1px; }
+      .insight { fill: #ffffff; font: 700 18px "Pretendard", "Noto Sans KR", "Malgun Gothic", sans-serif; }
+      .caption { fill: #243b53; font: 600 16px "Pretendard", "Noto Sans KR", "Malgun Gothic", sans-serif; }
+      .note { fill: #829ab1; font: 500 13px "Pretendard", "Noto Sans KR", "Malgun Gothic", sans-serif; }
+      .legend-text { fill: #243b53; font: 600 15px "Pretendard", "Noto Sans KR", "Malgun Gothic", sans-serif; }
+      .point-label { fill: #243b53; font: 700 14px "Pretendard", "Noto Sans KR", "Malgun Gothic", sans-serif; }
+
+    </style>
+    <marker id="figure4-arrow" markerWidth="8" markerHeight="8" refX="6.5" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#0f8b8d"/>
+    </marker>
+    <filter id="figure4-shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#102a43" flood-opacity="0.08"/>
+    </filter>
+    <clipPath id="figure4-plot-clip">
+      <rect x="150" y="230" width="940" height="330"/>
+    </clipPath>
+  </defs>
+
+  <rect width="1200" height="900" class="bg"/>
+  <text x="60" y="62" class="kicker">FIGURE 04  /  ENERGY PROPORTIONALITY</text>
+  <text x="60" y="107" class="title">유휴 전력을 10%로 낮추면 곡선이 달라진다</text>
+  <text x="60" y="139" class="subtitle">The Case for Energy-Proportional Computing · Barroso · Hölzle · 2007</text>
+  <rect x="925" y="42" width="215" height="34" rx="17" fill="#e6fffa"/>
+  <text x="1032.5" y="64" class="meta" text-anchor="middle">원문 Figure 4 재작성</text>
+
+
+  <rect x="50" y="170" width="1100" height="540" rx="24" class="card" filter="url(#figure4-shadow)"/>
+  <text x="150" y="203" class="axis-title">서버 전력과 상대 효율</text>
+  <text x="1090" y="203" class="muted" font-size="14" font-family="Pretendard, Noto Sans KR, Malgun Gothic, sans-serif" text-anchor="end">정규화된 개념 곡선 · 최대치 대비 (%)</text>
+
+  <rect x="244.00" y="230" width="376.00" height="330" fill="#fecaca" opacity="0.5"/>
+  <line x1="150.00" y1="230" x2="150.00" y2="560" class="grid vertical"/>
+  <line x1="244.00" y1="230" x2="244.00" y2="560" class="grid vertical"/>
+  <line x1="338.00" y1="230" x2="338.00" y2="560" class="grid vertical"/>
+  <line x1="432.00" y1="230" x2="432.00" y2="560" class="grid vertical"/>
+  <line x1="526.00" y1="230" x2="526.00" y2="560" class="grid vertical"/>
+  <line x1="620.00" y1="230" x2="620.00" y2="560" class="grid vertical"/>
+  <line x1="714.00" y1="230" x2="714.00" y2="560" class="grid vertical"/>
+  <line x1="808.00" y1="230" x2="808.00" y2="560" class="grid vertical"/>
+  <line x1="902.00" y1="230" x2="902.00" y2="560" class="grid vertical"/>
+  <line x1="996.00" y1="230" x2="996.00" y2="560" class="grid vertical"/>
+  <line x1="1090.00" y1="230" x2="1090.00" y2="560" class="grid vertical"/>
+  <line x1="150" y1="560.00" x2="1090" y2="560.00" class="grid"/>
+  <line x1="150" y1="527.00" x2="1090" y2="527.00" class="grid"/>
+  <line x1="150" y1="494.00" x2="1090" y2="494.00" class="grid"/>
+  <line x1="150" y1="461.00" x2="1090" y2="461.00" class="grid"/>
+  <line x1="150" y1="428.00" x2="1090" y2="428.00" class="grid"/>
+  <line x1="150" y1="395.00" x2="1090" y2="395.00" class="grid"/>
+  <line x1="150" y1="362.00" x2="1090" y2="362.00" class="grid"/>
+  <line x1="150" y1="329.00" x2="1090" y2="329.00" class="grid"/>
+  <line x1="150" y1="296.00" x2="1090" y2="296.00" class="grid"/>
+  <line x1="150" y1="263.00" x2="1090" y2="263.00" class="grid"/>
+  <line x1="150" y1="230.00" x2="1090" y2="230.00" class="grid"/>
+  <text x="432.00" y="255" class="focus-label" text-anchor="middle">주 운용 구간 10–50%</text>
+
+  <g clip-path="url(#figure4-plot-clip)">
+    <path d="M 150.00 527.00 L 168.80 521.06 L 187.60 515.12 L 206.40 509.18 L 225.20 503.24 L 244.00 497.30 L 262.80 491.36 L 281.60 485.42 L 300.40 479.48 L 319.20 473.54 L 338.00 467.60 L 356.80 461.66 L 375.60 455.72 L 394.40 449.78 L 413.20 443.84 L 432.00 437.90 L 450.80 431.96 L 469.60 426.02 L 488.40 420.08 L 507.20 414.14 L 526.00 408.20 L 544.80 402.26 L 563.60 396.32 L 582.40 390.38 L 601.20 384.44 L 620.00 378.50 L 638.80 372.56 L 657.60 366.62 L 676.40 360.68 L 695.20 354.74 L 714.00 348.80 L 732.80 342.86 L 751.60 336.92 L 770.40 330.98 L 789.20 325.04 L 808.00 319.10 L 826.80 313.16 L 845.60 307.22 L 864.40 301.28 L 883.20 295.34 L 902.00 289.40 L 920.80 283.46 L 939.60 277.52 L 958.40 271.58 L 977.20 265.64 L 996.00 259.70 L 1014.80 253.76 L 1033.60 247.82 L 1052.40 241.88 L 1071.20 235.94 L 1090.00 230.00" class="power"/>
+    <path d="M 150.00 560.00 L 168.80 504.07 L 187.60 462.94 L 206.40 431.43 L 225.20 406.51 L 244.00 386.32 L 262.80 369.62 L 281.60 355.58 L 300.40 343.61 L 319.20 333.28 L 338.00 324.29 L 356.80 316.38 L 375.60 309.37 L 394.40 303.11 L 413.20 297.50 L 432.00 292.43 L 450.80 287.84 L 469.60 283.65 L 488.40 279.81 L 507.20 276.29 L 526.00 273.04 L 544.80 270.04 L 563.60 267.26 L 582.40 264.67 L 601.20 262.26 L 620.00 260.00 L 638.80 257.89 L 657.60 255.90 L 676.40 254.04 L 695.20 252.28 L 714.00 250.63 L 732.80 249.06 L 751.60 247.57 L 770.40 246.17 L 789.20 244.83 L 808.00 243.56 L 826.80 242.35 L 845.60 241.20 L 864.40 240.10 L 883.20 239.05 L 902.00 238.05 L 920.80 237.09 L 939.60 236.17 L 958.40 235.29 L 977.20 234.44 L 996.00 233.63 L 1014.80 232.84 L 1033.60 232.09 L 1052.40 231.37 L 1071.20 230.67 L 1090.00 230.00" class="efficiency"/>
+
+    <line x1="244.00" y1="395.00" x2="244.00" y2="560.00" class="threshold"/>
+    <line x1="244.00" y1="395.00" x2="150.00" y2="395.00" class="threshold"/>
+    <circle cx="244.00" cy="386.32" r="7" fill="#ffffff" stroke="#e85d5d" stroke-width="4"/>
+    <circle cx="432.00" cy="292.43" r="7" fill="#ffffff" stroke="#e85d5d" stroke-width="4"/>
+
+  </g>
+
+  <line x1="150" y1="560" x2="1100" y2="560" class="axis" marker-end="url(#figure4-arrow)"/>
+  <line x1="150" y1="560" x2="150" y2="220" class="axis" marker-end="url(#figure4-arrow)"/>
+  <line x1="150.00" y1="560" x2="150.00" y2="569" class="tick-mark"/>
+  <text x="150.00" y="594" class="tick" text-anchor="middle">0</text>
+  <line x1="244.00" y1="560" x2="244.00" y2="569" class="tick-mark"/>
+  <text x="244.00" y="594" class="tick" text-anchor="middle">10</text>
+  <line x1="338.00" y1="560" x2="338.00" y2="569" class="tick-mark"/>
+  <text x="338.00" y="594" class="tick" text-anchor="middle">20</text>
+  <line x1="432.00" y1="560" x2="432.00" y2="569" class="tick-mark"/>
+  <text x="432.00" y="594" class="tick" text-anchor="middle">30</text>
+  <line x1="526.00" y1="560" x2="526.00" y2="569" class="tick-mark"/>
+  <text x="526.00" y="594" class="tick" text-anchor="middle">40</text>
+  <line x1="620.00" y1="560" x2="620.00" y2="569" class="tick-mark"/>
+  <text x="620.00" y="594" class="tick" text-anchor="middle">50</text>
+  <line x1="714.00" y1="560" x2="714.00" y2="569" class="tick-mark"/>
+  <text x="714.00" y="594" class="tick" text-anchor="middle">60</text>
+  <line x1="808.00" y1="560" x2="808.00" y2="569" class="tick-mark"/>
+  <text x="808.00" y="594" class="tick" text-anchor="middle">70</text>
+  <line x1="902.00" y1="560" x2="902.00" y2="569" class="tick-mark"/>
+  <text x="902.00" y="594" class="tick" text-anchor="middle">80</text>
+  <line x1="996.00" y1="560" x2="996.00" y2="569" class="tick-mark"/>
+  <text x="996.00" y="594" class="tick" text-anchor="middle">90</text>
+  <line x1="1090.00" y1="560" x2="1090.00" y2="569" class="tick-mark"/>
+  <text x="1090.00" y="594" class="tick" text-anchor="middle">100</text>
+  <text x="132" y="565.00" class="tick" text-anchor="end">0</text>
+  <text x="132" y="532.00" class="tick" text-anchor="end">10</text>
+  <text x="132" y="499.00" class="tick" text-anchor="end">20</text>
+  <text x="132" y="466.00" class="tick" text-anchor="end">30</text>
+  <text x="132" y="433.00" class="tick" text-anchor="end">40</text>
+  <text x="132" y="400.00" class="tick" text-anchor="end">50</text>
+  <text x="132" y="367.00" class="tick" text-anchor="end">60</text>
+  <text x="132" y="334.00" class="tick" text-anchor="end">70</text>
+  <text x="132" y="301.00" class="tick" text-anchor="end">80</text>
+  <text x="132" y="268.00" class="tick" text-anchor="end">90</text>
+  <text x="132" y="235.00" class="tick" text-anchor="end">100</text>
+  <text x="620.00" y="621" class="axis-title" text-anchor="middle">활용률 (%)</text>
+  <text x="77" y="395" class="axis-title" text-anchor="middle" transform="rotate(-90 77 395)">서버 전력·상대 효율 (최대치 대비, %)</text>
+
+  <rect x="820" y="438" width="250" height="83" rx="12" fill="#ffffff" fill-opacity="0.95" stroke="#b8c7d9" stroke-width="1.5"/>
+  <line x1="842" y1="466" x2="883" y2="466" class="power"/>
+  <text x="897" y="471" class="legend-text">전력 p(u)</text>
+  <line x1="842" y1="495" x2="883" y2="495" class="efficiency"/>
+  <text x="897" y="500" class="legend-text">상대 효율 u/p(u)</text>
+
+  <rect x="150" y="646" width="410" height="48" rx="12" fill="#eefcf9" stroke="#a8ded4" stroke-width="1.5"/>
+  <circle cx="173" cy="670" r="6" fill="#0f8b8d"/>
+  <text x="190" y="667" class="callout-title">동적 전력 범위 90%</text>
+  <text x="190" y="686" class="callout-body">유휴 10%에서 최대 부하 100%까지 넓은 범위</text>
+  <rect x="580" y="646" width="510" height="48" rx="12" fill="#fff4f4" stroke="#f4b4b4" stroke-width="1.5"/>
+  <circle cx="603" cy="670" r="6" fill="#e85d5d"/>
+  <text x="620" y="667" class="callout-title">상대 효율의 회복</text>
+  <text x="620" y="686" class="callout-body">10% 활용률에서도 50% 이상 · 30% 이상에서 80% 이상</text>
+
+  <rect x="50" y="730" width="1100" height="58" rx="16" fill="#102a43"/>
+  <rect x="70" y="746" width="90" height="26" rx="13" fill="#e85d5d"/>
+  <text x="115" y="764" class="insight-label" text-anchor="middle">핵심 관찰</text>
+  <text x="185" y="766" class="insight">최고 전력을 낮추지 않아도, 유휴 전력을 줄이면 실제 운용 구간의 효율이 올라간다.</text>
+
+  <text x="60" y="830" class="caption">그림 4. 더 에너지 비례적인 서버의 전력 사용량과 상대 에너지 효율.</text>
+  <text x="60" y="855" class="note">원문 Figure 4의 90% 동적 전력 범위와 효율 기준을 반영한 재작성 도표이며, 실측 보편값이 아니라 논문의 모형 곡선이다.</text>
+</svg>
