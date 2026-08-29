@@ -16,7 +16,7 @@ created: 2026-05-03
 updated: 2026-08-29
 review:
   mode: attested
-  revision: sha256:639486dad5988fe2f11a851244649466fb14d25bb1b1f904030504f400d408c7
+  revision: sha256:c30251df35d3b87ed2066c9ffde8f9bc05bb91d021a27249c9ce0597f8a9607a
   reviewed_at: 2026-08-28
   reviewed_by: antigravity
 evidence_ids: []
@@ -137,6 +137,7 @@ redirect_from:
 - [2026-08-29 update | The Case Figure 1 시각화 삽입](logs/log-2026-08-29-105-The-Case-Figure-1-시각화-삽입.md)
 - [2026-08-29 update | The Case Figures 2·4 시각화 삽입](logs/log-2026-08-29-106-The-Case-Figures-2-4-시각화-삽입.md)
 - [2026-08-29 update | 에너지 비례 컴퓨팅 용어 정리 반영](logs/log-2026-08-29-107-에너지-비례-컴퓨팅-용어-정리-반영.md)
+- [2026-08-29 update | 에너지 비례 컴퓨팅 문서군 용어 통일](logs/log-2026-08-29-108-에너지-비례-컴퓨팅-문서군-용어-통일.md)
 
 ## 출처
 

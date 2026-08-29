@@ -16,7 +16,7 @@ created: 2026-05-03
 updated: 2026-08-29
 review:
   mode: attested
-  revision: sha256:ac154e7b90694fc4e6ce000126a9c410694ef01afd4cd92b9507fe8c05e8c060
+  revision: sha256:a8d1bbb3b0935b8539758d6db9e52d47cfb1563917fd2dfd898d1eed8ca45bfb
   reviewed_at: 2026-08-03
   reviewed_by: codex
 evidence_ids: []
@@ -144,7 +144,7 @@ redirect_from:
 - [[Structured Programming with go to Statements]] — Knuth의 1974년 논문을 바탕으로 goto 논쟁의 균형, 오류 탈출 구문, 프로그램 변환 방법론을 정리한 참고 자료.
 - [[TensorFlow SavedModel Signatures]] — SavedModel consumer가 호출할 함수의 입력·출력 type과 이름을 SignatureDef로 노출하는 TensorFlow 공식 문서.
 - [[The Byzantine Generals Problem]] — 서로 다른 정보를 보내는 결함 구성요소가 있어도 분산된 참여자가 일관된 결정을 내리기 위한 조건과 한계를 정식화한 Lamport, Shostak, Pease의 1982년 논문.
-- [[The Case for Energy-Proportional Computing]] — 서버가 자주 머무는 중간 부하에서 전력 효율이 가장 낮았던 2007년의 불일치를 분석하고, 소비 전력이 유효 작업량에 비례하는 시스템을 설계 목표로 제안한 논문.
+- [[The Case for Energy-Proportional Computing]] — 서버가 자주 머무는 중간 부하에서 전력 효율이 가장 낮았던 2007년의 불일치를 분석하고, 작업 부하에 따라 소비 전력을 조절하는 에너지 비례 컴퓨팅을 설계 목표로 제안한 논문.
 - [[The Complexity of Theorem-Proving Procedures]] — 다항 시간 비결정적 튜링 기계가 푸는 인식 문제를 명제 논리의 항진식 판정 문제로 환원해 다항 환원과 완전 문제의 틀을 제시한 Stephen A. Cook의 1971년 논문.
 - [[The computation factory: de Prony's project for making tables in the 1790s]] — 드 프로니가 1790년대에 대규모 로그·삼각함수표를 분업으로 제작했으나 출판 비용 때문에 완성된 표를 널리 배포하지 못한 프로젝트와 배비지에 준 영향을 분석한 연구 장.
 - [[The Datacenter as a Computer]] — 대규모 인터넷 서비스의 데이터센터를 독립 서버들의 모음이 아니라 하드웨어와 소프트웨어가 공동 설계된 하나의 창고 규모 컴퓨터로 다룬 2009년 저작.
