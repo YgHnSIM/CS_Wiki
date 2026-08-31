@@ -16,7 +16,7 @@ created: 2026-05-03
 updated: 2026-08-31
 review:
   mode: attested
-  revision: sha256:107eca23a4b5dfefd83afddce3257ee1173ae9794c8d7becc903029d640a8521
+  revision: sha256:3f85a360932eace11cb2c9e46506b0c6bd29c83c6d80330cd664183539db51e7
   reviewed_at: 2026-08-03
   reviewed_by: codex
 evidence_ids: []
@@ -41,6 +41,7 @@ redirect_from:
 
 - [[A Case against the GO TO Statement]] — Dijkstra의 goto 비판을 바탕으로 프로그램 텍스트와 실행 과정의 대응, 제어 흐름의 추적 가능성을 정리한 참고 자료.
 - [[A Critique of ANSI SQL Isolation Levels]] — ANSI SQL 격리 수준의 현상 중심 정의가 실제 동시성 이상과 어떻게 어긋나는지 분석하고, serializability·snapshot isolation·write skew를 구분한 논문.
+- [[A New Golden Age for Computer Architecture]] — 무어의 법칙과 Dennard 스케일링의 종성 이후 도메인 특화 아키텍처와 하드웨어-소프트웨어 공동 설계가 혁신을 이끌 것임을 선언한 튜링상 강연 논문.
 - [[A Note respecting the Application of Machinery to the Calculation of Astronomical Tables]] — 찰스 배비지가 1822년 차분법 기반 기계로 수학 표를 계산하고 계산 결과에 따라 활자를 자동 배치하려 한 구상을 직접 보고한 발표문.
 - [[A Proof for the Queuing Formula: L = λ W]] — 시스템 안의 평균 작업 수, 평균 처리율, 평균 체류 시간의 관계 L = λW를 유한 평균·정상성·비영 평균 도착 과정의 조건 아래 증명한 John D. C. Little의 1961년 대기열 이론 논문.
 - [[A Symbolic Analysis of Relay and Switching Circuits]] — Shannon의 릴레이·스위칭 회로 논문을 바탕으로 불 대수, 논리 게이트, 이진 덧셈 회로, 이진 표현의 회로적 기반을 정리한 참고 자료.
@@ -375,7 +376,7 @@ redirect_from:
 
 - [[같은 SLO의 LLM 서비스는 무엇을 비용으로 세어야 하는가]] — 같은 모델 품질과 TTFT·TPOT SLO를 만족한 LLM 서비스를 에너지·가속기 시간·유휴 용량·실패 요청까지 포함한 유효 요청당 물리 자원 비용으로 비교하는 분석.
 - [[계산 결과에서 실행 가능한 절차로]] — 수학 표의 계산 결과, 라이브러리의 실행 절차, 저장 프로그램의 명령, 캐시의 사본을 비교해 컴퓨팅이 시간·공간·노동과 신뢰 비용을 서로 다른 층으로 옮기는 방식을 분석한다.
-- [[계산기와 컴퓨터의 차이]] — 차분 기관, 해석 기관, EDSAC을 통해 특수 목적 계산기와 범용 컴퓨터의 차이를 비교한 분석.
+- [[계산기와 컴퓨터의 차이]] — 차분 기관과 해석 기관, EDSAC의 역사적 구분을 현대 AI 가속기(TPU/ASIC vs GPU)와 에이전틱 AI 오케스트레이션(CPU)의 이종 컴퓨팅 계보로 확장해 비교한 분석.
 - [[기계가 계산한다는 말의 이론적 의미]] — 계산을 유한한 규칙에 따른 기호 상태 변환으로 보고, 보편성 및 계산 불가능성의 의미를 정리한 분석.
 - [[낮은 비트는 왜 LLM 추론 속도를 보장하지 않는가]] — LLM 가중치 비트 수 감소가 모델 용량·메모리 대역폭을 줄여도 패킹·역양자화·메타데이터·커널과 하드웨어 지원, 배치·품질 조건 때문에 실제 지연 단축을 자동으로 보장하지 않는 이유를 분석한다.
 - [[낮은 운영 에너지는 지속 가능한 컴퓨팅을 보장하는가]] — 작업당 에너지와 시설 전력 효율이 중요한 운영 지표이지만, 장비 제조·시설 인프라·전력망·수명·배분까지 포함한 수명 주기 환경 영향과는 다른 측정 경계를 가진다는 점을 분석한다.
