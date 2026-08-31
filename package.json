@@ -23,7 +23,7 @@
     "test:browser": "node scripts/run_browser_tests.mjs",
     "test:browser:install": "playwright install chromium",
     "test": "npm run test:site && npm run test:python",
-    "check": "npm run lint:wiki && npm run maintenance:check && npm test && npm run build && npm run verify:site && npm run test:browser"
+    "check": "npm run validate:changes && npm run lint:wiki && npm run maintenance:check && npm test && npm run build && npm run verify:site && npm run test:browser"
   },
   "dependencies": {
     "ajv": "^8.17.1",

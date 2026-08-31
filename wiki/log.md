@@ -16,8 +16,8 @@ created: 2026-05-03
 updated: 2026-08-31
 review:
   mode: attested
-  revision: sha256:d0dfa66f6f0bfc6e60c2edcbd4340334ba4ef58e2c8e078a5d9e8bcdef268da3
-  reviewed_at: 2026-08-28
+  revision: sha256:eb1046f98267108c848e012daf053c8545e08101a466801abbe68cb57fc4dac3
+  reviewed_at: 2026-08-31
   reviewed_by: antigravity
 evidence_ids: []
 capability_layers: []

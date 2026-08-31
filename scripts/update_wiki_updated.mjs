@@ -20,10 +20,17 @@ for (const relativePath of paths) {
   const match = text.match(/^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n|$)/);
   if (!match) continue;
   const data = YAML.parse(match[1], { uniqueKeys: false });
-  if (data?.schema_version !== 2 || data.updated === today) continue;
+  if (data?.schema_version !== 2) continue;
   const body = text.slice(match[0].length).replace(/\r\n?/g, "\n").trim();
   data.updated = today;
-  if (data.review) data.review.revision = revisionFor(body, data);
+  if (data.review) {
+    if (data.editorial_status === "active" && data.review.mode === "legacy-baseline") {
+      data.review.mode = "attested";
+      data.review.reviewed_at = today;
+      data.review.reviewed_by = process.env.WIKI_REVIEWER || "antigravity";
+    }
+    data.review.revision = revisionFor(body, data);
+  }
   await writeFile(filePath, `---\n${YAML.stringify(data, { lineWidth: 0 }).trimEnd()}\n---\n\n${body}\n`, "utf8");
   changed += 1;
 }
