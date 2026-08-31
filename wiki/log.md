@@ -16,7 +16,7 @@ created: 2026-05-03
 updated: 2026-08-31
 review:
   mode: attested
-  revision: sha256:c7e58fbdc9f44e3bba15c1c2ae38f8e9524d1bfdefb1ba2701fc6eeee0d51088
+  revision: sha256:cf198670485ee812c2aacdd5e2977e3babd1ae58ea0b2809a4246b1199827f33
   reviewed_at: 2026-08-31
   reviewed_by: antigravity
 evidence_ids: []
@@ -141,6 +141,7 @@ redirect_from:
 - [2026-08-29 fix | 에너지 비례 컴퓨팅 배포 검증 수정](logs/log-2026-08-29-109-에너지-비례-컴퓨팅-배포-검증-수정.md)
 - [2026-08-31 create | 하드웨어 실행 모델 3축 지식 통합](logs/log-2026-08-31-110-하드웨어-실행-모델-3축-통합.md)
 - [2026-08-31 update | 계산기와 컴퓨터의 차이 현대 AI 가속기 및 CPU 이종 컴퓨팅 확장](logs/log-2026-08-31-111-계산기와-컴퓨터의-차이-현대-AI-가속기-확장.md)
+- [2026-08-31 create | 전용 연산기와 범용 제어기의 진자 운동 심화 분석](logs/log-2026-08-31-112-전용-연산기와-범용-제어기의-진자-운동-심화-분석.md)
 
 ## 출처
 
