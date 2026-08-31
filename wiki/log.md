@@ -13,10 +13,10 @@ editorial_status: active
 publication_visibility: public
 graph_visibility: hidden
 created: 2026-05-03
-updated: 2026-08-29
+updated: 2026-08-31
 review:
   mode: attested
-  revision: sha256:7c445eb89a552eef72d9d2c685c3fe22b3d560cb336bf19881eb3ec9536251a1
+  revision: sha256:d0dfa66f6f0bfc6e60c2edcbd4340334ba4ef58e2c8e078a5d9e8bcdef268da3
   reviewed_at: 2026-08-28
   reviewed_by: antigravity
 evidence_ids: []
@@ -139,6 +139,7 @@ redirect_from:
 - [2026-08-29 update | 에너지 비례 컴퓨팅 용어 정리 반영](logs/log-2026-08-29-107-에너지-비례-컴퓨팅-용어-정리-반영.md)
 - [2026-08-29 update | 에너지 비례 컴퓨팅 문서군 용어 통일](logs/log-2026-08-29-108-에너지-비례-컴퓨팅-문서군-용어-통일.md)
 - [2026-08-29 fix | 에너지 비례 컴퓨팅 배포 검증 수정](logs/log-2026-08-29-109-에너지-비례-컴퓨팅-배포-검증-수정.md)
+- [2026-08-31 create | 하드웨어 실행 모델 3축 지식 통합](logs/log-2026-08-31-110-하드웨어-실행-모델-3축-통합.md)
 
 ## 출처
 
