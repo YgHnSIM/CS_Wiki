@@ -273,7 +273,7 @@ const md = new MarkdownIt({ html: false, linkify: true, typographer: false })
 
 // Tables are kept semantic, but their wrapper owns narrow-screen horizontal
 // scrolling so four-column prose tables never collapse into one-character cells.
-md.renderer.rules.table_open = () => '<div class="table-scroll" tabindex="0" role="region" aria-label="표, 좌우로 스크롤할 수 있습니다."><span class="table-scroll-hint">표는 좌우로 스크롤할 수 있습니다.</span><table>';
+md.renderer.rules.table_open = () => '<div class="table-scroll" tabindex="0" role="region" aria-label="표, 좌우로 스크롤할 수 있습니다."><table>';
 md.renderer.rules.table_close = () => "</table></div>";
 
 function renderWikiLinks(body) {

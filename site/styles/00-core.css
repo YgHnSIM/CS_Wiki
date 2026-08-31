@@ -1205,10 +1205,30 @@ kbd {
   margin: 0;
 }
 
-.prose table {
+.table-scroll {
   display: block;
   width: 100%;
   overflow-x: auto;
+  margin: 24px 0;
+  -webkit-overflow-scrolling: touch;
+  background:
+    linear-gradient(to right, var(--void) 30%, transparent),
+    linear-gradient(to left, var(--void) 30%, transparent) 100% 0,
+    radial-gradient(farthest-side at 0 50%, rgba(0, 255, 65, 0.22), transparent),
+    radial-gradient(farthest-side at 100% 50%, rgba(0, 255, 65, 0.22), transparent) 100% 0;
+  background-repeat: no-repeat;
+  background-color: var(--void);
+  background-size: 32px 100%, 32px 100%, 12px 100%, 12px 100%;
+  background-attachment: local, local, scroll, scroll;
+}
+
+.table-scroll:focus-visible {
+  outline: 1px solid var(--phosphor);
+  outline-offset: 2px;
+}
+
+.prose table {
+  width: 100%;
   border-collapse: collapse;
 }
 
