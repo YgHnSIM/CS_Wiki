@@ -395,6 +395,9 @@ export function buildKnowledgeGraph(pages, learningPaths, { lookup, urlFor = (ur
       const evidence = relation.evidence.map((value) => {
         const evidencePage = resolveTarget(lookup, value);
         if (!evidencePage) throw new Error(`Relation evidence '${value}' on '${page.title}' is missing`);
+        if (evidencePage.category !== "sources" && evidencePage.category !== "references" && !["source", "reference"].includes(evidencePage.kind)) {
+          throw new Error(`Relation evidence '${value}' on '${page.title}' must be a source or reference page`);
+        }
         return pageIds.get(evidencePage);
       });
       addEdge({

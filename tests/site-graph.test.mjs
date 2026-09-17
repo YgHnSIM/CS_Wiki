@@ -168,6 +168,10 @@ test("invalid stable IDs, metadata, relations, and duplicate IDs fail loudly", (
     page("Bad", { body: "## 관계\n\n| 관계 | 대상 | 설명 | 근거 |\n|---|---|---|---|\n| responds_to | [[Target]] | 확인된 제약에 대응한다. | |" }),
     target
   ]), /needs direct evidence/);
+  assert.throws(() => graph([
+    page("Bad", { body: "## 관계\n\n| 관계 | 대상 | 설명 | 근거 |\n|---|---|---|---|\n| enables | [[Target]] | 개념을 근거로 쓰면 실패한다. | [[Target]] |" }),
+    target
+  ]), /must be a source or reference page/);
 });
 
 test("local graph selection separates four channels and excludes hidden operational nodes", () => {

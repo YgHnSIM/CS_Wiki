@@ -14,10 +14,10 @@ editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-09
-updated: 2026-07-26
+updated: 2026-09-17
 review:
   mode: legacy-baseline
-  revision: sha256:c2870ff24fe8a286579aaf657d2929470473d24a1382b7f974e0bd7c0e10d0c6
+  revision: sha256:b647dbd8f876ed2368cb309eee0157d89beb89dec55861ddef9e272cecd236ef
   reviewed_at: null
   reviewed_by: legacy-baseline
 evidence_ids:
@@ -25,7 +25,10 @@ evidence_ids:
   - ref-018
   - ref-003
   - ref-004
-capability_layers: []
+capability_layers:
+  - programmability
+history:
+  layer: software
 redirect_from:
   - /concepts/api/
 ---
@@ -58,6 +61,14 @@ redirect_from:
 API는 [[소프트웨어 공학]]의 추상화와 책임 분리를 구체화한다. 좋은 API는 사용자가 모든 내부 세부를 알지 않아도 올바른 프로그램을 만들 수 있게 하고, 제공자는 내부 구현을 바꾸더라도 약속된 동작을 유지할 수 있게 한다.
 
 [[On the Criteria To Be Used in Decomposing Systems into Modules]]의 [[정보 은닉]] 관점에서 API는 변경 가능한 설계 결정을 감추는 경계다. [[Software Reuse]]의 관점에서는 재사용할 산출물을 선택하고 통합할 수 있게 하는 고수준 설명이다. 따라서 API는 단순 호출 목록이 아니라 [[소프트웨어 재사용]]을 가능하게 하는 계약이다.
+
+## 관계
+
+| 관계 | 대상 | 설명 | 근거 |
+|---|---|---|---|
+| synthesizes | [[라이브러리 카탈로그]] | 루틴의 동작·비용·정밀도를 명세로 분리한 초기 사용 계약을 API적 사고로 읽는다. | [[The Preparation of Programs for an Electronic Digital Computer]] |
+| enables | [[소프트웨어 재사용]] | 구현을 숨긴 호출 규약으로 검증된 단위를 선택·통합하게 한다. | [[Software Reuse]] |
+| implements | [[정보 은닉]] | 변경 가능한 설계 결정을 인터페이스 뒤에 감추는 모듈 경계를 프로그래밍 계약으로 구체화한다. | [[On the Criteria To Be Used in Decomposing Systems into Modules]] |
 
 ## 출처
 

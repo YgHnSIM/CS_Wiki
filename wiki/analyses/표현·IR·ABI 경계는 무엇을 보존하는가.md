@@ -16,10 +16,10 @@ editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-08-05
-updated: 2026-08-05
+updated: 2026-09-17
 review:
   mode: attested
-  revision: sha256:d8dce7d47293663486c47249b20ecc3b7da36464e56f7faed874c59ad7d1e230
+  revision: sha256:87f45a354d01797ae33ccbe70b0ef14f9d1c515878f00617ae7c157120784904
   reviewed_at: 2026-08-05
   reviewed_by: codex-research-097
 evidence_ids:
@@ -29,6 +29,8 @@ evidence_ids:
   - ref-133
 capability_layers:
   - reliable-results
+history:
+  layer: software
 ---
 
 ## 분석 질문

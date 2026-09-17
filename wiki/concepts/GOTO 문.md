@@ -16,16 +16,19 @@ editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-10
-updated: 2026-07-26
+updated: 2026-09-17
 review:
   mode: legacy-baseline
-  revision: sha256:2cd10bdce9cbd972e1a3789ee85f7e8ed0266697ad5390bd8454969039983c90
+  revision: sha256:d0c56972c7e2def6007a92a06cdfbf8fb9269272169c6e5772dd926afe073aef
   reviewed_at: null
   reviewed_by: legacy-baseline
 evidence_ids:
   - ref-011
   - ref-014
-capability_layers: []
+capability_layers:
+  - programmability
+history:
+  layer: software
 redirect_from:
   - /concepts/goto-문/
 ---

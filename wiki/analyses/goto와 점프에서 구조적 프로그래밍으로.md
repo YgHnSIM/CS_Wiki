@@ -16,10 +16,10 @@ editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-10
-updated: 2026-08-31
+updated: 2026-09-17
 review:
   mode: attested
-  revision: sha256:cf291e661351e80da75216b0e6a374bce0905a71f951647de8aae3e8b4ef2cab
+  revision: sha256:87734c3c77090a45e52a09535b3fe344c641ac2e2270d0e536d05e1f1d8e7130
   reviewed_at: 2026-08-31
   reviewed_by: antigravity
 evidence_ids:
@@ -27,7 +27,10 @@ evidence_ids:
   - ref-012
   - ref-013
   - ref-014
-capability_layers: []
+capability_layers:
+  - programmability
+history:
+  layer: software
 redirect_from:
   - /analyses/goto와-점프에서-구조적-프로그래밍으로/
 ---

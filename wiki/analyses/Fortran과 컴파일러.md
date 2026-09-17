@@ -16,10 +16,10 @@ editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-10
-updated: 2026-07-26
+updated: 2026-09-17
 review:
   mode: legacy-baseline
-  revision: sha256:7bde978ccd6e4de3059a018e3e4d2c3ac33fd2a68af25ab2df44ac4cea865aef
+  revision: sha256:e86ba2076dcaad6b3cb96466e80236d027a8bf71f12270f807e6ea88f079dfa5
   reviewed_at: null
   reviewed_by: legacy-baseline
 evidence_ids:
@@ -29,7 +29,10 @@ evidence_ids:
   - ref-017
   - ref-050
   - ref-051
-capability_layers: []
+capability_layers:
+  - programmability
+history:
+  layer: software
 redirect_from:
   - /analyses/fortran과-컴파일러/
 ---

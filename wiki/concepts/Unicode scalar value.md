@@ -15,16 +15,19 @@ editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-10
-updated: 2026-07-26
+updated: 2026-09-17
 review:
   mode: legacy-baseline
-  revision: sha256:ca37563cf5371c88c8ffb22ceddb21e493c6003b83699c60777cd7f2fbbd3e72
+  revision: sha256:ed816d398099bc1f0c533df67bce4c17a8c7da30bfaf2261248778bb850779aa
   reviewed_at: null
   reviewed_by: legacy-baseline
 evidence_ids:
   - ref-022
   - ref-023
-capability_layers: []
+capability_layers:
+  - reliable-results
+history:
+  layer: software
 redirect_from:
   - /concepts/unicode-scalar-value/
 ---

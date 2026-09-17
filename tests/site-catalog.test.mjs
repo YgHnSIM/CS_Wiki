@@ -1,6 +1,9 @@
 import assert from "node:assert/strict";
 import test from "node:test";
+import { readFile } from "node:fs/promises";
 import { domainMeta, statusMeta } from "../site/catalog.mjs";
+
+const vocabulary = JSON.parse(await readFile(new URL("../schema/vocabulary.json", import.meta.url), "utf8"));
 
 test("catalog labels every domain currently used by the wiki", () => {
   assert.deepEqual(
@@ -16,6 +19,10 @@ test("catalog labels every domain currently used by the wiki", () => {
       "domain/edge-computing": "에지 컴퓨팅",
       "domain/performance": "성능"
     }
+  );
+  assert.deepEqual(
+    Object.keys(domainMeta).sort(),
+    vocabulary.domains.map((domain) => `domain/${domain}`).sort()
   );
 });
 

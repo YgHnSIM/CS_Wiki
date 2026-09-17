@@ -16,10 +16,10 @@ editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-10
-updated: 2026-07-26
+updated: 2026-09-17
 review:
   mode: legacy-baseline
-  revision: sha256:c98c14a92049f32273e2da51d245300677919d502d808e4d1b01ba779b5ab98b
+  revision: sha256:b3927c5ab5d624617e377f119e8968e50d6778113b2068717d78433b1a97f41f
   reviewed_at: null
   reviewed_by: legacy-baseline
 evidence_ids:
@@ -27,7 +27,10 @@ evidence_ids:
   - ref-019
   - ref-020
   - ref-021
-capability_layers: []
+capability_layers:
+  - programmability
+history:
+  layer: software
 redirect_from:
   - /analyses/unix와-c/
 ---

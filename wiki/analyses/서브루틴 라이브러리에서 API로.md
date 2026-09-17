@@ -15,15 +15,18 @@ editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-09
-updated: 2026-07-26
+updated: 2026-09-17
 review:
   mode: legacy-baseline
-  revision: sha256:b6d662f0cf7628ce495569f27090ad90a4806550a7ec9196fe2ba2ba7c043b38
+  revision: sha256:ed5cdae8337c917d314aa02fe7ca8702f46cba57fbc18926a812ee9df6005f57
   reviewed_at: null
   reviewed_by: legacy-baseline
 evidence_ids:
   - ref-001
-capability_layers: []
+capability_layers:
+  - programmability
+history:
+  layer: software
 redirect_from:
   - /analyses/서브루틴-라이브러리에서-api로/
 ---

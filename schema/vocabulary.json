@@ -12,6 +12,7 @@
   "genres": ["primary-literature", "secondary-literature", "standard", "manual", "official-record", "dataset", "web", "raw-note", "metadata", "other"],
   "historical_layers": ["theory", "machine", "architecture", "software", "system", "service", "measurement"],
   "capability_layers": ["computability", "complexity", "programmability", "realized-performance", "scalability", "resource-efficiency", "reliable-results"],
+  "domains": ["computer-history", "software-engineering", "computer-science", "programming-languages", "computer-architecture", "text-processing", "operating-systems", "security", "systems", "database", "distributed-systems", "edge-computing", "performance", "internet", "mathematics", "machine-learning", "web"],
   "history_bases": ["introduced", "designed", "implemented", "released", "observed", "representative", "period", "publication-process"],
   "relation_kinds": ["broader", "narrower", "prerequisite_for", "enables", "constrains", "measures", "implements", "exemplifies", "precedes", "responds_to", "contradicts", "synthesizes"],
   "source_id_pattern": "^(?:src|ref)-[0-9]{3,}$",

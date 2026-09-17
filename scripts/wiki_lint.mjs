@@ -4,6 +4,8 @@ import { isAbsolute, relative, resolve, sep } from "node:path";
 import { fileURLToPath } from "node:url";
 import { loadWikiManifest, revisionFor } from "./wiki_manifest.mjs";
 import { key } from "../site/core.mjs";
+import { domainMeta } from "../site/catalog.mjs";
+import { CAPABILITY_LAYERS, HISTORICAL_LAYERS } from "../site/graph/schema.mjs";
 
 function isDate(value) {
   return /^\d{4}-\d{2}-\d{2}$/.test(String(value || ""));
@@ -103,10 +105,16 @@ export async function collectWikiLintIssues({ root = process.cwd(), manifest: su
   }
   const pages = Array.isArray(manifest.pages) ? manifest.pages : [];
   const rawRoot = resolve(resolvedRoot, "raw");
+  const allowedDomains = new Set(Object.keys(domainMeta).map((tag) => tag.replace(/^domain\//, "")));
   const byId = new Map();
+  const byLookup = manifest.lookup instanceof Map ? manifest.lookup : new Map();
   for (const page of pages) {
     if (byId.has(page.id)) add("error", "identity.duplicate", page.relativePath, `중복 ID: ${page.id}`);
     byId.set(page.id, page);
+    for (const name of [page.id, page.title, ...(page.aliases || [])]) {
+      const normalized = key(name);
+      if (normalized && !byLookup.has(normalized)) byLookup.set(normalized, page);
+    }
   }
   for (const page of pages) {
     if (!isDate(page.created) || !isDate(page.updated)) add("error", "frontmatter.date", page.relativePath, "created/updated는 ISO 날짜여야 한다.");
@@ -127,6 +135,39 @@ export async function collectWikiLintIssues({ root = process.cwd(), manifest: su
     for (const evidenceId of page.evidenceIds) {
       const evidence = byId.get(evidenceId);
       if (!evidence || !["source", "reference"].includes(evidence.kind)) add("error", "provenance.evidence", page.relativePath, `유효하지 않은 근거 ID: ${evidenceId}`);
+    }
+    for (const domain of page.domains || []) {
+      if (!allowedDomains.has(domain)) add("error", "ontology.domain", page.relativePath, `허용 목록에 없는 도메인: ${domain}`);
+    }
+    for (const layer of page.capabilityLayers || []) {
+      if (!CAPABILITY_LAYERS.includes(layer)) add("error", "ontology.capability_layer", page.relativePath, `허용 목록에 없는 능력 층위: ${layer}`);
+    }
+    const historicalLayer = page.history?.historicalLayer || page.historicalLayer || "";
+    if (historicalLayer && !HISTORICAL_LAYERS.includes(historicalLayer)) {
+      add("error", "ontology.historical_layer", page.relativePath, `허용 목록에 없는 역사 층위: ${historicalLayer}`);
+    }
+    if (["concept", "entity", "analysis"].includes(page.kind) && page.graphVisibility === "public") {
+      if (!(page.capabilityLayers || []).length) {
+        add("error", "ontology.capability_required", page.relativePath, "공개 지식 문서에는 capability_layers가 필요하다.");
+      }
+      if (!historicalLayer) {
+        add("error", "ontology.historical_required", page.relativePath, "공개 지식 문서에는 history.layer가 필요하다.");
+      }
+    }
+    const seenRelations = new Set();
+    for (const relation of page.relations || []) {
+      const signature = `${relation.kind}\0${key(relation.target)}`;
+      if (seenRelations.has(signature)) {
+        add("error", "graph.relation_duplicate", page.relativePath, `중복 관계 행: ${relation.kind} → ${relation.target}`);
+      }
+      seenRelations.add(signature);
+      for (const evidenceName of relation.evidence || []) {
+        const evidencePage = byLookup.get(key(evidenceName));
+        if (!evidencePage) continue;
+        if (!["source", "reference"].includes(evidencePage.kind)) {
+          add("error", "graph.relation_evidence_type", page.relativePath, `관계 근거는 소스·참고 자료여야 한다: ${evidenceName}`);
+        }
+      }
     }
     if (["source", "reference"].includes(page.kind)) {
       if (!page.rawFrontmatter.origin || !page.rawFrontmatter.works?.primary?.length) add("error", "provenance.primary", page.relativePath, "origin과 works.primary가 필요하다.");

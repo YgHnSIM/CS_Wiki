@@ -16,16 +16,19 @@ editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-10
-updated: 2026-07-26
+updated: 2026-09-17
 review:
   mode: legacy-baseline
-  revision: sha256:9c77241cf0f9e1abbd322d8c775e7dbc268d986fa1cc48bc62a1093257beef7e
+  revision: sha256:8e8b1242c1466e1c6b9a8bf5452eb7ade7644831d998a64213ffc67788ba170a
   reviewed_at: null
   reviewed_by: legacy-baseline
 evidence_ids:
   - ref-009
   - ref-010
-capability_layers: []
+capability_layers:
+  - computability
+history:
+  layer: theory
 redirect_from:
   - /concepts/entscheidungsproblem/
 ---
@@ -45,6 +48,13 @@ redirect_from:
 ## 의미
 
 Entscheidungsproblem의 부정적 해결은 계산 가능성 이론의 핵심 전환이다. 이는 단순히 아직 좋은 알고리즘을 찾지 못했다는 뜻이 아니라 명확히 형식화된 문제 중에도 모든 입력에 답하는 일반적인 기계 절차가 존재하지 않는 문제가 있음을 의미한다. 개별 공식의 타당성을 증명하거나 반증할 수 있는 경우가 있다는 사실과 모든 공식에 통하는 하나의 판정 절차가 없다는 사실은 구분해야 한다.
+
+## 관계
+
+| 관계 | 대상 | 설명 | 근거 |
+|---|---|---|---|
+| narrower | [[계산 가능성]] | 형식 논리 명제의 타당성을 일반 기계 절차로 판정할 수 없음을 보이는 결정 문제다. | [[On Computable Numbers with an Application to the Entscheidungsproblem]] |
+| precedes | [[처치-튜링 논제]] | 일반 판정 절차의 부재를 보인 뒤 서로 다른 형식 모델의 동등성 해석이 따라온다. | [[An Unsolvable Problem of Elementary Number Theory]] |
 
 ## 출처
 

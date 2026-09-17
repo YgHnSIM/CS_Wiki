@@ -1,6 +1,8 @@
 # CS Wiki 스키마 v2
 
-`wiki-page.schema.json`은 모든 `wiki/**/*.md` 페이지의 정규 frontmatter 계약이다. `vocabulary.json`은 상태·유형·접근 수단·역사 계층의 허용값을 한 곳에서 관리한다.
+`wiki-page.schema.json`은 모든 `wiki/**/*.md` 페이지의 정규 frontmatter 계약이다. `vocabulary.json`은 상태·유형·도메인·접근 수단·역사 계층·컴퓨팅 능력 층위·관계 종류의 허용값을 한 곳에서 관리한다.
+
+그래프에 공개하는 개념·개체·분석 문서는 빈 `capability_layers`와 빈 `history.layer`를 허용하지 않는다. 연도는 원전 대조 없이 추정하지 않으며, 층위만 있는 문서는 역사 렌즈의 `undated` 구간에 남는다.
 
 ## 검증과 생성
 

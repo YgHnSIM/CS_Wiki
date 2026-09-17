@@ -15,17 +15,20 @@ editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-08-24
-updated: 2026-08-25
+updated: 2026-09-17
 review:
   mode: attested
-  revision: sha256:c31f2eaa6aab32b2e90f98d8750285a58d0475875d05c6fa685294e002fb8579
+  revision: sha256:39ee511d6f6dbbeaa300328bb6fbfc4523750838dad4d0b8afa8a7cbd4025e14
   reviewed_at: 2026-08-25
   reviewed_by: codex
 evidence_ids:
   - ref-137
   - src-004
   - src-003
-capability_layers: []
+capability_layers:
+  - reliable-results
+history:
+  layer: system
 redirect_from:
   - /concepts/aslr/
 ---

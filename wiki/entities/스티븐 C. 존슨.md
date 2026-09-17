@@ -16,16 +16,19 @@ editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-10
-updated: 2026-07-26
+updated: 2026-09-17
 review:
   mode: legacy-baseline
-  revision: sha256:7b22935d39520fcd5d30d2aec5af4ac869ae7d8fdfce406bdbfa0a34049f4f14
+  revision: sha256:7d839de48bdb1ff6ae2f0e1d960fc8270932f0f7d7a9474aa7d4c709f731e0db
   reviewed_at: null
   reviewed_by: legacy-baseline
 evidence_ids:
   - ref-019
   - ref-021
-capability_layers: []
+capability_layers:
+  - programmability
+history:
+  layer: software
 redirect_from:
   - /entities/스티븐-c-존슨/
 ---

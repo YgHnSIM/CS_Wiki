@@ -15,16 +15,19 @@ editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-10
-updated: 2026-07-26
+updated: 2026-09-17
 review:
   mode: legacy-baseline
-  revision: sha256:40a17e9b307f4d8e15330785c4ad18a69fc7f15c7a59c4d36b477a76b15214a8
+  revision: sha256:97ac3ddcfd7f1169714015326dd772a9e76c98949cffed7f6cc2b472da56d719
   reviewed_at: null
   reviewed_by: legacy-baseline
 evidence_ids:
   - ref-022
   - ref-026
-capability_layers: []
+capability_layers:
+  - reliable-results
+history:
+  layer: software
 redirect_from:
   - /concepts/utf-16/
 ---

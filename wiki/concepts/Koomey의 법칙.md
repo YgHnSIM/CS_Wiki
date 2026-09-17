@@ -16,10 +16,10 @@ editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-16
-updated: 2026-07-26
+updated: 2026-09-17
 review:
   mode: legacy-baseline
-  revision: sha256:1af77ae182d4d2cb4ba5d504e8b182c0757c8f5bbc5a2c9855a53010c3489e83
+  revision: sha256:6a9547a45dabba439081dda5ca15d70cd968970ed6ae7ed2753e0e235ac70551
   reviewed_at: null
   reviewed_by: legacy-baseline
 evidence_ids:
@@ -27,7 +27,10 @@ evidence_ids:
   - ref-037
   - ref-038
   - ref-046
-capability_layers: []
+capability_layers:
+  - resource-efficiency
+history:
+  layer: measurement
 redirect_from:
   - /concepts/koomey의-법칙/
 ---

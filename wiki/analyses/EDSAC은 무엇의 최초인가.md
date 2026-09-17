@@ -15,16 +15,19 @@ editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-10
-updated: 2026-07-26
+updated: 2026-09-17
 review:
   mode: legacy-baseline
-  revision: sha256:49608d3e25f13b36ab6ed47298ef3ab8dd0ae82c20cba45e5c6090f7eb6de1e7
+  revision: sha256:9e611d81a7bc0b0fa98b7427a39120a664e1640f908a42f0ac0fc1da348cd3a7
   reviewed_at: null
   reviewed_by: legacy-baseline
 evidence_ids:
   - ref-006
   - ref-007
-capability_layers: []
+capability_layers:
+  - programmability
+history:
+  layer: machine
 redirect_from:
   - /analyses/edsac은-무엇의-최초인가/
 ---

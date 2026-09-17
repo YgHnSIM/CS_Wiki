@@ -28,7 +28,31 @@
     "title": { "type": "string", "minLength": 1 },
     "aliases": { "type": "array", "items": { "type": "string", "minLength": 1 }, "uniqueItems": true },
     "summary": { "type": "string", "minLength": 20, "maxLength": 200 },
-    "domains": { "type": "array", "items": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" }, "uniqueItems": true },
+    "domains": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "computer-history",
+          "software-engineering",
+          "computer-science",
+          "programming-languages",
+          "computer-architecture",
+          "text-processing",
+          "operating-systems",
+          "security",
+          "systems",
+          "database",
+          "distributed-systems",
+          "edge-computing",
+          "performance",
+          "internet",
+          "mathematics",
+          "machine-learning",
+          "web"
+        ]
+      },
+      "uniqueItems": true
+    },
     "editorial_status": { "enum": ["draft", "review", "active", "retired"] },
     "publication_visibility": { "enum": ["public", "unlisted", "private"] },
     "graph_visibility": { "enum": ["public", "context", "hidden"] },
@@ -46,7 +70,21 @@
       }
     },
     "evidence_ids": { "type": "array", "items": { "type": "string", "pattern": "^(?:src|ref)-[0-9]{3,}$" }, "uniqueItems": true },
-    "capability_layers": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+    "capability_layers": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "computability",
+          "complexity",
+          "programmability",
+          "realized-performance",
+          "scalability",
+          "resource-efficiency",
+          "reliable-results"
+        ]
+      },
+      "uniqueItems": true
+    },
     "history": {
       "type": "object",
       "additionalProperties": false,

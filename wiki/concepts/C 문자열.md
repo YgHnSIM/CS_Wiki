@@ -16,10 +16,10 @@ editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-05-12
-updated: 2026-07-26
+updated: 2026-09-17
 review:
   mode: legacy-baseline
-  revision: sha256:be0d66c20798f274a6f3def9b004460628a8da90da4d10ee19950e9164ed67b9
+  revision: sha256:ea31c35f3822a19da1613ada87808b6520277cda47a4eda33f24d270d01194cc
   reviewed_at: null
   reviewed_by: legacy-baseline
 evidence_ids:
@@ -27,7 +27,10 @@ evidence_ids:
   - ref-019
   - ref-090
   - ref-091
-capability_layers: []
+capability_layers:
+  - reliable-results
+history:
+  layer: software
 redirect_from:
   - /concepts/c-문자열/
 ---

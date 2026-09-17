@@ -15,10 +15,10 @@ editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-05-04
-updated: 2026-07-26
+updated: 2026-09-17
 review:
   mode: legacy-baseline
-  revision: sha256:11d4b7d01af6f15ebcc717522e84bcd6831e1ff55734530646b05f67ee574257
+  revision: sha256:398efbb6824f92e06ed9148fa46b52d42d00933896474d3a68207c3366150340
   reviewed_at: null
   reviewed_by: legacy-baseline
 evidence_ids:
@@ -26,7 +26,8 @@ evidence_ids:
   - ref-015
   - ref-016
   - ref-017
-capability_layers: []
+capability_layers:
+  - programmability
 history:
   event:
     start: 1957

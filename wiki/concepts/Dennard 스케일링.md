@@ -16,10 +16,10 @@ editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-16
-updated: 2026-07-26
+updated: 2026-09-17
 review:
   mode: legacy-baseline
-  revision: sha256:16f80b5ac68b32cefbfcc4aa89325f1a247205707aeea9a1ce3cc1024e69334d
+  revision: sha256:a6db3bbe277acb225cf1a067b53aaa1fca323304e1967c4cacefeb43cf328c29
   reviewed_at: null
   reviewed_by: legacy-baseline
 evidence_ids:
@@ -28,7 +28,8 @@ evidence_ids:
   - ref-040
   - ref-047
   - ref-048
-capability_layers: []
+capability_layers:
+  - resource-efficiency
 history:
   event:
     start: 1974

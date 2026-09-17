@@ -15,15 +15,18 @@ editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-10
-updated: 2026-07-26
+updated: 2026-09-17
 review:
   mode: legacy-baseline
-  revision: sha256:fbccb429c40387b37857d54af87117bfbf7772b08559b37508deeccf130a31cb
+  revision: sha256:e4e6ccb219eaf0e12308d323485621ff657bba19a18e0c9b24ca985d511190f1
   reviewed_at: null
   reviewed_by: legacy-baseline
 evidence_ids:
   - ref-004
-capability_layers: []
+capability_layers:
+  - programmability
+history:
+  layer: software
 redirect_from:
   - /entities/찰스-w-크루거/
 ---

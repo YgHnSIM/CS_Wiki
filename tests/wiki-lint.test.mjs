@@ -59,6 +59,41 @@ test("importing wiki_lint does not execute its CLI", async () => {
   assert.equal(result.stderr, "");
 });
 
+test("public knowledge pages require capability layers, a historical layer, and source-backed unique relations", async () => {
+  const evidence = makePage({
+    id: "ref-001",
+    kind: "reference",
+    title: "Evidence",
+    relativePath: "wiki/sources/evidence.md"
+  });
+  const concept = makePage({
+    id: "concept-other",
+    kind: "concept",
+    title: "Other",
+    relativePath: "wiki/concepts/other.md"
+  });
+  const page = makePage({
+    graphVisibility: "public",
+    capabilityLayers: [],
+    history: { historicalLayer: "" },
+    domains: ["not-a-domain"],
+    relations: [
+      { kind: "enables", target: "Other", note: "설명", evidence: ["Other"] },
+      { kind: "enables", target: "Other", note: "중복", evidence: ["Evidence"] }
+    ]
+  });
+  const summary = await collectWikiLintIssues({
+    root: projectRoot,
+    manifest: { pages: [page, evidence, concept], unresolved: [] }
+  });
+  const codes = summary.issues.map((issue) => issue.code);
+  assert.ok(codes.includes("ontology.domain"));
+  assert.ok(codes.includes("ontology.capability_required"));
+  assert.ok(codes.includes("ontology.historical_required"));
+  assert.ok(codes.includes("graph.relation_duplicate"));
+  assert.ok(codes.includes("graph.relation_evidence_type"));
+});
+
 test("collect/run count manifest pages and report each unplanned unresolved link once", async () => {
   const page = makePage({ plannedLinks: ["계획된 페이지"] });
   const manifest = {
