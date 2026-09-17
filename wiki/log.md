@@ -16,7 +16,7 @@ created: 2026-05-03
 updated: 2026-09-17
 review:
   mode: attested
-  revision: sha256:7c4e2c53b43161852cb3468329846729cf2f2f07806e56e1ce402aee74e7e9b0
+  revision: sha256:59d96cbf71199104ee32dd941b33e9dcb063838a2b8f014fef0e03898e2e09e8
   reviewed_at: 2026-08-31
   reviewed_by: antigravity
 evidence_ids: []
@@ -146,6 +146,7 @@ redirect_from:
 - [2026-09-17 update | 온톨로지 관리 점검과 층위·관계 보완](logs/log-2026-09-17-114-온톨로지-관리-점검-보완.md)
 - [2026-09-17 update | 관계 표와 학습 경로 보완](logs/log-2026-09-17-115-관계-표와-학습-경로-보완.md)
 - [2026-09-17 fix | 배포 변경 집합 검토 승격](logs/log-2026-09-17-116-배포-변경집합-검토-승격.md)
+- [2026-09-17 update | 모순 관계와 복잡도 층위](logs/log-2026-09-17-117-모순-관계와-복잡도-층위.md)
 
 ## 출처
 
