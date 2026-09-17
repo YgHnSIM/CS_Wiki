@@ -73,6 +73,16 @@ npm run test:browser
 - 모든 작업은 `wiki/logs/`에 원 기록을 남기고 생성 목록을 재생성한다.
 - 소스 페이지는 문헌 계보(`works`)와 접근 수단(`access`)을 분리한다.
 - 모순은 숨기지 말고 `> [!WARNING] 모순 발견`으로 기록한다.
+- 기존 `active` 페이지를 실질 변경하면 `review.mode`가 `legacy-baseline`인 문서는 `attested`로 승격한다. `scripts/update_wiki_updated.mjs`가 날짜·검토 모드·revision을 맞춘다.
+- 푸시 전 변경 집합 검사는 커밋한 뒤 `BASE_SHA`를 직전 원격 HEAD로 두고 실행한다. `BASE_SHA`가 없거나 `HEAD`와 같으면 게이트가 비거나 워킹 트리 변경을 보지 못한다.
+
+```bash
+git rev-parse origin/main
+BASE_SHA=$(git rev-parse origin/main) npm run validate:changes
+```
+
+Windows PowerShell에서는 `$env:BASE_SHA = git rev-parse origin/main; npm.cmd run validate:changes`를 사용한다.
+- Git에서 위키 경로 목록을 뽑을 때는 `-z`(NUL 구분)를 쓴다. 줄바꿈 분할은 한글 경로의 C 인용 때문에 파일을 놓친다.
 - 커밋 메시지는 영어로 `ingest: number_title` 또는 `reference: short_title` 형식을 따른다.
 
 ## 금지 사항
