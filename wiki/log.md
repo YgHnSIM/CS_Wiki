@@ -16,7 +16,7 @@ created: 2026-05-03
 updated: 2026-09-17
 review:
   mode: attested
-  revision: sha256:766e4b9088338f4b0f8fe9d36af8193a880d7cc4a539cce3c1267ecea1bf35a7
+  revision: sha256:bcf5b11bb164a8cf4e0583c95fbf45aa38368f1b964641d61865f761398cb700
   reviewed_at: 2026-08-31
   reviewed_by: antigravity
 evidence_ids: []
@@ -144,6 +144,7 @@ redirect_from:
 - [2026-08-31 create | 전용 연산기와 범용 제어기의 진자 운동 심화 분석](logs/log-2026-08-31-112-전용-연산기와-범용-제어기의-진자-운동-심화-분석.md)
 - [2026-08-31 fix | 시각화 자산 통합 및 배포 파이프라인 복구](logs/log-2026-08-31-113-시각화-자산-통합-및-배포-파이프라인-복구.md)
 - [2026-09-17 update | 온톨로지 관리 점검과 층위·관계 보완](logs/log-2026-09-17-114-온톨로지-관리-점검-보완.md)
+- [2026-09-17 update | 관계 표와 학습 경로 보완](logs/log-2026-09-17-115-관계-표와-학습-경로-보완.md)
 
 ## 출처
 

@@ -19,7 +19,7 @@ created: 2026-07-10
 updated: 2026-09-17
 review:
   mode: legacy-baseline
-  revision: sha256:d0c56972c7e2def6007a92a06cdfbf8fb9269272169c6e5772dd926afe073aef
+  revision: sha256:ea0f7cbb41c92ae907180b0004ec33b1574f9eb757f2d94fd670628a1920ef72
   reviewed_at: null
   reviewed_by: legacy-baseline
 evidence_ids:
@@ -45,8 +45,14 @@ redirect_from:
 
 Dijkstra의 비판은 `goto`가 계산 능력에 필요 없다는 주장에 머물지 않는다. 더 중요한 문제는 무제한 `goto`가 실행 진행을 설명할 독립적인 좌표계를 흐리게 만든다는 점이다. Knuth는 이후 논쟁을 정리하며 더 나은 반복 구문과 오류 탈출 구문이 많은 `goto` 사용을 대체할 수 있지만 모든 경우를 단순 금지 규칙으로 처리하는 것도 충분하지 않다고 보았다.
 
-## 출처
+## 관계
 
+| 관계 | 대상 | 설명 | 근거 |
+|---|---|---|---|
+| implements | [[제어 흐름]] | 실행 위치를 임의 표지로 옮기는 점프다. | [[A Case against the GO TO Statement]] |
+| constrains | [[구조적 프로그래밍]] | 무제한 점프가 프로그램 이해를 해친다는 비판의 대상이다. | [[Structured Programming]] |
+
+## 출처
 <!-- wiki-v2:evidence-start -->
 ### 근거 ID
 - `ref-011`

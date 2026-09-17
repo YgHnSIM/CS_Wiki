@@ -18,7 +18,7 @@ created: 2026-07-09
 updated: 2026-09-17
 review:
   mode: legacy-baseline
-  revision: sha256:ed5cdae8337c917d314aa02fe7ca8702f46cba57fbc18926a812ee9df6005f57
+  revision: sha256:463c93b9003c5aefbf4527282d21dbb580b29e50e1884addbb2f5bf8e6cb2241
   reviewed_at: null
   reviewed_by: legacy-baseline
 evidence_ids:
@@ -60,8 +60,14 @@ EDSAC의 라이브러리는 단순히 자주 쓰는 코드를 모아 둔 창고�
 
 EDSAC 라이브러리를 현대 API와 그대로 동일시하면 안 된다. 당시 루틴은 특정 기계의 메모리 구조, 종이 테이프 입력, 절대·상대 주소, 제한된 저장 공간에 강하게 묶여 있었다. 또한 버전 관리, 타입 시스템, 네트워크 호출, 권한 모델 같은 현대 API의 많은 요소는 아직 없었다. 따라서 정확한 표현은 "API 그 자체"가 아니라 "API적 사고의 전사"다.
 
-## 출처
+## 관계
 
+| 관계 | 대상 | 설명 | 근거 |
+|---|---|---|---|
+| synthesizes | [[라이브러리 카탈로그]] | 루틴 명세가 호출 계약으로 바뀌는 과정을 추적한다. | [[The Preparation of Programs for an Electronic Digital Computer]] |
+| synthesizes | [[API]] | 구현 은닉과 사용 규약이 재사용 단위를 만드는 조건을 정리한다. | [[The Preparation of Programs for an Electronic Digital Computer]] |
+
+## 출처
 <!-- wiki-v2:evidence-start -->
 ### 근거 ID
 - `ref-001`

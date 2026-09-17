@@ -17,7 +17,7 @@ created: 2026-05-04
 updated: 2026-09-17
 review:
   mode: legacy-baseline
-  revision: sha256:d1d366b5119f29a25670b4d15cf48b111cbe793f7a5b3c921cb61dcf1e3b1970
+  revision: sha256:ecc534299ecebc0e6b5d6404dbbde9ad65807c13126f1297cbd5b7a7add16fce
   reviewed_at: null
   reviewed_by: legacy-baseline
 evidence_ids:
@@ -73,8 +73,14 @@ Wheeler Jump는 기계 수준에서 [[제어 흐름]]을 구현하기 위한 호
 
 이 구분은 [[goto와 점프에서 구조적 프로그래밍으로]]에서 더 넓게 다룬다.
 
-## 출처
+## 관계
 
+| 관계 | 대상 | 설명 | 근거 |
+|---|---|---|---|
+| implements | [[서브루틴]] | 호출부 명령을 복귀 점프로 고쳐 폐쇄형 호출을 구현한다. | [[폐쇄형 서브루틴과 Wheeler Jump]] |
+| implements | [[자기 수정 코드]] | 저장된 명령을 실행 중에 고쳐 복귀 주소를 심는다. | [[서브루틴과 스택(Stack)의 원리]] |
+
+## 출처
 <!-- wiki-v2:evidence-start -->
 ### 근거 ID
 - `src-002`

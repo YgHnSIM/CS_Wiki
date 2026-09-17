@@ -19,7 +19,7 @@ created: 2026-07-16
 updated: 2026-09-17
 review:
   mode: legacy-baseline
-  revision: sha256:a6db3bbe277acb225cf1a067b53aaa1fca323304e1967c4cacefeb43cf328c29
+  revision: sha256:6e2f32f0b02b21a6ee0b7b3ca0224ef60a587721bb407e8b1547530f2625f3ad
   reviewed_at: null
   reviewed_by: legacy-baseline
 evidence_ids:
@@ -76,8 +76,14 @@ redirect_from:
 
 전압 축소가 약해진 뒤에는 칩 면적과 전력 예산이 독립적인 제약이 되었다. [[Dark Silicon and the End of Multicore Scaling]]의 [[다크 실리콘]]은 트랜지스터를 구현할 면적이 있어도 전력·열과 프로그램의 병렬성 때문에 일부 회로를 동시에 유용하게 사용하지 못하는 간극을 모델링했다. 이는 Dennard 스케일링의 약화를 “더 이상 작게 만들 수 없다”보다 “작게 만든 회로를 모두 같은 방식으로 켤 수 없다”는 문제로 구체화한다.
 
-## 출처
+## 관계
 
+| 관계 | 대상 | 설명 | 근거 |
+|---|---|---|---|
+| constrains | [[무어의 법칙]] | 소자 축소가 전력 밀도를 유지할 때만 클럭·집적 이득이 함께 온다. | [[Design of Ion-Implanted MOSFET's with Very Small Physical Dimensions]] |
+| precedes | [[다크 실리콘]] | 축소 규칙이 깨진 뒤 활성 면적 제한이 성능 모델이 된다. | [[The Landscape of Parallel Computing Research - A View from Berkeley]] |
+
+## 출처
 <!-- wiki-v2:evidence-start -->
 ### 근거 ID
 - `ref-038`

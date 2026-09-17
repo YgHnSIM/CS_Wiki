@@ -13,10 +13,10 @@ editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-05-04
-updated: 2026-07-26
+updated: 2026-09-17
 review:
   mode: legacy-baseline
-  revision: sha256:ce622541989a3a69fada3cefaeb97a22f814d15328eb0f9773cd0038b2555a8f
+  revision: sha256:698a5f289af32813ca18eefb54a45b5a53cfcf6876de0731cd94a85fb24ca1b6
   reviewed_at: null
   reviewed_by: legacy-baseline
 evidence_ids:
@@ -64,8 +64,14 @@ Wilkes의 EDSAC 설계는 [[First Draft of a Report on the EDVAC]]와 Moore Scho
 - 검증된 서브루틴을 [[라이브러리]]와 카탈로그로 관리해 소프트웨어를 개인 기술에서 집단적 자산으로 전환했다.
 - [[The Preparation of Programs for an Electronic Digital Computer]]를 통해 EDSAC의 라이브러리, 오류 진단, [[자동 프로그래밍]] 경험이 저장 프로그램 컴퓨터 일반을 위한 프로그래밍 지식으로 정리되었다.
 
-## 출처
+## 관계
 
+| 관계 | 대상 | 설명 | 근거 |
+|---|---|---|---|
+| exemplifies | [[저장 프로그램 컴퓨터]] | 저장된 프로그램을 실용 과학 계산 서비스로 운용한 사례다. | [[초기 소프트웨어의 탄생]] |
+| enables | [[라이브러리]] | 서브루틴 카탈로그와 적재 절차를 소프트웨어 계층으로 정착시켰다. | [[EDSAC과 Initial Orders]] |
+
+## 출처
 <!-- wiki-v2:evidence-start -->
 ### 근거 ID
 - `src-002`

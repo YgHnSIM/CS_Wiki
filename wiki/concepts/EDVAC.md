@@ -16,7 +16,7 @@ created: 2026-07-10
 updated: 2026-09-17
 review:
   mode: legacy-baseline
-  revision: sha256:625b2325ebd05589ac01305476756c229fc2fe4e95f9d10d3d930a60bc562196
+  revision: sha256:cc1f7e14667e3e08c351dfa99fd004f9c58aa6a5473a1cf3a120cf624a15c35e
   reviewed_at: null
   reviewed_by: legacy-baseline
 evidence_ids:
@@ -50,8 +50,14 @@ EDVAC은 저장 프로그램 컴퓨터의 초기 설계로 큰 영향을 주었�
 
 따라서 EDVAC의 지위는 "처음 설계된 현대적 저장 프로그램 컴퓨터"에 가깝다. "처음 작동한 저장 프로그램 전자식 컴퓨터"는 [[Manchester Baby]], "처음 실용적으로 일반 계산 서비스를 제공한 저장 프로그램 컴퓨터"는 [[EDSAC]] 쪽으로 구분하는 편이 더 정확하다.
 
-## 출처
+## 관계
 
+| 관계 | 대상 | 설명 | 근거 |
+|---|---|---|---|
+| enables | [[폰 노이만 구조]] | 명령과 데이터를 같은 기억장치에 두는 논리 구조를 문서화했다. | [[First Draft of a Report on the EDVAC]] |
+| enables | [[저장 프로그램 컴퓨터]] | 프로그램 교체를 재배선이 아니라 기억 내용 갱신으로 바꿨다. | [[First Draft of a Report on the EDVAC]] |
+
+## 출처
 <!-- wiki-v2:evidence-start -->
 ### 근거 ID
 - `ref-006`

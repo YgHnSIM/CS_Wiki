@@ -19,7 +19,7 @@ created: 2026-07-10
 updated: 2026-09-17
 review:
   mode: legacy-baseline
-  revision: sha256:15f674b271c04c712f07b483a5de7f86c579a0b93fb4df180be0c3ba2751459e
+  revision: sha256:92b3b78c4fb3d39e6bbdb43922ab247def0648bfe4f6645cc7e951a09066bf58
   reviewed_at: null
   reviewed_by: legacy-baseline
 evidence_ids:
@@ -56,8 +56,14 @@ C의 역사적 의미는 고급 언어와 기계에 가까운 제어 사이의 �
 
 C는 기계에 가까운 표현력을 제공하는 만큼 [[메모리 안전성]]의 책임을 프로그래머에게 많이 남긴다. [[C 문자열]]의 널 종단, 포인터 연산, 타입 변환, 정수 범위는 시스템 프로그래밍의 힘이면서 동시에 오류와 취약점의 원천이 될 수 있다.
 
-## 출처
+## 관계
 
+| 관계 | 대상 | 설명 | 근거 |
+|---|---|---|---|
+| enables | [[시스템 프로그래밍]] | 운영체제 자원을 이식 가능한 표기로 다루게 한다. | [[The Development of the C Language]] |
+| enables | [[이식성]] | 같은 소스를 여러 Unix 구현에서 번역하게 한다. | [[Portability of C Programs and the UNIX System]] |
+
+## 출처
 <!-- wiki-v2:evidence-start -->
 ### 근거 ID
 - `ref-019`

@@ -17,7 +17,7 @@ created: 2026-05-04
 updated: 2026-09-17
 review:
   mode: legacy-baseline
-  revision: sha256:a0265fa57b589cc8e902146b6c3c2a03f2b649300f03a3de44d5e8d79ae28ad4
+  revision: sha256:1165a1f99b7b054d88363c21191458d085893a20eb00eb92a16ed98495adc294
   reviewed_at: null
   reviewed_by: legacy-baseline
 evidence_ids:
@@ -59,8 +59,14 @@ Initial Orders 2는 `θ`를 현재 서브루틴의 기준 적재 주소로 사�
 
 Initial Orders는 오늘날의 부트로더, 로더, 어셈블러, 초기 번역기의 성격을 기초적인 형태로 함께 갖는다. 중요한 점은 사용자가 기계 내부 상태를 직접 조작하는 대신, 더 높은 수준의 표현을 작성하고 다른 절차가 이를 해석해 실행하게 했다는 것이다.
 
-## 출처
+## 관계
 
+| 관계 | 대상 | 설명 | 근거 |
+|---|---|---|---|
+| enables | [[부트스트랩]] | 빈 기계가 자기 적재 루틴을 읽어 프로그램을 시작하게 한다. | [[EDSAC과 Initial Orders]] |
+| enables | [[재배치]] | 기준 주소로 명령의 주소 필드를 고쳐 라이브러리를 결합한다. | [[초기 소프트웨어의 탄생]] |
+
+## 출처
 <!-- wiki-v2:evidence-start -->
 ### 근거 ID
 - `src-002`

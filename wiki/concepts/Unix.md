@@ -18,7 +18,7 @@ created: 2026-07-10
 updated: 2026-09-17
 review:
   mode: legacy-baseline
-  revision: sha256:b4e9283983e3c5dca5fe8472c4e4b314be022fb31974e5ea6b30d2ff47bb3687
+  revision: sha256:9a7cad01dc35099bf4bef3eac9227d8eb246f26dc076077439a00582ec47f7d5
   reviewed_at: null
   reviewed_by: legacy-baseline
 evidence_ids:
@@ -51,8 +51,14 @@ Unix의 핵심은 모든 기능을 하나의 거대한 프로그램 안에 넣�
 
 초기 Unix는 어셈블리 언어로 시작했지만 1973년 커널을 [[C 언어]]로 다시 작성하면서 현대적 형태를 갖추었다. 이 전환은 Unix가 특정 기계의 어셈블리 코드에 묶이지 않고 C 컴파일러와 함께 다른 기계로 옮겨질 수 있는 기반을 만들었다.
 
-## 출처
+## 관계
 
+| 관계 | 대상 | 설명 | 근거 |
+|---|---|---|---|
+| enables | [[시스템 호출]] | 파일·프로세스·장치를 공통 호출로 접근하게 한다. | [[The UNIX Time-Sharing System]] |
+| enables | [[C 언어]] | 운영체제와 언어가 같은 도구 환경에서 함께 이식되게 한다. | [[The Development of the C Language]] |
+
+## 출처
 <!-- wiki-v2:evidence-start -->
 ### 근거 ID
 - `ref-018`

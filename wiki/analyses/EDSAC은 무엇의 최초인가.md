@@ -18,7 +18,7 @@ created: 2026-07-10
 updated: 2026-09-17
 review:
   mode: legacy-baseline
-  revision: sha256:9e611d81a7bc0b0fa98b7427a39120a664e1640f908a42f0ac0fc1da348cd3a7
+  revision: sha256:68a4a4a166067cc1a866bc1b7ef13bb21e7dfa8fc4e03f17a999802381e924c3
   reviewed_at: null
   reviewed_by: legacy-baseline
 evidence_ids:
@@ -59,8 +59,14 @@ EDSAC을 설명할 때는 다음 표현을 구분해 쓰는 것이 좋다.
 
 이 구분은 EDSAC의 중요성을 낮추지 않는다. 오히려 [[저장 프로그램 개념의 여러 기원]] 안에서 EDSAC의 고유한 의미를 더 정확히 드러낸다.
 
-## 출처
+## 관계
 
+| 관계 | 대상 | 설명 | 근거 |
+|---|---|---|---|
+| synthesizes | [[EDSAC]] | 설계·최초 실행·실용 운영의 최초성 기준을 구분해 평가한다. | [[The Manchester Small Scale Experimental Machine - The Baby]] |
+| synthesizes | [[저장 프로그램 컴퓨터]] | 한 종류의 최초로 여러 기계를 합치지 말 것을 주장한다. | [[First Draft of a Report on the EDVAC]] |
+
+## 출처
 <!-- wiki-v2:evidence-start -->
 ### 근거 ID
 - `ref-006`

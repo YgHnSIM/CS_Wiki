@@ -18,7 +18,7 @@ created: 2026-07-10
 updated: 2026-09-17
 review:
   mode: legacy-baseline
-  revision: sha256:97ac3ddcfd7f1169714015326dd772a9e76c98949cffed7f6cc2b472da56d719
+  revision: sha256:41d703573669d23af51d95355e234eeb01af20b01a895ba6aa3b7aed0fd4110c
   reviewed_at: null
   reviewed_by: legacy-baseline
 evidence_ids:
@@ -48,8 +48,14 @@ UTF-16 코드 유닛은 16비트 값이므로 바이트열로 저장하거나 �
 
 많은 플랫폼과 언어가 내부 문자열 표현으로 UTF-16 또는 UTF-16에 가까운 코드 유닛 모델을 사용해 왔다. 이 경우 문자열 길이가 사용자 지각 문자 수가 아니라 UTF-16 코드 유닛 수일 수 있다. 이모지나 일부 역사 문자처럼 surrogate pair가 필요한 문자는 코드 유닛 두 개로 계산된다.
 
-## 출처
+## 관계
 
+| 관계 | 대상 | 설명 | 근거 |
+|---|---|---|---|
+| implements | [[유니코드]] | 코드 포인트를 16비트 코드 유닛과 서로게이트 쌍으로 직렬화한다. | [[The Unicode Standard 17.0.0]] |
+| constrains | [[바이트 순서 표식]] | 멀티바이트 유닛의 엔디안을 표시해야 해석이 안정된다. | [[WHATWG Encoding Standard]] |
+
+## 출처
 <!-- wiki-v2:evidence-start -->
 ### 근거 ID
 - `ref-022`

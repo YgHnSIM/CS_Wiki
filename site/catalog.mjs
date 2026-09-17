@@ -137,7 +137,9 @@ export const learningPaths = [
     description: "계산 절차의 형식화에서 보편 기계와 계산 불가능성의 경계까지 읽는다.",
     pages: [
       "On Computable Numbers with an Application to the Entscheidungsproblem",
+      "앨런 튜링",
       "An Unsolvable Problem of Elementary Number Theory",
+      "알론조 처치",
       "계산 가능성",
       "튜링 기계",
       "보편 튜링 기계",
@@ -153,6 +155,7 @@ export const learningPaths = [
     description: "EDVAC의 설계, Manchester Baby의 실행, EDSAC의 실용 운영을 구분해 살핀다.",
     pages: [
       "First Draft of a Report on the EDVAC",
+      "존 폰 노이만",
       "The Manchester Small Scale Experimental Machine - The Baby",
       "EDVAC",
       "폰 노이만 구조",
@@ -160,7 +163,8 @@ export const learningPaths = [
       "EDSAC",
       "저장 프로그램 컴퓨터",
       "저장 프로그램 개념의 여러 기원",
-      "EDSAC은 무엇의 최초인가"
+      "EDSAC은 무엇의 최초인가",
+      "모리스 윌크스"
     ]
   },
   {
@@ -178,8 +182,17 @@ export const learningPaths = [
       "폐쇄형 서브루틴과 Wheeler Jump",
       "서브루틴",
       "Wheeler Jump",
+      "데이비드 휠러",
       "복귀 주소",
       "스택",
+      "스택 프레임",
+      "자기 수정 코드",
+      "디버깅",
+      "포스트모템 루틴",
+      "재배치",
+      "링커",
+      "자동 프로그래밍",
+      "스탠리 길",
       "초기 소프트웨어의 계층화"
     ]
   },
@@ -189,9 +202,13 @@ export const learningPaths = [
     description: "기계적 점프와 고급 언어의 goto를 구분하고 이해 가능한 제어 구조의 형성을 추적한다.",
     pages: [
       "A Case against the GO TO Statement",
+      "에츠허르 데이크스트라",
       "Flow Diagrams, Turing Machines and Languages with Only Two Formation Rules",
+      "코라도 뵘",
+      "주세페 야코피니",
       "Structured Programming",
       "Structured Programming with go to Statements",
+      "도널드 커누스",
       "GOTO 문",
       "제어 흐름",
       "제어 구조",
@@ -225,7 +242,10 @@ export const learningPaths = [
     description: "운영체제와 시스템 프로그래밍 언어가 이식성과 도구 조합 안에서 함께 발전한 과정을 읽는다.",
     pages: [
       "The UNIX Time-Sharing System",
+      "켄 톰프슨",
       "The Development of the C Language",
+      "데니스 리치",
+      "스티븐 C. 존슨",
       "The Evolution of the Unix Time-sharing System",
       "Portability of C Programs and the UNIX System",
       "Unix",
@@ -236,6 +256,7 @@ export const learningPaths = [
       "시스템 호출",
       "유닉스 파이프",
       "이식성",
+      "시스템 프로그래밍",
       "Unix와 C"
     ]
   },
@@ -246,8 +267,11 @@ export const learningPaths = [
     pages: [
       "The Preparation of Programs for an Electronic Digital Computer",
       "Mass Produced Software Components",
+      "더글러스 매킬로이",
       "On the Criteria To Be Used in Decomposing Systems into Modules",
+      "데이비드 파나스",
       "Software Reuse",
+      "찰스 W. 크루거",
       "Sixteen Questions about Software Reuse",
       "라이브러리",
       "라이브러리 카탈로그",
@@ -259,7 +283,11 @@ export const learningPaths = [
       "소프트웨어 재사용의 역사",
       "계산 결과에서 실행 가능한 절차로",
       "스프레드시트",
-      "수학 표에서 스프레드시트로"
+      "수학 표에서 스프레드시트로",
+      "재현 가능한 빌드",
+      "재현 가능한 빌드는 무엇을 같게 만드는가",
+      "dependency provenance와 registry identity",
+      "registry는 의존성의 출처와 동일성을 어떻게 증명하는가"
     ]
   },
   {
@@ -293,6 +321,9 @@ export const learningPaths = [
       "Unicode Normalization Forms",
       "Unicode Text Segmentation",
       "Unicode Security Mechanisms",
+      "비트와 바이트",
+      "비트 연산",
+      "ASCII",
       "데이터 표현",
       "인코딩",
       "유니코드",
@@ -301,6 +332,8 @@ export const learningPaths = [
       "코드 유닛",
       "UTF-8",
       "UTF-16",
+      "바이트 순서 표식",
+      "인코딩 오류",
       "유니코드 정규화",
       "그래핌 클러스터",
       "동형이의 문자",
@@ -311,7 +344,8 @@ export const learningPaths = [
       "메모리 안전성",
       "비트 패턴과 해석 규칙",
       "인코딩 심화",
-      "입력을 해석하는 경계는 왜 보안 경계인가"
+      "입력을 해석하는 경계는 왜 보안 경계인가",
+      "ASLR (Address Space Layout Randomization)"
     ]
   },
   {
@@ -400,6 +434,11 @@ export const learningPaths = [
       "컴파일러 최적화",
       "Fortran과 컴파일러",
       "Unix와 C",
+      "프로그래밍 언어",
+      "올레요한 달",
+      "하드웨어 실행 모델",
+      "하드웨어 실행 모델은 어떻게 제어와 상태를 엮는가",
+      "전용 연산기와 범용 제어기의 진자 운동",
       "프로그래밍 가능성",
       "컴퓨팅 능력이란 무엇인가",
       "범용성은 어떻게 컴퓨팅 능력이 되었는가"
@@ -420,6 +459,10 @@ export const learningPaths = [
       "알고리즘과 스케줄 분리",
       "TVM: An Automated End-to-End Optimizing Compiler for Deep Learning",
       "성능 이식성",
+      "StableHLO·MLIR·ABI 경계",
+      "runtime contract",
+      "표현·IR·ABI 경계는 무엇을 보존하는가",
+      "runtime contract는 무엇을 보장해야 하는가",
       "도메인 특화 가속기",
       "한 소스의 의미와 성능은 가속기로 어떻게 번역되는가"
     ]
@@ -434,6 +477,7 @@ export const learningPaths = [
       "Slave Memories and Dynamic Storage Allocation",
       "캐시 메모리",
       "Design and Implementation of RISC I",
+      "마이크로프로그래밍",
       "축소 명령어 집합 컴퓨터",
       "컴파일러 최적화",
       "Hitting the Memory Wall",
@@ -489,11 +533,13 @@ export const learningPaths = [
       "Cooperating Sequential Processes",
       "동시성",
       "Monitors: An Operating System Structuring Concept",
+      "토니 호어",
       "상호 배제와 동기화",
       "How to Make a Multiprocessor Computer That Correctly Executes Multiprocess Programs",
       "순차 일관성",
       "Linearizability: A Correctness Condition for Concurrent Objects",
       "선형화 가능성",
+      "직렬 가능성",
       "복제 로그와 합의",
       "분산 서비스는 빠른 응답과 같은 상태를 어떻게 함께 보장하는가",
       "한 프로그램의 순서는 여러 실행 주체에서 어떻게 보존되는가"
@@ -630,6 +676,7 @@ export const learningPaths = [
       "The SPACE of Developer Productivity",
       "개발자 생산성",
       "소프트웨어 공학",
+      "그레이스 호퍼",
       "코드 생산량은 왜 개발 생산성을 설명하지 못하는가",
       "Expectation vs. Experience: Evaluating the Usability of Code Generation Tools Powered by Large Language Models",
       "AI 코딩 지원",
@@ -661,6 +708,13 @@ export const learningPaths = [
       "가용성과 복구",
       "The Tail at Scale",
       "꼬리 지연 시간",
+      "장애 감지",
+      "장애 감지는 실패와 느림을 어떻게 구분하는가",
+      "재시도",
+      "재시도는 실패를 줄이면서 부하를 어디로 옮기는가",
+      "멱등성",
+      "정확히 한 번은 어디까지 가능한가",
+      "트랜잭션 시스템은 어떤 순서 보장을 제공하는가",
       "빠른 서비스는 왜 가용한 서비스를 보장하지 않는가",
       "분산 서비스는 빠른 응답과 같은 상태를 어떻게 함께 보장하는가",
       "평균 성능은 왜 서비스의 컴퓨팅 능력을 설명하지 못하는가",

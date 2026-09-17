@@ -19,7 +19,7 @@ created: 2026-07-10
 updated: 2026-09-17
 review:
   mode: attested
-  revision: sha256:87734c3c77090a45e52a09535b3fe344c641ac2e2270d0e536d05e1f1d8e7130
+  revision: sha256:e6f3aefad89642584af559ad45afa55731616fedc54eadb1e253cd0924cea17a
   reviewed_at: 2026-08-31
   reviewed_by: antigravity
 evidence_ids:
@@ -63,8 +63,14 @@ redirect_from:
 
 따라서 `goto/점프`에서 구조적 프로그래밍으로의 전환은 제어 명령 하나의 유행 변화가 아니다. 그것은 소프트웨어가 기계 실행을 직접 지시하는 명령열에서, 사람이 읽고 추론하고 검증할 수 있는 구조적 텍스트로 바뀌는 과정이다. 이 전환은 [[프로그래밍 언어]] 설계, [[소프트웨어 공학]], 테스트와 검증, API와 모듈화의 역사와 직접 연결된다.
 
-## 출처
+## 관계
 
+| 관계 | 대상 | 설명 | 근거 |
+|---|---|---|---|
+| synthesizes | [[GOTO 문]] | 기계 점프와 고급 언어 goto를 구분해 비판의 대상을 한정한다. | [[A Case against the GO TO Statement]] |
+| synthesizes | [[구조적 프로그래밍]] | 형성 규칙으로 제어를 제한하는 전환을 추적한다. | [[Structured Programming]] |
+
+## 출처
 <!-- wiki-v2:evidence-start -->
 ### 근거 ID
 - `ref-011`

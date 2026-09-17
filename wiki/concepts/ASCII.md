@@ -17,7 +17,7 @@ created: 2026-05-12
 updated: 2026-09-17
 review:
   mode: legacy-baseline
-  revision: sha256:d54e35eb882a35316c1fb10bf1b4c3f8309fbdc1473dd4253bfae43911cdda1a
+  revision: sha256:8675947b18236c0d6f545244a55594d4cd613ad0c1e8f231bd903a66748bc84e
   reviewed_at: null
   reviewed_by: legacy-baseline
 evidence_ids:
@@ -48,8 +48,14 @@ ASCII는 로마자 중심의 7비트 표준이므로 다른 언어의 문자나 
 
 [[UTF-8]]은 ASCII 범위 `U+0000`부터 `U+007F`까지를 같은 한 바이트 값으로 표현한다. 그래서 순수 ASCII 텍스트는 그대로 유효한 UTF-8 텍스트이기도 하다. 다만 이 호환성은 ASCII 범위에만 해당하며, 한글이나 이모지처럼 ASCII 밖의 문자는 여러 바이트가 필요하다.
 
-## 출처
+## 관계
 
+| 관계 | 대상 | 설명 | 근거 |
+|---|---|---|---|
+| exemplifies | [[인코딩]] | 7비트 문자 집합으로 바이트와 문자의 대응을 고정한다. | [[데이터 표현과 인코딩]] |
+| precedes | [[유니코드]] | 이후 코드 공간의 하위 호환 기준이 된다. | [[The Unicode Standard 17.0.0]] |
+
+## 출처
 <!-- wiki-v2:evidence-start -->
 ### 근거 ID
 - `src-006`

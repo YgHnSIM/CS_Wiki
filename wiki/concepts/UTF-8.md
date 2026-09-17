@@ -18,7 +18,7 @@ created: 2026-07-10
 updated: 2026-09-17
 review:
   mode: legacy-baseline
-  revision: sha256:8a9decc8ba6329548c2664d453d1d0b7015734b403a23fbceba675164842cb5d
+  revision: sha256:891a3df09f4ee52b3796e5af59ae22dc138aa8a6af2664d16eba60655f4930aa
   reviewed_at: null
   reviewed_by: legacy-baseline
 evidence_ids:
@@ -52,8 +52,14 @@ UTF-8은 선행 바이트가 전체 길이를 나타내고 이어지는 바이�
 
 UTF-8은 바이트 순서 문제가 없고, ASCII와 호환되며, 인터넷과 웹의 기본 텍스트 교환 인코딩으로 적합하다. 그러나 "한 문자 = 한 바이트"는 ASCII 범위에서만 맞다. 한글, 이모지, 결합 문자 시퀀스는 여러 바이트와 여러 코드 포인트가 필요할 수 있다.
 
-## 출처
+## 관계
 
+| 관계 | 대상 | 설명 | 근거 |
+|---|---|---|---|
+| implements | [[유니코드]] | 스칼라 값을 1–4바이트열로 직렬화한다. | [[RFC 3629 UTF-8]] |
+| responds_to | [[ASCII]] | 0–127 구간을 단일 바이트로 보존해 하위 호환한다. | [[RFC 3629 UTF-8]] |
+
+## 출처
 <!-- wiki-v2:evidence-start -->
 ### 근거 ID
 - `ref-022`

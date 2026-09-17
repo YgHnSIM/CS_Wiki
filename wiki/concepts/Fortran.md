@@ -18,7 +18,7 @@ created: 2026-05-04
 updated: 2026-09-17
 review:
   mode: legacy-baseline
-  revision: sha256:398efbb6824f92e06ed9148fa46b52d42d00933896474d3a68207c3366150340
+  revision: sha256:79b43d1339d56024dd20aac0280ecb8f0512412c3a8166793689852971f0c674
   reviewed_at: null
   reviewed_by: legacy-baseline
 evidence_ids:
@@ -59,8 +59,14 @@ Fortran의 `GO TO`는 후대의 [[구조적 프로그래밍]] 논쟁과도 연�
 
 Fortran은 [[Initial Orders]]에서 보이던 인간 표기와 기계 실행 사이의 번역 계층이 더 높은 수준의 언어 설계로 확장된 사례다. 동시에 [[자동 프로그래밍]]이 주소 보정과 서브루틴 조립을 넘어, 수식과 반복 구조 전체를 목적 프로그램으로 변환하는 컴파일러 체계로 발전할 수 있음을 보여준다.
 
-## 출처
+## 관계
 
+| 관계 | 대상 | 설명 | 근거 |
+|---|---|---|---|
+| enables | [[컴파일러]] | 수학식에 가까운 소스를 효율적인 목적 코드로 번역하게 했다. | [[The FORTRAN Automatic Coding System]] |
+| exemplifies | [[프로그래밍 언어]] | 고급 표기가 실용 성능을 유지하며 작성 비용을 낮춘 사례다. | [[The History of FORTRAN I, II, and III]] |
+
+## 출처
 <!-- wiki-v2:evidence-start -->
 ### 근거 ID
 - `src-002`

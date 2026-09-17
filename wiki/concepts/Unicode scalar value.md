@@ -18,7 +18,7 @@ created: 2026-07-10
 updated: 2026-09-17
 review:
   mode: legacy-baseline
-  revision: sha256:ed816d398099bc1f0c533df67bce4c17a8c7da30bfaf2261248778bb850779aa
+  revision: sha256:72fba12e1c949e007e3988e5633aedd7f898937d96be5c68bd650faa38df19ed
   reviewed_at: null
   reviewed_by: legacy-baseline
 evidence_ids:
@@ -46,8 +46,14 @@ scalar value라고 해서 반드시 현재 문자에 배정된 값이라는 뜻�
 
 [[UTF-8]]은 하나의 scalar value를 1–4개의 8비트 코드 유닛으로, [[UTF-16]]은 하나 또는 두 개의 16비트 코드 유닛으로 표현한다. 올바른 UTF 인코딩은 독립된 surrogate 값을 입력 문자처럼 인코딩하지 않는다. 이 구분은 잘못된 문자열을 검증하고, 코드 포인트 수·코드 유닛 수·[[그래핌 클러스터]] 수를 정확히 해석하는 데 필요하다.
 
-## 출처
+## 관계
 
+| 관계 | 대상 | 설명 | 근거 |
+|---|---|---|---|
+| narrower | [[코드 포인트]] | 서로게이트를 제외한 유효 유니코드 스칼라 값이다. | [[The Unicode Standard 17.0.0]] |
+| enables | [[UTF-8]] | 인코딩이 전송할 수 있는 추상 값의 범위를 정한다. | [[RFC 3629 UTF-8]] |
+
+## 출처
 <!-- wiki-v2:evidence-start -->
 ### 근거 ID
 - `ref-022`
