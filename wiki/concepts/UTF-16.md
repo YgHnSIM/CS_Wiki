@@ -17,10 +17,10 @@ graph_visibility: public
 created: 2026-07-10
 updated: 2026-09-17
 review:
-  mode: legacy-baseline
-  revision: sha256:41d703573669d23af51d95355e234eeb01af20b01a895ba6aa3b7aed0fd4110c
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+  mode: attested
+  revision: sha256:86377791136bc197641c028c7ddcd7565fc6e5c6fa8883ea5ff056c23ef3cbd4
+  reviewed_at: 2026-09-17
+  reviewed_by: grok
 evidence_ids:
   - ref-022
   - ref-026

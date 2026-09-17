@@ -10,9 +10,11 @@ const exec = promisify(execFile);
 const root = process.cwd();
 const today = runDate();
 const base = process.env.BASE_SHA || "";
-const source = base ? ["diff", "--name-only", "--diff-filter=ACMRT", `${base}...HEAD`] : ["diff", "--name-only", "--diff-filter=ACMRT"];
+const source = base
+  ? ["diff", "-z", "--name-only", "--diff-filter=ACMRT", `${base}...HEAD`]
+  : ["diff", "-z", "--name-only", "--diff-filter=ACMRT"];
 const output = await exec("git", source, { cwd: root });
-const paths = output.stdout.split(/\r?\n/).map((path) => path.trim()).filter((path) => path.startsWith("wiki/") && path.endsWith(".md") && !path.startsWith("wiki/logs/"));
+const paths = output.stdout.split("\0").map((path) => path.trim().replaceAll("\\", "/")).filter((path) => path.startsWith("wiki/") && path.endsWith(".md") && !path.startsWith("wiki/logs/"));
 let changed = 0;
 for (const relativePath of paths) {
   const filePath = join(root, relativePath);
