@@ -16,14 +16,15 @@ editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-10
-updated: 2026-07-26
+updated: 2026-09-18
 review:
-  mode: legacy-baseline
-  revision: sha256:32ac28bb166179b05d7940641dec5e8ac4e33cd58a58d8234b7b25975ac23ecc
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+  mode: attested
+  revision: sha256:8a175d444e2598c63af3bee1b29f2a611d3830ed440c871df4f0a092dbce50a4
+  reviewed_at: 2026-09-18
+  reviewed_by: grok
 evidence_ids:
   - ref-007
+  - ref-001
 capability_layers:
   - programmability
 history:
@@ -61,10 +62,12 @@ Baby는 "처음 저장 프로그램을 실행한 전자식 디지털 컴퓨터"�
 <!-- wiki-v2:evidence-start -->
 ### 근거 ID
 - `ref-007`
+- `ref-001`
 <!-- wiki-v2:evidence-end -->
 
 - [[The Manchester Small Scale Experimental Machine - The Baby]]
 
+- [[The Preparation of Programs for an Electronic Digital Computer]]
 ## 관련 항목
 
 - [[저장 프로그램 컴퓨터]] — 프로그램 명령을 데이터처럼 메모리에 저장하고 실행하는 컴퓨터 구조.

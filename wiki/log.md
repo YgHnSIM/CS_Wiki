@@ -16,7 +16,7 @@ created: 2026-05-03
 updated: 2026-09-18
 review:
   mode: attested
-  revision: sha256:36f54479f3421ea92b6d9dd57ff335d89d7859219b5570571c889e90fb249551
+  revision: sha256:1fbd97438bb14a51db62c5c7470d5d7295c4424f589df32b5cdb0da2edd58de1
   reviewed_at: 2026-08-31
   reviewed_by: antigravity
 evidence_ids: []
@@ -148,6 +148,7 @@ redirect_from:
 - [2026-09-17 fix | 배포 변경 집합 검토 승격](logs/log-2026-09-17-116-배포-변경집합-검토-승격.md)
 - [2026-09-17 update | 모순 관계와 복잡도 층위](logs/log-2026-09-17-117-모순-관계와-복잡도-층위.md)
 - [2026-09-18 update | AI 병목 draft 5건 승격](logs/log-2026-09-18-118-AI-bottleneck-draft-promotion.md)
+- [2026-09-18 update | 단일근거 legacy 개념 11건 근거 보강](logs/log-2026-09-18-119-single-evidence-legacy-attestation.md)
 
 ## 출처
 

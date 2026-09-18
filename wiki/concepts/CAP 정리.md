@@ -17,14 +17,15 @@ editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-25
-updated: 2026-07-26
+updated: 2026-09-18
 review:
-  mode: legacy-baseline
-  revision: sha256:c9acc0672a79804994bf80d44e88036d86518db00cdd2bdb7fe1e1c217d0f751
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+  mode: attested
+  revision: sha256:80f5f726d74c43bd283db3e429593302e096ecbf3e4d0bde4cdc3319a3f0abed
+  reviewed_at: 2026-09-18
+  reviewed_by: grok
 evidence_ids:
   - ref-087
+  - ref-089
 capability_layers:
   - scalability
   - reliable-results
@@ -68,10 +69,12 @@ redirect_from:
 <!-- wiki-v2:evidence-start -->
 ### 근거 ID
 - `ref-087`
+- `ref-089`
 <!-- wiki-v2:evidence-end -->
 
 - [[Brewer's Conjecture and the Feasibility of Consistent, Available, Partition-Tolerant Web Services]]
 
+- [[Spanner: Google's Globally-Distributed Database]]
 ## 관련 항목
 
 - [[복제 로그와 합의]] — 정지 장애 모형에서 여러 복제본의 명령 순서를 맞추는 계층을 다룬다.

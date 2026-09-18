@@ -16,7 +16,7 @@ created: 2026-05-03
 updated: 2026-09-18
 review:
   mode: attested
-  revision: sha256:4a55b0ffb4385466a77cfaaff507411a269867c0dfcfb4331a86faed8143413d
+  revision: sha256:74346a137cb90749b3e5c69d5cabcee9134e6ce6f794fc75b3c644a640b8f41e
   reviewed_at: 2026-08-03
   reviewed_by: codex
 evidence_ids: []
@@ -63,6 +63,7 @@ redirect_from:
 - [[Dark Silicon and the End of Multicore Scaling]] — 전압과 전력의 축소가 트랜지스터 면적 축소를 따라가지 못할 때 고정된 칩 전력 안에서 일부 영역을 동시에 활용할 수 없게 된다는 다크 실리콘 문제를 2011년의 기술 세대·멀티코어 모델로 전망한 논문.
 - [[Decoupling Algorithms from Schedules for Easy Optimization of Image Processing Pipelines]] — 영상 처리 파이프라인의 계산 정의와 저장·계산 순서·타일링·병렬화 선택을 분리해 가독성·이식성·고성능을 함께 추구한 Halide의 2012년 논문.
 - [[Design and Implementation of RISC I]] — 초기 VLSI 제약에서 단순하고 규칙적인 명령어 집합, 레지스터 윈도, 컴파일러와 구현 도구를 함께 설계하고 시뮬레이션과 실제 칩의 차이까지 보고한 1982년 기술 보고서.
+- [[Design and Implementation of the Sun Network Filesystem]] — 원격 프로시저 호출 위에 상태 비저장 서버 모델을 올려 이질적인 UNIX 호스트 사이에서 파일을 공유하게 만든 Sun NFS의 설계와 구현을 정리한 1985년 논문이다.
 - [[Design of Ion-Implanted MOSFET's with Very Small Physical Dimensions]] — MOSFET의 치수와 전압을 함께 축소할 때 회로 지연과 전력은 낮추면서 전력 밀도를 일정하게 유지할 수 있음을 분석한 1974년 논문.
 - [[DistServe: Disaggregating Prefill and Decoding for Goodput-optimized Large Language Model Serving]] — LLM 요청의 프리필과 디코드 단계를 서로 다른 GPU에 배치해 단계 간 간섭과 자원 결합을 줄이고, TTFT·TPOT 서비스 수준 목표를 만족하는 goodput을 최적화한 2024년 OSDI 연구.
 - [[DLMF Standard Reference Tables on Demand]] — NIST가 특수함수 값을 요청 시 생성하고 보증된 오차 경계와 비교 기능을 제공해 수치 소프트웨어의 시험 기준으로 삼으려 한 DLMF Tables 프로젝트를 정리한 공식 보고서 자료.
@@ -122,6 +123,7 @@ redirect_from:
 - [[Recovery-Oriented Computing (ROC)]] — 하드웨어 고장, 소프트웨어 버그와 운영자 오류를 전제로 평균 고장 간격뿐 아니라 평균 복구 시간을 줄이는 시스템 설계를 제안한 2002년 Berkeley 기술 보고서.
 - [[Reducibility Among Combinatorial Problems]] — 만족 가능성 문제에서 여러 조합적 결정 문제로의 다항시간 변환을 구성해 완전성 결과를 확장한 Richard M. Karp의 1972년 논문.
 - [[Reevaluating Amdahl's Law]] — 고정된 문제를 더 빨리 푸는 대신 병렬 자원에 맞춰 문제 크기를 늘리면 같은 시간에 더 많은 계산을 수행할 수 있다는 확대 크기 가속 관점을 제시한 1988년 논문.
+- [[Remote Procedure Call protocols in historical perspective]] — 분산 시스템에서 원격 프로시저 호출이 지역 호출과 같은 추상화로 자리 잡기까지의 프로토콜·스텁·실패 모델 쟁점을 정리한 역사적 시각의 참고 문헌이다.
 - [[Reproducible Builds - Definition]] — 같은 소스 코드·빌드 환경·빌드 지침으로 지정 산출물을 bit-by-bit 동일하게 다시 만들 수 있다는 Reproducible Builds 프로젝트의 정의와 경계를 정리한 공식 문서.
 - [[RFC 3629 UTF-8]] — IETF의 UTF-8 표준을 바탕으로 ASCII 호환성, 1-4 octet 구조, 잘못된 바이트열 처리 문제를 정리한 참고 자료.
 - [[RFC 9110 HTTP Semantics]] — HTTP 요청 의미론과 멱등 메서드의 정의를 규정하며, 동일 요청의 반복이 의도된 서버 효과를 바꾸지 않는 계약과 물리적 단일 실행을 구분하는 표준.
@@ -149,6 +151,7 @@ redirect_from:
 - [[The Complexity of Theorem-Proving Procedures]] — 다항 시간 비결정적 튜링 기계가 푸는 인식 문제를 명제 논리의 항진식 판정 문제로 환원해 다항 환원과 완전 문제의 틀을 제시한 Stephen A. Cook의 1971년 논문.
 - [[The computation factory: de Prony's project for making tables in the 1790s]] — 드 프로니가 1790년대에 대규모 로그·삼각함수표를 분업으로 제작했으나 출판 비용 때문에 완성된 표를 널리 배포하지 못한 프로젝트와 배비지에 준 영향을 분석한 연구 장.
 - [[The Datacenter as a Computer]] — 대규모 인터넷 서비스의 데이터센터를 독립 서버들의 모음이 아니라 하드웨어와 소프트웨어가 공동 설계된 하나의 창고 규모 컴퓨터로 다룬 2009년 저작.
+- [[The Design Philosophy of the DARPA Internet Protocols]] — 인터넷 프로토콜 스위트가 목표한 연결성·생존성·다양성과, 그 목표가 종단 간 인수 논증과 어떻게 맞물리는지를 서술한 Clark의 1988년 설계 철학 논문이다.
 - [[The Development of the C Language]] — Ritchie의 C 언어 발전사 논문을 바탕으로 B에서 C로의 전환, PDP-11, Unix 커널 재작성을 정리한 참고 자료.
 - [[The Evolution of the Unix Time-sharing System]] — Ritchie의 Unix 초기 진화 회고를 바탕으로 파일 시스템, 프로세스 제어, 파이프라인 명령, C 재작성을 정리한 참고 자료.
 - [[The FORTRAN Automatic Coding System]] — Backus 팀의 1957년 논문을 바탕으로 Fortran 언어와 번역기, 제어 흐름 분석, 인덱스 레지스터 최적화를 정리한 참고 자료.
