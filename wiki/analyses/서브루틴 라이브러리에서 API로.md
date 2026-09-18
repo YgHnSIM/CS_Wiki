@@ -15,14 +15,16 @@ editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-09
-updated: 2026-09-17
+updated: 2026-09-18
 review:
   mode: attested
-  revision: sha256:07ed8c088a72aa38ceceb9cd644f06f62c77d77d0009dfdd1dd8e2871f165e25
+  revision: sha256:d50426dd05f562b2b33644a50746c68ce7ca5e965bd264629e3f6809d08ee839
   reviewed_at: 2026-09-17
   reviewed_by: grok
 evidence_ids:
   - ref-001
+  - ref-003
+  - ref-016
 capability_layers:
   - programmability
 history:
@@ -71,10 +73,14 @@ EDSAC 라이브러리를 현대 API와 그대로 동일시하면 안 된다. 당
 <!-- wiki-v2:evidence-start -->
 ### 근거 ID
 - `ref-001`
+- `ref-003`
+- `ref-016`
 <!-- wiki-v2:evidence-end -->
 
 - [[The Preparation of Programs for an Electronic Digital Computer]]
 
+- [[On the Criteria To Be Used in Decomposing Systems into Modules]]
+- [[The FORTRAN Automatic Coding System]]
 ## 관련 항목
 
 - [[EDSAC]] — 초기 저장 프로그램 컴퓨터로, 소프트웨어의 입력·적재·디버깅·재사용 계층이 선명하게 드러난 사례.

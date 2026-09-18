@@ -15,15 +15,16 @@ editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-10
-updated: 2026-09-17
+updated: 2026-09-18
 review:
   mode: attested
-  revision: sha256:c29b118986ece02b74f770514545b59451cafe1cac283ea9a7311aa1c9a168d1
+  revision: sha256:dd066de8dfdcc4d59d6a629abcf367499c8a551d2ddbcb6b36ff0a48de42e55c
   reviewed_at: 2026-09-17
   reviewed_by: grok
 evidence_ids:
   - ref-006
   - ref-007
+  - ref-001
 capability_layers:
   - programmability
 history:
@@ -71,11 +72,13 @@ EDSAC을 설명할 때는 다음 표현을 구분해 쓰는 것이 좋다.
 ### 근거 ID
 - `ref-006`
 - `ref-007`
+- `ref-001`
 <!-- wiki-v2:evidence-end -->
 
 - [[First Draft of a Report on the EDVAC]]
 - [[The Manchester Small Scale Experimental Machine - The Baby]]
 
+- [[The Preparation of Programs for an Electronic Digital Computer]]
 ## 관련 항목
 
 - [[EDSAC]] — 초기 저장 프로그램 컴퓨터로, 소프트웨어의 입력·적재·디버깅·재사용 계층이 선명하게 드러난 사례.
