@@ -13,10 +13,10 @@ editorial_status: active
 publication_visibility: public
 graph_visibility: hidden
 created: 2026-05-03
-updated: 2026-09-17
+updated: 2026-09-18
 review:
   mode: attested
-  revision: sha256:59d96cbf71199104ee32dd941b33e9dcb063838a2b8f014fef0e03898e2e09e8
+  revision: sha256:36f54479f3421ea92b6d9dd57ff335d89d7859219b5570571c889e90fb249551
   reviewed_at: 2026-08-31
   reviewed_by: antigravity
 evidence_ids: []
@@ -147,6 +147,7 @@ redirect_from:
 - [2026-09-17 update | 관계 표와 학습 경로 보완](logs/log-2026-09-17-115-관계-표와-학습-경로-보완.md)
 - [2026-09-17 fix | 배포 변경 집합 검토 승격](logs/log-2026-09-17-116-배포-변경집합-검토-승격.md)
 - [2026-09-17 update | 모순 관계와 복잡도 층위](logs/log-2026-09-17-117-모순-관계와-복잡도-층위.md)
+- [2026-09-18 update | AI 병목 draft 5건 승격](logs/log-2026-09-18-118-AI-bottleneck-draft-promotion.md)
 
 ## 출처
 

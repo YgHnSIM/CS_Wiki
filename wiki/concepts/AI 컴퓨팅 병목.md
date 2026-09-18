@@ -11,16 +11,16 @@ domains:
   - machine-learning
   - computer-architecture
   - systems
-editorial_status: draft
-publication_visibility: unlisted
-graph_visibility: context
+editorial_status: active
+publication_visibility: public
+graph_visibility: public
 created: 2026-08-04
-updated: 2026-08-05
+updated: 2026-09-18
 review:
-  mode: pending
-  revision: sha256:80d9c94bb3ecb68bbe5c8415279b323eff2453c0caba0a76fa3d4090c69e9ab8
-  reviewed_at: null
-  reviewed_by: null
+  mode: attested
+  revision: sha256:ee9ede553b169e32002d61a3690cc142a8f1632be593720bd3ef7c2a1854d0b7
+  reviewed_at: 2026-09-18
+  reviewed_by: grok
 evidence_ids:
   - ref-034
   - ref-039
@@ -32,6 +32,8 @@ capability_layers:
   - realized-performance
   - scalability
   - resource-efficiency
+history:
+  layer: architecture
 ---
 
 ## 개요
