@@ -127,7 +127,12 @@ export const learningPaths = [
       "해석 기관",
       "에이다 러브레이스",
       "알고리즘적 사고",
+      "토머스 홉스",
+      "고트프리트 빌헬름 라이프니츠",
+      "맹목적 사고와 기호적 인식",
+      "보편 기호법과 사유의 계산",
       "기호 조작",
+      "기호는 어떻게 생각의 보조 도구에서 계산 엔진이 되었는가",
       "계산기와 컴퓨터의 차이"
     ]
   },
@@ -146,7 +151,9 @@ export const learningPaths = [
       "Entscheidungsproblem",
       "정지 문제",
       "처치-튜링 논제",
-      "기계가 계산한다는 말의 이론적 의미"
+      "기계가 계산한다는 말의 이론적 의미",
+      "존 설",
+      "중국어 방과 구문-의미 간극"
     ]
   },
   {
@@ -295,6 +302,9 @@ export const learningPaths = [
     title: "논리 회로와 이진 표현",
     description: "불의 기호 논리에서 스위칭 회로와 논리 게이트, 이진 데이터 표현으로 이어지는 연결을 살핀다.",
     pages: [
+      "Explication de l'Arithmétique Binaire",
+      "고트프리트 빌헬름 라이프니츠",
+      "보편 기호법과 사유의 계산",
       "An Investigation of the Laws of Thought",
       "A Symbolic Analysis of Relay and Switching Circuits",
       "조지 불",
@@ -682,9 +692,11 @@ export const learningPaths = [
       "AI 코딩 지원",
       "자동화 경계",
       "검증 노동",
+      "중국어 방과 구문-의미 간극",
       "The Impact of AI on Developer Productivity: Evidence from GitHub Copilot",
       "Measuring the Impact of Early-2025 AI on Experienced Open-Source Developer Productivity",
       "자동화는 계산 노동을 없애는가 책임을 옮기는가",
+      "기호는 어떻게 생각의 보조 도구에서 계산 엔진이 되었는가",
       "범용성은 어떻게 컴퓨팅 능력이 되었는가",
       "컴퓨팅 능력이란 무엇인가"
     ]

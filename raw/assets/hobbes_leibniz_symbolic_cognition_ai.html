@@ -1,0 +1,2841 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+  <title>홉스와 라이프니츠, 기호에서 AI까지 — '생각은 계산이다'라는 혁명과 맹목적 사고(Cogitatio Caeca)의 400년 계보학</title>
+  <meta name="description" content="숭실대 이상명 교수의 학술 논문 〈홉스와 라이프니츠: 기호의 기능〉과 사상사 대담을 바탕으로, 17세기 기호 철학이 현대 컴퓨터 연산과 생성형 AI(LLM)로 이어지는 400년의 지적 계보를 완벽 해부한다. 인간 기억의 결함을 극복하려던 홉스의 표지(Mark)와 신호(Sign)의 이중 체계, '사유는 계산'이라는 혁명적 선언과 '무언의 추론' 모순, 닐과 다스칼의 논쟁을 짚는다. 이어 데카르트의 '천각형(Chiliagon)'을 전복하며 내용의 직관 없이도 진리를 도출하는 라이프니츠의 '맹목적 사고(Cogitatio Caeca)'와 '기호적 인식', 보편기호법과 사유의 계산, 0과 1의 이진법을 추적한다. 나아가 조지 불, 앨런 튜링, 클로드 섀넌을 거쳐 실리콘으로 육화된 기호 논리학이 오늘날 트랜스포머 신경망과 존 설의 '중국어 방'에서 어떻게 역설적으로 만개했는지를 밝히고, 엑셀 수식부터 프롬프트까지 일상화된 '의미의 외주화'가 던지는 묵직한 실존적 딜레마를 성찰한다.">
+  
+  
+
+  <!-- Favicon / Page Icon (📚) -->
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+  <!-- Pretendard Web Font -->
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+  <!-- Naver D2Coding -->
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/joungkyun/font-d2coding@1.3.2/d2coding.css" />
+  <script>
+    (function () {
+      try {
+        var f = localStorage.getItem("pages_font");
+        if (f === "d2coding" || f === "pretendard") {
+          document.documentElement.setAttribute("data-font", f);
+        }
+      } catch (e) {}
+    })();
+  </script>
+  
+  <!-- KaTeX for Math Equations -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '\\[', right: '\\]', display: true}, {left: '$', right: '$', display: false}, {left: '\\(', right: '\\)', display: false}], throwOnError: false, output: 'html'});"></script>
+
+  <style>
+    .katex-mathml {
+      display: none !important;
+      user-select: none !important;
+      -webkit-user-select: none !important;
+    }
+    .katex-display {
+      overflow-x: auto;
+      overflow-y: hidden;
+      max-width: 100%;
+      padding: 0.5em 0;
+      -webkit-overflow-scrolling: touch;
+    }
+    .katex {
+      max-width: 100%;
+    }
+
+    :root {
+      --font-sans: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+      --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      
+      --bg-page: #f8fafc;
+      --bg-card: #ffffff;
+      --bg-surface: #f1f5f9;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --text-light: #94a3b8;
+      --border: #e2e8f0;
+      --border-focus: #3b82f6;
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --primary-light: #eff6ff;
+      --code-bg: #0f172a;
+      --code-text: #e2e8f0;
+      --inline-code-bg: #e2e8f0;
+      --inline-code-text: #0f172a;
+      --quote-bg: #f8fafc;
+      --quote-border: #3b82f6;
+      --header-bg: rgba(248, 250, 252, 0.88);
+      --drawer-bg: #ffffff;
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 16px;
+      --radius-full: 9999px;
+    }
+
+    :root[data-font="d2coding"] {
+      --font-sans: "D2 coding", "D2Coding", Pretendard, monospace;
+      --font-mono: "D2 coding", "D2Coding", ui-monospace, monospace;
+    }
+
+
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --bg-page: #0b0f19;
+        --bg-card: #131b2e;
+        --bg-surface: #1e293b;
+        --text-main: #f1f5f9;
+        --text-muted: #94a3b8;
+        --text-light: #64748b;
+        --border: #243049;
+        --border-focus: #60a5fa;
+        --primary: #38bdf8;
+        --primary-hover: #7dd3fc;
+        --primary-light: rgba(56, 189, 248, 0.12);
+        --code-bg: #020617;
+        --code-text: #f8fafc;
+        --inline-code-bg: #243049;
+        --inline-code-text: #38bdf8;
+        --quote-bg: #141f36;
+        --quote-border: #38bdf8;
+        --header-bg: rgba(11, 15, 25, 0.88);
+        --drawer-bg: #131b2e;
+        --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.4);
+        --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+        --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.6);
+      }
+    }
+
+    :root[data-theme="dark"] {
+      --bg-page: #0b0f19;
+      --bg-card: #131b2e;
+      --bg-surface: #1e293b;
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --text-light: #64748b;
+      --border: #243049;
+      --border-focus: #60a5fa;
+      --primary: #38bdf8;
+      --primary-hover: #7dd3fc;
+      --primary-light: rgba(56, 189, 248, 0.12);
+      --code-bg: #020617;
+      --code-text: #f8fafc;
+      --inline-code-bg: #243049;
+      --inline-code-text: #38bdf8;
+      --quote-bg: #141f36;
+      --quote-border: #38bdf8;
+      --header-bg: rgba(11, 15, 25, 0.88);
+      --drawer-bg: #131b2e;
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.4);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.6);
+    }
+
+    :root[data-theme="light"] {
+      --bg-page: #f8fafc;
+      --bg-card: #ffffff;
+      --bg-surface: #f1f5f9;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --text-light: #94a3b8;
+      --border: #e2e8f0;
+      --border-focus: #3b82f6;
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --primary-light: #eff6ff;
+      --code-bg: #0f172a;
+      --code-text: #e2e8f0;
+      --inline-code-bg: #e2e8f0;
+      --inline-code-text: #0f172a;
+      --quote-bg: #f8fafc;
+      --quote-border: #3b82f6;
+      --header-bg: rgba(248, 250, 252, 0.88);
+      --drawer-bg: #ffffff;
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 80px;
+      overflow-x: clip;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      line-height: 1.8;
+      font-size: 16.5px;
+      word-break: keep-all;
+      overflow-wrap: break-word;
+      transition: background-color 0.25s ease, color 0.25s ease;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: clip;
+      width: 100%;
+      max-width: 100%;
+    }
+
+    /* Top Sticky Header */
+    .top-nav {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      background-color: var(--header-bg);
+      border-bottom: 1px solid var(--border);
+      height: 58px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px;
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+      flex: 1 1 auto;
+      overflow: hidden;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .nav-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      height: 40px;
+      min-width: 40px;
+      padding: 0 10px;
+      border-radius: var(--radius-md);
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text-main);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.18s ease;
+    }
+
+    .nav-btn:hover, .nav-btn:active {
+      background: var(--bg-surface);
+      border-color: var(--border);
+    }
+
+    .font-picker {
+      position: relative;
+    }
+
+    .font-menu {
+      position: absolute;
+      top: calc(100% + 6px);
+      right: 0;
+      min-width: 156px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-md);
+      padding: 4px;
+      z-index: 60;
+    }
+
+    .font-menu[hidden] {
+      display: none;
+    }
+
+    .font-option {
+      display: block;
+      width: 100%;
+      text-align: left;
+      border: none;
+      background: transparent;
+      color: var(--text-main);
+      padding: 8px 10px;
+      border-radius: var(--radius-sm);
+      font-size: 13.5px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .font-option:hover,
+    .font-option:focus-visible {
+      background: var(--bg-surface);
+      outline: none;
+    }
+
+    .font-option[aria-selected="true"] {
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    .font-option[data-font="pretendard"] {
+      font-family: Pretendard, sans-serif;
+    }
+
+    .font-option[data-font="d2coding"] {
+      font-family: "D2 coding", "D2Coding", monospace;
+    }
+
+    .nav-title {
+      font-size: 14.5px;
+      font-weight: 700;
+      color: var(--text-main);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 200px;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    @media (min-width: 640px) {
+      .nav-title {
+        max-width: 380px;
+      }
+    }
+
+    .nav-title.visible {
+      opacity: 1;
+    }
+
+    /* Reading Progress Bar */
+    #progress-container {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: transparent;
+      z-index: 50;
+    }
+
+    #progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #3b82f6, #06b6d4);
+      transition: width 0.08s ease-out;
+    }
+
+    /* Main Container */
+    .article-container {
+      width: 100%;
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 24px 16px 80px;
+      flex: 1;
+    }
+
+    @media (min-width: 768px) {
+      .article-container {
+        padding: 40px 24px 100px;
+      }
+    }
+
+    /* Article Card Wrapper */
+    .article-card {
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+      padding: 24px 18px;
+    }
+
+    @media (min-width: 768px) {
+      .article-card {
+        padding: 48px 48px;
+      }
+    }
+
+    /* Article Header */
+    .article-header {
+      margin-bottom: 32px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .article-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+      font-size: 13.5px;
+      color: var(--text-muted);
+    }
+
+    .meta-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      padding: 3px 10px;
+      border-radius: var(--radius-full);
+      font-weight: 500;
+    }
+
+    .article-title {
+      font-size: clamp(24px, 5.5vw, 34px);
+      font-weight: 800;
+      line-height: 1.32;
+      letter-spacing: -0.03em;
+      color: var(--text-main);
+      margin-bottom: 10px;
+    }
+
+    .article-subtitle {
+      font-size: clamp(16px, 3.8vw, 19px);
+      font-weight: 500;
+      line-height: 1.5;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 14px;
+    }
+
+    .tag-pill {
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--primary);
+      background: var(--primary-light);
+      padding: 3px 10px;
+      border-radius: var(--radius-full);
+      text-decoration: none;
+    }
+
+    /* Typography & Markdown Content */
+    .content {
+      color: var(--text-main);
+    }
+
+    .content h1, .content h2, .content h3, .content h4, .verification-card {
+      scroll-margin-top: 80px;
+    }
+
+    .content h1, .content h2, .content h3, .content h4 {
+      color: var(--text-main);
+      font-weight: 750;
+      line-height: 1.38;
+      letter-spacing: -0.025em;
+      margin-top: 2.2em;
+      margin-bottom: 0.8em;
+      position: relative;
+    }
+
+    .content h1 {
+      font-size: clamp(21px, 4.8vw, 27px);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.4em;
+    }
+
+    .content h2 {
+      font-size: clamp(19px, 4.2vw, 23px);
+      padding-left: 12px;
+      border-left: 4px solid var(--primary);
+    }
+
+    .content h3 {
+      font-size: clamp(17px, 3.6vw, 19.5px);
+    }
+
+    .content h4 {
+      font-size: 16.5px;
+      color: var(--text-muted);
+    }
+
+    .content a.heading-anchor {
+      color: var(--text-light);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.82em;
+      margin-right: 0.35em;
+      opacity: 0;
+      transition: opacity 0.15s ease;
+      word-break: keep-all;
+    }
+    .content h1:hover > a.heading-anchor,
+    .content h2:hover > a.heading-anchor,
+    .content h3:hover > a.heading-anchor,
+    .content h4:hover > a.heading-anchor,
+    .content a.heading-anchor:focus,
+    .content a.heading-anchor:focus-visible {
+      opacity: 1;
+      color: var(--text-muted);
+    }
+
+    .content p {
+      margin-top: 0;
+      margin-bottom: 1.4em;
+      text-align: start;
+    }
+
+    .content a {
+      color: var(--primary);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      word-break: keep-all;
+      overflow-wrap: break-word;
+    }
+
+    .content a:hover {
+      color: var(--primary-hover);
+    }
+
+    .content strong, .content b {
+      font-weight: 700;
+    }
+
+    .content ul, .content ol {
+      margin-bottom: 1.4em;
+      padding-left: 1.4em;
+    }
+
+    .content li {
+      margin-bottom: 0.5em;
+    }
+
+    .content hr {
+      border: 0;
+      height: 1px;
+      background: var(--border);
+      margin: 2.5em 0;
+    }
+
+    .content blockquote {
+      margin: 1.5em 0;
+      padding: 14px 18px;
+      background-color: var(--quote-bg);
+      border-left: 4px solid var(--quote-border);
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      color: var(--text-main);
+    }
+
+    .content blockquote p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Inline Code */
+    .content code:not(pre code) {
+      font-family: var(--font-mono);
+      font-size: 0.88em;
+      background: var(--inline-code-bg);
+      color: var(--inline-code-text);
+      padding: 0.2em 0.45em;
+      border-radius: 4px;
+      font-weight: 500;
+    }
+
+    /* Code Block with Copy Button */
+    .code-block-wrapper {
+      position: relative;
+      margin: 1.6em 0;
+      border-radius: var(--radius-md);
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .code-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 14px;
+      background: rgba(255, 255, 255, 0.05);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 12px;
+      font-family: var(--font-mono);
+      color: #94a3b8;
+    }
+
+    .code-lang {
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .code-lang.lang-generic {
+      text-transform: none;
+      letter-spacing: 0;
+    }
+
+    .copy-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #e2e8f0;
+      font-size: 11.5px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.15s ease;
+    }
+
+    .copy-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+    .nav-btn:focus-visible,
+    .sim-btn:focus-visible,
+    .sim-tab-btn:focus-visible,
+    .copy-btn:focus-visible,
+    .toc-close-btn:focus-visible,
+    #back-to-top:focus-visible {
+      outline: 2px solid var(--border-focus);
+      outline-offset: 2px;
+    }
+
+    .copy-btn.copied {
+      background: #10b981;
+      color: #ffffff;
+      border-color: #10b981;
+    }
+
+    .content pre {
+      margin: 0;
+      padding: 14px 16px;
+      overflow-x: auto;
+      background: transparent;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .content pre code {
+      font-family: var(--font-mono);
+      font-size: 13.5px;
+      line-height: 1.6;
+      color: var(--code-text);
+      display: block;
+      background: none;
+      padding: 0;
+    }
+
+    /* Tables (Responsive Scroll) */
+    /* Callout & Note Blocks */
+    .callout-box {
+      margin: 1.6em 0;
+      padding: 16px 18px;
+      border-radius: var(--radius-md);
+      background: var(--bg-surface);
+      border-left: 4px solid var(--primary);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .callout-box.tip {
+      border-left-color: #10b981;
+      background: rgba(16, 185, 129, 0.08);
+    }
+
+    .callout-box.warning {
+      border-left-color: #f59e0b;
+      background: rgba(245, 158, 11, 0.08);
+    }
+
+    .callout-box.info {
+      border-left-color: #3b82f6;
+      background: rgba(59, 130, 246, 0.08);
+    }
+
+    .callout-title {
+      font-weight: 700;
+      font-size: 15px;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Interactive Simulator Component */
+    .sim-container {
+      margin: 2em 0;
+      padding: 20px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+    }
+
+    .sim-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 16px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .sim-title {
+      font-size: 17px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-main);
+    }
+
+    .sim-tabs {
+      display: flex;
+      gap: 6px;
+      background: var(--bg-card);
+      padding: 4px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+    }
+
+    .sim-tab-btn {
+      padding: 6px 12px;
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      font-size: 13.5px;
+      font-weight: 600;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: all 0.18s ease;
+    }
+
+    .sim-tab-btn.active {
+      background: var(--primary);
+      color: #ffffff;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .sim-controls {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 18px;
+      background: var(--bg-card);
+      padding: 10px 14px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+    }
+
+    .sim-btn-group {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .sim-btn {
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 600;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      background: var(--bg-surface);
+      color: var(--text-main);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+      flex: 0 0 auto;
+    }
+
+    @media (max-width: 420px) {
+      .sim-controls {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .sim-btn-group {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        width: 100%;
+      }
+      .sim-btn {
+        justify-content: center;
+      }
+    }
+
+    .sim-btn:hover:not(:disabled) {
+      background: var(--primary-light);
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .sim-btn:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
+    .sim-btn.primary {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #ffffff;
+    }
+
+    .sim-btn.primary:hover:not(:disabled) {
+      background: var(--primary-hover);
+    }
+
+    .sim-status-badge {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--primary);
+      background: var(--primary-light);
+      padding: 4px 10px;
+      border-radius: var(--radius-full);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .sim-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    @media (min-width: 640px) {
+      .sim-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .sim-panel {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 14px;
+    }
+
+    .sim-panel-title {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .sim-registers {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+    }
+
+    .sim-reg-card {
+      background: var(--bg-surface);
+      padding: 8px 10px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      transition: all 0.2s ease;
+    }
+
+    .sim-reg-card.changed {
+      border-color: #f59e0b;
+      background: rgba(245, 158, 11, 0.12);
+      animation: pulse-orange 0.8s ease;
+    }
+
+    .sim-reg-label {
+      font-size: 11.5px;
+      color: var(--text-muted);
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .sim-reg-val {
+      font-family: var(--font-mono);
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .sim-mem-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .sim-mem-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 6px 10px;
+      border-radius: var(--radius-sm);
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      font-size: 13px;
+      font-family: var(--font-mono);
+      transition: all 0.2s ease;
+    }
+
+    .sim-mem-row.pc-target {
+      border-color: var(--primary);
+      background: var(--primary-light);
+      font-weight: 700;
+    }
+
+    .sim-mem-row.modified {
+      border-color: #ef4444;
+      background: rgba(239, 68, 68, 0.1);
+      font-weight: 700;
+      animation: pulse-red 0.8s ease;
+    }
+
+    .sim-mem-row.read-target {
+      border-color: #10b981;
+      background: rgba(16, 185, 129, 0.1);
+      font-weight: 700;
+    }
+
+    .sim-badge-sm {
+      font-size: 11px;
+      padding: 2px 6px;
+      border-radius: var(--radius-full);
+      font-family: var(--font-sans);
+      font-weight: 600;
+    }
+
+    .badge-code { background: #3b82f6; color: white; }
+    .badge-data { background: #10b981; color: white; }
+    .badge-mod { background: #ef4444; color: white; }
+
+    .sim-desc-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 14px 16px;
+    }
+
+    .sim-desc-step {
+      font-size: 14.5px;
+      line-height: 1.6;
+      color: var(--text-main);
+    }
+
+    .sim-desc-step strong {
+      color: var(--primary);
+    }
+
+    @keyframes pulse-orange {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.02); }
+      100% { transform: scale(1); }
+    }
+
+    @keyframes pulse-red {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.02); }
+      100% { transform: scale(1); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .sim-reg-card.changed,
+      .sim-mem-row.modified {
+        animation: none;
+      }
+    }
+
+    /* Footnotes and Citations */
+    .footnote-ref {
+      font-size: 0.78em;
+      line-height: 0;
+      vertical-align: super;
+      padding: 0 2px;
+      font-weight: 700;
+      color: var(--primary);
+      text-decoration: none;
+    }
+    .footnote-ref:hover {
+      text-decoration: underline;
+    }
+    .footnotes-section {
+      margin-top: 3.5rem;
+      padding-top: 2rem;
+      border-top: 2px solid var(--border);
+    }
+    .footnotes-section h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 1.2rem;
+      color: var(--text-main);
+    }
+    .footnotes-list {
+      font-size: 13.5px;
+      line-height: 1.75;
+      color: var(--text-muted);
+      padding-left: 1.6rem;
+    }
+    .footnotes-list li {
+      margin-bottom: 0.85rem;
+    }
+    .footnotes-list a.backlink {
+      color: var(--primary);
+      text-decoration: none;
+      margin-left: 6px;
+      font-weight: 700;
+    }
+    .footnotes-list a.backlink:hover {
+      text-decoration: underline;
+    }
+
+    /* Military Operational Labels */
+    .badge-record {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 4px;
+      background: #10b981;
+      color: #ffffff;
+      margin-right: 6px;
+      vertical-align: middle;
+    }
+    .badge-estimate {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 4px;
+      background: #f59e0b;
+      color: #ffffff;
+      margin-right: 6px;
+      vertical-align: middle;
+    }
+    .badge-scenario {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 4px;
+      background: #8b5cf6;
+      color: #ffffff;
+      margin-right: 6px;
+      vertical-align: middle;
+    }
+
+    /* Archival Metadata Card */
+    .archival-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--primary);
+      border-radius: var(--radius-sm);
+      padding: 14px 18px;
+      margin: 1.2rem 0;
+      font-size: 14px;
+      line-height: 1.65;
+    }
+    .archival-card .card-title {
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .archival-meta-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 8px 16px;
+      margin-top: 8px;
+      font-size: 13px;
+    }
+    .archival-meta-item strong {
+      color: var(--text-main);
+    }
+
+    .table-wrapper {
+      position: relative;
+      width: 100%;
+      overflow-x: auto;
+      margin: 1.8em 0;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      -webkit-overflow-scrolling: touch;
+      box-shadow: var(--shadow-sm);
+      background: var(--bg-card);
+    }
+    .table-wrapper:focus-visible {
+      outline: 2px solid var(--border-focus);
+      outline-offset: 2px;
+    }
+    .table-wrapper[data-scroll-hint]::after {
+      content: "↔ " attr(data-scroll-hint);
+      display: none;
+      font-size: 11.5px;
+      font-weight: 600;
+      color: var(--text-muted);
+      background: var(--bg-surface);
+      padding: 5px 12px;
+      text-align: right;
+      border-top: 1px dashed var(--border);
+      letter-spacing: -0.01em;
+    }
+    @media (max-width: 768px) {
+      .table-wrapper[data-scroll-hint]::after {
+        display: block;
+      }
+    }
+
+    .content table {
+      width: 100%;
+      min-width: 780px;
+      border-collapse: collapse;
+      font-size: 14.5px;
+      text-align: left;
+    }
+
+    .content th {
+      background: var(--bg-surface);
+      font-weight: 700;
+      padding: 12px 14px;
+      border-bottom: 2px solid var(--border);
+      color: var(--text-main);
+      white-space: nowrap;
+    }
+
+    .content td {
+      padding: 11px 14px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text-main);
+      vertical-align: middle;
+      word-break: keep-all;
+    }
+
+    .content tr:last-child td {
+      border-bottom: none;
+    }
+
+    .content tr:nth-child(even) td {
+      background: rgba(0, 0, 0, 0.015);
+    }
+
+    /* 7대 표준 판정 체계 및 신뢰도 배지 */
+    .badge-verdict {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: var(--radius-sm);
+      line-height: 1.35;
+      white-space: nowrap;
+      letter-spacing: -0.01em;
+    }
+    .badge-verdict::before {
+      content: "";
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .badge-verified {
+      background: rgba(16, 185, 129, 0.12);
+      color: #047857;
+      border: 1px solid rgba(16, 185, 129, 0.35);
+    }
+    .badge-verified::before { background: #10b981; }
+
+    .badge-mostly-verified {
+      background: rgba(13, 148, 136, 0.12);
+      color: #0f766e;
+      border: 1px solid rgba(13, 148, 136, 0.35);
+    }
+    .badge-mostly-verified::before { background: #0d9488; }
+
+    .badge-partially-verified {
+      background: rgba(217, 119, 6, 0.12);
+      color: #b45309;
+      border: 1px solid rgba(217, 119, 6, 0.35);
+    }
+    .badge-partially-verified::before { background: #f59e0b; }
+
+    .badge-misleading {
+      background: rgba(234, 88, 12, 0.12);
+      color: #c2410c;
+      border: 1px solid rgba(234, 88, 12, 0.35);
+    }
+    .badge-misleading::before { background: #ea580c; }
+
+    .badge-insufficient {
+      background: rgba(100, 116, 139, 0.12);
+      color: #475569;
+      border: 1px solid rgba(100, 116, 139, 0.35);
+    }
+    .badge-insufficient::before { background: #64748b; }
+
+    .badge-refuted {
+      background: rgba(225, 29, 72, 0.12);
+      color: #be123c;
+      border: 1px solid rgba(225, 29, 72, 0.35);
+    }
+    .badge-refuted::before { background: #f43f5e; }
+
+    .badge-pending {
+      background: rgba(99, 102, 241, 0.12);
+      color: #4338ca;
+      border: 1px solid rgba(99, 102, 241, 0.35);
+    }
+    .badge-pending::before { background: #6366f1; }
+
+    /* 신뢰도 배지 */
+    .badge-confidence {
+      display: inline-flex;
+      align-items: center;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 7px;
+      border-radius: var(--radius-full);
+      line-height: 1.35;
+      white-space: nowrap;
+    }
+    .badge-confidence-high {
+      background: rgba(59, 130, 246, 0.1);
+      color: #1d4ed8;
+      border: 1px solid rgba(59, 130, 246, 0.25);
+    }
+    .badge-confidence-moderate {
+      background: rgba(168, 85, 247, 0.1);
+      color: #7e22ce;
+      border: 1px solid rgba(168, 85, 247, 0.25);
+    }
+    .badge-confidence-low {
+      background: rgba(148, 163, 184, 0.15);
+      color: #475569;
+      border: 1px solid rgba(148, 163, 184, 0.25);
+    }
+
+    /* 증거 수준 (Evidence Level) 배지 */
+    .badge-evidence {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2.5px 8px;
+      border-radius: var(--radius-sm);
+      line-height: 1.35;
+      white-space: nowrap;
+      letter-spacing: -0.01em;
+    }
+    .badge-evidence-high {
+      background: rgba(16, 185, 129, 0.12);
+      color: #047857;
+      border: 1px solid rgba(16, 185, 129, 0.35);
+    }
+    .badge-evidence-moderate {
+      background: rgba(217, 119, 6, 0.12);
+      color: #b45309;
+      border: 1px solid rgba(217, 119, 6, 0.35);
+    }
+    .badge-evidence-low {
+      background: rgba(100, 116, 139, 0.12);
+      color: #475569;
+      border: 1px solid rgba(100, 116, 139, 0.35);
+    }
+
+    /* Dark Mode Badges */
+    :root[data-theme="dark"] .badge-evidence-high {
+      background: rgba(16, 185, 129, 0.18);
+      color: #34d399;
+      border-color: rgba(52, 211, 153, 0.35);
+    }
+    :root[data-theme="dark"] .badge-evidence-moderate {
+      background: rgba(217, 119, 6, 0.18);
+      color: #fbbf24;
+      border-color: rgba(251, 191, 36, 0.35);
+    }
+    :root[data-theme="dark"] .badge-evidence-low {
+      background: rgba(100, 116, 139, 0.2);
+      color: #cbd5e1;
+      border-color: rgba(148, 163, 184, 0.3);
+    }
+    :root[data-theme="dark"] .badge-verified {
+      background: rgba(16, 185, 129, 0.18);
+      color: #34d399;
+      border-color: rgba(52, 211, 153, 0.35);
+    }
+    :root[data-theme="dark"] .badge-mostly-verified {
+      background: rgba(13, 148, 136, 0.18);
+      color: #2dd4bf;
+      border-color: rgba(45, 212, 191, 0.35);
+    }
+    :root[data-theme="dark"] .badge-partially-verified {
+      background: rgba(217, 119, 6, 0.18);
+      color: #fbbf24;
+      border-color: rgba(251, 191, 36, 0.35);
+    }
+    :root[data-theme="dark"] .badge-misleading {
+      background: rgba(234, 88, 12, 0.18);
+      color: #fb923c;
+      border-color: rgba(251, 146, 60, 0.35);
+    }
+    :root[data-theme="dark"] .badge-insufficient {
+      background: rgba(100, 116, 139, 0.2);
+      color: #cbd5e1;
+      border-color: rgba(148, 163, 184, 0.3);
+    }
+    :root[data-theme="dark"] .badge-refuted {
+      background: rgba(225, 29, 72, 0.2);
+      color: #fb7185;
+      border-color: rgba(251, 113, 133, 0.35);
+    }
+    :root[data-theme="dark"] .badge-pending {
+      background: rgba(99, 102, 241, 0.2);
+      color: #a5b4fc;
+      border-color: rgba(165, 180, 252, 0.35);
+    }
+    :root[data-theme="dark"] .badge-confidence-high {
+      background: rgba(56, 189, 248, 0.16);
+      color: #7dd3fc;
+      border-color: rgba(56, 189, 248, 0.3);
+    }
+    :root[data-theme="dark"] .badge-confidence-moderate {
+      background: rgba(192, 132, 252, 0.16);
+      color: #e9d5ff;
+      border-color: rgba(192, 132, 252, 0.3);
+    }
+    :root[data-theme="dark"] .badge-confidence-low {
+      background: rgba(148, 163, 184, 0.2);
+      color: #cbd5e1;
+      border-color: rgba(148, 163, 184, 0.3);
+    }
+
+    /* 4단계 공통 템플릿 검증 카드 */
+    .verification-card {
+      margin: 2.2em 0;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .verification-card:hover {
+      border-color: var(--border-focus);
+      box-shadow: var(--shadow-md);
+    }
+    .vc-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 14px 18px;
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border);
+    }
+    .vc-title-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .vc-step-id {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--primary);
+      background: var(--primary-light);
+      padding: 3px 8px;
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(59, 130, 246, 0.2);
+    }
+    .vc-issue-title {
+      font-size: 15.5px;
+      font-weight: 750;
+      color: var(--text-main);
+    }
+    .vc-badges {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .vc-body {
+      padding: 18px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .vc-block {
+      border-left: 3px solid var(--border);
+      padding-left: 14px;
+    }
+    .vc-block.step-1 { border-left-color: #3b82f6; }
+    .vc-block.step-2 { border-left-color: #10b981; }
+    .vc-block.step-3 { border-left-color: #f59e0b; }
+    .vc-block.step-4 { border-left-color: #64748b; }
+    .vc-block.step-5 { border-left-color: #8b5cf6; }
+
+    .vc-step-label {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .vc-block.step-1 .vc-step-label { color: #2563eb; }
+    .vc-block.step-2 .vc-step-label { color: #059669; }
+    .vc-block.step-3 .vc-step-label { color: #d97706; }
+    .vc-block.step-4 .vc-step-label { color: #475569; }
+    .vc-block.step-5 .vc-step-label { color: #7c3aed; }
+
+    :root[data-theme="dark"] .vc-block.step-1 .vc-step-label { color: #60a5fa; }
+    :root[data-theme="dark"] .vc-block.step-2 .vc-step-label { color: #34d399; }
+    :root[data-theme="dark"] .vc-block.step-3 .vc-step-label { color: #fbbf24; }
+    :root[data-theme="dark"] .vc-block.step-4 .vc-step-label { color: #94a3b8; }
+    :root[data-theme="dark"] .vc-block.step-5 .vc-step-label { color: #a78bfa; }
+
+    /* External Links in References */
+    .references-list a.ext-link,
+    .content a.ext-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      font-weight: 600;
+      color: var(--primary);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .references-list a.ext-link::after,
+    .content a.ext-link::after {
+      content: "↗";
+      font-size: 11px;
+      line-height: 1;
+      opacity: 0.8;
+    }
+
+    /* Collapsible References Section */
+    .references-collapsible {
+      margin: 2rem 0;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      background: var(--bg-card);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.2s ease;
+    }
+
+    .references-collapsible summary.references-toggle {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.1rem 1.4rem;
+      background: var(--bg-surface);
+      cursor: pointer;
+      user-select: none;
+      list-style: none;
+      border-bottom: 1px solid transparent;
+      transition: background 0.15s ease, border-color 0.15s ease;
+    }
+
+    .references-collapsible summary.references-toggle::-webkit-details-marker {
+      display: none;
+    }
+
+    .references-collapsible summary.references-toggle:hover {
+      background: var(--bg-subtle, rgba(0, 0, 0, 0.03));
+    }
+
+    :root[data-theme="dark"] .references-collapsible summary.references-toggle:hover {
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .references-collapsible[open] summary.references-toggle {
+      border-bottom-color: var(--border);
+    }
+
+    .references-toggle .toggle-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-main);
+      flex-wrap: wrap;
+    }
+
+    .references-toggle .toggle-badge {
+      font-size: 12px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 9999px;
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    .references-toggle .toggle-icon {
+      font-size: 13px;
+      color: var(--text-muted);
+      transition: transform 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+    }
+
+    .references-collapsible[open] summary.references-toggle .toggle-icon {
+      transform: rotate(180deg);
+    }
+
+    .references-body {
+      padding: 1.25rem 1.4rem;
+    }
+
+    .references-group-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin: 1.8rem 0 0.5rem 0;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-main);
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 0.5rem;
+    }
+
+    .references-group-title:first-child {
+      margin-top: 0.5rem;
+    }
+
+    .references-group-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 0.9rem;
+      line-height: 1.5;
+    }
+
+    .vc-speaker-meta {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+      padding: 4px 10px;
+      background: var(--bg-surface);
+      border-radius: var(--radius-sm);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .vc-speaker-meta strong {
+      color: var(--text-main);
+    }
+    .vc-content {
+      font-size: 14.5px;
+      line-height: 1.7;
+      color: var(--text-main);
+    }
+    .vc-content p:last-child {
+      margin-bottom: 0;
+    }
+    .vc-content ul {
+      margin-bottom: 0;
+      padding-left: 18px;
+    }
+    .vc-content li {
+      margin-bottom: 4px;
+    }
+
+    /* TOC Drawer (Slide-in) */
+    .drawer-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(4px);
+      z-index: 90;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .drawer-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .toc-drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      transform: translateX(100%);
+      width: 320px;
+      max-width: 88vw;
+      height: 100%;
+      background: var(--drawer-bg);
+      border-left: 1px solid var(--border);
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      box-shadow: var(--shadow-lg);
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .toc-drawer.active {
+      transform: translateX(0);
+    }
+
+    .toc-drawer-header {
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .toc-drawer-title {
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .toc-close-btn {
+      background: transparent;
+      border: none;
+      font-size: 20px;
+      color: var(--text-muted);
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .toc-drawer-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px 16px 40px;
+    }
+
+    .toc-drawer-body ul.toc-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .toc-drawer-body li {
+      margin-bottom: 6px;
+    }
+
+    .toc-drawer-body li.depth-2 {
+      padding-left: 0;
+      margin-top: 10px;
+      margin-bottom: 4px;
+    }
+    .toc-drawer-body li.depth-2 > .toc-link {
+      font-weight: 700;
+      color: var(--text-main);
+      border-left: 2px solid var(--primary);
+      padding-left: 8px;
+    }
+    .toc-drawer-body li.depth-3 {
+      padding-left: 14px;
+      margin-bottom: 3px;
+    }
+    .toc-drawer-body li.depth-3 > .toc-link {
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+    .toc-drawer-body li.depth-4 {
+      padding-left: 24px;
+      margin-bottom: 2px;
+    }
+    .toc-drawer-body li.depth-4 > .toc-link {
+      font-size: 13px;
+      color: var(--text-light);
+    }
+
+    .toc-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9.5px;
+      font-weight: 700;
+      line-height: 1.2;
+      padding: 1.5px 5px;
+      border-radius: 4px;
+      margin-right: 6px;
+      flex-shrink: 0;
+      font-family: var(--font-mono);
+    }
+    .toc-badge.badge-h2 {
+      background: var(--primary-light);
+      color: var(--primary);
+      border: 1px solid rgba(37, 99, 235, 0.25);
+    }
+    .toc-badge.badge-h3 {
+      background: var(--bg-surface);
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+    }
+    .toc-badge.badge-h4 {
+      background: transparent;
+      color: var(--text-light);
+      border: 1px dashed var(--border);
+    }
+
+    .toc-link {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 13.5px;
+      line-height: 1.45;
+      display: flex;
+      align-items: baseline;
+      padding: 4px 6px;
+      border-radius: var(--radius-sm);
+      transition: all 0.15s ease;
+    }
+
+    .toc-link:hover, .toc-link.active {
+      color: var(--primary);
+      background: var(--primary-light);
+    }
+    .toc-text {
+      word-break: keep-all;
+    }
+
+    /* Heading Anchor Tooltip */
+    .anchor-tooltip {
+      position: absolute;
+      transform: translateX(-50%);
+      background: var(--code-bg);
+      color: var(--code-text);
+      font-size: 11.5px;
+      font-weight: 600;
+      padding: 4px 8px;
+      border-radius: var(--radius-sm);
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      z-index: 1000;
+      box-shadow: var(--shadow-md);
+      white-space: nowrap;
+    }
+    .anchor-tooltip.visible {
+      opacity: 1;
+      transform: translateX(-50%) translateY(-2px);
+    }
+
+    /* Floating Back to Top */
+    #back-to-top {
+      position: fixed;
+      bottom: 24px;
+      right: 20px;
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-full);
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow-md);
+      cursor: pointer;
+      z-index: 30;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      transition: all 0.2s ease;
+    }
+
+    #back-to-top.visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    /* Footer */
+    .article-footer {
+      text-align: center;
+      margin-top: 40px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      color: var(--text-light);
+      font-size: 13.5px;
+    }
+
+    .article-footer a {
+      color: var(--text-muted);
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Sticky Navigation Bar -->
+  <header class="top-nav">
+    <div class="nav-left">
+      <a href="index.html" class="nav-btn" title="목록으로 이동">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+        <span>목록</span>
+      </a>
+      <span class="nav-title" id="nav-title-text">홉스와 라이프니츠, 기호에서 AI까지 — '생각은 계산이다'라는 혁명과 맹목적 사고(Cogitatio Caeca)의 400년 계보학</span>
+    </div>
+    
+    <div class="nav-right">
+      <div class="font-picker" id="font-picker">
+        <button class="nav-btn" id="font-toggle" type="button" aria-label="본문 폰트" title="본문 폰트 선택" aria-expanded="false" aria-haspopup="listbox" aria-controls="font-menu">가</button>
+        <div class="font-menu" id="font-menu" role="listbox" hidden>
+          <button type="button" class="font-option" role="option" data-font="pretendard" aria-selected="true">Pretendard</button>
+          <button type="button" class="font-option" role="option" data-font="d2coding" aria-selected="false">D2Coding</button>
+        </div>
+      </div>
+      <button class="nav-btn" id="theme-toggle" aria-label="테마 전환" title="다크/라이트 모드 전환">
+        <span id="theme-icon">🌓</span>
+      </button>
+      <button class="nav-btn" id="toc-toggle" aria-label="목차 열기" title="목차 보기" aria-expanded="false" aria-controls="toc-drawer">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="21" x2="3" y1="6" y2="6"/><line x1="15" x2="3" y1="12" y2="12"/><line x1="17" x2="3" y1="18" y2="18"/></svg>
+        <span>목차</span>
+      </button>
+    </div>
+    <!-- Reading Progress Bar -->
+    <div id="progress-container">
+      <div id="progress-bar"></div>
+    </div>
+  </header>
+
+  <!-- TOC Slide-in Drawer -->
+  <div class="drawer-overlay" id="drawer-overlay"></div>
+  <aside class="toc-drawer" id="toc-drawer" aria-label="문서 목차">
+    <div class="toc-drawer-header">
+      <span class="toc-drawer-title">📑 목차</span>
+      <button class="toc-close-btn" id="toc-close" aria-label="목차 닫기">&times;</button>
+    </div>
+    <div class="toc-drawer-body">
+      <ul class="toc-list"><li class="depth-2"><a href="#1-오프닝-가발-쓴-17세기-철학자들과-21세기-실리콘-문명" class="toc-link"><span class="toc-badge badge-h2">대주제</span><span class="toc-text">1. [오프닝] 가발 쓴 17세기 철학자들과 21세기 실리콘 문명</span></a></li><li class="depth-2"><a href="#2-홉스의-인간-인지-진단-왜-우리에겐-기호가-필요한가" class="toc-link"><span class="toc-badge badge-h2">대주제</span><span class="toc-text">2. 홉스의 인간 인지 진단 — 왜 우리에겐 기호가 필요한가?</span></a></li><li class="depth-3"><a href="#21-사고의-유동성과-망각의-공포" class="toc-link"><span class="toc-badge badge-h3">중주제</span><span class="toc-text">2.1 사고의 유동성과 망각의 공포</span></a></li><li class="depth-3"><a href="#22-표지mark-nota와-신호sign-signum의-이중-체계" class="toc-link"><span class="toc-badge badge-h3">중주제</span><span class="toc-text">2.2 표지(Mark / Nota)와 신호(Sign / Signum)의 이중 체계</span></a></li><li class="depth-3"><a href="#23-이름names의-우선순위와-명제의-결합" class="toc-link"><span class="toc-badge badge-h3">중주제</span><span class="toc-text">2.3 이름(Names)의 우선순위와 명제의 결합</span></a></li><li class="depth-2"><a href="#3-quot생각은-계산이다quot-홉스의-혁명과-39무언의-추론39-모순" class="toc-link"><span class="toc-badge badge-h2">대주제</span><span class="toc-text">3. &quot;생각은 계산이다&quot; — 홉스의 혁명과 &#39;무언의 추론&#39; 모순</span></a></li><li class="depth-3"><a href="#31-추론이란-곧-산술의-가감-연산이다" class="toc-link"><span class="toc-badge badge-h3">중주제</span><span class="toc-text">3.1 추론이란 곧 산술의 가감(加減) 연산이다</span></a></li><li class="depth-3"><a href="#32-39무언의-추론silent-reasoning39이라는-치명적-모순" class="toc-link"><span class="toc-badge badge-h3">중주제</span><span class="toc-text">3.2 &#39;무언의 추론(Silent Reasoning)&#39;이라는 치명적 모순</span></a></li><li class="depth-3"><a href="#33-닐kneale-대-다스칼dascal-논쟁과-이상명-교수의-재평가" class="toc-link"><span class="toc-badge badge-h3">중주제</span><span class="toc-text">3.3 닐(Kneale) 대 다스칼(Dascal) 논쟁과 이상명 교수의 재평가</span></a></li><li class="depth-2"><a href="#4-라이프니츠의-도약-천각형의-역설과-맹목적-사고cogitatio-caeca" class="toc-link"><span class="toc-badge badge-h2">대주제</span><span class="toc-text">4. 라이프니츠의 도약 — 천각형의 역설과 맹목적 사고(Cogitatio Caeca)</span></a></li><li class="depth-3"><a href="#41-인간-지성의-유한성과-신적-직관intuitio의-불가능성" class="toc-link"><span class="toc-badge badge-h3">중주제</span><span class="toc-text">4.1 인간 지성의 유한성과 신적 직관(Intuitio)의 불가능성</span></a></li><li class="depth-3"><a href="#42-데카르트의-39천각형chiliagon39을-전복하다" class="toc-link"><span class="toc-badge badge-h3">중주제</span><span class="toc-text">4.2 데카르트의 &#39;천각형(Chiliagon)&#39;을 전복하다</span></a></li><li class="depth-3"><a href="#43-맹목적-사고cogitatio-caeca와-관념-개념의-혁명" class="toc-link"><span class="toc-badge badge-h3">중주제</span><span class="toc-text">4.3 맹목적 사고(Cogitatio Caeca)와 관념 개념의 혁명</span></a></li><li class="depth-2"><a href="#5-0과-1의-세계-보편기호법에서-튜링-섀넌-그리고-반도체-육화까지" class="toc-link"><span class="toc-badge badge-h2">대주제</span><span class="toc-text">5. 0과 1의 세계 — 보편기호법에서 튜링, 섀넌, 그리고 반도체 육화까지</span></a></li><li class="depth-3"><a href="#51-두-개의-기둥-보편-기호법과-사유의-계산" class="toc-link"><span class="toc-badge badge-h3">중주제</span><span class="toc-text">5.1 두 개의 기둥: 보편 기호법과 사유의 계산</span></a></li><li class="depth-3"><a href="#52-이진법binary-system과-사칙연산-계산기" class="toc-link"><span class="toc-badge badge-h3">중주제</span><span class="toc-text">5.2 이진법(Binary System)과 사칙연산 계산기</span></a></li><li class="depth-3"><a href="#53-불-대수-튜링-기계-섀넌의-논리-게이트" class="toc-link"><span class="toc-badge badge-h3">중주제</span><span class="toc-text">5.3 불 대수, 튜링 기계, 섀넌의 논리 게이트</span></a></li><li class="depth-2"><a href="#6-20세기-ai의-분열과-현대-거대언어모델llm의-대역설" class="toc-link"><span class="toc-badge badge-h2">대주제</span><span class="toc-text">6. 20세기 AI의 분열과 현대 거대언어모델(LLM)의 대역설</span></a></li><li class="depth-3"><a href="#61-기호주의symbolic-ai의-좌절" class="toc-link"><span class="toc-badge badge-h3">중주제</span><span class="toc-text">6.1 기호주의(Symbolic AI)의 좌절</span></a></li><li class="depth-3"><a href="#62-연결주의connectionism의-부상과-트랜스포머-혁명" class="toc-link"><span class="toc-badge badge-h3">중주제</span><span class="toc-text">6.2 연결주의(Connectionism)의 부상과 트랜스포머 혁명</span></a></li><li class="depth-3"><a href="#63-거대한-역설-llm은-라이프니츠의-승리인가" class="toc-link"><span class="toc-badge badge-h3">중주제</span><span class="toc-text">6.3 거대한 역설: LLM은 라이프니츠의 승리인가?</span></a></li><li class="depth-2"><a href="#7-존-설의-39중국어-방39과-생성형-ai의-실존적-함의" class="toc-link"><span class="toc-badge badge-h2">대주제</span><span class="toc-text">7. 존 설의 &#39;중국어 방&#39;과 생성형 AI의 실존적 함의</span></a></li><li class="depth-3"><a href="#71-구문론syntax-대-의미론semantics" class="toc-link"><span class="toc-badge badge-h3">중주제</span><span class="toc-text">7.1 구문론(Syntax) 대 의미론(Semantics)</span></a></li><li class="depth-3"><a href="#72-일상의-맹목적-사고-엑셀-수식에서-ai-프롬프트까지" class="toc-link"><span class="toc-badge badge-h3">중주제</span><span class="toc-text">7.2 일상의 맹목적 사고: 엑셀 수식에서 AI 프롬프트까지</span></a></li><li class="depth-3"><a href="#73-현대인의-실존적-딜레마-39의미의-외주화outsourcing-of-meaning39" class="toc-link"><span class="toc-badge badge-h3">중주제</span><span class="toc-text">7.3 현대인의 실존적 딜레마: &#39;의미의 외주화(Outsourcing of Meaning)&#39;</span></a></li><li class="depth-2"><a href="#8-클로징-400년의-지적-탐구를-마치며" class="toc-link"><span class="toc-badge badge-h2">대주제</span><span class="toc-text">8. [클로징] 400년의 지적 탐구를 마치며</span></a></li></ul>
+    </div>
+  </aside>
+
+  <!-- Main Article Content Container -->
+  <main class="article-container">
+    <article class="article-card">
+      <header class="article-header">
+        <div class="article-meta">
+          <span class="meta-badge">📅 2026-10-18</span>
+          <span class="meta-badge">⏱️ 약 59분</span>
+          <span class="meta-badge">✍️ Pages 지적 탐구·사상사·컴퓨터과학 심층 분석팀</span>
+        </div>
+        <h1 class="article-title">홉스와 라이프니츠, 기호에서 AI까지 — '생각은 계산이다'라는 혁명과 맹목적 사고(Cogitatio Caeca)의 400년 계보학</h1>
+        <p class="article-subtitle">이상명 교수의 원전 해부와 지적 탐구 — 17세기 가발 쓴 철학자들의 기호 혁명, 천각형의 역설, 불 대수와 튜링 기계를 거쳐 생성형 AI의 '중국어 방'과 의미의 외주화까지</p>
+        
+        <div class="tag-list">
+          
+          <span class="tag-pill">#홉스</span>
+          
+          <span class="tag-pill">#라이프니츠</span>
+          
+          <span class="tag-pill">#기호의기능</span>
+          
+          <span class="tag-pill">#맹목적사고</span>
+          
+          <span class="tag-pill">#기호적인식</span>
+          
+          <span class="tag-pill">#보편기호법</span>
+          
+          <span class="tag-pill">#사유의계산</span>
+          
+          <span class="tag-pill">#튜링기계</span>
+          
+          <span class="tag-pill">#불대수</span>
+          
+          <span class="tag-pill">#중국어방</span>
+          
+          <span class="tag-pill">#생성형AI</span>
+          
+          <span class="tag-pill">#의미의외주화</span>
+          
+        </div>
+      </header>
+
+      <section class="content" id="article-content">
+        <blockquote>
+<p><strong>문서 메타데이터 및 사상사적 지형도</strong>  </p>
+<ul>
+<li><strong>핵심 원전 논문</strong>: 이상명(숭실대학교 철학과 교수), 〈홉스와 라이프니츠: 기호의 기능〉 (《가톨릭철학》 제27호, 2016년, pp. 113–140, DOI: <code>10.16895/cathp.2016.27.4.113</code>)  </li>
+<li><strong>구술 사료 및 팟캐스트</strong>: 《지적 탐구: 생각의 계보학》 특별 대담 — <em>&quot;홉스와 라이프니츠, 기호에서 AI까지&quot;</em>  </li>
+<li><strong>참조 원전 아카이브</strong>: 토머스 홉스 《물체론(De Corpore, 1655)》·《리바이어던(Leviathan, 1651)》 | G. W. 라이프니츠 《인식, 진리, 관념에 관한 성찰(Meditationes, 1684)》·《관념이란 무엇인가(Quid sit idea, 1678)》·《정신, 우주, 신에 관하여(1676)》·《추론 계산의 기초(1679)》 | 조지 불 《사유의 법칙(1854)》 | 앨런 튜링 《계산 가능한 수(1936)》 | 클로드 섀넌 《스위칭 회로의 기호 분석(1937)》 | 존 설 《마음, 뇌, 프로그램(1980)》  </li>
+<li><strong>핵심 질문</strong>: <em>&quot;인간의 뇌는 왜 망각의 늪에 빠지며, 기호는 어떻게 생각의 외장하드가 되었는가? 사유를 덧셈·뺄셈으로 환원한 홉스는 왜 &#39;기호 없는 무언의 추론&#39;이라는 모순에 부딪혔는가? 라이프니츠는 천각형(Chiliagon)의 역설을 통해 어떻게 &#39;직관 없는 맹목적 사고(Cogitatio Caeca)&#39;를 지식의 엔진으로 탈바꿈시켰는가? 그리고 300년 전의 형이상학은 어떻게 반도체 논리 게이트와 챗GPT의 거대한 &#39;중국어 방&#39;으로 육화되었으며, 우리는 왜 &#39;의미의 외주화&#39;라는 실존적 위기에 직면했는가?&quot;</em></li>
+</ul>
+</blockquote>
+<div class="callout-box info">
+  <div class="callout-title">핵심 명제: "사유는 계산이며, 인간의 진리는 대상의 직관이 아니라 '맹목적 기호 조작의 적법성'에서 완성된다"</div>
+  <p>현대 디지털 문명과 생성형 인공지능(LLM)의 뿌리는 20세기 공학의 우연한 산물이 아닙니다. 17세기 과학혁명기, <strong>토머스 홉스</strong>는 인간 뇌의 인지적 유동성과 망각을 극복하기 위해 물리적 닻인 <strong>표지(Mark)</strong>와 <strong>신호(Sign)</strong>를 고안하고 "추론이란 곧 산술의 가감(加減) 계산"이라는 계산주의의 첫 깃발을 꽂았습니다.<br>
+  나아가 <strong>고트프리트 빌헬름 라이프니츠</strong>는 인간이 복합 개념을 신(God)처럼 단번에 꿰뚫어 볼 수 없다는 유한성을 직시하고, 데카르트의 <strong>천각형(Chiliagon)</strong>을 전복하여 <strong>"내용을 직관하지 못해도 기호 조작 규칙만 지키면 완벽한 진리에 도달한다"</strong>는 <strong>맹목적 사고(Cogitatio Caeca / 기호적 사고)</strong>의 문을 열었습니다.<br>
+  이 순수한 형이상학적 통찰은 불 대수, 튜링 기계, 섀넌의 논리 회로를 거쳐 실리콘으로 육화되었고, 오늘날 통계적 신경망으로 무장한 거대언어모델(LLM) 안에서 '의미 없는 맹목적 기호 처리'의 궁극적 형태로 실현되었습니다. 본 아티클은 일상의 엑셀 수식부터 인공지능 시대의 '의미의 외주화'까지 이어지는 400년의 지적 대서사를 철학적 원전과 기술사적 계보로 치밀하게 해부합니다.</p>
+</div>
+
+<hr>
+<h2 id="1-오프닝-가발-쓴-17세기-철학자들과-21세기-실리콘-문명"><a href="#1-오프닝-가발-쓴-17세기-철학자들과-21세기-실리콘-문명" class="heading-anchor" aria-hidden="true">#</a> 1. [오프닝] 가발 쓴 17세기 철학자들과 21세기 실리콘 문명</h2><p>우리가 매일 아침 사무실 모니터 앞에서 무심코 두드리는 엑셀 수식 <code>=SUM(A1:B10)</code>이나 <code>=VLOOKUP(...)</code>, 스마트폰 백그라운드에서 끊임없이 데이터를 분류하는 추천 알고리즘, 그리고 인간의 언어를 능수능란하게 흉내 내며 전 세계를 전율케 하는 챗GPT 같은 거대언어모델(LLM). </p>
+<p>현대인들은 이러한 첨단 기술을 &#39;딱 떨어지는 컴퓨터 과학과 실리콘 밸리 공학의 전유물&#39;로 여기며, 추상적이고 모호한 질문을 던지는 &#39;형이상학적 철학&#39;과는 대척점에 서 있는 별개의 세계라고 믿곤 합니다. 문과와 이과의 끝판왕처럼 서로 등을 돌리고 있는 두 세계처럼 보입니다.</p>
+<p>그러나 컴퓨터 과학과 인공지능의 심장을 열어보면, 그 내부를 흐르는 근본적인 작동 원리는 놀랍게도 <strong>17세기에 커다란 가발을 쓰고 라틴어로 깃펜을 휘갈기던 두 명의 철학자</strong>가 치열하게 싸우며 설계해 둔 사상적 설계도와 한 치의 오차도 없이 맞물려 돌아갑니다. 바로 영국의 기계론적 경험론자 <strong>토머스 홉스(Thomas Hobbes, 1588–1679)</strong>와 독일의 보편 천재 <strong>고트프리트 빌헬름 라이프니츠(Gottfried Wilhelm Leibniz, 1646–1716)</strong>입니다.</p>
+<p>숭실대학교 철학과 이상명 교수가 학술지 《가톨릭철학》에 발표한 정밀한 원전 연구 〈홉스와 라이프니츠: 기호의 기능〉은 이 지적 연결고리의 비밀을 쥐고 있습니다. 인간 정신의 한계를 진단하고 이를 극복하기 위해 물리적 &#39;기호(Sign)&#39;를 발명했던 17세기의 고투는, 오늘날 인간의 의미를 기계에 위임하고 있는 생성형 AI 시대의 가장 깊은 실존적 질문과 정면으로 맞닿아 있습니다.</p>
+<hr>
+<h2 id="2-홉스의-인간-인지-진단-왜-우리에겐-기호가-필요한가"><a href="#2-홉스의-인간-인지-진단-왜-우리에겐-기호가-필요한가" class="heading-anchor" aria-hidden="true">#</a> 2. 홉스의 인간 인지 진단 — 왜 우리에겐 기호가 필요한가?</h2><p>현대 컴퓨터나 인공지능의 0과 1 연산을 논하기에 앞서, 우리는 17세기 철학자들이 마주했던 가장 원초적인 질문으로 내려가야 합니다. <strong>&quot;인간은 애초에 왜 &#39;기호&#39;라는 물리적 매개체를 발명하고 사용해야만 했을까?&quot;</strong></p>
+<p>홉스는 17세기 과학혁명의 기계론적 자연철학에 깊이 매료된 사상가였습니다. 그는 인간의 마음과 정신 작용을 영혼의 신비로운 작용이 아니라, 감각 기관을 통해 외부의 물질적 운동이 뇌와 심장에 전달되어 일어나는 기계적 운동으로 파악했습니다. 그리고 이 관점에서 인간 인지 능력의 치명적인 한계를 서늘하게 포착해 냅니다.</p>
+<h3 id="21-사고의-유동성과-망각의-공포"><a href="#21-사고의-유동성과-망각의-공포" class="heading-anchor" aria-hidden="true">#</a> 2.1 사고의 유동성과 망각의 공포</h3><p>홉스의 진단에 따르면, 인간의 사고는 마치 흐르는 물처럼 극도로 유동적(fluid)이고 일시적(transitory)입니다. 감각을 통해 아무리 번뜩이는 지적 관념이나 기발한 환영(phantasm)이 뇌리에 떠올라도, 유한한 물질로 이루어진 인간의 뇌 속에는 그 생각을 영구적으로 붙잡아 둘 장치가 없습니다.</p>
+<blockquote>
+<p><em>&quot;어떤 사고를 정신에 다시 불러 환기하는 것도 운에 의존해야 할 만큼 어렵다. 결국 인간의 사고에는 자신의 경험을 통해서 알게 된 것 외에는 확실하고 오류 불가능한 것이 없다.&quot;</em><br>— 이상명 (2016), 《가톨릭철학》 제27호, p. 115; 홉스, 《물체론(De Corpore)》 I, 2, 1</p>
+</blockquote>
+<p>우리가 아침에 샤워를 하다가 업무나 연구에 관한 기가 막힌 아이디어가 번쩍 떠올랐는데, 물기를 닦고 거실로 나오는 수 초 사이에 *&quot;어? 내가 방금 무슨 생각을 했더라?&quot;*라며 머리를 쥐어뜯는 경험은 누구나 겪는 일상입니다. 홉스는 바로 이 인지적 휘발성을 인간의 본원적 한계로 보았습니다.</p>
+<p>인간은 눈앞에 감각 가능하고 현재하는 측정 기준이 없으면 양(quantity)을 기억할 수 없고, 감각 가능한 표본이 없으면 색채를 기억할 수 없으며, 순서대로 정렬된 수의 이름(names of numbers)을 학습하지 못하면 세 자리 수 이상의 수조차 셀 수 없습니다. 따라서 사념이 망각의 심연 속으로 날아가 버리기 전에, 현실 세계에 쾅 박아둘 감각적인 물리적 닻, 즉 <strong>&quot;기억을 보존할 수 있는 감각 가능한 어떤 것(some sensible moniments)&quot;</strong>이 필연적으로 요청됩니다 (<em>De Corpore</em> I, 2, 1).</p>
+<h3 id="22-표지mark-nota와-신호sign-signum의-이중-체계"><a href="#22-표지mark-nota와-신호sign-signum의-이중-체계" class="heading-anchor" aria-hidden="true">#</a> 2.2 표지(Mark / Nota)와 신호(Sign / Signum)의 이중 체계</h3><p>홉스는 이 감각 가능한 기호를 그것이 수행하는 기능에 따라 매우 엄격하게 두 가지 층위로 구별합니다 (<em>De Corpore</em> I, 2, 2; I, 2, 3).</p>
+<ol>
+<li><strong>표지 (標識, Mark / 라틴어: <em>Nota</em>)</strong>:<ul>
+<li><strong>기능</strong>: 개인적 기억의 보존 (<code>notae mihi ipsi ad reminiscendum</code>)</li>
+<li><strong>사용 주체</strong>: 자기 자신 (Private / Internal)</li>
+<li><strong>본질</strong>: 사적인 망각을 방지하기 위해 개인이 임의로 고안한 물리적 장치입니다. 샤워를 마치고 뛰어나와 잊어버리기 전에 모니터 구석에 찰싹 붙여두는 &#39;포스트잇 메모&#39;나 길을 잃지 않기 위해 갈림길에 쌓아둔 작은 돌무더기가 바로 홉스가 말하는 표지(Mark)입니다.</li>
+</ul>
+</li>
+<li><strong>신호 (信號, Sign / 라틴어: <em>Signum</em>)</strong>:<ul>
+<li><strong>기능</strong>: 사회적 소통 및 지식의 전수 (<code>signa erga alios ad docendum</code>)</li>
+<li><strong>사용 주체</strong>: 타인 및 공동체 (Public / External)</li>
+<li><strong>본질</strong>: 개인이 혼자만 알아보는 표지에 머문다면, 그 학자가 사망하는 순간 그가 발견한 모든 위대한 지식은 문명에서 영원히 소멸하고 맙니다. 학문의 축적과 인류의 일반적 진보를 위해서는 내 머릿속의 관념을 타인의 정신 속에도 똑같이 환기할 수 있는 공통의 약속이 필요합니다. 홉스는 개인의 표지가 다수에게 알려져 공통의 사회적 규약이 될 때 이를 &#39;신호(Sign)&#39;라고 명명했습니다.</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p><em>&quot;표지와 신호 간의 차이는, 우리가 표지를 우리 자신이 사용하기 위해 만드는 반면 신호는 다른 사람들도 사용하기 위해 만든다는 것이다.&quot;</em><br>— 홉스, 《물체론(De Corpore)》 I, 2, 2 (EW I, p. 15)</p>
+</blockquote>
+<div class="table-wrapper" style="margin:2rem 0; overflow-x:auto;">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 290" role="img" aria-label="홉스의 표지와 신호 이중 기호 체계도" style="width:100%; height:auto; max-width:840px; display:block; margin:0 auto; background:var(--bg-card); border-radius:14px; border:1px solid var(--border);">
+  <defs>
+    <style>
+      .hb-title { font-family: Pretendard, sans-serif; font-weight: 800; font-size: 15px; fill: var(--text-main); }
+      .hb-sub { font-family: Pretendard, sans-serif; font-size: 12px; fill: var(--text-muted); }
+      .hb-box { fill: var(--bg-surface); stroke: var(--border); stroke-width: 1.2; rx: 8px; }
+      .hb-header { font-family: Pretendard, sans-serif; font-weight: 700; font-size: 14px; text-anchor: middle; }
+      .hb-item { font-family: Pretendard, sans-serif; font-size: 11.8px; fill: var(--text-muted); }
+      .hb-bold { font-family: Pretendard, sans-serif; font-weight: 700; font-size: 12px; fill: var(--text-main); }
+    </style>
+    <marker id="hb-arr" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#3b82f6"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="840" height="290" rx="14" fill="var(--bg-card)"/>
+  <text x="420" y="28" text-anchor="middle" class="hb-title">토머스 홉스의 감각 기호 이중 분화 모델 (Mark vs Sign)</text>
+  <text x="420" y="46" text-anchor="middle" class="hb-sub">인간 뇌의 인지적 휘발성(망각)을 극복하고 문명적 지식 축적으로 나아가는 두 층위의 도구</text>
+
+  <!-- Left Box: Mark -->
+  <g transform="translate(30, 65)">
+    <rect x="0" y="0" width="360" height="205" class="hb-box" stroke="#f59e0b" stroke-opacity="0.5"/>
+    <rect x="14" y="12" width="332" height="30" rx="6" fill="#f59e0b" fill-opacity="0.15"/>
+    <text x="180" y="32" class="hb-header" fill="#f59e0b">표지 (標識, Mark / Nota)</text>
+    <text x="18" y="66" class="hb-bold">본질: <tspan font-weight="normal">개인적 기억의 보존 (Memory)</tspan></text>
+    <text x="18" y="88" class="hb-item">• 라틴어: notae mihi ipsi ad reminiscendum</text>
+    <text x="18" y="108" class="hb-item">• 사용 주체: 사적 자아 (Internal / Private)</text>
+    <text x="18" y="128" class="hb-item">• 목적: 흘러가 버리는 찰나의 사념을 현실에 닻 내림</text>
+    <text x="18" y="148" class="hb-item">• 일상 유비: 모니터에 붙여두는 나만의 포스트잇 메모</text>
+    <rect x="14" y="162" width="332" height="32" rx="5" fill="var(--bg-card)" stroke="#f59e0b" stroke-opacity="0.4"/>
+    <text x="180" y="183" text-anchor="middle" class="hb-bold" fill="#f59e0b">기능: 사적 망각 방지 및 내적 사념 환기</text>
+  </g>
+
+  <!-- Connecting Arrow -->
+  <line x1="405" y1="168" x2="435" y2="168" stroke="#3b82f6" stroke-width="2.5" marker-end="url(#hb-arr)"/>
+  <text x="420" y="156" text-anchor="middle" font-family="Pretendard, sans-serif" font-size="10.5px" font-weight="700" fill="#3b82f6">사회적 확장</text>
+
+  <!-- Right Box: Sign -->
+  <g transform="translate(450, 65)">
+    <rect x="0" y="0" width="360" height="205" class="hb-box" stroke="#3b82f6" stroke-opacity="0.5"/>
+    <rect x="14" y="12" width="332" height="30" rx="6" fill="#3b82f6" fill-opacity="0.15"/>
+    <text x="180" y="32" class="hb-header" fill="#3b82f6">신호 (信號, Sign / Signum)</text>
+    <text x="18" y="66" class="hb-bold">본질: <tspan font-weight="normal">사회적 소통 및 지식 전수 (Communication)</tspan></text>
+    <text x="18" y="88" class="hb-item">• 라틴어: signa erga alios ad docendum</text>
+    <text x="18" y="108" class="hb-item">• 사용 주체: 타인 및 공동체 (External / Public)</text>
+    <text x="18" y="128" class="hb-item">• 목적: 타인의 정신 속에 나와 동일한 관념을 환기</text>
+    <text x="18" y="148" class="hb-item">• 일상 유비: 동료들에게 전송하는 슬랙 메시지·공통 언어</text>
+    <rect x="14" y="162" width="332" height="32" rx="5" fill="var(--bg-card)" stroke="#3b82f6" stroke-opacity="0.4"/>
+    <text x="180" y="183" text-anchor="middle" class="hb-bold" fill="#3b82f6">기능: 공적 지식 축적 및 학문의 세대 간 전수</text>
+  </g>
+</svg>
+</div>
+
+<h3 id="23-이름names의-우선순위와-명제의-결합"><a href="#23-이름names의-우선순위와-명제의-결합" class="heading-anchor" aria-hidden="true">#</a> 2.3 이름(Names)의 우선순위와 명제의 결합</h3><p>홉스에게 이 표지와 신호의 역할을 수행하는 물리적 실체는 바로 단어들, 더 정확히는 <strong>&#39;이름(names / verba)&#39;</strong>입니다. </p>
+<p>여기서 홉스는 중요한 선후 관계를 설정합니다. 이름은 우선적으로 나 자신의 기억을 보존하는 <strong>&#39;표지(Mark)&#39;</strong>로서 먼저 작동하며, 그것이 말 속에 적합한 문법적 질서로 배치되어 하나의 <strong>문장(명제, proposition)</strong>을 형성할 때 비로소 타인에게 사고를 전달하는 <strong>&#39;신호(Sign)&#39;</strong>로 전환됩니다 (<em>De Corpore</em> I, 2, 3). 단어 하나만 툭 던져서는 복잡한 생각을 전달할 수 없기 때문입니다.</p>
+<p>더욱이 홉스는 이름이 &#39;외적 사물 그 자체&#39;를 표현하는 기호가 아니라, <strong>&#39;사물에 대해 우리가 품고 있는 관념과 사념&#39;을 표현하는 기호</strong>라고 단언했습니다 (<em>De Corpore</em> I, 2, 5). 언어적 기호는 객관적 세계의 복사물이 아니라, 인간 인지 활동을 표상하는 심적 부호라는 것입니다.</p>
+<hr>
+<h2 id="3-quot생각은-계산이다quot-홉스의-혁명과-39무언의-추론39-모순"><a href="#3-quot생각은-계산이다quot-홉스의-혁명과-39무언의-추론39-모순" class="heading-anchor" aria-hidden="true">#</a> 3. &quot;생각은 계산이다&quot; — 홉스의 혁명과 &#39;무언의 추론&#39; 모순</h2><p>기호가 기억을 돕는 외장하드(표지)이자 남에게 생각을 전달하는 메신저(신호)라는 설명은 대단히 직관적입니다. 하지만 여기서 우리는 훨씬 더 거대하고 급진적인 질문과 마주합니다. <strong>&quot;단순한 이름표에 불과한 기호들을 가지고, 인간은 어떻게 고도의 철학적 진리를 탐구하고 복잡한 수학적 추론을 해내는가?&quot;</strong></p>
+<p>여기서 홉스는 현대 인지과학과 컴퓨터 과학의 토대가 되는 서양 사상사상 가장 대담한 선언을 던집니다. 인간 고유의 사고 작용인 <strong>&#39;추론(Reasoning / Ratiocination)&#39;</strong> 자체를 완전히 기계적으로 재정의해 버린 것입니다.</p>
+<h3 id="31-추론이란-곧-산술의-가감-연산이다"><a href="#31-추론이란-곧-산술의-가감-연산이다" class="heading-anchor" aria-hidden="true">#</a> 3.1 추론이란 곧 산술의 가감(加減) 연산이다</h3><p>1655년 출간된 홉스의 저작 《철학의 원리: 제1권 물체에 관하여(Elementorum Philosophiae sectio prima de Corpore)》 제1부는 &#39;계산 혹은 논리학(computation or logic)&#39;이라는 부제가 붙어 있습니다. 홉스는 이 책의 첫머리에서 철학(학문, <em>scientia</em>)을 감각 지각이 아니라 <strong>&#39;참된 이성적 추론(ratiocination)을 통해 얻은 원인과 결과의 지식&#39;</strong>으로 정의하며 다음과 같이 선언합니다.</p>
+<blockquote>
+<p><em>&quot;추론이란 곧 산수의 계산과 같이, 더하고 빼는 정신의 작용이다.&quot;</em><br>(<em>Ratiocination is computation</em>)<br>— 홉스, 《물체론(De Corpore)》 I, 1, 2; 《리바이어던(Leviathan)》 1부 5장</p>
+</blockquote>
+<p>곱셈은 덧셈의 반복일 뿐이고 나눗셈은 뺄셈의 반복일 뿐입니다. 홉스는 인간이 수(Number)의 계산에서 발휘하는 계산 능력이 인간의 모든 사고 영역에 동일하게 적용된다고 보았습니다.</p>
+<ul>
+<li><strong>관념의 덧셈(+)</strong>: 멀리서 어떤 형체가 다가올 때, 우리는 먼저 &#39;물체(body)&#39;라는 관념을 지각하고, 그것이 스스로 움직이는 것을 보며 &#39;생명(animated)&#39;이라는 관념을 더하고, 대화를 나누며 &#39;이성적(rational)&#39;이라는 관념을 덧셈합니다. 그 결과 <strong>&#39;사람(human) = 물체 + 생명 + 이성&#39;</strong>이라는 복합 개념이 합성됩니다.</li>
+<li><strong>관념의 뺄셈(-)</strong>: 반대로 &#39;사람&#39;이라는 관념에서 &#39;이성&#39;이라는 속성을 빼버리면 결과값으로 <strong>&#39;동물(animal) = 사람 - 이성&#39;</strong>이 남게 됩니다.</li>
+</ul>
+<p>이것은 파도바 학파의 자코모 자바렐라(J. Zabarella)와 갈릴레오 갈릴레이가 확립했던 자연과학의 방법론, 즉 <strong>분석(분해, resolution)과 종합(합성, composition)</strong>을 인간의 사유 작용 일반으로 확장한 것입니다. 인간의 뇌를 일종의 계산기로 파악한 이 대전제는 훗날 인지과학의 계산주의 마음 이론(Computational Theory of Mind)과 인공지능의 거대한 초석이 됩니다.</p>
+<h3 id="32-39무언의-추론silent-reasoning39이라는-치명적-모순"><a href="#32-39무언의-추론silent-reasoning39이라는-치명적-모순" class="heading-anchor" aria-hidden="true">#</a> 3.2 &#39;무언의 추론(Silent Reasoning)&#39;이라는 치명적 모순</h3><p>그러나 홉스의 이 찬란한 혁명은 자신의 텍스트 내부에서 대단히 치명적인 자기모순에 부딪힙니다.</p>
+<ol>
+<li><strong>전제 A (기호 필수론)</strong>: 인간 정신은 망각에 취약하므로, 학문적 추론을 전개하려면 감각 가능한 언어적 기호(표지와 신호)가 필수적이다 (<em>De Corpore</em> I, 2, 2).</li>
+<li><strong>전제 B (무언의 추론 선언)</strong>: 그러나 정작 가장 심오하고 참된 진리를 탐구하는 내적 추론은 일체의 단어나 기호를 개입시키지 않고 머릿속 관념만으로 이루어지는 <strong>&#39;무언의 추론(Silent Reasoning / Cogitatio Tacita)&#39;</strong>이며, 이것이 언어의 왜곡을 피하는 가장 순수한 사유다 (<em>De Corpore</em> I, 1, 3).</li>
+</ol>
+<blockquote>
+<p><em>&quot;이 예들을 통해서 단어들 없는 마음의 내적 추론(internal ratiocination of the mind without words)이 무엇인지 충분히 명백해졌다고 본다. 따라서 우리는 계산, 즉 추론이 오직 수에서만 일어난다고 생각해서는 안 된다.&quot;</em><br>— 홉스, 《물체론(De Corpore)》 I, 1, 3 (EW I, p. 5)</p>
+</blockquote>
+<p>이 두 주장은 명백히 정면충돌합니다. 방금 전에는 뇌의 기억력이 나빠서 기호라는 포스트잇이 없으면 사유가 흩어진다고 해놓고, 최고 수준의 추론에 도달할 때는 기호를 싹 치우고 머릿속으로 순수 암산을 해야 한다니 앞뒤가 맞지 않는 것입니다.</p>
+<p>현대 언어철학자 <strong>마르셀로 다스칼(Marcelo Dascal)</strong>은 바로 이 지점을 집요하게 비판했습니다. 다스칼에 따르면, 홉스에게 기호는 밥을 떠먹을 때 쓰는 &#39;숟가락&#39;에 불과했습니다. 관념이라는 음식을 입에 넣기 좋게 도와주는 외재적 보조 도구일 뿐, 진짜 소화라는 복잡한 화학 작용(추론)은 온전히 내 위장(정신)이 기호 없이 해내야 한다고 본 것입니다. 홉스는 <strong>&quot;기호 없이는 고도의 추론 작용 자체가 아예 불가능하다&quot;</strong>는 통찰로까지는 나아가지 못했습니다.</p>
+<h3 id="33-닐kneale-대-다스칼dascal-논쟁과-이상명-교수의-재평가"><a href="#33-닐kneale-대-다스칼dascal-논쟁과-이상명-교수의-재평가" class="heading-anchor" aria-hidden="true">#</a> 3.3 닐(Kneale) 대 다스칼(Dascal) 논쟁과 이상명 교수의 재평가</h3><p>이 모순을 둘러싸고 논리학사가 윌리엄 닐(William Kneale)과 다스칼 사이에 치열한 해석 논쟁이 벌어졌습니다. 다스칼은 닐이 &quot;홉스에게 사고는 단지 기호들의 조작에 불과하다&quot;고 잘못 해석했다고 공격했습니다.</p>
+<p>그러나 이상명 교수는 닐의 원전을 면밀히 재검토하여 다스칼의 비판이 오독에 기반하고 있음을 밝혀냅니다. 닐은 홉스 자신이 기호 조작으로서의 추론을 완성했다고 쓴 것이 아니라, 홉스의 &#39;계산 혹은 논리학&#39;이라는 제목이 <strong>&quot;추론을 계산으로 환원할 수 있음을 강력하게 &#39;시사(suggest)&#39;했고, 그 시사를 라이프니츠가 채택했다&quot;</strong>고 평가했을 뿐이라는 점입니다 (<em>Kneale 1985, p. 547</em>). 닐과 다스칼 모두 <strong>&quot;홉스 철학에서 기호는 아직 사고 자체를 구성하는 본질적 구성요소로 격상되지 못했다&quot;</strong>는 결론을 공유하고 있습니다.</p>
+<p>이상명 교수는 텍스트의 맥락을 종합하여 홉스를 다음과 같이 복원합니다.</p>
+<ul>
+<li>《물체론》 1부 1장의 &#39;무언의 추론&#39;은 홉스의 완결된 정설이라기보다, &quot;계산이 수치 연산에만 국한되지 않는다&quot;는 점을 일상적 지각 사례로 증명하려다 튀어나온 과도기적 논증입니다.</li>
+<li>이미 《리바이어던》(1부 5장)에서 홉스는 *&quot;추론은 일반 명사(단어)로부터 결과를 도출하는 계산&quot;*이라 명시하여 언어적 기호의 개입을 인정했습니다.</li>
+<li>그럼에도 불구하고 홉스의 진짜 한계는 분명합니다. 홉스는 기호를 오직 &#39;자연언어(단어/이름)&#39;에 한정했고, 수학 기호의 기능을 단순한 &#39;분석의 축약(abbreviation)&#39;으로만 보았으며, <strong>관념(의미)이 결여된 순수한 기호 조작만으로 진리에 도달할 수 있다는 형식주의적 확신을 갖지 못했습니다.</strong></li>
+</ul>
+<p>당장 세 자리 수 곱셈 $387 \times 649$만 머릿속으로 해보려 해도 인간의 뇌는 금세 길을 잃고 멈춰버립니다. 종이와 펜이라는 물리적 기호가 계산 과정에 직접 개입하지 않으면, 인간의 유한한 지성은 복잡성의 장벽 앞에서 마비되고 맙니다. 홉스의 위대한 혁명은 바로 이 지점에서 미완의 과제로 멈춰 섰습니다.</p>
+<hr>
+<h2 id="4-라이프니츠의-도약-천각형의-역설과-맹목적-사고cogitatio-caeca"><a href="#4-라이프니츠의-도약-천각형의-역설과-맹목적-사고cogitatio-caeca" class="heading-anchor" aria-hidden="true">#</a> 4. 라이프니츠의 도약 — 천각형의 역설과 맹목적 사고(Cogitatio Caeca)</h2><p>역사에는 앞선 세대가 남긴 공백과 모순을 날카롭게 파고들어 사상의 지평을 통째로 전복하는 천재가 나타납니다. 홉스가 남긴 미완의 퍼즐을 집어 든 인물이 바로 독일의 철학자이자 미적분학의 창시자, <strong>고트프리트 빌헬름 라이프니츠</strong>였습니다.</p>
+<p>라이프니츠는 청년기부터 홉스의 기호론에 깊은 감명을 받았으며, 표지(nota)와 신호(signum)의 구별을 자신의 라틴어 저작에 그대로 수용했습니다 (<em>A VI, 1, p. 278</em>). 그러나 라이프니츠는 홉스가 머물렀던 &#39;보조 도구관&#39;을 단호히 거부합니다.</p>
+<blockquote>
+<p><em>&quot;인간의 모든 추론은 어떤 부호나 기호를 통해서 완성된다. […] 모든 추론은 기호의 사용으로 구성된다.&quot;</em><br>(<em>Omnis humana ratiocinatio signis quibusdam sive characteribus perficitur. […] ratiocinatio omnis in usu characterum consistit</em>)<br>— 라이프니츠, 《추론 계산의 기초(Fundamenta calculi ratiocinatoris)》 (A VI, 4, pp. 918-919)</p>
+</blockquote>
+<p>라이프니츠에게 기호는 밥을 퍼먹는 숟가락이 아니라, <strong>인간의 사고 작용을 물리적으로 구성하는 엔진 그 자체</strong>였습니다. 그는 어떻게 이 엄청난 인식론적 도약에 도달했을까요?</p>
+<h3 id="41-인간-지성의-유한성과-신적-직관intuitio의-불가능성"><a href="#41-인간-지성의-유한성과-신적-직관intuitio의-불가능성" class="heading-anchor" aria-hidden="true">#</a> 4.1 인간 지성의 유한성과 신적 직관(Intuitio)의 불가능성</h3><p>라이프니츠는 1684년 발표한 기념비적 논문 《인식, 진리 그리고 관념에 대한 성찰(Meditationes de cognitione, veritate et ideis)》에서 인간 인지의 단계를 정밀하게 해부합니다.</p>
+<ul>
+<li><strong>단순 근원 개념 (Notio primitiva)</strong>: 더 이상 쪼갤 수 없는 개념의 궁극적 원자.</li>
+<li><strong>복합 개념 (Notio composita)</strong>: 여러 단순 개념이 결합된 개념.</li>
+<li><strong>충분한 인식 (Adaequata)</strong>: 복합 개념을 구성하는 모든 요소를 단순 근원 개념에 도달할 때까지 완전히 분해하여 명료하게 아는 상태.</li>
+<li><strong>직관적 인식 (Cognitio Intuitiva)</strong>: 복합 개념을 이루는 모든 요소들을 찰나에 <strong>&#39;단번에 동시에(simul)&#39;</strong> 꿰뚫어 보는 인식.</li>
+</ul>
+<p>라이프니츠는 냉정하게 선언합니다. <strong>&quot;완전한 직관적 인식은 오직 전지전능한 신(God)에게만 가능하다!&quot;</strong> 인간의 유한한 정신은 복잡한 대상을 구성하는 수많은 속성을 머릿속에 동시에 시각화하거나 직관할 수 없습니다. 인간의 인식은 필연적으로 불완전하고 불충분한(inadaequata) 상태에 머뭅니다.</p>
+<h3 id="42-데카르트의-39천각형chiliagon39을-전복하다"><a href="#42-데카르트의-39천각형chiliagon39을-전복하다" class="heading-anchor" aria-hidden="true">#</a> 4.2 데카르트의 &#39;천각형(Chiliagon)&#39;을 전복하다</h3><p>라이프니츠는 이 한계를 증명하기 위해 르네 데카르트가 《성찰》에서 제시했던 기하학적 사고실험, 즉 <strong>&#39;천각형(Chiliagon, 변이 1,000개인 다각형)&#39;</strong>을 소환하여 급진적으로 재해석합니다.</p>
+<p>머릿속으로 &#39;삼각형&#39;이나 &#39;정사각형&#39;을 떠올려 보십시오. 우리는 세 개 또는 네 개의 꼭짓점과 선분을 선명하게 시각화(직관)할 수 있습니다. </p>
+<p>그렇다면 이번에는 <strong>변이 정확히 1,000개인 &#39;천각형&#39;</strong>을 머릿속에 떠올려 보십시오. 직관할 수 있습니까?</p>
+<p>아무리 집중력이 뛰어난 사람이라도 머릿속에 떠오르는 이미지는 그저 훌라후프처럼 매끄러운 원(Circle)에 불과합니다. 눈을 감고 내 머릿속에 뜬 도형의 변이 999개인지, 1,000개인지, 1,001개인지 시각적 이미지로 구별해 낼 수 있는 인간은 단 한 명도 없습니다. 즉, <strong>천각형에 대한 인간의 심상(imago)은 사실상 텅 비어 있는 공백 상태</strong>입니다. 데카르트는 이를 상상력의 한계일 뿐 순수 지성으로는 파악된다고 보았습니다.</p>
+<p>그러나 라이프니츠는 데카르트를 정면으로 반박합니다.</p>
+<blockquote>
+<p><strong>&quot;인간의 순수 지성 역시, 기호 없이는 천각형을 결코 사유할 수 없다!&quot;</strong></p>
+</blockquote>
+<p>우리는 천각형의 실제 모습을 1%도 직관하지 못합니다. 그런데 놀랍게도, 우리는 천각형의 구체적 이미지를 전혀 그리지 못하면서도 <strong>&#39;천각형&#39;이라는 단어, 숫자 <code>1,000</code>이라는 기호(character)</strong>를 비어 있는 관념의 자리에 집어넣는 순간, 고도의 엄밀한 수학적 추론을 완벽하게 수행해 냅니다.</p>
+<p>$\text{다각형 내각의 총합 공식} = 180^\circ \times (n - 2)$</p>
+<p>우리는 천각형의 변을 머릿속으로 세어보지 않고도, 위 공식의 변수 $n$ 자리에 기호 <code>1,000</code>을 대입하여 $180^\circ \times 998 = 179,640^\circ$라는 정확한 내각의 총합을 오차 없이 계산해 냅니다. <strong>내용을 직관하지 못해도, 비어 있는 자리에 기호를 대신 채워 넣고 규칙에 따라 조작하면 완벽한 진리에 도달하는 것입니다!</strong></p>
+<div class="table-wrapper" style="margin:2rem 0; overflow-x:auto;">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 310" role="img" aria-label="라이프니츠의 천각형 역설과 맹목적 사고 메커니즘" style="width:100%; height:auto; max-width:840px; display:block; margin:0 auto; background:var(--bg-card); border-radius:14px; border:1px solid var(--border);">
+  <defs>
+    <style>
+      .ch-title { font-family: Pretendard, sans-serif; font-weight: 800; font-size: 15px; fill: var(--text-main); }
+      .ch-sub { font-family: Pretendard, sans-serif; font-size: 12px; fill: var(--text-muted); }
+      .ch-box { fill: var(--bg-surface); stroke: var(--border); stroke-width: 1.2; rx: 8px; }
+      .ch-h { font-family: Pretendard, sans-serif; font-weight: 700; font-size: 13.5px; text-anchor: middle; }
+      .ch-desc { font-family: Pretendard, sans-serif; font-size: 11.5px; fill: var(--text-muted); }
+      .ch-bold { font-family: Pretendard, sans-serif; font-weight: 700; font-size: 12px; fill: var(--text-main); }
+    </style>
+    <marker id="ch-arr" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#10b981"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="840" height="310" rx="14" fill="var(--bg-card)"/>
+  <text x="420" y="28" text-anchor="middle" class="ch-title">라이프니츠의 '천각형(Chiliagon) 역설'과 맹목적 사고(Cogitatio Caeca)</text>
+  <text x="420" y="46" text-anchor="middle" class="ch-sub">인간 지성의 직관적 결함을 기호 대입과 형식 조작으로 극복하는 인식론적 메커니즘</text>
+
+  <!-- Step 1: Intuition Failure -->
+  <g transform="translate(25, 65)">
+    <rect x="0" y="0" width="240" height="225" class="ch-box" stroke="#ef4444" stroke-opacity="0.45"/>
+    <rect x="12" y="12" width="216" height="28" rx="6" fill="#ef4444" fill-opacity="0.14"/>
+    <text x="120" y="31" class="ch-h" fill="#ef4444">1. 직관의 붕괴 (공백)</text>
+    <text x="16" y="62" class="ch-bold">천각형 머릿속 상상 시도</text>
+    <text x="16" y="82" class="ch-desc">• 변 1,000개 시각화 불가</text>
+    <text x="16" y="100" class="ch-desc">• 원(Circle)과 심상 구별 실패</text>
+    <text x="16" y="118" class="ch-desc">• 999각형과의 차이 식별 불가</text>
+    <rect x="12" y="138" width="216" height="42" rx="5" fill="var(--bg-card)" stroke="#ef4444" stroke-opacity="0.3"/>
+    <text x="120" y="156" text-anchor="middle" font-family="Pretendard, sans-serif" font-size="11px" font-weight="700" fill="#ef4444">내용적 심상(Imago)의 부재</text>
+    <text x="120" y="172" text-anchor="middle" font-family="Pretendard, sans-serif" font-size="10.5px" fill="var(--text-muted)">관념의 자리가 텅 비어 있음</text>
+    <text x="120" y="205" text-anchor="middle" font-family="Pretendard, sans-serif" font-size="11.5px" font-weight="700" fill="var(--text-main)">인간 인지의 한계 노출</text>
+  </g>
+
+  <!-- Arrow 1 -> 2 -->
+  <line x1="272" y1="178" x2="298" y2="178" stroke="#10b981" stroke-width="2.2" marker-end="url(#ch-arr)"/>
+
+  <!-- Step 2: Symbolic Substitution -->
+  <g transform="translate(305, 65)">
+    <rect x="0" y="0" width="240" height="225" class="ch-box" stroke="#f59e0b" stroke-opacity="0.45"/>
+    <rect x="12" y="12" width="216" height="28" rx="6" fill="#f59e0b" fill-opacity="0.14"/>
+    <text x="120" y="31" class="ch-h" fill="#f59e0b">2. 기호적 대입 (치환)</text>
+    <text x="16" y="62" class="ch-bold">비어 있는 자리에 기호 대입</text>
+    <text x="16" y="82" class="ch-desc">• 문자 기호: "천각형"</text>
+    <text x="16" y="100" class="ch-desc">• 수학 기호: 변수 n = 1,000</text>
+    <text x="16" y="118" class="ch-desc">• 조작 규칙: 180° × (n - 2)</text>
+    <rect x="12" y="138" width="216" height="42" rx="5" fill="var(--bg-card)" stroke="#f59e0b" stroke-opacity="0.3"/>
+    <text x="120" y="156" text-anchor="middle" font-family="Pretendard, sans-serif" font-size="11px" font-weight="700" fill="#f59e0b">맹목적 사고 (Cogitatio Caeca)</text>
+    <text x="120" y="172" text-anchor="middle" font-family="Pretendard, sans-serif" font-size="10.5px" fill="var(--text-muted)">눈을 감고 기호 규칙만 추종</text>
+    <text x="120" y="205" text-anchor="middle" font-family="Pretendard, sans-serif" font-size="11.5px" font-weight="700" fill="var(--text-main)">사유의 엔진 가동</text>
+  </g>
+
+  <!-- Arrow 2 -> 3 -->
+  <line x1="552" y1="178" x2="578" y2="178" stroke="#10b981" stroke-width="2.2" marker-end="url(#ch-arr)"/>
+
+  <!-- Step 3: Formal Rigor -->
+  <g transform="translate(585, 65)">
+    <rect x="0" y="0" width="230" height="225" class="ch-box" stroke="#10b981" stroke-opacity="0.5"/>
+    <rect x="12" y="12" width="206" height="28" rx="6" fill="#10b981" fill-opacity="0.14"/>
+    <text x="115" y="31" class="ch-h" fill="#10b981">3. 진리의 정당성 획득</text>
+    <text x="16" y="62" class="ch-bold">형식적 연산의 완벽성</text>
+    <text x="16" y="82" class="ch-desc">• 180° × (1,000 - 2) 대입</text>
+    <text x="16" y="100" class="ch-desc">• 180° × 998 = 179,640°</text>
+    <text x="16" y="118" class="ch-desc">• 한 치의 오차 없는 참 도출</text>
+    <rect x="12" y="138" width="206" height="42" rx="5" fill="var(--bg-card)" stroke="#10b981" stroke-opacity="0.3"/>
+    <text x="115" y="156" text-anchor="middle" font-family="Pretendard, sans-serif" font-size="11px" font-weight="700" fill="#10b981">기호적 인식의 승리</text>
+    <text x="115" y="172" text-anchor="middle" font-family="Pretendard, sans-serif" font-size="10.5px" fill="var(--text-muted)">직관 없이 증명된 지식</text>
+    <text x="115" y="205" text-anchor="middle" font-family="Pretendard, sans-serif" font-size="11.5px" font-weight="700" fill="var(--text-main)">현대 컴퓨터 연산의 원형</text>
+  </g>
+</svg>
+</div>
+
+<h3 id="43-맹목적-사고cogitatio-caeca와-관념-개념의-혁명"><a href="#43-맹목적-사고cogitatio-caeca와-관념-개념의-혁명" class="heading-anchor" aria-hidden="true">#</a> 4.3 맹목적 사고(Cogitatio Caeca)와 관념 개념의 혁명</h3><p>라이프니츠는 대상의 구체적인 심상을 떠올리지 못한 채, 오직 기호 체계의 형식적 규칙에 의존하여 진행되는 사유를 <strong>&#39;맹목적 사고(盲目的 思考, Cogitatio Caeca)&#39;</strong> 혹은 <strong>&#39;기호적 사고(Cogitatio Symbolica)&#39;</strong>라고 불렀습니다 (<em>Meditationes</em>, A VI, 4, pp. 587-588).</p>
+<p>라틴어 형용사 <em>caecus</em>는 글자 그대로 &#39;눈먼(blind)&#39;을 뜻합니다. 이상명 교수는 이를 단순히 눈이 멀었다는 부정적 의미가 아니라, <strong>&#39;명목적(nominal)&#39; 사고</strong>로 해석합니다. 사물의 실질적인 내용물(직관)은 눈에 보이지 않게 비워둔 채, 오직 이름과 기호만으로 전개되는 사고라는 뜻입니다.</p>
+<p>내용이 비워져 있다는 것은 결함이 아니라 엄청난 축복입니다. 대수학에서 모르는 숫자를 일단 $x$나 $y$라는 변수로 두고 방정식을 풀듯, 기호의 내용물이 특정 이미지로 고정되어 있지 않기 때문에 인간은 무한히 복잡한 대상이나 심지어 존재하지 않는 가상의 대상까지도 기호로 묶어 연산의 장 안으로 끌고 들어올 수 있습니다.</p>
+<p>라이프니츠는 단편 논문 《관념이란 무엇인가(Quid sit idea, 1678)》에서 서양 철학사의 &#39;관념(Idea)&#39; 개념을 뿌리부터 뒤흔듭니다.</p>
+<ul>
+<li>전통 철학자들(데카르트 등)은 관념을 현재 의식에 떠오른 &#39;심적 작용(act)&#39;이나 대상의 모사체로 보았습니다.</li>
+<li>그러나 라이프니츠에게 관념은 그런 실시간 이미지가 아니라 <strong>&#39;사유할 수 있는 능력(facultas / proximate ability)&#39;</strong>입니다 (<em>A VI, 4, p. 1370</em>).</li>
+<li>따라서 우리가 지금 당장 어떤 사물의 이미지를 떠올리지 못한다고 해서 관념이 없는 것이 아니며, <strong>인간은 &quot;관념을 동반하지 않는 기호에 의한 사고&quot;를 완벽하게 수행할 수 있습니다.</strong></li>
+</ul>
+<blockquote>
+<p><em>&quot;표현하는 기호의 상태를 고찰하는 것만으로 우리는 표현되는 사물에 상응하는 성질들의 인식에 이를 수 있다.&quot;</em><br>— 라이프니츠, 《관념이란 무엇인가(Quid sit idea)》 (A VI, 4, p. 1370)</p>
+</blockquote>
+<p>진리(Truth)의 기준이 완전히 바뀌었습니다. 진리는 머릿속 관념과 외부 사물이 신비롭게 일치하는 데 있는 것이 아닙니다. <strong>정해진 규칙에 따라 기호를 무모순하게 조작했는가, 즉 &#39;추론의 형식적 적법성(Formal Validity)&#39;이 갖추어졌는가</strong>가 진리를 보증합니다 (<em>Krämer 1992, p. 235</em>). 기호는 인간 지성이 오류의 수렁에 빠지지 않도록 인도하는 <strong>&#39;아리아드네의 기계적 실(filo quodam mechanico)&#39;</strong>이 된 것입니다 (<em>Analysis Linguarum</em>, A VI, 4, p. 102).</p>
+<hr>
+<h2 id="5-0과-1의-세계-보편기호법에서-튜링-섀넌-그리고-반도체-육화까지"><a href="#5-0과-1의-세계-보편기호법에서-튜링-섀넌-그리고-반도체-육화까지" class="heading-anchor" aria-hidden="true">#</a> 5. 0과 1의 세계 — 보편기호법에서 튜링, 섀넌, 그리고 반도체 육화까지</h2><p>라이프니츠가 확립한 &#39;맹목적 기호 사고&#39;는 책장 속의 형이상학에 머물지 않았습니다. 그는 인간의 모든 이성적 추론을 기계화하기 위한 구체적인 기술적 청사진을 세웠습니다.</p>
+<h3 id="51-두-개의-기둥-보편-기호법과-사유의-계산"><a href="#51-두-개의-기둥-보편-기호법과-사유의-계산" class="heading-anchor" aria-hidden="true">#</a> 5.1 두 개의 기둥: 보편 기호법과 사유의 계산</h3><p>라이프니츠는 모든 학문적 논쟁과 철학적 오류를 종식시키기 위해 두 가지 핵심 시스템을 설계했습니다.</p>
+<ol>
+<li><strong>보편 기호법 (Characteristica Universalis)</strong>:<ul>
+<li>모든 인간 개념을 더 이상 쪼갤 수 없는 &#39;원초적 기본 관념(Alphabet of Human Thought)&#39;으로 분해하고, 여기에 모호함이 없는 명확한 기호를 부여하는 체계입니다.</li>
+<li>현대 컴퓨터 과학의 용어로 치면 <strong>&#39;데이터 표상 체계(Data Representation System)&#39;</strong>입니다.</li>
+</ul>
+</li>
+<li><strong>사유의 계산 (Calculus Ratiocinator)</strong>:<ul>
+<li>보편 기호들을 결합하고 조작하여 새로운 진리를 도출하는 엄밀한 수학적 연산 규칙입니다.</li>
+<li>현대 컴퓨터 과학의 <strong>&#39;형식 추론 알고리즘 엔진(Inference Engine)&#39;</strong>입니다.</li>
+</ul>
+</li>
+</ol>
+<p>라이프니츠는 신학자나 철학자들이 형이상학적 문제로 격렬하게 다툴 때, 쓸데없이 감정싸움을 하지 말고 테이블에 마주 앉아 펜을 들고 이렇게 외치자고 제안했습니다.</p>
+<blockquote>
+<p><strong>&quot;자, 계산해 봅시다!(Calculemus!)&quot;</strong></p>
+</blockquote>
+<h3 id="52-이진법binary-system과-사칙연산-계산기"><a href="#52-이진법binary-system과-사칙연산-계산기" class="heading-anchor" aria-hidden="true">#</a> 5.2 이진법(Binary System)과 사칙연산 계산기</h3><p>사유를 계산으로 바꾸기 위해 라이프니츠는 세상을 표현할 수 있는 가장 단순하고 순수한 기호 체계를 고안했습니다. 바로 <strong>0과 1만으로 모든 수와 논리를 나타내는 &#39;이진법(Binary System)&#39;</strong>입니다. 라이프니츠는 1을 무(無)에서 만물을 창조한 &#39;신(God)&#39;으로, 0을 &#39;허무(Nothingness)&#39;로 보았습니다.</p>
+<p>그는 이론에 그치지 않고 사칙연산(덧셈, 뺄셈, 곱셈, 나눗셈)을 자동으로 수행할 수 있는 기계식 톱니바퀴 계산기인 <strong>&#39;단차 계산기(Stepped Reckoner / Staffelwalze)&#39;</strong>를 세계 최초로 직접 설계하고 제작했습니다. 현대 CPU의 물리적 조상이 탄생한 순간이었습니다.</p>
+<h3 id="53-불-대수-튜링-기계-섀넌의-논리-게이트"><a href="#53-불-대수-튜링-기계-섀넌의-논리-게이트" class="heading-anchor" aria-hidden="true">#</a> 5.3 불 대수, 튜링 기계, 섀넌의 논리 게이트</h3><p>라이프니츠가 뿌린 씨앗은 이후 300년간 거인들의 손을 거치며 실리콘 하드웨어로 진화해 갔습니다.</p>
+<ol>
+<li><strong>조지 불 (George Boole, 1854)</strong>:<ul>
+<li>수학자 조지 불은 《사유의 법칙(The Laws of Thought)》을 통해 인간의 명제 논리를 대수학 방정식으로 변환했습니다. 참(True)을 1로, 거짓(False)을 0으로 정의하고 논리적 AND, OR, NOT 연산을 수식으로 풀어내는 <strong>&#39;불 대수(Boolean Algebra)&#39;</strong>를 완성했습니다.</li>
+</ul>
+</li>
+<li><strong>앨런 튜링 (Alan Turing, 1936)</strong>:<ul>
+<li>앨런 튜링은 &quot;인간이 계산할 때 실제로 무엇을 하는가?&quot;를 근본적으로 해체했습니다. 무한한 종이테이프 위에 적힌 기호를 읽고, 헤드를 움직이며, 내부 상태를 바꾸는 가상의 기계, 즉 <strong>&#39;보편 튜링 기계(Universal Turing Machine)&#39;</strong>를 고안했습니다.</li>
+<li>튜링의 천재성은 테이프에 적힌 &#39;기호적 지시문(프로그램)&#39;만 바꾸면 단 하나의 물리적 기계가 계산기도 되고, 체스 기계도 되고, 문서 작성기도 될 수 있음을 증명한 데 있었습니다. <strong>컴퓨터 역사상 최초로 소프트웨어와 하드웨어의 존재론적 분리</strong>가 완성되었습니다.</li>
+</ul>
+</li>
+<li><strong>클로드 섀넌 (Claude Shannon, 1937)</strong>:<ul>
+<li>MIT의 석사 과정이던 클로드 섀넌은 불 대수의 참/거짓 논리가 전화 교환 릴레이의 스위치가 켜지고(ON) 꺼지는(OFF) 전기적 물리 현상과 1:1로 완벽히 대응함을 증명했습니다.</li>
+<li>전기가 흐르면 1, 흐르지 않으면 0. 스위치를 직렬로 연결하면 AND 게이트, 병렬로 연결하면 OR 게이트, 역전시키면 NOT 게이트가 됩니다.</li>
+</ul>
+</li>
+</ol>
+<p>컴퓨터 반도체 칩 안에는 의미를 아는 영혼이 들어있지 않습니다. 컴퓨터는 화면에 뜬 사진이 귀여운 강아지인지, 슬픈 영화인지 1%도 이해하지 못합니다. </p>
+<p>기계는 내용의 의미에 대해 철저하게 장님(Blind)입니다. 그저 정해진 클록 신호에 따라 초당 수십억 번씩 0과 1의 전기적 스위칭 상태를 변환하고 있을 뿐입니다. <strong>내용은 텅 비워둔 채 오직 형식적 기호 조작 규칙만으로 완벽한 연산을 수행하는 라이프니츠의 &#39;맹목적 사고&#39;가 실리콘 반도체라는 기계의 육체를 입고 현현한 것이 바로 현대의 컴퓨터인 것입니다.</strong></p>
+<hr>
+<h2 id="6-20세기-ai의-분열과-현대-거대언어모델llm의-대역설"><a href="#6-20세기-ai의-분열과-현대-거대언어모델llm의-대역설" class="heading-anchor" aria-hidden="true">#</a> 6. 20세기 AI의 분열과 현대 거대언어모델(LLM)의 대역설</h2><p>컴퓨터가 발명된 후, 인류는 이 기계에 인간의 &#39;지능(Intelligence)&#39;을 불어넣으려 시도했습니다. 이 과정에서 인공지능 연구는 거대한 두 학파로 갈라져 반세기 동안 치열한 전쟁을 치렀습니다.</p>
+<h3 id="61-기호주의symbolic-ai의-좌절"><a href="#61-기호주의symbolic-ai의-좌절" class="heading-anchor" aria-hidden="true">#</a> 6.1 기호주의(Symbolic AI)의 좌절</h3><p>라이프니츠의 직계 후예를 자처한 진영은 <strong>&#39;기호주의 AI (Symbolic AI / GOFAI)&#39;</strong>였습니다. 뉴얼과 사이먼의 &#39;물리적 기호 시스템 가설&#39;처럼, 인간의 모든 지식과 상식을 if-then 같은 명시적 기호와 논리 규칙으로 코딩해 주면 인공지능이 완성될 것이라 믿었습니다.</p>
+<p>그러나 기호주의는 1980년대에 처참하게 무너졌습니다.</p>
+<ul>
+<li><strong>프레임 문제 (Frame Problem)</strong>: 행동을 취할 때 현실 세계에서 &quot;변화하지 않는 수억 가지 조건&quot;을 계산하느라 시스템이 멈춰버립니다.</li>
+<li><strong>기호 착지 문제 (Symbol Grounding Problem)</strong>: 기호 시스템 내부의 기호들은 오직 다른 기호들만을 지시할 뿐(사전의 무한 순환), 물리적 신체 경험이나 현실 세계의 감각과 연결(Grounding)되지 않았습니다.</li>
+</ul>
+<h3 id="62-연결주의connectionism의-부상과-트랜스포머-혁명"><a href="#62-연결주의connectionism의-부상과-트랜스포머-혁명" class="heading-anchor" aria-hidden="true">#</a> 6.2 연결주의(Connectionism)의 부상과 트랜스포머 혁명</h3><p>반면 뇌의 생물학적 신경망을 모방한 <strong>&#39;연결주의 AI (Connectionism)&#39;</strong>는 규칙을 직접 가르치는 대신, 수많은 인공 뉴런의 연결 강도(가중치)를 대규모 데이터를 통해 스스로 학습하게 만들었습니다. </p>
+<p>2010년대 딥러닝 혁명과 2017년 구글의 트랜스포머(Transformer) 아키텍처는 이 연결주의의 눈부신 승리를 이끌었습니다. 인간이 문법 규칙을 단 한 줄도 코딩해 주지 않아도, 챗GPT 같은 모델은 수천억 개의 매개변수를 통해 텍스트의 장거리 맥락과 통계적 상관관계를 완벽하게 학습하여 인간 전문가 수준의 글을 쏟아내기 시작했습니다.</p>
+<h3 id="63-거대한-역설-llm은-라이프니츠의-승리인가"><a href="#63-거대한-역설-llm은-라이프니츠의-승리인가" class="heading-anchor" aria-hidden="true">#</a> 6.3 거대한 역설: LLM은 라이프니츠의 승리인가?</h3><p>그렇다면 지금의 거대언어모델(LLM)은 라이프니츠의 기호주의와는 완전히 무관한 길을 걷고 있는 것일까요? </p>
+<p>사상사적 시각으로 깊이 파고들면, 우리는 소름 돋는 <strong>&#39;거대한 역설(Grand Paradox)&#39;</strong>을 목도하게 됩니다. 최신 LLM의 작동 메커니즘을 보십시오.</p>
+<ol>
+<li>인간이 입력한 이산적(discrete) 기호(단어/토큰)를 수천 차원의 고차원 연속 벡터 공간(Continuous Vector Space)의 좌표로 변환합니다.</li>
+<li>초당 수십조 번의 맹목적인 행렬 곱셈 연산(Attention 메커니즘)을 통과시킵니다.</li>
+<li>통계적으로 다음에 올 확률이 가장 높은 기호(토큰)를 선택하여 출력합니다.</li>
+</ol>
+<p>LLM 내부에는 인간이 느끼는 고통, 사랑, 진리의 의미가 존재하지 않습니다. 모델 내부에는 오직 고차원 기하학적 거리와 통계적 확률 분포만이 존재합니다.</p>
+<p>기계 자신은 의미를 완전히 결여한 채 맹목적으로 숫자와 기호를 조작하고 있는데, 출력되는 결과물은 인간이 보기에 경이로울 정도로 지적이고 유창합니다. 이것은 무엇입니까? <strong>&quot;구체적 내용의 직관 없이도 형식적 기호 조작 규칙만으로 지적 결과물에 도달할 수 있다&quot;는 라이프니츠의 &#39;맹목적 사고(Cogitatio Caeca)&#39;가, 현대의 거대한 통계적 인공신경망이라는 육체를 입고 가장 극단적이고 완전한 형태로 실현된 것입니다!</strong></p>
+<div class="table-wrapper" style="margin:2rem 0; overflow-x:auto;">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 330" role="img" aria-label="기호에서 AI까지 400년 계산 사상사 계보도" style="width:100%; height:auto; max-width:840px; display:block; margin:0 auto; background:var(--bg-card); border-radius:14px; border:1px solid var(--border);">
+  <defs>
+    <style>
+      .tree-title { font-family: Pretendard, sans-serif; font-weight: 800; font-size: 15px; fill: var(--text-main); }
+      .tree-sub { font-family: Pretendard, sans-serif; font-size: 12px; fill: var(--text-muted); }
+      .tree-card { fill: var(--bg-surface); stroke: var(--border); stroke-width: 1.2; rx: 8px; }
+      .tree-h { font-family: Pretendard, sans-serif; font-weight: 700; font-size: 13px; }
+      .tree-desc { font-family: Pretendard, sans-serif; font-size: 11px; fill: var(--text-muted); }
+      .tree-badge { font-family: Pretendard, sans-serif; font-size: 10px; font-weight: 700; fill: #3b82f6; }
+    </style>
+    <marker id="tree-arr" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#3b82f6"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="840" height="330" rx="14" fill="var(--bg-card)"/>
+  <text x="420" y="28" text-anchor="middle" class="tree-title">사유의 계산론(Computation of Thought) 400년 사상사 계보도</text>
+  <text x="420" y="46" text-anchor="middle" class="tree-sub">17세기 형이상학적 기호 혁명에서 21세기 생성형 AI의 통계적 맹목성까지</text>
+
+  <!-- Node 1: Hobbes -->
+  <g transform="translate(25, 65)">
+    <rect x="0" y="0" width="235" height="110" class="tree-card" stroke="#f59e0b" stroke-opacity="0.5"/>
+    <text x="14" y="24" class="tree-h" fill="#f59e0b">17C 토머스 홉스 (1655)</text>
+    <text x="14" y="42" class="tree-desc">• 표지(기억) vs 신호(소통) 이중 분화</text>
+    <text x="14" y="60" class="tree-desc">• "사유는 계산(Computatio)이다"</text>
+    <text x="14" y="78" class="tree-desc">• 한계: 기호 배제한 '무언의 추론' 모순</text>
+    <text x="14" y="98" class="tree-badge">계산주의 마음의 원초적 착상</text>
+  </g>
+
+  <!-- Node 2: Leibniz -->
+  <g transform="translate(300, 65)">
+    <rect x="0" y="0" width="240" height="110" class="tree-card" stroke="#10b981" stroke-opacity="0.5"/>
+    <text x="14" y="24" class="tree-h" fill="#10b981">17C G. W. 라이프니츠 (1684)</text>
+    <text x="14" y="42" class="tree-desc">• 천각형 역설 ──> 맹목적 사고(Caeca)</text>
+    <text x="14" y="60" class="tree-desc">• 보편기호법 + 사유의 계산 (Calculemus!)</text>
+    <text x="14" y="78" class="tree-desc">• 0과 1 이진법 체계 및 사칙연산기</text>
+    <text x="14" y="98" class="tree-badge" fill="#10b981">형식주의와 데이터/알고리즘 분리</text>
+  </g>
+
+  <!-- Node 3: Boole & Turing -->
+  <g transform="translate(580, 65)">
+    <rect x="0" y="0" width="235" height="110" class="tree-card" stroke="#3b82f6" stroke-opacity="0.5"/>
+    <text x="14" y="24" class="tree-h" fill="#3b82f6">19~20C 불 &amp; 튜링 (1854/1936)</text>
+    <text x="14" y="42" class="tree-desc">• 조지 불: 논리의 대수화 (불 대수)</text>
+    <text x="14" y="60" class="tree-desc">• 앨런 튜링: 보편 튜링 기계 (UTM)</text>
+    <text x="14" y="78" class="tree-desc">• SW(지시문 테이프)와 HW의 존재론적 분리</text>
+    <text x="14" y="98" class="tree-badge">범용 소프트웨어 개념의 완성</text>
+  </g>
+
+  <!-- Horizontal Connections Row 1 -->
+  <line x1="260" y1="120" x2="295" y2="120" stroke="#10b981" stroke-width="2" marker-end="url(#tree-arr)"/>
+  <line x1="540" y1="120" x2="575" y2="120" stroke="#3b82f6" stroke-width="2" marker-end="url(#tree-arr)"/>
+
+  <!-- Vertical Connection to Row 2 -->
+  <line x1="697" y1="175" x2="697" y2="200" stroke="#3b82f6" stroke-width="2"/>
+  <line x1="697" y1="200" x2="420" y2="200" stroke="#3b82f6" stroke-width="2"/>
+  <line x1="420" y1="200" x2="420" y2="218" stroke="#3b82f6" stroke-width="2" marker-end="url(#tree-arr)"/>
+
+  <!-- Row 2 Left: Shannon & Gates -->
+  <g transform="translate(60, 225)">
+    <rect x="0" y="0" width="330" height="90" class="tree-card" stroke="#8b5cf6" stroke-opacity="0.5"/>
+    <text x="14" y="22" class="tree-h" fill="#8b5cf6">20C 클로드 섀넌: 스위칭 회로 육화 (1937)</text>
+    <text x="14" y="40" class="tree-desc">• 불 대수의 참/거짓 ──> 전자 스위치 ON/OFF 매핑</text>
+    <text x="14" y="58" class="tree-desc">• AND, OR, NOT 반도체 논리 게이트 하드웨어 완성</text>
+    <text x="14" y="76" class="tree-badge" fill="#8b5cf6">사유의 법칙이 실리콘 기계 신체를 획득</text>
+  </g>
+
+  <!-- Row 2 Right: Modern LLMs -->
+  <g transform="translate(450, 225)">
+    <rect x="0" y="0" width="330" height="90" class="tree-card" stroke="#ec4899" stroke-opacity="0.5"/>
+    <text x="14" y="22" class="tree-h" fill="#ec4899">21C 생성형 AI &amp; 거대언어모델 (LLM)</text>
+    <text x="14" y="40" class="tree-desc">• 고차원 연속 벡터 공간에서의 행렬 연산</text>
+    <text x="14" y="58" class="tree-desc">• "중국어 방"의 현실화: 의미론 결여 + 유창성 극대화</text>
+    <text x="14" y="76" class="tree-badge" fill="#ec4899">라이프니츠 맹목적 사고의 통계적 궁극화</text>
+  </g>
+
+  <line x1="390" y1="270" x2="445" y2="270" stroke="#ec4899" stroke-width="2" marker-end="url(#tree-arr)"/>
+</svg>
+</div>
+
+<hr>
+<h2 id="7-존-설의-39중국어-방39과-생성형-ai의-실존적-함의"><a href="#7-존-설의-39중국어-방39과-생성형-ai의-실존적-함의" class="heading-anchor" aria-hidden="true">#</a> 7. 존 설의 &#39;중국어 방&#39;과 생성형 AI의 실존적 함의</h2><p>인공지능이 의미를 모른 채 맹목적 연산만으로 가장 고도의 지적 결과물을 만들어낸다는 이 사상사적 현실은, 철학자 존 설(John Searle)이 1980년에 제기했던 유명한 사고실험인 <strong>&#39;중국어 방(Chinese Room)&#39;</strong>을 21세기 현실로 소환합니다.</p>
+<h3 id="71-구문론syntax-대-의미론semantics"><a href="#71-구문론syntax-대-의미론semantics" class="heading-anchor" aria-hidden="true">#</a> 7.1 구문론(Syntax) 대 의미론(Semantics)</h3><p>존 설은 영어를 모국어로 쓰는 사람을 밀폐된 방에 가두고, 방 밖에서 중국어 질문이 들어오면 오직 영어로 된 규칙서(Syntax)에 따라 한자 기호를 대조해서 밖으로 내보내는 상황을 가정했습니다.</p>
+<ul>
+<li>방 밖에서 관찰하는 사람은 방 안의 존재가 중국어를 유창하게 이해한다고 착각합니다.</li>
+<li>그러나 방 안의 사람은 중국어 단어의 <strong>의미(Semantics)</strong>를 단 1%도 이해하지 못한 채, 오직 기호의 외형적 모양과 순서 규칙, 즉 <strong>구문론(Syntax)</strong>만을 조작하고 있을 뿐입니다.</li>
+<li>존 설의 결론: <strong>&quot;구문론(기호 조작 규칙)은 의미론(진정한 이해)을 낳기에 충분하지 않다(Syntax is not sufficient for semantics).&quot;</strong></li>
+</ul>
+<p>오늘날의 챗GPT가 바로 1조 개의 파라미터를 가진 거대한 &#39;통계적 중국어 방&#39;입니다. AI는 사과의 달콤함을 맛본 적도, 실연의 슬픔을 겪어본 적도 없습니다. 기계는 의미에 대해 완벽하게 장님(Blind)이지만, 기호들 간의 통계적 상관관계만을 맹목적으로 추적하여 인간보다 더 인간다운 텍스트를 출력합니다. </p>
+<p>인간의 언어활동과 지적 추론의 상당 부분이, 사실상 &#39;깊은 내적 직관&#39;이 아니라 &#39;정교한 기호 규칙의 조작&#39;에 기대어 작동하고 있었음을 기계가 역으로 입증해 보인 셈입니다.</p>
+<h3 id="72-일상의-맹목적-사고-엑셀-수식에서-ai-프롬프트까지"><a href="#72-일상의-맹목적-사고-엑셀-수식에서-ai-프롬프트까지" class="heading-anchor" aria-hidden="true">#</a> 7.2 일상의 맹목적 사고: 엑셀 수식에서 AI 프롬프트까지</h3><p>우리가 매일 사용하는 엑셀 스프레드시트에 <code>=A1+B1</code>이라는 수식을 걸고 아래로 드래그할 때, 우리는 A1과 B1에 당장 어떤 구체적인 숫자가 들어올지 상상하지 않습니다.</p>
+<ol>
+<li><strong>내용의 비움</strong>: 구체적 데이터는 공란으로 비워둡니다.</li>
+<li><strong>연산 관계의 선언</strong>: 오직 기호들 사이의 수학적·논리적 관계만을 정의합니다.</li>
+<li><strong>자동화된 연산</strong>: 데이터가 입력되는 순간, 소프트웨어 엔진이 맹목적으로 규칙을 실행하여 완벽한 결과를 출력합니다.</li>
+</ol>
+<p>프로그래밍의 변수 선언, SQL 데이터베이스 쿼리, 컴파일러의 기호 분석, 그리고 LLM의 프롬프트 엔지니어링에 이르기까지, 현대 디지털 문명이 누리는 모든 효율성과 생산성의 기원은 <strong>&quot;직관의 에너지를 아끼기 위해 내용물을 비우고 기호 연산 규칙에 모든 것을 위임한 라이프니츠의 맹목적 사고&quot;</strong> 위에 서 있습니다.</p>
+<h3 id="73-현대인의-실존적-딜레마-39의미의-외주화outsourcing-of-meaning39"><a href="#73-현대인의-실존적-딜레마-39의미의-외주화outsourcing-of-meaning39" class="heading-anchor" aria-hidden="true">#</a> 7.3 현대인의 실존적 딜레마: &#39;의미의 외주화(Outsourcing of Meaning)&#39;</h3><p>그러나 17세기 가발 쓴 철학자들의 꿈이 완벽하게 실현되어 온 세상이 기호 계산의 축복을 누리게 된 지금, 우리는 유례없이 무거운 실존적 질문과 맞닥뜨리게 됩니다.</p>
+<p>라이프니츠 덕분에 우리는 스스로 온전히 이해할 수 없는 페타바이트급 데이터도, 기호 조작 기계를 통해 엔터키 한 번으로 1초 만에 최적의 정답을 얻어내게 되었습니다. 문명과 효율성 관점에서는 인류 역사상 최고의 도약입니다.</p>
+<p><strong>하지만 반대로 뒤집어 생각해 보십시오.</strong> 
+우리가 이토록 매끄럽고 완벽한 기호 조작 기계에 전적으로 의존하게 되면서, 그 이면에 숨겨진 진짜 의미와 본질을 온몸으로 고뇌하고 직관하려는 인간 고유의 노력조차 기계에게 통째로 &#39;외주(Outsourcing)&#39;를 맡겨버린 것은 아닐까요?</p>
+<ul>
+<li>과거 홉스의 표지(Mark)가 단순한 &#39;외장 메모리(기억의 외주화)&#39;였다면,</li>
+<li>라이프니츠의 사유의 계산은 &#39;추론과 논리 연산의 외주화&#39;였고,</li>
+<li>오늘날의 생성형 AI는 마침내 <strong>&#39;개념의 구성과 문장화, 그리고 의미 해석의 외주화&#39;</strong>로 치닫고 있습니다.</li>
+</ul>
+<p>우리는 엔터키 한 번으로 우주의 나이나 양자역학의 방정식을 유창하게 설명하는 리포트를 3초 만에 뽑아냅니다. 그러나 그 글을 손에 쥔 인간은 우주라는 심연의 침묵을 가슴으로 느껴보지도 못했고, 수학적 증명의 뼈를 깎는 고통을 통과하지도 않았습니다. </p>
+<p>기호가 빠르고 정확하게 정답을 내놓으니까, 인간은 굳이 기호의 껍질을 깨고 내용의 깊은 심연을 들여다보는 고통스러운 내적 직관을 스스로 포기하고 있는지도 모릅니다. 기호가 우리의 계산 능력은 무한히 확장해 주었지만, 세계를 깊이 성찰하고 통찰하는 인간 고유의 직관적 능력은 오히려 서서히 퇴화시키고 있는 것은 아닐까요?</p>
+<hr>
+<h2 id="8-클로징-400년의-지적-탐구를-마치며"><a href="#8-클로징-400년의-지적-탐구를-마치며" class="heading-anchor" aria-hidden="true">#</a> 8. [클로징] 400년의 지적 탐구를 마치며</h2><p>17세기 토머스 홉스는 뇌에서 자꾸만 새어 나가는 사념을 붙잡기 위해 기호라는 &#39;포스트잇(표지와 신호)&#39;의 필요성을 절박하게 외쳤고, 사유를 계산으로 환원했습니다.</p>
+<p>라이프니츠는 인간이 신처럼 우주를 직관할 수 없다는 한계를 쿨하게 인정하고, 텅 빈 직관의 자리에 기호를 채워 넣어 자율적으로 돌아가는 &#39;생각의 엔진(맹목적 사고)&#39;을 조립해 냈습니다.</p>
+<p>그리고 오늘날 실리콘 반도체와 거대언어모델은 그 맹목적 기호 조작을 극단으로 밀어붙여, 의미를 전혀 모르는 기계가 인간보다 더 유창하게 지식을 쏟아내는 기적과도 같은 풍경을 만들어냈습니다.</p>
+<p>오늘 여러분이 업무 창에 엑셀 수식을 입력하거나 AI 프롬프트에 질문을 던질 때, 기억하십시오. 여러분은 단순히 기계를 다루고 있는 것이 아닙니다. <strong>인간 이성의 한계를 극복하기 위해 자신의 두뇌와 치열하게 싸웠던 400년 전 천재 철학자들의 거대한 지적 유산 위에서 스위치를 켜고 있는 것입니다.</strong></p>
+<p>그리고 그 스위치를 켤 때마다 우리는 스스로에게 되물어야 합니다.</p>
+<blockquote>
+<p><strong>&quot;우리가 인공지능에 넘겨준 것은 단순한 계산일까요, 아니면 세계에 대한 이해 그 자체일까요?&quot;</strong><br>기호의 연산이 극단으로 치달을수록, 우리가 결코 기계에 넘겨주어서는 안 될 인간 고유의 &#39;의미(Semantics)의 자리&#39;는 어디에 남아 있는지를 말입니다.</p>
+</blockquote>
+
+      </section>
+
+      <footer class="article-footer">
+        <p>© Curated Reading Hub · <a href="index.html">← 목록으로 돌아가기</a></p>
+      </footer>
+    </article>
+  </main>
+
+  <!-- Back to Top Button -->
+  <button id="back-to-top" aria-label="맨 위로 가기" title="맨 위로 이동">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg>
+  </button>
+
+  <script>
+    // Theme Management
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeIcon = document.getElementById('theme-icon');
+    
+    function getTheme() {
+      const saved = localStorage.getItem('pages_theme');
+      if (saved) return saved;
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+
+    function applyTheme(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem('pages_theme', theme);
+      if (themeIcon) {
+        themeIcon.textContent = theme === 'dark' ? '🌙' : '☀️';
+      }
+    }
+
+    applyTheme(getTheme());
+
+    const FONT_KEY = "pages_font";
+    const fontToggle = document.getElementById("font-toggle");
+    const fontMenu = document.getElementById("font-menu");
+    const fontOptions = fontMenu ? fontMenu.querySelectorAll(".font-option") : [];
+
+    function getFont() {
+      try {
+        const saved = localStorage.getItem(FONT_KEY);
+        if (saved === "d2coding" || saved === "pretendard") return saved;
+      } catch (e) {}
+      return "pretendard";
+    }
+
+    function applyFont(font) {
+      document.documentElement.setAttribute("data-font", font);
+      try { localStorage.setItem(FONT_KEY, font); } catch (e) {}
+      fontOptions.forEach((btn) => {
+        btn.setAttribute("aria-selected", btn.dataset.font === font ? "true" : "false");
+      });
+    }
+
+    function closeFontMenu() {
+      if (!fontMenu || !fontToggle) return;
+      fontMenu.hidden = true;
+      fontToggle.setAttribute("aria-expanded", "false");
+    }
+
+    function toggleFontMenu() {
+      if (!fontMenu || !fontToggle) return;
+      const open = fontMenu.hidden;
+      fontMenu.hidden = !open;
+      fontToggle.setAttribute("aria-expanded", open ? "true" : "false");
+    }
+
+    applyFont(getFont());
+
+    if (fontToggle) {
+      fontToggle.addEventListener("click", (e) => {
+        e.stopPropagation();
+        toggleFontMenu();
+      });
+    }
+    fontOptions.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        applyFont(btn.dataset.font);
+        closeFontMenu();
+      });
+    });
+    document.addEventListener("click", (e) => {
+      if (fontMenu && !fontMenu.hidden && !e.target.closest("#font-picker")) {
+        closeFontMenu();
+      }
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeFontMenu();
+    });
+
+    if (themeToggle) {
+      themeToggle.addEventListener('click', () => {
+        const current = document.documentElement.getAttribute('data-theme') || getTheme();
+        const next = current === 'dark' ? 'light' : 'dark';
+        applyTheme(next);
+      });
+    }
+
+    // Reading Progress & Header Title Visibility
+    const progressBar = document.getElementById('progress-bar');
+    const navTitle = document.getElementById('nav-title-text');
+    const backToTop = document.getElementById('back-to-top');
+
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+      const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      
+      if (progressBar) progressBar.style.width = progress + '%';
+      
+      if (navTitle) {
+        if (scrollTop > 140) {
+          navTitle.classList.add('visible');
+        } else {
+          navTitle.classList.remove('visible');
+        }
+      }
+
+      if (backToTop) {
+        if (scrollTop > 300) {
+          backToTop.classList.add('visible');
+        } else {
+          backToTop.classList.remove('visible');
+        }
+      }
+    }, { passive: true });
+
+    if (backToTop) {
+      backToTop.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
+    // TOC Drawer Interactions
+    const tocToggle = document.getElementById('toc-toggle');
+    const tocDrawer = document.getElementById('toc-drawer');
+    const drawerOverlay = document.getElementById('drawer-overlay');
+    const tocClose = document.getElementById('toc-close');
+
+    function openDrawer() {
+      if (tocDrawer) tocDrawer.classList.add('active');
+      if (drawerOverlay) drawerOverlay.classList.add('active');
+      if (tocToggle) tocToggle.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeDrawer() {
+      if (tocDrawer) tocDrawer.classList.remove('active');
+      if (drawerOverlay) drawerOverlay.classList.remove('active');
+      if (tocToggle) tocToggle.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+
+    if (tocToggle) tocToggle.addEventListener('click', openDrawer);
+    if (tocClose) tocClose.addEventListener('click', closeDrawer);
+    if (drawerOverlay) drawerOverlay.addEventListener('click', closeDrawer);
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeDrawer();
+    });
+
+    document.querySelectorAll('.toc-link').forEach(link => {
+      link.addEventListener('click', () => {
+        closeDrawer();
+      });
+    });
+
+    // Heading Anchor Click: Copy URL and show tooltip
+    document.querySelectorAll('.heading-anchor').forEach(anchor => {
+      anchor.setAttribute('aria-hidden', 'false');
+      anchor.setAttribute('aria-label', '섹션 고유 링크 복사');
+      anchor.setAttribute('title', '클릭하여 링크 복사');
+      anchor.addEventListener('click', async (e) => {
+        e.preventDefault();
+        const href = anchor.getAttribute('href');
+        const targetId = href.replace(/^#/, '');
+        const targetEl = document.getElementById(targetId);
+        if (targetEl) {
+          targetEl.scrollIntoView({ behavior: 'smooth' });
+          history.pushState(null, '', href);
+        }
+        const fullUrl = window.location.origin + window.location.pathname + href;
+        try {
+          await navigator.clipboard.writeText(fullUrl);
+          showAnchorTooltip(anchor, '✓ 링크 복사됨!');
+        } catch (err) {
+          showAnchorTooltip(anchor, href);
+        }
+      });
+    });
+
+    function showAnchorTooltip(element, message) {
+      let tip = document.getElementById('anchor-copy-tooltip');
+      if (!tip) {
+        tip = document.createElement('div');
+        tip.id = 'anchor-copy-tooltip';
+        tip.className = 'anchor-tooltip';
+        document.body.appendChild(tip);
+      }
+      tip.textContent = message;
+      const rect = element.getBoundingClientRect();
+      tip.style.top = `${window.scrollY + rect.top - 28}px`;
+      tip.style.left = `${window.scrollX + rect.left + rect.width / 2}px`;
+      tip.classList.add('visible');
+      clearTimeout(tip._timer);
+      tip._timer = setTimeout(() => {
+        tip.classList.remove('visible');
+      }, 1800);
+    }
+
+    // Copy Code Buttons
+    document.querySelectorAll('.copy-btn').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const code = btn.closest('.code-block-wrapper').querySelector('code').innerText;
+        try {
+          await navigator.clipboard.writeText(code);
+          btn.textContent = '✓ 복사됨';
+          btn.classList.add('copied');
+          setTimeout(() => {
+            btn.textContent = '복사';
+            btn.classList.remove('copied');
+          }, 2000);
+        } catch (e) {
+          btn.textContent = '실패';
+        }
+      });
+    });
+
+    // ==========================================
+    // Interactive Memory & Step Simulator Logic
+    // ==========================================
+    function initSimulator() {
+      const simContainer = document.getElementById('interactive-simulator');
+      if (!simContainer) return;
+
+      const smcSteps = [
+        {
+          beat: 0, pc: 6, nextPc: 6,
+          action: "실행 전",
+          sum: "0", memo: "-", cmd6: "add [20]",
+          desc: "<strong>[실행 전]</strong> 아직 아무 명령도 실행하지 않았다. PC는 첫 명령인 6호를 가리키고, 합계는 0이다.",
+          highlightRow: null, pcRow: "mem-6", modRow: null
+        },
+        {
+          beat: 1, pc: 6, nextPc: 7,
+          action: "20호 상자 안의 값(7)을 합계에 더함",
+          sum: "7", memo: "-", cmd6: "add [20]",
+          desc: "<strong>[박자 1]</strong> PC가 6을 가리킵니다. 주소 6의 명령 <code>add [20]</code>을 읽어 20호의 재료(7)를 합계(주소 4)에 더합니다. (합계: 0 → <strong>7</strong>)",
+          highlightRow: "mem-20", pcRow: "mem-6", modRow: null
+        },
+        {
+          beat: 2, pc: 7, nextPc: 8,
+          action: "6호 명령의 주소 필드를 20에서 21로 수정",
+          sum: "7", memo: "-", cmd6: "add [21]",
+          desc: "<strong>[박자 2]</strong> 7호 명령이 <strong>6호 레시피의 잉크를 긁어고칩니다!</strong> 명령 속 '20'이 '21'로 덮어써집니다. (6호 명령: <code>add [20]</code> → <strong style='color:#ef4444;'>add [21]</strong>)",
+          highlightRow: null, pcRow: "mem-7", modRow: "mem-6"
+        },
+        {
+          beat: 3, pc: 8, nextPc: 6,
+          action: "주소칸(21) ≠ 22 이므로 주소 6으로 점프",
+          sum: "7", memo: "-", cmd6: "add [21]",
+          desc: "<strong>[박자 3]</strong> 8호 명령이 주소칸(21)을 22와 비교합니다. 끝에 도달하지 않았으므로 <strong>PC를 6으로 점프</strong>시킵니다.",
+          highlightRow: null, pcRow: "mem-8", modRow: null
+        },
+        {
+          beat: 4, pc: 6, nextPc: 7,
+          action: "21호 상자 안의 값(3)을 합계에 더함",
+          sum: "10", memo: "-", cmd6: "add [21]",
+          desc: "<strong>[박자 4]</strong> 다시 주소 6으로 착지했습니다! 하지만 이제 6호에 적힌 명령은 <code>add [21]</code>입니다. 21호의 재료(3)를 더합니다. (합계: 7 → <strong>10</strong>)",
+          highlightRow: "mem-21", pcRow: "mem-6", modRow: null
+        },
+        {
+          beat: 5, pc: 7, nextPc: 8,
+          action: "6호 명령의 주소 필드를 21에서 22로 수정",
+          sum: "10", memo: "-", cmd6: "add [22]",
+          desc: "<strong>[박자 5]</strong> 7호 명령이 다시 6호 레시피를 수정합니다. 명령 속 '21'이 '22'로 변합니다. (6호 명령: <strong style='color:#ef4444;'>add [22]</strong>)",
+          highlightRow: null, pcRow: "mem-7", modRow: "mem-6"
+        },
+        {
+          beat: 6, pc: 8, nextPc: 9,
+          action: "주소칸(22) == 22 이므로 루프 종료",
+          sum: "10", memo: "-", cmd6: "add [22]",
+          desc: "<strong>[박자 6]</strong> 주소칸이 22와 일치하므로 루프를 통과합니다. <strong>최종 합계: 10</strong>. 단, 끝난 뒤에도 6호 레시피는 원본과 다른 <code>add [22]</code>로 영구 변질되었습니다.",
+          highlightRow: null, pcRow: "mem-8", modRow: null
+        }
+      ];
+
+      const ptrSteps = [
+        {
+          beat: 0, pc: 6, nextPc: 6,
+          action: "실행 전",
+          sum: "0", memo: "20", cmd6: "add [4], [[3]]",
+          desc: "<strong>[실행 전]</strong> 아직 아무 명령도 실행하지 않았다. PC는 첫 명령인 6호를 가리키고, 합계는 0, 메모지는 20호다.",
+          highlightRow: null, pcRow: "mem-6", modRow: null
+        },
+        {
+          beat: 1, pc: 6, nextPc: 7,
+          action: "3호 메모지(20)가 가리키는 20호의 값(7)을 더함",
+          sum: "7", memo: "20", cmd6: "add [4], [[3]]",
+          desc: "<strong>[박자 1]</strong> PC가 6을 가리킵니다. 명령 <code>add [4], [[3]]</code>은 3호 메모지(20호)를 보고 20호의 재료(7)를 합계에 더합니다. <strong>(명령어는 고정!)</strong>",
+          highlightRow: "mem-20", pcRow: "mem-6", modRow: null
+        },
+        {
+          beat: 2, pc: 7, nextPc: 8,
+          action: "3호 메모지의 숫자를 20에서 21로 증가",
+          sum: "7", memo: "21", cmd6: "add [4], [[3]]",
+          desc: "<strong>[박자 2]</strong> 7호 명령이 <strong>3호 메모지의 숫자만 20에서 21로 변경</strong>합니다. 6호 레시피는 전혀 건드리지 않습니다. (메모지: 20 → <strong style='color:#10b981;'>21</strong>)",
+          highlightRow: null, pcRow: "mem-7", modRow: "mem-3"
+        },
+        {
+          beat: 3, pc: 8, nextPc: 6,
+          action: "메모지(21) ≠ 22 이므로 주소 6으로 점프",
+          sum: "7", memo: "21", cmd6: "add [4], [[3]]",
+          desc: "<strong>[박자 3]</strong> 8호 명령이 메모지의 숫자(21)를 22와 비교합니다. 일치하지 않으므로 <strong>PC를 6으로 점프</strong>시킵니다.",
+          highlightRow: null, pcRow: "mem-8", modRow: null
+        },
+        {
+          beat: 4, pc: 6, nextPc: 7,
+          action: "3호 메모지(21)가 가리키는 21호의 값(3)을 더함",
+          sum: "10", memo: "21", cmd6: "add [4], [[3]]",
+          desc: "<strong>[박자 4]</strong> 다시 주소 6으로 왔습니다. 명령 글자는 여전히 똑같은 <code>add [4], [[3]]</code>이지만, 손에 든 메모지가 21호이므로 21호의 3을 더합니다. (합계: 7 → <strong>10</strong>)",
+          highlightRow: "mem-21", pcRow: "mem-6", modRow: null
+        },
+        {
+          beat: 5, pc: 7, nextPc: 8,
+          action: "3호 메모지의 숫자를 21에서 22로 증가",
+          sum: "10", memo: "22", cmd6: "add [4], [[3]]",
+          desc: "<strong>[박자 5]</strong> 7호 명령이 3호 메모지 숫자를 21에서 22로 올립니다. 레시피 6호는 여전히 깨끗합니다. (메모지: 21 → <strong style='color:#10b981;'>22</strong>)",
+          highlightRow: null, pcRow: "mem-7", modRow: "mem-3"
+        },
+        {
+          beat: 6, pc: 8, nextPc: 9,
+          action: "메모지(22) == 22 이므로 루프 종료",
+          sum: "10", memo: "22", cmd6: "add [4], [[3]]",
+          desc: "<strong>[박자 6]</strong> 메모지가 22에 도달하여 루프를 마칩니다. <strong>최종 합계: 10</strong>. 6호 레시피는 원본 그대로 완벽하게 보존되었습니다.",
+          highlightRow: null, pcRow: "mem-8", modRow: null
+        }
+      ];
+
+      let currentMode = 'smc'; // 'smc' or 'ptr'
+      let currentStep = 0;
+      let autoPlayTimer = null;
+
+      const tabSmc = document.getElementById('sim-tab-smc');
+      const tabPtr = document.getElementById('sim-tab-ptr');
+      const btnPrev = document.getElementById('sim-prev');
+      const btnNext = document.getElementById('sim-next');
+      const btnReset = document.getElementById('sim-reset');
+      const btnPlay = document.getElementById('sim-play');
+
+      const elBeat = document.getElementById('sim-val-beat');
+      const elPc = document.getElementById('sim-val-pc');
+      const elNextPc = document.getElementById('sim-val-nextpc');
+      const elAction = document.getElementById('sim-val-action');
+      const elSum = document.getElementById('sim-val-sum') || document.getElementById('sim-mem-4-val');
+      const elMemo = document.getElementById('sim-val-memo') || document.getElementById('sim-mem-3-val');
+      const elCmd6 = document.getElementById('sim-val-cmd6') || document.getElementById('sim-mem-6-val');
+      const elDesc = document.getElementById('sim-val-desc');
+
+      function setText(el, value) {
+        if (el) el.textContent = value;
+      }
+      function setHtml(el, value) {
+        if (el) el.innerHTML = value;
+      }
+      function lastBeat(steps) {
+        return steps.length ? steps[steps.length - 1].beat : 0;
+      }
+
+      function updateUI() {
+        const steps = currentMode === 'smc' ? smcSteps : ptrSteps;
+        const data = steps[currentStep];
+        if (!data) return;
+
+        setText(elBeat, `박자 ${data.beat} / ${lastBeat(steps)}`);
+        setText(elPc, `${data.pc}호`);
+        setText(elNextPc, `${data.nextPc}호`);
+        setText(elAction, data.action);
+        setText(elSum, data.sum);
+        setText(elMemo, data.memo);
+        setText(elCmd6, data.cmd6);
+        setHtml(elDesc, data.desc);
+
+        if (btnPrev) btnPrev.disabled = currentStep === 0;
+        if (btnNext) btnNext.disabled = currentStep === steps.length - 1;
+
+        document.querySelectorAll('.sim-mem-row').forEach(row => {
+          row.classList.remove('pc-target', 'modified', 'read-target');
+        });
+
+        if (data.pcRow) {
+          const r = document.getElementById(data.pcRow);
+          if (r) r.classList.add('pc-target');
+        }
+        if (data.highlightRow) {
+          const r = document.getElementById(data.highlightRow);
+          if (r) r.classList.add('read-target');
+        }
+        if (data.modRow) {
+          const r = document.getElementById(data.modRow);
+          if (r) r.classList.add('modified');
+        }
+
+        const row6Val = document.getElementById('sim-mem-6-val');
+        if (row6Val) row6Val.textContent = data.cmd6;
+        const row3Val = document.getElementById('sim-mem-3-val');
+        if (row3Val) row3Val.textContent = data.memo;
+        const row4Val = document.getElementById('sim-mem-4-val');
+        if (row4Val) row4Val.textContent = data.sum;
+      }
+
+      function stopAutoPlay() {
+        if (autoPlayTimer) {
+          clearInterval(autoPlayTimer);
+          autoPlayTimer = null;
+          if (btnPlay) btnPlay.textContent = '▶ 자동 재생';
+        }
+      }
+
+      function startAutoPlay() {
+        if (btnPlay) btnPlay.textContent = '⏸ 일시 정지';
+        autoPlayTimer = setInterval(() => {
+          const steps = currentMode === 'smc' ? smcSteps : ptrSteps;
+          if (currentStep < steps.length - 1) {
+            currentStep++;
+            updateUI();
+          } else {
+            stopAutoPlay();
+          }
+        }, 1600);
+      }
+
+      function applyModeChrome(mode) {
+        currentMode = mode;
+        if (tabSmc) {
+          tabSmc.classList.toggle('active', mode === 'smc');
+          tabSmc.setAttribute('aria-selected', mode === 'smc' ? 'true' : 'false');
+        }
+        if (tabPtr) {
+          tabPtr.classList.toggle('active', mode === 'ptr');
+          tabPtr.setAttribute('aria-selected', mode === 'ptr' ? 'true' : 'false');
+        }
+        const memoRow = document.getElementById('mem-3');
+        if (memoRow) memoRow.style.opacity = mode === 'smc' ? '0.4' : '1';
+      }
+
+      if (tabSmc) {
+        tabSmc.addEventListener('click', () => {
+          if (currentMode === 'smc') return;
+          stopAutoPlay();
+          applyModeChrome('smc');
+          currentStep = 0;
+          updateUI();
+        });
+      }
+
+      if (tabPtr) {
+        tabPtr.addEventListener('click', () => {
+          if (currentMode === 'ptr') return;
+          stopAutoPlay();
+          applyModeChrome('ptr');
+          currentStep = 0;
+          updateUI();
+        });
+      }
+
+      if (btnPrev) {
+        btnPrev.addEventListener('click', () => {
+          stopAutoPlay();
+          if (currentStep > 0) {
+            currentStep--;
+            updateUI();
+          }
+        });
+      }
+
+      if (btnNext) {
+        btnNext.addEventListener('click', () => {
+          stopAutoPlay();
+          const steps = currentMode === 'smc' ? smcSteps : ptrSteps;
+          if (currentStep < steps.length - 1) {
+            currentStep++;
+            updateUI();
+          }
+        });
+      }
+
+      if (btnReset) {
+        btnReset.addEventListener('click', () => {
+          stopAutoPlay();
+          currentStep = 0;
+          updateUI();
+        });
+      }
+
+      if (btnPlay) {
+        btnPlay.addEventListener('click', () => {
+          if (autoPlayTimer) {
+            stopAutoPlay();
+          } else {
+            const steps = currentMode === 'smc' ? smcSteps : ptrSteps;
+            if (currentStep >= steps.length - 1) currentStep = 0;
+            updateUI();
+            startAutoPlay();
+          }
+        });
+      }
+
+      // Initial state: beat 0 idle
+      applyModeChrome('smc');
+      currentStep = 0;
+      updateUI();
+    }
+
+    // Initialize on DOM ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initSimulator);
+    } else {
+      initSimulator();
+    }
+  </script>
+</body>
+</html>
