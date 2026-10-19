@@ -20,7 +20,7 @@ created: 2026-08-31
 updated: 2026-08-31
 review:
   mode: attested
-  revision: sha256:3010abb01e777fd5e9fa7c3fb6208acceb45f3d72b020228dc1e89b9eb5d869a
+  revision: sha256:40b0dc3ec96ec61f047bc6793d55afa7fd7af780758bbd59679b35168c558e0b
   reviewed_at: 2026-08-31
   reviewed_by: antigravity
 evidence_ids: []
@@ -63,7 +63,7 @@ access:
 
 [[A New Golden Age for Computer Architecture]]는 컴퓨터 구조의 선구자인 존 헤네시(John L. Hennessy)와 데이비드 패터슨(David A. Patterson)이 2018년 ACM 튜링상(A.M. Turing Award)을 수상하며 발표한 기념 강연 논문이다. 저자들은 반도체 미세화와 클록 속도 향상을 이끌던 [[무어의 법칙]]과 [[Dennard 스케일링]]이 물리적 한계에 부딪히며 단일 범용 프로세서(CPU) 중심의 성능 향상 시대가 종언을 고했다고 진단했다.
 
-논문은 이러한 한계를 돌파하기 위한 유일한 해법으로 **도메인 특화 아키텍처(DSA, Domain-Specific Architectures)**와 프로그래밍 언어·컴파일러·하드웨어의 공동 설계를 제시한다. 모든 작업을 두루 처리하려던 범용 프로세서의 오버헤드를 덜어내고, 특정 문제 영역(머신러닝, 그래픽스, 신호 처리 등)의 연산 패턴에 직접 맞춘 전용 실행 엔진을 구축함으로써 수십~수백 배의 에너지 효율과 처리량을 달성할 수 있음을 역설한다.
+논문은 이러한 한계를 돌파하기 위한 유일한 해법으로 **도메인 특화 아키텍처**(DSA, Domain-Specific Architectures)와 프로그래밍 언어·컴파일러·하드웨어의 공동 설계를 제시한다. 모든 작업을 두루 처리하려던 범용 프로세서의 오버헤드를 덜어내고, 특정 문제 영역(머신러닝, 그래픽스, 신호 처리 등)의 연산 패턴에 직접 맞춘 전용 실행 엔진을 구축함으로써 수십~수백 배의 에너지 효율과 처리량을 달성할 수 있음을 역설한다.
 
 ## 핵심 통찰
 

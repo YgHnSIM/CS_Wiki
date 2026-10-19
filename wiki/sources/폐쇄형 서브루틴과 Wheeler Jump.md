@@ -16,7 +16,7 @@ created: 2026-05-04
 updated: 2026-07-26
 review:
   mode: legacy-baseline
-  revision: sha256:e642c8ec4612fc1b634ed08a79126791504dedca035a031aa068ec037ae10cc7
+  revision: sha256:60eb5361a9c2b4aabdde0b2d5ce166f2f79f03f59cf68796c338b93892bd8684
   reviewed_at: null
   reviewed_by: legacy-baseline
 evidence_ids: []
@@ -37,7 +37,7 @@ access:
     path: raw/폐쇄형 서브루틴과 Wheeler Jump.md
     retrieved: 2026-07-10
     version: null
-    sha256: f12b47e7257478f2b83a000eb22a5ac3bad2c26fd932e08745b005aa1889ea9d
+    sha256: 4f32e9dfcefcaf9ffadac442d76b1a167112f40d7fa690dce296fd0171e69498
     media_type: text/markdown
     bytes: 14944
 ---

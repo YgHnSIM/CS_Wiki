@@ -17,7 +17,7 @@ created: 2026-10-18
 updated: 2026-10-18
 review:
   mode: pending
-  revision: sha256:b8ee9f21edfe2a7c079c8bbae9e2a3c6e71677f0c6916eae0c3e1ccf5828bc9b
+  revision: sha256:a739ed00f9f8d8dba9c8b312d3cd422aee4ed31b0d8bf66f583e28361d3633ea
   reviewed_at: null
   reviewed_by: null
 evidence_ids: []
@@ -47,7 +47,7 @@ access:
 
 [[Minds, Brains, and Programs]](마음, 뇌, 그리고 프로그램)는 미국의 언어철학자이자 인지철학자 존 설(John R. Searle)이 1980년 학술지 《행동 및 뇌과학(Behavioral and Brain Sciences)》에 발표한 논문이다.
 
-설은 이 논문에서 유명한 **'중국어 방(Chinese Room)'** 사고실험을 제시하며, 튜링 검정(Turing Test)과 강한 인공지능(Strong AI) 이론의 핵심 전제를 정면으로 비판했다. 그는 컴퓨터의 프로그램 실행이 순전히 형식적이고 형태적인 기호 조작(구문론, syntax)에 불과하기 때문에, 기호의 의미 이해(의미론, semantics)와 지향성(intentionality)을 필연적으로 결여할 수밖에 없다고 논증했다.
+설은 이 논문에서 유명한 ‘**중국어 방(Chinese Room)**’ 사고실험을 제시하며, 튜링 검정(Turing Test)과 강한 인공지능(Strong AI) 이론의 핵심 전제를 정면으로 비판했다. 그는 컴퓨터의 프로그램 실행이 순전히 형식적이고 형태적인 기호 조작(구문론, syntax)에 불과하기 때문에, 기호의 의미 이해(의미론, semantics)와 지향성(intentionality)을 필연적으로 결여할 수밖에 없다고 논증했다.
 
 ## 강한 인공지능과 약한 인공지능
 
