@@ -13,10 +13,10 @@ editorial_status: active
 publication_visibility: public
 graph_visibility: hidden
 created: 2026-05-03
-updated: 2026-10-18
+updated: 2026-10-19
 review:
   mode: attested
-  revision: sha256:4c92321abc1fec4343e87450c5e739781f801a2ac5559b089cb50062e42b8050
+  revision: sha256:d463d067754f6353a8916d233096d049ba2544066e7a8c26346ddcbb08be7d97
   reviewed_at: 2026-08-31
   reviewed_by: antigravity
 evidence_ids: []
@@ -151,6 +151,7 @@ redirect_from:
 - [2026-09-18 update | 단일근거 legacy 개념 11건 근거 보강](logs/log-2026-09-18-119-single-evidence-legacy-attestation.md)
 - [2026-09-18 update | 근거 빈약 분석 4건 보강](logs/log-2026-09-18-120-thin-analysis-evidence.md)
 - [2026-10-18 ingest | 홉스·라이프니츠 기호 철학 및 생성형 AI 계보 보강](logs/log-2026-10-18-121-hobbes-leibniz-symbolic-cognition-ai.md)
+- [2026-10-19 ingest | 생명은 계산이며 공생발생으로 진화한다 (아구에라 이 아르카스 해설) 보강](logs/log-2026-10-19-122-life-computation-symbiogenesis-agi.md)
 
 ## 출처
 

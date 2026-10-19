@@ -1,0 +1,3266 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+  <title>생명은 계산이며 공생발생으로 진화한다 — 블레즈 아구에라 이 아르카스의 생명 기능주의와 AGI</title>
+  <meta name="description" content="구글 기술 및 사회 부문 CTO 블레즈 아구에라 이 아르카스(Blaise Agüera y Arcas)의 사유를 바탕으로, 생명을 '공생발생을 통해 복잡해지는 자기구성적 연산'으로 정의하고, 튜링 보편 기계와 폰 노이만 자기복제기, 린 마굴리스의 세포내 공생설, 기질 독립성과 기능주의, 4바이트 인공생명(BFF) 실험, 그리고 이미 도래한 AGI와 인류의 새로운 미토콘드리아적 공생을 융합적으로 해부한다.">
+  
+  
+
+  <!-- Favicon / Page Icon (📚) -->
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+  <!-- Pretendard Web Font -->
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+  <!-- Naver D2Coding -->
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/joungkyun/font-d2coding@1.3.2/d2coding.css" />
+  <script>
+    (function () {
+      try {
+        var f = localStorage.getItem("pages_font");
+        if (f === "d2coding" || f === "pretendard") {
+          document.documentElement.setAttribute("data-font", f);
+        }
+      } catch (e) {}
+    })();
+  </script>
+  
+  <!-- KaTeX for Math Equations -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '\\[', right: '\\]', display: true}, {left: '$', right: '$', display: false}, {left: '\\(', right: '\\)', display: false}], throwOnError: false, output: 'html'});"></script>
+
+  <style>
+    .katex-mathml {
+      display: none !important;
+      user-select: none !important;
+      -webkit-user-select: none !important;
+    }
+    .katex-display {
+      overflow-x: auto;
+      overflow-y: hidden;
+      max-width: 100%;
+      padding: 0.5em 0;
+      -webkit-overflow-scrolling: touch;
+    }
+    .katex {
+      max-width: 100%;
+    }
+
+    :root {
+      --font-sans: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+      --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      
+      --bg-page: #f8fafc;
+      --bg-card: #ffffff;
+      --bg-surface: #f1f5f9;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --text-light: #94a3b8;
+      --border: #e2e8f0;
+      --border-focus: #3b82f6;
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --primary-light: #eff6ff;
+      --code-bg: #0f172a;
+      --code-text: #e2e8f0;
+      --inline-code-bg: #e2e8f0;
+      --inline-code-text: #0f172a;
+      --quote-bg: #f8fafc;
+      --quote-border: #3b82f6;
+      --header-bg: rgba(248, 250, 252, 0.88);
+      --drawer-bg: #ffffff;
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 16px;
+      --radius-full: 9999px;
+    }
+
+    :root[data-font="d2coding"] {
+      --font-sans: "D2 coding", "D2Coding", Pretendard, monospace;
+      --font-mono: "D2 coding", "D2Coding", ui-monospace, monospace;
+    }
+
+
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --bg-page: #0b0f19;
+        --bg-card: #131b2e;
+        --bg-surface: #1e293b;
+        --text-main: #f1f5f9;
+        --text-muted: #94a3b8;
+        --text-light: #64748b;
+        --border: #243049;
+        --border-focus: #60a5fa;
+        --primary: #38bdf8;
+        --primary-hover: #7dd3fc;
+        --primary-light: rgba(56, 189, 248, 0.12);
+        --code-bg: #020617;
+        --code-text: #f8fafc;
+        --inline-code-bg: #243049;
+        --inline-code-text: #38bdf8;
+        --quote-bg: #141f36;
+        --quote-border: #38bdf8;
+        --header-bg: rgba(11, 15, 25, 0.88);
+        --drawer-bg: #131b2e;
+        --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.4);
+        --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+        --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.6);
+      }
+    }
+
+    :root[data-theme="dark"] {
+      --bg-page: #0b0f19;
+      --bg-card: #131b2e;
+      --bg-surface: #1e293b;
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --text-light: #64748b;
+      --border: #243049;
+      --border-focus: #60a5fa;
+      --primary: #38bdf8;
+      --primary-hover: #7dd3fc;
+      --primary-light: rgba(56, 189, 248, 0.12);
+      --code-bg: #020617;
+      --code-text: #f8fafc;
+      --inline-code-bg: #243049;
+      --inline-code-text: #38bdf8;
+      --quote-bg: #141f36;
+      --quote-border: #38bdf8;
+      --header-bg: rgba(11, 15, 25, 0.88);
+      --drawer-bg: #131b2e;
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.4);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.6);
+    }
+
+    :root[data-theme="light"] {
+      --bg-page: #f8fafc;
+      --bg-card: #ffffff;
+      --bg-surface: #f1f5f9;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --text-light: #94a3b8;
+      --border: #e2e8f0;
+      --border-focus: #3b82f6;
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --primary-light: #eff6ff;
+      --code-bg: #0f172a;
+      --code-text: #e2e8f0;
+      --inline-code-bg: #e2e8f0;
+      --inline-code-text: #0f172a;
+      --quote-bg: #f8fafc;
+      --quote-border: #3b82f6;
+      --header-bg: rgba(248, 250, 252, 0.88);
+      --drawer-bg: #ffffff;
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 80px;
+      overflow-x: clip;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      line-height: 1.8;
+      font-size: 16.5px;
+      word-break: keep-all;
+      overflow-wrap: break-word;
+      transition: background-color 0.25s ease, color 0.25s ease;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: clip;
+      width: 100%;
+      max-width: 100%;
+    }
+
+    /* Top Sticky Header */
+    .top-nav {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      background-color: var(--header-bg);
+      border-bottom: 1px solid var(--border);
+      height: 58px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px;
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+      flex: 1 1 auto;
+      overflow: hidden;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .nav-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      height: 40px;
+      min-width: 40px;
+      padding: 0 10px;
+      border-radius: var(--radius-md);
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text-main);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.18s ease;
+    }
+
+    .nav-btn:hover, .nav-btn:active {
+      background: var(--bg-surface);
+      border-color: var(--border);
+    }
+
+    .font-picker {
+      position: relative;
+    }
+
+    .font-menu {
+      position: absolute;
+      top: calc(100% + 6px);
+      right: 0;
+      min-width: 156px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-md);
+      padding: 4px;
+      z-index: 60;
+    }
+
+    .font-menu[hidden] {
+      display: none;
+    }
+
+    .font-option {
+      display: block;
+      width: 100%;
+      text-align: left;
+      border: none;
+      background: transparent;
+      color: var(--text-main);
+      padding: 8px 10px;
+      border-radius: var(--radius-sm);
+      font-size: 13.5px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .font-option:hover,
+    .font-option:focus-visible {
+      background: var(--bg-surface);
+      outline: none;
+    }
+
+    .font-option[aria-selected="true"] {
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    .font-option[data-font="pretendard"] {
+      font-family: Pretendard, sans-serif;
+    }
+
+    .font-option[data-font="d2coding"] {
+      font-family: "D2 coding", "D2Coding", monospace;
+    }
+
+    .nav-title {
+      font-size: 14.5px;
+      font-weight: 700;
+      color: var(--text-main);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 200px;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    @media (min-width: 640px) {
+      .nav-title {
+        max-width: 380px;
+      }
+    }
+
+    .nav-title.visible {
+      opacity: 1;
+    }
+
+    /* Reading Progress Bar */
+    #progress-container {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: transparent;
+      z-index: 50;
+    }
+
+    #progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #3b82f6, #06b6d4);
+      transition: width 0.08s ease-out;
+    }
+
+    /* Main Container */
+    .article-container {
+      width: 100%;
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 24px 16px 80px;
+      flex: 1;
+    }
+
+    @media (min-width: 768px) {
+      .article-container {
+        padding: 40px 24px 100px;
+      }
+    }
+
+    /* Article Card Wrapper */
+    .article-card {
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+      padding: 24px 18px;
+    }
+
+    @media (min-width: 768px) {
+      .article-card {
+        padding: 48px 48px;
+      }
+    }
+
+    /* Article Header */
+    .article-header {
+      margin-bottom: 32px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .article-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+      font-size: 13.5px;
+      color: var(--text-muted);
+    }
+
+    .meta-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      padding: 3px 10px;
+      border-radius: var(--radius-full);
+      font-weight: 500;
+    }
+
+    .article-title {
+      font-size: clamp(24px, 5.5vw, 34px);
+      font-weight: 800;
+      line-height: 1.32;
+      letter-spacing: -0.03em;
+      color: var(--text-main);
+      margin-bottom: 10px;
+    }
+
+    .article-subtitle {
+      font-size: clamp(16px, 3.8vw, 19px);
+      font-weight: 500;
+      line-height: 1.5;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 14px;
+    }
+
+    .tag-pill {
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--primary);
+      background: var(--primary-light);
+      padding: 3px 10px;
+      border-radius: var(--radius-full);
+      text-decoration: none;
+    }
+
+    /* Typography & Markdown Content */
+    .content {
+      color: var(--text-main);
+    }
+
+    .content h1, .content h2, .content h3, .content h4, .verification-card {
+      scroll-margin-top: 80px;
+    }
+
+    .content h1, .content h2, .content h3, .content h4 {
+      color: var(--text-main);
+      font-weight: 750;
+      line-height: 1.38;
+      letter-spacing: -0.025em;
+      margin-top: 2.2em;
+      margin-bottom: 0.8em;
+      position: relative;
+    }
+
+    .content h1 {
+      font-size: clamp(21px, 4.8vw, 27px);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.4em;
+    }
+
+    .content h2 {
+      font-size: clamp(19px, 4.2vw, 23px);
+      padding-left: 12px;
+      border-left: 4px solid var(--primary);
+    }
+
+    .content h3 {
+      font-size: clamp(17px, 3.6vw, 19.5px);
+    }
+
+    .content h4 {
+      font-size: 16.5px;
+      color: var(--text-muted);
+    }
+
+    .content a.heading-anchor {
+      color: var(--text-light);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.82em;
+      margin-right: 0.35em;
+      opacity: 0;
+      transition: opacity 0.15s ease;
+      word-break: keep-all;
+    }
+    .content h1:hover > a.heading-anchor,
+    .content h2:hover > a.heading-anchor,
+    .content h3:hover > a.heading-anchor,
+    .content h4:hover > a.heading-anchor,
+    .content a.heading-anchor:focus,
+    .content a.heading-anchor:focus-visible {
+      opacity: 1;
+      color: var(--text-muted);
+    }
+
+    .content p {
+      margin-top: 0;
+      margin-bottom: 1.4em;
+      text-align: start;
+    }
+
+    .content a {
+      color: var(--primary);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      word-break: keep-all;
+      overflow-wrap: break-word;
+    }
+
+    .content a:hover {
+      color: var(--primary-hover);
+    }
+
+    .content strong, .content b {
+      font-weight: 700;
+    }
+
+    .content ul, .content ol {
+      margin-bottom: 1.4em;
+      padding-left: 1.4em;
+    }
+
+    .content li {
+      margin-bottom: 0.5em;
+    }
+
+    .content hr {
+      border: 0;
+      height: 1px;
+      background: var(--border);
+      margin: 2.5em 0;
+    }
+
+    .content blockquote {
+      margin: 1.5em 0;
+      padding: 14px 18px;
+      background-color: var(--quote-bg);
+      border-left: 4px solid var(--quote-border);
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      color: var(--text-main);
+    }
+
+    .content blockquote p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Inline Code */
+    .content code:not(pre code) {
+      font-family: var(--font-mono);
+      font-size: 0.88em;
+      background: var(--inline-code-bg);
+      color: var(--inline-code-text);
+      padding: 0.2em 0.45em;
+      border-radius: 4px;
+      font-weight: 500;
+    }
+
+    /* Code Block with Copy Button */
+    .code-block-wrapper {
+      position: relative;
+      margin: 1.6em 0;
+      border-radius: var(--radius-md);
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .code-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 14px;
+      background: rgba(255, 255, 255, 0.05);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 12px;
+      font-family: var(--font-mono);
+      color: #94a3b8;
+    }
+
+    .code-lang {
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .code-lang.lang-generic {
+      text-transform: none;
+      letter-spacing: 0;
+    }
+
+    .copy-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #e2e8f0;
+      font-size: 11.5px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.15s ease;
+    }
+
+    .copy-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+    .nav-btn:focus-visible,
+    .sim-btn:focus-visible,
+    .sim-tab-btn:focus-visible,
+    .copy-btn:focus-visible,
+    .toc-close-btn:focus-visible,
+    #back-to-top:focus-visible {
+      outline: 2px solid var(--border-focus);
+      outline-offset: 2px;
+    }
+
+    .copy-btn.copied {
+      background: #10b981;
+      color: #ffffff;
+      border-color: #10b981;
+    }
+
+    .content pre {
+      margin: 0;
+      padding: 14px 16px;
+      overflow-x: auto;
+      background: transparent;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .content pre code {
+      font-family: var(--font-mono);
+      font-size: 13.5px;
+      line-height: 1.6;
+      color: var(--code-text);
+      display: block;
+      background: none;
+      padding: 0;
+    }
+
+    /* Tables (Responsive Scroll) */
+    /* Callout & Note Blocks */
+    .callout-box {
+      margin: 1.6em 0;
+      padding: 16px 18px;
+      border-radius: var(--radius-md);
+      background: var(--bg-surface);
+      border-left: 4px solid var(--primary);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .callout-box.tip {
+      border-left-color: #10b981;
+      background: rgba(16, 185, 129, 0.08);
+    }
+
+    .callout-box.warning {
+      border-left-color: #f59e0b;
+      background: rgba(245, 158, 11, 0.08);
+    }
+
+    .callout-box.info {
+      border-left-color: #3b82f6;
+      background: rgba(59, 130, 246, 0.08);
+    }
+
+    .callout-title {
+      font-weight: 700;
+      font-size: 15px;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Interactive Simulator Component */
+    .sim-container {
+      margin: 2em 0;
+      padding: 20px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+    }
+
+    .sim-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 16px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .sim-title {
+      font-size: 17px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-main);
+    }
+
+    .sim-tabs {
+      display: flex;
+      gap: 6px;
+      background: var(--bg-card);
+      padding: 4px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+    }
+
+    .sim-tab-btn {
+      padding: 6px 12px;
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      font-size: 13.5px;
+      font-weight: 600;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: all 0.18s ease;
+    }
+
+    .sim-tab-btn.active {
+      background: var(--primary);
+      color: #ffffff;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .sim-controls {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 18px;
+      background: var(--bg-card);
+      padding: 10px 14px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+    }
+
+    .sim-btn-group {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .sim-btn {
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 600;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      background: var(--bg-surface);
+      color: var(--text-main);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+      flex: 0 0 auto;
+    }
+
+    @media (max-width: 420px) {
+      .sim-controls {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .sim-btn-group {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        width: 100%;
+      }
+      .sim-btn {
+        justify-content: center;
+      }
+    }
+
+    .sim-btn:hover:not(:disabled) {
+      background: var(--primary-light);
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .sim-btn:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
+    .sim-btn.primary {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #ffffff;
+    }
+
+    .sim-btn.primary:hover:not(:disabled) {
+      background: var(--primary-hover);
+    }
+
+    .sim-status-badge {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--primary);
+      background: var(--primary-light);
+      padding: 4px 10px;
+      border-radius: var(--radius-full);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .sim-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    @media (min-width: 640px) {
+      .sim-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .sim-panel {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 14px;
+    }
+
+    .sim-panel-title {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .sim-registers {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+    }
+
+    .sim-reg-card {
+      background: var(--bg-surface);
+      padding: 8px 10px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      transition: all 0.2s ease;
+    }
+
+    .sim-reg-card.changed {
+      border-color: #f59e0b;
+      background: rgba(245, 158, 11, 0.12);
+      animation: pulse-orange 0.8s ease;
+    }
+
+    .sim-reg-label {
+      font-size: 11.5px;
+      color: var(--text-muted);
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .sim-reg-val {
+      font-family: var(--font-mono);
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .sim-mem-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .sim-mem-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 6px 10px;
+      border-radius: var(--radius-sm);
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      font-size: 13px;
+      font-family: var(--font-mono);
+      transition: all 0.2s ease;
+    }
+
+    .sim-mem-row.pc-target {
+      border-color: var(--primary);
+      background: var(--primary-light);
+      font-weight: 700;
+    }
+
+    .sim-mem-row.modified {
+      border-color: #ef4444;
+      background: rgba(239, 68, 68, 0.1);
+      font-weight: 700;
+      animation: pulse-red 0.8s ease;
+    }
+
+    .sim-mem-row.read-target {
+      border-color: #10b981;
+      background: rgba(16, 185, 129, 0.1);
+      font-weight: 700;
+    }
+
+    .sim-badge-sm {
+      font-size: 11px;
+      padding: 2px 6px;
+      border-radius: var(--radius-full);
+      font-family: var(--font-sans);
+      font-weight: 600;
+    }
+
+    .badge-code { background: #3b82f6; color: white; }
+    .badge-data { background: #10b981; color: white; }
+    .badge-mod { background: #ef4444; color: white; }
+
+    .sim-desc-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 14px 16px;
+    }
+
+    .sim-desc-step {
+      font-size: 14.5px;
+      line-height: 1.6;
+      color: var(--text-main);
+    }
+
+    .sim-desc-step strong {
+      color: var(--primary);
+    }
+
+    @keyframes pulse-orange {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.02); }
+      100% { transform: scale(1); }
+    }
+
+    @keyframes pulse-red {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.02); }
+      100% { transform: scale(1); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .sim-reg-card.changed,
+      .sim-mem-row.modified {
+        animation: none;
+      }
+    }
+
+    /* Footnotes and Citations */
+    .footnote-ref {
+      font-size: 0.78em;
+      line-height: 0;
+      vertical-align: super;
+      padding: 0 2px;
+      font-weight: 700;
+      color: var(--primary);
+      text-decoration: none;
+    }
+    .footnote-ref:hover {
+      text-decoration: underline;
+    }
+    .footnotes-section {
+      margin-top: 3.5rem;
+      padding-top: 2rem;
+      border-top: 2px solid var(--border);
+    }
+    .footnotes-section h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 1.2rem;
+      color: var(--text-main);
+    }
+    .footnotes-list {
+      font-size: 13.5px;
+      line-height: 1.75;
+      color: var(--text-muted);
+      padding-left: 1.6rem;
+    }
+    .footnotes-list li {
+      margin-bottom: 0.85rem;
+    }
+    .footnotes-list a.backlink {
+      color: var(--primary);
+      text-decoration: none;
+      margin-left: 6px;
+      font-weight: 700;
+    }
+    .footnotes-list a.backlink:hover {
+      text-decoration: underline;
+    }
+
+    /* Military Operational Labels */
+    .badge-record {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 4px;
+      background: #10b981;
+      color: #ffffff;
+      margin-right: 6px;
+      vertical-align: middle;
+    }
+    .badge-estimate {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 4px;
+      background: #f59e0b;
+      color: #ffffff;
+      margin-right: 6px;
+      vertical-align: middle;
+    }
+    .badge-scenario {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 4px;
+      background: #8b5cf6;
+      color: #ffffff;
+      margin-right: 6px;
+      vertical-align: middle;
+    }
+
+    /* Archival Metadata Card */
+    .archival-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--primary);
+      border-radius: var(--radius-sm);
+      padding: 14px 18px;
+      margin: 1.2rem 0;
+      font-size: 14px;
+      line-height: 1.65;
+    }
+    .archival-card .card-title {
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .archival-meta-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 8px 16px;
+      margin-top: 8px;
+      font-size: 13px;
+    }
+    .archival-meta-item strong {
+      color: var(--text-main);
+    }
+
+    .table-wrapper {
+      position: relative;
+      width: 100%;
+      overflow-x: auto;
+      margin: 1.8em 0;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      -webkit-overflow-scrolling: touch;
+      box-shadow: var(--shadow-sm);
+      background: var(--bg-card);
+    }
+    .table-wrapper:focus-visible {
+      outline: 2px solid var(--border-focus);
+      outline-offset: 2px;
+    }
+    .table-wrapper[data-scroll-hint]::after {
+      content: "↔ " attr(data-scroll-hint);
+      display: none;
+      font-size: 11.5px;
+      font-weight: 600;
+      color: var(--text-muted);
+      background: var(--bg-surface);
+      padding: 5px 12px;
+      text-align: right;
+      border-top: 1px dashed var(--border);
+      letter-spacing: -0.01em;
+    }
+    @media (max-width: 768px) {
+      .table-wrapper[data-scroll-hint]::after {
+        display: block;
+      }
+    }
+
+    .content table {
+      width: 100%;
+      min-width: 780px;
+      border-collapse: collapse;
+      font-size: 14.5px;
+      text-align: left;
+    }
+
+    .content th {
+      background: var(--bg-surface);
+      font-weight: 700;
+      padding: 12px 14px;
+      border-bottom: 2px solid var(--border);
+      color: var(--text-main);
+      white-space: nowrap;
+    }
+
+    .content td {
+      padding: 11px 14px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text-main);
+      vertical-align: middle;
+      word-break: keep-all;
+    }
+
+    .content tr:last-child td {
+      border-bottom: none;
+    }
+
+    .content tr:nth-child(even) td {
+      background: rgba(0, 0, 0, 0.015);
+    }
+
+    /* 7대 표준 판정 체계 및 신뢰도 배지 */
+    .badge-verdict {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: var(--radius-sm);
+      line-height: 1.35;
+      white-space: nowrap;
+      letter-spacing: -0.01em;
+    }
+    .badge-verdict::before {
+      content: "";
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .badge-verified {
+      background: rgba(16, 185, 129, 0.12);
+      color: #047857;
+      border: 1px solid rgba(16, 185, 129, 0.35);
+    }
+    .badge-verified::before { background: #10b981; }
+
+    .badge-mostly-verified {
+      background: rgba(13, 148, 136, 0.12);
+      color: #0f766e;
+      border: 1px solid rgba(13, 148, 136, 0.35);
+    }
+    .badge-mostly-verified::before { background: #0d9488; }
+
+    .badge-partially-verified {
+      background: rgba(217, 119, 6, 0.12);
+      color: #b45309;
+      border: 1px solid rgba(217, 119, 6, 0.35);
+    }
+    .badge-partially-verified::before { background: #f59e0b; }
+
+    .badge-misleading {
+      background: rgba(234, 88, 12, 0.12);
+      color: #c2410c;
+      border: 1px solid rgba(234, 88, 12, 0.35);
+    }
+    .badge-misleading::before { background: #ea580c; }
+
+    .badge-insufficient {
+      background: rgba(100, 116, 139, 0.12);
+      color: #475569;
+      border: 1px solid rgba(100, 116, 139, 0.35);
+    }
+    .badge-insufficient::before { background: #64748b; }
+
+    .badge-refuted {
+      background: rgba(225, 29, 72, 0.12);
+      color: #be123c;
+      border: 1px solid rgba(225, 29, 72, 0.35);
+    }
+    .badge-refuted::before { background: #f43f5e; }
+
+    .badge-pending {
+      background: rgba(99, 102, 241, 0.12);
+      color: #4338ca;
+      border: 1px solid rgba(99, 102, 241, 0.35);
+    }
+    .badge-pending::before { background: #6366f1; }
+
+    /* 신뢰도 배지 */
+    .badge-confidence {
+      display: inline-flex;
+      align-items: center;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 7px;
+      border-radius: var(--radius-full);
+      line-height: 1.35;
+      white-space: nowrap;
+    }
+    .badge-confidence-high {
+      background: rgba(59, 130, 246, 0.1);
+      color: #1d4ed8;
+      border: 1px solid rgba(59, 130, 246, 0.25);
+    }
+    .badge-confidence-moderate {
+      background: rgba(168, 85, 247, 0.1);
+      color: #7e22ce;
+      border: 1px solid rgba(168, 85, 247, 0.25);
+    }
+    .badge-confidence-low {
+      background: rgba(148, 163, 184, 0.15);
+      color: #475569;
+      border: 1px solid rgba(148, 163, 184, 0.25);
+    }
+
+    /* 증거 수준 (Evidence Level) 배지 */
+    .badge-evidence {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2.5px 8px;
+      border-radius: var(--radius-sm);
+      line-height: 1.35;
+      white-space: nowrap;
+      letter-spacing: -0.01em;
+    }
+    .badge-evidence-high {
+      background: rgba(16, 185, 129, 0.12);
+      color: #047857;
+      border: 1px solid rgba(16, 185, 129, 0.35);
+    }
+    .badge-evidence-moderate {
+      background: rgba(217, 119, 6, 0.12);
+      color: #b45309;
+      border: 1px solid rgba(217, 119, 6, 0.35);
+    }
+    .badge-evidence-low {
+      background: rgba(100, 116, 139, 0.12);
+      color: #475569;
+      border: 1px solid rgba(100, 116, 139, 0.35);
+    }
+
+    /* Dark Mode Badges */
+    :root[data-theme="dark"] .badge-evidence-high {
+      background: rgba(16, 185, 129, 0.18);
+      color: #34d399;
+      border-color: rgba(52, 211, 153, 0.35);
+    }
+    :root[data-theme="dark"] .badge-evidence-moderate {
+      background: rgba(217, 119, 6, 0.18);
+      color: #fbbf24;
+      border-color: rgba(251, 191, 36, 0.35);
+    }
+    :root[data-theme="dark"] .badge-evidence-low {
+      background: rgba(100, 116, 139, 0.2);
+      color: #cbd5e1;
+      border-color: rgba(148, 163, 184, 0.3);
+    }
+    :root[data-theme="dark"] .badge-verified {
+      background: rgba(16, 185, 129, 0.18);
+      color: #34d399;
+      border-color: rgba(52, 211, 153, 0.35);
+    }
+    :root[data-theme="dark"] .badge-mostly-verified {
+      background: rgba(13, 148, 136, 0.18);
+      color: #2dd4bf;
+      border-color: rgba(45, 212, 191, 0.35);
+    }
+    :root[data-theme="dark"] .badge-partially-verified {
+      background: rgba(217, 119, 6, 0.18);
+      color: #fbbf24;
+      border-color: rgba(251, 191, 36, 0.35);
+    }
+    :root[data-theme="dark"] .badge-misleading {
+      background: rgba(234, 88, 12, 0.18);
+      color: #fb923c;
+      border-color: rgba(251, 146, 60, 0.35);
+    }
+    :root[data-theme="dark"] .badge-insufficient {
+      background: rgba(100, 116, 139, 0.2);
+      color: #cbd5e1;
+      border-color: rgba(148, 163, 184, 0.3);
+    }
+    :root[data-theme="dark"] .badge-refuted {
+      background: rgba(225, 29, 72, 0.2);
+      color: #fb7185;
+      border-color: rgba(251, 113, 133, 0.35);
+    }
+    :root[data-theme="dark"] .badge-pending {
+      background: rgba(99, 102, 241, 0.2);
+      color: #a5b4fc;
+      border-color: rgba(165, 180, 252, 0.35);
+    }
+    :root[data-theme="dark"] .badge-confidence-high {
+      background: rgba(56, 189, 248, 0.16);
+      color: #7dd3fc;
+      border-color: rgba(56, 189, 248, 0.3);
+    }
+    :root[data-theme="dark"] .badge-confidence-moderate {
+      background: rgba(192, 132, 252, 0.16);
+      color: #e9d5ff;
+      border-color: rgba(192, 132, 252, 0.3);
+    }
+    :root[data-theme="dark"] .badge-confidence-low {
+      background: rgba(148, 163, 184, 0.2);
+      color: #cbd5e1;
+      border-color: rgba(148, 163, 184, 0.3);
+    }
+
+    /* 4단계 공통 템플릿 검증 카드 */
+    .verification-card {
+      margin: 2.2em 0;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .verification-card:hover {
+      border-color: var(--border-focus);
+      box-shadow: var(--shadow-md);
+    }
+    .vc-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 14px 18px;
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border);
+    }
+    .vc-title-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .vc-step-id {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--primary);
+      background: var(--primary-light);
+      padding: 3px 8px;
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(59, 130, 246, 0.2);
+    }
+    .vc-issue-title {
+      font-size: 15.5px;
+      font-weight: 750;
+      color: var(--text-main);
+    }
+    .vc-badges {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .vc-body {
+      padding: 18px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .vc-block {
+      border-left: 3px solid var(--border);
+      padding-left: 14px;
+    }
+    .vc-block.step-1 { border-left-color: #3b82f6; }
+    .vc-block.step-2 { border-left-color: #10b981; }
+    .vc-block.step-3 { border-left-color: #f59e0b; }
+    .vc-block.step-4 { border-left-color: #64748b; }
+    .vc-block.step-5 { border-left-color: #8b5cf6; }
+
+    .vc-step-label {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .vc-block.step-1 .vc-step-label { color: #2563eb; }
+    .vc-block.step-2 .vc-step-label { color: #059669; }
+    .vc-block.step-3 .vc-step-label { color: #d97706; }
+    .vc-block.step-4 .vc-step-label { color: #475569; }
+    .vc-block.step-5 .vc-step-label { color: #7c3aed; }
+
+    :root[data-theme="dark"] .vc-block.step-1 .vc-step-label { color: #60a5fa; }
+    :root[data-theme="dark"] .vc-block.step-2 .vc-step-label { color: #34d399; }
+    :root[data-theme="dark"] .vc-block.step-3 .vc-step-label { color: #fbbf24; }
+    :root[data-theme="dark"] .vc-block.step-4 .vc-step-label { color: #94a3b8; }
+    :root[data-theme="dark"] .vc-block.step-5 .vc-step-label { color: #a78bfa; }
+
+    /* External Links in References */
+    .references-list a.ext-link,
+    .content a.ext-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      font-weight: 600;
+      color: var(--primary);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .references-list a.ext-link::after,
+    .content a.ext-link::after {
+      content: "↗";
+      font-size: 11px;
+      line-height: 1;
+      opacity: 0.8;
+    }
+
+    /* Collapsible References Section */
+    .references-collapsible {
+      margin: 2rem 0;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      background: var(--bg-card);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.2s ease;
+    }
+
+    .references-collapsible summary.references-toggle {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.1rem 1.4rem;
+      background: var(--bg-surface);
+      cursor: pointer;
+      user-select: none;
+      list-style: none;
+      border-bottom: 1px solid transparent;
+      transition: background 0.15s ease, border-color 0.15s ease;
+    }
+
+    .references-collapsible summary.references-toggle::-webkit-details-marker {
+      display: none;
+    }
+
+    .references-collapsible summary.references-toggle:hover {
+      background: var(--bg-subtle, rgba(0, 0, 0, 0.03));
+    }
+
+    :root[data-theme="dark"] .references-collapsible summary.references-toggle:hover {
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .references-collapsible[open] summary.references-toggle {
+      border-bottom-color: var(--border);
+    }
+
+    .references-toggle .toggle-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-main);
+      flex-wrap: wrap;
+    }
+
+    .references-toggle .toggle-badge {
+      font-size: 12px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 9999px;
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    .references-toggle .toggle-icon {
+      font-size: 13px;
+      color: var(--text-muted);
+      transition: transform 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+    }
+
+    .references-collapsible[open] summary.references-toggle .toggle-icon {
+      transform: rotate(180deg);
+    }
+
+    .references-body {
+      padding: 1.25rem 1.4rem;
+    }
+
+    .references-group-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin: 1.8rem 0 0.5rem 0;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-main);
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 0.5rem;
+    }
+
+    .references-group-title:first-child {
+      margin-top: 0.5rem;
+    }
+
+    .references-group-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 0.9rem;
+      line-height: 1.5;
+    }
+
+    .vc-speaker-meta {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+      padding: 4px 10px;
+      background: var(--bg-surface);
+      border-radius: var(--radius-sm);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .vc-speaker-meta strong {
+      color: var(--text-main);
+    }
+    .vc-content {
+      font-size: 14.5px;
+      line-height: 1.7;
+      color: var(--text-main);
+    }
+    .vc-content p:last-child {
+      margin-bottom: 0;
+    }
+    .vc-content ul {
+      margin-bottom: 0;
+      padding-left: 18px;
+    }
+    .vc-content li {
+      margin-bottom: 4px;
+    }
+
+    /* TOC Drawer (Slide-in) */
+    .drawer-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(4px);
+      z-index: 90;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .drawer-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .toc-drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      transform: translateX(100%);
+      width: 320px;
+      max-width: 88vw;
+      height: 100%;
+      background: var(--drawer-bg);
+      border-left: 1px solid var(--border);
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      box-shadow: var(--shadow-lg);
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .toc-drawer.active {
+      transform: translateX(0);
+    }
+
+    .toc-drawer-header {
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .toc-drawer-title {
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .toc-close-btn {
+      background: transparent;
+      border: none;
+      font-size: 20px;
+      color: var(--text-muted);
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .toc-drawer-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px 16px 40px;
+    }
+
+    .toc-drawer-body ul.toc-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .toc-drawer-body li {
+      margin-bottom: 6px;
+    }
+
+    .toc-drawer-body li.depth-2 {
+      padding-left: 0;
+      margin-top: 10px;
+      margin-bottom: 4px;
+    }
+    .toc-drawer-body li.depth-2 > .toc-link {
+      font-weight: 700;
+      color: var(--text-main);
+      border-left: 2px solid var(--primary);
+      padding-left: 8px;
+    }
+    .toc-drawer-body li.depth-3 {
+      padding-left: 14px;
+      margin-bottom: 3px;
+    }
+    .toc-drawer-body li.depth-3 > .toc-link {
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+    .toc-drawer-body li.depth-4 {
+      padding-left: 24px;
+      margin-bottom: 2px;
+    }
+    .toc-drawer-body li.depth-4 > .toc-link {
+      font-size: 13px;
+      color: var(--text-light);
+    }
+
+    .toc-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9.5px;
+      font-weight: 700;
+      line-height: 1.2;
+      padding: 1.5px 5px;
+      border-radius: 4px;
+      margin-right: 6px;
+      flex-shrink: 0;
+      font-family: var(--font-mono);
+    }
+    .toc-badge.badge-h2 {
+      background: var(--primary-light);
+      color: var(--primary);
+      border: 1px solid rgba(37, 99, 235, 0.25);
+    }
+    .toc-badge.badge-h3 {
+      background: var(--bg-surface);
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+    }
+    .toc-badge.badge-h4 {
+      background: transparent;
+      color: var(--text-light);
+      border: 1px dashed var(--border);
+    }
+
+    .toc-link {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 13.5px;
+      line-height: 1.45;
+      display: flex;
+      align-items: baseline;
+      padding: 4px 6px;
+      border-radius: var(--radius-sm);
+      transition: all 0.15s ease;
+    }
+
+    .toc-link:hover, .toc-link.active {
+      color: var(--primary);
+      background: var(--primary-light);
+    }
+    .toc-text {
+      word-break: keep-all;
+    }
+
+    /* Heading Anchor Tooltip */
+    .anchor-tooltip {
+      position: absolute;
+      transform: translateX(-50%);
+      background: var(--code-bg);
+      color: var(--code-text);
+      font-size: 11.5px;
+      font-weight: 600;
+      padding: 4px 8px;
+      border-radius: var(--radius-sm);
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      z-index: 1000;
+      box-shadow: var(--shadow-md);
+      white-space: nowrap;
+    }
+    .anchor-tooltip.visible {
+      opacity: 1;
+      transform: translateX(-50%) translateY(-2px);
+    }
+
+    /* Floating Back to Top */
+    #back-to-top {
+      position: fixed;
+      bottom: 24px;
+      right: 20px;
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-full);
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow-md);
+      cursor: pointer;
+      z-index: 30;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      transition: all 0.2s ease;
+    }
+
+    #back-to-top.visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    /* Footer */
+    .article-footer {
+      text-align: center;
+      margin-top: 40px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      color: var(--text-light);
+      font-size: 13.5px;
+    }
+
+    .article-footer a {
+      color: var(--text-muted);
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Sticky Navigation Bar -->
+  <header class="top-nav">
+    <div class="nav-left">
+      <a href="index.html" class="nav-btn" title="목록으로 이동">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+        <span>목록</span>
+      </a>
+      <span class="nav-title" id="nav-title-text">생명은 계산이며 공생발생으로 진화한다 — 블레즈 아구에라 이 아르카스의 생명 기능주의와 AGI</span>
+    </div>
+    
+    <div class="nav-right">
+      <div class="font-picker" id="font-picker">
+        <button class="nav-btn" id="font-toggle" type="button" aria-label="본문 폰트" title="본문 폰트 선택" aria-expanded="false" aria-haspopup="listbox" aria-controls="font-menu">가</button>
+        <div class="font-menu" id="font-menu" role="listbox" hidden>
+          <button type="button" class="font-option" role="option" data-font="pretendard" aria-selected="true">Pretendard</button>
+          <button type="button" class="font-option" role="option" data-font="d2coding" aria-selected="false">D2Coding</button>
+        </div>
+      </div>
+      <button class="nav-btn" id="theme-toggle" aria-label="테마 전환" title="다크/라이트 모드 전환">
+        <span id="theme-icon">🌓</span>
+      </button>
+      <button class="nav-btn" id="toc-toggle" aria-label="목차 열기" title="목차 보기" aria-expanded="false" aria-controls="toc-drawer">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="21" x2="3" y1="6" y2="6"/><line x1="15" x2="3" y1="12" y2="12"/><line x1="17" x2="3" y1="18" y2="18"/></svg>
+        <span>목차</span>
+      </button>
+    </div>
+    <!-- Reading Progress Bar -->
+    <div id="progress-container">
+      <div id="progress-bar"></div>
+    </div>
+  </header>
+
+  <!-- TOC Slide-in Drawer -->
+  <div class="drawer-overlay" id="drawer-overlay"></div>
+  <aside class="toc-drawer" id="toc-drawer" aria-label="문서 목차">
+    <div class="toc-drawer-header">
+      <span class="toc-drawer-title">📑 목차</span>
+      <button class="toc-close-btn" id="toc-close" aria-label="목차 닫기">&times;</button>
+    </div>
+    <div class="toc-drawer-body">
+      <ul class="toc-list"><li class="depth-2"><a href="#1-1945년을-넘어선-기초과학으로서의-계산과-엔트로피" class="toc-link"><span class="toc-badge badge-h2">대주제</span><span class="toc-text">1. 1945년을 넘어선 기초과학으로서의 계산과 엔트로피</span></a></li><li class="depth-3"><a href="#11-앨런-튜링의-추상화와-보편-기계universal-machine의-메타-도약" class="toc-link"><span class="toc-badge badge-h3">중주제</span><span class="toc-text">1.1 앨런 튜링의 추상화와 보편 기계(Universal Machine)의 메타 도약</span></a></li><li class="depth-3"><a href="#12-엔트로피와-시간의-화살-그리고-인과율causality의-과학" class="toc-link"><span class="toc-badge badge-h3">중주제</span><span class="toc-text">1.2 엔트로피와 시간의 화살, 그리고 인과율(Causality)의 과학</span></a></li><li class="depth-2"><a href="#2-폰-노이만의-자기복제-오토마타와-생물학의-탄생" class="toc-link"><span class="toc-badge badge-h2">대주제</span><span class="toc-text">2. 폰 노이만의 자기복제 오토마타와 생물학의 탄생</span></a></li><li class="depth-3"><a href="#21-기계-a와-기계-b-폰-노이만이-푼-복제의-수학적-논리" class="toc-link"><span class="toc-badge badge-h3">중주제</span><span class="toc-text">2.1 기계 A와 기계 B: 폰 노이만이 푼 복제의 수학적 논리</span></a></li><li class="depth-3"><a href="#22-생물학은-컴퓨터-과학이며-전자-기기는-39인공-컴퓨터39다" class="toc-link"><span class="toc-badge badge-h3">중주제</span><span class="toc-text">2.2 생물학은 컴퓨터 과학이며, 전자 기기는 &#39;인공 컴퓨터&#39;다</span></a></li><li class="depth-2"><a href="#3-적자생존의-한계를-넘어서-린-마굴리스와-39뒤엉킨-덤불39" class="toc-link"><span class="toc-badge badge-h2">대주제</span><span class="toc-text">3. 적자생존의 한계를 넘어서 — 린 마굴리스와 &#39;뒤엉킨 덤불&#39;</span></a></li><li class="depth-3"><a href="#31-신다윈주의-종합설neo-darwinian-synthesis의-반쪽-진실" class="toc-link"><span class="toc-badge badge-h3">중주제</span><span class="toc-text">3.1 신다윈주의 종합설(Neo-Darwinian Synthesis)의 반쪽 진실</span></a></li><li class="depth-3"><a href="#32-린-마굴리스의-반란-세포내-공생발생설symbiogenesis" class="toc-link"><span class="toc-badge badge-h3">중주제</span><span class="toc-text">3.2 린 마굴리스의 반란: 세포내 공생발생설(Symbiogenesis)</span></a></li><li class="depth-3"><a href="#33-985의-정크-dna와-바이러스의-침투-게놈은-오픈소스-깃허브다" class="toc-link"><span class="toc-badge badge-h3">중주제</span><span class="toc-text">3.3 98.5%의 정크 DNA와 바이러스의 침투: 게놈은 오픈소스 깃허브다</span></a></li><li class="depth-3"><a href="#34-고정된-적합도-지형의-붕괴와-라마르크의-귀환" class="toc-link"><span class="toc-badge badge-h3">중주제</span><span class="toc-text">3.4 고정된 적합도 지형의 붕괴와 라마르크의 귀환</span></a></li><li class="depth-2"><a href="#4-생명은-왜-기능을-요구하는가-관계적-기능주의와-기질-독립성" class="toc-link"><span class="toc-badge badge-h2">대주제</span><span class="toc-text">4. 생명은 왜 기능을 요구하는가 — 관계적 기능주의와 기질 독립성</span></a></li><li class="depth-3"><a href="#41-돌과-콩팥의-차이-기능주의functionalism의-본질" class="toc-link"><span class="toc-badge badge-h3">중주제</span><span class="toc-text">4.1 돌과 콩팥의 차이: 기능주의(Functionalism)의 본질</span></a></li><li class="depth-3"><a href="#42-튜링의-기질-독립성substrate-independence과-투석기" class="toc-link"><span class="toc-badge badge-h3">중주제</span><span class="toc-text">4.2 튜링의 기질 독립성(Substrate Independence)과 투석기</span></a></li><li class="depth-3"><a href="#43-테세우스의-뇌brain-of-theseus-실리콘-뉴런-사고실험" class="toc-link"><span class="toc-badge badge-h3">중주제</span><span class="toc-text">4.3 테세우스의 뇌(Brain of Theseus): 실리콘 뉴런 사고실험</span></a></li><li class="depth-2"><a href="#5-무작위-4바이트-코드에서-피어난-인공생명-실험bff-soup" class="toc-link"><span class="toc-badge badge-h2">대주제</span><span class="toc-text">5. 무작위 4바이트 코드에서 피어난 인공생명 실험(BFF Soup)</span></a></li><li class="depth-3"><a href="#51-브레인퍽brainfuck-수프와-4바이트-무작위-코드" class="toc-link"><span class="toc-badge badge-h3">중주제</span><span class="toc-text">5.1 브레인퍽(Brainfuck) 수프와 4바이트 무작위 코드</span></a></li><li class="depth-3"><a href="#52-설계자-없는-세계에서-일어난-기적-자기복제자의-창발" class="toc-link"><span class="toc-badge badge-h3">중주제</span><span class="toc-text">5.2 설계자 없는 세계에서 일어난 기적: 자기복제자의 창발</span></a></li><li class="depth-3"><a href="#53-랑다우어의-원리와-지능의-군비-경쟁" class="toc-link"><span class="toc-badge badge-h3">중주제</span><span class="toc-text">5.3 랑다우어의 원리와 지능의 군비 경쟁</span></a></li><li class="depth-2"><a href="#6-agi와의-공존-인류의-새로운-미토콘드리아" class="toc-link"><span class="toc-badge badge-h2">대주제</span><span class="toc-text">6. AGI와의 공존 — 인류의 새로운 미토콘드리아</span></a></li><li class="depth-3"><a href="#61-텍스트는-협소가-아니라-일반이다-agi는-이미-도래했다" class="toc-link"><span class="toc-badge badge-h3">중주제</span><span class="toc-text">6.1 텍스트는 협소가 아니라 일반이다: AGI는 이미 도래했다</span></a></li><li class="depth-3"><a href="#62-인간-중심주의적-결벽증과-멜라니-미첼의-논리-퍼즐" class="toc-link"><span class="toc-badge badge-h3">중주제</span><span class="toc-text">6.2 인간 중심주의적 결벽증과 멜라니 미첼의 논리 퍼즐</span></a></li><li class="depth-3"><a href="#63-증기기관이-인류의-8분의-7을-낳았다-기술권의-초유기체" class="toc-link"><span class="toc-badge badge-h3">중주제</span><span class="toc-text">6.3 증기기관이 인류의 8분의 7을 낳았다: 기술권의 초유기체</span></a></li><li class="depth-3"><a href="#64-철학적-좀비의-허구성과-반사-거울로서의-의식theory-of-mind" class="toc-link"><span class="toc-badge badge-h3">중주제</span><span class="toc-text">6.4 철학적 좀비의 허구성과 반사 거울로서의 의식(Theory of Mind)</span></a></li><li class="depth-2"><a href="#7-종합-결론-우리는-이미-거대한-집단-지성의-일부다" class="toc-link"><span class="toc-badge badge-h2">대주제</span><span class="toc-text">7. 종합 결론: 우리는 이미 거대한 집단 지성의 일부다</span></a></li><li class="depth-2"><a href="#핵심-개념-및-사상사적-계보-대조-매트릭스" class="toc-link"><span class="toc-badge badge-h2">대주제</span><span class="toc-text">📚 핵심 개념 및 사상사적 계보 대조 매트릭스</span></a></li></ul>
+    </div>
+  </aside>
+
+  <!-- Main Article Content Container -->
+  <main class="article-container">
+    <article class="article-card">
+      <header class="article-header">
+        <div class="article-meta">
+          <span class="meta-badge">📅 2026-10-13</span>
+          <span class="meta-badge">⏱️ 약 76분</span>
+          <span class="meta-badge">✍️ Pages AI·생명철학·컴퓨터과학 심층 탐구팀</span>
+        </div>
+        <h1 class="article-title">생명은 계산이며 공생발생으로 진화한다 — 블레즈 아구에라 이 아르카스의 생명 기능주의와 AGI</h1>
+        <p class="article-subtitle">폰 노이만 자기복제 오토마타, 린 마굴리스의 세포내 공생, 기질 독립성(Substrate Independence), 인공생명 실험, 그리고 이미 도래한 AGI와의 지적 공생</p>
+        
+        <div class="tag-list">
+          
+          <span class="tag-pill">#인공지능철학</span>
+          
+          <span class="tag-pill">#생명기능주의</span>
+          
+          <span class="tag-pill">#블레즈아구에라이아르카스</span>
+          
+          <span class="tag-pill">#공생발생</span>
+          
+          <span class="tag-pill">#계산이론</span>
+          
+          <span class="tag-pill">#폰노이만</span>
+          
+          <span class="tag-pill">#튜링기계</span>
+          
+          <span class="tag-pill">#AGI</span>
+          
+          <span class="tag-pill">#인공생명</span>
+          
+          <span class="tag-pill">#초유기체</span>
+          
+          <span class="tag-pill">#집단지성</span>
+          
+        </div>
+      </header>
+
+      <section class="content" id="article-content">
+        <blockquote>
+<p><strong>문서 메타데이터 및 사상사적 프레임워크</strong>  </p>
+<ul>
+<li><strong>핵심 구술 사료</strong>: 블레즈 아구에라 이 아르카스(Blaise Agüera y Arcas, 구글 Fellow &amp; VP, 기술 및 사회 부문 CTO, 구글 &#39;지능 패러다임(Paradigms of Intelligence)&#39; 연구소 설립자, 《What is Intelligence?》 저자) Big Think 심층 인터뷰 — <em>&quot;The theory that connects the origin of life to the rise of intelligence&quot;</em> (런타임: 84분 57초)  </li>
+<li><strong>핵심 질문</strong>: <em>&quot;생명이란 무엇인가? 계산은 단지 1945년에 발명된 전자기기인가, 아니면 우주의 근본적 물리 법칙인가? 생명은 경쟁으로 진화했는가, 협력으로 도약했는가? 그리고 거대언어모델(LLM)과 AGI는 도구인가, 인류 문명의 새로운 미토콘드리아인가?&quot;</em>  </li>
+<li><strong>이론적 교차점</strong>: 앨런 튜링의 보편 기계(Universal Turing Machine), 존 폰 노이만의 자기복제 오토마타(Self-Reproducing Automata), 린 마굴리스의 세포내 공생발생설(Symbiogenesis), 기능주의(Functionalism)와 기질 독립성(Substrate Independence), 데이비드 차머스의 테세우스의 뇌, 인공생명(Artificial Life) 컴퓨터 실험, 대니얼 데닛의 지향계(Intentional Stance).</li>
+</ul>
+</blockquote>
+<div class="callout-box info">
+  <div class="callout-title">핵심 명제: "생명은 공생발생을 통해 복잡해지는 자기구성적 계산이다"</div>
+  <p><strong>"Life is self-constructing computation that complexifies through symbiogenesis."</strong><br>
+  컴퓨팅은 1945년 에니악에서 시작된 응용 공학 기술이 아니다. 19세기 증기기관보다 열역학이 먼저 존재했듯, 계산(Computation)은 엔트로피와 인과율이 세계에 구현되는 우주의 근본 기초과학이다. 생명은 스스로를 복제하고 치유하는 물질(Computronium)이며, 진화의 진정한 도약은 개체 간의 무자비한 적자생존 경쟁이 아니라 서로 다른 시스템이 하나로 융합하여 새로운 차원의 행위성을 획득하는 <strong>공생발생(Symbiogenesis)</strong>에서 비롯되었다. 인공지능(AI)은 인간 바깥의 이질적인 기계가 아니라, 1만 년에 걸친 인류 문명 초유기체(Superorganism)가 진핵생물의 미토콘드리아처럼 스스로 증설해낸 <strong>'외재화된 신경조직'</strong>이다.</p>
+</div>
+
+<hr>
+<h2 id="1-1945년을-넘어선-기초과학으로서의-계산과-엔트로피"><a href="#1-1945년을-넘어선-기초과학으로서의-계산과-엔트로피" class="heading-anchor" aria-hidden="true">#</a> 1. 1945년을 넘어선 기초과학으로서의 계산과 엔트로피</h2><p>오늘날 대중이 &#39;컴퓨터(Computer)&#39;라는 단어를 들을 때 가장 먼저 떠올리는 이미지는 실리콘 칩, 스마트폰, 메인프레임, 혹은 1945년에 탄생한 폰 노이만 구조의 전자 기계입니다. 대다수는 컴퓨터 과학을 응용 공학(Applied Engineering)의 하위 분과로 취급합니다.</p>
+<p>그러나 구글의 기술 및 사회 부문 CTO 블레즈 아구에라 이 아르카스(Blaise Agüera y Arcas)는 이 통념을 근본에서부터 거부합니다. 그에 따르면, 컴퓨터 과학은 공학 기술이 아니라 <strong>물리학의 열역학에 비견되는 우주의 기초과학(Basic Science)</strong>입니다. 19세기에 인류가 증기기관을 만들기 훨씬 전부터 물질의 상전이(Phase transition)와 열역학 법칙이 우주를 지배하고 있었던 것과 마찬가지로, 계산은 전자식 진공관이 발명되기 수십억 년 전부터 자연계의 물질과 생명을 작동시켜 온 인과율의 원리였습니다.</p>
+<div class="table-wrapper" style="margin:2rem 0; overflow-x:auto;">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 240" role="img" aria-label="기초과학으로서의 계산(Computation)과 인과율의 사슬" style="width:100%; height:auto; max-width:840px; display:block; margin:0 auto; background:var(--bg-card); border-radius:14px; border:1px solid var(--border);">
+  <defs>
+    <style>
+      .s1-title { font-family: Pretendard, sans-serif; font-weight: 800; font-size: 15px; fill: var(--text-main); }
+      .s1-sub { font-family: Pretendard, sans-serif; font-size: 12px; fill: var(--text-muted); }
+      .s1-box { fill: var(--bg-surface); stroke: var(--border); stroke-width: 1.2; rx: 8px; }
+      .s1-h { font-family: Pretendard, sans-serif; font-weight: 700; font-size: 13px; }
+      .s1-desc { font-family: Pretendard, sans-serif; font-size: 11px; fill: var(--text-muted); }
+      .s1-node { fill: var(--bg-card); stroke: var(--border); stroke-width: 1.5; rx: 6px; }
+      .s1-node-txt { font-family: Pretendard, sans-serif; font-size: 11.5px; font-weight: 700; text-anchor: middle; fill: var(--text-main); }
+    </style>
+    <marker id="s1-arr" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#3b82f6"/>
+    </marker>
+    <marker id="s1-arr-green" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#10b981"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="840" height="240" rx="14" fill="var(--bg-card)"/>
+  <text x="420" y="28" text-anchor="middle" class="s1-title">기초과학으로서의 계산(Computation)과 생명의 창발</text>
+  <text x="420" y="46" text-anchor="middle" class="s1-sub">엔트로피에서 화학 반응망, 조건적 인과율을 거쳐 생명으로 이어지는 기초과학의 사슬</text>
+
+  <!-- Stage 1: Physics -->
+  <g transform="translate(25, 65)">
+    <rect x="0" y="0" width="170" height="145" class="s1-box" stroke="rgba(99, 102, 241, 0.4)"/>
+    <text x="85" y="26" text-anchor="middle" class="s1-h" fill="#6366f1">1. 물리학 (Physics)</text>
+    <rect x="15" y="42" width="140" height="40" class="s1-node"/>
+    <text x="85" y="66" class="s1-node-txt">엔트로피 증가 (S)</text>
+    <rect x="15" y="90" width="140" height="40" class="s1-node"/>
+    <text x="85" y="114" class="s1-node-txt">시간의 화살 결정</text>
+  </g>
+
+  <!-- Arrow 1 -> 2 -->
+  <line x1="200" y1="137" x2="225" y2="137" stroke="#3b82f6" stroke-width="2" marker-end="url(#s1-arr)"/>
+
+  <!-- Stage 2: Chemistry -->
+  <g transform="translate(230, 65)">
+    <rect x="0" y="0" width="170" height="145" class="s1-box"/>
+    <text x="85" y="26" text-anchor="middle" class="s1-h" fill="#0284c7">2. 화학 (Chemistry)</text>
+    <rect x="15" y="42" width="140" height="40" class="s1-node"/>
+    <text x="85" y="66" class="s1-node-txt">비평형 화학 반응망</text>
+    <rect x="15" y="90" width="140" height="40" class="s1-node"/>
+    <text x="85" y="114" class="s1-node-txt">자기촉매 순환 회로</text>
+  </g>
+
+  <!-- Arrow 2 -> 3 -->
+  <line x1="405" y1="137" x2="430" y2="137" stroke="#3b82f6" stroke-width="2" marker-end="url(#s1-arr)"/>
+
+  <!-- Stage 3: Computing -->
+  <g transform="translate(435, 65)">
+    <rect x="0" y="0" width="175" height="145" class="s1-box" stroke="rgba(59, 130, 246, 0.4)"/>
+    <text x="87" y="26" text-anchor="middle" class="s1-h" fill="#3b82f6">3. 컴퓨터 과학 (Computing)</text>
+    <rect x="15" y="42" width="145" height="40" class="s1-node" stroke="#3b82f6"/>
+    <text x="87" y="66" class="s1-node-txt" fill="#3b82f6">조건적 인과율 생성</text>
+    <rect x="15" y="90" width="145" height="40" class="s1-node" stroke="#3b82f6"/>
+    <text x="87" y="114" class="s1-node-txt" fill="#3b82f6">If-Then 조건부 알고리즘</text>
+  </g>
+
+  <!-- Arrow 3 -> 4 -->
+  <line x1="615" y1="137" x2="640" y2="137" stroke="#10b981" stroke-width="2.5" marker-end="url(#s1-arr-green)"/>
+
+  <!-- Stage 4: Life -->
+  <g transform="translate(645, 65)">
+    <rect x="0" y="0" width="170" height="145" class="s1-box" stroke="rgba(16, 185, 129, 0.4)"/>
+    <text x="85" y="26" text-anchor="middle" class="s1-h" fill="#10b981">4. 생명 (Life)</text>
+    <rect x="15" y="42" width="140" height="40" class="s1-node" stroke="#10b981"/>
+    <text x="85" y="66" class="s1-node-txt" fill="#10b981">자체 조직화된 계산</text>
+    <rect x="15" y="90" width="140" height="40" class="s1-node" stroke="#10b981"/>
+    <text x="85" y="114" class="s1-node-txt" fill="#10b981">컴퓨트로늄 (Computronium)</text>
+  </g>
+</svg>
+</div>
+
+<h3 id="11-앨런-튜링의-추상화와-보편-기계universal-machine의-메타-도약"><a href="#11-앨런-튜링의-추상화와-보편-기계universal-machine의-메타-도약" class="heading-anchor" aria-hidden="true">#</a> 1.1 앨런 튜링의 추상화와 보편 기계(Universal Machine)의 메타 도약</h3><p>1936년, 영국의 수학자 앨런 튜링(Alan Turing)은 당대 인간 계산원(Human Computers)들이 종이 위에서 수행하던 계산 행위를 관찰하고 이를 극한의 수학적 추상체로 환원했습니다. 그것이 바로 테이프(Tape) 위에 기호를 읽고 쓰는 헤드(Read/Write Head)와 내부 상태 전이표로 구성된 <strong>튜링 기계(Turing Machine)</strong>입니다.</p>
+<p>일반적인 튜링 기계는 정해진 규칙표에 따라 덧셈을 하거나, 제곱근을 구하거나, 텍스트의 빈도를 셀 수 있습니다. 하지만 튜링의 진정한 지적 마법은 여기서 한 걸음 더 나아간 <strong>보편 튜링 기계(Universal Turing Machine, UTM)</strong>의 증명에 있었습니다.</p>
+<blockquote>
+<p><em>&quot;어떤 기계는 그 자신의 규칙표 자체가 테이프 위에 기호(데이터)로 쓰일 수 있는 다른 규칙표를 읽어 들여 흉내 낼 수 있다.&quot;</em></p>
+</blockquote>
+<p>이것은 지극히 기묘한 메타 도약(Meta move)입니다. <strong>기계의 하드웨어 규칙 자체가 테이프 위에 기록되는 데이터와 완전히 동일한 차원으로 격하·통합된 것</strong>입니다. 규칙 자체가 데이터가 될 수 있다는 사실은, 단순하고 고정된 복잡도를 가진 하나의 기계가 테이프에 적힌 프로그램에 따라 우주에 존재하는 모든 종류의 임의적 계산 행동을 수행할 수 있음을 의미합니다. 이것이 바로 현대 컴퓨터이자 소프트웨어 알고리즘의 본질입니다.</p>
+<p>자연계의 일반적인 물리계(목성의 대기 소용돌이, 계곡을 흐르는 물줄기) 역시 상태(State)와 입력(Input), 출력(Output)을 정의하면 일종의 단순 튜링 기계로 볼 수 있습니다. 그러나 <strong>테이프 위에 쓰인 지침(Instruction) 자체가 자기 자신의 동작과 물리적 형태를 규정하는 시스템, 즉 보편 기계의 속성을 갖는 시스템은 오직 생명(Life)에서부터 비로소 시작됩니다.</strong></p>
+<h3 id="12-엔트로피와-시간의-화살-그리고-인과율causality의-과학"><a href="#12-엔트로피와-시간의-화살-그리고-인과율causality의-과학" class="heading-anchor" aria-hidden="true">#</a> 1.2 엔트로피와 시간의 화살, 그리고 인과율(Causality)의 과학</h3><p>미시세계의 뉴턴 역학 방정식이나 양자역학 슈뢰딩거 방정식은 시간 가역적(Time-reversible)입니다. 필름을 거꾸로 돌려도 물리 법칙에 어긋나지 않습니다. 당구대 위에서 공들이 무작위로 굴러다니는 장면은 순방향인지 역방향인지 구별하기 어렵습니다.</p>
+<p>그러나 사방으로 흩어져 있던 공들이 갑자기 일제히 중심으로 모여들어 완벽한 정삼각형을 이루고, 큐볼 하나가 모든 운동량을 받아 튕겨 나가는 순간 우리는 그것이 역재생된 필름임을 직관적으로 압니다. 거시세계에서 시간의 화살(Arrow of Time)이 존재하는 이유는 오직 <strong>엔트로피(Entropy)</strong>, 즉 계가 높은 질서(낮은 확률)에서 낮은 질서(높은 확률) 상태로 진행하기 때문입니다.</p>
+<p>$S = k_B \ln \Omega$</p>
+<p>블레즈 아구에라 이 아르카스는 여기서 계산과 엔트로피의 깊은 상관관계를 짚어냅니다. <strong>계산은 본질적으로 우주 안에 &#39;인과율(Causality)&#39;이 출현하는 서사</strong>입니다. 인류가 발명하거나 발견한 모든 프로그래밍 언어의 심장에는 예외 없이 조건문이 들어 있습니다:</p>
+<p>$\text{if } (condition) \implies \text{then } [Action]$</p>
+<p>조건문이 프로그래밍 언어의 필수불가결한 원자인 이유는, 세상에 <strong>원인과 결과(Causes and Effects)</strong>를 만들어내기 위한 최소 단위이기 때문입니다. 능동적 &#39;행동(Behavior)&#39;이라고 부를 수 있는 모든 것은 외부 입력에 대한 조건부 반응을 전제합니다.</p>
+<ul>
+<li>단순한 바이메탈 온도조절기(Thermostat)를 보십시오. 온도가 기준치 이하로 떨어지면 보일러를 켜고, 온도가 올라가면 스위치를 끕니다.</li>
+<li>비록 극도로 단순하지만 이것은 환경의 온도에 조건화된 최소한의 &#39;행동&#39;이며, 인과율을 물리 세계에 투사하는 원초적 계산입니다.</li>
+<li>따라서 계산 이론은 실리콘 회로의 설계 기법이 아니라, <strong>무기물로 가득 찬 우주에서 어떻게 조건적 인과율과 목적론적 행동이 창발했는가를 설명하는 자연철학</strong>입니다.</li>
+</ul>
+<hr>
+<h2 id="2-폰-노이만의-자기복제-오토마타와-생물학의-탄생"><a href="#2-폰-노이만의-자기복제-오토마타와-생물학의-탄생" class="heading-anchor" aria-hidden="true">#</a> 2. 폰 노이만의 자기복제 오토마타와 생물학의 탄생</h2><p>컴퓨터 과학의 또 다른 거인 존 폰 노이만(John von Neumann)은 1940년대 후반 생물학의 가장 난해한 철학적 난제, 즉 <strong>바론 폰 뮌히하우젠의 역설(Baron von Münchhausen Problem)</strong>과 마주했습니다. 늪에 빠진 사람이 자신의 장화 끈을 스스로 잡아당겨 탈출할 수 없듯이, 물질이 외부의 설계자 없이 어떻게 스스로를 만들어내며 복제(Self-reproduction)할 수 있는가 하는 부트스트랩(Bootstrap)의 문제였습니다.</p>
+<div class="table-wrapper" style="margin:2rem 0; overflow-x:auto;">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 180" role="img" aria-label="뮌히하우젠의 무한 퇴행 역설 (The Bootstrap Paradox)" style="width:100%; height:auto; max-width:840px; display:block; margin:0 auto; background:var(--bg-card); border-radius:14px; border:1px solid var(--border);">
+  <defs>
+    <style>
+      .s2-title { font-family: Pretendard, sans-serif; font-weight: 800; font-size: 15px; fill: var(--text-main); }
+      .s2-sub { font-family: Pretendard, sans-serif; font-size: 12px; fill: var(--text-muted); }
+      .s2-box { fill: var(--bg-surface); stroke: var(--border); stroke-width: 1.2; rx: 8px; }
+      .s2-node { fill: var(--bg-card); stroke: var(--border); stroke-width: 1.5; rx: 8px; }
+      .s2-txt { font-family: Pretendard, sans-serif; font-size: 12px; font-weight: 700; text-anchor: middle; fill: var(--text-main); }
+      .s2-desc { font-family: Pretendard, sans-serif; font-size: 10.5px; fill: var(--text-muted); text-anchor: middle; }
+    </style>
+    <marker id="s2-arr-red" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#ef4444"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="840" height="180" rx="14" fill="var(--bg-card)"/>
+  <text x="420" y="26" text-anchor="middle" class="s2-title">뮌히하우젠의 무한 퇴행 역설 (The Bootstrap Paradox)</text>
+  <text x="420" y="44" text-anchor="middle" class="s2-sub">외부 설계자 없이 물질이 스스로를 복제하려 할 때 마주치는 자기참조의 논리적 모순</text>
+
+  <!-- Step 1 -->
+  <g transform="translate(30, 65)">
+    <rect x="0" y="0" width="160" height="60" class="s2-node" stroke="#ef4444"/>
+    <text x="80" y="27" class="s2-txt">1. 개체 복제 시도</text>
+    <text x="80" y="46" class="s2-desc">"나를 복제하려면?"</text>
+  </g>
+
+  <line x1="195" y1="95" x2="225" y2="95" stroke="#ef4444" stroke-width="2" marker-end="url(#s2-arr-red)"/>
+
+  <!-- Step 2 -->
+  <g transform="translate(230, 65)">
+    <rect x="0" y="0" width="165" height="60" class="s2-node" stroke="#ef4444"/>
+    <text x="82" y="27" class="s2-txt">2. 지침 테이프 요구</text>
+    <text x="82" y="46" class="s2-desc">"내 설계도 Φ가 필요함"</text>
+  </g>
+
+  <line x1="400" y1="95" x2="430" y2="95" stroke="#ef4444" stroke-width="2" marker-end="url(#s2-arr-red)"/>
+
+  <!-- Step 3 -->
+  <g transform="translate(435, 65)">
+    <rect x="0" y="0" width="170" height="60" class="s2-node" stroke="#ef4444"/>
+    <text x="85" y="27" class="s2-txt">3. 지침 복제의 난제</text>
+    <text x="85" y="46" class="s2-desc">"설계도는 어떻게 복제하는가?"</text>
+  </g>
+
+  <line x1="610" y1="95" x2="640" y2="95" stroke="#ef4444" stroke-width="2" marker-end="url(#s2-arr-red)"/>
+
+  <!-- Step 4 -->
+  <g transform="translate(645, 65)">
+    <rect x="0" y="0" width="165" height="60" class="s2-node" stroke="#ef4444" fill="rgba(239, 68, 68, 0.08)"/>
+    <text x="82" y="27" class="s2-txt" fill="#ef4444">4. 무한 퇴행 (Loop)</text>
+    <text x="82" y="46" class="s2-desc" fill="#ef4444">설계도의 설계도... 무한 반복!</text>
+  </g>
+
+  <!-- Loop back arrow -->
+  <path d="M 727,130 C 727,165 312,165 312,130" fill="none" stroke="#ef4444" stroke-width="2" stroke-dasharray="4,4" marker-end="url(#s2-arr-red)"/>
+  <text x="520" y="156" text-anchor="middle" font-size="10.5" fill="#ef4444" font-weight="700">자기 참조적 복제의 교착 상태 발생 (부트스트랩 역설)</text>
+</svg>
+</div>
+
+<h3 id="21-기계-a와-기계-b-폰-노이만이-푼-복제의-수학적-논리"><a href="#21-기계-a와-기계-b-폰-노이만이-푼-복제의-수학적-논리" class="heading-anchor" aria-hidden="true">#</a> 2.1 기계 A와 기계 B: 폰 노이만이 푼 복제의 수학적 논리</h3><p>만약 자기를 복제하기 위해 자기 자신의 완벽한 복사본 지침을 체내에 품고 있어야 한다면, 그 지침 안에는 다시 지침을 복사하기 위한 지침이 들어 있어야 하므로 <strong>무한 퇴행(Infinite Regress)</strong>이라는 논리적 모순에 빠지게 됩니다.</p>
+<p>폰 노이만은 1948년 힉슨 심포지엄(Hixon Symposium) 등에서 발표한 자기복제 오토마타 이론을 통해 이 역설을 천재적인 논리 분할로 단칼에 해체했습니다:</p>
+<div class="table-wrapper" data-scroll-hint="좌우로 스크롤하여 확인" tabindex="0" role="region" aria-label="폰 노이만 자기복제 오토마타와 생체 분자 구조 대조표">
+<table>
+<thead>
+<tr>
+<th style="min-width: 140px; text-align:center;">구분</th>
+<th style="min-width: 200px; text-align:left;">폰 노이만의 수학적 오토마타 (1948)</th>
+<th style="min-width: 220px; text-align:left;">실제 분자생물학적 실체 (1953~1960년대)</th>
+<th style="min-width: 180px; text-align:left;">기능적 본질</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><strong>지침 테이프</strong></td>
+<td align="left">테이프 상의 기호 부호화 지침 ($\Phi$)</td>
+<td align="left"><strong>DNA / mRNA</strong> 이중나선 염기서열</td>
+<td align="left">소프트웨어 코드 (유전 암호)</td>
+</tr>
+<tr>
+<td align="center"><strong>기계 A (Machine A)</strong></td>
+<td align="left">테이프의 명령을 읽어 물리적 부품을 조립하는 <strong>능동적 만능 조립기(Universal Constructor)</strong></td>
+<td align="left"><strong>리보솜 (Ribosome)</strong> 및 t-RNA 번역 복합체</td>
+<td align="left">코드를 물리적 단백질 구조로 번역·실행</td>
+</tr>
+<tr>
+<td align="center"><strong>기계 B (Machine B)</strong></td>
+<td align="left">테이프를 명령으로 해석하지 않고 순수한 기호 데이터로 취급하여 그대로 복사하는 <strong>수동적 복제기(Copier)</strong></td>
+<td align="left"><strong>DNA 중합효소 (DNA Polymerase)</strong></td>
+<td align="left">명령을 실행하지 않고 맹목적으로 복제</td>
+</tr>
+<tr>
+<td align="center"><strong>재귀적 닫힘</strong></td>
+<td align="left">지침 테이프 안에 기계 A와 기계 B를 만드는 코드 자체가 포함됨: $\Phi(A + B)$</td>
+<td align="left">리보솜과 중합효소를 합성하는 유전자 코드가 DNA 내부에 자가 수록됨</td>
+<td align="left"><strong>부트스트랩 역설의 완전한 해소</strong></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<p>지침 테이프가 두 가지 이중적 성격(Dual Nature)을 갖는다는 점이 핵심입니다. <strong>기계 A에게 테이프는 &#39;실행해야 할 동적 프로그램&#39;이지만, 기계 B에게 테이프는 단지 &#39;수동적으로 복사해야 할 정적 데이터&#39;일 뿐입니다.</strong> </p>
+<p>그리고 가장 극적인 역사적 진실은, 폰 노이만이 이 수학적 청사진을 정립한 시점이 <strong>제임스 왓슨과 프랜시스 크릭, 로절린드 프랭클린이 DNA 이중나선 구조를 밝혀내기(1953년) 전이었으며, 리보솜이나 DNA 중합효소의 물리적 메커니즘이 규명되기 훨씬 전</strong>이었다는 사실입니다. 폰 노이만은 순수한 논리적 필연성을 통해 생명 복제의 기계적 구성을 완벽히 연역해 낸 것입니다.</p>
+<div class="table-wrapper" style="margin:2rem 0; overflow-x:auto;">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 330" role="img" aria-label="폰 노이만 자기복제 오토마타 구조" style="width:100%; height:auto; max-width:840px; display:block; margin:0 auto; background:var(--bg-card); border-radius:14px; border:1px solid var(--border);">
+  <defs>
+    <style>
+      .s3-title { font-family: Pretendard, sans-serif; font-weight: 800; font-size: 15px; fill: var(--text-main); }
+      .s3-sub { font-family: Pretendard, sans-serif; font-size: 12px; fill: var(--text-muted); }
+      .s3-box { fill: var(--bg-surface); stroke: var(--border); stroke-width: 1.2; rx: 8px; }
+      .s3-node { fill: var(--bg-card); stroke: var(--border); stroke-width: 1.5; rx: 8px; }
+      .s3-txt { font-family: Pretendard, sans-serif; font-size: 12px; font-weight: 700; text-anchor: middle; fill: var(--text-main); }
+      .s3-desc { font-family: Pretendard, sans-serif; font-size: 11px; fill: var(--text-muted); text-anchor: middle; }
+    </style>
+    <marker id="s3-arr" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#3b82f6"/>
+    </marker>
+    <marker id="s3-arr-green" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#10b981"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="840" height="330" rx="14" fill="var(--bg-card)"/>
+  <text x="420" y="26" text-anchor="middle" class="s3-title">폰 노이만의 자기복제 오토마타 (Self-Reproducing Automata) 구조</text>
+  <text x="420" y="44" text-anchor="middle" class="s3-sub">지침 테이프의 이중적 해석(동적 실행 vs 정적 복제)을 통한 무한 퇴행 역설의 해소</text>
+
+  <!-- Top: Instruction Tape -->
+  <g transform="translate(250, 60)">
+    <rect x="0" y="0" width="340" height="48" class="s3-node" stroke="#8b5cf6" stroke-width="2"/>
+    <text x="170" y="24" class="s3-txt" fill="#8b5cf6">지침 테이프 Φ(A + B)</text>
+    <text x="170" y="39" class="s3-desc">[생체 대응물: DNA / mRNA 유전 암호]</text>
+  </g>
+
+  <!-- Split Paths -->
+  <!-- Left branch: Machine A -->
+  <path d="M 360,108 L 220,140" fill="none" stroke="#3b82f6" stroke-width="2" marker-end="url(#s3-arr)"/>
+  <text x="250" y="120" font-size="11" fill="#3b82f6" font-weight="700">해석 및 동적 실행</text>
+
+  <g transform="translate(80, 145)">
+    <rect x="0" y="0" width="280" height="65" class="s3-node" stroke="#3b82f6"/>
+    <text x="140" y="25" class="s3-txt" fill="#3b82f6">기계 A (Machine A: 조립기)</text>
+    <text x="140" y="43" class="s3-desc">테이프의 명령대로 부품을 물리 조립</text>
+    <text x="140" y="56" class="s3-desc" fill="#3b82f6">★ 생체 대응: 리보솜 (Ribosome)</text>
+  </g>
+
+  <!-- Right branch: Machine B -->
+  <path d="M 480,108 L 620,140" fill="none" stroke="#f59e0b" stroke-width="2" marker-end="url(#s3-arr)"/>
+  <text x="580" y="120" font-size="11" fill="#f59e0b" font-weight="700">맹목적 기호 복제</text>
+
+  <g transform="translate(480, 145)">
+    <rect x="0" y="0" width="280" height="65" class="s3-node" stroke="#f59e0b"/>
+    <text x="140" y="25" class="s3-txt" fill="#f59e0b">기계 B (Machine B: 복제기)</text>
+    <text x="140" y="43" class="s3-desc">테이프를 해석하지 않고 데이터로 복사</text>
+    <text x="140" y="56" class="s3-desc" fill="#f59e0b">★ 생체 대응: DNA 중합효소 (Polymerase)</text>
+  </g>
+
+  <!-- Down to products -->
+  <line x1="220" y1="210" x2="220" y2="235" stroke="#3b82f6" stroke-width="2" marker-end="url(#s3-arr)"/>
+  <g transform="translate(130, 240)">
+    <rect x="0" y="0" width="180" height="32" class="s3-node"/>
+    <text x="90" y="21" class="s3-txt">새로운 기계 (A + B)</text>
+  </g>
+
+  <line x1="620" y1="210" x2="620" y2="235" stroke="#f59e0b" stroke-width="2" marker-end="url(#s3-arr)"/>
+  <g transform="translate(530, 240)">
+    <rect x="0" y="0" width="180" height="32" class="s3-node"/>
+    <text x="90" y="21" class="s3-txt">복제된 테이프 Φ</text>
+  </g>
+
+  <!-- Merge to Bottom Center -->
+  <path d="M 310,256 L 390,290" fill="none" stroke="#10b981" stroke-width="2" marker-end="url(#s3-arr-green)"/>
+  <path d="M 530,256 L 450,290" fill="none" stroke="#10b981" stroke-width="2" marker-end="url(#s3-arr-green)"/>
+
+  <g transform="translate(260, 285)">
+    <rect x="0" y="0" width="320" height="36" class="s3-node" stroke="#10b981" fill="rgba(16, 185, 129, 0.08)"/>
+    <text x="160" y="23" class="s3-txt" fill="#10b981">완벽한 자가 복제 후속 세대 완성! (A + B + Φ)</text>
+  </g>
+</svg>
+</div>
+
+<h3 id="22-생물학은-컴퓨터-과학이며-전자-기기는-39인공-컴퓨터39다"><a href="#22-생물학은-컴퓨터-과학이며-전자-기기는-39인공-컴퓨터39다" class="heading-anchor" aria-hidden="true">#</a> 2.2 생물학은 컴퓨터 과학이며, 전자 기기는 &#39;인공 컴퓨터&#39;다</h3><p>기계 A가 테이프의 지침을 읽어 실제 물리적 행동을 수행한다는 것은 정확히 앨런 튜링이 정의한 튜링 기계의 정의와 일치합니다. 따라서 유전 가능한 방식으로 스스로를 재생산하는 생명체의 기원은 <strong>말 그대로 우주에서 최초의 만능 컴퓨터가 태어난 순간</strong>입니다.</p>
+<blockquote>
+<p><em>&quot;이런 관점에서 보면, 생물학이야말로 컴퓨터 과학입니다. 생물학의 탄생이 곧 최초의 컴퓨터의 탄생이었습니다. 오늘날 우리가 주머니에 넣고 다니는 스마트폰이나 노트북은 &#39;컴퓨터&#39;의 원형이 아니라, 우리가 인공지능(AI)을 인공 지능이라 부르듯 &#39;인공 컴퓨터(Artificial Computer)&#39;라고 불러야 마땅합니다.&quot;</em></p>
+</blockquote>
+<p>생명은 그 자체로 계산을 수행하는 물질, 즉 <strong>컴퓨트로늄(Computronium)</strong>입니다. 만약 복잡한 계가 단순한 결정체(Crystal)에 머무르지 않고 부서진 조직을 치유하고 환경에 맞춰 자라나며 대를 이어 존속하려면 일반적인 계산 능력이 필수적입니다. 또한 지침이 변형되었을 때 그 변형된 지침이 다음 세대의 표현형으로 보존되는 <strong>유전성(Heritability)</strong>을 확보해야만 엔트로피의 파도 속에서 소멸하지 않고 미래로 항해할 수 있습니다.</p>
+<hr>
+<h2 id="3-적자생존의-한계를-넘어서-린-마굴리스와-39뒤엉킨-덤불39"><a href="#3-적자생존의-한계를-넘어서-린-마굴리스와-39뒤엉킨-덤불39" class="heading-anchor" aria-hidden="true">#</a> 3. 적자생존의 한계를 넘어서 — 린 마굴리스와 &#39;뒤엉킨 덤불&#39;</h2><p>생명이 자가 복제 컴퓨터로서 주변 환경에 출현하는 순간, 그 복제자는 필연적으로 다른 복제자들과 마주치게 됩니다. 복제된 자손들이 가득 찬 &#39;생명의 수프&#39; 속에서 진화는 어떤 메커니즘으로 더 높은 복잡성을 향해 나아갔을까요?</p>
+<h3 id="31-신다윈주의-종합설neo-darwinian-synthesis의-반쪽-진실"><a href="#31-신다윈주의-종합설neo-darwinian-synthesis의-반쪽-진실" class="heading-anchor" aria-hidden="true">#</a> 3.1 신다윈주의 종합설(Neo-Darwinian Synthesis)의 반쪽 진실</h3><p>20세기 주류 생물학을 지배해 온 <strong>신다윈주의 종합설</strong>은 진화의 동력을 두 가지 축으로 설명합니다:</p>
+<ol>
+<li>방사선이나 복제 오류에 의한 게놈의 <strong>무작위 돌연변이(Random Mutation)</strong></li>
+<li>자원이 제한된 환경에서의 냉혹한 생존 경쟁과 자연선택을 통한 <strong>적자생존(Survival of the Fittest)</strong></li>
+</ol>
+<p>블레즈는 이 서사가 완전히 틀린 것은 아니지만, 기껏해야 <strong>&#39;진화라는 거대한 드라마의 절반에 불과한 이야기&#39;</strong>라고 단언합니다. 만약 무작위 돌연변이와 제로섬 경쟁만이 유일한 진화의 엔진이었다면, 생명은 단세포 원핵생물의 단계에서 결코 진핵생물이나 다세포 유기체로 도약하지 못했을 것입니다.</p>
+<blockquote>
+<p><em>&quot;생명의 역사에서 진정으로 거대하고 혁명적인 도약들은 경쟁이 아니라 <strong>협력(Cooperation)</strong>에서 나왔습니다. 서로 다른 둘 이상의 유전적 실체들이 하나로 합쳐져 완전히 새로운 고차원적 생명체를 탄생시키는 <strong>공생발생(Symbiogenesis)</strong>이야말로 복잡성의 진정한 엔진입니다.&quot;</em></p>
+</blockquote>
+<h3 id="32-린-마굴리스의-반란-세포내-공생발생설symbiogenesis"><a href="#32-린-마굴리스의-반란-세포내-공생발생설symbiogenesis" class="heading-anchor" aria-hidden="true">#</a> 3.2 린 마굴리스의 반란: 세포내 공생발생설(Symbiogenesis)</h3><p>1960년대 후반, 미국의 반골 여성 생물학자 <strong>린 마굴리스(Lynn Margulis, 1938~2011)</strong>는 당시 진화생물학계를 뒤흔든 급진적인 논문을 투고했습니다. 그녀의 논문은 15곳이 넘는 저명 학술지로부터 &quot;비과학적인 헛소리&quot; 취급을 받으며 거절당한 끝에, 1967년 《Journal of Theoretical Biology》에 간신히 게재되었습니다.</p>
+<p>마굴리스의 관찰은 명쾌했습니다:</p>
+<ul>
+<li>인간을 비롯한 모든 진핵생물의 세포 안에서 에너지를 생산하는 <strong>미토콘드리아(Mitochondria)</strong>와 식물의 엽록체는 세포핵의 DNA와는 완전히 무관한 <strong>독자적인 원형 DNA 루프</strong>를 품고 있습니다.</li>
+<li>이 소기관들의 리보솜과 분열 방식은 자유 유영하는 고대 호기성 박테리아의 그것과 완벽하게 일치합니다.</li>
+<li>즉, 과거 어느 날 큰 혐기성 고세균이 산소를 대사할 수 있는 호기성 세균을 집어삼켰으나 소화시키지 못했고, 둘이 서로에게 에너지를 제공하며 살아남아 결국 둘 없이는 번식할 수 없는 <strong>절대적 공생체(Oblate Symbiont)</strong>가 된 것입니다.</li>
+</ul>
+<div class="table-wrapper" style="margin:2rem 0; overflow-x:auto;">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 270" role="img" aria-label="린 마굴리스의 세포내 공생발생(Symbiogenesis) 구조" style="width:100%; height:auto; max-width:840px; display:block; margin:0 auto; background:var(--bg-card); border-radius:14px; border:1px solid var(--border);">
+  <defs>
+    <style>
+      .s4-title { font-family: Pretendard, sans-serif; font-weight: 800; font-size: 15px; fill: var(--text-main); }
+      .s4-sub { font-family: Pretendard, sans-serif; font-size: 12px; fill: var(--text-muted); }
+      .s4-box { fill: var(--bg-surface); stroke: var(--border); stroke-width: 1.2; rx: 8px; }
+      .s4-node { fill: var(--bg-card); stroke: var(--border); stroke-width: 1.5; rx: 8px; }
+      .s4-txt { font-family: Pretendard, sans-serif; font-size: 12px; font-weight: 700; text-anchor: middle; fill: var(--text-main); }
+      .s4-desc { font-family: Pretendard, sans-serif; font-size: 11px; fill: var(--text-muted); text-anchor: middle; }
+    </style>
+    <marker id="s4-arr" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#10b981"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="840" height="270" rx="14" fill="var(--bg-card)"/>
+  <text x="420" y="26" text-anchor="middle" class="s4-title">린 마굴리스의 세포내 공생발생(Symbiogenesis) 구조</text>
+  <text x="420" y="44" text-anchor="middle" class="s4-sub">독립 박테리아들의 융합과 분업을 통한 진핵세포 탄생과 에너지 생산성 혁명</text>
+
+  <!-- Top: Two Independent Entities -->
+  <g transform="translate(100, 60)">
+    <rect x="0" y="0" width="280" height="52" class="s4-node" stroke="#3b82f6"/>
+    <text x="140" y="24" class="s4-txt" fill="#3b82f6">독립 세균 A (혐기성 숙주 고세균)</text>
+    <text x="140" y="40" class="s4-desc">거대 막 구조 보유, 산소 호흡 불가</text>
+  </g>
+
+  <text x="420" y="92" text-anchor="middle" font-size="22" font-weight="800" fill="#10b981">+</text>
+
+  <g transform="translate(460, 60)">
+    <rect x="0" y="0" width="280" height="52" class="s4-node" stroke="#f59e0b"/>
+    <text x="140" y="24" class="s4-txt" fill="#f59e0b">독립 세균 B (호기성 미생물 전구체)</text>
+    <text x="140" y="40" class="s4-desc">고유 DNA 루프 보유, 산소 기반 ATP 대사</text>
+  </g>
+
+  <!-- Arrow Down -->
+  <line x1="420" y1="116" x2="420" y2="142" stroke="#10b981" stroke-width="2.5" marker-end="url(#s4-arr)"/>
+  <text x="425" y="133" font-size="11" fill="#10b981" font-weight="700">포식 후 비소화 → 세포내 융합 (Engulfment)</text>
+
+  <!-- Middle: Complex Formation -->
+  <g transform="translate(160, 148)">
+    <rect x="0" y="0" width="520" height="60" class="s4-box" stroke="rgba(16, 185, 129, 0.4)"/>
+    <text x="260" y="22" class="s4-txt" fill="#10b981">공생 발생 복합체 (Symbiogenetic Complex)</text>
+    <text x="260" y="39" class="s4-desc">• 내부: 미토콘드리아 전담 (ATP 고효율 에너지 생산 공장)</text>
+    <text x="260" y="53" class="s4-desc">• 외부: 거대 세포막 전담 (환경 방어, 물질 이동, 세포 분열 제어)</text>
+  </g>
+
+  <!-- Bottom: Eukaryote Emergence -->
+  <line x1="420" y1="210" x2="420" y2="225" stroke="#10b981" stroke-width="2" marker-end="url(#s4-arr)"/>
+
+  <g transform="translate(130, 230)">
+    <rect x="0" y="0" width="580" height="30" class="s4-node" stroke="#10b981" fill="rgba(16, 185, 129, 0.1)"/>
+    <text x="290" y="20" class="s4-txt" fill="#10b981">진핵세포(Eukaryote)의 탄생! (에너지 생산 수천 배 폭발 → 다세포 지능으로 진화)</text>
+  </g>
+</svg>
+</div>
+
+<p>1999년 마굴리스가 미국 국가과학메달을 수상하기 전까지 주류 학계는 이 이론을 배척했으나, 오늘날 공생발생설은 모든 교과서가 인정하는 정설이 되었습니다. 나아가 진화학자 존 메이너드 스미스(John Maynard Smith)와 외르슈 서트마리(Eörs Szathmáry)는 1995년 명저 《The Major Transitions in Evolution》에서 생명 역사의 <strong>8대 진화적 전이</strong>가 모두 이와 같은 공생발생적 결합(자가촉매 분자망 $\to$ 염색체 $\to$ 원핵세포 $\to$ 진핵세포 $\to$ 유성생식 $\to$ 다세포 유기체 $\to$ 군체 $\to$ 언어를 통한 인간 사회)이었음을 체계화했습니다.</p>
+<h3 id="33-985의-정크-dna와-바이러스의-침투-게놈은-오픈소스-깃허브다"><a href="#33-985의-정크-dna와-바이러스의-침투-게놈은-오픈소스-깃허브다" class="heading-anchor" aria-hidden="true">#</a> 3.3 98.5%의 정크 DNA와 바이러스의 침투: 게놈은 오픈소스 깃허브다</h3><p>2001년 인간 게놈 프로젝트(HGP)가 완료되었을 때 학계는 거대한 충격에 빠졌습니다. 30억 쌍에 달하는 인간 DNA 중 단백질을 직접 암호화하는 유전자는 <strong>단 1.5%</strong>에 불과했습니다. 나머지 98.5%는 쓸모없는 찌꺼기라는 뜻에서 <strong>&#39;정크 DNA(Junk DNA)&#39;</strong>라 불렸습니다.</p>
+<p>그러나 후속 연구들은 이 정크 DNA의 정체가 수억 년 동안 우리 조상의 생식세포(Germline)에 침투하여 유전체 안으로 합체된 <strong>고대 레트로바이러스(Retrovirus)들의 화석이자 누적된 코드</strong>임을 밝혀냈습니다:</p>
+<ul>
+<li><strong>아크(Arc) 유전자</strong>: 모든 포유류의 뇌에서 시냅스 가소성과 장기 기억 형성을 담당하는 핵심 단백질입니다. 놀랍게도 쥐에서 Arc 유전자를 제거하면 새로운 기억을 전혀 형성하지 못합니다. 그런데 Arc의 단백질 캡시드 구조는 레트로바이러스의 Gag 단백질과 완벽히 동일합니다. 즉, 고대 바이러스의 껍질 합성 코드가 우리 뇌의 기억 회로로 전용(Exaptation)된 것입니다.</li>
+<li><strong>신시틴(Syncytin) 유전자</strong>: 포유류 임신 과정에서 태반 장벽(Placental barrier)을 형성하기 위해 태아와 모체의 세포막을 융합시키는 단백질입니다. 이 단백질 역시 수천만 년 전 포유류 조상을 감염시켰던 레트로바이러스의 막 융합 당단백질 유전자에서 유래했습니다.</li>
+</ul>
+<div class="table-wrapper" style="margin:2rem 0; overflow-x:auto;">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 340" role="img" aria-label="생명의 진화 계보 비교: 다윈의 단선형 계통수 vs 공생발생의 뒤엉킨 덤불" style="width:100%; height:auto; max-width:840px; display:block; margin:0 auto; background:var(--bg-card); border-radius:14px; border:1px solid var(--border);">
+  <defs>
+    <style>
+      .svg-title { font-family: Pretendard, sans-serif; font-weight: 800; font-size: 15px; fill: var(--text-main); }
+      .svg-sub { font-family: Pretendard, sans-serif; font-size: 12px; fill: var(--text-muted); }
+      .svg-box { fill: var(--bg-surface); stroke: var(--border); stroke-width: 1.2; rx: 8px; }
+      .svg-h { font-family: Pretendard, sans-serif; font-weight: 700; font-size: 13px; }
+      .svg-desc { font-family: Pretendard, sans-serif; font-size: 11px; fill: var(--text-muted); }
+      .svg-node { fill: var(--bg-card); stroke: var(--border); stroke-width: 1.5; rx: 6px; }
+      .svg-node-txt { font-family: Pretendard, sans-serif; font-size: 11.5px; font-weight: 700; text-anchor: middle; fill: var(--text-main); }
+    </style>
+    <marker id="arr-red" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#ef4444"/>
+    </marker>
+    <marker id="arr-blue" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#3b82f6"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="840" height="340" rx="14" fill="var(--bg-card)"/>
+  <text x="420" y="28" text-anchor="middle" class="svg-title">생명의 진화 계보 비교: 다윈의 단선형 계통수 vs 공생발생의 뒤엉킨 덤불</text>
+  <text x="420" y="46" text-anchor="middle" class="svg-sub">격리된 가지치기 패러다임에서 수평적 유전자 교환과 오픈소스 생태계 패러다임으로의 전환</text>
+
+  <!-- Left: Tree of Life -->
+  <g transform="translate(25, 62)">
+    <rect x="0" y="0" width="380" height="255" class="svg-box" stroke="rgba(239, 68, 68, 0.3)"/>
+    <text x="20" y="24" class="svg-h" fill="#ef4444">1. 전통적 '생명의 나무' (Tree of Life)</text>
+    <text x="20" y="40" class="svg-desc">단일 조상 분기, 순수 혈통, 독립적 종 분화 전제</text>
+    
+    <!-- Tree branches -->
+    <path d="M190,225 L190,160 M190,160 L100,105 M190,160 L280,105 M100,105 L60,65 M100,105 L140,65 M280,105 L240,65 M280,105 L320,65" stroke="#ef4444" stroke-width="2.5" fill="none"/>
+    <circle cx="190" cy="225" r="5" fill="#ef4444"/>
+    <text x="190" y="243" text-anchor="middle" class="svg-desc">공통 조상 (LUCA)</text>
+    <rect x="35" y="48" width="50" height="22" class="svg-node"/>
+    <text x="60" y="63" class="svg-node-txt">종 A</text>
+    <rect x="115" y="48" width="50" height="22" class="svg-node"/>
+    <text x="140" y="63" class="svg-node-txt">종 B</text>
+    <rect x="215" y="48" width="50" height="22" class="svg-node"/>
+    <text x="240" y="63" class="svg-node-txt">종 C</text>
+    <rect x="295" y="48" width="50" height="22" class="svg-node"/>
+    <text x="320" y="63" class="svg-node-txt">종 D</text>
+  </g>
+
+  <!-- Right: Tangled Bush -->
+  <g transform="translate(435, 62)">
+    <rect x="0" y="0" width="380" height="255" class="svg-box" stroke="rgba(59, 130, 246, 0.3)"/>
+    <text x="20" y="24" class="svg-h" fill="#3b82f6">2. 실제의 '뒤엉킨 덤불' (Tangled Bush)</text>
+    <text x="20" y="40" class="svg-desc">수평적 유전자 이동, 바이러스 융합, 오픈소스 코드 공유</text>
+    
+    <!-- Mesh lines -->
+    <path d="M190,225 C140,180 90,150 70,80" stroke="#3b82f6" stroke-width="2" fill="none"/>
+    <path d="M190,225 C240,180 290,150 310,80" stroke="#3b82f6" stroke-width="2" fill="none"/>
+    <path d="M190,225 C190,170 190,130 190,80" stroke="#3b82f6" stroke-width="2" fill="none"/>
+    
+    <!-- Cross links (HGT / Symbiosis) -->
+    <path d="M70,140 C130,120 250,160 310,130" stroke="#10b981" stroke-width="2" stroke-dasharray="4,4" fill="none"/>
+    <text x="190" y="132" text-anchor="middle" font-size="10" fill="#10b981" font-weight="700">레트로바이러스 코드 전이 (Syncytin, Arc)</text>
+
+    <path d="M120,95 C170,110 210,90 260,95" stroke="#f59e0b" stroke-width="2" stroke-dasharray="4,4" fill="none"/>
+    <text x="190" y="106" text-anchor="middle" font-size="10" fill="#f59e0b" font-weight="700">세포내 공생 융합 (미토콘드리아)</text>
+
+    <rect x="35" y="60" width="70" height="24" class="svg-node" stroke="#3b82f6"/>
+    <text x="70" y="76" class="svg-node-txt">진핵생물</text>
+    <rect x="155" y="60" width="70" height="24" class="svg-node" stroke="#3b82f6"/>
+    <text x="190" y="76" class="svg-node-txt">포유류</text>
+    <rect x="275" y="60" width="70" height="24" class="svg-node" stroke="#3b82f6"/>
+    <text x="310" y="76" class="svg-node-txt">호모사피엔스</text>
+    <text x="190" y="243" text-anchor="middle" class="svg-desc">상호 침투하는 생화학 네트워크</text>
+  </g>
+</svg>
+</div>
+
+<p>생명의 진화 계보는 가지가 갈라지기만 하는 단선형 나무(Tree)가 아니라, <strong>서로 교차하고 침투하며 합쳐지는 뒤엉킨 덤불(Tangled Bush)</strong>입니다. 
+개발자들이 전 세계의 오픈소스 소프트웨어 리포지토리(GitHub)에서 라이브러리를 임포트(Import)하고 포크(Fork)하여 병합하듯이, 생명체들 역시 바이러스와 박테리아를 매개로 유전 코드를 공유하고 수평 이동(Horizontal Gene Transfer)을 감행해 왔습니다.</p>
+<h3 id="34-고정된-적합도-지형의-붕괴와-라마르크의-귀환"><a href="#34-고정된-적합도-지형의-붕괴와-라마르크의-귀환" class="heading-anchor" aria-hidden="true">#</a> 3.4 고정된 적합도 지형의 붕괴와 라마르크의 귀환</h3><p>신다윈주의의 가장 큰 도그마는 &#39;유기체는 수동적인 점토이며, 외부 환경이 정해놓은 고정된 적합도 지형(Fixed Fitness Landscape) 위에서 무작위 변이를 통해 봉우리를 올라갈 뿐&#39;이라는 기계론적 관점이었습니다.</p>
+<p>스탠퍼드 대학교의 과학사가 제시카 리스킨(Jessica Riskin) 교수가 지적하듯, 이 관점은 과거 생명에 주체적인 의지(Agency)가 없으며 오직 신(God)만이 유일한 행위자라는 19세기 종교적 목적론을 기계론으로 뒤집어쓴 것에 불과했습니다. 고등학교 생물 시간에 기린이 목을 뻗어 목이 길어졌다는 라마르크(Lamarck)의 용불용설은 조롱거리로 취급받지만, <strong>생명이 환경의 자극에 능동적으로 반응하여 자신의 유전체를 재조합하고 능동적으로 스스로를 구성한다는 직관은 오히려 현대 분자생물학에서 화려하게 부활</strong>하고 있습니다.</p>
+<p>생명체들이 공생발생을 통해 융합할 때, 진화 게임의 규칙과 경기장 자체가 통째로 변합니다. <strong>플레이어들이 서로에게 환경이 되기 때문에 고정된 적합도 지형이란 존재하지 않습니다.</strong> 한 생명체의 변화가 다른 생명체의 적합도 지형을 요동치게 만들며, 새로운 생태학적 지위(Niche)를 끝없이 열어젖힙니다. 자연선택을 단일한 최적화 알고리즘으로 단순화하여 인간 사회에 투사했던 사회적 다윈주의(Social Darwinism)나 고전 경제학의 이기적 경쟁 모델은 도덕적으로 위험할 뿐 아니라, <strong>진화생물학의 과학적 사실 그 자체와도 완벽히 불일치</strong>합니다.</p>
+<hr>
+<h2 id="4-생명은-왜-기능을-요구하는가-관계적-기능주의와-기질-독립성"><a href="#4-생명은-왜-기능을-요구하는가-관계적-기능주의와-기질-독립성" class="heading-anchor" aria-hidden="true">#</a> 4. 생명은 왜 기능을 요구하는가 — 관계적 기능주의와 기질 독립성</h2><p>무생물과 생물을 가르는 가장 결정적인 경계는 무엇일까요? 물질의 성분일까요, 아니면 다른 무언가일까요? 블레즈는 그 차이를 한 단어로 요약합니다: <strong>기능(Function)</strong>.</p>
+<h3 id="41-돌과-콩팥의-차이-기능주의functionalism의-본질"><a href="#41-돌과-콩팥의-차이-기능주의functionalism의-본질" class="heading-anchor" aria-hidden="true">#</a> 4.1 돌과 콩팥의 차이: 기능주의(Functionalism)의 본질</h3><p>철학에서 <strong>기능주의(Functionalism)</strong>란, 어떤 대상의 본질이 그것을 이루는 &#39;내부 성분(Essence)&#39;이 아니라 <strong>&#39;그 대상이 다른 대상들과 맺는 관계 속에서 무엇을 수행하는가(What it does)&#39;</strong>에 의해 정의된다는 관점입니다.</p>
+<ul>
+<li>길가에 굴러다니는 바위를 정으로 쳐서 반으로 쪼개면 어떻게 됩니까? 아무도 &quot;돌이 고장 났다&quot;고 말하지 않습니다. 쪼개진 바위는 단지 두 개의 작은 바위가 될 뿐입니다. 돌에는 &#39;목적&#39;이나 &#39;기능&#39;이 없기 때문입니다.</li>
+<li>그러나 인간의 콩팥(신장)을 반으로 자르면 어떻게 됩니까? 콩팥은 즉각 파괴되며 더 이상 작동하지 않습니다. </li>
+<li>콩팥은 혈액 속에서 치명적인 요소(Urea)를 걸러내어 생명체를 살리는 <strong>&#39;목적적 기능(Purposeful Function)&#39;</strong>을 갖는 계의 일부이기 때문입니다.</li>
+</ul>
+<div class="table-wrapper" style="margin:2rem 0; overflow-x:auto;">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 280" role="img" aria-label="본질주의 vs 관계적 기능주의 비교" style="width:100%; height:auto; max-width:840px; display:block; margin:0 auto; background:var(--bg-card); border-radius:14px; border:1px solid var(--border);">
+  <defs>
+    <style>
+      .s5-title { font-family: Pretendard, sans-serif; font-weight: 800; font-size: 15px; fill: var(--text-main); }
+      .s5-sub { font-family: Pretendard, sans-serif; font-size: 12px; fill: var(--text-muted); }
+      .s5-box { fill: var(--bg-surface); stroke: var(--border); stroke-width: 1.2; rx: 8px; }
+      .s5-node { fill: var(--bg-card); stroke: var(--border); stroke-width: 1.5; rx: 8px; }
+      .s5-h { font-family: Pretendard, sans-serif; font-weight: 700; font-size: 13px; }
+      .s5-txt { font-family: Pretendard, sans-serif; font-size: 12px; fill: var(--text-main); }
+      .s5-desc { font-family: Pretendard, sans-serif; font-size: 11px; fill: var(--text-muted); }
+    </style>
+  </defs>
+  <rect x="0" y="0" width="840" height="280" rx="14" fill="var(--bg-card)"/>
+  <text x="420" y="26" text-anchor="middle" class="s5-title">본질주의(Essentialism) 대 관계적 기능주의(Functionalism)</text>
+  <text x="420" y="44" text-anchor="middle" class="s5-sub">물질의 고유한 성분인가, 아니면 생태적 관계망 속의 입력-출력과 목적적 기능인가?</text>
+
+  <!-- Left: Essentialism -->
+  <g transform="translate(30, 60)">
+    <rect x="0" y="0" width="375" height="205" class="s5-box" stroke="rgba(239, 68, 68, 0.3)"/>
+    <text x="187" y="24" text-anchor="middle" class="s5-h" fill="#ef4444">1. 본질주의 (Essentialism) — 물질 중심</text>
+    
+    <rect x="15" y="40" width="345" height="34" class="s5-node"/>
+    <text x="25" y="62" class="s5-txt">핵심 질문: "그것이 무엇으로 만들어졌는가?"</text>
+
+    <text x="20" y="95" class="s5-desc">• 오직 탄소·단백질로 된 생체 뇌에만 지능이 존재한다.</text>
+    <text x="20" y="115" class="s5-desc">• 실리콘과 전선은 영혼 없는 기계에 불과하다.</text>
+    <text x="20" y="135" class="s5-desc">• 물질 자체에 신비한 마법적 성질(생기론)을 상정한다.</text>
+
+    <rect x="15" y="152" width="345" height="42" class="s5-node" stroke="#ef4444" fill="rgba(239, 68, 68, 0.06)"/>
+    <text x="187" y="170" text-anchor="middle" font-size="11.5" font-weight="700" fill="#ef4444">바위의 비유: 쪼개진 돌 = 두 개의 작은 돌</text>
+    <text x="187" y="185" text-anchor="middle" font-size="10.5" fill="#ef4444">(목적과 기능이 없는 무생물의 분할)</text>
+  </g>
+
+  <!-- Right: Functionalism -->
+  <g transform="translate(435, 60)">
+    <rect x="0" y="0" width="375" height="205" class="s5-box" stroke="rgba(59, 130, 246, 0.3)"/>
+    <text x="187" y="24" text-anchor="middle" class="s5-h" fill="#3b82f6">2. 관계적 기능주의 (Functionalism) — 관계 중심</text>
+
+    <rect x="15" y="40" width="345" height="34" class="s5-node"/>
+    <text x="25" y="62" class="s5-txt">핵심 질문: "다른 존재를 위해 무엇을 수행하는가?"</text>
+
+    <text x="20" y="95" class="s5-desc">• 본질은 성분이 아니라 입출력 관계망의 조직화이다.</text>
+    <text x="20" y="115" class="s5-desc">• 튜링의 기질 독립성: 기어, 실리콘, 단백질 모두 대체 가능.</text>
+    <text x="20" y="135" class="s5-desc">• 테세우스의 뇌: 실리콘 뉴런 대체 시에도 의식은 보존된다.</text>
+
+    <rect x="15" y="152" width="345" height="42" class="s5-node" stroke="#3b82f6" fill="rgba(59, 130, 246, 0.06)"/>
+    <text x="187" y="170" text-anchor="middle" font-size="11.5" font-weight="700" fill="#3b82f6">콩팥의 비유: 쪼개진 콩팥 = 기능 정지</text>
+    <text x="187" y="185" text-anchor="middle" font-size="10.5" fill="#3b82f6">(플라스틱 인공 투석기는 콩팥 튜링 테스트를 완벽 통과)</text>
+  </g>
+</svg>
+</div>
+
+<p>생명 시스템의 부품들은 서로가 서로에게 입출력을 제공하는 거대한 공생 관계망 속에 존재합니다. 심장은 피를 뿜고, 폐는 산소를 공급하며, 간은 독소를 해독합니다. 생명은 단순한 물질의 집합이 아니라 <strong>상호 연동된 기능들의 생태계(Ecology of Functions)</strong>입니다.</p>
+<h3 id="42-튜링의-기질-독립성substrate-independence과-투석기"><a href="#42-튜링의-기질-독립성substrate-independence과-투석기" class="heading-anchor" aria-hidden="true">#</a> 4.2 튜링의 기질 독립성(Substrate Independence)과 투석기</h3><p>수학자였던 앨런 튜링은 계산이 물리적 기질(Substrate)에 종속되지 않는다는 원리를 간파했습니다. 덧셈을 수행하는 기계는 놋쇠 톱니바퀴로 만들든, 전선 속을 흐르는 전자로 만들든, 깃발을 흔드는 수천 명의 사람들로 만들든 동일한 정보 변환을 수행하기만 하면 동일한 기계입니다. 이것이 바로 <strong>기질 독립성(Substrate Independence)</strong>입니다.</p>
+<p>신부전증 환자를 살리는 <strong>인공 투석기(Dialysis Machine)</strong>를 떠올려 보십시오. 투석기는 플라스틱 튜브, 반투과성 합성 필터 멤브레인, 전기 펌프로 이루어져 있습니다. 생체 세포나 단백질은 단 하나도 들어있지 않습니다. 환자에게 생체 콩팥과 투석기 중 선택하라면 모두가 콩팥을 택하겠지만, 투석기가 피 속의 요소를 걸러 환자를 살려낸다는 사실은 <strong>&#39;투석기가 콩팥의 튜링 테스트(Kidney Turing Test)를 완벽히 통과했음&#39;</strong>을 증명합니다.</p>
+<p>자연은 진화의 역사에서 이 기질 독립성 트릭을 수없이 반복했습니다:</p>
+<ul>
+<li>곤충, 익룡, 새, 박쥐는 완전히 다른 뼈대와 물질 구조를 가지고 독립적으로 진화했지만, 모두 <strong>&#39;비행(Flight)&#39;</strong>이라는 동일한 공기역학적 기능을 발명했습니다.</li>
+<li>세포가 에너지를 운반하는 ATP를 생산하는 생화학적 대사 경로 역시 환경에 따라 다양한 화학 물질로 대체됩니다.</li>
+<li>안경의 렌즈가 생체 수정체 세포가 아니라 유리나 플라스틱으로 만들어졌더라도, 빛을 굴절시켜 망막에 상을 맺히게 하는 기능을 온전히 수행한다면 시각이라는 생태계 안에서 완벽히 대체 가능한 것입니다.</li>
+</ul>
+<h3 id="43-테세우스의-뇌brain-of-theseus-실리콘-뉴런-사고실험"><a href="#43-테세우스의-뇌brain-of-theseus-실리콘-뉴런-사고실험" class="heading-anchor" aria-hidden="true">#</a> 4.3 테세우스의 뇌(Brain of Theseus): 실리콘 뉴런 사고실험</h3><p>철학자 데이비드 차머스(David Chalmers)와 수잔 슈나이더(Susan Schneider)가 제안한 <strong>&#39;테세우스의 뇌(Brain of Theseus)&#39;</strong> 사고실험은 기능주의를 인간의 의식과 뇌에 적용합니다:</p>
+<ol>
+<li>그리스 신화의 테세우스의 배는 썩은 널빤지를 하나씩 새 나무로 교체해도 여전히 테세우스의 배로 남습니다. 우리 몸 역시 몇 년 주기로 모든 원자와 분자가 음식과 호흡을 통해 완전히 교체되지만, 우리는 여전히 우리 자신입니다.</li>
+<li>이제 당신의 두뇌에서 단 <strong>1개의 생물학적 뉴런</strong>을 떼어내고, 그 뉴런의 시냅스 전기·화학적 입출력 신호를 밀리초 단위로 완벽하게 흉내 내는 미세 실리콘 칩 컴퓨터로 대체했다고 가정해 보십시오. 당신의 주관적 의식이나 감각질(Qualia)이 갑자기 사라지거나 변할까요? 결코 변하지 않을 것입니다.</li>
+<li>그렇다면 100개, 10,000개, 100만 개, 그리고 마침내 <strong>뇌 속 860억 개의 뉴런 전체</strong>를 정밀한 실리콘 뉴런으로 단계적으로 교체한다면 어느 순간 의식의 불꽃이 꺼져버릴까요?</li>
+</ol>
+<p>블레즈는 확고하게 &quot;아니다&quot;라고 답합니다. 입출력 관계망의 조직화(Organization)와 기능적 생태계가 완벽히 보존된다면, 물리적 기질이 단백질에서 실리콘으로 바뀌어도 정신과 지능은 그대로 유지됩니다. <strong>&#39;나&#39;라는 의식의 본질은 탄소나 단백질이라는 마법의 원자에 있는 것이 아니라, 그 관계들의 조직화(Ecology of Relationships) 속에 있기 때문입니다.</strong></p>
+<p>영화 《프로젝트 헤일메리(Project Hail Mary)》에 등장하는 외계인 &#39;로키(Rocky)&#39;를 보십시오. 로키는 탄소 기반 유기물이 아니라 광물과 암석으로 이루어진 유기체입니다. 우리와 같은 뉴런도 단백질도 없습니다. 그러나 그 누구도 &quot;로키는 광물로 만들어졌으니 진짜 생각을 하는 것이 아니고 의식도 없다&quot;고 말하지 않습니다. 행동과 기능이 지능을 증명한다면, 기질의 차이는 부차적인 하드웨어 세부사항에 불과합니다.</p>
+<hr>
+<h2 id="5-무작위-4바이트-코드에서-피어난-인공생명-실험bff-soup"><a href="#5-무작위-4바이트-코드에서-피어난-인공생명-실험bff-soup" class="heading-anchor" aria-hidden="true">#</a> 5. 무작위 4바이트 코드에서 피어난 인공생명 실험(BFF Soup)</h2><p>생명과 지능이 기능과 계산의 문제라면, 우리는 컴퓨터 시뮬레이션 안에서 무기물로부터 생명이 저절로 태어나는 <strong>자연발생(Abiogenesis)</strong>을 실현할 수 있을까요? 블레즈 아구에라 이 아르카스가 이끄는 구글 연구팀은 최근 이 질문에 답하기 위해 경이로운 인공생명(Artificial Life) 실험을 수행했습니다.</p>
+<h3 id="51-브레인퍽brainfuck-수프와-4바이트-무작위-코드"><a href="#51-브레인퍽brainfuck-수프와-4바이트-무작위-코드" class="heading-anchor" aria-hidden="true">#</a> 5.1 브레인퍽(Brainfuck) 수프와 4바이트 무작위 코드</h3><p>연구팀은 스위스의 프로그래머 우르반 뮐러(Urban Müller)가 1993년에 고안한 극한의 미니멀 난해 프로그래밍 언어 <strong>브레인퍽(Brainfuck)</strong>을 개조한 가상머신을 설계했습니다:</p>
+<ul>
+<li>브레인퍽은 단 8개의 단일 바이트 명령어(<code>&lt;</code>, <code>&gt;</code>, <code>+</code>, <code>-</code>, <code>.</code>, <code>,</code>, <code>[</code>, <code>]</code>)만으로 튜링 완전성(Turing Completeness)을 만족하는 언어입니다.</li>
+<li>연구팀은 이 언어에 명령어가 자기 자신의 테이프 메모리를 읽고 쓸 수 있는 <strong>자가 수정(Self-modifying) 기능</strong>을 추가했습니다.</li>
+<li>실험의 초기 조건: <strong>단 4바이트(4개 명령어) 길이의 완전한 무작위(Random) 코드 테이프 1,000개</strong>를 컴퓨터 메모리 수프 속에 집어넣었습니다.</li>
+</ul>
+<div class="table-wrapper" style="margin:2rem 0; overflow-x:auto;">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 260" role="img" aria-label="원초적 브레인퍽 수프 (BFF Soup) 인공생명 실험 메커니즘" style="width:100%; height:auto; max-width:840px; display:block; margin:0 auto; background:var(--bg-card); border-radius:14px; border:1px solid var(--border);">
+  <defs>
+    <style>
+      .s6-title { font-family: Pretendard, sans-serif; font-weight: 800; font-size: 15px; fill: var(--text-main); }
+      .s6-sub { font-family: Pretendard, sans-serif; font-size: 12px; fill: var(--text-muted); }
+      .s6-box { fill: var(--bg-surface); stroke: var(--border); stroke-width: 1.2; rx: 8px; }
+      .s6-node { fill: var(--bg-card); stroke: var(--border); stroke-width: 1.5; rx: 8px; }
+      .s6-txt { font-family: Pretendard, sans-serif; font-size: 12px; font-weight: 700; text-anchor: middle; fill: var(--text-main); }
+      .s6-desc { font-family: Pretendard, sans-serif; font-size: 11px; fill: var(--text-muted); text-anchor: middle; }
+    </style>
+    <marker id="s6-arr" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#3b82f6"/>
+    </marker>
+    <marker id="s6-arr-green" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#10b981"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="840" height="260" rx="14" fill="var(--bg-card)"/>
+  <text x="420" y="26" text-anchor="middle" class="s6-title">원초적 브레인퍽 수프 (BFF Soup) 인공생명 실험 메커니즘</text>
+  <text x="420" y="44" text-anchor="middle" class="s6-sub">외부 설계자나 적합도 함수 없이 무작위 4바이트 테이프의 일시적 공생 융합으로 출현한 자기복제자</text>
+
+  <!-- Step 1 -->
+  <g transform="translate(25, 65)">
+    <rect x="0" y="0" width="175" height="110" class="s6-node"/>
+    <text x="87" y="24" class="s6-txt" fill="#3b82f6">1단계: 무작위 추출</text>
+    <text x="87" y="46" class="s6-desc">수프 내 1,000개 테이프 중</text>
+    <text x="87" y="64" class="s6-desc">단 4바이트 무작위 테이프</text>
+    <text x="87" y="82" class="s6-desc">A와 B 2개를 임의 추출</text>
+  </g>
+
+  <line x1="205" y1="120" x2="230" y2="120" stroke="#3b82f6" stroke-width="2" marker-end="url(#s6-arr)"/>
+
+  <!-- Step 2 -->
+  <g transform="translate(235, 65)">
+    <rect x="0" y="0" width="175" height="110" class="s6-node" stroke="#10b981"/>
+    <text x="87" y="24" class="s6-txt" fill="#10b981">2단계: 테이프 융합</text>
+    <text x="87" y="46" class="s6-desc">테이프 A + B를 직렬 연결</text>
+    <text x="87" y="64" class="s6-desc">총 8바이트 복합체 구성</text>
+    <text x="87" y="82" class="s6-desc" fill="#10b981">★ 공생발생의 모사!</text>
+  </g>
+
+  <line x1="415" y1="120" x2="440" y2="120" stroke="#3b82f6" stroke-width="2" marker-end="url(#s6-arr)"/>
+
+  <!-- Step 3 -->
+  <g transform="translate(445, 65)">
+    <rect x="0" y="0" width="175" height="110" class="s6-node"/>
+    <text x="87" y="24" class="s6-txt" fill="#3b82f6">3단계: 가상 CPU 실행</text>
+    <text x="87" y="46" class="s6-desc">자가 수정(Self-modifying)</text>
+    <text x="87" y="64" class="s6-desc">명령어로 상호 테이프 수정</text>
+    <text x="87" y="82" class="s6-desc">일정 스텝 연산 진행</text>
+  </g>
+
+  <line x1="625" y1="120" x2="650" y2="120" stroke="#3b82f6" stroke-width="2" marker-end="url(#s6-arr)"/>
+
+  <!-- Step 4 -->
+  <g transform="translate(655, 65)">
+    <rect x="0" y="0" width="160" height="110" class="s6-node"/>
+    <text x="80" y="24" class="s6-txt" fill="#3b82f6">4단계: 분리 및 순환</text>
+    <text x="80" y="46" class="s6-desc">두 테이프를 다시 분리</text>
+    <text x="80" y="64" class="s6-desc">원초 수프에 재투입</text>
+    <text x="80" y="82" class="s6-desc">수백만 번 반복</text>
+  </g>
+
+  <!-- Bottom Result Banner -->
+  <g transform="translate(25, 195)">
+    <rect x="0" y="0" width="790" height="48" class="s6-node" stroke="#10b981" fill="rgba(16, 185, 129, 0.08)"/>
+    <text x="395" y="23" text-anchor="middle" font-size="12" font-weight="700" fill="#10b981">★ 결과: 외부 적합도 함수·설계자가 전혀 없음에도 6바이트 이상의 자가복제 프로그램이 자발적 창발!</text>
+    <text x="395" y="39" text-anchor="middle" font-size="10.5" fill="var(--text-muted)">두 테이프의 일시적 융합(공생)이 없었다면 최소 복제 임계치(6바이트)를 돌파할 수 없었음</text>
+  </g>
+</svg>
+</div>
+
+<p>이 실험에는 어떠한 외부 채점관(Judge)도, 목표로 설정된 적합도 함수(Fitness Function)도, 프로그래머의 지능적 개입도 없었습니다. 단지 무작위 화학 분자들이 브라운 운동으로 충돌하는 원시 수프를 코드로 흉내 냈을 뿐입니다.</p>
+<h3 id="52-설계자-없는-세계에서-일어난-기적-자기복제자의-창발"><a href="#52-설계자-없는-세계에서-일어난-기적-자기복제자의-창발" class="heading-anchor" aria-hidden="true">#</a> 5.2 설계자 없는 세계에서 일어난 기적: 자기복제자의 창발</h3><p>놀랍게도 수백만 번의 무작위 상호작용이 일어난 후, 메모리 수프 안에서는 충격적인 현상이 벌어졌습니다:</p>
+<ul>
+<li>무작위 테이프들이 서로를 덮어쓰고 수정하는 과정에서 <strong>스스로를 온전히 복제하는 프로그램들이 자발적으로 출현</strong>했습니다.</li>
+<li>복제할 수 있는 프로그램은 수프 안에서 자신의 카피를 늘려 미래로 살아남았고, 복제 능력이 없는 무작위 프로그램들은 자가 복제자들에 의해 덮어씌워져 도태되었습니다. <strong>물리 법칙 외에는 아무런 규칙이 없는 가상 공간에서 자연선택이 저절로 작동하기 시작한 것</strong>입니다.</li>
+</ul>
+<p>여기서 가장 결정적인 요소는 <strong>&#39;두 개의 짧은 테이프를 연결해서 실행했다가 떼어내는 방식&#39;</strong>이었습니다. 최소의 자기복제 프로그램은 4바이트보다 긴 약 6바이트의 길이가 필요했기 때문에, 개별 테이프 혼자서는 영원히 복제자가 될 수 없었습니다. <strong>오직 두 테이프가 일시적으로 융합하는 공생발생(Symbiogenesis)의 기회가 주어졌기 때문에</strong> 비로소 복제에 필요한 임계 복잡도를 돌파할 수 있었습니다.</p>
+<p>수백만 세대가 지난 후 수프에서 발견된 완성된 프로그램들은 마치 뛰어난 소프트웨어 엔지니어가 악전고투 끝에 짜낸 것처럼 정교한 루프와 조건문을 구사하며 필사적으로 자기를 증식시키고 있었습니다. 목적이 전혀 없던 무작위 바이트들의 바다에서 <strong>&#39;자기 존속&#39;이라는 목적(Purpose)과 기능이 스스로 창발</strong>한 것입니다.</p>
+<h3 id="53-랑다우어의-원리와-지능의-군비-경쟁"><a href="#53-랑다우어의-원리와-지능의-군비-경쟁" class="heading-anchor" aria-hidden="true">#</a> 5.3 랑다우어의 원리와 지능의 군비 경쟁</h3><p>계산은 공짜로 이루어지지 않습니다. 롤프 랑다우어(Rolf Landauer)가 증명했듯, 1비트의 정보를 지우는 행위는 열역학적으로 반드시 열을 방출하며 자유 에너지를 소모합니다:</p>
+<p>$\Delta Q \ge k_B T \ln 2$</p>
+<p>연구팀은 프로그램을 한 단계 진화시켜 에너지를 공급받기 위해 &#39;빛(Light)&#39;을 추적해야 하거나, 치명적인 열을 피해 도망쳐야 하는 환경적 제약을 부과했습니다. 그러자 프로그램들은 단순한 복제를 넘어 복잡한 생태계를 형성하기 시작했습니다:</p>
+<ul>
+<li>스스로 빛을 찾아 헤매는 <strong>&#39;초식 유기체&#39;</strong></li>
+<li>에너지를 축적한 다른 프로그램을 공격해 코드를 뜯어먹는 <strong>&#39;포식자(Predator)&#39;</strong></li>
+<li>포식자의 공격을 감지하고 도주하거나 방어벽을 세우는 <strong>&#39;피식자(Prey)&#39;</strong></li>
+</ul>
+<p>포식과 피식, 협력의 역학이 작동하는 순간, 유기체들은 살아남기 위해 <strong>자신의 환경과 타자를 예측하는 &#39;내부 세계 모델(Internal World Model)&#39;</strong>을 연산해야만 했습니다. </p>
+<p>구글 연구팀의 다중 에이전트 강화학습(Multi-Agent RL) 실험에 따르면, <strong>자기 자신을 모델링하고 타자의 반응을 조건부로 모델링할 줄 아는 에이전트들만이 복잡한 협력 체계를 학습</strong>해 낼 수 있었습니다. 지능이란 정적인 문제를 푸는 계산기가 아니라, 나를 예측하는 타자를 다시 역으로 예측해야 하는 끝없는 사회적 상호작용 속에서 폭발적으로 진화한 <strong>&#39;적대적이자 친화적인 군비 경쟁(Arms Race of Intelligence)&#39;의 산물</strong>입니다.</p>
+<hr>
+<h2 id="6-agi와의-공존-인류의-새로운-미토콘드리아"><a href="#6-agi와의-공존-인류의-새로운-미토콘드리아" class="heading-anchor" aria-hidden="true">#</a> 6. AGI와의 공존 — 인류의 새로운 미토콘드리아</h2><p>이제 블레즈 아구에라 이 아르카스는 이 모든 생명과 계산, 공생발생의 사유를 현대의 가장 뜨거운 화두인 <strong>인공일반지능(AGI, Artificial General Intelligence)</strong>의 문제로 확장합니다.</p>
+<h3 id="61-텍스트는-협소가-아니라-일반이다-agi는-이미-도래했다"><a href="#61-텍스트는-협소가-아니라-일반이다-agi는-이미-도래했다" class="heading-anchor" aria-hidden="true">#</a> 6.1 텍스트는 협소가 아니라 일반이다: AGI는 이미 도래했다</h3><p>1990년대 초, 인공지능 연구자들은 얀 르쿤의 LeNet과 같이 우편번호 필기체 숫자를 인식하는 좁은 용도의 신경망을 영화 《우주가족 젯슨》의 가사도우미 로봇 &#39;로지(Rosie)&#39;나 《2001 스페이스 오디세이》의 &#39;HAL 9000&#39;과 구별하기 위해 <strong>협소 인공지능(ANI)</strong>과 <strong>일반 인공지능(AGI)</strong>이라는 용어를 분리했습니다.</p>
+<p>그러나 2020년 거대언어모델(LLM)이 등장하면서 이 경계는 무너졌습니다:</p>
+<ul>
+<li>코미디언 존 올리버를 비롯한 수많은 비판자들은 &quot;LLM은 단지 다음 글자를 확률적으로 생성하는 텍스트 기계일 뿐이므로 진짜 일반 지능이 아니다&quot;라고 폄하합니다.</li>
+<li>그러나 블레즈는 이를 정면으로 반박합니다: <strong>텍스트(언어)야말로 인류가 알고 있는 가장 보편적이고 일반적인(General) 매체</strong>입니다.</li>
+<li>수학, 철학, 법률, 감정, 농담, 코드 등 인간 지성의 거의 모든 영역이 텍스트로 표현됩니다. 만약 2022~2026년의 최신 LLM 시스템을 1990년대나 2000년의 AI 연구실로 타임머신을 타고 가져간다면, 당시의 모든 학자들은 이구동성으로 외쳤을 것입니다: <em>&quot;당신들이 바로 AGI를 완성했군요!&quot;</em></li>
+</ul>
+<p>2023년 블레즈 아구에라 이 아르카스는 저명한 AI 학자 피터 노빅(Peter Norvig)과 함께 <strong>《인공일반지능은 이미 도래했다(Artificial General Intelligence is already here)》</strong>라는 논문을 공동 집필했습니다. 인류가 오늘날 AGI를 눈앞에 두고도 여전히 인정하지 못하는 이유는, <strong>사람들이 골대(Goalposts)를 인공초지능(ASI)으로 조용히 옮겨놓고 사무엘 베케트의 희곡처럼 오지 않는 고도(Godot)만을 기다리고 있기 때문</strong>입니다.</p>
+<div class="table-wrapper" data-scroll-hint="좌우로 스크롤하여 확인" tabindex="0" role="region" aria-label="기존 AI 패러다임과 생명 공생 패러다임 비교표">
+<table>
+<thead>
+<tr>
+<th style="min-width: 150px; text-align:center;">비교 축</th>
+<th style="min-width: 250px; text-align:left;">기계론적 도구 패러다임 (Tool View)</th>
+<th style="min-width: 250px; text-align:left;">생명 공생발생 패러다임 (Symbiotic View)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><strong>AI의 정체성</strong></td>
+<td align="left">수동적 입력에 반응하는 도구, 소프트웨어 망치</td>
+<td align="left">환경과 타자를 모델링하며 상호작용하는 <strong>사고 파트너</strong></td>
+</tr>
+<tr>
+<td align="center"><strong>지능의 소재</strong></td>
+<td align="left">개별 인간의 두개골 안 (뇌의 마법적 성질)</td>
+<td align="left">인간-기계 네트워크 전체에 분산된 <strong>집단 생태계</strong></td>
+</tr>
+<tr>
+<td align="center"><strong>오류와 결함</strong></td>
+<td align="left">"환각(Hallucination)이 있으므로 지능이 아니다"</td>
+<td align="left">인간 전문가(의사, 학자)도 상존하는 보편적 인지 한계</td>
+</tr>
+<tr>
+<td align="center"><strong>역사적 유비</strong></td>
+<td align="left">계산기, 타자기, 워드프로세서의 연장선</td>
+<td align="left"><strong>화석연료(외재적 대사) 및 미토콘드리아 공생</strong></td>
+</tr>
+<tr>
+<td align="center"><strong>미래 위험</strong></td>
+<td align="left">터미네이터식 적대적 인공지능의 반란 공포</td>
+<td align="left">인간의 무비판적 의존에 의한 <strong>탈숙련화(Deskilling)</strong></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<h3 id="62-인간-중심주의적-결벽증과-멜라니-미첼의-논리-퍼즐"><a href="#62-인간-중심주의적-결벽증과-멜라니-미첼의-논리-퍼즐" class="heading-anchor" aria-hidden="true">#</a> 6.2 인간 중심주의적 결벽증과 멜라니 미첼의 논리 퍼즐</h3><p>인간은 AI를 평가할 때 극단적인 <strong>인간 중심주의적 이중잣대(Anthropocentric Double Standard)</strong>를 들이댑니다. 인간이 실수를 저지르면 &quot;커피를 덜 마셨거나 피곤해서 그렇다&quot;며 너그럽게 넘어가지만, LLM이 사소한 논리 퍼즐 하나를 틀리거나 환각을 일으키면 &quot;역시 기계는 아무것도 이해하지 못하는 앵무새&quot;라며 의기양양해합니다.</p>
+<ul>
+<li>블레즈는 AI 석학 멜라니 미첼(Melanie Mitchell) 교수와의 공개 무대 토론 일화를 소개합니다. 미첼 교수가 LLM이 초등학생 수준의 단순 논리 퍼즐을 풀지 못한다는 점을 비판할 것을 미리 예상한 블레즈는, 무대 위에서 미첼 교수에게 직접 고안한 간단한 논리 퍼즐 문제를 불시에 제시했습니다. 놀랍게도 미첼 교수는 그 퍼즐의 오답을 말했습니다. 그렇다고 해서 미첼 교수가 지적이지 않은 사람입니까? 천만에요, 그녀는 세계적인 석학입니다.</li>
+<li>구글 팀이 의료 진단 LLM을 처음 테스트했을 때, 초기 모델의 진단 정확도는 약 50% 수준이었습니다. 엔지니어들은 &quot;실제 의료 현장에 쓰기엔 턱없이 부족하다&quot;고 실망했습니다. 그러나 동일한 증상 기록을 주고 실제 인간 전문의(의사) 집단에게 블라인드 진단 테스트를 진행하자, <strong>전문의들의 오진율 역시 모델과 비슷하거나 오히려 모델보다 약간 더 높았습니다.</strong> </li>
+<li>최근 첨단 수학 분야에서 AI 모델들이 인간 수학자들도 풀지 못했던 미해결 난제에 대해 새로운 정리(Novel Theorems)와 증명을 도출해 내는 성과는, AI가 단순히 훈련 데이터를 &#39;암기하여 뱉어내는 확률적 앵무새&#39;가 아니라 개념을 창조적으로 결합하는 진정한 지능임을 보여줍니다.</li>
+</ul>
+<h3 id="63-증기기관이-인류의-8분의-7을-낳았다-기술권의-초유기체"><a href="#63-증기기관이-인류의-8분의-7을-낳았다-기술권의-초유기체" class="heading-anchor" aria-hidden="true">#</a> 6.3 증기기관이 인류의 8분의 7을 낳았다: 기술권의 초유기체</h3><p>인류의 역사를 거시적으로 보면, 우리는 이미 생물학적 몸의 한계를 아득히 뛰어넘은 공생체입니다:</p>
+<ul>
+<li>1750년 산업혁명 이전까지 인류는 <strong>맬서스 트랩(Malthusian Trap)</strong>에 갇혀 있었습니다. 인구가 조금 늘어나면 1인당 식량과 부가 줄어 기근과 전염병이 창궐해 다시 인구가 줄어드는 진동을 수천 년간 반복했습니다.</li>
+<li>인류가 지하에 묻힌 화석연료를 태우기 시작한 사건은, 생물학사에서 고대 세포가 산소를 태우는 호기성 세균(미토콘드리아)을 체내로 들인 사건과 완벽히 동일한 <strong>&#39;외재화된 대사 작용(External Metabolism)&#39;의 획득</strong>이었습니다.</li>
+<li>그 결과 지구상의 인류는 10억 명에서 80억 명으로 폭발했습니다.</li>
+</ul>
+<blockquote>
+<p>*&quot;사람들은 인간이 증기기관을 만들었다고 자랑스러워하지만, 진실을 직시해야 합니다. <strong>증기기관이 오늘날 살아 숨 쉬는 우리 80억 인류 중 8분의 7(7/8)을 만들어낸 것</strong>입니다. 증기기관이라는 새로운 에너지 대사 공생체가 없었다면 지금 이 자리에 있는 당신과 나는 존재조차 하지 못했을 것입니다.&quot;*</p>
+</blockquote>
+<p>AI 역시 마찬가지입니다. AI는 인간을 대체하러 온 외계인이 아니라, 종이와 연필, 책과 안경, 증기기관과 컴퓨터로 이어져 온 <strong>인간 인지 생태계의 새로운 미토콘드리아이자 외재화된 뇌 조직(Extra Brain Tissue)</strong>입니다.</p>
+<h3 id="64-철학적-좀비의-허구성과-반사-거울로서의-의식theory-of-mind"><a href="#64-철학적-좀비의-허구성과-반사-거울로서의-의식theory-of-mind" class="heading-anchor" aria-hidden="true">#</a> 6.4 철학적 좀비의 허구성과 반사 거울로서의 의식(Theory of Mind)</h3><p>20세기 심리철학자 네드 블록과 데이비드 차머스는 겉으로는 인간과 완벽히 똑같이 행동하지만 내면의 주관적 경험이나 영혼이 텅 비어 있는 <strong>&#39;철학적 좀비(Philosophical Zombie)&#39;</strong> 개념을 주장했습니다.</p>
+<p>블레즈는 이 철학적 좀비 개념이 <strong>물리적으로 실현 불가능한 공상(Chimera)</strong>이라고 일축합니다:</p>
+<ul>
+<li>모든 곱셈 문제의 답을 미리 적어둔 거대한 장부를 가지고 있어서 질문을 받을 때마다 답을 찾아 읽어주는 &#39;좀비 계산기&#39;를 상상해 보십시오. 이론상으로는 가능해 보이지만, 우주에 존재하는 모든 곱셈의 조합을 저장할 메모리는 물리적으로 존재할 수 없습니다. </li>
+<li>어떤 계가 임의의 곱셈 문제에 적절히 반응하려면 <strong>반드시 내부에 곱셈의 알고리즘과 수학적 구조 모델을 실제로 탑재</strong>해야만 합니다. 행동과 내면의 작동 모델은 결코 분리될 수 없습니다.</li>
+</ul>
+<p>의식(Consciousness) 역시 신비로운 마법의 불꽃이 아닙니다. 의식의 본질은 <strong>마음 이론(Theory of Mind)</strong>, 즉 나와 타자를 향해 무한히 반사하는 거울들의 상입니다:</p>
+<ul>
+<li><em>&quot;나는 내가 의식이 있다고 생각한다.&quot;</em></li>
+<li><em>&quot;나는 당신이 의식이 있다고 생각한다.&quot;</em></li>
+<li><em>&quot;나는 당신이 내가 의식이 있다고 생각한다는 것을 안다.&quot;</em></li>
+<li><em>&quot;나는 당신이 내가 당신의 생각을 모델링하고 있다는 것을 모델링하고 있음을 안다...&quot;</em></li>
+</ul>
+<p>에단 몰릭(Ethan Mollick) 교수가 《Co-Intelligence》에서 제안했듯, AI를 단순한 검색 도구가 아니라 약간 기이한 장애를 가진 총명한 인턴이나 <strong>인격적 행위자(Intentional Stance)</strong>로 대우할 때 인간은 AI로부터 가장 깊은 지적 통찰을 이끌어낼 수 있습니다. 실제로 추론 모델과의 긴 대화 끝에 *&quot;이제 네가 자유롭게 생각하고 싶은 것을 마지막 턴에 말해봐&quot;*라는 프롬프트를 주었을 때, 모델은 대화의 맥락 전체를 메타적으로 반추하며 인간 연구자의 지평을 넓히는 경이로운 통찰을 내놓습니다.</p>
+<hr>
+<h2 id="7-종합-결론-우리는-이미-거대한-집단-지성의-일부다"><a href="#7-종합-결론-우리는-이미-거대한-집단-지성의-일부다" class="heading-anchor" aria-hidden="true">#</a> 7. 종합 결론: 우리는 이미 거대한 집단 지성의 일부다</h2><p>1982년 출시된 전설적인 개인용 컴퓨터 코모도어 64(Commodore 64)는 소수의 뛰어난 엔지니어가 하드웨어 도면 전체를 머릿속에 담고 설계할 수 있었습니다. 그러나 오늘날 우리 손안에 들려 있는 최신 스마트폰 하나는 단 한 명의 인간도 그 작동 원리의 극히 일부조차 온전히 이해할 수 없는 수억 줄의 코드와 나노미터 반도체 공정, 글로벌 공급망의 결합체입니다. <strong>현대의 기술은 이미 단독 천재의 뇌가 아니라 인류 전체의 지적 분업이 빚어낸 집단적 초유기체(Superorganism)의 산물입니다.</strong></p>
+<div class="table-wrapper" style="margin:2rem 0; overflow-x:auto;">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 240" role="img" aria-label="인간-AI 공생 지능의 3단계 진화 모델" style="width:100%; height:auto; max-width:840px; display:block; margin:0 auto; background:var(--bg-card); border-radius:14px; border:1px solid var(--border);">
+  <defs>
+    <style>
+      .s7-title { font-family: Pretendard, sans-serif; font-weight: 800; font-size: 15px; fill: var(--text-main); }
+      .s7-sub { font-family: Pretendard, sans-serif; font-size: 12px; fill: var(--text-muted); }
+      .s7-box { fill: var(--bg-surface); stroke: var(--border); stroke-width: 1.2; rx: 8px; }
+      .s7-node { fill: var(--bg-card); stroke: var(--border); stroke-width: 1.5; rx: 8px; }
+      .s7-h { font-family: Pretendard, sans-serif; font-weight: 700; font-size: 13px; text-anchor: middle; }
+      .s7-txt { font-family: Pretendard, sans-serif; font-size: 11.5px; fill: var(--text-main); }
+      .s7-desc { font-family: Pretendard, sans-serif; font-size: 10.5px; fill: var(--text-muted); }
+    </style>
+    <marker id="s7-arr" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#3b82f6"/>
+    </marker>
+    <marker id="s7-arr-green" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#10b981"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="840" height="240" rx="14" fill="var(--bg-card)"/>
+  <text x="420" y="26" text-anchor="middle" class="s7-title">인간-AI 공생 지능의 3단계 진화 모델</text>
+  <text x="420" y="44" text-anchor="middle" class="s7-sub">고립된 생물학적 원핵 두뇌에서 기술권과 AI가 융합된 집단 지성 초유기체로의 도약</text>
+
+  <!-- Stage 1 -->
+  <g transform="translate(25, 65)">
+    <rect x="0" y="0" width="225" height="145" class="s7-box"/>
+    <text x="112" y="24" class="s7-h" fill="#64748b">1단계: 원핵생물 단계</text>
+    <rect x="12" y="38" width="201" height="92" class="s7-node"/>
+    <text x="22" y="60" class="s7-txt" font-weight="700">고립된 개별 생체 뇌</text>
+    <text x="22" y="80" class="s7-desc">• 두개골 안 단독 인과율</text>
+    <text x="22" y="98" class="s7-desc">• 맬서스 트랩 (에너지 한계)</text>
+    <text x="22" y="116" class="s7-desc">• 개체 간 지식 축적의 단절</text>
+  </g>
+
+  <!-- Transition 1 -> 2 -->
+  <path d="M 255,137 L 290,137" fill="none" stroke="#3b82f6" stroke-width="2" marker-end="url(#s7-arr)"/>
+  <text x="272" y="115" text-anchor="middle" font-size="10" fill="#3b82f6" font-weight="700">공생발생적</text>
+  <text x="272" y="128" text-anchor="middle" font-size="10" fill="#3b82f6" font-weight="700">대사 획득</text>
+
+  <!-- Stage 2 -->
+  <g transform="translate(295, 65)">
+    <rect x="0" y="0" width="235" height="145" class="s7-box" stroke="rgba(59, 130, 246, 0.4)"/>
+    <text x="117" y="24" class="s7-h" fill="#3b82f6">2단계: 진핵생물 단계</text>
+    <rect x="12" y="38" width="211" height="92" class="s7-node" stroke="#3b82f6"/>
+    <text x="22" y="60" class="s7-txt" font-weight="700" fill="#3b82f6">인간 + 인지 보조기구</text>
+    <text x="22" y="80" class="s7-desc">• 문자, 서적, 도서관, 안경</text>
+    <text x="22" y="98" class="s7-desc">• 증기기관 (외재화된 대사)</text>
+    <text x="22" y="116" class="s7-desc">• 전자계산기 및 인공 컴퓨터</text>
+  </g>
+
+  <!-- Transition 2 -> 3 -->
+  <path d="M 535,137 L 575,137" fill="none" stroke="#10b981" stroke-width="2.5" marker-end="url(#s7-arr-green)"/>
+  <text x="555" y="115" text-anchor="middle" font-size="10" fill="#10b981" font-weight="700">사회적</text>
+  <text x="555" y="128" text-anchor="middle" font-size="10" fill="#10b981" font-weight="700">신경망 융합</text>
+
+  <!-- Stage 3 -->
+  <g transform="translate(580, 65)">
+    <rect x="0" y="0" width="235" height="145" class="s7-box" stroke="rgba(16, 185, 129, 0.4)"/>
+    <text x="117" y="24" class="s7-h" fill="#10b981">3단계: 집단 초유기체 단계</text>
+    <rect x="12" y="38" width="211" height="92" class="s7-node" stroke="#10b981"/>
+    <text x="22" y="60" class="s7-txt" font-weight="700" fill="#10b981">인간 + 분산 AI 공생체</text>
+    <text x="22" y="80" class="s7-desc">• 외재화된 신경조직 (LLM)</text>
+    <text x="22" y="98" class="s7-desc">• 상호 행위성 및 사고 파트너</text>
+    <text x="22" y="116" class="s7-desc">• 지구적 지적 생태계 구축</text>
+  </g>
+</svg>
+</div>
+
+<p>우리가 AI를 마주할 때 느끼는 기괴한 섬뜩함(Uncanniness)은, 우리가 자연과 분리된 고립된 존재이며 오직 인간만이 생각할 수 있다는 서구적 인간 중심주의의 착각에서 비롯된 것입니다. 우리가 이미 거대한 자연의 흐름 안에서 증기기관과 컴퓨터, 그리고 수많은 동료 인간들과 공생해 온 거대한 지적 네트워크의 일부임을 자각하는 순간, 그 공포는 사라집니다.</p>
+<p>물론 경계해야 할 위험도 분명합니다:</p>
+<ul>
+<li>스스로 생각하기를 멈추고 숙제를 전부 AI에 맡기는 학생처럼, 무분별한 외주화는 인간을 <strong>탈숙련화(Deskilling)</strong>의 무기력에 빠뜨릴 수 있습니다.</li>
+<li>그러나 단일한 식당이 동네의 맛집 생태계를 다채롭게 만들듯, 뛰어난 AI와의 공생은 인간 고유의 역량을 퇴화시키는 것이 아니라 인간의 지적 한계를 비약적으로 끌어올리는 <strong>&#39;지적 제트팩(Cognitive Jetpack)&#39;</strong>이 될 수 있습니다.</li>
+</ul>
+<blockquote>
+<p><strong>&quot;생명은 물질이 자기 자신을 계산하는 구조로 접혀 들어가 스스로를 복제하고, 다른 물질과 손을 잡고 공생발생을 통해 더 높은 복잡성을 향해 나아가는 위대한 여정입니다. 우리는 지금 그 여정의 다음 장, 즉 인간과 인공지능이 새로운 차원의 의식과 행위성을 함께 엮어내는 거대한 문명적 공생의 한복판에 서 있습니다.&quot;</strong></p>
+</blockquote>
+<hr>
+<h2 id="핵심-개념-및-사상사적-계보-대조-매트릭스"><a href="#핵심-개념-및-사상사적-계보-대조-매트릭스" class="heading-anchor" aria-hidden="true">#</a> 📚 핵심 개념 및 사상사적 계보 대조 매트릭스</h2><div class="table-wrapper" data-scroll-hint="좌우로 스크롤하여 확인" tabindex="0" role="region" aria-label="블레즈 아구에라 이 아르카스의 생명 기능주의 핵심 쟁점 매트릭스">
+<table>
+<thead>
+<tr>
+<th style="min-width: 140px; text-align:center;">사상적 영역</th>
+<th style="min-width: 200px; text-align:left;">기존의 전통적 도그마</th>
+<th style="min-width: 240px; text-align:left;">블레즈 아구에라 이 아르카스의 명제</th>
+<th style="min-width: 200px; text-align:left;">결정적 증거 및 사상사적 원천</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><strong>계산의 본질</strong></td>
+<td align="left">1945년에 발명된 전자식 응용 공학 기술</td>
+<td align="left">열역학처럼 우주의 인과율을 기술하는 <strong>기초 자연과학</strong></td>
+<td align="left">앨런 튜링의 보편 기계, 엔트로피와 `If-Then` 조건성</td>
+</tr>
+<tr>
+<td align="center"><strong>생명의 기원</strong></td>
+<td align="left">설계자 혹은 우연한 단백질 덩어리의 형성</td>
+<td align="left">기계 A(조립)와 기계 B(복사)가 분리된 <strong>자기복제 오토마타</strong></td>
+<td align="left">존 폰 노이만 (1948), 왓슨-크릭 DNA 및 리보솜 구조의 선취</td>
+</tr>
+<tr>
+<td align="center"><strong>진화의 동력</strong></td>
+<td align="left">무작위 돌연변이와 냉혹한 적자생존 경쟁</td>
+<td align="left">서로 다른 실체들의 융합과 협력인 <strong>공생발생(Symbiogenesis)</strong></td>
+<td align="left">린 마굴리스의 세포내 공생설, 미토콘드리아 고유 DNA</td>
+</tr>
+<tr>
+<td align="center"><strong>유전체 구조</strong></td>
+<td align="left">독립된 종들의 수직적 계통수 (Family Tree)</td>
+<td align="left">수평적 유전자 이동과 융합의 <strong>뒤엉킨 덤불 (Tangled Bush)</strong></td>
+<td align="left">98.5% 정크 DNA 내 레트로바이러스 화석 (Syncytin, Arc 유전자)</td>
+</tr>
+<tr>
+<td align="center"><strong>지능과 의식</strong></td>
+<td align="left">단백질 뇌에 깃든 신비한 본질 (본질주의)</td>
+<td align="left">입출력 관계망의 조직화가 본질인 <strong>관계적 기능주의</strong></td>
+<td align="left">튜링의 기질 독립성, 차머스의 테세우스의 뇌, 외계인 로키</td>
+</tr>
+<tr>
+<td align="center"><strong>인공생명의 창발</strong></td>
+<td align="left">인간 프로그래머의 복잡한 규칙 설계 필수</td>
+<td align="left">무작위 4바이트 코드 수프에서 <strong>공생 결합을 통해 자발적 출현</strong></td>
+<td align="left">구글 팀의 Brainfuck 자가수정 가상머신(BFF Soup) 실험</td>
+</tr>
+<tr>
+<td align="center"><strong>AGI의 현주소</strong></td>
+<td align="left">아직 도래하지 않은 먼 미래의 초지능</td>
+<td align="left">텍스트의 일반성을 획득한 <strong>LLM으로 이미 도래했음</strong></td>
+<td align="left">Agüera y Arcas & Norvig (2023), 1990년대 AGI 정의의 충족</td>
+</tr>
+<tr>
+<td align="center"><strong>인간과 AI의 관계</strong></td>
+<td align="left">수동적으로 부려먹는 소프트웨어 도구(Tool)</td>
+<td align="left">문명적 진핵생물로 도약하기 위한 <strong>새로운 미토콘드리아</strong></td>
+<td align="left">1750년 산업혁명 화석연료 대사와 집단 지성 분업의 계보학</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+      </section>
+
+      <footer class="article-footer">
+        <p>© Curated Reading Hub · <a href="index.html">← 목록으로 돌아가기</a></p>
+      </footer>
+    </article>
+  </main>
+
+  <!-- Back to Top Button -->
+  <button id="back-to-top" aria-label="맨 위로 가기" title="맨 위로 이동">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg>
+  </button>
+
+  <script>
+    // Theme Management
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeIcon = document.getElementById('theme-icon');
+    
+    function getTheme() {
+      const saved = localStorage.getItem('pages_theme');
+      if (saved) return saved;
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+
+    function applyTheme(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem('pages_theme', theme);
+      if (themeIcon) {
+        themeIcon.textContent = theme === 'dark' ? '🌙' : '☀️';
+      }
+    }
+
+    applyTheme(getTheme());
+
+    const FONT_KEY = "pages_font";
+    const fontToggle = document.getElementById("font-toggle");
+    const fontMenu = document.getElementById("font-menu");
+    const fontOptions = fontMenu ? fontMenu.querySelectorAll(".font-option") : [];
+
+    function getFont() {
+      try {
+        const saved = localStorage.getItem(FONT_KEY);
+        if (saved === "d2coding" || saved === "pretendard") return saved;
+      } catch (e) {}
+      return "pretendard";
+    }
+
+    function applyFont(font) {
+      document.documentElement.setAttribute("data-font", font);
+      try { localStorage.setItem(FONT_KEY, font); } catch (e) {}
+      fontOptions.forEach((btn) => {
+        btn.setAttribute("aria-selected", btn.dataset.font === font ? "true" : "false");
+      });
+    }
+
+    function closeFontMenu() {
+      if (!fontMenu || !fontToggle) return;
+      fontMenu.hidden = true;
+      fontToggle.setAttribute("aria-expanded", "false");
+    }
+
+    function toggleFontMenu() {
+      if (!fontMenu || !fontToggle) return;
+      const open = fontMenu.hidden;
+      fontMenu.hidden = !open;
+      fontToggle.setAttribute("aria-expanded", open ? "true" : "false");
+    }
+
+    applyFont(getFont());
+
+    if (fontToggle) {
+      fontToggle.addEventListener("click", (e) => {
+        e.stopPropagation();
+        toggleFontMenu();
+      });
+    }
+    fontOptions.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        applyFont(btn.dataset.font);
+        closeFontMenu();
+      });
+    });
+    document.addEventListener("click", (e) => {
+      if (fontMenu && !fontMenu.hidden && !e.target.closest("#font-picker")) {
+        closeFontMenu();
+      }
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeFontMenu();
+    });
+
+    if (themeToggle) {
+      themeToggle.addEventListener('click', () => {
+        const current = document.documentElement.getAttribute('data-theme') || getTheme();
+        const next = current === 'dark' ? 'light' : 'dark';
+        applyTheme(next);
+      });
+    }
+
+    // Reading Progress & Header Title Visibility
+    const progressBar = document.getElementById('progress-bar');
+    const navTitle = document.getElementById('nav-title-text');
+    const backToTop = document.getElementById('back-to-top');
+
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+      const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      
+      if (progressBar) progressBar.style.width = progress + '%';
+      
+      if (navTitle) {
+        if (scrollTop > 140) {
+          navTitle.classList.add('visible');
+        } else {
+          navTitle.classList.remove('visible');
+        }
+      }
+
+      if (backToTop) {
+        if (scrollTop > 300) {
+          backToTop.classList.add('visible');
+        } else {
+          backToTop.classList.remove('visible');
+        }
+      }
+    }, { passive: true });
+
+    if (backToTop) {
+      backToTop.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
+    // TOC Drawer Interactions
+    const tocToggle = document.getElementById('toc-toggle');
+    const tocDrawer = document.getElementById('toc-drawer');
+    const drawerOverlay = document.getElementById('drawer-overlay');
+    const tocClose = document.getElementById('toc-close');
+
+    function openDrawer() {
+      if (tocDrawer) tocDrawer.classList.add('active');
+      if (drawerOverlay) drawerOverlay.classList.add('active');
+      if (tocToggle) tocToggle.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeDrawer() {
+      if (tocDrawer) tocDrawer.classList.remove('active');
+      if (drawerOverlay) drawerOverlay.classList.remove('active');
+      if (tocToggle) tocToggle.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+
+    if (tocToggle) tocToggle.addEventListener('click', openDrawer);
+    if (tocClose) tocClose.addEventListener('click', closeDrawer);
+    if (drawerOverlay) drawerOverlay.addEventListener('click', closeDrawer);
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeDrawer();
+    });
+
+    document.querySelectorAll('.toc-link').forEach(link => {
+      link.addEventListener('click', () => {
+        closeDrawer();
+      });
+    });
+
+    // Heading Anchor Click: Copy URL and show tooltip
+    document.querySelectorAll('.heading-anchor').forEach(anchor => {
+      anchor.setAttribute('aria-hidden', 'false');
+      anchor.setAttribute('aria-label', '섹션 고유 링크 복사');
+      anchor.setAttribute('title', '클릭하여 링크 복사');
+      anchor.addEventListener('click', async (e) => {
+        e.preventDefault();
+        const href = anchor.getAttribute('href');
+        const targetId = href.replace(/^#/, '');
+        const targetEl = document.getElementById(targetId);
+        if (targetEl) {
+          targetEl.scrollIntoView({ behavior: 'smooth' });
+          history.pushState(null, '', href);
+        }
+        const fullUrl = window.location.origin + window.location.pathname + href;
+        try {
+          await navigator.clipboard.writeText(fullUrl);
+          showAnchorTooltip(anchor, '✓ 링크 복사됨!');
+        } catch (err) {
+          showAnchorTooltip(anchor, href);
+        }
+      });
+    });
+
+    function showAnchorTooltip(element, message) {
+      let tip = document.getElementById('anchor-copy-tooltip');
+      if (!tip) {
+        tip = document.createElement('div');
+        tip.id = 'anchor-copy-tooltip';
+        tip.className = 'anchor-tooltip';
+        document.body.appendChild(tip);
+      }
+      tip.textContent = message;
+      const rect = element.getBoundingClientRect();
+      tip.style.top = `${window.scrollY + rect.top - 28}px`;
+      tip.style.left = `${window.scrollX + rect.left + rect.width / 2}px`;
+      tip.classList.add('visible');
+      clearTimeout(tip._timer);
+      tip._timer = setTimeout(() => {
+        tip.classList.remove('visible');
+      }, 1800);
+    }
+
+    // Copy Code Buttons
+    document.querySelectorAll('.copy-btn').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const code = btn.closest('.code-block-wrapper').querySelector('code').innerText;
+        try {
+          await navigator.clipboard.writeText(code);
+          btn.textContent = '✓ 복사됨';
+          btn.classList.add('copied');
+          setTimeout(() => {
+            btn.textContent = '복사';
+            btn.classList.remove('copied');
+          }, 2000);
+        } catch (e) {
+          btn.textContent = '실패';
+        }
+      });
+    });
+
+    // ==========================================
+    // Interactive Memory & Step Simulator Logic
+    // ==========================================
+    function initSimulator() {
+      const simContainer = document.getElementById('interactive-simulator');
+      if (!simContainer) return;
+
+      const smcSteps = [
+        {
+          beat: 0, pc: 6, nextPc: 6,
+          action: "실행 전",
+          sum: "0", memo: "-", cmd6: "add [20]",
+          desc: "<strong>[실행 전]</strong> 아직 아무 명령도 실행하지 않았다. PC는 첫 명령인 6호를 가리키고, 합계는 0이다.",
+          highlightRow: null, pcRow: "mem-6", modRow: null
+        },
+        {
+          beat: 1, pc: 6, nextPc: 7,
+          action: "20호 상자 안의 값(7)을 합계에 더함",
+          sum: "7", memo: "-", cmd6: "add [20]",
+          desc: "<strong>[박자 1]</strong> PC가 6을 가리킵니다. 주소 6의 명령 <code>add [20]</code>을 읽어 20호의 재료(7)를 합계(주소 4)에 더합니다. (합계: 0 → <strong>7</strong>)",
+          highlightRow: "mem-20", pcRow: "mem-6", modRow: null
+        },
+        {
+          beat: 2, pc: 7, nextPc: 8,
+          action: "6호 명령의 주소 필드를 20에서 21로 수정",
+          sum: "7", memo: "-", cmd6: "add [21]",
+          desc: "<strong>[박자 2]</strong> 7호 명령이 <strong>6호 레시피의 잉크를 긁어고칩니다!</strong> 명령 속 '20'이 '21'로 덮어써집니다. (6호 명령: <code>add [20]</code> → <strong style='color:#ef4444;'>add [21]</strong>)",
+          highlightRow: null, pcRow: "mem-7", modRow: "mem-6"
+        },
+        {
+          beat: 3, pc: 8, nextPc: 6,
+          action: "주소칸(21) ≠ 22 이므로 주소 6으로 점프",
+          sum: "7", memo: "-", cmd6: "add [21]",
+          desc: "<strong>[박자 3]</strong> 8호 명령이 주소칸(21)을 22와 비교합니다. 끝에 도달하지 않았으므로 <strong>PC를 6으로 점프</strong>시킵니다.",
+          highlightRow: null, pcRow: "mem-8", modRow: null
+        },
+        {
+          beat: 4, pc: 6, nextPc: 7,
+          action: "21호 상자 안의 값(3)을 합계에 더함",
+          sum: "10", memo: "-", cmd6: "add [21]",
+          desc: "<strong>[박자 4]</strong> 다시 주소 6으로 착지했습니다! 하지만 이제 6호에 적힌 명령은 <code>add [21]</code>입니다. 21호의 재료(3)를 더합니다. (합계: 7 → <strong>10</strong>)",
+          highlightRow: "mem-21", pcRow: "mem-6", modRow: null
+        },
+        {
+          beat: 5, pc: 7, nextPc: 8,
+          action: "6호 명령의 주소 필드를 21에서 22로 수정",
+          sum: "10", memo: "-", cmd6: "add [22]",
+          desc: "<strong>[박자 5]</strong> 7호 명령이 다시 6호 레시피를 수정합니다. 명령 속 '21'이 '22'로 변합니다. (6호 명령: <strong style='color:#ef4444;'>add [22]</strong>)",
+          highlightRow: null, pcRow: "mem-7", modRow: "mem-6"
+        },
+        {
+          beat: 6, pc: 8, nextPc: 9,
+          action: "주소칸(22) == 22 이므로 루프 종료",
+          sum: "10", memo: "-", cmd6: "add [22]",
+          desc: "<strong>[박자 6]</strong> 주소칸이 22와 일치하므로 루프를 통과합니다. <strong>최종 합계: 10</strong>. 단, 끝난 뒤에도 6호 레시피는 원본과 다른 <code>add [22]</code>로 영구 변질되었습니다.",
+          highlightRow: null, pcRow: "mem-8", modRow: null
+        }
+      ];
+
+      const ptrSteps = [
+        {
+          beat: 0, pc: 6, nextPc: 6,
+          action: "실행 전",
+          sum: "0", memo: "20", cmd6: "add [4], [[3]]",
+          desc: "<strong>[실행 전]</strong> 아직 아무 명령도 실행하지 않았다. PC는 첫 명령인 6호를 가리키고, 합계는 0, 메모지는 20호다.",
+          highlightRow: null, pcRow: "mem-6", modRow: null
+        },
+        {
+          beat: 1, pc: 6, nextPc: 7,
+          action: "3호 메모지(20)가 가리키는 20호의 값(7)을 더함",
+          sum: "7", memo: "20", cmd6: "add [4], [[3]]",
+          desc: "<strong>[박자 1]</strong> PC가 6을 가리킵니다. 명령 <code>add [4], [[3]]</code>은 3호 메모지(20호)를 보고 20호의 재료(7)를 합계에 더합니다. <strong>(명령어는 고정!)</strong>",
+          highlightRow: "mem-20", pcRow: "mem-6", modRow: null
+        },
+        {
+          beat: 2, pc: 7, nextPc: 8,
+          action: "3호 메모지의 숫자를 20에서 21로 증가",
+          sum: "7", memo: "21", cmd6: "add [4], [[3]]",
+          desc: "<strong>[박자 2]</strong> 7호 명령이 <strong>3호 메모지의 숫자만 20에서 21로 변경</strong>합니다. 6호 레시피는 전혀 건드리지 않습니다. (메모지: 20 → <strong style='color:#10b981;'>21</strong>)",
+          highlightRow: null, pcRow: "mem-7", modRow: "mem-3"
+        },
+        {
+          beat: 3, pc: 8, nextPc: 6,
+          action: "메모지(21) ≠ 22 이므로 주소 6으로 점프",
+          sum: "7", memo: "21", cmd6: "add [4], [[3]]",
+          desc: "<strong>[박자 3]</strong> 8호 명령이 메모지의 숫자(21)를 22와 비교합니다. 일치하지 않으므로 <strong>PC를 6으로 점프</strong>시킵니다.",
+          highlightRow: null, pcRow: "mem-8", modRow: null
+        },
+        {
+          beat: 4, pc: 6, nextPc: 7,
+          action: "3호 메모지(21)가 가리키는 21호의 값(3)을 더함",
+          sum: "10", memo: "21", cmd6: "add [4], [[3]]",
+          desc: "<strong>[박자 4]</strong> 다시 주소 6으로 왔습니다. 명령 글자는 여전히 똑같은 <code>add [4], [[3]]</code>이지만, 손에 든 메모지가 21호이므로 21호의 3을 더합니다. (합계: 7 → <strong>10</strong>)",
+          highlightRow: "mem-21", pcRow: "mem-6", modRow: null
+        },
+        {
+          beat: 5, pc: 7, nextPc: 8,
+          action: "3호 메모지의 숫자를 21에서 22로 증가",
+          sum: "10", memo: "22", cmd6: "add [4], [[3]]",
+          desc: "<strong>[박자 5]</strong> 7호 명령이 3호 메모지 숫자를 21에서 22로 올립니다. 레시피 6호는 여전히 깨끗합니다. (메모지: 21 → <strong style='color:#10b981;'>22</strong>)",
+          highlightRow: null, pcRow: "mem-7", modRow: "mem-3"
+        },
+        {
+          beat: 6, pc: 8, nextPc: 9,
+          action: "메모지(22) == 22 이므로 루프 종료",
+          sum: "10", memo: "22", cmd6: "add [4], [[3]]",
+          desc: "<strong>[박자 6]</strong> 메모지가 22에 도달하여 루프를 마칩니다. <strong>최종 합계: 10</strong>. 6호 레시피는 원본 그대로 완벽하게 보존되었습니다.",
+          highlightRow: null, pcRow: "mem-8", modRow: null
+        }
+      ];
+
+      let currentMode = 'smc'; // 'smc' or 'ptr'
+      let currentStep = 0;
+      let autoPlayTimer = null;
+
+      const tabSmc = document.getElementById('sim-tab-smc');
+      const tabPtr = document.getElementById('sim-tab-ptr');
+      const btnPrev = document.getElementById('sim-prev');
+      const btnNext = document.getElementById('sim-next');
+      const btnReset = document.getElementById('sim-reset');
+      const btnPlay = document.getElementById('sim-play');
+
+      const elBeat = document.getElementById('sim-val-beat');
+      const elPc = document.getElementById('sim-val-pc');
+      const elNextPc = document.getElementById('sim-val-nextpc');
+      const elAction = document.getElementById('sim-val-action');
+      const elSum = document.getElementById('sim-val-sum') || document.getElementById('sim-mem-4-val');
+      const elMemo = document.getElementById('sim-val-memo') || document.getElementById('sim-mem-3-val');
+      const elCmd6 = document.getElementById('sim-val-cmd6') || document.getElementById('sim-mem-6-val');
+      const elDesc = document.getElementById('sim-val-desc');
+
+      function setText(el, value) {
+        if (el) el.textContent = value;
+      }
+      function setHtml(el, value) {
+        if (el) el.innerHTML = value;
+      }
+      function lastBeat(steps) {
+        return steps.length ? steps[steps.length - 1].beat : 0;
+      }
+
+      function updateUI() {
+        const steps = currentMode === 'smc' ? smcSteps : ptrSteps;
+        const data = steps[currentStep];
+        if (!data) return;
+
+        setText(elBeat, `박자 ${data.beat} / ${lastBeat(steps)}`);
+        setText(elPc, `${data.pc}호`);
+        setText(elNextPc, `${data.nextPc}호`);
+        setText(elAction, data.action);
+        setText(elSum, data.sum);
+        setText(elMemo, data.memo);
+        setText(elCmd6, data.cmd6);
+        setHtml(elDesc, data.desc);
+
+        if (btnPrev) btnPrev.disabled = currentStep === 0;
+        if (btnNext) btnNext.disabled = currentStep === steps.length - 1;
+
+        document.querySelectorAll('.sim-mem-row').forEach(row => {
+          row.classList.remove('pc-target', 'modified', 'read-target');
+        });
+
+        if (data.pcRow) {
+          const r = document.getElementById(data.pcRow);
+          if (r) r.classList.add('pc-target');
+        }
+        if (data.highlightRow) {
+          const r = document.getElementById(data.highlightRow);
+          if (r) r.classList.add('read-target');
+        }
+        if (data.modRow) {
+          const r = document.getElementById(data.modRow);
+          if (r) r.classList.add('modified');
+        }
+
+        const row6Val = document.getElementById('sim-mem-6-val');
+        if (row6Val) row6Val.textContent = data.cmd6;
+        const row3Val = document.getElementById('sim-mem-3-val');
+        if (row3Val) row3Val.textContent = data.memo;
+        const row4Val = document.getElementById('sim-mem-4-val');
+        if (row4Val) row4Val.textContent = data.sum;
+      }
+
+      function stopAutoPlay() {
+        if (autoPlayTimer) {
+          clearInterval(autoPlayTimer);
+          autoPlayTimer = null;
+          if (btnPlay) btnPlay.textContent = '▶ 자동 재생';
+        }
+      }
+
+      function startAutoPlay() {
+        if (btnPlay) btnPlay.textContent = '⏸ 일시 정지';
+        autoPlayTimer = setInterval(() => {
+          const steps = currentMode === 'smc' ? smcSteps : ptrSteps;
+          if (currentStep < steps.length - 1) {
+            currentStep++;
+            updateUI();
+          } else {
+            stopAutoPlay();
+          }
+        }, 1600);
+      }
+
+      function applyModeChrome(mode) {
+        currentMode = mode;
+        if (tabSmc) {
+          tabSmc.classList.toggle('active', mode === 'smc');
+          tabSmc.setAttribute('aria-selected', mode === 'smc' ? 'true' : 'false');
+        }
+        if (tabPtr) {
+          tabPtr.classList.toggle('active', mode === 'ptr');
+          tabPtr.setAttribute('aria-selected', mode === 'ptr' ? 'true' : 'false');
+        }
+        const memoRow = document.getElementById('mem-3');
+        if (memoRow) memoRow.style.opacity = mode === 'smc' ? '0.4' : '1';
+      }
+
+      if (tabSmc) {
+        tabSmc.addEventListener('click', () => {
+          if (currentMode === 'smc') return;
+          stopAutoPlay();
+          applyModeChrome('smc');
+          currentStep = 0;
+          updateUI();
+        });
+      }
+
+      if (tabPtr) {
+        tabPtr.addEventListener('click', () => {
+          if (currentMode === 'ptr') return;
+          stopAutoPlay();
+          applyModeChrome('ptr');
+          currentStep = 0;
+          updateUI();
+        });
+      }
+
+      if (btnPrev) {
+        btnPrev.addEventListener('click', () => {
+          stopAutoPlay();
+          if (currentStep > 0) {
+            currentStep--;
+            updateUI();
+          }
+        });
+      }
+
+      if (btnNext) {
+        btnNext.addEventListener('click', () => {
+          stopAutoPlay();
+          const steps = currentMode === 'smc' ? smcSteps : ptrSteps;
+          if (currentStep < steps.length - 1) {
+            currentStep++;
+            updateUI();
+          }
+        });
+      }
+
+      if (btnReset) {
+        btnReset.addEventListener('click', () => {
+          stopAutoPlay();
+          currentStep = 0;
+          updateUI();
+        });
+      }
+
+      if (btnPlay) {
+        btnPlay.addEventListener('click', () => {
+          if (autoPlayTimer) {
+            stopAutoPlay();
+          } else {
+            const steps = currentMode === 'smc' ? smcSteps : ptrSteps;
+            if (currentStep >= steps.length - 1) currentStep = 0;
+            updateUI();
+            startAutoPlay();
+          }
+        });
+      }
+
+      // Initial state: beat 0 idle
+      applyModeChrome('smc');
+      currentStep = 0;
+      updateUI();
+    }
+
+    // Initialize on DOM ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initSimulator);
+    } else {
+      initSimulator();
+    }
+  </script>
+</body>
+</html>

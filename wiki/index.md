@@ -13,10 +13,10 @@ editorial_status: active
 publication_visibility: public
 graph_visibility: hidden
 created: 2026-05-03
-updated: 2026-10-18
+updated: 2026-10-19
 review:
   mode: attested
-  revision: sha256:9616f17e7fc8a808c8ef59f04bdd5c22c0cca657e0bfb25d43515c2737f829c3
+  revision: sha256:6b59c3eea0fa3407ca71ee73879ef9561f6f3c744e2a32597408b8a422e41572
   reviewed_at: 2026-08-03
   reviewed_by: codex
 evidence_ids: []
@@ -31,6 +31,7 @@ redirect_from:
 ## 소스
 
 - [[데이터 표현과 인코딩]] — 인코딩, 이진법, 문자 표현, 비트 연산, C 문자열과 메모리 안전성을 연결해 디지털 데이터의 표현 원리를 정리한 소스.
+- [[생명은 계산이며 공생발생으로 진화한다]] — 아구에라 이 아르카스의 Big Think 인터뷰를 풀어 쓴 해설 페이지. 계산·자기복제·공생발생·기능주의·인공생명·AGI를 한 서사로 엮으며, 원문과 어긋나는 대목도 포함한다.
 - [[서브루틴과 스택(Stack)의 원리]] — 서브루틴의 본질을 복귀 주소 관리로 설명하고 Wheeler Jump에서 스택 프레임까지의 발전을 정리한 소스.
 - [[초기 소프트웨어의 탄생]] — EDSAC, Initial Orders, 디버깅, 서브루틴, 라이브러리, 마이크로프로그래밍, 프로그래밍 언어를 통해 초기 소프트웨어의 계층적 형성을 정리한 소스.
 - [[컴퓨팅의 기원 - 배비지와 러브레이스]] — 배비지의 차분 기관과 해석 기관, 러브레이스의 Note G와 기호 조작 해석을 통해 컴퓨팅의 19세기 개념적 기원을 정리한 소스.
@@ -47,17 +48,21 @@ redirect_from:
 - [[A Note respecting the Application of Machinery to the Calculation of Astronomical Tables]] — 찰스 배비지가 1822년 차분법 기반 기계로 수학 표를 계산하고 계산 결과에 따라 활자를 자동 배치하려 한 구상을 직접 보고한 발표문.
 - [[A Proof for the Queuing Formula: L = λ W]] — 시스템 안의 평균 작업 수, 평균 처리율, 평균 체류 시간의 관계 L = λW를 유한 평균·정상성·비영 평균 도착 과정의 조건 아래 증명한 John D. C. Little의 1961년 대기열 이론 논문.
 - [[A Symbolic Analysis of Relay and Switching Circuits]] — Shannon의 릴레이·스위칭 회로 논문을 바탕으로 불 대수, 논리 게이트, 이진 덧셈 회로, 이진 표현의 회로적 기반을 정리한 참고 자료.
+- [[Absent Qualia, Fading Qualia, Dancing Qualia]] — 데이비드 차머스가 뇌를 기능적으로 동일한 부품으로 점진 교체하는 사고실험으로 기능적 조직과 의식의 관계를 논한 1995년 글.
 - [[An Investigation of the Laws of Thought]] — Boole의 1854년 저작을 바탕으로 논리를 기호와 연산의 체계로 다루는 관점과 Boolean이라는 명칭의 기원을 정리한 참고 자료.
 - [[An Unsolvable Problem of Elementary Number Theory]] — Church의 1936년 논문을 바탕으로 효과적 계산 가능성, 람다 정의 가능성, 재귀 함수, 처치-튜링 논제를 보강한 참고 자료.
+- [[Artificial General Intelligence Is Already Here]] — 아구에라 이 아르카스와 피터 노빅이 2023년 Noema에 쓴 글로, 최신 대규모 AI 모델이 최초의 진정한 AGI 사례로 기록될 것이라고 주장한다.
 - [[ASLR 1차 자료 묶음]] — PaX 설계 문서와 Linux 커널 공식 문서를 바탕으로 ASLR의 대상, 프로세스 배치, PIE·KASLR의 연결과 한계를 정리한 1차 자료 묶음.
 - [[Attention Is All You Need]] — 순환이나 합성곱 없이 어텐션을 중심으로 인코더와 디코더를 구성해 시퀀스 위치의 병렬 계산 가능성과 전역 의존성 모델링을 결합한 2017년 Transformer 논문.
 - [[AWQ: Activation-aware Weight Quantization for On-Device LLM Compression and Acceleration]] — 보정 입력의 활성값으로 중요한 가중치 채널을 식별하고 채널별 스케일을 조정해 양자화 오차를 줄이며, 가중치 전용 저비트 커널로 데스크톱·모바일 GPU 추론을 가속한 2024년 MLSys 연구.
 - [[Bazel BUILD Files and Hermeticity]] — Bazel BUILD 파일의 알려진 입력 의존성과 임의 I/O 제한이 해석을 hermetic하게 만들어 재현 가능한 빌드에 기여한다는 공식 문서.
+- [[Blaise Agüera y Arcas Big Think 인터뷰 원문]] — 블레즈 아구에라 이 아르카스가 생명의 정의, 기능주의, AGI와의 공존을 말하는 Big Think 인터뷰의 영어 전사본. 영상 주소와 게시일은 미확인.
 - [[Brewer's Conjecture and the Feasibility of Consistent, Available, Partition-Tolerant Web Services]] — 비동기 네트워크 분할 모형에서 원자적 일관성, 가용성, 분할 허용성을 동시에 보장할 수 없음을 보인 Gilbert와 Lynch의 2002년 CAP 정리 논문.
 - [[C Integer and Shift Semantics]] — WG14 문서를 바탕으로 C의 unsigned 래핑, signed overflow, 시프트 연산 조건을 정리한 참고 자료.
 - [[Cambridge Computer Laboratory - The History of the Computer Lab]] — EDSAC I의 운영과 EDSAC II의 마이크로프로그램 제어부 계보를 구분하는 케임브리지 공식 역사 자료.
 - [[Carbon Emissions and Large Neural Network Training]] — 대형 신경망 학습의 에너지와 CO₂e를 모델 구조, 프로세서, 데이터센터 효율, 지역 전력망 조건과 함께 추정·비교한 2021년 연구.
 - [[Chasing Carbon: The Elusive Environmental Footprint of Computing]] — 컴퓨팅의 운영 에너지와 하드웨어 제조·인프라에서 나오는 탄소를 구분하고, 성능·전력 효율 개선만으로 전체 환경 영향을 판단할 수 없음을 분석한 2021년 HPCA 논문.
+- [[Computational Life]] — 무작위 프로그램의 원시 수프에서 적합도 함수 없이 자기복제 프로그램이 나타남을 보인 2024년 논문. Brainfuck 변형(BFF)과 Forth, Z80 등을 사용했다.
 - [[Cooperating Sequential Processes]] — 공유 변수와 통신을 통해 협력하는 순차 프로세스의 상호 배제, 세마포어, 대기 조건과 교착 상태를 다룬 Dijkstra의 1968년 고전적 동시성 연구.
 - [[Cramming More Components onto Integrated Circuits]] — Gordon Moore가 집적 회로의 최소 비용 지점에서 부품 수가 빠르게 증가할 것이라고 관찰하고 집적도의 경제적·기술적 효과를 전망한 1965년 논문.
 - [[CWE-190 Integer Overflow or Wraparound]] — 계산 결과가 정수 표현 범위를 넘어 매우 작거나 음수인 값으로 바뀌어 할당·인덱스·권한·루프 제어를 잘못 만들 수 있는 정수 오버플로 또는 래핑 약점을 정리한 MITRE CWE 항목.
@@ -97,6 +102,7 @@ redirect_from:
 - [[Implications of Historical Trends in the Electrical Efficiency of Computing]] — 1946–2009년 여러 종류의 컴퓨터에서 최고 부하의 계산량을 전력으로 나눈 장기 자료를 분석해 계산의 전기 효율이 약 1.57년마다 배가했다는 역사적 추세를 보고한 논문.
 - [[In Search of an Understandable Consensus Algorithm]] — 리더 선출, 로그 복제, 안전성을 분리해 강한 리더 기반 복제 로그 합의를 설명한 Ongaro와 Ousterhout의 2014년 Raft 논문.
 - [[In-Datacenter Performance Analysis of a Tensor Processing Unit]] — Google의 1세대 TPU를 실제 데이터센터 신경망 추론 작업으로 평가해 도메인 특화 하드웨어의 성능·에너지·꼬리 지연 이점을 분석한 2017년 논문.
+- [[Irreversibility and Heat Generation in the Computing Process]] — 롤프 랑다우어가 1961년 IBM Journal of Research and Development에 발표한, 정보 삭제의 열역학적 비용을 다룬 논문.
 - [[Linearizability: A Correctness Condition for Concurrent Objects]] — 동시 객체의 각 연산이 호출과 응답 사이 한 순간에 일어난 것처럼 보이고 겹치지 않는 연산의 실제 시간 순서를 보존해야 한다는 선형화 가능성을 정의한 Herlihy와 Wing의 1990년 논문.
 - [[LLVM Language Reference]] — LLVM IR의 target data layout과 calling convention이 machine-level representation과 호출 규약을 어떻게 지정하는지 설명하는 LLVM 공식 문서.
 - [[LLVM: A Compilation Framework for Lifelong Program Analysis & Transformation]] — 정적·링크·실행·유휴 단계에서 프로그램 분석과 변환을 이어 갈 수 있도록 SSA 기반의 저수준 공통 표현과 컴파일러 프레임워크를 제안한 2004년 LLVM 논문.
@@ -119,6 +125,7 @@ redirect_from:
 - [[On Computable Numbers with an Application to the Entscheidungsproblem]] — Turing의 1936년 논문을 바탕으로 튜링 기계, 보편 튜링 기계, 계산 가능성, 정지 문제, Entscheidungsproblem을 정리한 참고 자료.
 - [[On the Computational Complexity of Algorithms]] — 계산 가능한 대상들 사이에도 필요한 시간 자원에 따른 본질적 난이도 차이가 있음을 형식화하고 시간 복잡도 계층을 제시한 1965년 논문.
 - [[On the Criteria To Be Used in Decomposing Systems into Modules]] — Parnas의 1972년 논문을 바탕으로 모듈화, 정보 은닉, 변경 가능한 설계 결정 중심의 분해 기준을 정리한 참고 자료.
+- [[On the Origin of Mitosing Cells]] — 린 세이건(후일 린 마굴리스)이 1967년 Journal of Theoretical Biology에 발표한 논문으로, 세포내 공생발생설의 서지 근거다.
 - [[ONNX Runtime Execution Providers]] — ONNX Runtime이 같은 API 아래 execution provider의 capability와 node/subgraph 배치를 통해 hardware backend를 연결하는 공식 문서.
 - [[OpenTelemetry Trace API]] — 분산 trace와 span의 생성·전파·종료 의미를 정의해 관측 데이터의 구조와 실행 상태의 의미를 연결하는 OpenTelemetry 공식 명세.
 - [[Orca: A Distributed Serving System for Transformer-Based Generative Models]] — 자동회귀 생성 요청을 고정 배치가 끝날 때까지 묶는 대신 모델 반복마다 실행 대상을 다시 선택하고, 선택적 배칭으로 서로 다른 길이의 요청을 함께 처리한 2022년 분산 Transformer 서빙 연구.
@@ -167,6 +174,7 @@ redirect_from:
 - [[The Impact of AI on Developer Productivity: Evidence from GitHub Copilot]] — JavaScript HTTP 서버 구현 과제에서 GitHub Copilot 접근 여부를 무작위 배정해 완료 시간을 비교한 2023년 통제 실험.
 - [[The Landscape of Parallel Computing Research - A View from Berkeley]] — 전력·명령 수준 병렬성·메모리 병목으로 단일 프로세서 성능 향상의 수익이 감소한 상황에서 병렬 하드웨어와 소프트웨어를 함께 재설계해야 한다고 제안한 2006년 보고서.
 - [[The Linpack Benchmark]] — 고밀도 선형방정식 풀이를 통해 부동소수점 실행률을 측정하는 LINPACK의 범위와 Rmax·Rpeak의 차이, 단일 벤치마크 수치의 한계를 설명하는 TOP500 공식 자료.
+- [[The Major Transitions in Evolution]] — 존 메이너드 스미스와 외르슈 서트마리가 1995년 출간한 책으로, 생명 역사의 주요 진화적 전이를 정식화했다.
 - [[The Manchester Small Scale Experimental Machine - The Baby]] — Manchester Baby의 저장 프로그램 실행, Williams-Kilburn tube, EDSAC과의 최초성 기준 차이를 정리한 참고 자료.
 - [[The Phi Accrual Failure Detector]] — heartbeat 도착 간격의 통계적 분포에서 연속적인 suspicion 값을 계산해 장애 탐지 민감도와 거짓 양성의 절충을 설명하는 failure detector 연구 보고서.
 - [[The Preparation of Programs for an Electronic Digital Computer]] — Wilkes, Wheeler, Gill의 EDSAC 프로그래밍 문헌을 바탕으로 서브루틴 라이브러리, 카탈로그, 오류 진단, 자동 프로그래밍을 API의 전신으로 정리한 참고 자료.
@@ -174,6 +182,7 @@ redirect_from:
 - [[The Tail at Scale]] — 대규모 온라인 서비스에서 드문 구성요소 지연이 모든 응답을 기다리는 팬아웃을 통해 흔한 서비스 지연으로 증폭되는 원리와 꼬리 내성 기법을 정리한 2013년 논문.
 - [[The Unicode Standard 17.0.0]] — Unicode 17.0.0의 핵심 명세를 바탕으로 코드 포인트, scalar value, 코드 유닛, UTF-8, UTF-16, BOM의 구분을 정리한 참고 자료.
 - [[The UNIX Time-Sharing System]] — Ritchie와 Thompson의 1974년 논문을 바탕으로 Unix의 파일 시스템, 셸, 프로세스, 파이프, 시스템 호출을 정리한 참고 자료.
+- [[Theory of Self-Reproducing Automata]] — 존 폰 노이만의 자기복제 오토마타 연구를 아서 벅스가 편집·완성해 1966년 출간한 책. 복제 논리의 1차 서지 근거다.
 - [[There's Plenty of Room at the Top]] — 반도체 미세화 둔화 이후 성능 향상의 주요 여지를 소프트웨어, 알고리즘과 하드웨어 아키텍처의 공동 개선에서 찾는 Leiserson 등 연구진의 2020년 Science 논문.
 - [[Time, Clocks, and the Ordering of Events in a Distributed System]] — 분산 시스템에서 사건의 인과적 선행 관계와 논리 시계를 정의하고, 인과 순서를 보존하는 전체 순서를 만드는 방법을 제시한 Leslie Lamport의 1978년 논문.
 - [[TokenPowerBench: Benchmarking the Power Consumption of LLM Inference]] — LLM 추론의 GPU·노드·전체 시스템 전력을 같은 실행 구간에서 수집하고 프리필·디코드에 맞춰 에너지와 토큰당 줄을 분석하는 2026년 AAAI 연구.
@@ -197,9 +206,12 @@ redirect_from:
 - [[계산 가능성]] — 어떤 함수나 문제가 유한한 규칙적 절차로 해결될 수 있는지를 다루는 이론적 개념.
 - [[계산 복잡도]] — 계산 가능한 문제를 풀기 위해 필요한 시간·공간 같은 자원이 입력 규모에 따라 어떻게 증가하는지를 계산 모형과 점근적 기준 아래 분류하는 이론적 관점.
 - [[계산-통신 중첩]] — 분산 시스템에서 계산 중 통신을 진행해 통신의 노출 시간을 줄이고, 병렬 확장성의 이상 모델과 실제 실행 사이의 간극을 완화하는 기법.
+- [[계산적 인공생명]] — 무작위 프로그램들을 상호작용시키면 적합도 함수 없이도 자기복제 프로그램이 나타난다는 실험 계열. BFF 수프가 대표 사례다.
+- [[공생발생]] — 둘 이상의 독립된 개체가 결합해 스스로 번식하는 더 복잡한 개체가 되는 과정. 이 위키는 계산적 해석과 생물학 주장을 구분해 다룬다.
 - [[구조적 프로그래밍]] — 프로그램을 임의 점프가 아니라 이해·검증 가능한 제어 구조와 데이터 구조로 작성하려는 방법론.
 - [[구조화 프로그램 정리]] — 계산 절차가 제한된 제어 형식으로 표현될 수 있음을 보이는 이론적 결과.
 - [[그래핌 클러스터]] — 사용자가 문자 하나로 인식하는 단위에 가까운 Unicode 텍스트 분할 단위.
+- [[기질 독립성과 기능주의]] — 어떤 것의 본질은 재료가 아니라 입출력 관계 속에서 하는 일(기능)이며, 같은 기능이면 기질이 달라도 같다는 입장과 그 쟁점.
 - [[기호 조작]] — 숫자, 데이터, 프로그램 표기를 관계와 의미의 표현으로 보고 규칙에 따라 변환하는 컴퓨팅 관점.
 - [[꼬리 지연 시간]] — 응답 시간 분포의 느린 상위 구간과 그것이 팬아웃·공유 자원·큐를 통해 종단 서비스 응답성으로 증폭되는 현상을 다루는 개념.
 - [[논리 게이트]] — AND, OR, NOT, XOR 같은 불 대수 연산을 물리 회로로 구현하는 이진 회로 단위.
@@ -214,6 +226,7 @@ redirect_from:
 - [[디버깅]] — 프로그램 실행을 관찰하고 오류 원인을 찾아 수정하는 소프트웨어 개발의 핵심 활동.
 - [[라이브러리]] — 검증된 재사용 코드 단위를 모아 공동체의 소프트웨어 자산으로 만든 체계.
 - [[라이브러리 카탈로그]] — 서브루틴의 동작, 사용법, 실행 시간, 정밀도, 저장 공간을 문서화한 초기 API 문서형 체계.
+- [[랑다우어 원리]] — 논리적으로 비가역적인 정보 삭제에는 열역학적 최소 에너지 비용이 따른다는 원리. 계산이 물리 법칙에 묶여 있음을 보여 준다.
 - [[로더]] — 프로그램을 실행 가능한 위치에 적재하고 실행 흐름을 넘기는 소프트웨어 계층.
 - [[리틀의 법칙]] — 같은 시스템 경계에서 평균 작업 수 L, 평균 처리율 λ, 평균 체류 시간 W가 L = λW로 연결된다는 대기열 이론의 관계와, 이를 서비스 측정에 쓸 때 필요한 단위·기간·분포 해석의 조건.
 - [[릴레이 회로]] — 접점의 열림과 닫힘으로 전류 흐름을 제어하며 스위칭 회로와 디지털 논리의 전신을 보여주는 회로.
@@ -285,6 +298,7 @@ redirect_from:
 - [[입출력 인지 어텐션]] — 어텐션의 산술 연산뿐 아니라 메모리 계층 사이 읽기·쓰기를 비용으로 모델링하고 타일링·재계산으로 느린 메모리 이동을 줄이는 구현 관점.
 - [[자기 수정 코드]] — 프로그램이 실행 중에 자기 명령어나 다른 코드 영역의 명령을 바꾸는 방식.
 - [[자기 주의]] — 한 시퀀스에서 만든 질의·키·값으로 각 위치가 같은 시퀀스의 다른 위치를 얼마나 참조할지 계산해 새 표현을 만드는 어텐션 연산.
+- [[자기복제 오토마타]] — 설계도(기술)를 담은 기계가 자기 설계도까지 복사해 무한 퇴행 없이 스스로를 만들 수 있음을 보인 폰 노이만의 논리 구조.
 - [[자동 프로그래밍]] — 주소 보정, 서브루틴 조립, 변환·해석 루틴처럼 프로그램 작성의 규칙적 작업을 기계에 맡기는 초기 기법.
 - [[자동화 경계]] — 도구가 특정 작업 단계를 수행하더라도 요구 정의, 결과 검증, 통합, 책임 귀속이 자동으로 사라지지 않는다는 인간과 도구 사이의 분업 경계.
 - [[장애 감지]] — 분산 시스템에서 관찰 가능한 지연·heartbeat·요청 결과로 구성 요소의 실패를 추정하고, 거짓 양성과 탐지 지연을 감수하며 격리·복구 결정을 내리는 관찰 계약.
@@ -366,7 +380,9 @@ redirect_from:
 - [[데이비드 파나스]] — 모듈화와 정보 은닉을 통해 변경 가능한 설계 결정을 감추는 소프트웨어 구조를 정리한 컴퓨터 과학자.
 - [[데이비드 휠러]] — Wheeler Jump와 폐쇄형 서브루틴을 통해 복귀 주소 관리와 모듈화의 초기 형태를 정립한 EDSAC 팀 인물.
 - [[도널드 커누스]] — goto 논쟁을 언어 설계와 프로그램 변환의 관점에서 균형 있게 재검토한 컴퓨터 과학자.
+- [[린 마굴리스]] — 세포내 공생발생설을 주류 생물학에 올린 생물학자로, 1967년 논문은 린 세이건이라는 이름으로 발표했다.
 - [[모리스 윌크스]] — EDSAC 개발을 이끌고 초기 명령, 디버깅, 서브루틴, 마이크로프로그래밍의 실용적 흐름을 형성한 컴퓨터 과학자.
+- [[블레즈 아구에라 이 아르카스]] — 구글에서 기술·사회 부문 CTO와 Paradigms of Intelligence 팀을 맡고, 계산적 인공생명 논문과 AGI 논의의 공동 저자인 연구자.
 - [[스탠리 길]] — Wilkes, Wheeler와 함께 EDSAC 프로그래밍 지식을 서브루틴, 라이브러리, 자동 프로그래밍 문헌으로 정리한 공동 저자.
 - [[스티븐 C. 존슨]] — C/Unix 이식성, pcc, lint 같은 도구 흐름을 통해 C 프로그램의 이식성과 인터페이스 점검에 기여한 연구자.
 - [[알론조 처치]] — 효과적 계산 가능성을 람다 정의 가능성과 재귀 함수로 형식화해 처치-튜링 논제의 배경을 이룬 수학자.
@@ -392,7 +408,9 @@ redirect_from:
 - [[같은 SLO의 LLM 서비스는 무엇을 비용으로 세어야 하는가]] — 같은 모델 품질과 TTFT·TPOT SLO를 만족한 LLM 서비스를 에너지·가속기 시간·유휴 용량·실패 요청까지 포함한 유효 요청당 물리 자원 비용으로 비교하는 분석.
 - [[계산 결과에서 실행 가능한 절차로]] — 수학 표의 계산 결과, 라이브러리의 실행 절차, 저장 프로그램의 명령, 캐시의 사본을 비교해 컴퓨팅이 시간·공간·노동과 신뢰 비용을 서로 다른 층으로 옮기는 방식을 분석한다.
 - [[계산기와 컴퓨터의 차이]] — 차분 기관과 해석 기관, EDSAC의 역사적 구분을 현대 AI 가속기(TPU/ASIC vs GPU)와 에이전틱 AI 오케스트레이션(CPU)의 이종 컴퓨팅 계보로 확장해 비교한 분석.
+- [[계산은 발명인가 자연 현상인가]] — 계산을 1945년 이후의 공학 기술, 1936년의 수학적 개념, 자연에 이미 있던 현상으로 읽는 세 관점을 구분하고 각각의 근거와 한계를 대조한다.
 - [[기계가 계산한다는 말의 이론적 의미]] — 계산을 유한한 규칙에 따른 기호 상태 변환으로 보고, 보편성 및 계산 불가능성의 의미를 정리한 분석.
+- [[기능주의와 중국어 방은 어디서 갈라지는가]] — 기능과 조직이 보존되면 이해도 보존된다는 기능주의와 형식적 시뮬레이션은 이해를 낳지 못한다는 중국어 방을 같은 쟁점 위에서 대조하고, LLM 평가가 갈리는 이유를 정리한다.
 - [[기호는 어떻게 생각의 보조 도구에서 계산 엔진이 되었는가]] — 홉스의 표지·신호와 추론 계산론에서 출발해 라이프니츠의 천각형 역설과 맹목적 사고, 불·튜링·섀넌의 회로 육화와 거대언어모델(LLM)의 의미 외주화까지 기호 조작의 사상사를 종합 분석한다.
 - [[낮은 비트는 왜 LLM 추론 속도를 보장하지 않는가]] — LLM 가중치 비트 수 감소가 모델 용량·메모리 대역폭을 줄여도 패킹·역양자화·메타데이터·커널과 하드웨어 지원, 배치·품질 조건 때문에 실제 지연 단축을 자동으로 보장하지 않는 이유를 분석한다.
 - [[낮은 운영 에너지는 지속 가능한 컴퓨팅을 보장하는가]] — 작업당 에너지와 시설 전력 효율이 중요한 운영 지표이지만, 장비 제조·시설 인프라·전력망·수명·배분까지 포함한 수명 주기 환경 영향과는 다른 측정 경계를 가진다는 점을 분석한다.
@@ -435,6 +453,7 @@ redirect_from:
 - [[하드웨어 실행 모델은 어떻게 제어와 상태를 엮는가]] — 연산·저장·제어 3축의 물리적 분리가 고수준 언어의 제어 흐름, 포인터 간접화, 스택·힙 상태 수명 관리로 발전하는 인과적 메커니즘을 분석.
 - [[한 소스의 의미와 성능은 가속기로 어떻게 번역되는가]] — LLVM·CUDA·Halide·TVM을 통해 하나의 계산 정의가 중간 표현, 대상별 스케줄, 코드 생성, 런타임과 측정 계약을 거쳐 이기종 가속기 성능으로 번역되는 과정을 분석한다.
 - [[한 프로그램의 순서는 여러 실행 주체에서 어떻게 보존되는가]] — 구조화된 단일 제어 흐름이 여러 실행 주체의 공유 상태 문제로 확장될 때, 상호 배제·순차 일관성·선형화 가능성이 각각 접근, 메모리 관찰, 객체 결과의 다른 순서를 보존함을 비교한다.
+- [[AGI 판정 기준은 누가 옮기는가]] — ANI와 AGI의 구분이 생긴 맥락, LLM 이후 판정 기준이 옮겨 간다는 주장, 일화 중심 근거의 한계를 정리하고 범용성과 결과 신뢰성을 분리해 읽는다.
 - [[AI 시스템은 병목을 어떻게 이동시키는가]] — FlashAttention, PagedAttention, 프리필·디코드 분리, 분산 학습과 전력 측정 사례를 비교해 AI 최적화가 병목을 제거하기보다 다른 계층으로 이동시키는 조건을 분석한다.
 - [[AI 인프라의 병목 계보]] — Amdahl의 순차 부분, memory wall, Roofline, 도메인 특화 가속기와 데이터센터 컴퓨팅을 연결해 현재 AI 병목이 과거 개념의 단절이 아니라 계층화된 연속임을 분석한다.
 - [[EDSAC은 무엇의 최초인가]] — EDSAC의 최초성을 절대적 최초가 아니라 실용적 범용 저장 프로그램 컴퓨터 기준으로 정리한 분석.
