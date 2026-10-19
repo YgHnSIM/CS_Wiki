@@ -1765,7 +1765,8 @@ console.log(
 
 const outputTotals = await verifyOutputEnvelope(dist);
 
-const publicHtmlFiles = (await relativeFiles(dist)).filter((file) => file.endsWith(".html"));
+// raw/assets HTML is a preserved original copied through unchanged. It is not rendered wiki output, so an author's own callout text is not a generator leak.
+const publicHtmlFiles = (await relativeFiles(dist)).filter((file) => file.endsWith(".html") && !file.startsWith("assets/raw/"));
 const leakedWikiMarkup = [];
 for (const file of publicHtmlFiles) {
   const html = await read(file);

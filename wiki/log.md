@@ -16,7 +16,7 @@ created: 2026-05-03
 updated: 2026-10-19
 review:
   mode: attested
-  revision: sha256:d463d067754f6353a8916d233096d049ba2544066e7a8c26346ddcbb08be7d97
+  revision: sha256:b6cc4a789c150599dd52eb6fce81fe6f1aff9b17a592e6e56b20b805679dc9bf
   reviewed_at: 2026-08-31
   reviewed_by: antigravity
 evidence_ids: []
@@ -152,6 +152,7 @@ redirect_from:
 - [2026-09-18 update | 근거 빈약 분석 4건 보강](logs/log-2026-09-18-120-thin-analysis-evidence.md)
 - [2026-10-18 ingest | 홉스·라이프니츠 기호 철학 및 생성형 AI 계보 보강](logs/log-2026-10-18-121-hobbes-leibniz-symbolic-cognition-ai.md)
 - [2026-10-19 ingest | 생명은 계산이며 공생발생으로 진화한다 (아구에라 이 아르카스 해설) 보강](logs/log-2026-10-19-122-life-computation-symbiogenesis-agi.md)
+- [2026-10-19 ingest | 지수 기호가 늦은 이유와 구문론의 두 의미](logs/log-2026-10-19-123-exponent-notation-delay.md)
 
 ## 출처
 

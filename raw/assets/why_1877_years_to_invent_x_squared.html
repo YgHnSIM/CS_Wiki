@@ -1,0 +1,2957 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+  <title>지수 기호 하나를 얻기까지 왜 1,877년이나 걸렸는가 — 로버트 레코드의 등호와 데카르트의 구문론 혁명</title>
+  <meta name="description" content="인류는 기원전 3세기 아르키메데스 시절에 이미 거듭제곱 곱셈의 기본 규칙을 알았지만, 오늘날과 같은 x²이라는 단순한 지수 표기에 도달하기까지 무려 1,877년이 걸렸다. 옥스퍼드 사전 최다 Z 단어 zenzizenzizenzic의 기괴한 미로부터, 수를 사물의 형용사로 보던 전근대의 존재론적 장벽, 로버트 레코드의 조폐국 스캔들과 비극적인 옥사, 그리고 데카르트가 이끈 '시각적 구문론'의 대도약까지 지수 표기 탄생의 2천 년 역사를 추적한다.">
+  
+  
+
+  <!-- Favicon / Page Icon (📚) -->
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+  <!-- Pretendard Web Font -->
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+  <!-- Naver D2Coding -->
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/joungkyun/font-d2coding@1.3.2/d2coding.css" />
+  <script>
+    (function () {
+      try {
+        var f = localStorage.getItem("pages_font");
+        if (f === "d2coding" || f === "pretendard") {
+          document.documentElement.setAttribute("data-font", f);
+        }
+      } catch (e) {}
+    })();
+  </script>
+  
+  <!-- KaTeX for Math Equations -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '\\[', right: '\\]', display: true}, {left: '$', right: '$', display: false}, {left: '\\(', right: '\\)', display: false}], throwOnError: false, output: 'html'});"></script>
+
+  <style>
+    .katex-mathml {
+      display: none !important;
+      user-select: none !important;
+      -webkit-user-select: none !important;
+    }
+    .katex-display {
+      overflow-x: auto;
+      overflow-y: hidden;
+      max-width: 100%;
+      padding: 0.5em 0;
+      -webkit-overflow-scrolling: touch;
+    }
+    .katex {
+      max-width: 100%;
+    }
+
+    :root {
+      --font-sans: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+      --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      
+      --bg-page: #f8fafc;
+      --bg-card: #ffffff;
+      --bg-surface: #f1f5f9;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --text-light: #94a3b8;
+      --border: #e2e8f0;
+      --border-focus: #3b82f6;
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --primary-light: #eff6ff;
+      --code-bg: #0f172a;
+      --code-text: #e2e8f0;
+      --inline-code-bg: #e2e8f0;
+      --inline-code-text: #0f172a;
+      --quote-bg: #f8fafc;
+      --quote-border: #3b82f6;
+      --header-bg: rgba(248, 250, 252, 0.88);
+      --drawer-bg: #ffffff;
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 16px;
+      --radius-full: 9999px;
+    }
+
+    :root[data-font="d2coding"] {
+      --font-sans: "D2 coding", "D2Coding", Pretendard, monospace;
+      --font-mono: "D2 coding", "D2Coding", ui-monospace, monospace;
+    }
+
+
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --bg-page: #0b0f19;
+        --bg-card: #131b2e;
+        --bg-surface: #1e293b;
+        --text-main: #f1f5f9;
+        --text-muted: #94a3b8;
+        --text-light: #64748b;
+        --border: #243049;
+        --border-focus: #60a5fa;
+        --primary: #38bdf8;
+        --primary-hover: #7dd3fc;
+        --primary-light: rgba(56, 189, 248, 0.12);
+        --code-bg: #020617;
+        --code-text: #f8fafc;
+        --inline-code-bg: #243049;
+        --inline-code-text: #38bdf8;
+        --quote-bg: #141f36;
+        --quote-border: #38bdf8;
+        --header-bg: rgba(11, 15, 25, 0.88);
+        --drawer-bg: #131b2e;
+        --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.4);
+        --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+        --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.6);
+      }
+    }
+
+    :root[data-theme="dark"] {
+      --bg-page: #0b0f19;
+      --bg-card: #131b2e;
+      --bg-surface: #1e293b;
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --text-light: #64748b;
+      --border: #243049;
+      --border-focus: #60a5fa;
+      --primary: #38bdf8;
+      --primary-hover: #7dd3fc;
+      --primary-light: rgba(56, 189, 248, 0.12);
+      --code-bg: #020617;
+      --code-text: #f8fafc;
+      --inline-code-bg: #243049;
+      --inline-code-text: #38bdf8;
+      --quote-bg: #141f36;
+      --quote-border: #38bdf8;
+      --header-bg: rgba(11, 15, 25, 0.88);
+      --drawer-bg: #131b2e;
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.4);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.6);
+    }
+
+    :root[data-theme="light"] {
+      --bg-page: #f8fafc;
+      --bg-card: #ffffff;
+      --bg-surface: #f1f5f9;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --text-light: #94a3b8;
+      --border: #e2e8f0;
+      --border-focus: #3b82f6;
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --primary-light: #eff6ff;
+      --code-bg: #0f172a;
+      --code-text: #e2e8f0;
+      --inline-code-bg: #e2e8f0;
+      --inline-code-text: #0f172a;
+      --quote-bg: #f8fafc;
+      --quote-border: #3b82f6;
+      --header-bg: rgba(248, 250, 252, 0.88);
+      --drawer-bg: #ffffff;
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 80px;
+      overflow-x: clip;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      line-height: 1.8;
+      font-size: 16.5px;
+      word-break: keep-all;
+      overflow-wrap: break-word;
+      transition: background-color 0.25s ease, color 0.25s ease;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: clip;
+      width: 100%;
+      max-width: 100%;
+    }
+
+    /* Top Sticky Header */
+    .top-nav {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      background-color: var(--header-bg);
+      border-bottom: 1px solid var(--border);
+      height: 58px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px;
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+      flex: 1 1 auto;
+      overflow: hidden;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .nav-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      height: 40px;
+      min-width: 40px;
+      padding: 0 10px;
+      border-radius: var(--radius-md);
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text-main);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.18s ease;
+    }
+
+    .nav-btn:hover, .nav-btn:active {
+      background: var(--bg-surface);
+      border-color: var(--border);
+    }
+
+    .font-picker {
+      position: relative;
+    }
+
+    .font-menu {
+      position: absolute;
+      top: calc(100% + 6px);
+      right: 0;
+      min-width: 156px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-md);
+      padding: 4px;
+      z-index: 60;
+    }
+
+    .font-menu[hidden] {
+      display: none;
+    }
+
+    .font-option {
+      display: block;
+      width: 100%;
+      text-align: left;
+      border: none;
+      background: transparent;
+      color: var(--text-main);
+      padding: 8px 10px;
+      border-radius: var(--radius-sm);
+      font-size: 13.5px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .font-option:hover,
+    .font-option:focus-visible {
+      background: var(--bg-surface);
+      outline: none;
+    }
+
+    .font-option[aria-selected="true"] {
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    .font-option[data-font="pretendard"] {
+      font-family: Pretendard, sans-serif;
+    }
+
+    .font-option[data-font="d2coding"] {
+      font-family: "D2 coding", "D2Coding", monospace;
+    }
+
+    .nav-title {
+      font-size: 14.5px;
+      font-weight: 700;
+      color: var(--text-main);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 200px;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    @media (min-width: 640px) {
+      .nav-title {
+        max-width: 380px;
+      }
+    }
+
+    .nav-title.visible {
+      opacity: 1;
+    }
+
+    /* Reading Progress Bar */
+    #progress-container {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: transparent;
+      z-index: 50;
+    }
+
+    #progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #3b82f6, #06b6d4);
+      transition: width 0.08s ease-out;
+    }
+
+    /* Main Container */
+    .article-container {
+      width: 100%;
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 24px 16px 80px;
+      flex: 1;
+    }
+
+    @media (min-width: 768px) {
+      .article-container {
+        padding: 40px 24px 100px;
+      }
+    }
+
+    /* Article Card Wrapper */
+    .article-card {
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+      padding: 24px 18px;
+    }
+
+    @media (min-width: 768px) {
+      .article-card {
+        padding: 48px 48px;
+      }
+    }
+
+    /* Article Header */
+    .article-header {
+      margin-bottom: 32px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .article-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+      font-size: 13.5px;
+      color: var(--text-muted);
+    }
+
+    .meta-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      padding: 3px 10px;
+      border-radius: var(--radius-full);
+      font-weight: 500;
+    }
+
+    .article-title {
+      font-size: clamp(24px, 5.5vw, 34px);
+      font-weight: 800;
+      line-height: 1.32;
+      letter-spacing: -0.03em;
+      color: var(--text-main);
+      margin-bottom: 10px;
+    }
+
+    .article-subtitle {
+      font-size: clamp(16px, 3.8vw, 19px);
+      font-weight: 500;
+      line-height: 1.5;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 14px;
+    }
+
+    .tag-pill {
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--primary);
+      background: var(--primary-light);
+      padding: 3px 10px;
+      border-radius: var(--radius-full);
+      text-decoration: none;
+    }
+
+    /* Typography & Markdown Content */
+    .content {
+      color: var(--text-main);
+    }
+
+    .content h1, .content h2, .content h3, .content h4, .verification-card {
+      scroll-margin-top: 80px;
+    }
+
+    .content h1, .content h2, .content h3, .content h4 {
+      color: var(--text-main);
+      font-weight: 750;
+      line-height: 1.38;
+      letter-spacing: -0.025em;
+      margin-top: 2.2em;
+      margin-bottom: 0.8em;
+      position: relative;
+    }
+
+    .content h1 {
+      font-size: clamp(21px, 4.8vw, 27px);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.4em;
+    }
+
+    .content h2 {
+      font-size: clamp(19px, 4.2vw, 23px);
+      padding-left: 12px;
+      border-left: 4px solid var(--primary);
+    }
+
+    .content h3 {
+      font-size: clamp(17px, 3.6vw, 19.5px);
+    }
+
+    .content h4 {
+      font-size: 16.5px;
+      color: var(--text-muted);
+    }
+
+    .content a.heading-anchor {
+      color: var(--text-light);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.82em;
+      margin-right: 0.35em;
+      opacity: 0;
+      transition: opacity 0.15s ease;
+      word-break: keep-all;
+    }
+    .content h1:hover > a.heading-anchor,
+    .content h2:hover > a.heading-anchor,
+    .content h3:hover > a.heading-anchor,
+    .content h4:hover > a.heading-anchor,
+    .content a.heading-anchor:focus,
+    .content a.heading-anchor:focus-visible {
+      opacity: 1;
+      color: var(--text-muted);
+    }
+
+    .content p {
+      margin-top: 0;
+      margin-bottom: 1.4em;
+      text-align: start;
+    }
+
+    .content a {
+      color: var(--primary);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      word-break: keep-all;
+      overflow-wrap: break-word;
+    }
+
+    .content a:hover {
+      color: var(--primary-hover);
+    }
+
+    .content strong, .content b {
+      font-weight: 700;
+    }
+
+    .content ul, .content ol {
+      margin-bottom: 1.4em;
+      padding-left: 1.4em;
+    }
+
+    .content li {
+      margin-bottom: 0.5em;
+    }
+
+    .content hr {
+      border: 0;
+      height: 1px;
+      background: var(--border);
+      margin: 2.5em 0;
+    }
+
+    .content blockquote {
+      margin: 1.5em 0;
+      padding: 14px 18px;
+      background-color: var(--quote-bg);
+      border-left: 4px solid var(--quote-border);
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      color: var(--text-main);
+    }
+
+    .content blockquote p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Inline Code */
+    .content code:not(pre code) {
+      font-family: var(--font-mono);
+      font-size: 0.88em;
+      background: var(--inline-code-bg);
+      color: var(--inline-code-text);
+      padding: 0.2em 0.45em;
+      border-radius: 4px;
+      font-weight: 500;
+    }
+
+    /* Code Block with Copy Button */
+    .code-block-wrapper {
+      position: relative;
+      margin: 1.6em 0;
+      border-radius: var(--radius-md);
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .code-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 14px;
+      background: rgba(255, 255, 255, 0.05);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 12px;
+      font-family: var(--font-mono);
+      color: #94a3b8;
+    }
+
+    .code-lang {
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .code-lang.lang-generic {
+      text-transform: none;
+      letter-spacing: 0;
+    }
+
+    .copy-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #e2e8f0;
+      font-size: 11.5px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.15s ease;
+    }
+
+    .copy-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+    .nav-btn:focus-visible,
+    .sim-btn:focus-visible,
+    .sim-tab-btn:focus-visible,
+    .copy-btn:focus-visible,
+    .toc-close-btn:focus-visible,
+    #back-to-top:focus-visible {
+      outline: 2px solid var(--border-focus);
+      outline-offset: 2px;
+    }
+
+    .copy-btn.copied {
+      background: #10b981;
+      color: #ffffff;
+      border-color: #10b981;
+    }
+
+    .content pre {
+      margin: 0;
+      padding: 14px 16px;
+      overflow-x: auto;
+      background: transparent;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .content pre code {
+      font-family: var(--font-mono);
+      font-size: 13.5px;
+      line-height: 1.6;
+      color: var(--code-text);
+      display: block;
+      background: none;
+      padding: 0;
+    }
+
+    /* Tables (Responsive Scroll) */
+    /* Callout & Note Blocks */
+    .callout-box {
+      margin: 1.6em 0;
+      padding: 16px 18px;
+      border-radius: var(--radius-md);
+      background: var(--bg-surface);
+      border-left: 4px solid var(--primary);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .callout-box.tip {
+      border-left-color: #10b981;
+      background: rgba(16, 185, 129, 0.08);
+    }
+
+    .callout-box.warning {
+      border-left-color: #f59e0b;
+      background: rgba(245, 158, 11, 0.08);
+    }
+
+    .callout-box.info {
+      border-left-color: #3b82f6;
+      background: rgba(59, 130, 246, 0.08);
+    }
+
+    .callout-title {
+      font-weight: 700;
+      font-size: 15px;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Interactive Simulator Component */
+    .sim-container {
+      margin: 2em 0;
+      padding: 20px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+    }
+
+    .sim-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 16px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .sim-title {
+      font-size: 17px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-main);
+    }
+
+    .sim-tabs {
+      display: flex;
+      gap: 6px;
+      background: var(--bg-card);
+      padding: 4px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+    }
+
+    .sim-tab-btn {
+      padding: 6px 12px;
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      font-size: 13.5px;
+      font-weight: 600;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: all 0.18s ease;
+    }
+
+    .sim-tab-btn.active {
+      background: var(--primary);
+      color: #ffffff;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .sim-controls {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 18px;
+      background: var(--bg-card);
+      padding: 10px 14px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+    }
+
+    .sim-btn-group {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .sim-btn {
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 600;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      background: var(--bg-surface);
+      color: var(--text-main);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+      flex: 0 0 auto;
+    }
+
+    @media (max-width: 420px) {
+      .sim-controls {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .sim-btn-group {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        width: 100%;
+      }
+      .sim-btn {
+        justify-content: center;
+      }
+    }
+
+    .sim-btn:hover:not(:disabled) {
+      background: var(--primary-light);
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .sim-btn:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
+    .sim-btn.primary {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #ffffff;
+    }
+
+    .sim-btn.primary:hover:not(:disabled) {
+      background: var(--primary-hover);
+    }
+
+    .sim-status-badge {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--primary);
+      background: var(--primary-light);
+      padding: 4px 10px;
+      border-radius: var(--radius-full);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .sim-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    @media (min-width: 640px) {
+      .sim-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .sim-panel {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 14px;
+    }
+
+    .sim-panel-title {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .sim-registers {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+    }
+
+    .sim-reg-card {
+      background: var(--bg-surface);
+      padding: 8px 10px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      transition: all 0.2s ease;
+    }
+
+    .sim-reg-card.changed {
+      border-color: #f59e0b;
+      background: rgba(245, 158, 11, 0.12);
+      animation: pulse-orange 0.8s ease;
+    }
+
+    .sim-reg-label {
+      font-size: 11.5px;
+      color: var(--text-muted);
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .sim-reg-val {
+      font-family: var(--font-mono);
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .sim-mem-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .sim-mem-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 6px 10px;
+      border-radius: var(--radius-sm);
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      font-size: 13px;
+      font-family: var(--font-mono);
+      transition: all 0.2s ease;
+    }
+
+    .sim-mem-row.pc-target {
+      border-color: var(--primary);
+      background: var(--primary-light);
+      font-weight: 700;
+    }
+
+    .sim-mem-row.modified {
+      border-color: #ef4444;
+      background: rgba(239, 68, 68, 0.1);
+      font-weight: 700;
+      animation: pulse-red 0.8s ease;
+    }
+
+    .sim-mem-row.read-target {
+      border-color: #10b981;
+      background: rgba(16, 185, 129, 0.1);
+      font-weight: 700;
+    }
+
+    .sim-badge-sm {
+      font-size: 11px;
+      padding: 2px 6px;
+      border-radius: var(--radius-full);
+      font-family: var(--font-sans);
+      font-weight: 600;
+    }
+
+    .badge-code { background: #3b82f6; color: white; }
+    .badge-data { background: #10b981; color: white; }
+    .badge-mod { background: #ef4444; color: white; }
+
+    .sim-desc-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 14px 16px;
+    }
+
+    .sim-desc-step {
+      font-size: 14.5px;
+      line-height: 1.6;
+      color: var(--text-main);
+    }
+
+    .sim-desc-step strong {
+      color: var(--primary);
+    }
+
+    @keyframes pulse-orange {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.02); }
+      100% { transform: scale(1); }
+    }
+
+    @keyframes pulse-red {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.02); }
+      100% { transform: scale(1); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .sim-reg-card.changed,
+      .sim-mem-row.modified {
+        animation: none;
+      }
+    }
+
+    /* Footnotes and Citations */
+    .footnote-ref {
+      font-size: 0.78em;
+      line-height: 0;
+      vertical-align: super;
+      padding: 0 2px;
+      font-weight: 700;
+      color: var(--primary);
+      text-decoration: none;
+    }
+    .footnote-ref:hover {
+      text-decoration: underline;
+    }
+    .footnotes-section {
+      margin-top: 3.5rem;
+      padding-top: 2rem;
+      border-top: 2px solid var(--border);
+    }
+    .footnotes-section h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 1.2rem;
+      color: var(--text-main);
+    }
+    .footnotes-list {
+      font-size: 13.5px;
+      line-height: 1.75;
+      color: var(--text-muted);
+      padding-left: 1.6rem;
+    }
+    .footnotes-list li {
+      margin-bottom: 0.85rem;
+    }
+    .footnotes-list a.backlink {
+      color: var(--primary);
+      text-decoration: none;
+      margin-left: 6px;
+      font-weight: 700;
+    }
+    .footnotes-list a.backlink:hover {
+      text-decoration: underline;
+    }
+
+    /* Military Operational Labels */
+    .badge-record {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 4px;
+      background: #10b981;
+      color: #ffffff;
+      margin-right: 6px;
+      vertical-align: middle;
+    }
+    .badge-estimate {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 4px;
+      background: #f59e0b;
+      color: #ffffff;
+      margin-right: 6px;
+      vertical-align: middle;
+    }
+    .badge-scenario {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 4px;
+      background: #8b5cf6;
+      color: #ffffff;
+      margin-right: 6px;
+      vertical-align: middle;
+    }
+
+    /* Archival Metadata Card */
+    .archival-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--primary);
+      border-radius: var(--radius-sm);
+      padding: 14px 18px;
+      margin: 1.2rem 0;
+      font-size: 14px;
+      line-height: 1.65;
+    }
+    .archival-card .card-title {
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .archival-meta-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 8px 16px;
+      margin-top: 8px;
+      font-size: 13px;
+    }
+    .archival-meta-item strong {
+      color: var(--text-main);
+    }
+
+    .table-wrapper {
+      position: relative;
+      width: 100%;
+      overflow-x: auto;
+      margin: 1.8em 0;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      -webkit-overflow-scrolling: touch;
+      box-shadow: var(--shadow-sm);
+      background: var(--bg-card);
+    }
+    .table-wrapper:focus-visible {
+      outline: 2px solid var(--border-focus);
+      outline-offset: 2px;
+    }
+    .table-wrapper[data-scroll-hint]::after {
+      content: "↔ " attr(data-scroll-hint);
+      display: none;
+      font-size: 11.5px;
+      font-weight: 600;
+      color: var(--text-muted);
+      background: var(--bg-surface);
+      padding: 5px 12px;
+      text-align: right;
+      border-top: 1px dashed var(--border);
+      letter-spacing: -0.01em;
+    }
+    @media (max-width: 768px) {
+      .table-wrapper[data-scroll-hint]::after {
+        display: block;
+      }
+    }
+
+    .content table {
+      width: 100%;
+      min-width: 780px;
+      border-collapse: collapse;
+      font-size: 14.5px;
+      text-align: left;
+    }
+
+    .content th {
+      background: var(--bg-surface);
+      font-weight: 700;
+      padding: 12px 14px;
+      border-bottom: 2px solid var(--border);
+      color: var(--text-main);
+      white-space: nowrap;
+    }
+
+    .content td {
+      padding: 11px 14px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text-main);
+      vertical-align: middle;
+      word-break: keep-all;
+    }
+
+    .content tr:last-child td {
+      border-bottom: none;
+    }
+
+    .content tr:nth-child(even) td {
+      background: rgba(0, 0, 0, 0.015);
+    }
+
+    /* 7대 표준 판정 체계 및 신뢰도 배지 */
+    .badge-verdict {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: var(--radius-sm);
+      line-height: 1.35;
+      white-space: nowrap;
+      letter-spacing: -0.01em;
+    }
+    .badge-verdict::before {
+      content: "";
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .badge-verified {
+      background: rgba(16, 185, 129, 0.12);
+      color: #047857;
+      border: 1px solid rgba(16, 185, 129, 0.35);
+    }
+    .badge-verified::before { background: #10b981; }
+
+    .badge-mostly-verified {
+      background: rgba(13, 148, 136, 0.12);
+      color: #0f766e;
+      border: 1px solid rgba(13, 148, 136, 0.35);
+    }
+    .badge-mostly-verified::before { background: #0d9488; }
+
+    .badge-partially-verified {
+      background: rgba(217, 119, 6, 0.12);
+      color: #b45309;
+      border: 1px solid rgba(217, 119, 6, 0.35);
+    }
+    .badge-partially-verified::before { background: #f59e0b; }
+
+    .badge-misleading {
+      background: rgba(234, 88, 12, 0.12);
+      color: #c2410c;
+      border: 1px solid rgba(234, 88, 12, 0.35);
+    }
+    .badge-misleading::before { background: #ea580c; }
+
+    .badge-insufficient {
+      background: rgba(100, 116, 139, 0.12);
+      color: #475569;
+      border: 1px solid rgba(100, 116, 139, 0.35);
+    }
+    .badge-insufficient::before { background: #64748b; }
+
+    .badge-refuted {
+      background: rgba(225, 29, 72, 0.12);
+      color: #be123c;
+      border: 1px solid rgba(225, 29, 72, 0.35);
+    }
+    .badge-refuted::before { background: #f43f5e; }
+
+    .badge-pending {
+      background: rgba(99, 102, 241, 0.12);
+      color: #4338ca;
+      border: 1px solid rgba(99, 102, 241, 0.35);
+    }
+    .badge-pending::before { background: #6366f1; }
+
+    /* 신뢰도 배지 */
+    .badge-confidence {
+      display: inline-flex;
+      align-items: center;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 7px;
+      border-radius: var(--radius-full);
+      line-height: 1.35;
+      white-space: nowrap;
+    }
+    .badge-confidence-high {
+      background: rgba(59, 130, 246, 0.1);
+      color: #1d4ed8;
+      border: 1px solid rgba(59, 130, 246, 0.25);
+    }
+    .badge-confidence-moderate {
+      background: rgba(168, 85, 247, 0.1);
+      color: #7e22ce;
+      border: 1px solid rgba(168, 85, 247, 0.25);
+    }
+    .badge-confidence-low {
+      background: rgba(148, 163, 184, 0.15);
+      color: #475569;
+      border: 1px solid rgba(148, 163, 184, 0.25);
+    }
+
+    /* 증거 수준 (Evidence Level) 배지 */
+    .badge-evidence {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2.5px 8px;
+      border-radius: var(--radius-sm);
+      line-height: 1.35;
+      white-space: nowrap;
+      letter-spacing: -0.01em;
+    }
+    .badge-evidence-high {
+      background: rgba(16, 185, 129, 0.12);
+      color: #047857;
+      border: 1px solid rgba(16, 185, 129, 0.35);
+    }
+    .badge-evidence-moderate {
+      background: rgba(217, 119, 6, 0.12);
+      color: #b45309;
+      border: 1px solid rgba(217, 119, 6, 0.35);
+    }
+    .badge-evidence-low {
+      background: rgba(100, 116, 139, 0.12);
+      color: #475569;
+      border: 1px solid rgba(100, 116, 139, 0.35);
+    }
+
+    /* Dark Mode Badges */
+    :root[data-theme="dark"] .badge-evidence-high {
+      background: rgba(16, 185, 129, 0.18);
+      color: #34d399;
+      border-color: rgba(52, 211, 153, 0.35);
+    }
+    :root[data-theme="dark"] .badge-evidence-moderate {
+      background: rgba(217, 119, 6, 0.18);
+      color: #fbbf24;
+      border-color: rgba(251, 191, 36, 0.35);
+    }
+    :root[data-theme="dark"] .badge-evidence-low {
+      background: rgba(100, 116, 139, 0.2);
+      color: #cbd5e1;
+      border-color: rgba(148, 163, 184, 0.3);
+    }
+    :root[data-theme="dark"] .badge-verified {
+      background: rgba(16, 185, 129, 0.18);
+      color: #34d399;
+      border-color: rgba(52, 211, 153, 0.35);
+    }
+    :root[data-theme="dark"] .badge-mostly-verified {
+      background: rgba(13, 148, 136, 0.18);
+      color: #2dd4bf;
+      border-color: rgba(45, 212, 191, 0.35);
+    }
+    :root[data-theme="dark"] .badge-partially-verified {
+      background: rgba(217, 119, 6, 0.18);
+      color: #fbbf24;
+      border-color: rgba(251, 191, 36, 0.35);
+    }
+    :root[data-theme="dark"] .badge-misleading {
+      background: rgba(234, 88, 12, 0.18);
+      color: #fb923c;
+      border-color: rgba(251, 146, 60, 0.35);
+    }
+    :root[data-theme="dark"] .badge-insufficient {
+      background: rgba(100, 116, 139, 0.2);
+      color: #cbd5e1;
+      border-color: rgba(148, 163, 184, 0.3);
+    }
+    :root[data-theme="dark"] .badge-refuted {
+      background: rgba(225, 29, 72, 0.2);
+      color: #fb7185;
+      border-color: rgba(251, 113, 133, 0.35);
+    }
+    :root[data-theme="dark"] .badge-pending {
+      background: rgba(99, 102, 241, 0.2);
+      color: #a5b4fc;
+      border-color: rgba(165, 180, 252, 0.35);
+    }
+    :root[data-theme="dark"] .badge-confidence-high {
+      background: rgba(56, 189, 248, 0.16);
+      color: #7dd3fc;
+      border-color: rgba(56, 189, 248, 0.3);
+    }
+    :root[data-theme="dark"] .badge-confidence-moderate {
+      background: rgba(192, 132, 252, 0.16);
+      color: #e9d5ff;
+      border-color: rgba(192, 132, 252, 0.3);
+    }
+    :root[data-theme="dark"] .badge-confidence-low {
+      background: rgba(148, 163, 184, 0.2);
+      color: #cbd5e1;
+      border-color: rgba(148, 163, 184, 0.3);
+    }
+
+    /* 4단계 공통 템플릿 검증 카드 */
+    .verification-card {
+      margin: 2.2em 0;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .verification-card:hover {
+      border-color: var(--border-focus);
+      box-shadow: var(--shadow-md);
+    }
+    .vc-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 14px 18px;
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border);
+    }
+    .vc-title-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .vc-step-id {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--primary);
+      background: var(--primary-light);
+      padding: 3px 8px;
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(59, 130, 246, 0.2);
+    }
+    .vc-issue-title {
+      font-size: 15.5px;
+      font-weight: 750;
+      color: var(--text-main);
+    }
+    .vc-badges {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .vc-body {
+      padding: 18px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .vc-block {
+      border-left: 3px solid var(--border);
+      padding-left: 14px;
+    }
+    .vc-block.step-1 { border-left-color: #3b82f6; }
+    .vc-block.step-2 { border-left-color: #10b981; }
+    .vc-block.step-3 { border-left-color: #f59e0b; }
+    .vc-block.step-4 { border-left-color: #64748b; }
+    .vc-block.step-5 { border-left-color: #8b5cf6; }
+
+    .vc-step-label {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .vc-block.step-1 .vc-step-label { color: #2563eb; }
+    .vc-block.step-2 .vc-step-label { color: #059669; }
+    .vc-block.step-3 .vc-step-label { color: #d97706; }
+    .vc-block.step-4 .vc-step-label { color: #475569; }
+    .vc-block.step-5 .vc-step-label { color: #7c3aed; }
+
+    :root[data-theme="dark"] .vc-block.step-1 .vc-step-label { color: #60a5fa; }
+    :root[data-theme="dark"] .vc-block.step-2 .vc-step-label { color: #34d399; }
+    :root[data-theme="dark"] .vc-block.step-3 .vc-step-label { color: #fbbf24; }
+    :root[data-theme="dark"] .vc-block.step-4 .vc-step-label { color: #94a3b8; }
+    :root[data-theme="dark"] .vc-block.step-5 .vc-step-label { color: #a78bfa; }
+
+    /* External Links in References */
+    .references-list a.ext-link,
+    .content a.ext-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      font-weight: 600;
+      color: var(--primary);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .references-list a.ext-link::after,
+    .content a.ext-link::after {
+      content: "↗";
+      font-size: 11px;
+      line-height: 1;
+      opacity: 0.8;
+    }
+
+    /* Collapsible References Section */
+    .references-collapsible {
+      margin: 2rem 0;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      background: var(--bg-card);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.2s ease;
+    }
+
+    .references-collapsible summary.references-toggle {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.1rem 1.4rem;
+      background: var(--bg-surface);
+      cursor: pointer;
+      user-select: none;
+      list-style: none;
+      border-bottom: 1px solid transparent;
+      transition: background 0.15s ease, border-color 0.15s ease;
+    }
+
+    .references-collapsible summary.references-toggle::-webkit-details-marker {
+      display: none;
+    }
+
+    .references-collapsible summary.references-toggle:hover {
+      background: var(--bg-subtle, rgba(0, 0, 0, 0.03));
+    }
+
+    :root[data-theme="dark"] .references-collapsible summary.references-toggle:hover {
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .references-collapsible[open] summary.references-toggle {
+      border-bottom-color: var(--border);
+    }
+
+    .references-toggle .toggle-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-main);
+      flex-wrap: wrap;
+    }
+
+    .references-toggle .toggle-badge {
+      font-size: 12px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 9999px;
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    .references-toggle .toggle-icon {
+      font-size: 13px;
+      color: var(--text-muted);
+      transition: transform 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+    }
+
+    .references-collapsible[open] summary.references-toggle .toggle-icon {
+      transform: rotate(180deg);
+    }
+
+    .references-body {
+      padding: 1.25rem 1.4rem;
+    }
+
+    .references-group-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin: 1.8rem 0 0.5rem 0;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-main);
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 0.5rem;
+    }
+
+    .references-group-title:first-child {
+      margin-top: 0.5rem;
+    }
+
+    .references-group-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 0.9rem;
+      line-height: 1.5;
+    }
+
+    .vc-speaker-meta {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+      padding: 4px 10px;
+      background: var(--bg-surface);
+      border-radius: var(--radius-sm);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .vc-speaker-meta strong {
+      color: var(--text-main);
+    }
+    .vc-content {
+      font-size: 14.5px;
+      line-height: 1.7;
+      color: var(--text-main);
+    }
+    .vc-content p:last-child {
+      margin-bottom: 0;
+    }
+    .vc-content ul {
+      margin-bottom: 0;
+      padding-left: 18px;
+    }
+    .vc-content li {
+      margin-bottom: 4px;
+    }
+
+    /* TOC Drawer (Slide-in) */
+    .drawer-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(4px);
+      z-index: 90;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .drawer-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .toc-drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      transform: translateX(100%);
+      width: 320px;
+      max-width: 88vw;
+      height: 100%;
+      background: var(--drawer-bg);
+      border-left: 1px solid var(--border);
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      box-shadow: var(--shadow-lg);
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .toc-drawer.active {
+      transform: translateX(0);
+    }
+
+    .toc-drawer-header {
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .toc-drawer-title {
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .toc-close-btn {
+      background: transparent;
+      border: none;
+      font-size: 20px;
+      color: var(--text-muted);
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .toc-drawer-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px 16px 40px;
+    }
+
+    .toc-drawer-body ul.toc-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .toc-drawer-body li {
+      margin-bottom: 6px;
+    }
+
+    .toc-drawer-body li.depth-2 {
+      padding-left: 0;
+      margin-top: 10px;
+      margin-bottom: 4px;
+    }
+    .toc-drawer-body li.depth-2 > .toc-link {
+      font-weight: 700;
+      color: var(--text-main);
+      border-left: 2px solid var(--primary);
+      padding-left: 8px;
+    }
+    .toc-drawer-body li.depth-3 {
+      padding-left: 14px;
+      margin-bottom: 3px;
+    }
+    .toc-drawer-body li.depth-3 > .toc-link {
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+    .toc-drawer-body li.depth-4 {
+      padding-left: 24px;
+      margin-bottom: 2px;
+    }
+    .toc-drawer-body li.depth-4 > .toc-link {
+      font-size: 13px;
+      color: var(--text-light);
+    }
+
+    .toc-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9.5px;
+      font-weight: 700;
+      line-height: 1.2;
+      padding: 1.5px 5px;
+      border-radius: 4px;
+      margin-right: 6px;
+      flex-shrink: 0;
+      font-family: var(--font-mono);
+    }
+    .toc-badge.badge-h2 {
+      background: var(--primary-light);
+      color: var(--primary);
+      border: 1px solid rgba(37, 99, 235, 0.25);
+    }
+    .toc-badge.badge-h3 {
+      background: var(--bg-surface);
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+    }
+    .toc-badge.badge-h4 {
+      background: transparent;
+      color: var(--text-light);
+      border: 1px dashed var(--border);
+    }
+
+    .toc-link {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 13.5px;
+      line-height: 1.45;
+      display: flex;
+      align-items: baseline;
+      padding: 4px 6px;
+      border-radius: var(--radius-sm);
+      transition: all 0.15s ease;
+    }
+
+    .toc-link:hover, .toc-link.active {
+      color: var(--primary);
+      background: var(--primary-light);
+    }
+    .toc-text {
+      word-break: keep-all;
+    }
+
+    /* Heading Anchor Tooltip */
+    .anchor-tooltip {
+      position: absolute;
+      transform: translateX(-50%);
+      background: var(--code-bg);
+      color: var(--code-text);
+      font-size: 11.5px;
+      font-weight: 600;
+      padding: 4px 8px;
+      border-radius: var(--radius-sm);
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      z-index: 1000;
+      box-shadow: var(--shadow-md);
+      white-space: nowrap;
+    }
+    .anchor-tooltip.visible {
+      opacity: 1;
+      transform: translateX(-50%) translateY(-2px);
+    }
+
+    /* Floating Back to Top */
+    #back-to-top {
+      position: fixed;
+      bottom: 24px;
+      right: 20px;
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-full);
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow-md);
+      cursor: pointer;
+      z-index: 30;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      transition: all 0.2s ease;
+    }
+
+    #back-to-top.visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    /* Footer */
+    .article-footer {
+      text-align: center;
+      margin-top: 40px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      color: var(--text-light);
+      font-size: 13.5px;
+    }
+
+    .article-footer a {
+      color: var(--text-muted);
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Sticky Navigation Bar -->
+  <header class="top-nav">
+    <div class="nav-left">
+      <a href="index.html" class="nav-btn" title="목록으로 이동">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+        <span>목록</span>
+      </a>
+      <span class="nav-title" id="nav-title-text">지수 기호 하나를 얻기까지 왜 1,877년이나 걸렸는가 — 로버트 레코드의 등호와 데카르트의 구문론 혁명</span>
+    </div>
+    
+    <div class="nav-right">
+      <div class="font-picker" id="font-picker">
+        <button class="nav-btn" id="font-toggle" type="button" aria-label="본문 폰트" title="본문 폰트 선택" aria-expanded="false" aria-haspopup="listbox" aria-controls="font-menu">가</button>
+        <div class="font-menu" id="font-menu" role="listbox" hidden>
+          <button type="button" class="font-option" role="option" data-font="pretendard" aria-selected="true">Pretendard</button>
+          <button type="button" class="font-option" role="option" data-font="d2coding" aria-selected="false">D2Coding</button>
+        </div>
+      </div>
+      <button class="nav-btn" id="theme-toggle" aria-label="테마 전환" title="다크/라이트 모드 전환">
+        <span id="theme-icon">🌓</span>
+      </button>
+      <button class="nav-btn" id="toc-toggle" aria-label="목차 열기" title="목차 보기" aria-expanded="false" aria-controls="toc-drawer">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="21" x2="3" y1="6" y2="6"/><line x1="15" x2="3" y1="12" y2="12"/><line x1="17" x2="3" y1="18" y2="18"/></svg>
+        <span>목차</span>
+      </button>
+    </div>
+    <!-- Reading Progress Bar -->
+    <div id="progress-container">
+      <div id="progress-bar"></div>
+    </div>
+  </header>
+
+  <!-- TOC Slide-in Drawer -->
+  <div class="drawer-overlay" id="drawer-overlay"></div>
+  <aside class="toc-drawer" id="toc-drawer" aria-label="문서 목차">
+    <div class="toc-drawer-header">
+      <span class="toc-drawer-title">📑 목차</span>
+      <button class="toc-close-btn" id="toc-close" aria-label="목차 닫기">&times;</button>
+    </div>
+    <div class="toc-drawer-body">
+      <ul class="toc-list"><li class="depth-2"><a href="#1-프롤로그-옥스퍼드-사전에서-가장-39z39가-많은-단어" class="toc-link"><span class="toc-badge badge-h2">대주제</span><span class="toc-text">1. 프롤로그: 옥스퍼드 사전에서 가장 &#39;Z&#39;가 많은 단어</span></a></li><li class="depth-2"><a href="#2-고대의-기원-수의-거대한-바다와-미지수의-탄생" class="toc-link"><span class="toc-badge badge-h2">대주제</span><span class="toc-text">2. 고대의 기원: 수의 거대한 바다와 미지수의 탄생</span></a></li><li class="depth-3"><a href="#아르키메데스의-모래알-셈과-연속-비례" class="toc-link"><span class="toc-badge badge-h3">중주제</span><span class="toc-text">아르키메데스의 『모래알 셈』과 연속 비례</span></a></li><li class="depth-3"><a href="#디오판토스의-미지수-거듭제곱-단축-기호" class="toc-link"><span class="toc-badge badge-h3">중주제</span><span class="toc-text">디오판토스의 미지수 거듭제곱 단축 기호</span></a></li><li class="depth-2"><a href="#3-코식cossic-대수학의-미로와-손계산-알고리즘" class="toc-link"><span class="toc-badge badge-h2">대주제</span><span class="toc-text">3. 코식(Cossic) 대수학의 미로와 손계산 알고리즘</span></a></li><li class="depth-3"><a href="#39말ml39에서-39첸소censo39를-거쳐-39젠직zenzic39으로" class="toc-link"><span class="toc-badge badge-h3">중주제</span><span class="toc-text">&#39;말(māl)&#39;에서 &#39;첸소(censo)&#39;를 거쳐 &#39;젠직(zenzic)&#39;으로</span></a></li><li class="depth-3"><a href="#왜-곱셈적-명칭을-썼는가-거듭제곱근-손계산의-알고리즘" class="toc-link"><span class="toc-badge badge-h3">중주제</span><span class="toc-text">왜 곱셈적 명칭을 썼는가: 거듭제곱근 손계산의 알고리즘</span></a></li><li class="depth-3"><a href="#소수prime-차수의-악몽-서솔리드sursolid" class="toc-link"><span class="toc-badge badge-h3">중주제</span><span class="toc-text">소수(Prime) 차수의 악몽: 서솔리드(Sursolid)</span></a></li><li class="depth-2"><a href="#4-1800년의-인식론적-장벽-quot수는-사물을-수식하는-형용사다quot" class="toc-link"><span class="toc-badge badge-h2">대주제</span><span class="toc-text">4. 1,800년의 인식론적 장벽: &quot;수는 사물을 수식하는 형용사다&quot;</span></a></li><li class="depth-3"><a href="#종-수량-쌍quantity-species-pairs의-세계관" class="toc-link"><span class="toc-badge badge-h3">중주제</span><span class="toc-text">종-수량 쌍(Quantity-Species Pairs)의 세계관</span></a></li><li class="depth-3"><a href="#다항식은-quot3시간-21분-13초quot였다" class="toc-link"><span class="toc-badge badge-h3">중주제</span><span class="toc-text">다항식은 &quot;3시간 21분 13초&quot;였다</span></a></li><li class="depth-2"><a href="#5-왕립-조폐국-스캔들과-비극의-천재-로버트-레코드" class="toc-link"><span class="toc-badge badge-h2">대주제</span><span class="toc-text">5. 왕립 조폐국 스캔들과 비극의 천재 로버트 레코드</span></a></li><li class="depth-3"><a href="#화폐-대개악the-great-debasement과-조폐국-발탁" class="toc-link"><span class="toc-badge badge-h3">중주제</span><span class="toc-text">화폐 대개악(The Great Debasement)과 조폐국 발탁</span></a></li><li class="depth-3"><a href="#정육면체cube-단위-순환-기하학적-모델" class="toc-link"><span class="toc-badge badge-h3">중주제</span><span class="toc-text">정육면체(Cube) 단위 순환 기하학적 모델</span></a></li><li class="depth-3"><a href="#인류-역사상-가장-아름다운-기호-등호의-탄생" class="toc-link"><span class="toc-badge badge-h3">중주제</span><span class="toc-text">인류 역사상 가장 아름다운 기호: 등호(=)의 탄생</span></a></li><li class="depth-3"><a href="#펨브룩-백작과의-정쟁과-채무자-감옥에서의-옥사" class="toc-link"><span class="toc-badge badge-h3">중주제</span><span class="toc-text">펨브룩 백작과의 정쟁과 채무자 감옥에서의 옥사</span></a></li><li class="depth-2"><a href="#6-대륙의-기호-실험들과-결정적-결함-quot밑base이-빠져-있었다quot" class="toc-link"><span class="toc-badge badge-h2">대주제</span><span class="toc-text">6. 대륙의 기호 실험들과 결정적 결함: &quot;밑(Base)이 빠져 있었다&quot;</span></a></li><li class="depth-3"><a href="#선구자들의-실험-슈케-슈티펠-봄벨리-스테빈" class="toc-link"><span class="toc-badge badge-h3">중주제</span><span class="toc-text">선구자들의 실험: 슈케, 슈티펠, 봄벨리, 스테빈</span></a></li><li class="depth-3"><a href="#왜-기호-체계는-폭발하지-못했는가-밑base의-부재" class="toc-link"><span class="toc-badge badge-h3">중주제</span><span class="toc-text">왜 기호 체계는 폭발하지 못했는가: 밑(Base)의 부재</span></a></li><li class="depth-3"><a href="#프랑수아-비에트1591-기호-대수학의-빅뱅" class="toc-link"><span class="toc-badge badge-h3">중주제</span><span class="toc-text">프랑수아 비에트(1591): 기호 대수학의 빅뱅</span></a></li><li class="depth-2"><a href="#7-데카르트의-위대한-통합-quot구문론이-의미론을-이끈다quot" class="toc-link"><span class="toc-badge badge-h2">대주제</span><span class="toc-text">7. 데카르트의 위대한 통합: &quot;구문론이 의미론을 이끈다&quot;</span></a></li><li class="depth-3"><a href="#1637년-기하학과-현대적-지수-표기-math-inline-84" class="toc-link"><span class="toc-badge badge-h3">중주제</span><span class="toc-text">1637년 『기하학』과 현대적 지수 표기 (%%MATH_INLINE_84%%)</span></a></li><li class="depth-3"><a href="#패러다임-전환-quot구문론이-의미론을-이끈다-syntax-leads-semanticsquot" class="toc-link"><span class="toc-badge badge-h3">중주제</span><span class="toc-text">패러다임 전환: &quot;구문론이 의미론을 이끈다 (Syntax leads Semantics)&quot;</span></a></li><li class="depth-4"><a href="#1-음수-지수의-필연적-탄생" class="toc-link"><span class="toc-badge badge-h4">소주제</span><span class="toc-text">1) 음수 지수의 필연적 탄생</span></a></li><li class="depth-4"><a href="#2-분수-지수와-거듭제곱근의-통합" class="toc-link"><span class="toc-badge badge-h4">소주제</span><span class="toc-text">2) 분수 지수와 거듭제곱근의 통합</span></a></li><li class="depth-2"><a href="#8-일반화자들의-시대와-레코드의-영원성" class="toc-link"><span class="toc-badge badge-h2">대주제</span><span class="toc-text">8. 일반화자들의 시대와 레코드의 영원성</span></a></li><li class="depth-3"><a href="#존-월리스와-뉴턴의-일반화된-이항정리" class="toc-link"><span class="toc-badge badge-h3">중주제</span><span class="toc-text">존 월리스와 뉴턴의 일반화된 이항정리</span></a></li><li class="depth-3"><a href="#에필로그-100년-만에-얻은-불멸성" class="toc-link"><span class="toc-badge badge-h3">중주제</span><span class="toc-text">에필로그: 100년 만에 얻은 불멸성</span></a></li><li class="depth-2"><a href="#9-맺음말-기호가-생각을-만든다" class="toc-link"><span class="toc-badge badge-h2">대주제</span><span class="toc-text">9. 맺음말: 기호가 생각을 만든다</span></a></li></ul>
+    </div>
+  </aside>
+
+  <!-- Main Article Content Container -->
+  <main class="article-container">
+    <article class="article-card">
+      <header class="article-header">
+        <div class="article-meta">
+          <span class="meta-badge">📅 2026-10-19</span>
+          <span class="meta-badge">⏱️ 약 54분</span>
+          <span class="meta-badge">✍️ Pages 과학·수학사 분석</span>
+        </div>
+        <h1 class="article-title">지수 기호 하나를 얻기까지 왜 1,877년이나 걸렸는가 — 로버트 레코드의 등호와 데카르트의 구문론 혁명</h1>
+        <p class="article-subtitle">zenzizenzizenzic의 미로에서 x²의 단순함으로: 수가 형용사에서 순수 기호로 해방되기까지의 대서사시</p>
+        
+        <div class="tag-list">
+          
+          <span class="tag-pill">#수학사</span>
+          
+          <span class="tag-pill">#대수학</span>
+          
+          <span class="tag-pill">#기호학</span>
+          
+          <span class="tag-pill">#르네데카르트</span>
+          
+          <span class="tag-pill">#로버트레코드</span>
+          
+          <span class="tag-pill">#과학철학</span>
+          
+          <span class="tag-pill">#아이작뉴턴</span>
+          
+        </div>
+      </header>
+
+      <section class="content" id="article-content">
+        <blockquote>
+<p><strong>&quot;The exponent as we know it was an invention that took 1,900 years to arrive, after the first known statement of the basic rules of exponents.&quot;</strong><br>— Ben Syversen, <em>Why Did It Take 1,877 Years to Invent $x^2$?</em></p>
+</blockquote>
+<p>오늘날 초등학교나 중학교 수학 시간에 배우는 $x^2$이나 $x^3$, $2^5$ 같은 지수 표기는 현대인에게 공기나 물처럼 자연스럽다. 우리는 어떤 밑(base) 위에 작은 숫자를 얹는 것만으로 거듭제곱을 즉시 표현하고, $a^m \cdot a^n = a^{m+n}$이라는 지수 법칙을 아무런 거부감 없이 계산해낸다.</p>
+<p>하지만 놀랍게도 인류 문명사에서 이 지극히 단순해 보이는 표기법이 확립되기까지는 <strong>기원전 3세기 아르키메데스의 첫 발견 이후 무려 1,877년이라는 장구한 세월</strong>이 걸렸다. </p>
+<p>인류는 어째서 거듭제곱의 곱셈 법칙을 알고 있으면서도 19세기 동안이나 지수를 쓰지 못했을까? 왜 르네상스의 가장 위대한 천재들은 오늘날의 시각에서 보면 터무니없을 만큼 조잡하고 기괴한 단어들을 줄줄이 읊조리며 계산을 해야만 했을까?</p>
+<p>이 질문에 답하기 위해서는 옥스퍼드 영어사전에서 가장 기묘한 단어의 어원을 파헤치고, 전근대 수학자들이 품고 있던 &#39;수(Number)&#39;에 대한 존재론적 세계관을 통과해야 하며, 튜더 왕조 런던의 차디찬 채무자 감옥에서 비극적으로 숨져간 한 수학자의 삶을 마주해야 한다. 그리고 마침내 인간의 인식이 &#39;말과 구술의 세계&#39;에서 &#39;스스로 의미를 창출하는 시각적 기호 체계&#39;로 도약하는 위대한 지적 전환을 목도하게 된다.</p>
+<hr>
+<h2 id="1-프롤로그-옥스퍼드-사전에서-가장-39z39가-많은-단어"><a href="#1-프롤로그-옥스퍼드-사전에서-가장-39z39가-많은-단어" class="heading-anchor" aria-hidden="true">#</a> 1. 프롤로그: 옥스퍼드 사전에서 가장 &#39;Z&#39;가 많은 단어</h2><p>세계에서 가장 방대한 어휘를 자랑하는 『옥스퍼드 영어사전(Oxford English Dictionary)』을 펼쳐 알파벳 &#39;Z&#39;가 가장 많이 들어간 단어를 검색하면 실로 기이한 단어 하나가 등장한다.</p>
+<div align="center" style="margin: 24px 0; width: 100%; max-width: 100%; box-sizing: border-box;">
+  <span style="display: inline-block; max-width: 100%; box-sizing: border-box; padding: 8px 14px; background: var(--bg-surface); border: 2px solid var(--primary); border-radius: 12px; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: clamp(13px, 4.2vw, 22px); font-weight: 800; letter-spacing: 0.5px; color: var(--primary); box-shadow: var(--shadow-sm); word-break: break-all;">zenzizenzizenzic</span>
+</div>
+
+<p>무려 여섯 개의 알파벳 Z가 연달아 박혀 있는 이 16자짜리 단어는 도대체 무슨 뜻일까? 이 단어는 16세기 영국의 르네상스 의사이자 수학자였던 <strong>로버트 레코드(Robert Recorde, 1510~1558)</strong>가 1557년에 출간한 대수학서 『지혜의 숫돌(<em>The Whetstone of Witte</em>)』에 공식적으로 등장한다. 레코드는 이 책에서 이 단어가 <strong>&quot;정사각형의 정사각형을 다시 정사각형으로 만든 것(the square of squares squarely)&quot;</strong>을 나타낸다고 설명했다.</p>
+<p>현대 수학 기호로 번역하면 이는 어떤 수의 <strong>8제곱($x^8$)</strong>을 의미한다.</p>
+<p>$((x^2)^2)^2 = (x^4)^2 = x^8$</p>
+<p>현대인이라면 $x^8$이라는 단 세 글자로 가볍게 적어 넘길 개념을 표현하기 위해, 16세기의 지식인들은 &#39;젠지젠지젠직&#39;이라는 혀가 꼬이는 주문 같은 단어를 외쳐야 했다. 이 단어는 결코 로버트 레코드 개인의 엉뚱한 장난이 아니었다. 그것은 당시 유럽 대륙, 특히 독일과 이탈리아를 지배하고 있던 이른바 <strong>코식 대수학(Cossic algebra)</strong>이라는 방대하고 복잡한 수학 체계의 정식 명칭이었다.</p>
+<p>로버트 레코드는 영국의 수학도들에게 이 고도의 학문을 가르치고 싶어 했다. 그는 인류 역사상 최초로 영어로 된 산술 교과서와 대수학 교과서를 집필했고, 그 과정에서 현대 문명의 가장 위대한 기호 중 하나인 <strong>등호($=$)</strong>를 발명해낸 천재였다. 그러나 바로 그 위대한 레코드조차, 런던 킹스 벤치 감옥에서 쓸쓸히 옥사하기 전까지 지수 표기법의 비밀을 끝내 풀지 못했다.</p>
+<hr>
+<h2 id="2-고대의-기원-수의-거대한-바다와-미지수의-탄생"><a href="#2-고대의-기원-수의-거대한-바다와-미지수의-탄생" class="heading-anchor" aria-hidden="true">#</a> 2. 고대의 기원: 수의 거대한 바다와 미지수의 탄생</h2><p>지수와 거듭제곱의 역사는 기원전 3세기 고대 그리스의 시라쿠사, 인류 역사상 가장 위대한 수학자 중 한 사람인 <strong>아르키메데스(Archimedes, 기원전 287~212경)</strong>에게서 출발한다.</p>
+<h3 id="아르키메데스의-모래알-셈과-연속-비례"><a href="#아르키메데스의-모래알-셈과-연속-비례" class="heading-anchor" aria-hidden="true">#</a> 아르키메데스의 『모래알 셈』과 연속 비례</h3><p>당시 고대 그리스의 수 체계는 1만(myriad)을 기본 단위로 삼았으며, 1억(myriad of myriads, $10^8$)을 넘어서는 수를 셀 수 있는 공식적인 어휘나 기호가 전무했다. 사람들은 우주에 존재하는 모래알의 개수는 무한대이므로 인간의 언어로는 도저히 표현할 수 없다고 믿었다.</p>
+<p>아르키메데스는 이 통념을 깨부수기로 결심했다. 그는 국왕 겔론에게 헌정한 논문 『모래알 셈(<em>Arenarius / The Sand Reckoner</em>)』에서, 당대 천문학자 아리스타르코스의 우주 모형을 바탕으로 전 우주를 모래알로 가득 채운다면 그 모래알이 대략 몇 개나 될 것인지를 계산해냈다(아르키메데스의 계산 결과는 현대 수치로 약 $10^{63}$개에 달했다).</p>
+<p>이 과정에서 1억 이상의 천문학적인 수를 표기하기 위해 아르키메데스는 거듭제곱의 기본 질서를 확립했다. 그는 1부터 시작하여 일정한 비율로 증가하는 기하급수적 수열, 즉 <strong>연속 비례(continued proportions)</strong>의 항들을 관찰했다.</p>
+<p>$1, \quad a, \quad a^2, \quad a^3, \quad a^4, \quad \dots$</p>
+<p>아르키메데스는 이 수열에서 어떤 두 항을 곱하면, 그 결과는 두 항이 수열의 시작점(1)으로부터 떨어진 위치(거리)를 합친 지점에 위치한 항과 같아진다는 사실을 발견했다. 이것이 바로 인류 역사상 최초로 문서화된 <strong>지수의 곱셈 법칙</strong>이었다.</p>
+<p>$a^m \cdot a^n = a^{m+n}$</p>
+<p>그러나 아르키메데스에게는 거듭제곱을 압축적으로 적을 수 있는 대수적 기호 체계가 없었다. 그는 이 모든 원리를 &#39;기하학적 비례식&#39;이라는 장황한 언어로 기술해야만 했다.</p>
+<div class="svg-chart-container" style="margin: 28px 0; width: 100%; max-width: 100%; box-sizing: border-box; overflow-x: auto; -webkit-overflow-scrolling: touch;">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 280" role="img" aria-label="아르키메데스의 연속 비례와 거듭제곱 곱셈 법칙" style="width:100%; min-width:680px; max-width:800px; height:auto; display:block; margin:0 auto; background:var(--bg-card); border-radius:14px; border:1px solid var(--border); box-shadow:var(--shadow-sm);">
+  <defs>
+    <marker id="m1-arr-gray" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+      <path d="M0,1 L5,3.5 L0,6 Z" fill="var(--text-light, #94a3b8)"/>
+    </marker>
+    <marker id="m1-arr-blue" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <path d="M0,1.5 L6,4 L0,6.5 Z" fill="var(--primary, #2563eb)"/>
+    </marker>
+  </defs>
+
+  <!-- Title & Subtitle: positioned at top with ample space (y=30, y=52) -->
+  <text x="400" y="30" text-anchor="middle" font-family="Pretendard, -apple-system, sans-serif" font-size="15px" font-weight="700" fill="var(--text-main)">아르키메데스의 연속 비례(Continued Proportions)와 거듭제곱 곱셈 법칙</text>
+  <text x="400" y="52" text-anchor="middle" font-family="Pretendard, -apple-system, sans-serif" font-size="12px" fill="var(--text-muted)">수열의 시작점(1)으로부터 떨어진 위치(단계)를 합산하여 곱셈 결과(a³ × a⁴ = a⁷)를 도출</text>
+
+  <!-- Arc Jump: from a³ (x=422, y=150) to a⁷ (x=720, y=150), peak at y=88 -->
+  <path d="M 422 150 C 422 85, 720 85, 720 150" fill="none" stroke="var(--primary, #2563eb)" stroke-width="2.5" stroke-dasharray="5,4" marker-end="url(#m1-arr-blue)"/>
+  
+  <!-- Jump Badge on Arc (x=525 to 617, y=74 to 98) - well below subtitle at y=52 -->
+  <rect x="525" y="74" width="92" height="24" rx="6" fill="var(--bg-card)" stroke="var(--primary, #2563eb)" stroke-width="1.5"/>
+  <text x="571" y="90" text-anchor="middle" font-family="Pretendard, -apple-system, sans-serif" font-size="11px" font-weight="700" fill="var(--primary, #2563eb)">3 + 4 = 7단계</text>
+
+  <!-- Nodes (1 -> a -> a² -> a³ -> a⁴ -> ... -> a⁷) positioned at y=150 to y=214 -->
+  <!-- Node 0: 1 -->
+  <g transform="translate(35, 150)">
+    <rect width="75" height="64" rx="10" fill="var(--bg-surface)" stroke="var(--border)" stroke-width="1.5"/>
+    <text x="37.5" y="28" text-anchor="middle" font-family="Pretendard, -apple-system, sans-serif" font-size="15px" font-weight="700" fill="var(--text-main)">1</text>
+    <text x="37.5" y="48" text-anchor="middle" font-family="Pretendard, -apple-system, sans-serif" font-size="11px" fill="var(--text-muted)">시작점 (0)</text>
+  </g>
+  <line x1="110" y1="182" x2="145" y2="182" stroke="var(--text-light, #94a3b8)" stroke-width="1.5" marker-end="url(#m1-arr-gray)"/>
+
+  <!-- Node 1: a -->
+  <g transform="translate(150, 150)">
+    <rect width="75" height="64" rx="10" fill="var(--bg-surface)" stroke="var(--border)" stroke-width="1.5"/>
+    <text x="37.5" y="28" text-anchor="middle" font-family="Pretendard, -apple-system, sans-serif" font-size="15px" font-weight="700" fill="var(--text-main)">a</text>
+    <text x="37.5" y="48" text-anchor="middle" font-family="Pretendard, -apple-system, sans-serif" font-size="11px" fill="var(--text-muted)">1단계</text>
+  </g>
+  <line x1="225" y1="182" x2="260" y2="182" stroke="var(--text-light, #94a3b8)" stroke-width="1.5" marker-end="url(#m1-arr-gray)"/>
+
+  <!-- Node 2: a² -->
+  <g transform="translate(265, 150)">
+    <rect width="75" height="64" rx="10" fill="var(--bg-surface)" stroke="var(--border)" stroke-width="1.5"/>
+    <text x="37.5" y="28" text-anchor="middle" font-family="Pretendard, -apple-system, sans-serif" font-size="15px" font-weight="700" fill="var(--text-main)">a²</text>
+    <text x="37.5" y="48" text-anchor="middle" font-family="Pretendard, -apple-system, sans-serif" font-size="11px" fill="var(--text-muted)">2단계</text>
+  </g>
+  <line x1="340" y1="182" x2="375" y2="182" stroke="var(--text-light, #94a3b8)" stroke-width="1.5" marker-end="url(#m1-arr-gray)"/>
+
+  <!-- Node 3: a³ -->
+  <g transform="translate(380, 150)">
+    <rect width="85" height="64" rx="10" fill="var(--primary-light, #eff6ff)" stroke="var(--primary, #2563eb)" stroke-width="2"/>
+    <text x="42.5" y="28" text-anchor="middle" font-family="Pretendard, -apple-system, sans-serif" font-size="15px" font-weight="800" fill="var(--primary, #2563eb)">a³</text>
+    <text x="42.5" y="48" text-anchor="middle" font-family="Pretendard, -apple-system, sans-serif" font-size="11px" font-weight="600" fill="var(--primary, #2563eb)">3단계</text>
+  </g>
+  <line x1="465" y1="182" x2="495" y2="182" stroke="var(--text-light, #94a3b8)" stroke-width="1.5" marker-end="url(#m1-arr-gray)"/>
+
+  <!-- Node 4: a⁴ -->
+  <g transform="translate(500, 150)">
+    <rect width="85" height="64" rx="10" fill="var(--primary-light, #eff6ff)" stroke="var(--primary, #2563eb)" stroke-width="2"/>
+    <text x="42.5" y="28" text-anchor="middle" font-family="Pretendard, -apple-system, sans-serif" font-size="15px" font-weight="800" fill="var(--primary, #2563eb)">a⁴</text>
+    <text x="42.5" y="48" text-anchor="middle" font-family="Pretendard, -apple-system, sans-serif" font-size="11px" font-weight="600" fill="var(--primary, #2563eb)">4단계</text>
+  </g>
+
+  <!-- Ellipsis -->
+  <text x="612" y="187" text-anchor="middle" font-family="Pretendard, -apple-system, sans-serif" font-size="18px" font-weight="700" fill="var(--text-light, #94a3b8)">⋯</text>
+  <line x1="632" y1="182" x2="668" y2="182" stroke="var(--primary, #2563eb)" stroke-width="1.5" marker-end="url(#m1-arr-blue)"/>
+
+  <!-- Node 7: a⁷ -->
+  <g transform="translate(675, 150)">
+    <rect width="90" height="64" rx="10" fill="var(--primary, #2563eb)" stroke="var(--primary-hover, #1d4ed8)" stroke-width="2"/>
+    <text x="45" y="28" text-anchor="middle" font-family="Pretendard, -apple-system, sans-serif" font-size="16px" font-weight="800" fill="#ffffff">a⁷</text>
+    <text x="45" y="48" text-anchor="middle" font-family="Pretendard, -apple-system, sans-serif" font-size="11px" font-weight="600" fill="rgba(255,255,255,0.88)">7단계 (결과)</text>
+  </g>
+
+  <!-- Formula Summary: at y=255, well below nodes -->
+  <text x="400" y="255" text-anchor="middle" font-family="Pretendard, -apple-system, sans-serif" font-size="13px" font-weight="600" fill="var(--text-main)">지수 곱셈 법칙: aᵐ · aⁿ = aᵐ⁺ⁿ  (a³ · a⁴ = a³⁺⁴ = a⁷)</text>
+</svg>
+</div>
+
+<h3 id="디오판토스의-미지수-거듭제곱-단축-기호"><a href="#디오판토스의-미지수-거듭제곱-단축-기호" class="heading-anchor" aria-hidden="true">#</a> 디오판토스의 미지수 거듭제곱 단축 기호</h3><p>아르키메데스로부터 약 500년 뒤인 서기 3세기, 알렉산드리아의 수학자 <strong>디오판토스(Diophantus)</strong>는 『산술(<em>Arithmetica</em>)』에서 미지수와 미지수의 거듭제곱을 다루기 위한 획기적인 단축 기호(Syncopated notation)를 도입했다.</p>
+<p>디오판토스는 미지수(unknown, $x$)를 그리스 문자 아리스모스(arithmos)의 머릿글자 모양을 딴 기호로 나타내고, 그 거듭제곱들에 다음과 같은 이름을 부여했다:</p>
+<ul>
+<li>제곱($x^2$): <strong>뒤나미스($\Delta^{\Upsilon}$, dynamis, 능력/제곱)</strong></li>
+<li>세제곱($x^3$): <strong>퀴보스($K^{\Upsilon}$, kybos, 정육면체/입방)</strong></li>
+<li>네제곱($x^4$): <strong>뒤나모뒤나미스($\Delta^{\Upsilon}\Delta$, 제곱-제곱)</strong></li>
+<li>다섯제곱($x^5$): <strong>뒤나모퀴보스($\Delta K^{\Upsilon}$, 제곱-세제곱)</strong></li>
+<li>여섯제곱($x^6$): <strong>퀴보퀴보스($K^{\Upsilon}K$, 세제곱-세제곱)</strong></li>
+</ul>
+<p>디오판토스의 체계는 대단히 직관적이었다. 4제곱은 $2+2=4$이므로 제곱과 제곱의 결합($\Delta^{\Upsilon}\Delta$)이었고, 5제곱은 $2+3=5$이므로 제곱과 세제곱의 결합($\Delta K^{\Upsilon}$)이었다. </p>
+<p>하지만 디오판토스의 저작은 로마 제국의 쇠퇴와 함께 서유럽에서 수백 년 동안 자취를 감추었다가 재발견되기를 반복했다. 그리고 디오판토스가 던져놓은 &quot;미지수의 거듭제곱을 어떻게 다룰 것인가?&quot;라는 화두는 향후 1,400년간 중세와 르네상스 대수학의 가장 뜨거운 전쟁터가 되었다.</p>
+<hr>
+<h2 id="3-코식cossic-대수학의-미로와-손계산-알고리즘"><a href="#3-코식cossic-대수학의-미로와-손계산-알고리즘" class="heading-anchor" aria-hidden="true">#</a> 3. 코식(Cossic) 대수학의 미로와 손계산 알고리즘</h2><p>16세기 중반의 잉글랜드. 웨일스 텐비(Tenby)의 부유한 상인의 아들로 태어난 로버트 레코드는 옥스퍼드와 케임브리지 대학에서 수학과 의학을 전공한 뒤 런던으로 상경했다.</p>
+<p>당시 잉글랜드에는 영어로 인쇄된 수학 교과서가 단 한 권도 없었다. 수학이나 학문을 배우고 싶다면 반드시 귀족이나 성직자처럼 라틴어를 유창하게 읽을 수 있어야 했다. 레코드는 이 지적 독점을 깨뜨리고자 했다. 1543년에 펴낸 영문 산술서 『기예의 기초(<em>The Grounde of Artes</em>)』는 평민 상인과 기술자들에게 폭발적인 인기를 끌며 150년 동안 49판 이상 재인쇄되는 베스트셀러가 되었다.</p>
+<p>자신감을 얻은 레코드는 1557년, 대륙의 최첨단 학문이었던 대수학을 영국에 최초로 소개하는 역작 『지혜의 숫돌(<em>The Whetstone of Witte</em>)』을 펴냈다.</p>
+<h3 id="39말ml39에서-39첸소censo39를-거쳐-39젠직zenzic39으로"><a href="#39말ml39에서-39첸소censo39를-거쳐-39젠직zenzic39으로" class="heading-anchor" aria-hidden="true">#</a> &#39;말(māl)&#39;에서 &#39;첸소(censo)&#39;를 거쳐 &#39;젠직(zenzic)&#39;으로</h3><p>레코드가 책에서 소개한 거듭제곱 명칭은 사실 그가 독창적으로 창안한 것이 아니었다. 그것은 당시 신성로마제국(독일)과 이탈리아를 중심으로 맹위를 떨치던 코식 대수학의 용어를 영어식으로 번안한 것이었다.</p>
+<p>그 어원의 사슬을 거슬러 올라가면 중세 이슬람의 대수학에 도달한다:</p>
+<ol>
+<li><strong>아랍어 &#39;말(<em>māl</em>)&#39;</strong>: 9세기 바그다드의 수학자 알콰리즈미는 미지수의 제곱($x^2$)을 &#39;재산&#39; 또는 &#39;부&#39;를 뜻하는 <em>māl</em>이라고 불렀다.</li>
+<li><strong>이탈리아어 &#39;첸소(<em>censo</em>)&#39;</strong>: 중세 이탈리아 수학자들은 라틴어로 재산 조사를 뜻하는 <em>census</em>에서 유래하여 <em>māl</em>을 <em>censo</em>로 번역했다.</li>
+<li><strong>독일어 &#39;첸수스(<em>zensus</em>)&#39; 또는 &#39;첸소(<em>zenso</em>)&#39;</strong>: 15세기 독일 상인과 수학자들이 이탈리아의 대수학을 수입하면서 이를 독일식 발음인 <em>zensus</em>로 받아들였다.</li>
+<li><strong>영어 &#39;젠직(<em>zenzic</em>)&#39;</strong>: 로버트 레코드가 이를 영어화하여 제곱을 <em>zenzic</em>이라 명명했다.</li>
+</ol>
+<div class="table-wrapper" data-scroll-hint="좌우로 스크롤하여 확인" tabindex="0" role="region" aria-label="데이터 표"><table>
+<thead>
+<tr>
+<th align="center">거듭제곱 차수</th>
+<th align="left">코식 대수학 명칭</th>
+<th align="left">구성 방식</th>
+<th align="left">수학적 의미</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">$x$</td>
+<td align="left"><strong>Root / Thing</strong> (라틴어 radix, 독일어 coss)</td>
+<td align="left">기본 단위</td>
+<td align="left">1차 미지수</td>
+</tr>
+<tr>
+<td align="center">$x^2$</td>
+<td align="left"><strong>Zenzic</strong> (이탈리아어 censo, 독일어 zensus)</td>
+<td align="left">제곱</td>
+<td align="left">$x^2$</td>
+</tr>
+<tr>
+<td align="center">$x^3$</td>
+<td align="left"><strong>Cubic</strong> (독일어 cubus)</td>
+<td align="left">세제곱</td>
+<td align="left">$x^3$</td>
+</tr>
+<tr>
+<td align="center">$x^4$</td>
+<td align="left"><strong>Zenzizenzic</strong></td>
+<td align="left">제곱의 제곱</td>
+<td align="left">$(x^2)^2 = x^4$</td>
+</tr>
+<tr>
+<td align="center">$x^5$</td>
+<td align="left"><strong>Sursolid</strong> (서솔리드)</td>
+<td align="left">쪼갤 수 없는 차수</td>
+<td align="left">5차 소수 거듭제곱</td>
+</tr>
+<tr>
+<td align="center">$x^6$</td>
+<td align="left"><strong>Zenzicubic</strong></td>
+<td align="left">세제곱의 제곱</td>
+<td align="left">$(x^3)^2 = x^6$</td>
+</tr>
+<tr>
+<td align="center">$x^7$</td>
+<td align="left"><strong>Second Sursolid</strong></td>
+<td align="left">쪼갤 수 없는 차수</td>
+<td align="left">7차 소수 거듭제곱</td>
+</tr>
+<tr>
+<td align="center">$x^8$</td>
+<td align="left"><strong>Zenzizenzizenzic</strong></td>
+<td align="left">제곱의 제곱의 제곱</td>
+<td align="left">$((x^2)^2)^2 = x^8$</td>
+</tr>
+<tr>
+<td align="center">$x^9$</td>
+<td align="left"><strong>Cubicocubic</strong></td>
+<td align="left">세제곱의 세제곱</td>
+<td align="left">$(x^3)^3 = x^9$</td>
+</tr>
+</tbody></table>
+</div><h3 id="왜-곱셈적-명칭을-썼는가-거듭제곱근-손계산의-알고리즘"><a href="#왜-곱셈적-명칭을-썼는가-거듭제곱근-손계산의-알고리즘" class="heading-anchor" aria-hidden="true">#</a> 왜 곱셈적 명칭을 썼는가: 거듭제곱근 손계산의 알고리즘</h3><p>여기서 아주 중요한 질문이 생긴다. 왜 디오판토스는 $2+2=4, 2+3=5$처럼 덧셈적으로 명칭을 붙였는데, 16세기 유럽의 코식 대수학자들은 8제곱을 $2 \times 2 \times 2 = 8$로, 6제곱을 $2 \times 3 = 6$으로 곱셈적(multiplicative)으로 합성했을까?</p>
+<p>그 답은 바로 <strong>당대 수학자들의 실용적 계산 기술, 즉 &#39;거듭제곱근의 손계산 알고리즘&#39;</strong>에 있었다.</p>
+<p>당시 연필과 종이로 고차 방정식의 근을 구해야 했던 르네상스 계산가들에게는 <strong>제곱근($\sqrt{N}$)과 세제곱근($\sqrt[3]{N}$)</strong>을 손으로 추출하는 정교한 수작업 알고리즘이 확립되어 있었다. 만약 어떤 방정식에 8제곱수($x^8 = 256$)가 등장한다면, 수학자는 먼저 256의 제곱근을 구한다($\sqrt{256} = 16$). 16은 다시 완전제곱수이므로 또 한 번 제곱근을 구한다($\sqrt{16} = 4$). 그리고 4에서 마지막으로 제곱근을 취하면 최종적인 밑 $x = 2$에 도달한다.</p>
+<p>$\sqrt{\sqrt{\sqrt{256}}} = \sqrt{\sqrt{16}} = \sqrt{4} = 2$</p>
+<p>즉, 8제곱수(<em>zenzizenzizenzic</em>)는 손으로 제곱근을 세 번 연속해서 뽑아낼 수 있는 수라는 뜻이었다. 마찬가지로 6제곱수(<em>zenzicubic</em>)는 먼저 세제곱근을 구한 뒤 다시 제곱근을 취하면 되는 수였다. 이 명칭은 추상적인 이론이 아니라, <strong>인간이 손으로 근을 계산할 수 있는 물리적 절차를 그대로 담은 작업 지시서</strong>였던 것이다.</p>
+<h3 id="소수prime-차수의-악몽-서솔리드sursolid"><a href="#소수prime-차수의-악몽-서솔리드sursolid" class="heading-anchor" aria-hidden="true">#</a> 소수(Prime) 차수의 악몽: 서솔리드(Sursolid)</h3><p>그러나 이 실용적인 명칭 체계는 치명적인 약점을 안고 있었다. 2나 3의 배수가 아닌 소수(Prime) 거듭제곱이 등장하면 체계가 산산조각 났다.</p>
+<p>5제곱은 2나 3의 거듭제곱근 알고리즘으로 분해할 수 없었다. 그래서 코식 수학자들은 이를 &#39;단단하여 뚫을 수 없는 수&#39;라는 뜻의 **서솔리드(<em>sursolid</em>, 둔감한 입체)**라는 기괴한 이름을 지어 붙여야 했다. 7제곱은 &#39;제2의 서솔리드(<em>second sursolid</em>)&#39;, 11제곱은 &#39;제3의 서솔리드&#39;가 되었다. 차수가 올라갈 때마다 새로운 이름과 암기용 라틴어 규칙이 끝없이 덧붙여졌다.</p>
+<p>이 코식 대수학은 실생활에서는 아무 쓸모가 없었고, 오직 최고의 수학자들만이 두뇌를 연마하고 수학 올림피아드 같은 지적 대결에서 승리하기 위해 배우는 난해한 비전(祕傳)이었다.</p>
+<blockquote>
+<p>[!NOTE]
+<strong>로버트 레코드의 인문주의적 언어유희(Pun)</strong><br>레코드의 책 제목 『지혜의 숫돌(<em>The Whetstone of Witte</em>)』은 바로 이 코식 대수학을 활용한 절묘한 2개국어 언어유희였다. 당시 대수학을 뜻하던 단어 <strong>Coss</strong>(이탈리아어 <em>cosa</em>, &#39;사물&#39;에서 유래)는 **라틴어로 숫돌(칼을 가는 돌)을 뜻하는 단어 <em>cōs</em>(소유격 <em>cōtis</em>)**와 발음이 완전히 같았다. 따라서 이 책의 제목은 &quot;대수학 책&quot;인 동시에 독자의 지혜를 예리하게 벼려주는 &quot;지혜의 숫돌(<em>Cos ingenii</em>)&quot;이라는 이중적 의미를 담고 있었다.</p>
+</blockquote>
+<hr>
+<h2 id="4-1800년의-인식론적-장벽-quot수는-사물을-수식하는-형용사다quot"><a href="#4-1800년의-인식론적-장벽-quot수는-사물을-수식하는-형용사다quot" class="heading-anchor" aria-hidden="true">#</a> 4. 1,800년의 인식론적 장벽: &quot;수는 사물을 수식하는 형용사다&quot;</h2><p>이제 우리는 이 글의 가장 깊은 인식론적 핵심에 도달한다. </p>
+<p>오늘날 초등학생조차 &quot;그냥 8제곱은 $x$ 위에 작은 8을 적고($x^8$), 곱할 때는 지수끼리 더하면($x^2 \cdot x^3 = x^5$) 되잖아? 왜 그 똑똑한 학자들이 그걸 못 했을까?&quot;라고 의아해할 수 있다.</p>
+<p>하지만 르네상스 대수학사 분야의 세계적 석학인 <strong>제프리 오크스(Jeffrey Oaks) 교수</strong>의 연구에 따르면, 그들이 지수 표기법을 쓰지 못한 데에는 당대 인간의 사고 체계를 지배하던 타당하고도 근본적인 철학적 이유가 있었다.</p>
+<h3 id="종-수량-쌍quantity-species-pairs의-세계관"><a href="#종-수량-쌍quantity-species-pairs의-세계관" class="heading-anchor" aria-hidden="true">#</a> 종-수량 쌍(Quantity-Species Pairs)의 세계관</h3><p>17세기 이전의 인류에게 <strong>&#39;수(Number)&#39;</strong>라는 개념은 오늘날 우리가 생각하는 것과 완전히 달랐다. </p>
+<p>현대인에게 수 &#39;3&#39;이나 &#39;5&#39;는 그 자체로 독립되어 존재하는 순수 추상 스칼라(Scalar)다. 하지만 고대 그리스부터 16세기 르네상스까지, 수는 독립적으로 떠다니는 존재가 아니라 <strong>언제나 구체적인 사물의 성질을 묘사하는 &#39;형용사&#39;</strong>였다.</p>
+<p>학술적으로 이를 <strong>종-수량 쌍(quantity-species pairs)</strong>이라고 부른다. </p>
+<p>예컨대 &#39;다스(Dozen)&#39;라는 단어를 생각해보자. 세상에 그냥 홀로 존재하는 &#39;다스&#39;라는 것은 없다. &#39;다스&#39;라는 개념은 오직 &#39;계란 한 다스&#39;, &#39;베이글 두 다스&#39;처럼 구체적인 사물(종, Species)과 결합하여 그 수량(Quantity)을 지정할 때만 의미를 갖는다.</p>
+<p>전근대의 대수학도 정확히 이러했다. 오늘날 우리는 수식 $3x$를 볼 때 &quot;미지의 변수 $x$에 추상적인 수 3을 곱한다&quot;고 연산론적으로 이해한다. 하지만 16세기의 수학자에게 $3x$는 곱셈이 아니라 <strong>&quot;정체를 알 수 없는 어떤 사물(thing) 3개&quot;</strong>를 가리키는 집합적 표현(Aggregation)이었다. </p>
+<p>마치 액면가를 모르는 외국 동전 세 닢을 손바닥 위에 올려놓고 &quot;알 수 없는 동전 3개&quot;라고 부르는 것과 완벽히 같았다.</p>
+
+<div class="code-block-wrapper">
+  <div class="code-header">
+    <span class="code-lang lang-generic">평문</span>
+    <button class="copy-btn" type="button" aria-label="코드 복사">복사</button>
+  </div>
+  <pre><code class="language-text">[현대의 시각: 추상 연산]
+3 * x  ===&gt;  추상수 3과 변수 x의 곱셈 연산
+
+[전근대의 시각: 종-수량 쌍]
+3 things  ===&gt;  정체 모를 사물(종) 3개(수량)의 묶음 (사물 수식 형용사)</code></pre>
+</div><h3 id="다항식은-quot3시간-21분-13초quot였다"><a href="#다항식은-quot3시간-21분-13초quot였다" class="heading-anchor" aria-hidden="true">#</a> 다항식은 &quot;3시간 21분 13초&quot;였다</h3><p>이 세계관 아래에서 미지수의 각 거듭제곱($x, x^2, x^3$)은 결코 같은 숫자의 거듭된 곱이 아니었다. 그것들은 <strong>서로 완전히 다른 차원에 속하는 이질적인 &#39;종(Species)&#39;</strong>이었다.</p>
+<p>따라서 당대 수학자가 다음과 같은 다항식을 썼다면:</p>
+<p>$2x^2 + 5x + 4$</p>
+<p>그는 이것을 하나의 연속적인 함수나 다항식으로 본 것이 아니었다. 그것은 현대의 우리가 다음과 같이 말하는 것과 완벽히 같았다.</p>
+<div align="center" style="margin: 20px 0; width: 100%; max-width: 100%; box-sizing: border-box;">
+  <span style="display: inline-block; max-width: 100%; box-sizing: border-box; padding: 8px 16px; background: var(--bg-surface); border: 1.5px solid var(--border); border-radius: 10px; font-size: clamp(14px, 4.2vw, 20px); font-weight: 800; color: var(--primary); box-shadow: var(--shadow-sm); word-break: keep-all;">"3시간 21분 13초"</span>
+</div>
+
+<p>&#39;시간&#39;과 &#39;분&#39;과 &#39;초&#39;는 각자 다른 물리적 단위(종)이므로, 단위를 일치시키는 변환을 거치지 않는 한 결코 숫자끼리 그냥 합쳐질 수 없다. </p>
+<p>이것이 바로 당대 수학자들이 거듭제곱의 곱셈을 산술적 덧셈($a^m \cdot a^n = a^{m+n}$)으로 직결하지 못한 이유였다. 거듭제곱들의 곱셈은 숫자의 곱셈뿐만 아니라 <strong>종(Species) 자체를 완전히 다른 차원의 종으로 변환하는 절차</strong>를 동반해야 했다. </p>
+<p>그것은 마치 &quot;아버지의 아버지는 할아버지이고, 할아버지의 아버지는 증조할아버지&quot;라는 <strong>친족 족보를 조회하듯 별도의 &#39;종 변환 관계표&#39;를 머릿속에서 거쳐야 하는 일</strong>이었다. </p>
+<p>이 거대한 존재론적 족쇄가 1,800년 동안 지수 기호의 출현을 완벽하게 가로막고 있었다.</p>
+<hr>
+<h2 id="5-왕립-조폐국-스캔들과-비극의-천재-로버트-레코드"><a href="#5-왕립-조폐국-스캔들과-비극의-천재-로버트-레코드" class="heading-anchor" aria-hidden="true">#</a> 5. 왕립 조폐국 스캔들과 비극의 천재 로버트 레코드</h2><p>이처럼 거대한 수학사적 격변기 한가운데에서, 로버트 레코드의 삶은 튜더 왕조 영국 사회의 거친 정치적 격랑 속으로 휘말려 들어갔다.</p>
+<h3 id="화폐-대개악the-great-debasement과-조폐국-발탁"><a href="#화폐-대개악the-great-debasement과-조폐국-발탁" class="heading-anchor" aria-hidden="true">#</a> 화폐 대개악(The Great Debasement)과 조폐국 발탁</h3><p>책을 써서 얻는 수입만으로는 생계를 유지할 수 없었던 레코드에게 1549년 뜻밖의 기회가 찾아왔다.</p>
+<p>당시 잉글랜드 국왕 헨리 8세는 막대한 전쟁 비용을 조달하기 위해 국가 통화에 포함된 순은 함량을 92.5%에서 25%까지 극단적으로 떨어뜨렸다. 이것이 악명 높은 <strong>화폐 대개악(Great Debasement, 1544~1551)</strong>이다. 은화 표면에 구리가 드러나 헨리 8세에게는 &#39;구리 코 영감(Old Coppernose)&#39;이라는 조롱 섞인 별명이 붙었다.</p>
+<p>통화 가치가 붕괴하자 전국 조폐국에서는 은을 빼돌리는 관리들의 횡령과 부패가 극에 달했다. 헨리 8세가 죽고 9세의 어린 에드워드 6세가 즉위하자, 브리스톨 조폐국의 실세 윌리엄 셰링턴 경(Sir William Sharington)이 막대한 국고를 횡령하고 토머스 시모어의 반역 음모에 자금을 댄 혐의로 체포되는 거대한 스캔들이 터졌다.</p>
+<p>왕실 정부는 부패를 척결하기 위해 철두철미한 계산 능력과 결벽에 가까운 정직성을 지닌 인물을 찾아야 했다. 의사이자 당대 최고의 수학자였던 <strong>로버트 레코드가 적임자로 낙점</strong>되었다. 1549년 1월, 레코드는 전임자의 4배에 달하는 파격적인 연봉을 약속받고 브리스톨 조폐국의 감사관(Comptroller)으로 임명되었다.</p>
+<h3 id="정육면체cube-단위-순환-기하학적-모델"><a href="#정육면체cube-단위-순환-기하학적-모델" class="heading-anchor" aria-hidden="true">#</a> 정육면체(Cube) 단위 순환 기하학적 모델</h3><p>조폐국 감사관으로 일하는 동안에도 레코드는 수학적 단순화에 대한 집념을 버리지 않았다. 그는 독일식 서솔리드(<em>sursolid</em>) 체계가 너무 복잡하다고 보고, 『지혜의 숫돌』에서 <strong>인간의 3차원 감각을 바탕으로 한 독창적인 순환 기하학 모델</strong>을 제시했다:</p>
+
+<div class="code-block-wrapper">
+  <div class="code-header">
+    <span class="code-lang lang-generic">평문</span>
+    <button class="copy-btn" type="button" aria-label="코드 복사">복사</button>
+  </div>
+  <pre><code class="language-text">[1단계] 단위(Unit, 1) ---&gt; 점
+[2단계] 근(Root, x) ------&gt; 선 (1차원)
+[3단계] 제곱(Square, x²) -&gt; 정사각형 (2차원)
+[4단계] 입방(Cube, x³) ---&gt; 정육면체 (3차원)
+---------------------------------------------
+[새로운 단위 설정: 정육면체(Cube, x³)를 새로운 단위(Unit)로 삼음]
+[5단계] Long Cube (x⁴) ------&gt; 정육면체를 한 줄로 세운 선 (x³ * x)
+[6단계] Square of Cubes (x⁵) -&gt; 정육면체로 만든 면 (x³ * x²)
+[7단계] Cube of Cubes (x⁶) ---&gt; 정육면체로 만든 입방체 (x³ * x³)</code></pre>
+</div><p>인간의 감각은 3차원을 넘을 수 없으므로, $x^3$을 새로운 단위로 삼아 다시 선-면-입체라는 3주기 순환을 영원히 반복하자는 아이디어였다. 비록 현대적 지수에는 미치지 못했지만, 복잡한 명칭의 미로를 기하학적 블록으로 단순화하려는 획기적인 시도였다.</p>
+<h3 id="인류-역사상-가장-아름다운-기호-등호의-탄생"><a href="#인류-역사상-가장-아름다운-기호-등호의-탄생" class="heading-anchor" aria-hidden="true">#</a> 인류 역사상 가장 아름다운 기호: 등호(=)의 탄생</h3><p>그리고 바로 이 책 『지혜의 숫돌』에서, 로버트 레코드는 인류 문명사에 길이 남을 불멸의 기호를 세상에 내놓았다.</p>
+<p>당시의 수학책들은 수식 사이마다 라틴어로 &quot;is equal to(이것은 ~와 같다)&quot;라는 문장을 끊임없이 반복해서 써야 했다. 책을 집필하던 레코드는 이 지루한 반복에 진절머리가 났다. 그는 마침내 펜을 들어 <strong>길이가 완벽히 같은 두 개의 수평 평행선</strong>을 그었다.</p>
+<blockquote>
+<p><strong>&quot;And to auoide the tediouse repetition of these woordes: is equalle to: I will sette as I doe often in woorke vse, a paire of paralleles, or Gemowe lines of one lengthe, thus: ======, bicause noe .2. thynges, can be moare equalle.&quot;</strong><br>*(그리고 &#39;is equal to&#39;라는 단어의 지루한 반복을 피하기 위해, 내가 작업할 때 자주 쓰듯 길이가 같은 한 쌍의 평행선, 즉 쌍둥이 선을 이렇게 그을 것이다: ======, <strong>왜냐하면 그 어떤 두 사물도 이 세상에서 평행한 두 선보다 더 같을 수는 없기 때문이다.</strong>)*<br>— Robert Recorde, <em>The Whetstone of Witte</em> (1557)</p>
+</blockquote>
+<p>레코드가 종이 위에 그은 두 평행선, 그것이 바로 오늘날 전 세계 80억 인류가 사용하는 <strong>등호($=$)</strong>의 탄생 순간이었다.</p>
+<div class="svg-chart-container" style="margin: 28px 0; width: 100%; max-width: 100%; box-sizing: border-box; overflow-x: auto; -webkit-overflow-scrolling: touch;">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 200" role="img" aria-label="로버트 레코드의 등호 발명 계보" style="width:100%; min-width:680px; max-width:800px; height:auto; display:block; margin:0 auto; background:var(--bg-card); border-radius:14px; border:1px solid var(--border); box-shadow:var(--shadow-sm);">
+  <defs>
+    <marker id="m2-arr" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <path d="M0,1.5 L6,4 L0,6.5 Z" fill="var(--text-light, #94a3b8)"/>
+    </marker>
+  </defs>
+
+  <!-- Title & Subtitle -->
+  <text x="400" y="30" text-anchor="middle" font-family="Pretendard, -apple-system, sans-serif" font-size="15px" font-weight="700" fill="var(--text-main)">로버트 레코드의 등호(=) 발명 계보: 『지혜의 숫돌』(1557)</text>
+  <text x="400" y="48" text-anchor="middle" font-family="Pretendard, -apple-system, sans-serif" font-size="12px" fill="var(--text-muted)">라틴어 수사적 문장 반복에서 세계 공통의 수학 기호로의 진화</text>
+
+  <!-- 4 Step Cards -->
+  <!-- Card 1 -->
+  <g transform="translate(30, 70)">
+    <rect width="155" height="95" rx="10" fill="var(--bg-surface)" stroke="var(--border)" stroke-width="1.5"/>
+    <rect x="12" y="12" width="60" height="20" rx="4" fill="var(--border)"/>
+    <text x="42" y="26" text-anchor="middle" font-family="Pretendard, -apple-system, sans-serif" font-size="11px" font-weight="700" fill="var(--text-muted)">1. 기존 관습</text>
+    <text x="77.5" y="52" text-anchor="middle" font-family="ui-monospace, monospace" font-size="13px" font-weight="700" fill="var(--text-main)">is equalle to</text>
+    <text x="77.5" y="74" text-anchor="middle" font-family="Pretendard, -apple-system, sans-serif" font-size="11px" fill="var(--text-muted)">지루한 문장 끝없는 반복</text>
+  </g>
+  <line x1="190" y1="117" x2="225" y2="117" stroke="var(--text-light, #94a3b8)" stroke-width="1.5" marker-end="url(#m2-arr)"/>
+
+  <!-- Card 2 -->
+  <g transform="translate(230, 70)">
+    <rect width="155" height="95" rx="10" fill="var(--bg-surface)" stroke="var(--border)" stroke-width="1.5"/>
+    <rect x="12" y="12" width="60" height="20" rx="4" fill="var(--border)"/>
+    <text x="42" y="26" text-anchor="middle" font-family="Pretendard, -apple-system, sans-serif" font-size="11px" font-weight="700" fill="var(--text-muted)">2. 레코드의 고뇌</text>
+    <text x="77.5" y="52" text-anchor="middle" font-family="Pretendard, -apple-system, sans-serif" font-size="12px" font-weight="700" fill="var(--text-main)">시각적 단순화</text>
+    <text x="77.5" y="74" text-anchor="middle" font-family="Pretendard, -apple-system, sans-serif" font-size="11px" fill="var(--text-muted)">집필 피로 및 교육 혁신</text>
+  </g>
+  <line x1="390" y1="117" x2="425" y2="117" stroke="var(--text-light, #94a3b8)" stroke-width="1.5" marker-end="url(#m2-arr)"/>
+
+  <!-- Card 3: Gemowe lines -->
+  <g transform="translate(430, 70)">
+    <rect width="170" height="95" rx="10" fill="var(--primary-light, #eff6ff)" stroke="var(--primary, #2563eb)" stroke-width="1.8"/>
+    <rect x="12" y="12" width="70" height="20" rx="4" fill="var(--primary, #2563eb)"/>
+    <text x="47" y="26" text-anchor="middle" font-family="Pretendard, -apple-system, sans-serif" font-size="11px" font-weight="700" fill="#ffffff">3. 쌍둥이 선</text>
+    <text x="85" y="52" text-anchor="middle" font-family="ui-monospace, monospace" font-size="14px" font-weight="800" fill="var(--primary, #2563eb)">====== (Gemowe)</text>
+    <text x="85" y="74" text-anchor="middle" font-family="Pretendard, -apple-system, sans-serif" font-size="11px" font-weight="600" fill="var(--primary, #2563eb)">"더 같을 수는 없다"</text>
+  </g>
+  <line x1="605" y1="117" x2="635" y2="117" stroke="var(--text-light, #94a3b8)" stroke-width="1.5" marker-end="url(#m2-arr)"/>
+
+  <!-- Card 4: Global Standard -->
+  <g transform="translate(640, 70)">
+    <rect width="130" height="95" rx="10" fill="var(--primary, #2563eb)" stroke="var(--primary-hover, #1d4ed8)" stroke-width="2"/>
+    <rect x="12" y="12" width="65" height="20" rx="4" fill="rgba(255,255,255,0.2)"/>
+    <text x="44.5" y="26" text-anchor="middle" font-family="Pretendard, -apple-system, sans-serif" font-size="11px" font-weight="700" fill="#ffffff">4. 세계 표준</text>
+    <text x="65" y="60" text-anchor="middle" font-family="Pretendard, -apple-system, sans-serif" font-size="28px" font-weight="800" fill="#ffffff">=</text>
+    <text x="65" y="80" text-anchor="middle" font-family="Pretendard, -apple-system, sans-serif" font-size="10px" font-weight="600" fill="rgba(255,255,255,0.85)">인류 공통 등호</text>
+  </g>
+</svg>
+</div>
+
+<h3 id="펨브룩-백작과의-정쟁과-채무자-감옥에서의-옥사"><a href="#펨브룩-백작과의-정쟁과-채무자-감옥에서의-옥사" class="heading-anchor" aria-hidden="true">#</a> 펨브룩 백작과의 정쟁과 채무자 감옥에서의 옥사</h3><p>그러나 현실의 세계는 수학 기호처럼 아름답지 못했다. 레코드가 브리스톨 조폐국에 부임한 지 불과 일주일 만에 치명적인 정적이 나타났다. 당대 최고의 실력자였던 <strong>제1대 펨브룩 백작 윌리엄 허버트(William Herbert, 1501~1570)</strong>였다.</p>
+<p>훗날 전기 작가 존 오브리가 &quot;문맹에 가까웠고 미친 싸움꾼(a mad fighting fellow)&quot;이라 묘사했던 허버트는, 레코드가 관리하던 웨일스 펜티르크의 왕실 제철소에서 국왕에게 수송될 귀금속과 물자를 무단으로 가로채려 했다. 원리원칙주의자였던 레코드가 이를 단호히 거부하자, 격분한 허버트는 레코드를 &#39;반역죄&#39;로 고발하며 법정 공방을 벌였다.</p>
+<p>1553년 소년왕 에드워드 6세가 15세의 나이로 요절하고 가톨릭 군주 메리 1세가 즉위하자, 레코드는 정치적 바람이 자신에게 유리하게 분다고 믿었다. 메리 여왕이 조폐국 비리 척결을 선언하자, 레코드는 여왕에게 비밀 서한을 보내 지난 수년간 브리스톨과 아일랜드 더블린 조폐국에서 허버트가 저지른 횡령과 방해 공작을 낱낱이 고발했다.</p>
+<p>하지만 그것은 순진한 학자의 치명적인 오판이었다. 그 사이 허버트의 정치적 권력은 여왕조차 함부로 건드릴 수 없을 만큼 거대해져 있었다.</p>
+<p>허버트는 즉각 레코드를 상대로 <strong>£12,000(현대 가치로 수백억 원)의 천문학적인 명예훼손(Libel) 역소송</strong>을 제기했다. 유력한 증인들을 매수한 허버트는 재판에서 승리했고, 법원은 레코드에게 <strong>£1,000의 배상금 지급 판결</strong>을 내렸다.</p>
+<p>정부로부터 조폐국 급여를 제때 지급받지 못해 빈털터리였던 레코드는 그 거액을 감당할 길이 없었다. 그는 즉시 런던 서더크의 <strong>국왕벤치(King&#39;s Bench) 채무자 감옥</strong>으로 압송되었다. </p>
+<p>1557년 그토록 자랑스럽던 대수학서 『지혜의 숫돌』이 세상의 빛을 보았을 때, 저자 로버트 레코드는 이미 차가운 감옥 바닥에 갇혀 있었다. 1557년과 1558년 런던을 휩쓴 인플루엔자(또는 발진티푸스) 대유행 속에서, 영국인들에게 처음으로 대수학을 가르치고 등호를 선물했던 천재 수학자는 1558년 여름, 감옥 독방에서 쓸쓸히 숨을 거두었다. 그의 나이 불과 48세였다.</p>
+<p>그는 묘비명 하나조차 제대로 남기지 못했다. 그리고 지독한 역사의 아이러니로, 그가 사망한 지 12년이 지난 1570년, 엘리자베스 1세 정부는 아일랜드 조폐국 체불 임금 명목으로 레코드의 유족에게 정확히 <strong>£1,000</strong>를 지급했다. 그 돈이 12년만 일찍 지급되었더라면, 그는 감옥에 가지도, 그토록 비참하게 목숨을 잃지도 않았을 것이다.</p>
+<p>그의 산술 교과서 『기예의 기초』가 49쇄를 찍으며 영국 최고의 수학 교재로 군림한 반면, 등호와 코식 대수학을 담은 필생의 역작 『지혜의 숫돌』은 단 1회 인쇄된 뒤 역사의 먼지 속으로 잊혀져 갔다.</p>
+<hr>
+<h2 id="6-대륙의-기호-실험들과-결정적-결함-quot밑base이-빠져-있었다quot"><a href="#6-대륙의-기호-실험들과-결정적-결함-quot밑base이-빠져-있었다quot" class="heading-anchor" aria-hidden="true">#</a> 6. 대륙의 기호 실험들과 결정적 결함: &quot;밑(Base)이 빠져 있었다&quot;</h2><p>로버트 레코드가 비극적으로 퇴장한 뒤에도 바다 건너 유럽 대륙에서는 미지수의 거듭제곱을 표현하기 위한 수학자들의 치열한 기호 실험이 이어졌다.</p>
+<h3 id="선구자들의-실험-슈케-슈티펠-봄벨리-스테빈"><a href="#선구자들의-실험-슈케-슈티펠-봄벨리-스테빈" class="heading-anchor" aria-hidden="true">#</a> 선구자들의 실험: 슈케, 슈티펠, 봄벨리, 스테빈</h3><ul>
+<li><strong>니콜라 슈케 (Nicolas Chuquet, 1484)</strong>: 프랑스의 수학자 슈케는 필사본 『수의 과학 삼부작(<em>Triparty</em>)』에서 역사상 최초로 거듭제곱 숫자를 위첨자로 쓰는 방식($12^2, 12^3$)을 고안했다. 그는 심지어 상수항의 지수가 0($12^0 = 12$)이라는 사실까지 꿰뚫어 보았다. 그러나 그의 원고는 출판되지 못한 채 1880년대까지 400년간 파리 국립도서관에 파묻혀 있었다.</li>
+<li><strong>미하엘 슈티펠 (Michael Stifel, 1544)</strong>: 레코드와 동시대를 살았던 독일의 루터파 수도사이자 수학자 슈티펠은 『종합 산술(<em>Arithmetica Integra</em>)』에서 2의 거듭제곱 표를 분석하며 지수 위치에 놓인 숫자들을 라틴어로 <em>numeri expositi</em>(노출된 수)라고 불렀다. 여기서 오늘날의 **&#39;지수(<em>exponent</em>)&#39;**라는 수학 용어가 공식 탄생했다.</li>
+<li><strong>라파엘 봄벨리 (Rafael Bombelli, 1572)</strong>: 이탈리아의 봄벨리는 복잡한 코식 기호들을 버리고 지수 숫자를 작은 호(arc) 모양 기호 안에 넣어 $\overset{\smile}{2}, \overset{\smile}{3}$ 형태로 표기했다.</li>
+<li><strong>시몬 스테빈 (Simon Stevin, 1585)</strong>: 네덜란드의 공학자 스테빈은 지수 숫자에 동그라미를 치는 원형 지수 기호(①, ②, ③)를 도입했다. 스테빈은 원 안에 분수를 넣으면 제곱근이 된다는 통찰을 제시하며, ②/③가 거듭제곱(involution)과 거듭제곱근 추출(evolution)을 동시에 나타낼 수 있다고 주장했다.</li>
+</ul>
+
+<div class="code-block-wrapper">
+  <div class="code-header">
+    <span class="code-lang lang-generic">평문</span>
+    <button class="copy-btn" type="button" aria-label="코드 복사">복사</button>
+  </div>
+  <pre><code class="language-text">[지수 표기법의 과도기적 실험들]
+슈케 (1484):      .12.²       (위첨자 선구, 400년간 사장)
+슈티펠 (1544):    exponent    (용어 최초 명명)
+봄벨리 (1572):    3 ⏑ 2       (호 표기: 3x²)
+스테빈 (1585):    3 ②         (원형 숫자: 3x²)</code></pre>
+</div><h3 id="왜-기호-체계는-폭발하지-못했는가-밑base의-부재"><a href="#왜-기호-체계는-폭발하지-못했는가-밑base의-부재" class="heading-anchor" aria-hidden="true">#</a> 왜 기호 체계는 폭발하지 못했는가: 밑(Base)의 부재</h3><p>이처럼 위첨자, 호, 원형 기호까지 온갖 아이디어가 쏟아져 나왔는데도 왜 현대적인 지수 표기법으로 나아가지 못했을까?</p>
+<p>그 결정적인 원인은 지수 숫자에 있었던 것이 아니었다. <strong>그들에게는 &#39;밑(Base)&#39;이 없었다.</strong></p>
+<p>당시의 코식 대수학과 아바코 전통은 언제나 **&#39;단 하나의 미지수(<em>cosa</em>)&#39;**만을 다루는 1변수 체계였다. 미지수는 언제나 그 자리에 당연히 존재하는 단 하나의 &#39;사물&#39;이었으므로, 미지수 자체에 별도의 알파벳 이름을 붙일 필요가 없었다. </p>
+<p>따라서 스테빈의 책에서 원 안에 둘러싸인 2(②)는 현대의 지수 $^2$이 아니라, <strong>&quot;제곱된 그 미지수($x^2$)&quot;라는 단어 자체</strong>였다. 숫자 3 뒤에 동그라미 2가 붙은 3②는 &quot;3에 $x^2$이 붙어 있다&quot;는 뜻이었다. </p>
+<p>미지수(밑)가 기호로 명시되지 않은 상태에서, 지수 기호는 오직 단 하나의 암묵적 미지수에만 묶여 있는 특수 기호에 불과했다. $(a+b)^2$이나 $x^2 y$, 혹은 $2^5$처럼 <strong>임의의 문자나 숫자를 밑으로 삼는 일반화된 지수 연산은 원천적으로 불가능</strong>했던 것이다.</p>
+<h3 id="프랑수아-비에트1591-기호-대수학의-빅뱅"><a href="#프랑수아-비에트1591-기호-대수학의-빅뱅" class="heading-anchor" aria-hidden="true">#</a> 프랑수아 비에트(1591): 기호 대수학의 빅뱅</h3><p>이 거대한 병목을 단숨에 부수어 버린 인물이 바로 프랑스의 법률가이자 수학자였던 <strong>프랑수아 비에트(François Viète, 1540~1603)</strong>였다.</p>
+<p>1591년, 비에트는 기하학 작도 문제를 대수학으로 풀어내기 위한 방법론을 연구하고 있었다. 기하학 도형에는 수많은 선분이 동시에 존재한다. 길이가 알려진 선분도 여러 개이고, 구해야 할 미지수의 선분도 여러 개였다. 단 하나의 미지수만 다루던 기존 대수학으로는 기하학을 풀 수 없었다.</p>
+<p>비에트는 역사상 최초로 모든 양을 문자로 표현하기로 결심했다:</p>
+<ul>
+<li><strong>모음(A, E, I, O, U)</strong>: 아직 알지 못하는 미지수(Unknowns)</li>
+<li><strong>자음(B, C, D, G...)</strong>: 이미 알고 있는 기지수와 계수(Coefficients)</li>
+</ul>
+<p>비에트가 이 좁고 특수한 문제를 풀기 위해 도입한 문자 표기법은 대수학 전체를 송두리째 뒤흔들었다. 인류 최초로 **문자 대수학(<em>logistica speciosa</em>)**이 탄생한 것이다!</p>
+<p>이제 수식에는 $A$도 등장하고 $B$도 등장하며 $C$도 등장했다. 여러 문자가 한 식에 동시에 존재하게 되자, 수학자들은 역사상 처음으로 다음과 같은 질문을 던져야만 했다:</p>
+<div align="center" style="margin: 20px 0; width: 100%; max-width: 100%; box-sizing: border-box;">
+  <span style="display: inline-block; max-width: 100%; box-sizing: border-box; padding: 8px 16px; background: var(--bg-surface); border: 1.5px solid var(--border); border-radius: 10px; font-size: clamp(13px, 3.8vw, 18px); font-weight: 800; color: var(--primary); box-shadow: var(--shadow-sm); word-break: keep-all; line-height: 1.4;">"도대체 어떤 문자의 제곱이란 말인가?"</span>
+</div>
+
+<p>이 절박한 필요성이 대두되면서, 마침내 <strong>&#39;밑(Base)&#39;을 글자로 명시하고 그 뒤에 차수를 덧붙여야만 하는 문법적 필연성</strong>이 탄생했다 (<em>A quadratum</em>, <em>A cubum</em>). 비에트는 지수 표기법의 문을 여는 마지막 열쇠, 즉 &#39;밑(Base)&#39;을 인류에게 쥐어준 것이다.</p>
+<hr>
+<h2 id="7-데카르트의-위대한-통합-quot구문론이-의미론을-이끈다quot"><a href="#7-데카르트의-위대한-통합-quot구문론이-의미론을-이끈다quot" class="heading-anchor" aria-hidden="true">#</a> 7. 데카르트의 위대한 통합: &quot;구문론이 의미론을 이끈다&quot;</h2><p>마침내 무대의 막이 오르고, 근대 철학과 수학의 거인 <strong>르네 데카르트(René Descartes, 1596~1650)</strong>가 등장한다.</p>
+<p>어린 시절 라 플레슈의 예수회 대학에서 병약한 건강 덕분에 매일 아침 11시까지 침대에 누워 사색할 수 있는 특권을 누렸던 데카르트는, 당대의 대수학을 바라보며 &quot;너무나 혼란스럽고 모호하여 정신을 연마하기보다는 어지럽히는 기술&quot;이라고 혹평했다. 그는 모든 수량과 형상을 단 하나의 보편적인 학문 체계로 통합하겠다는 거대한 야망을 품었다.</p>
+<h3 id="1637년-기하학과-현대적-지수-표기-math-inline-84"><a href="#1637년-기하학과-현대적-지수-표기-math-inline-84" class="heading-anchor" aria-hidden="true">#</a> 1637년 『기하학』과 현대적 지수 표기 ($x^3, xx$)</h3><p>1637년, 데카르트는 『방법서설』의 부록으로 출간한 **『기하학(<em>La Géométrie</em>)』**에서 기하학과 대수학을 하나로 통합하는 해석기하학(Analytic Geometry)을 창시했다. </p>
+<p>이 책에서 데카르트는 후대 인류가 영원히 사용하게 될 표준 기호 체계를 확립했다:</p>
+<ol>
+<li><strong>변수와 계수의 표준화</strong>: 알파벳 뒷자리($x, y, z$)는 미지수와 변수로, 앞자리($a, b, c$)는 기지수와 상수로 지정했다.</li>
+<li><strong>현대적 위첨자 지수의 정립</strong>: 복잡한 라틴어 명칭이나 호, 원형 기호를 모두 던져버리고, 변수 문자 바로 뒤 오른쪽 위에 작은 지수 숫자를 올려 적었다 ($x^3, x^4, x^5$).</li>
+</ol>
+
+<div class="code-block-wrapper">
+  <div class="code-header">
+    <span class="code-lang lang-generic">평문</span>
+    <button class="copy-btn" type="button" aria-label="코드 복사">복사</button>
+  </div>
+  <pre><code class="language-text">[데카르트의 지수 표기법]
+x³   ===&gt;   x를 3번 곱함
+x⁴   ===&gt;   x를 4번 곱함
+xx   ===&gt;   x² 대신 조판 편의상 xx 사용 (지면 폭 2칸 소모가 동일했기 때문)</code></pre>
+</div><blockquote>
+<p>[!TIP]
+<strong>데카르트는 왜 $x^2$ 대신 $xx$를 썼을까?</strong><br>데카르트의 책을 보면 $x^3, x^4$는 위첨자로 쓰면서도, 유독 2제곱만큼은 $x^2$ 대신 $xx$라고 쓴 경우가 매우 많다. 이유는 단순한 인쇄소 활자 조판 편의 때문이었다. 당시 활판 인쇄에서 $x^2$은 글자 &#39;x&#39; 위에 작은 활자 &#39;2&#39;를 올려야 하므로 조판이 매우 까다로웠지만, $xx$는 일반 활자 두 개를 나란히 놓으면 그만이었고 지면을 차지하는 가로 폭도 똑같았기 때문이다. 이 관습은 가우스 시대까지도 끈질기게 유지되었다.</p>
+</blockquote>
+<p>데카르트는 책을 학자들의 언어인 라틴어가 아닌 일반 대중을 위한 <strong>프랑스어</strong>로 썼지만, 동시에 경쟁자들을 골탕 먹이기 위해 증명의 중간 단계를 무수히 생략하는 악명 높은 불친절함을 보였다. 자칫 사장될 뻔했던 데카르트의 기하학은 네덜란드의 수학자 <strong>프란스 판 스호텐(Frans van Schooten)</strong>이 상세한 해설과 주석을 덧붙인 라틴어 번역판(1649, 1659~1661)을 유럽 전역에 보급하면서 대륙과 영국의 학계를 완전히 평정했다.</p>
+<h3 id="패러다임-전환-quot구문론이-의미론을-이끈다-syntax-leads-semanticsquot"><a href="#패러다임-전환-quot구문론이-의미론을-이끈다-syntax-leads-semanticsquot" class="heading-anchor" aria-hidden="true">#</a> 패러다임 전환: &quot;구문론이 의미론을 이끈다 (Syntax leads Semantics)&quot;</h3><p>데카르트의 표기법이 가져온 진정한 혁명은 단순히 글자 수가 줄어들었다는 시각적 편리함에 있지 않았다. 그것은 <strong>인간의 뇌가 수학을 다루는 근본적인 방식의 지각변동</strong>이었다.</p>
+<p>과거의 수학책은 &#39;입으로 소리 내어 낭독하고 암송하는 책&#39;이었다. 따라서 표기법은 언제나 현실 세계의 말과 물리적 실체(선, 면, 입체)에 단단히 묶여 있어야만 했다.</p>
+<p>그러나 인쇄술과 데카르트의 표기법을 거치며 수학책은 <strong>&#39;눈으로 읽고 손으로 기호를 조작하는 시각적 텍스트&#39;</strong>로 탈바꿈했다. 기호가 말의 굴레에서 해방되자, 인류 역사상 처음으로 <strong>&quot;표기 규칙(구문론, Syntax)이 물리적 의미(의미론, Semantics)를 스스로 이끌고 나가는 역전 현상&quot;</strong>이 일어났다.</p>
+<div class="svg-chart-container" style="margin: 32px 0; width: 100%; max-width: 100%; box-sizing: border-box; overflow-x: auto; -webkit-overflow-scrolling: touch;">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 320" role="img" aria-label="대수학 인식론 대도약: 구술적 의미론에서 시각적 구문론으로" style="width:100%; min-width:680px; max-width:800px; height:auto; display:block; margin:0 auto; background:var(--bg-card); border-radius:14px; border:1px solid var(--border); box-shadow:var(--shadow-sm);">
+  <defs>
+    <marker id="m3-arr-blue" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <path d="M0,1.5 L6,4 L0,6.5 Z" fill="var(--primary, #2563eb)"/>
+    </marker>
+  </defs>
+
+  <!-- Title & Subtitle -->
+  <text x="400" y="30" text-anchor="middle" font-family="Pretendard, -apple-system, sans-serif" font-size="15px" font-weight="700" fill="var(--text-main)">대수학 인식론의 대도약: 구술적 의미론에서 시각적 구문론으로</text>
+  <text x="400" y="48" text-anchor="middle" font-family="Pretendard, -apple-system, sans-serif" font-size="12px" fill="var(--text-muted)">"표기 규칙(Syntax)이 물리적 실체(Semantics)의 한계를 깨고 새로운 수학적 진리를 창출한다"</text>
+
+  <!-- Left Card: Oral Semantics -->
+  <g transform="translate(30, 70)">
+    <rect width="345" height="225" rx="12" fill="var(--bg-surface)" stroke="var(--border)" stroke-width="1.5"/>
+    <rect x="16" y="14" width="135" height="24" rx="6" fill="var(--border)"/>
+    <text x="83.5" y="30" text-anchor="middle" font-family="Pretendard, -apple-system, sans-serif" font-size="11px" font-weight="700" fill="var(--text-main)">과거: 구술적 의미론 중심</text>
+
+    <!-- Sub-box 1: Intuition -->
+    <rect x="16" y="48" width="313" height="66" rx="8" fill="var(--bg-card)" stroke="var(--border)" stroke-width="1"/>
+    <text x="30" y="70" font-family="Pretendard, -apple-system, sans-serif" font-size="12px" font-weight="700" fill="var(--text-main)">1. 물리적 직관 &amp; 구술 설명 (출발점)</text>
+    <text x="30" y="90" font-family="Pretendard, -apple-system, sans-serif" font-size="11px" fill="var(--text-muted)">• 선(1D) → 정사각형(2D) → 정육면체(3D)의 감각적 굴레</text>
+    <text x="30" y="104" font-family="Pretendard, -apple-system, sans-serif" font-size="11px" fill="var(--text-muted)">• 수는 사물을 꾸미는 '형용사' (계란 한 다스, 동전 3개)</text>
+
+    <!-- Down Arrow inside left card -->
+    <path d="M 172 118 L 172 134" stroke="var(--text-light)" stroke-width="2" marker-end="url(#m3-arr-blue)"/>
+
+    <!-- Sub-box 2: Notation as mere recording -->
+    <rect x="16" y="140" width="313" height="66" rx="8" fill="var(--bg-card)" stroke="var(--border)" stroke-width="1"/>
+    <text x="30" y="162" font-family="Pretendard, -apple-system, sans-serif" font-size="12px" font-weight="700" fill="var(--text-main)">2. 기호의 종속적 위치 (결과물)</text>
+    <text x="30" y="182" font-family="Pretendard, -apple-system, sans-serif" font-size="11px" fill="var(--text-muted)">• 기호는 단지 '말과 발음의 기록 도구'에 불과</text>
+    <text x="30" y="196" font-family="Pretendard, -apple-system, sans-serif" font-size="11px" fill="var(--text-muted)">• zenzizenzic, sursolid 등 명칭의 미로에 감금</text>
+  </g>
+
+  <!-- Big Central Transition -->
+  <g transform="translate(385, 150)">
+    <rect x="-3" y="-22" width="34" height="44" rx="8" fill="var(--primary-light, #eff6ff)" stroke="var(--primary, #2563eb)" stroke-width="1.5"/>
+    <text x="14" y="5" text-anchor="middle" font-family="Pretendard, -apple-system, sans-serif" font-size="18px" font-weight="800" fill="var(--primary, #2563eb)">➔</text>
+  </g>
+
+  <!-- Right Card: Visual Syntax -->
+  <g transform="translate(425, 70)">
+    <rect width="345" height="225" rx="12" fill="var(--primary-light, #eff6ff)" stroke="var(--primary, #2563eb)" stroke-width="1.8"/>
+    <rect x="16" y="14" width="145" height="24" rx="6" fill="var(--primary, #2563eb)"/>
+    <text x="88.5" y="30" text-anchor="middle" font-family="Pretendard, -apple-system, sans-serif" font-size="11px" font-weight="700" fill="#ffffff">근대: 시각적 구문론 혁명</text>
+
+    <!-- Sub-box 1: Syntax Rules -->
+    <rect x="16" y="48" width="313" height="66" rx="8" fill="var(--bg-card)" stroke="var(--primary)" stroke-width="1"/>
+    <text x="30" y="70" font-family="Pretendard, -apple-system, sans-serif" font-size="12px" font-weight="700" fill="var(--primary, #2563eb)">1. 순수 기호 조작 규칙 (출발점)</text>
+    <text x="30" y="90" font-family="Pretendard, -apple-system, sans-serif" font-size="11px" fill="var(--text-main)">• 나눗셈 차감 규칙: xᵃ / xᵇ = xᵃ⁻ᵇ</text>
+    <text x="30" y="104" font-family="Pretendard, -apple-system, sans-serif" font-size="11px" fill="var(--text-main)">• 거듭제곱 곱셈 규칙: (xᵃ)ᵇ = xᵃᵇ</text>
+
+    <!-- Down Arrow inside right card -->
+    <path d="M 172 118 L 172 134" stroke="var(--primary, #2563eb)" stroke-width="2" marker-end="url(#m3-arr-blue)"/>
+
+    <!-- Sub-box 2: Semantic Emergence -->
+    <rect x="16" y="140" width="313" height="66" rx="8" fill="var(--bg-card)" stroke="var(--primary)" stroke-width="1"/>
+    <text x="30" y="162" font-family="Pretendard, -apple-system, sans-serif" font-size="12px" font-weight="700" fill="var(--primary, #2563eb)">2. 새로운 의미의 자동 창출 (도약)</text>
+    <text x="30" y="182" font-family="Pretendard, -apple-system, sans-serif" font-size="11px" font-weight="600" fill="var(--text-main)">• 음수 지수 탄생: 2³ / 2⁵ = 2⁻² = 1/4</text>
+    <text x="30" y="196" font-family="Pretendard, -apple-system, sans-serif" font-size="11px" font-weight="600" fill="var(--text-main)">• 분수 지수 통일: (2¹/²)² = 2¹ ⟹ 2¹/² = √2</text>
+  </g>
+</svg>
+</div>
+
+<p>이 규칙의 인도를 따라가자, 과거에는 도저히 상상할 수 없었던 수학적 개념들이 마치 마법처럼 저절로 쏟아져 나오기 시작했다:</p>
+<h4 id="1-음수-지수의-필연적-탄생"><a href="#1-음수-지수의-필연적-탄생" class="heading-anchor" aria-hidden="true">#</a> 1) 음수 지수의 필연적 탄생</h4><p>지수의 나눗셈 규칙(밑이 같으면 지수끼리 뺀다)을 기계적으로 적용해보자:</p>
+<p>$\frac{2^3}{2^5} = \frac{8}{32} = \frac{1}{4}$</p>
+<p>하지만 지수 규칙을 그대로 따르면 지수끼리 빼야 한다:</p>
+<p>$2^{3 - 5} = 2^{-2}$</p>
+<p>따라서 구문론의 규칙은 우리에게 의심의 여지 없이 선언한다: <strong>&quot;$2^{-2}$는 반드시 $\frac{1}{4}$이어야만 한다!&quot;</strong> 사물의 개수로서는 존재할 수 없었던 &#39;음수 거듭제곱&#39;이, 기호의 내적 규칙을 통해 완벽한 수학적 정당성을 획득한 것이다.</p>
+<h4 id="2-분수-지수와-거듭제곱근의-통합"><a href="#2-분수-지수와-거듭제곱근의-통합" class="heading-anchor" aria-hidden="true">#</a> 2) 분수 지수와 거듭제곱근의 통합</h4><p>거듭제곱의 거듭제곱 규칙(지수끼리 곱한다)을 적용해보자:</p>
+<p>$(x^a)^b = x^{a \cdot b}$</p>
+<p>어떤 수를 제곱해서 2가 되는 수, 즉 $\sqrt{2}$를 지수로 표현하고 싶다면 어떻게 해야 할까? 제곱($b=2$)을 곱해서 지수가 1이 되어야 하므로:</p>
+<p>$a \cdot 2 = 1 \implies a = \frac{1}{2}$</p>
+<p>따라서:</p>
+<p>$(2^{1/2})^2 = 2^1 = 2 \implies 2^{1/2} = \sqrt{2}$</p>
+<p>과거에는 &#39;제곱근 추출&#39;이라는 완전히 다른 차원의 연산으로 취급받던 거듭제곱근이, 지수 표기 규칙을 따르는 것만으로 <strong>&#39;분수 지수&#39;라는 단 하나의 기호적 지붕 아래 완전히 흡수</strong>되었다.</p>
+<hr>
+<h2 id="8-일반화자들의-시대와-레코드의-영원성"><a href="#8-일반화자들의-시대와-레코드의-영원성" class="heading-anchor" aria-hidden="true">#</a> 8. 일반화자들의 시대와 레코드의 영원성</h2><p>판 스호텐이 번역한 데카르트의 라틴어 『기하학』은 바다를 건너 영국의 케임브리지 대학에 도달했다. </p>
+<p>1660년대, 당시 케임브리지에서 가르치던 고루한 아리스토텔레스 철학에 깊은 환멸을 느끼고 있던 청년 <strong>아이작 뉴턴(Isaac Newton, 1642~1727)</strong>은 판 스호텐의 데카르트 주석본과 윌리엄 오트레드의 대수학 책을 구입하여 홀로 최신 수학을 독학하기 시작했다.</p>
+<h3 id="존-월리스와-뉴턴의-일반화된-이항정리"><a href="#존-월리스와-뉴턴의-일반화된-이항정리" class="heading-anchor" aria-hidden="true">#</a> 존 월리스와 뉴턴의 일반화된 이항정리</h3><p>1655년 영국의 수학자 <strong>존 월리스(John Wallis)</strong>는 『무한 산술(<em>Arithmetica Infinitorum</em>)』에서 곡선 아래의 면적을 구하는 과정(적분의 전초)에 데카르트의 지수 표기법을 도입하고, 지수가 분수이거나 무리수일 수 있다는 대담한 가설을 제시했다.</p>
+<p>그리고 1676년 6월 13일, 런던 왕립학회 서기 헨리 올덴버그에게 보낸 전설적인 편지(《제1서한》, <em>Epistola Prior</em>)에서, <strong>아이작 뉴턴은 임의의 유리수 지수에 대해 성립하는 &#39;일반화된 이항정리(Generalized Binomial Theorem)&#39;를 공식 발표</strong>했다.</p>
+<p>$(1+x)^r = 1 + rx + \frac{r(r-1)}{2!}x^2 + \frac{r(r-1)(r-2)}{3!}x^3 + \dots$</p>
+<p>뉴턴은 지수 $r$이 음수이든 분수이든 상관없이 무한급수로 전개될 수 있음을 증명했다. 이 순간, 지수($r$)는 &#39;어떤 수를 몇 번 거듭 곱했는가&#39;라는 원시적인 정수 카운팅의 족쇄를 완전히 벗어던지고, 미적분학의 거대한 바다를 항해하는 연속적인 수학적 자유를 얻었다.</p>
+<p>18세기에 이르러 <strong>요한 베르누이(Johann Bernoulli)</strong>와 <strong>레온하르트 오일러(Leonhard Euler)</strong>는 지수를 함수 자체($f(x) = a^x, e^x$)로 확장했고, 마침내 오일러는 허수 단위 $i$를 지수 위에 얹음으로써 인류 역사상 가장 아름다운 공식을 탄생시켰다.</p>
+<p>$e^{i\pi} + 1 = 0$</p>
+<div class="svg-chart-container" style="margin: 28px 0; width: 100%; max-width: 100%; box-sizing: border-box; overflow-x: auto; -webkit-overflow-scrolling: touch;">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 200" role="img" aria-label="일반화자들의 계보: 데카르트에서 오일러까지" style="width:100%; min-width:680px; max-width:800px; height:auto; display:block; margin:0 auto; background:var(--bg-card); border-radius:14px; border:1px solid var(--border); box-shadow:var(--shadow-sm);">
+  <defs>
+    <marker id="m4-arr" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <path d="M0,1.5 L6,4 L0,6.5 Z" fill="var(--text-light, #94a3b8)"/>
+    </marker>
+  </defs>
+
+  <!-- Title & Subtitle -->
+  <text x="400" y="30" text-anchor="middle" font-family="Pretendard, -apple-system, sans-serif" font-size="15px" font-weight="700" fill="var(--text-main)">일반화자들의 계보: 데카르트에서 오일러까지 (1637 ~ 1748)</text>
+  <text x="400" y="48" text-anchor="middle" font-family="Pretendard, -apple-system, sans-serif" font-size="12px" fill="var(--text-muted)">정수 반복 곱셈에서 무한급수와 복소 지수함수로의 연속적 확장</text>
+
+  <!-- 4 Step Cards -->
+  <!-- Card 1: Descartes -->
+  <g transform="translate(25, 70)">
+    <rect width="165" height="95" rx="10" fill="var(--bg-surface)" stroke="var(--border)" stroke-width="1.5"/>
+    <text x="82.5" y="28" text-anchor="middle" font-family="Pretendard, -apple-system, sans-serif" font-size="12px" font-weight="700" fill="var(--text-main)">데카르트 (1637)</text>
+    <text x="82.5" y="52" text-anchor="middle" font-family="ui-monospace, monospace" font-size="15px" font-weight="800" fill="var(--primary, #2563eb)">x³, x⁴, xx</text>
+    <text x="82.5" y="74" text-anchor="middle" font-family="Pretendard, -apple-system, sans-serif" font-size="11px" fill="var(--text-muted)">밑과 위첨자 지수 확립</text>
+  </g>
+  <line x1="195" y1="117" x2="225" y2="117" stroke="var(--text-light, #94a3b8)" stroke-width="1.5" marker-end="url(#m4-arr)"/>
+
+  <!-- Card 2: Wallis -->
+  <g transform="translate(230, 70)">
+    <rect width="165" height="95" rx="10" fill="var(--bg-surface)" stroke="var(--border)" stroke-width="1.5"/>
+    <text x="82.5" y="28" text-anchor="middle" font-family="Pretendard, -apple-system, sans-serif" font-size="12px" font-weight="700" fill="var(--text-main)">존 월리스 (1655)</text>
+    <text x="82.5" y="52" text-anchor="middle" font-family="ui-monospace, monospace" font-size="14px" font-weight="800" fill="var(--primary, #2563eb)">x⁻ⁿ, x¹/ⁿ</text>
+    <text x="82.5" y="74" text-anchor="middle" font-family="Pretendard, -apple-system, sans-serif" font-size="11px" fill="var(--text-muted)">음수/분수 지수 제안</text>
+  </g>
+  <line x1="400" y1="117" x2="430" y2="117" stroke="var(--text-light, #94a3b8)" stroke-width="1.5" marker-end="url(#m4-arr)"/>
+
+  <!-- Card 3: Newton -->
+  <g transform="translate(435, 70)">
+    <rect width="165" height="95" rx="10" fill="var(--primary-light, #eff6ff)" stroke="var(--primary, #2563eb)" stroke-width="1.8"/>
+    <text x="82.5" y="28" text-anchor="middle" font-family="Pretendard, -apple-system, sans-serif" font-size="12px" font-weight="700" fill="var(--primary, #2563eb)">아이작 뉴턴 (1676)</text>
+    <text x="82.5" y="52" text-anchor="middle" font-family="ui-monospace, monospace" font-size="13px" font-weight="800" fill="var(--primary, #2563eb)">(1+x)ʳ 급수</text>
+    <text x="82.5" y="74" text-anchor="middle" font-family="Pretendard, -apple-system, sans-serif" font-size="11px" font-weight="600" fill="var(--primary, #2563eb)">일반화된 이항정리</text>
+  </g>
+  <line x1="605" y1="117" x2="635" y2="117" stroke="var(--text-light, #94a3b8)" stroke-width="1.5" marker-end="url(#m4-arr)"/>
+
+  <!-- Card 4: Euler -->
+  <g transform="translate(640, 70)">
+    <rect width="135" height="95" rx="10" fill="var(--primary, #2563eb)" stroke="var(--primary-hover, #1d4ed8)" stroke-width="2"/>
+    <text x="67.5" y="28" text-anchor="middle" font-family="Pretendard, -apple-system, sans-serif" font-size="12px" font-weight="700" fill="#ffffff">오일러 (1748)</text>
+    <text x="67.5" y="52" text-anchor="middle" font-family="ui-monospace, monospace" font-size="13px" font-weight="800" fill="#ffffff">eⁱᵖᶦ + 1 = 0</text>
+    <text x="67.5" y="74" text-anchor="middle" font-family="Pretendard, -apple-system, sans-serif" font-size="10px" font-weight="600" fill="rgba(255,255,255,0.85)">복소 지수함수 완성</text>
+  </g>
+</svg>
+</div>
+
+<h3 id="에필로그-100년-만에-얻은-불멸성"><a href="#에필로그-100년-만에-얻은-불멸성" class="heading-anchor" aria-hidden="true">#</a> 에필로그: 100년 만에 얻은 불멸성</h3><p>이 거대한 대서사시의 마지막 장에는 가슴 뭉클한 역사의 수수께끼가 숨어 있다.</p>
+<p>데카르트는 1637년 『기하학』을 쓸 때 로버트 레코드의 등호($=$)를 알지 못했다. 그래서 데카르트는 라틴어 <em>equalis</em>의 머릿글자에서 유래한 뫼비우스 띠 모양의 기호($\propto$)를 등호로 사용했다. </p>
+<p>그렇다면 레코드가 1557년 차가운 옥사 직전에 『지혜의 숫돌』에 남겨놓았던 두 평행선($=$)은 어떻게 사라지지 않고 오늘날 전 인류의 표준 기호로 부활할 수 있었을까?</p>
+<p>그 결정적인 가교 역할을 한 인물이 바로 영국의 수학자 <strong>윌리엄 오트레드(William Oughtred, 1574~1660)</strong>였다. 1631년 오트레드가 발표한 대수학서 『수학의 열쇠(<em>Clavis Mathematicae</em>)』는 레코드의 『지혜의 숫돌』을 밀어내고 영국의 표준 고급 수학 교재가 되었다. </p>
+<p>하지만 오트레드는 레코드의 책에서 찬란하게 빛나던 <strong>두 평행선($=$)</strong>의 탁월함을 잊지 않고 자신의 책에 온전히 수록했다. 그리고 바로 그 책을 통해 케임브리지의 청년 아이작 뉴턴이 레코드의 등호를 배웠다. 뉴턴과 영국 왕립학회의 과학자들이 이 기호를 전폭적으로 채택하면서, 등호는 마침내 데카르트의 기호를 밀어내고 세계 공통의 언어로 우뚝 섰다.</p>
+<p>1558년 런던의 비참한 감옥 독방에서 자신의 정치적 무능과 가난을 한탄하며 쓸쓸히 눈을 감았던 비운의 수학자 로버트 레코드. </p>
+<p>그가 펜 끝으로 그었던 길이가 같은 두 개의 평행선은, 그가 죽고 100년이 지난 뒤 뉴턴과 유럽 수학자들의 손을 거쳐 영원히 죽지 않는 불멸의 생명을 얻었다.</p>
+<div align="center" style="margin: 28px 0; width: 100%; max-width: 100%; box-sizing: border-box; padding: 14px 18px; background: var(--primary-light); border-radius: 12px; border: 1.5px solid var(--primary); box-shadow: var(--shadow-sm);">
+  <span style="display: inline-block; max-width: 100%; font-size: clamp(13px, 3.6vw, 18px); font-weight: 800; color: var(--primary); font-style: italic; letter-spacing: 0.2px; line-height: 1.45; word-break: normal; overflow-wrap: break-word;">"Robert Recorde's two parallel lines were now immortal."</span>
+</div>
+
+<hr>
+<h2 id="9-맺음말-기호가-생각을-만든다"><a href="#9-맺음말-기호가-생각을-만든다" class="heading-anchor" aria-hidden="true">#</a> 9. 맺음말: 기호가 생각을 만든다</h2><p>인류가 아르키메데스의 모래알 셈에서 데카르트의 $x^2$에 도달하기까지 걸린 1,877년의 여정은, 단순한 수학적 테크닉의 발전사가 아니다. 그것은 <strong>인간의 지성이 구체적인 감각의 감옥에서 벗어나 고도의 추상적 기호 체계로 탈바꿈해 온 인식론적 해방의 드라마</strong>였다.</p>
+<ul>
+<li>수가 사물을 수식하는 형용사였을 때, 인류는 $x^8$을 표현하기 위해 <em>zenzizenzizenzic</em>이라는 주술을 외워야 했다.</li>
+<li>미지수가 오직 하나뿐이라고 믿었을 때, 인류는 &#39;밑(Base)&#39;이라는 지극히 단순한 개념조차 기호로 표기하지 못했다.</li>
+<li>그러나 비에트가 문자를 도입하고, 데카르트가 위첨자 지수를 세우며, 레코드의 등호가 연결되었을 때, 수학 기호는 비로소 인간의 사고를 얽매는 족쇄가 아니라 <strong>인간의 뇌를 한 번도 가보지 못한 심오한 수학적 진리로 인도하는 가장 강력한 엔진</strong>이 되었다.</li>
+</ul>
+<p>우리가 오늘날 노트 구석에 무심코 끄적이는 $x^2 = 4$라는 지극히 사소한 수식 한 줄에는, 2천 년 동안 편견과 싸워온 인류의 지적 투쟁과 감옥에서 스러져간 한 천재의 피와 눈물이 고스란히 응축되어 있는 것이다.</p>
+
+      </section>
+
+      <footer class="article-footer">
+        <p>© Curated Reading Hub · <a href="index.html">← 목록으로 돌아가기</a></p>
+      </footer>
+    </article>
+  </main>
+
+  <!-- Back to Top Button -->
+  <button id="back-to-top" aria-label="맨 위로 가기" title="맨 위로 이동">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg>
+  </button>
+
+  <script>
+    // Theme Management
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeIcon = document.getElementById('theme-icon');
+    
+    function getTheme() {
+      const saved = localStorage.getItem('pages_theme');
+      if (saved) return saved;
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+
+    function applyTheme(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem('pages_theme', theme);
+      if (themeIcon) {
+        themeIcon.textContent = theme === 'dark' ? '🌙' : '☀️';
+      }
+    }
+
+    applyTheme(getTheme());
+
+    const FONT_KEY = "pages_font";
+    const fontToggle = document.getElementById("font-toggle");
+    const fontMenu = document.getElementById("font-menu");
+    const fontOptions = fontMenu ? fontMenu.querySelectorAll(".font-option") : [];
+
+    function getFont() {
+      try {
+        const saved = localStorage.getItem(FONT_KEY);
+        if (saved === "d2coding" || saved === "pretendard") return saved;
+      } catch (e) {}
+      return "pretendard";
+    }
+
+    function applyFont(font) {
+      document.documentElement.setAttribute("data-font", font);
+      try { localStorage.setItem(FONT_KEY, font); } catch (e) {}
+      fontOptions.forEach((btn) => {
+        btn.setAttribute("aria-selected", btn.dataset.font === font ? "true" : "false");
+      });
+    }
+
+    function closeFontMenu() {
+      if (!fontMenu || !fontToggle) return;
+      fontMenu.hidden = true;
+      fontToggle.setAttribute("aria-expanded", "false");
+    }
+
+    function toggleFontMenu() {
+      if (!fontMenu || !fontToggle) return;
+      const open = fontMenu.hidden;
+      fontMenu.hidden = !open;
+      fontToggle.setAttribute("aria-expanded", open ? "true" : "false");
+    }
+
+    applyFont(getFont());
+
+    if (fontToggle) {
+      fontToggle.addEventListener("click", (e) => {
+        e.stopPropagation();
+        toggleFontMenu();
+      });
+    }
+    fontOptions.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        applyFont(btn.dataset.font);
+        closeFontMenu();
+      });
+    });
+    document.addEventListener("click", (e) => {
+      if (fontMenu && !fontMenu.hidden && !e.target.closest("#font-picker")) {
+        closeFontMenu();
+      }
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeFontMenu();
+    });
+
+    if (themeToggle) {
+      themeToggle.addEventListener('click', () => {
+        const current = document.documentElement.getAttribute('data-theme') || getTheme();
+        const next = current === 'dark' ? 'light' : 'dark';
+        applyTheme(next);
+      });
+    }
+
+    // Reading Progress & Header Title Visibility
+    const progressBar = document.getElementById('progress-bar');
+    const navTitle = document.getElementById('nav-title-text');
+    const backToTop = document.getElementById('back-to-top');
+
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+      const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      
+      if (progressBar) progressBar.style.width = progress + '%';
+      
+      if (navTitle) {
+        if (scrollTop > 140) {
+          navTitle.classList.add('visible');
+        } else {
+          navTitle.classList.remove('visible');
+        }
+      }
+
+      if (backToTop) {
+        if (scrollTop > 300) {
+          backToTop.classList.add('visible');
+        } else {
+          backToTop.classList.remove('visible');
+        }
+      }
+    }, { passive: true });
+
+    if (backToTop) {
+      backToTop.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
+    // TOC Drawer Interactions
+    const tocToggle = document.getElementById('toc-toggle');
+    const tocDrawer = document.getElementById('toc-drawer');
+    const drawerOverlay = document.getElementById('drawer-overlay');
+    const tocClose = document.getElementById('toc-close');
+
+    function openDrawer() {
+      if (tocDrawer) tocDrawer.classList.add('active');
+      if (drawerOverlay) drawerOverlay.classList.add('active');
+      if (tocToggle) tocToggle.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeDrawer() {
+      if (tocDrawer) tocDrawer.classList.remove('active');
+      if (drawerOverlay) drawerOverlay.classList.remove('active');
+      if (tocToggle) tocToggle.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+
+    if (tocToggle) tocToggle.addEventListener('click', openDrawer);
+    if (tocClose) tocClose.addEventListener('click', closeDrawer);
+    if (drawerOverlay) drawerOverlay.addEventListener('click', closeDrawer);
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeDrawer();
+    });
+
+    document.querySelectorAll('.toc-link').forEach(link => {
+      link.addEventListener('click', () => {
+        closeDrawer();
+      });
+    });
+
+    // Heading Anchor Click: Copy URL and show tooltip
+    document.querySelectorAll('.heading-anchor').forEach(anchor => {
+      anchor.setAttribute('aria-hidden', 'false');
+      anchor.setAttribute('aria-label', '섹션 고유 링크 복사');
+      anchor.setAttribute('title', '클릭하여 링크 복사');
+      anchor.addEventListener('click', async (e) => {
+        e.preventDefault();
+        const href = anchor.getAttribute('href');
+        const targetId = href.replace(/^#/, '');
+        const targetEl = document.getElementById(targetId);
+        if (targetEl) {
+          targetEl.scrollIntoView({ behavior: 'smooth' });
+          history.pushState(null, '', href);
+        }
+        const fullUrl = window.location.origin + window.location.pathname + href;
+        try {
+          await navigator.clipboard.writeText(fullUrl);
+          showAnchorTooltip(anchor, '✓ 링크 복사됨!');
+        } catch (err) {
+          showAnchorTooltip(anchor, href);
+        }
+      });
+    });
+
+    function showAnchorTooltip(element, message) {
+      let tip = document.getElementById('anchor-copy-tooltip');
+      if (!tip) {
+        tip = document.createElement('div');
+        tip.id = 'anchor-copy-tooltip';
+        tip.className = 'anchor-tooltip';
+        document.body.appendChild(tip);
+      }
+      tip.textContent = message;
+      const rect = element.getBoundingClientRect();
+      tip.style.top = `${window.scrollY + rect.top - 28}px`;
+      tip.style.left = `${window.scrollX + rect.left + rect.width / 2}px`;
+      tip.classList.add('visible');
+      clearTimeout(tip._timer);
+      tip._timer = setTimeout(() => {
+        tip.classList.remove('visible');
+      }, 1800);
+    }
+
+    // Copy Code Buttons
+    document.querySelectorAll('.copy-btn').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const code = btn.closest('.code-block-wrapper').querySelector('code').innerText;
+        try {
+          await navigator.clipboard.writeText(code);
+          btn.textContent = '✓ 복사됨';
+          btn.classList.add('copied');
+          setTimeout(() => {
+            btn.textContent = '복사';
+            btn.classList.remove('copied');
+          }, 2000);
+        } catch (e) {
+          btn.textContent = '실패';
+        }
+      });
+    });
+
+    // ==========================================
+    // Interactive Memory & Step Simulator Logic
+    // ==========================================
+    function initSimulator() {
+      const simContainer = document.getElementById('interactive-simulator');
+      if (!simContainer) return;
+
+      const smcSteps = [
+        {
+          beat: 0, pc: 6, nextPc: 6,
+          action: "실행 전",
+          sum: "0", memo: "-", cmd6: "add [20]",
+          desc: "<strong>[실행 전]</strong> 아직 아무 명령도 실행하지 않았다. PC는 첫 명령인 6호를 가리키고, 합계는 0이다.",
+          highlightRow: null, pcRow: "mem-6", modRow: null
+        },
+        {
+          beat: 1, pc: 6, nextPc: 7,
+          action: "20호 상자 안의 값(7)을 합계에 더함",
+          sum: "7", memo: "-", cmd6: "add [20]",
+          desc: "<strong>[박자 1]</strong> PC가 6을 가리킵니다. 주소 6의 명령 <code>add [20]</code>을 읽어 20호의 재료(7)를 합계(주소 4)에 더합니다. (합계: 0 → <strong>7</strong>)",
+          highlightRow: "mem-20", pcRow: "mem-6", modRow: null
+        },
+        {
+          beat: 2, pc: 7, nextPc: 8,
+          action: "6호 명령의 주소 필드를 20에서 21로 수정",
+          sum: "7", memo: "-", cmd6: "add [21]",
+          desc: "<strong>[박자 2]</strong> 7호 명령이 <strong>6호 레시피의 잉크를 긁어고칩니다!</strong> 명령 속 '20'이 '21'로 덮어써집니다. (6호 명령: <code>add [20]</code> → <strong style='color:#ef4444;'>add [21]</strong>)",
+          highlightRow: null, pcRow: "mem-7", modRow: "mem-6"
+        },
+        {
+          beat: 3, pc: 8, nextPc: 6,
+          action: "주소칸(21) ≠ 22 이므로 주소 6으로 점프",
+          sum: "7", memo: "-", cmd6: "add [21]",
+          desc: "<strong>[박자 3]</strong> 8호 명령이 주소칸(21)을 22와 비교합니다. 끝에 도달하지 않았으므로 <strong>PC를 6으로 점프</strong>시킵니다.",
+          highlightRow: null, pcRow: "mem-8", modRow: null
+        },
+        {
+          beat: 4, pc: 6, nextPc: 7,
+          action: "21호 상자 안의 값(3)을 합계에 더함",
+          sum: "10", memo: "-", cmd6: "add [21]",
+          desc: "<strong>[박자 4]</strong> 다시 주소 6으로 착지했습니다! 하지만 이제 6호에 적힌 명령은 <code>add [21]</code>입니다. 21호의 재료(3)를 더합니다. (합계: 7 → <strong>10</strong>)",
+          highlightRow: "mem-21", pcRow: "mem-6", modRow: null
+        },
+        {
+          beat: 5, pc: 7, nextPc: 8,
+          action: "6호 명령의 주소 필드를 21에서 22로 수정",
+          sum: "10", memo: "-", cmd6: "add [22]",
+          desc: "<strong>[박자 5]</strong> 7호 명령이 다시 6호 레시피를 수정합니다. 명령 속 '21'이 '22'로 변합니다. (6호 명령: <strong style='color:#ef4444;'>add [22]</strong>)",
+          highlightRow: null, pcRow: "mem-7", modRow: "mem-6"
+        },
+        {
+          beat: 6, pc: 8, nextPc: 9,
+          action: "주소칸(22) == 22 이므로 루프 종료",
+          sum: "10", memo: "-", cmd6: "add [22]",
+          desc: "<strong>[박자 6]</strong> 주소칸이 22와 일치하므로 루프를 통과합니다. <strong>최종 합계: 10</strong>. 단, 끝난 뒤에도 6호 레시피는 원본과 다른 <code>add [22]</code>로 영구 변질되었습니다.",
+          highlightRow: null, pcRow: "mem-8", modRow: null
+        }
+      ];
+
+      const ptrSteps = [
+        {
+          beat: 0, pc: 6, nextPc: 6,
+          action: "실행 전",
+          sum: "0", memo: "20", cmd6: "add [4], [[3]]",
+          desc: "<strong>[실행 전]</strong> 아직 아무 명령도 실행하지 않았다. PC는 첫 명령인 6호를 가리키고, 합계는 0, 메모지는 20호다.",
+          highlightRow: null, pcRow: "mem-6", modRow: null
+        },
+        {
+          beat: 1, pc: 6, nextPc: 7,
+          action: "3호 메모지(20)가 가리키는 20호의 값(7)을 더함",
+          sum: "7", memo: "20", cmd6: "add [4], [[3]]",
+          desc: "<strong>[박자 1]</strong> PC가 6을 가리킵니다. 명령 <code>add [4], [[3]]</code>은 3호 메모지(20호)를 보고 20호의 재료(7)를 합계에 더합니다. <strong>(명령어는 고정!)</strong>",
+          highlightRow: "mem-20", pcRow: "mem-6", modRow: null
+        },
+        {
+          beat: 2, pc: 7, nextPc: 8,
+          action: "3호 메모지의 숫자를 20에서 21로 증가",
+          sum: "7", memo: "21", cmd6: "add [4], [[3]]",
+          desc: "<strong>[박자 2]</strong> 7호 명령이 <strong>3호 메모지의 숫자만 20에서 21로 변경</strong>합니다. 6호 레시피는 전혀 건드리지 않습니다. (메모지: 20 → <strong style='color:#10b981;'>21</strong>)",
+          highlightRow: null, pcRow: "mem-7", modRow: "mem-3"
+        },
+        {
+          beat: 3, pc: 8, nextPc: 6,
+          action: "메모지(21) ≠ 22 이므로 주소 6으로 점프",
+          sum: "7", memo: "21", cmd6: "add [4], [[3]]",
+          desc: "<strong>[박자 3]</strong> 8호 명령이 메모지의 숫자(21)를 22와 비교합니다. 일치하지 않으므로 <strong>PC를 6으로 점프</strong>시킵니다.",
+          highlightRow: null, pcRow: "mem-8", modRow: null
+        },
+        {
+          beat: 4, pc: 6, nextPc: 7,
+          action: "3호 메모지(21)가 가리키는 21호의 값(3)을 더함",
+          sum: "10", memo: "21", cmd6: "add [4], [[3]]",
+          desc: "<strong>[박자 4]</strong> 다시 주소 6으로 왔습니다. 명령 글자는 여전히 똑같은 <code>add [4], [[3]]</code>이지만, 손에 든 메모지가 21호이므로 21호의 3을 더합니다. (합계: 7 → <strong>10</strong>)",
+          highlightRow: "mem-21", pcRow: "mem-6", modRow: null
+        },
+        {
+          beat: 5, pc: 7, nextPc: 8,
+          action: "3호 메모지의 숫자를 21에서 22로 증가",
+          sum: "10", memo: "22", cmd6: "add [4], [[3]]",
+          desc: "<strong>[박자 5]</strong> 7호 명령이 3호 메모지 숫자를 21에서 22로 올립니다. 레시피 6호는 여전히 깨끗합니다. (메모지: 21 → <strong style='color:#10b981;'>22</strong>)",
+          highlightRow: null, pcRow: "mem-7", modRow: "mem-3"
+        },
+        {
+          beat: 6, pc: 8, nextPc: 9,
+          action: "메모지(22) == 22 이므로 루프 종료",
+          sum: "10", memo: "22", cmd6: "add [4], [[3]]",
+          desc: "<strong>[박자 6]</strong> 메모지가 22에 도달하여 루프를 마칩니다. <strong>최종 합계: 10</strong>. 6호 레시피는 원본 그대로 완벽하게 보존되었습니다.",
+          highlightRow: null, pcRow: "mem-8", modRow: null
+        }
+      ];
+
+      let currentMode = 'smc'; // 'smc' or 'ptr'
+      let currentStep = 0;
+      let autoPlayTimer = null;
+
+      const tabSmc = document.getElementById('sim-tab-smc');
+      const tabPtr = document.getElementById('sim-tab-ptr');
+      const btnPrev = document.getElementById('sim-prev');
+      const btnNext = document.getElementById('sim-next');
+      const btnReset = document.getElementById('sim-reset');
+      const btnPlay = document.getElementById('sim-play');
+
+      const elBeat = document.getElementById('sim-val-beat');
+      const elPc = document.getElementById('sim-val-pc');
+      const elNextPc = document.getElementById('sim-val-nextpc');
+      const elAction = document.getElementById('sim-val-action');
+      const elSum = document.getElementById('sim-val-sum') || document.getElementById('sim-mem-4-val');
+      const elMemo = document.getElementById('sim-val-memo') || document.getElementById('sim-mem-3-val');
+      const elCmd6 = document.getElementById('sim-val-cmd6') || document.getElementById('sim-mem-6-val');
+      const elDesc = document.getElementById('sim-val-desc');
+
+      function setText(el, value) {
+        if (el) el.textContent = value;
+      }
+      function setHtml(el, value) {
+        if (el) el.innerHTML = value;
+      }
+      function lastBeat(steps) {
+        return steps.length ? steps[steps.length - 1].beat : 0;
+      }
+
+      function updateUI() {
+        const steps = currentMode === 'smc' ? smcSteps : ptrSteps;
+        const data = steps[currentStep];
+        if (!data) return;
+
+        setText(elBeat, `박자 ${data.beat} / ${lastBeat(steps)}`);
+        setText(elPc, `${data.pc}호`);
+        setText(elNextPc, `${data.nextPc}호`);
+        setText(elAction, data.action);
+        setText(elSum, data.sum);
+        setText(elMemo, data.memo);
+        setText(elCmd6, data.cmd6);
+        setHtml(elDesc, data.desc);
+
+        if (btnPrev) btnPrev.disabled = currentStep === 0;
+        if (btnNext) btnNext.disabled = currentStep === steps.length - 1;
+
+        document.querySelectorAll('.sim-mem-row').forEach(row => {
+          row.classList.remove('pc-target', 'modified', 'read-target');
+        });
+
+        if (data.pcRow) {
+          const r = document.getElementById(data.pcRow);
+          if (r) r.classList.add('pc-target');
+        }
+        if (data.highlightRow) {
+          const r = document.getElementById(data.highlightRow);
+          if (r) r.classList.add('read-target');
+        }
+        if (data.modRow) {
+          const r = document.getElementById(data.modRow);
+          if (r) r.classList.add('modified');
+        }
+
+        const row6Val = document.getElementById('sim-mem-6-val');
+        if (row6Val) row6Val.textContent = data.cmd6;
+        const row3Val = document.getElementById('sim-mem-3-val');
+        if (row3Val) row3Val.textContent = data.memo;
+        const row4Val = document.getElementById('sim-mem-4-val');
+        if (row4Val) row4Val.textContent = data.sum;
+      }
+
+      function stopAutoPlay() {
+        if (autoPlayTimer) {
+          clearInterval(autoPlayTimer);
+          autoPlayTimer = null;
+          if (btnPlay) btnPlay.textContent = '▶ 자동 재생';
+        }
+      }
+
+      function startAutoPlay() {
+        if (btnPlay) btnPlay.textContent = '⏸ 일시 정지';
+        autoPlayTimer = setInterval(() => {
+          const steps = currentMode === 'smc' ? smcSteps : ptrSteps;
+          if (currentStep < steps.length - 1) {
+            currentStep++;
+            updateUI();
+          } else {
+            stopAutoPlay();
+          }
+        }, 1600);
+      }
+
+      function applyModeChrome(mode) {
+        currentMode = mode;
+        if (tabSmc) {
+          tabSmc.classList.toggle('active', mode === 'smc');
+          tabSmc.setAttribute('aria-selected', mode === 'smc' ? 'true' : 'false');
+        }
+        if (tabPtr) {
+          tabPtr.classList.toggle('active', mode === 'ptr');
+          tabPtr.setAttribute('aria-selected', mode === 'ptr' ? 'true' : 'false');
+        }
+        const memoRow = document.getElementById('mem-3');
+        if (memoRow) memoRow.style.opacity = mode === 'smc' ? '0.4' : '1';
+      }
+
+      if (tabSmc) {
+        tabSmc.addEventListener('click', () => {
+          if (currentMode === 'smc') return;
+          stopAutoPlay();
+          applyModeChrome('smc');
+          currentStep = 0;
+          updateUI();
+        });
+      }
+
+      if (tabPtr) {
+        tabPtr.addEventListener('click', () => {
+          if (currentMode === 'ptr') return;
+          stopAutoPlay();
+          applyModeChrome('ptr');
+          currentStep = 0;
+          updateUI();
+        });
+      }
+
+      if (btnPrev) {
+        btnPrev.addEventListener('click', () => {
+          stopAutoPlay();
+          if (currentStep > 0) {
+            currentStep--;
+            updateUI();
+          }
+        });
+      }
+
+      if (btnNext) {
+        btnNext.addEventListener('click', () => {
+          stopAutoPlay();
+          const steps = currentMode === 'smc' ? smcSteps : ptrSteps;
+          if (currentStep < steps.length - 1) {
+            currentStep++;
+            updateUI();
+          }
+        });
+      }
+
+      if (btnReset) {
+        btnReset.addEventListener('click', () => {
+          stopAutoPlay();
+          currentStep = 0;
+          updateUI();
+        });
+      }
+
+      if (btnPlay) {
+        btnPlay.addEventListener('click', () => {
+          if (autoPlayTimer) {
+            stopAutoPlay();
+          } else {
+            const steps = currentMode === 'smc' ? smcSteps : ptrSteps;
+            if (currentStep >= steps.length - 1) currentStep = 0;
+            updateUI();
+            startAutoPlay();
+          }
+        });
+      }
+
+      // Initial state: beat 0 idle
+      applyModeChrome('smc');
+      currentStep = 0;
+      updateUI();
+    }
+
+    // Initialize on DOM ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initSimulator);
+    } else {
+      initSimulator();
+    }
+  </script>
+</body>
+</html>
