@@ -2,7 +2,7 @@
 
 ## 0. 이 교안의 목표
 
-이 교안은 초기 컴퓨터 EDSAC에서 등장한 **폐쇄형 서브루틴**(closed subroutine)과 **Wheeler Jump**를 이해하기 위한 것이다.
+이 교안은 초기 컴퓨터 EDSAC에서 등장한 **폐쇄형 서브루틴(closed subroutine)**과 **Wheeler Jump**를 이해하기 위한 것이다.
 
 핵심 질문은 다음과 같다.
 

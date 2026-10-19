@@ -41,6 +41,26 @@ async function oldFile(revision, path) {
   }
 }
 
+async function blobAt(revision, path) {
+  try {
+    return (await git("rev-parse", `${revision}:${path}`)).trim();
+  } catch {
+    return null;
+  }
+}
+
+async function rawRestoredToIntroduction(path) {
+  const added = (await git("log", "--diff-filter=A", "--format=%H", "--", path))
+    .split("\n")
+    .map((line) => line.trim())
+    .filter(Boolean);
+  const introducedAt = added.at(-1);
+  if (!introducedAt) return false;
+  const introduced = await blobAt(introducedAt, path);
+  const current = await blobAt("HEAD", path);
+  return Boolean(introduced && current && introduced === current);
+}
+
 async function main() {
   if (!base || /^0+$/.test(base)) {
     console.log("change-set: BASE_SHA is not set; diff gate skipped");
@@ -73,7 +93,9 @@ async function main() {
   for (const change of changes) {
     const path = change.path.replaceAll("\\", "/");
     if (path === "raw" || path.startsWith("raw/")) {
-      if (change.status !== "A") add("raw.immutable", path, "raw 원본은 추가 이후 수정·삭제·이동할 수 없다.");
+      if (change.status !== "A" && !(await rawRestoredToIntroduction(path))) {
+        add("raw.immutable", path, "raw 원본은 추가 이후 수정·삭제·이동할 수 없다.");
+      }
       continue;
     }
     if (!path.startsWith("wiki/") || !path.endsWith(".md")) continue;

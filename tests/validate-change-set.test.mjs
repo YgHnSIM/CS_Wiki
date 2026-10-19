@@ -81,6 +81,46 @@ Current body
   }
 });
 
+test("change-set validation accepts restoring a raw original and rejects any other raw edit", async () => {
+  const root = await mkdtemp(join(tmpdir(), "cs-wiki-change-set-raw-"));
+  const rawPath = join(root, "raw", "note.md");
+  try {
+    await git(root, "init", "-q");
+    await git(root, "config", "user.email", "test@example.com");
+    await git(root, "config", "user.name", "CS Wiki Test");
+    await mkdir(join(root, "raw"), { recursive: true });
+    await writeFile(rawPath, "original\n", "utf8");
+    await git(root, "add", ".");
+    await git(root, "commit", "-m", "add raw");
+    const added = (await git(root, "rev-parse", "HEAD")).stdout.trim();
+
+    await writeFile(rawPath, "edited\n", "utf8");
+    await git(root, "add", ".");
+    await git(root, "commit", "-m", "edit raw");
+    const edited = (await git(root, "rev-parse", "HEAD")).stdout.trim();
+
+    const rejected = await run("node", [validator], {
+      cwd: root,
+      env: { ...process.env, BASE_SHA: added },
+      maxBuffer: 2 * 1024 * 1024,
+    }).then(() => ({ code: 0, stderr: "" }), (error) => ({ code: error.code, stderr: error.stderr }));
+    assert.equal(rejected.code, 1);
+    assert.match(rejected.stderr, /raw\.immutable/);
+
+    await writeFile(rawPath, "original\n", "utf8");
+    await git(root, "add", ".");
+    await git(root, "commit", "-m", "restore raw");
+    const restored = await run("node", [validator], {
+      cwd: root,
+      env: { ...process.env, BASE_SHA: edited },
+      maxBuffer: 2 * 1024 * 1024,
+    });
+    assert.match(restored.stdout, /change-set: 1 changed paths validated/);
+  } finally {
+    await rm(root, { recursive: true, force: true });
+  }
+});
+
 test("change-set validation accepts the project date across the UTC-to-KST boundary", async () => {
   const root = await mkdtemp(join(tmpdir(), "cs-wiki-change-set-date-"));
   const pagePath = join(root, "wiki", "index.md");

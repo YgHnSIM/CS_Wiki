@@ -15,12 +15,12 @@ editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-05-04
-updated: 2026-07-26
+updated: 2026-10-20
 review:
-  mode: legacy-baseline
-  revision: sha256:fe9724a7e7b86b9c8ff94f0779393cdeca7e0bfa70b4c5223e94eff8e2d0dc34
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+  mode: attested
+  revision: sha256:f3169bc4873a66097513cc77af22ebe5508eb98185fdbe1d9e61375b8aa1f50e
+  reviewed_at: 2026-10-20
+  reviewed_by: grok
 evidence_ids: []
 capability_layers: []
 redirect_from:
@@ -39,7 +39,7 @@ access:
     path: raw/서브루틴과 스택(Stack)의 원리.md
     retrieved: 2026-07-10
     version: null
-    sha256: a16994eb1dc49698a584c0df6bc4ce95124bf5a519fb3828d23e8df45a014863
+    sha256: 543cd233a03d8e8f15cf91f3eecebdf3ca15c69ad0febf5052d4745f36f858f3
     media_type: text/markdown
     bytes: 20586
 ---

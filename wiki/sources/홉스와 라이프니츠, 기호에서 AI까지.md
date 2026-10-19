@@ -19,7 +19,7 @@ created: 2026-10-18
 updated: 2026-10-18
 review:
   mode: pending
-  revision: sha256:fd5c98b8238dade152c325e2c5079ae8a504c5ea4dcfbc67ef05d04d28abb9d3
+  revision: sha256:66a4dcc6ff81b7261b186c2d9f021bfe0ac3140237844743bef7826a580df054
   reviewed_at: null
   reviewed_by: null
 evidence_ids: []
@@ -42,9 +42,9 @@ access:
     path: raw/홉스와 라이프니츠, 기호에서 AI까지.md
     retrieved: 2026-10-18
     version: null
-    sha256: 7196b5720a45f1a669bba5620e54da4ba637e01ef1da7e48d03fd3e08df9183e
+    sha256: 57e5762c482bc5d6f3243f727e14c2c78ed0cfc8e8594d8c6388b89f7b6b95c7
     media_type: text/markdown
-    bytes: 40713
+    bytes: 40533
   - kind: snapshot
     role: archive
     path: raw/assets/hobbes_leibniz_symbolic_cognition_ai.html

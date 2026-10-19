@@ -17,10 +17,10 @@ editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-08-31
-updated: 2026-08-31
+updated: 2026-10-20
 review:
   mode: attested
-  revision: sha256:40b0dc3ec96ec61f047bc6793d55afa7fd7af780758bbd59679b35168c558e0b
+  revision: sha256:e1e3545ea2d8e2a39f18f31d1d507135b529c9a54e320200fc41c190e63372f1
   reviewed_at: 2026-08-31
   reviewed_by: antigravity
 evidence_ids: []
