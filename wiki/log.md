@@ -16,7 +16,7 @@ created: 2026-05-03
 updated: 2026-10-20
 review:
   mode: attested
-  revision: sha256:343b0d5f2d3c20119742cb8278d6f906823755fe043843dfdc057983002f3da7
+  revision: sha256:2b088ae7804c029ef420777e75cbab3eec989d5aef1bf5a9de17d915b0da039f
   reviewed_at: 2026-08-31
   reviewed_by: antigravity
 evidence_ids: []
@@ -154,6 +154,7 @@ redirect_from:
 - [2026-10-19 ingest | 생명은 계산이며 공생발생으로 진화한다 (아구에라 이 아르카스 해설) 보강](logs/log-2026-10-19-122-life-computation-symbiogenesis-agi.md)
 - [2026-10-19 ingest | 지수 기호가 늦은 이유와 구문론의 두 의미](logs/log-2026-10-19-123-exponent-notation-delay.md)
 - [2026-10-20 fix | 배포 변경 집합의 raw 복원과 검토 승격](logs/log-2026-10-20-124-deploy-raw-restore-and-attestation.md)
+- [2026-10-20 ingest | 기하학과 대수학의 번역과 공간의 기호화](logs/log-2026-10-20-125-the-great-mathematical-translation.md)
 
 ## 출처
 
