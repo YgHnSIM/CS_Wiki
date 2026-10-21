@@ -13,10 +13,10 @@ editorial_status: active
 publication_visibility: public
 graph_visibility: hidden
 created: 2026-05-03
-updated: 2026-10-20
+updated: 2026-10-21
 review:
   mode: attested
-  revision: sha256:70a2fee4327360c705daf930c9bd273301bbe4e71ba079c115b8b02166a1ac0d
+  revision: sha256:abed052c1068187553c3d507cc9b5255bdf74da7bd8cb6cb3ee02c05f6d216aa
   reviewed_at: 2026-08-03
   reviewed_by: codex
 evidence_ids: []
@@ -32,7 +32,7 @@ redirect_from:
 
 - [[기하학과 대수학의 위대한 번역]] — 아폴로니우스 원뿔곡선과 파푸스 난제, 동차성의 법칙을 단위 선분으로 전복한 데카르트·페르마의 해석기하학과 현대 GPU·지도 시스템으로의 계보 해설.
 - [[데이터 표현과 인코딩]] — 인코딩, 이진법, 문자 표현, 비트 연산, C 문자열과 메모리 안전성을 연결해 디지털 데이터의 표현 원리를 정리한 소스.
-- [[생명은 계산이며 공생발생으로 진화한다]] — 아구에라 이 아르카스의 Big Think 인터뷰를 풀어 쓴 해설 페이지. 계산·자기복제·공생발생·기능주의·인공생명·AGI를 한 서사로 엮으며, 원문과 어긋나는 대목도 포함한다.
+- [[생명은 계산이며 공생발생으로 진화한다]] — 블레즈 아구에라 이 아르카스의 사유를 바탕으로 튜링 계산, 폰 노이만 자기복제, 마굴리스 공생발생, 기능주의, 인공생명, AGI를 하나의 유기적 연속체로 엮어낸 심층 지식 문서.
 - [[서브루틴과 스택(Stack)의 원리]] — 서브루틴의 본질을 복귀 주소 관리로 설명하고 Wheeler Jump에서 스택 프레임까지의 발전을 정리한 소스.
 - [[지수 기호 하나를 얻기까지 왜 1877년이나 걸렸는가]] — 아르키메데스의 거듭제곱 법칙부터 코식 이름의 손계산 절차, 종-수량 세계관, 비에트의 문자 밑, 데카르트의 위첨자 지수까지를 잇는 해설.
 - [[초기 소프트웨어의 탄생]] — EDSAC, Initial Orders, 디버깅, 서브루틴, 라이브러리, 마이크로프로그래밍, 프로그래밍 언어를 통해 초기 소프트웨어의 계층적 형성을 정리한 소스.
@@ -104,7 +104,7 @@ redirect_from:
 - [[Implications of Historical Trends in the Electrical Efficiency of Computing]] — 1946–2009년 여러 종류의 컴퓨터에서 최고 부하의 계산량을 전력으로 나눈 장기 자료를 분석해 계산의 전기 효율이 약 1.57년마다 배가했다는 역사적 추세를 보고한 논문.
 - [[In Search of an Understandable Consensus Algorithm]] — 리더 선출, 로그 복제, 안전성을 분리해 강한 리더 기반 복제 로그 합의를 설명한 Ongaro와 Ousterhout의 2014년 Raft 논문.
 - [[In-Datacenter Performance Analysis of a Tensor Processing Unit]] — Google의 1세대 TPU를 실제 데이터센터 신경망 추론 작업으로 평가해 도메인 특화 하드웨어의 성능·에너지·꼬리 지연 이점을 분석한 2017년 논문.
-- [[Irreversibility and Heat Generation in the Computing Process]] — 롤프 랑다우어가 1961년 IBM Journal of Research and Development에 발표한, 정보 삭제의 열역학적 비용을 다룬 논문.
+- [[Irreversibility and Heat Generation in the Computing Process]] — 롤프 란다우어가 1961년 IBM Journal of Research and Development에 발표한, 정보 삭제의 열역학적 비용을 다룬 논문.
 - [[Linearizability: A Correctness Condition for Concurrent Objects]] — 동시 객체의 각 연산이 호출과 응답 사이 한 순간에 일어난 것처럼 보이고 겹치지 않는 연산의 실제 시간 순서를 보존해야 한다는 선형화 가능성을 정의한 Herlihy와 Wing의 1990년 논문.
 - [[LLVM Language Reference]] — LLVM IR의 target data layout과 calling convention이 machine-level representation과 호출 규약을 어떻게 지정하는지 설명하는 LLVM 공식 문서.
 - [[LLVM: A Compilation Framework for Lifelong Program Analysis & Transformation]] — 정적·링크·실행·유휴 단계에서 프로그램 분석과 변환을 이어 갈 수 있도록 SSA 기반의 저수준 공통 표현과 컴파일러 프레임워크를 제안한 2004년 LLVM 논문.
@@ -229,7 +229,7 @@ redirect_from:
 - [[디버깅]] — 프로그램 실행을 관찰하고 오류 원인을 찾아 수정하는 소프트웨어 개발의 핵심 활동.
 - [[라이브러리]] — 검증된 재사용 코드 단위를 모아 공동체의 소프트웨어 자산으로 만든 체계.
 - [[라이브러리 카탈로그]] — 서브루틴의 동작, 사용법, 실행 시간, 정밀도, 저장 공간을 문서화한 초기 API 문서형 체계.
-- [[랑다우어 원리]] — 논리적으로 비가역적인 정보 삭제에는 열역학적 최소 에너지 비용이 따른다는 원리. 계산이 물리 법칙에 묶여 있음을 보여 준다.
+- [[란다우어 원리]] — 논리적으로 비가역적인 정보 삭제에는 열역학적 최소 에너지 비용이 따른다는 원리. 계산이 물리 법칙에 묶여 있음을 보여 준다.
 - [[로더]] — 프로그램을 실행 가능한 위치에 적재하고 실행 흐름을 넘기는 소프트웨어 계층.
 - [[리틀의 법칙]] — 같은 시스템 경계에서 평균 작업 수 L, 평균 처리율 λ, 평균 체류 시간 W가 L = λW로 연결된다는 대기열 이론의 관계와, 이를 서비스 측정에 쓸 때 필요한 단위·기간·분포 해석의 조건.
 - [[릴레이 회로]] — 접점의 열림과 닫힘으로 전류 흐름을 제어하며 스위칭 회로와 디지털 논리의 전신을 보여주는 회로.

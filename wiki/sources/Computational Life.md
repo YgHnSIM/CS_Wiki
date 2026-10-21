@@ -15,10 +15,10 @@ editorial_status: draft
 publication_visibility: public
 graph_visibility: public
 created: 2026-10-19
-updated: 2026-10-19
+updated: 2026-10-21
 review:
   mode: pending
-  revision: sha256:5a958b77e62801ec93744f3ce2af0f56351cc990b76eb1bc011cb4f84dec820a
+  revision: sha256:bedfbeaa82d056a7ce8ee5e7050690887f8513de3880dd5881c53b50d25f34a0
   reviewed_at: null
   reviewed_by: null
 evidence_ids: []
@@ -59,7 +59,7 @@ access:
 
 ## 인터뷰와의 차이
 
-인터뷰는 "4바이트 무작위 프로그램 1,000개"와 "최소 복제자 약 6바이트"로 설명한다. 논문 본문에서는 이 설정을 찾지 못했다. 논문은 "랑다우어", "포식자", "빛 추적" 같은 표현도 쓰지 않는다. 또 논문 본문에 "symbiogenesis"라는 용어는 없다. 두 프로그램이 이어져 실행되는 상호작용을 공생발생으로 해석하는 것은 인터뷰의 해석이다. 자세한 대조는 [[생명은 계산이며 공생발생으로 진화한다]]에 있다.
+인터뷰는 "4바이트 무작위 프로그램 1,000개"와 "최소 복제자 약 6바이트"로 설명한다. 논문 본문에서는 이 설정을 찾지 못했다. 논문은 "란다우어", "포식자", "빛 추적" 같은 표현도 쓰지 않는다. 또 논문 본문에 "symbiogenesis"라는 용어는 없다. 두 프로그램이 이어져 실행되는 상호작용을 공생발생으로 해석하는 것은 인터뷰의 해석이다. 자세한 대조는 [[생명은 계산이며 공생발생으로 진화한다]]에 있다.
 
 ## 출처
 

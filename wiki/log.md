@@ -13,10 +13,10 @@ editorial_status: active
 publication_visibility: public
 graph_visibility: hidden
 created: 2026-05-03
-updated: 2026-10-20
+updated: 2026-10-21
 review:
   mode: attested
-  revision: sha256:2b088ae7804c029ef420777e75cbab3eec989d5aef1bf5a9de17d915b0da039f
+  revision: sha256:b1194133fe9a1ec0f2aa60ecaa1a57011f1e4e7a27877d75c65f1ff333224ce2
   reviewed_at: 2026-08-31
   reviewed_by: antigravity
 evidence_ids: []
@@ -155,6 +155,8 @@ redirect_from:
 - [2026-10-19 ingest | 지수 기호가 늦은 이유와 구문론의 두 의미](logs/log-2026-10-19-123-exponent-notation-delay.md)
 - [2026-10-20 fix | 배포 변경 집합의 raw 복원과 검토 승격](logs/log-2026-10-20-124-deploy-raw-restore-and-attestation.md)
 - [2026-10-20 ingest | 기하학과 대수학의 번역과 공간의 기호화](logs/log-2026-10-20-125-the-great-mathematical-translation.md)
+- [2026-10-21 refactor | 생명은 계산이며 공생발생으로 진화한다 심층 지식 종합 재작성](logs/log-2026-10-21-126-rewrite-life-computation-symbiogenesis.md)
+- [2026-10-21 update | 랑다우어 표기를 란다우어로 일괄 수정](logs/log-2026-10-21-127-rename-landauer-spelling.md)
 
 ## 출처
 
