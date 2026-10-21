@@ -1,0 +1,150 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 395" width="880" height="395">
+  <defs>
+    <style>
+      .bg { fill: #f8fafc; stroke: #e2e8f0; stroke-width: 1.5px; }
+      .col-box { fill: #ffffff; stroke: #e2e8f0; stroke-width: 1.5px; }
+      .card-math { fill: #fdf4ff; stroke: #f5d0fe; stroke-width: 1.5px; }
+      .card-trans { fill: #f8fafc; stroke: #cbd5e1; stroke-width: 1px; stroke-dasharray: 4 2; }
+      .card-hw { fill: #eff6ff; stroke: #bfdbfe; stroke-width: 1.5px; }
+
+      .badge-col { fill: #334155; }
+      .badge-math { fill: #9333ea; }
+      .badge-hw { fill: #2563eb; }
+
+      .badge-text { fill: #ffffff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Pretendard", sans-serif; font-size: 10px; font-weight: 700; }
+      .main-title { fill: #0f172a; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Pretendard", sans-serif; font-size: 13.5px; font-weight: 700; }
+      .col-title { fill: #0f172a; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Pretendard", sans-serif; font-size: 12.5px; font-weight: 700; }
+      .title { fill: #0f172a; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Pretendard", sans-serif; font-size: 12px; font-weight: 700; }
+      .desc { fill: #475569; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Pretendard", sans-serif; font-size: 10.5px; font-weight: 400; }
+      .trans-title { fill: #0369a1; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Pretendard", sans-serif; font-size: 10px; font-weight: 700; text-anchor: middle; }
+      .trans-desc { fill: #475569; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Pretendard", sans-serif; font-size: 9.5px; font-weight: 500; text-anchor: middle; }
+
+      .arrow { stroke: #0284c7; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; fill: none; }
+      .arrow-head { fill: #0284c7; }
+
+      @media (prefers-color-scheme: dark) {
+        .bg { fill: #090d16; stroke: #1e293b; }
+        .col-box { fill: #0c1322; stroke: #1e293b; }
+        .card-math { fill: #1b1124; stroke: #4a1d6d; }
+        .card-trans { fill: #0f172a; stroke: #334155; }
+        .card-hw { fill: #101a2e; stroke: #1e3a5f; }
+
+        .badge-col { fill: #64748b; }
+        .badge-math { fill: #c084fc; }
+        .badge-hw { fill: #60a5fa; }
+
+        .badge-text { fill: #0f172a; }
+        .main-title { fill: #f8fafc; }
+        .col-title { fill: #f8fafc; }
+        .title { fill: #f8fafc; }
+        .desc { fill: #94a3b8; }
+        .trans-title { fill: #38bdf8; }
+        .trans-desc { fill: #94a3b8; }
+
+        .arrow { stroke: #38bdf8; }
+        .arrow-head { fill: #38bdf8; }
+      }
+    </style>
+    <marker id="arrow-sky" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" class="arrow-head" />
+    </marker>
+  </defs>
+
+  <!-- Outer Canvas Container -->
+  <rect width="880" height="395" rx="10" class="bg"/>
+
+  <!-- Top Title Header -->
+  <rect x="20" y="16" width="112" height="20" rx="4" class="badge-col"/>
+  <text x="76" y="30" text-anchor="middle" class="badge-text">수학의 물리적 육화</text>
+  <text x="142" y="31.5" class="main-title">17세기 해석기하학·미적분학과 현대 모바일 컴퓨팅 3대 기둥 매핑</text>
+
+  <!-- ================= COLUMN 1: 디스플레이 & GPU ================= -->
+  <rect x="20" y="48" width="270" height="332" rx="8" class="col-box"/>
+  <text x="32" y="72" class="col-title">기둥 1: 디스플레이와 GPU</text>
+
+  <!-- Col 1 Top: Math -->
+  <rect x="32" y="86" width="246" height="84" rx="6" class="card-math"/>
+  <rect x="42" y="96" width="96" height="16" rx="3" class="badge-math"/>
+  <text x="90" y="108" text-anchor="middle" class="badge-text">17세기 수학 혁명</text>
+  <text x="42" y="128" class="title">데카르트 직교좌표계 (1637)</text>
+  <text x="42" y="146" class="desc">• 2차원 공간을 수치 순서쌍 (x, y)로 환원</text>
+  <text x="42" y="160" class="desc">• 도형과 대수 방정식의 1:1 대응 수립</text>
+
+  <!-- Col 1 Mid: Transformation -->
+  <rect x="32" y="184" width="246" height="58" rx="6" class="card-trans"/>
+  <text x="155" y="202" class="trans-title">변환: 2D 격자 1D 선형화 &amp; 4×4 아핀 행렬</text>
+  <text x="155" y="218" class="trans-desc">addr = Base + (y × W + x) × Bpp</text>
+  <text x="155" y="232" class="trans-desc">정점 셰이더 동차 좌표계 투영 파이프라인</text>
+
+  <path d="M 155 170 L 155 183" class="arrow" marker-end="url(#arrow-sky)"/>
+  <path d="M 155 242 L 155 255" class="arrow" marker-end="url(#arrow-sky)"/>
+
+  <!-- Col 1 Bottom: Hardware -->
+  <rect x="32" y="256" width="246" height="110" rx="6" class="card-hw"/>
+  <rect x="42" y="266" width="112" height="16" rx="3" class="badge-hw"/>
+  <text x="98" y="278" text-anchor="middle" class="badge-text">현대 모바일 아키텍처</text>
+  <text x="42" y="298" class="title">GPU 프레임버퍼 &amp; 래스터라이저</text>
+  <text x="42" y="318" class="desc">• VRAM 선형 물리 메모리 주소 사상</text>
+  <text x="42" y="334" class="desc">• 픽셀 단위 래스터 주사 및 텍스처 맵핑</text>
+  <text x="42" y="350" class="desc">• 5인치 유리판 위 수백만 서브픽셀 구동</text>
+
+  <!-- ================= COLUMN 2: 터치스크린 & 물리 엔진 ================= -->
+  <rect x="305" y="48" width="270" height="332" rx="8" class="col-box"/>
+  <text x="317" y="72" class="col-title">기둥 2: 터치스크린과 물리 엔진</text>
+
+  <!-- Col 2 Top: Math -->
+  <rect x="317" y="86" width="246" height="84" rx="6" class="card-math"/>
+  <rect x="327" y="96" width="96" height="16" rx="3" class="badge-math"/>
+  <text x="375" y="108" text-anchor="middle" class="badge-text">17세기 수학 혁명</text>
+  <text x="327" y="128" class="title">페르마 극값 &amp; 뉴턴 미적분학</text>
+  <text x="327" y="146" class="desc">• 페르마 의사의법(1636): 접선과 극값 도출</text>
+  <text x="327" y="160" class="desc">• 뉴턴-라이프니츠(1665-84): 변화율과 2계 ODE</text>
+
+  <!-- Col 2 Mid: Transformation -->
+  <rect x="317" y="184" width="246" height="58" rx="6" class="card-trans"/>
+  <text x="440" y="202" class="trans-title">변환: 점성 감쇠 ODE &amp; 반음시적 오일러 적분</text>
+  <text x="440" y="218" class="trans-desc">m·(d²x/dt²) + γ·(dx/dt) = 0 (점성 감쇠 수치해)</text>
+  <text x="440" y="232" class="trans-desc">v_{n+1} = v_n·d^{Δt}, x_{n+1} = x_n + v_{n+1}·Δt</text>
+
+  <path d="M 440 170 L 440 183" class="arrow" marker-end="url(#arrow-sky)"/>
+  <path d="M 440 242 L 440 255" class="arrow" marker-end="url(#arrow-sky)"/>
+
+  <!-- Col 2 Bottom: Hardware -->
+  <rect x="317" y="256" width="246" height="110" rx="6" class="card-hw"/>
+  <rect x="327" y="266" width="112" height="16" rx="3" class="badge-hw"/>
+  <text x="383" y="278" text-anchor="middle" class="badge-text">현대 모바일 아키텍처</text>
+  <text x="327" y="298" class="title">ITO 정전 센서 &amp; OS 물리 엔진</text>
+  <text x="327" y="318" class="desc">• 상호 정전용량 격자 무게중심(Centroid) 추적</text>
+  <text x="327" y="334" class="desc">• 순간 방출 속도(Flop/Fling) 실시간 적분</text>
+  <text x="327" y="350" class="desc">• 120Hz 주사율 관성 스크롤 및 고무줄 바운스</text>
+
+  <!-- ================= COLUMN 3: 위치 인식 & 지도 앱 ================= -->
+  <rect x="590" y="48" width="270" height="332" rx="8" class="col-box"/>
+  <text x="602" y="72" class="col-title">기둥 3: 위치 인식과 지도 앱</text>
+
+  <!-- Col 3 Top: Math -->
+  <rect x="602" y="86" width="246" height="84" rx="6" class="card-math"/>
+  <rect x="612" y="96" width="96" height="16" rx="3" class="badge-math"/>
+  <text x="660" y="108" text-anchor="middle" class="badge-text">17세기 수학 혁명</text>
+  <text x="612" y="128" class="title">연립해석 &amp; 구면 미적분학</text>
+  <text x="612" y="146" class="desc">• 데카르트 연립방정식 기하 해석 (1637)</text>
+  <text x="612" y="160" class="desc">• 뉴턴-그레고리 구면 시컨트 적분 ∫secφ dφ</text>
+
+  <!-- Col 3 Mid: Transformation -->
+  <rect x="602" y="184" width="246" height="58" rx="6" class="card-trans"/>
+  <text x="725" y="202" class="trans-title">변환: 뉴턴-랩슨 연립해석 &amp; 등각 투영</text>
+  <text x="725" y="218" class="trans-desc">4개 위성 의사거리 비선형 연립식 자코비안 역행렬</text>
+  <text x="725" y="232" class="trans-desc">타원체 좌표 → EPSG:3857 Web Mercator 평면화</text>
+
+  <path d="M 725 170 L 725 183" class="arrow" marker-end="url(#arrow-sky)"/>
+  <path d="M 725 242 L 725 255" class="arrow" marker-end="url(#arrow-sky)"/>
+
+  <!-- Col 3 Bottom: Hardware -->
+  <rect x="602" y="256" width="246" height="110" rx="6" class="card-hw"/>
+  <rect x="612" y="266" width="112" height="16" rx="3" class="badge-hw"/>
+  <text x="668" y="278" text-anchor="middle" class="badge-text">현대 모바일 아키텍처</text>
+  <text x="612" y="298" class="title">GNSS 베이스밴드 &amp; 모바일 지도</text>
+  <text x="612" y="318" class="desc">• 100ns 단위 위성 시계 오차 보정 수치해법</text>
+  <text x="612" y="334" class="desc">• 256×256 정방형 타일 피라미드 쿼드트리</text>
+  <text x="612" y="350" class="desc">• 터치 제스처 연동 실시간 줌/팬/회전 렌더링</text>
+</svg>

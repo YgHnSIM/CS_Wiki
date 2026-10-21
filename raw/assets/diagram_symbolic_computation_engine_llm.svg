@@ -1,0 +1,152 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 340" width="880" height="340">
+  <defs>
+    <style>
+      .bg { fill: #f8fafc; stroke: #e2e8f0; stroke-width: 1.5px; }
+      .card-syntax { fill: #f0fdf4; stroke: #bbf7d0; stroke-width: 1.5px; }
+      .card-engine { fill: #eff6ff; stroke: #bfdbfe; stroke-width: 1.5px; }
+      .card-engine-sub { fill: #ffffff; stroke: #dbeafe; stroke-width: 1px; }
+      .card-human { fill: #fff1f2; stroke: #fecdd3; stroke-width: 1.5px; }
+      .card-summary { fill: #f1f5f9; stroke: #cbd5e1; stroke-width: 1px; }
+
+      .badge-syntax { fill: #16a34a; }
+      .badge-engine { fill: #2563eb; }
+      .badge-human { fill: #e11d48; }
+      .badge-title { fill: #475569; }
+
+      .badge-text { fill: #ffffff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Pretendard", sans-serif; font-size: 10px; font-weight: 700; }
+      .main-title { fill: #0f172a; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Pretendard", sans-serif; font-size: 13.5px; font-weight: 700; }
+      .title { fill: #0f172a; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Pretendard", sans-serif; font-size: 13px; font-weight: 700; }
+      .sub-title { fill: #1e293b; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Pretendard", sans-serif; font-size: 11px; font-weight: 700; }
+      .desc { fill: #475569; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Pretendard", sans-serif; font-size: 11px; font-weight: 400; }
+      .desc-sub { fill: #64748b; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Pretendard", sans-serif; font-size: 10px; font-weight: 400; }
+      .footnote { fill: #64748b; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Pretendard", sans-serif; font-size: 9.5px; font-weight: 500; font-style: italic; }
+      .summary-text { fill: #334155; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Pretendard", sans-serif; font-size: 11px; font-weight: 600; }
+
+      .arrow { stroke: #64748b; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; fill: none; }
+      .arrow-head { fill: #64748b; }
+      .arrow-inner { stroke: #3b82f6; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; fill: none; }
+      .arrow-inner-head { fill: #3b82f6; }
+      .arrow-label { fill: #475569; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Pretendard", sans-serif; font-size: 9.5px; font-weight: 600; text-anchor: middle; }
+
+      @media (prefers-color-scheme: dark) {
+        .bg { fill: #090d16; stroke: #1e293b; }
+        .card-syntax { fill: #0c1f17; stroke: #14532d; }
+        .card-engine { fill: #101a2e; stroke: #1e3a5f; }
+        .card-engine-sub { fill: #17243c; stroke: #254977; }
+        .card-human { fill: #1f1215; stroke: #541c26; }
+        .card-summary { fill: #0e1526; stroke: #1e293b; }
+
+        .badge-syntax { fill: #4ade80; }
+        .badge-engine { fill: #60a5fa; }
+        .badge-human { fill: #fb7185; }
+        .badge-title { fill: #94a3b8; }
+
+        .badge-text { fill: #0f172a; }
+        .main-title { fill: #f8fafc; }
+        .title { fill: #f8fafc; }
+        .sub-title { fill: #e2e8f0; }
+        .desc { fill: #94a3b8; }
+        .desc-sub { fill: #cbd5e1; }
+        .footnote { fill: #94a3b8; }
+        .summary-text { fill: #cbd5e1; }
+
+        .arrow { stroke: #94a3b8; }
+        .arrow-head { fill: #94a3b8; }
+        .arrow-inner { stroke: #60a5fa; }
+        .arrow-inner-head { fill: #60a5fa; }
+        .arrow-label { fill: #cbd5e1; }
+      }
+    </style>
+    <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" class="arrow-head" />
+    </marker>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" class="arrow-inner-head" />
+    </marker>
+  </defs>
+
+  <!-- Outer Canvas Container -->
+  <rect width="880" height="340" rx="10" class="bg"/>
+
+  <!-- Top Title Header -->
+  <rect x="20" y="16" width="108" height="20" rx="4" class="badge-title"/>
+  <text x="74" y="30" text-anchor="middle" class="badge-text">사상사 아키텍처</text>
+  <text x="138" y="31.5" class="main-title">구문 조작 엔진(LLM)과 인간 주체의 의미 검증 구조 (Syntax vs Semantics)</text>
+
+  <!-- ================= 1. 입력 기호열 (Syntax) ================= -->
+  <rect x="20" y="48" width="165" height="215" rx="8" class="card-syntax"/>
+  <rect x="32" y="60" width="76" height="18" rx="4" class="badge-syntax"/>
+  <text x="70" y="73" text-anchor="middle" class="badge-text">구문 (Syntax)</text>
+  <text x="32" y="98" class="title">입력 기호열</text>
+  <text x="32" y="122" class="desc">• 프롬프트 이산 기호열</text>
+  <text x="32" y="142" class="desc">• 토큰 시퀀스 w₁..w_t</text>
+  <text x="32" y="162" class="desc">• 자연어 문장 / 질문</text>
+  <text x="32" y="188" class="footnote">기계 관점에서는</text>
+  <text x="32" y="204" class="footnote">의미 없는 이산 부호열</text>
+  <text x="32" y="220" class="footnote">(John Searle의 한자 카드)</text>
+
+  <!-- Arrow 1: Input -> Engine -->
+  <path d="M 185 155 L 217 155" class="arrow" marker-end="url(#arrow)"/>
+  <text x="201" y="147" class="arrow-label">토큰 사상</text>
+
+  <!-- ================= 2. 맹목적 연산 엔진 (LLM) ================= -->
+  <rect x="225" y="48" width="295" height="215" rx="8" class="card-engine"/>
+  <rect x="237" y="60" width="130" height="18" rx="4" class="badge-engine"/>
+  <text x="302" y="73" text-anchor="middle" class="badge-text">맹목적 연산 (Cogitatio Caeca)</text>
+  <text x="237" y="98" class="title">맹목적 연산 엔진 (LLM)</text>
+
+  <!-- Sub-card 1: Embedding -->
+  <rect x="237" y="110" width="271" height="42" rx="5" class="card-engine-sub"/>
+  <text x="247" y="127" class="sub-title">임베딩 벡터 (Embedding Vectors)</text>
+  <text x="247" y="142" class="desc-sub">이산 토큰을 고차원 연속 벡터 공간으로 투영</text>
+
+  <!-- Engine Internal Arrow -->
+  <path d="M 372 153 L 372 165" class="arrow-inner" marker-end="url(#arrow-blue)"/>
+
+  <!-- Sub-card 2: Transformer & Attention -->
+  <rect x="237" y="168" width="271" height="64" rx="5" class="card-engine-sub"/>
+  <text x="247" y="185" class="sub-title">Self-Attention &amp; 행렬 곱셈</text>
+  <text x="247" y="201" class="desc-sub">부동소수점 텐서 연산으로 문맥 가중치 산출</text>
+  <text x="247" y="217" class="desc-sub">다음 토큰 확률 분포 P(w_t | w_&lt;t) 계산</text>
+
+  <text x="237" y="249" class="footnote">*대상에 대한 지향성(Intentionality)이나 의미 이해 전무</text>
+
+  <!-- Arrow 2: Engine -> Output -->
+  <path d="M 520 155 L 552 155" class="arrow" marker-end="url(#arrow)"/>
+  <text x="536" y="147" class="arrow-label">확률 생성</text>
+
+  <!-- ================= 3. 출력 기호열 (Syntax) ================= -->
+  <rect x="560" y="48" width="145" height="215" rx="8" class="card-syntax"/>
+  <rect x="572" y="60" width="76" height="18" rx="4" class="badge-syntax"/>
+  <text x="610" y="73" text-anchor="middle" class="badge-text">구문 (Syntax)</text>
+  <text x="572" y="98" class="title">출력 기호열</text>
+  <text x="572" y="122" class="desc">• 유창한 자연어 텍스트</text>
+  <text x="572" y="142" class="desc">• 합성된 프로그램 코드</text>
+  <text x="572" y="168" class="footnote">형식적 적법성 구비</text>
+  <text x="572" y="184" class="footnote">지적 유창함의 외형</text>
+  <text x="572" y="200" class="footnote">구문론은 의미론을</text>
+  <text x="572" y="216" class="footnote">담보하지 못함 (설)</text>
+
+  <!-- Arrow 3: Output -> Human -->
+  <path d="M 705 155 L 737 155" class="arrow" marker-end="url(#arrow)"/>
+  <text x="721" y="147" class="arrow-label">검증 요구</text>
+
+  <!-- ================= 4. 인간 주체 (Semantics) ================= -->
+  <rect x="745" y="48" width="115" height="215" rx="8" class="card-human"/>
+  <rect x="755" y="60" width="85" height="18" rx="4" class="badge-human"/>
+  <text x="797.5" y="73" text-anchor="middle" class="badge-text">의미론 (Semantics)</text>
+  <text x="755" y="98" class="title">인간 주체</text>
+  <text x="755" y="122" class="desc">• 의미 맥락 해석</text>
+  <text x="755" y="142" class="desc">• 사실성·무모순성</text>
+  <text x="755" y="162" class="desc">• 결과 검증 노동</text>
+  <text x="755" y="182" class="desc">• 오류/환각 차단</text>
+  <text x="755" y="208" class="footnote">최종 책임 귀속</text>
+  <text x="755" y="224" class="footnote">(Accountability)</text>
+
+  <!-- ================= Bottom Summary Bar ================= -->
+  <rect x="20" y="275" width="840" height="48" rx="6" class="card-summary"/>
+  <text x="35" y="295" class="summary-text">외주화 3단계 계보:</text>
+  <text x="145" y="295" class="desc">① 기억의 외주화(홉스 표지) → ② 연산의 외주화(라이프니츠·불·튜링) → ③ 의미 구성의 외주화(LLM)</text>
+  <text x="35" y="312" class="summary-text">결과 계약의 재편:</text>
+  <text x="145" y="312" class="desc">기계가 기호 생성을 전담할수록 인간의 역할은 '생산 노동'에서 '결과 검증 노동'과 책임 귀속으로 이동한다.</text>
+</svg>
