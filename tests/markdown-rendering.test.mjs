@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import MarkdownIt from "markdown-it";
 import test from "node:test";
 import { prepareWikiMarkdown, stripWikiOperationalMarkers } from "../site/markdown.mjs";
+import { mathPlugin } from "../site/math.mjs";
 
 test("wiki operational comments stay out of public Markdown", () => {
   const source = [
@@ -52,4 +53,22 @@ test("Obsidian callout markers become readable blockquote labels", () => {
   assert.match(html, /<strong>WARNING<\/strong> · 기준의 주의점<br>/);
   assert.match(html, /<strong>NOTE<\/strong> · 범위/);
   assert.match(html, /직접 계보와 개념적 선구를 구분한다\./);
+});
+
+test("inline and block math are rendered via KaTeX into accessible HTML and MathML", () => {
+  const source = [
+    "데카르트 좌표계 $(x, y)$와 선형 메모리:",
+    "",
+    "$$\\text{Address}(x, y) = \\text{Base} + y \\times \\text{Pitch} + x \\times B$$",
+    "",
+    "가격은 $100입니다."
+  ].join("\n");
+  const md = new MarkdownIt({ html: false }).use(mathPlugin);
+  const html = md.render(prepareWikiMarkdown(source));
+
+  assert.match(html, /<span class="katex">/);
+  assert.match(html, /<math xmlns="http:\/\/www\.w3\.org\/1998\/Math\/MathML">/);
+  assert.match(html, /<div class="math-block" tabindex="0" role="region" aria-label="수식">/);
+  assert.match(html, /가격은 \$100입니다\./);
+  assert.doesNotMatch(html, /\$\$\\text\{Address\}/);
 });

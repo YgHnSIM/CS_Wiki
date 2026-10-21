@@ -17,6 +17,7 @@ import { describeRelationship, indexGraphEdges, relationLabel, selectLocalGraph 
 import { createDataOutputPath, createOutputWriter } from "./output.mjs";
 import { loadSiteCss } from "./styles/index.mjs";
 import { prepareWikiMarkdown } from "./markdown.mjs";
+import { mathPlugin } from "./math.mjs";
 import {
   cleanInline,
   escapeHtml,
@@ -255,6 +256,7 @@ for (const payload of [
 
 const headingSlugs = new Map();
 const md = new MarkdownIt({ html: false, linkify: true, typographer: false })
+  .use(mathPlugin)
   .use(anchor, {
     slugify: (value) => {
       const base = slugify(value);
