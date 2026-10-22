@@ -16,7 +16,7 @@ created: 2026-05-03
 updated: 2026-10-22
 review:
   mode: attested
-  revision: sha256:7f6f8fd154190e8eec333052279d9c993f36ab65ae1f87dd0f59369fedf52d8f
+  revision: sha256:efdba228fb47891485027924d8d261cc8f657aa627949506f7b175a774abf0eb
   reviewed_at: 2026-08-31
   reviewed_by: antigravity
 evidence_ids: []
@@ -159,6 +159,7 @@ redirect_from:
 - [2026-10-21 update | 랑다우어 표기를 란다우어로 일괄 수정](logs/log-2026-10-21-127-rename-landauer-spelling.md)
 - [2026-10-21 update | 머메이드 차트의 SVG 벡터 그래픽 전면 전환](logs/log-2026-10-21-128-convert-mermaid-diagrams-to-svg.md)
 - [2026-10-21 update | KaTeX 기반 수식 정적 빌드 렌더링 파이프라인 구축](logs/log-2026-10-21-129-support-latex-math-rendering-katex.md)
+- [2026-10-22 refactor | 17세기 해석기하학 디스플레이 및 지도 분석 대중적 리팩토링](logs/log-2026-10-22-130-refactor-analytic-geometry-to-pixels-and-maps.md)
 
 ## 출처
 
