@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: analysis-transformer-io-bottleneck
 kind: analysis
 title: Transformer 추론은 왜 연산량만으로 설명되지 않는가
@@ -12,16 +12,10 @@ domains:
   - machine-learning
   - computer-architecture
   - systems
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-24
-updated: 2026-08-03
-review:
-  mode: attested
-  revision: sha256:24aca6d61ade7462a21db7f60686e9ab8dcb3e7d7b941b63555804d1a1de9730
-  reviewed_at: 2026-08-03
-  reviewed_by: codex
+updated: 2026-10-24
 evidence_ids:
   - ref-073
   - ref-074

@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept-0fdf8f46e0e7b677
 kind: concept
 title: Koomey의 법칙
@@ -12,16 +12,10 @@ summary: 1946–2009년 컴퓨터 표본에서 최고 부하의 단위 에너지
 domains:
   - computer-history
   - computer-architecture
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-16
-updated: 2026-09-17
-review:
-  mode: attested
-  revision: sha256:0b483231e59ed9c78df8974d4dceb5cf8f5b91ffffebf733656287204c8603ff
-  reviewed_at: 2026-09-17
-  reviewed_by: grok
+updated: 2026-10-24
 evidence_ids:
   - ref-047
   - ref-037

@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept-30fac639582288be
 kind: concept
 title: Manchester Baby
@@ -12,16 +12,10 @@ summary: 1948년 저장된 프로그램을 전자식 디지털 컴퓨터에서 �
 domains:
   - computer-history
   - computer-architecture
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-10
-updated: 2026-09-18
-review:
-  mode: attested
-  revision: sha256:8a175d444e2598c63af3bee1b29f2a611d3830ed440c871df4f0a092dbce50a4
-  reviewed_at: 2026-09-18
-  reviewed_by: grok
+updated: 2026-10-24
 evidence_ids:
   - ref-007
   - ref-001

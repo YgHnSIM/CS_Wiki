@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-023
 kind: reference
 title: RFC 3629 UTF-8
@@ -12,16 +12,10 @@ domains:
   - computer-science
   - internet
   - text-processing
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-10
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:af6ffd26ed6f6520a6f33296c9de3b376e2801a0177590b9658622318d77ed54
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids: []
 capability_layers: []
 history:

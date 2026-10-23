@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: analysis-ai-bottleneck-shifting
 kind: analysis
 title: AI 시스템은 병목을 어떻게 이동시키는가
@@ -11,16 +11,10 @@ domains:
   - machine-learning
   - systems
   - computer-architecture
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-08-04
-updated: 2026-09-18
-review:
-  mode: attested
-  revision: sha256:69101aba9875e94b331882714047c28b2ba5e88cb2dd468c6f59909d86241df0
-  reviewed_at: 2026-09-18
-  reviewed_by: grok
+updated: 2026-10-24
 evidence_ids:
   - ref-074
   - ref-076

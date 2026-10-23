@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-084
 kind: reference
 title: MLPerf Inference Power Measurement
@@ -12,16 +12,10 @@ domains:
   - machine-learning
   - performance
   - systems
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-25
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:453d7b1ce27e97cbf4562d49344e24c50806ef3dd9dff6ab4c2ba70f0b5d4cef
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - realized-performance

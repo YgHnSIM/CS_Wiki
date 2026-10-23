@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-027
 kind: reference
 title: Unicode Security Mechanisms
@@ -12,16 +12,10 @@ domains:
   - computer-science
   - security
   - text-processing
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-10
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:ef9f795c86fc7c5bbea453919f8d7ebed3d57135b34d9fe1c35f07e9d484a7ef
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids: []
 capability_layers: []
 history:

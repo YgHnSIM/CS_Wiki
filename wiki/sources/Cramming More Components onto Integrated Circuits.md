@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-037
 kind: reference
 title: Cramming More Components onto Integrated Circuits
@@ -11,16 +11,10 @@ summary: Gordon Moore가 집적 회로의 최소 비용 지점에서 부품 수�
 domains:
   - computer-history
   - computer-architecture
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-16
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:fa435f1fa2f50a525daa36735d19b4ecbceddcee67098d2f7baf1713e75a800d
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - realized-performance

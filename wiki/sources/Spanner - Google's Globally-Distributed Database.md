@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-089
 kind: reference
 title: "Spanner: Google's Globally-Distributed Database"
@@ -13,16 +13,10 @@ domains:
   - distributed-systems
   - systems
   - database
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-25
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:745644fad0be3cdac39fc8c9077c28e00a55fac3d08c76f8b83eb76f54701939
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - scalability

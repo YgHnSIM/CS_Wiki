@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-076
 kind: reference
 title: Efficient Memory Management for Large Language Model Serving with PagedAttention
@@ -13,16 +13,10 @@ domains:
   - machine-learning
   - systems
   - operating-systems
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-24
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:ad82abab4ef01ff6eea7f05687a824ad63a1f03fb3aa8a3696785288e29c689a
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - realized-performance

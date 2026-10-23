@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept-092a889f122121cb
 kind: concept
 title: Unix
@@ -11,16 +11,10 @@ domains:
   - operating-systems
   - computer-history
   - software-engineering
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-10
-updated: 2026-09-17
-review:
-  mode: attested
-  revision: sha256:a4b7d6c6674b1997e845fceae83866654f803b623d673bf6aff93e6ef4b574ae
-  reviewed_at: 2026-09-17
-  reviewed_by: grok
+updated: 2026-10-24
 evidence_ids:
   - ref-018
   - ref-019

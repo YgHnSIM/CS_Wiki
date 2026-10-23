@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-132
 kind: reference
 title: MLIR Language Reference
@@ -10,16 +10,10 @@ summary: MLIR의 operation·value·type·block·region·dialect 구조와 여러
 domains:
   - software-engineering
   - programming-languages
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-08-05
-updated: 2026-08-05
-review:
-  mode: attested
-  revision: sha256:90f4203124ef51c928ad7522cbeb01b9d5d218b2b94244ff8cd55f3bc2f7ba0b
-  reviewed_at: 2026-08-05
-  reviewed_by: codex-research-097
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - reliable-results

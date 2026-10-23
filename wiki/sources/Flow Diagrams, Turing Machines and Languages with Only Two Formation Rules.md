@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-012
 kind: reference
 title: Flow Diagrams, Turing Machines and Languages with Only Two Formation Rules
@@ -9,16 +9,10 @@ summary: Böhm-Jacopini의 흐름도 정규화와 구조화 프로그램 정리�
 domains:
   - computer-science
   - programming-languages
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-10
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:d4b54f39a7170ca6deab3ef14d13e42785f088633942a54e4d31faea52fec3e1
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids: []
 capability_layers: []
 history:

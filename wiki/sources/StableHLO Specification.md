@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-130
 kind: reference
 title: StableHLO Specification
@@ -11,16 +11,10 @@ domains:
   - machine-learning
   - programming-languages
   - software-engineering
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-08-05
-updated: 2026-08-05
-review:
-  mode: attested
-  revision: sha256:d36a1ff84310c4074fb09842f985bf962415b411ecd3f011e51747a4301f87dd
-  reviewed_at: 2026-08-05
-  reviewed_by: codex-research-097
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - reliable-results

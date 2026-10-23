@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: analysis-kv-cache-throughput
 kind: analysis
 title: KV 캐시는 왜 LLM 추론 처리량을 제한하는가
@@ -12,16 +12,10 @@ domains:
   - machine-learning
   - systems
   - computer-architecture
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-24
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:6746b1555983f120f06b5c9d29c21a4b1dc93c08a021e8a8465ce583429d7620
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids:
   - ref-073
   - ref-074

@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-051
 kind: reference
 title: IEEE 754-2019 Standard for Floating-Point Arithmetic
@@ -11,16 +11,10 @@ summary: 이진·십진 부동소수점의 교환·산술 형식과 연산 방�
 domains:
   - computer-architecture
   - mathematics
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-16
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:5fa8ed750a1f0adafeef436f67d9b3b2f9af51e8195948ca61f88166ae4646fc
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - reliable-results

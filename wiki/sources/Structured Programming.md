@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-013
 kind: reference
 title: Structured Programming
@@ -10,16 +10,10 @@ summary: Dahl, Dijkstra, Hoare의 1972년 책을 바탕으로 구조적 프로�
 domains:
   - software-engineering
   - programming-languages
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-10
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:ceb37b2aca66fdc84dd14f7443c1396ab0e7f405f41e4e1e817e93b10f42f94e
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids: []
 capability_layers: []
 history:

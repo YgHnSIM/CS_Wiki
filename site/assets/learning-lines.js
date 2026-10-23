@@ -111,8 +111,7 @@ export function buildLearningMap(graph = {}) {
       url: String(node.url || ""),
       category: String(node.category || ""),
       summary: String(node.summary || ""),
-      aliases: sortedUnique(node.aliases),
-      status: String(node.status || "")
+      aliases: sortedUnique(node.aliases)
     };
   });
 

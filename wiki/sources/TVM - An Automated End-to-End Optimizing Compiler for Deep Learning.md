@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-099
 kind: reference
 title: "TVM: An Automated End-to-End Optimizing Compiler for Deep Learning"
@@ -14,16 +14,10 @@ domains:
   - software-engineering
   - computer-architecture
   - performance
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-25
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:85935f5cc254f27d19e13f01b2eff7f542e8754555a395bfad08754963454783
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - programmability

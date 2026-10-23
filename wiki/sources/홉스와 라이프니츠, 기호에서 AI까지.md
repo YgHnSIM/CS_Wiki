@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: src-007
 kind: source
 title: 홉스와 라이프니츠, 기호에서 AI까지
@@ -12,16 +12,10 @@ domains:
   - computer-history
   - computer-science
   - machine-learning
-editorial_status: draft
 publication_visibility: unlisted
 graph_visibility: public
 created: 2026-10-18
-updated: 2026-10-23
-review:
-  mode: pending
-  revision: sha256:69c781df235d57b2f1f9ff18c0492e811417a3aaa93b50be6357eb252d4c2cc5
-  reviewed_at: null
-  reviewed_by: null
+updated: 2026-10-24
 evidence_ids: []
 capability_layers: []
 origin: local

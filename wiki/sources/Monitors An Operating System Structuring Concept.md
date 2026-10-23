@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-093
 kind: reference
 title: "Monitors: An Operating System Structuring Concept"
@@ -14,16 +14,10 @@ domains:
   - operating-systems
   - software-engineering
   - computer-science
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-25
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:0f8f67e581fc1a3292722b263c79ef8a2320fc1d7107a59dfd4f74deb2f0af71
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - scalability

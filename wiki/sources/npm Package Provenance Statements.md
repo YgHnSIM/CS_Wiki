@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-127
 kind: reference
 title: npm Package Provenance Statements
@@ -10,16 +10,10 @@ summary: npm 패키지가 어디서 빌드되고 누가 게시했는지를 sourc
 domains:
   - software-engineering
   - security
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-08-05
-updated: 2026-08-05
-review:
-  mode: attested
-  revision: sha256:f8082be7850faa846709c9472e62e014d108464942edafd1aba925469c7da536
-  reviewed_at: 2026-08-05
-  reviewed_by: codex-research-097
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - reliable-results

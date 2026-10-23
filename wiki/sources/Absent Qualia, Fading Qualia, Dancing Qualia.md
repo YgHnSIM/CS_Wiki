@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-154
 kind: reference
 title: Absent Qualia, Fading Qualia, Dancing Qualia
@@ -9,16 +9,10 @@ aliases:
 summary: 데이비드 차머스가 뇌를 기능적으로 동일한 부품으로 점진 교체하는 사고실험으로 기능적 조직과 의식의 관계를 논한 1995년 글.
 domains:
   - computer-science
-editorial_status: draft
 publication_visibility: unlisted
 graph_visibility: public
 created: 2026-10-19
-updated: 2026-10-23
-review:
-  mode: pending
-  revision: sha256:afd0bb118cc4614d6a40b603570b2f0892cad0028538301a7a012497824846db
-  reviewed_at: null
-  reviewed_by: null
+updated: 2026-10-24
 evidence_ids: []
 capability_layers: []
 history:

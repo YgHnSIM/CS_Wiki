@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-004
 kind: reference
 title: Software Reuse
@@ -11,16 +11,10 @@ summary: Krueger의 1992년 조사 논문을 바탕으로 재사용을 추상화
 domains:
   - software-engineering
   - computer-history
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-10
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:7f8a128ce23e50df8c67e49d7bd5964f662322b998904795a80f4783256301ff
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids: []
 capability_layers: []
 history:

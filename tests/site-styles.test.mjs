@@ -33,10 +33,8 @@ test("CSS tokens are complete and functional text stays legible", async () => {
   for (const token of [
     "--type-meta",
     "--type-ui",
-    "--status-active",
-    "--status-review",
-    "--status-draft",
-    "--status-archived"
+    "--phosphor",
+    "--amber"
   ]) assert.ok(definitions.has(token), `missing shared token ${token}`);
 });
 
@@ -59,7 +57,6 @@ test("filter toolbars keep named, non-ragged responsive grids", async () => {
     ".listing-filter-query",
     ".listing-filter-details",
     ".listing-filter-domain",
-    ".listing-filter-status",
     ".listing-filter-sort",
     ".listing-filter-reset",
     ".listing-filter-count",
@@ -74,20 +71,17 @@ test("filter toolbars keep named, non-ragged responsive grids", async () => {
   ]) assert.ok(css.includes(selector), `missing responsive filter hook ${selector}`);
 
   assert.match(css, /grid-template-areas:\s*"query details count"/);
-  assert.match(css, /grid-template-areas:\s*"domain status sort reset"/);
+  assert.match(css, /grid-template-areas:\s*"domain sort reset"/);
   assert.match(css, /"search search"\s*"scope preservation"\s*"reset reset"/);
   assert.match(css, /"search era layer"\s*"capability display reset"/);
 });
 
-test("article breakpoint, Korean headings, and statuses keep their visual semantics", async () => {
+test("article breakpoint, Korean headings, and document notices keep their visual semantics", async () => {
   const css = await siteCss();
 
   assert.match(css, /@media\s*\(max-width:\s*1180px\)\s*and\s*\(min-width:\s*861px\)[\s\S]*?\.article-layout\s*\{[^}]*grid-template-columns:\s*180px minmax\(0,\s*820px\) minmax\(0,\s*1fr\)/);
   assert.match(css, /\.article-header h1,[\s\S]*?word-break:\s*keep-all;[\s\S]*?overflow-wrap:\s*break-word;[\s\S]*?text-wrap:\s*balance;/);
   assert.doesNotMatch(css, /\.history-hero h1 br\s*\{[^}]*display:\s*none/);
-
-  for (const status of ["active", "review", "draft", "archived"]) {
-    assert.match(css, new RegExp(`\\.status-label\\.${status}\\s*\\{`));
-    assert.match(css, new RegExp(`\\.status-dot\\.${status}\\s*\\{`));
-  }
+  assert.match(css, /\.article-notice\s*\{/);
+  assert.match(css, /\.article-notice-superseded\s*\{/);
 });

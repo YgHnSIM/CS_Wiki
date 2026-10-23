@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-061
 kind: reference
 title: VisiCalc Apple II Version 1.0 Manual
@@ -11,16 +11,10 @@ summary: 셀에 값과 수식을 함께 두고 자동 모드에서 시트 전체
 domains:
   - computer-history
   - software-engineering
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-20
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:02acdffb12949fd5ebcfa7b6004bda70eab49cf2f83aa110255a77067e8923ad
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - programmability

@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-039
 kind: reference
 title: Hitting the Memory Wall
@@ -11,16 +11,10 @@ summary: 프로세서 속도와 DRAM 속도의 격차가 커지면 전체 실행
 domains:
   - computer-architecture
   - computer-history
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-16
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:0add371f058eef8fbc7be64f54c06dfa3b6b8dcd9bb9cb8aeeac6192968527a0
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - realized-performance

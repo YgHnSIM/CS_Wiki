@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept-18a0ce4363c25093
 kind: concept
 title: PDP-11
@@ -11,16 +11,10 @@ summary: 초기 Unix와 C 언어가 실용화된 DEC 미니컴퓨터 계열.
 domains:
   - computer-history
   - computer-architecture
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-10
-updated: 2026-09-17
-review:
-  mode: attested
-  revision: sha256:cfb1ac16b9613cb100822fc651f630ec6738f67e59da31d6c2deef7207e2ecc6
-  reviewed_at: 2026-09-17
-  reviewed_by: grok
+updated: 2026-10-24
 evidence_ids:
   - ref-018
   - ref-019

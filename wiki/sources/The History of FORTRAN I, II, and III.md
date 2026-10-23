@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-017
 kind: reference
 title: The History of FORTRAN I, II, and III
@@ -11,16 +11,10 @@ domains:
   - programming-languages
   - software-engineering
   - computer-history
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-10
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:7fa7cad5cae9fe74a69a7176075d91e437ab1967f08130d1a337318f13c66d91
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids: []
 capability_layers: []
 history:

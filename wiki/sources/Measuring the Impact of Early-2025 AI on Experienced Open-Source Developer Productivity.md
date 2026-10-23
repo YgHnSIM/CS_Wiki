@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-107
 kind: reference
 title: Measuring the Impact of Early-2025 AI on Experienced Open-Source Developer Productivity
@@ -11,16 +11,10 @@ summary: 숙련된 오픈소스 기여자가 익숙한 대규모 저장소의 �
 domains:
   - software-engineering
   - machine-learning
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-25
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:766654b1d11825d37a8fedd040add92fa852a5c2b6965ea1489e04e23dcdf6b6
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - programmability

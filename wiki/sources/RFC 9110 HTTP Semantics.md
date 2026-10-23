@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-114
 kind: reference
 title: RFC 9110 HTTP Semantics
@@ -12,16 +12,10 @@ domains:
   - internet
   - web
   - distributed-systems
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-08-05
-updated: 2026-08-05
-review:
-  mode: attested
-  revision: sha256:992cd039778f935716cf4093fe71457a0ba521dbe31ad0fc43e33137dd492761
-  reviewed_at: 2026-08-05
-  reviewed_by: codex
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - reliable-results

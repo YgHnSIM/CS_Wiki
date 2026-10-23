@@ -29,44 +29,6 @@
   color: var(--void);
 }
 
-.status-label {
-  display: inline-flex;
-  min-height: 24px;
-  align-items: center;
-  padding: 2px 7px;
-  border: 1px dashed currentColor;
-  color: var(--status-draft);
-  font-size: var(--type-ui);
-  line-height: 1;
-  text-transform: none;
-}
-
-.status-label.active {
-  border-style: solid;
-  color: var(--status-active);
-}
-
-.status-label.review {
-  border-style: double;
-  color: var(--status-review);
-}
-
-.status-label.draft {
-  color: var(--status-draft);
-}
-
-.status-label.archived {
-  border-style: dotted;
-  border-radius: 999px;
-  color: var(--status-archived);
-}
-
-.status-label.retired {
-  border-style: dotted;
-  border-radius: 999px;
-  color: var(--status-archived);
-}
-
 .learning-path-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -211,16 +173,12 @@
 .listing-filter-fields {
   display: grid;
   height: 100%;
-  grid-template-columns: repeat(3, minmax(0, 1fr)) auto;
-  grid-template-areas: "domain status sort reset";
+  grid-template-columns: repeat(2, minmax(0, 1fr)) auto;
+  grid-template-areas: "domain sort reset";
 }
 
 .listing-filter-domain {
   grid-area: domain;
-}
-
-.listing-filter-status {
-  grid-area: status;
 }
 
 .listing-filter-sort {
@@ -725,8 +683,8 @@
   .listing-filter-fields {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     grid-template-areas:
-      "domain status"
-      "sort reset";
+      "domain sort"
+      "reset reset";
   }
 
   .listing-filter-reset {
@@ -863,7 +821,6 @@
     grid-template-columns: 1fr;
     grid-template-areas:
       "domain"
-      "status"
       "sort"
       "reset";
   }

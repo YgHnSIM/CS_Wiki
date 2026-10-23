@@ -1,4 +1,3 @@
-import { createHash } from "node:crypto";
 import { readFile, readdir } from "node:fs/promises";
 import { basename, extname, join, relative, sep } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -12,7 +11,7 @@ import { key, parseFlowList, parseScalar, slugify } from "../site/core.mjs";
 const PAGE_SCHEMA = JSON.parse(await readFile(new URL("../schema/wiki-page.schema.json", import.meta.url), "utf8"));
 const ajv = new Ajv2020({ allErrors: true, strict: false });
 addFormats(ajv);
-const validateV2 = ajv.compile(PAGE_SCHEMA);
+const validateV3 = ajv.compile(PAGE_SCHEMA);
 
 const CONTENT_KINDS = new Set(["source", "reference", "entity", "concept", "analysis", "meta"]);
 const SPECIAL_FILES = new Set(["index.md", "overview.md", "log.md"]);
@@ -97,12 +96,10 @@ function legacyRecord(data, category, filePath) {
     aliases: asArray(data.aliases),
     summary: asString(data.summary),
     domains: tags.filter((tag) => tag.startsWith("domain/")).map((tag) => tag.slice("domain/".length)),
-    editorialStatus: asString(data.status, "draft"),
     publicationVisibility: "public",
     graphVisibility: asString(data.graph_visibility, category === "meta" ? "hidden" : "public"),
     created: asString(data.created),
     updated: asString(data.updated),
-    review: { mode: "pending", revision: null, reviewedAt: null, reviewedBy: null },
     evidenceIds: asArray(data.sources),
     sources: asArray(data.sources),
     capabilityLayers: asArray(data.capability_layers),
@@ -130,10 +127,10 @@ function legacyRecord(data, category, filePath) {
   };
 }
 
-function v2Record(data, category, filePath) {
-  if (!validateV2(data)) {
-    const details = (validateV2.errors || []).map((error) => `${error.instancePath || "/"} ${error.message}`).join("; ");
-    throw new Error(`Invalid v2 frontmatter in ${filePath}: ${details}`);
+function v3Record(data, category, filePath) {
+  if (!validateV3(data)) {
+    const details = (validateV3.errors || []).map((error) => `${error.instancePath || "/"} ${error.message}`).join("; ");
+    throw new Error(`Invalid v3 frontmatter in ${filePath}: ${details}`);
   }
   const history = data.history || {};
   const event = history.event || {};
@@ -141,24 +138,18 @@ function v2Record(data, category, filePath) {
   const localAccess = source && data.access.some((item) => item.kind === "local");
   const archivedAccess = source && data.access.some((item) => item.kind === "snapshot");
   return {
-    schemaVersion: 2,
+    schemaVersion: 3,
     id: data.id,
     kind: data.kind,
     title: data.title,
     aliases: asArray(data.aliases),
     summary: data.summary,
     domains: asArray(data.domains),
-    editorialStatus: data.editorial_status,
     publicationVisibility: data.publication_visibility,
     graphVisibility: data.graph_visibility,
     created: data.created,
     updated: data.updated,
-    review: {
-      mode: data.review.mode,
-      revision: data.review.revision || null,
-      reviewedAt: data.review.reviewed_at || null,
-      reviewedBy: data.review.reviewed_by || null
-    },
+    supersededBy: data.superseded_by || "",
     evidenceIds: asArray(data.evidence_ids),
     sources: asArray(data.evidence_ids),
     capabilityLayers: asArray(data.capability_layers),
@@ -194,13 +185,6 @@ function v2Record(data, category, filePath) {
   };
 }
 
-export function revisionFor(body, data) {
-  const visible = structuredClone(data);
-  if (visible.review) visible.review.revision = null;
-  const hash = createHash("sha256").update(`${JSON.stringify(visible)}\n${body.trim()}\n`).digest("hex");
-  return `sha256:${hash}`;
-}
-
 async function markdownFiles(directory) {
   const entries = await readdir(directory, { withFileTypes: true });
   const found = [];
@@ -219,12 +203,12 @@ async function markdownFiles(directory) {
 function buildPage(raw, { filePath, root, wikiRoot, strict }) {
   const parsed = parseFrontmatter(raw);
   const category = categoryFor(filePath, wikiRoot, parsed.data);
-  const record = parsed.data.schema_version === 2
-    ? v2Record(parsed.data, category, filePath)
+  const record = parsed.data.schema_version === 3
+    ? v3Record(parsed.data, category, filePath)
     : legacyRecord(parsed.data, category, filePath);
   const title = record.title || basename(filePath, ".md");
   const oldUrl = `/${category}/${slugify(title)}/`;
-  const url = record.schemaVersion === 2 ? `/docs/${record.id}/` : oldUrl;
+  const url = record.schemaVersion === 3 ? `/docs/${record.id}/` : oldUrl;
   const body = parsed.body.trim();
   const wikiLinks = extractWikiLinks(parsed.body);
   const targets = wikiLinks.map((link) => link.target);
@@ -241,22 +225,17 @@ function buildPage(raw, { filePath, root, wikiRoot, strict }) {
     legacyUrl: oldUrl,
     legacyUrls: [...new Set([oldUrl, ...record.redirectFrom])],
     body,
-    status: record.editorialStatus,
-    tags: [`type/${record.kind}`, ...record.domains.map((domain) => `domain/${domain}`), `status/${record.editorialStatus}`],
+    tags: [`type/${record.kind}`, ...record.domains.map((domain) => `domain/${domain}`)],
     rawFrontmatter: parsed.data,
     attachments: extractAttachmentLinks(parsed.body),
     wikiLinks,
     targets,
     relations: parseCuratedRelations(parsed.body, { pageTitle: title }),
-    revision: revisionFor(body, parsed.data),
     incoming: 0,
     links: []
   };
-  if (strict && record.schemaVersion !== 2) {
+  if (strict && record.schemaVersion !== 3) {
     throw new Error(`Legacy frontmatter is not allowed in strict mode: ${page.relativePath}`);
-  }
-  if (record.schemaVersion === 2 && record.review.mode === "pending" && record.editorialStatus === "active") {
-    throw new Error(`Active v2 page has pending review: ${page.relativePath}`);
   }
   return page;
 }
@@ -311,7 +290,7 @@ export async function loadWikiManifest({ root = process.cwd(), wikiRoot = join(r
   const { lookup, aliases } = buildLookup(pages);
   const unresolved = resolveManifestLinks(pages, lookup);
   return {
-    version: 2,
+    version: 3,
     generated_at: new Date().toISOString(),
     pages,
     lookup,
@@ -330,14 +309,13 @@ function jsonPage(page) {
     relativePath: page.relativePath,
     url: page.url,
     legacyUrls: page.legacyUrls,
-    editorialStatus: page.editorialStatus,
     publicationVisibility: page.publicationVisibility,
     graphVisibility: page.graphVisibility,
+    supersededBy: page.supersededBy,
     evidenceIds: page.evidenceIds,
     access: page.access,
     snapshotStatus: page.snapshotStatus,
     sourceUrls: page.sourceUrls,
-    revision: page.revision,
     incoming: page.incoming,
     unresolvedLinks: page.targets.filter((target) => !page.links.some((link) => key(link.title) === key(target)))
   };

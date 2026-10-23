@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-073
 kind: reference
 title: Attention Is All You Need
@@ -10,16 +10,10 @@ summary: 순환이나 합성곱 없이 어텐션을 중심으로 인코더와 �
 domains:
   - machine-learning
   - computer-architecture
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-24
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:ce0fd85844f9e94ac969998b0d63c21b2494e8ef7127602fe30ce8f7ba8d7126
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - realized-performance

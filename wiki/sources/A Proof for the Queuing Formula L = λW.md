@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-085
 kind: reference
 title: "A Proof for the Queuing Formula: L = λ W"
@@ -13,16 +13,10 @@ domains:
   - mathematics
   - performance
   - systems
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-25
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:21aa67842167d1a6187801a3bc1ab85b7d9d957ade67e915478201cc8f124c23
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - realized-performance

@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-081
 kind: reference
 title: "GPTQ: Accurate Post-Training Quantization for Generative Pre-trained Transformers"
@@ -11,16 +11,10 @@ summary: 대규모 생성 Transformer의 가중치를 재학습 없이 한 번�
 domains:
   - machine-learning
   - computer-architecture
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-25
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:8be363c9501d13617a65299cd37d17e8eb44a2068ce7c6454bc7310799329a40
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - realized-performance

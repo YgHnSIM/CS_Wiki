@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-057
 kind: reference
 title: "Prehistory: The Math Tables Project"
@@ -13,16 +13,10 @@ summary: 1938–1946년 WPA 사업으로 운영되고 NBS가 지도부·시설·
 domains:
   - computer-history
   - mathematics
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-20
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:a87c91a649ec872aaf07268c629c145af3ce37a3947fe0c0671f735826cdcc86
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - resource-efficiency

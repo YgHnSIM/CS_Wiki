@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-113
 kind: reference
 title: PostgreSQL 17 Transaction Isolation
@@ -11,16 +11,10 @@ summary: PostgreSQL 17의 Read Committed·Repeatable Read·Serializable 동작�
 domains:
   - database
   - systems
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-08-05
-updated: 2026-08-05
-review:
-  mode: attested
-  revision: sha256:0d94d9e1a14cdb877d03ad3f46cb9f787aaeec46a5a3aaff6b2ddc3ab63005e5
-  reviewed_at: 2026-08-05
-  reviewed_by: codex
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - reliable-results

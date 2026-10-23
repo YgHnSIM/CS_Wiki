@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-060
 kind: reference
 title: DLMF Standard Reference Tables on Demand
@@ -11,16 +11,10 @@ summary: NIST가 특수함수 값을 요청 시 생성하고 보증된 오차 �
 domains:
   - mathematics
   - software-engineering
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-20
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:e1390acb7b44c5b01eabb362ffd68c271f10b0b50310e5eb43694b86967f08b3
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - reliable-results

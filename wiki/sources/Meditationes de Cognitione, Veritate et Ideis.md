@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-144
 kind: reference
 title: Meditationes de Cognitione, Veritate et Ideis
@@ -11,16 +11,10 @@ summary: 라이프니츠가 천각형 역설을 통해 직관 없이 기호 조�
 domains:
   - computer-history
   - computer-science
-editorial_status: draft
 publication_visibility: unlisted
 graph_visibility: public
 created: 2026-10-18
-updated: 2026-10-23
-review:
-  mode: pending
-  revision: sha256:7a3c234b002649a7b67a327900ef2412d4133aa86cded8f5ae5a2d639801e985
-  reviewed_at: null
-  reviewed_by: null
+updated: 2026-10-24
 evidence_ids: []
 capability_layers: []
 history:

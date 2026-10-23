@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-022
 kind: reference
 title: The Unicode Standard 17.0.0
@@ -11,16 +11,10 @@ domains:
   - computer-science
   - systems
   - text-processing
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-10
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:daf19858298f8f479fd0bdeb53b36363a90756795230c0c4b1117ea887e933fd
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids: []
 capability_layers: []
 history:

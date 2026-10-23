@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-077
 kind: reference
 title: "DistServe: Disaggregating Prefill and Decoding for Goodput-optimized Large Language Model Serving"
@@ -13,16 +13,10 @@ domains:
   - machine-learning
   - systems
   - distributed-systems
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-24
-updated: 2026-08-28
-review:
-  mode: attested
-  revision: sha256:46f8e640f19dc44581c2a674e5f65f48d402f903103da270766c24d7d1c34334
-  reviewed_at: 2026-08-28
-  reviewed_by: antigravity
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - realized-performance

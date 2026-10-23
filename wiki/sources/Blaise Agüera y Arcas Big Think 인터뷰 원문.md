@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-147
 kind: reference
 title: Blaise Agüera y Arcas Big Think 인터뷰 원문
@@ -11,16 +11,10 @@ summary: 블레즈 아구에라 이 아르카스가 생명의 정의, 기능주�
 domains:
   - computer-science
   - machine-learning
-editorial_status: draft
 publication_visibility: unlisted
 graph_visibility: public
 created: 2026-10-19
-updated: 2026-10-23
-review:
-  mode: pending
-  revision: sha256:2492757e6ca6bf4f14a9a0216272282c0788a296c54d3d9519cd9452492ed2ce
-  reviewed_at: null
-  reviewed_by: null
+updated: 2026-10-24
 evidence_ids: []
 capability_layers: []
 origin: external

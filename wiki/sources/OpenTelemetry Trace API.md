@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-122
 kind: reference
 title: OpenTelemetry Trace API
@@ -11,16 +11,10 @@ summary: 분산 trace와 span의 생성·전파·종료 의미를 정의해 관�
 domains:
   - software-engineering
   - distributed-systems
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-08-05
-updated: 2026-08-05
-review:
-  mode: attested
-  revision: sha256:992fcf94e43bdccff6f7809a2c6407f7a65a0a3f3e9c58a99319729e486b5819
-  reviewed_at: 2026-08-05
-  reviewed_by: codex
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - reliable-results

@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-074
 kind: reference
 title: "FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness"
@@ -13,16 +13,10 @@ domains:
   - machine-learning
   - computer-architecture
   - systems
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-24
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:f3be8561ac7edf0f1698305b133b5fdc29ef30877d7abd8b3f5cb2ab8efb4953
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - realized-performance

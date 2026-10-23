@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-072
 kind: reference
 title: The SPACE of Developer Productivity
@@ -12,16 +12,10 @@ summary: 개발자 생산성을 만족·웰빙, 성과, 활동, 소통·협업, 
 domains:
   - software-engineering
   - computer-science
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-24
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:b7dc464bb5df29e78ce97323ea9a2a3aaf5cd1cfd06e8d920e746cbf9e8e8beb
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - programmability

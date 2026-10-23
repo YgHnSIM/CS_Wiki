@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-126
 kind: reference
 title: Bazel BUILD Files and Hermeticity
@@ -12,16 +12,10 @@ domains:
   - software-engineering
   - systems
   - programming-languages
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-08-05
-updated: 2026-08-05
-review:
-  mode: attested
-  revision: sha256:4746f8b59770db430f7e370cf49dea23417c23c2c4a151387f6bae6cbf126883
-  reviewed_at: 2026-08-05
-  reviewed_by: codex-research-097
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - reliable-results

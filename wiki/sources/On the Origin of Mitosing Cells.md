@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-149
 kind: reference
 title: On the Origin of Mitosing Cells
@@ -10,16 +10,10 @@ aliases:
 summary: 린 세이건(후일 린 마굴리스)이 1967년 Journal of Theoretical Biology에 발표한 논문으로, 세포내 공생발생설의 서지 근거다.
 domains:
   - computer-history
-editorial_status: draft
 publication_visibility: unlisted
 graph_visibility: public
 created: 2026-10-19
-updated: 2026-10-23
-review:
-  mode: pending
-  revision: sha256:9658c62c4a48a649b27c6b0bb735642b1ffad78b2e2b5b69e6df8f5f51fbdcb0
-  reviewed_at: null
-  reviewed_by: null
+updated: 2026-10-24
 evidence_ids: []
 capability_layers: []
 history:

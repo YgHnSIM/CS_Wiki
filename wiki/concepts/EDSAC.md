@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept-00b55ff0f7a3581b
 kind: concept
 title: EDSAC
@@ -9,16 +9,10 @@ summary: 초기 저장 프로그램 컴퓨터로, 소프트웨어의 입력·적
 domains:
   - computer-history
   - software-engineering
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-05-04
-updated: 2026-09-17
-review:
-  mode: attested
-  revision: sha256:8297d29c34de56b28d2c721dd30144de60cb1363e985d4fe48337a86db2ce777
-  reviewed_at: 2026-09-17
-  reviewed_by: grok
+updated: 2026-10-24
 evidence_ids:
   - src-002
   - src-003

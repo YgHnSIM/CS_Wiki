@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-131
 kind: reference
 title: StableHLO Compatibility
@@ -11,16 +11,10 @@ domains:
   - machine-learning
   - programming-languages
   - software-engineering
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-08-05
-updated: 2026-08-05
-review:
-  mode: attested
-  revision: sha256:5ef09d61f7a0c1bef0ad658d179cc68f209afa982179e45a0eecd5abc96da875
-  reviewed_at: 2026-08-05
-  reviewed_by: codex-research-097
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - reliable-results

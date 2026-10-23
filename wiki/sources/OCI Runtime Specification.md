@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-136
 kind: reference
 title: OCI Runtime Specification
@@ -12,16 +12,10 @@ domains:
   - systems
   - software-engineering
   - security
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-08-05
-updated: 2026-08-05
-review:
-  mode: attested
-  revision: sha256:6072026e11862155bbf5e109430d04797cab3f20604e860c12528407f14a1b1e
-  reviewed_at: 2026-08-05
-  reviewed_by: codex-research-097
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - reliable-results

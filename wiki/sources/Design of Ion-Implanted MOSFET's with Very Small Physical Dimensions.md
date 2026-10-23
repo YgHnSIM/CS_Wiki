@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-038
 kind: reference
 title: Design of Ion-Implanted MOSFET's with Very Small Physical Dimensions
@@ -11,16 +11,10 @@ summary: MOSFET의 치수와 전압을 함께 축소할 때 회로 지연과 전
 domains:
   - computer-architecture
   - computer-history
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-16
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:9ebf5f662c65c42c6faca8a07cec7e334286262d921e37b49c71cdc5e30953af
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - realized-performance

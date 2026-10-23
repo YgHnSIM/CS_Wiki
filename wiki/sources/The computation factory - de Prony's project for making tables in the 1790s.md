@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-056
 kind: reference
 title: "The computation factory: de Prony's project for making tables in the 1790s"
@@ -12,16 +12,10 @@ summary: 드 프로니가 1790년대에 대규모 로그·삼각함수표를 분
 domains:
   - computer-history
   - mathematics
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-20
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:abe066c38ec5fe94fb0b95c5913180dd97d9b18283b3d53ad4b85b4feb7ed910
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - resource-efficiency

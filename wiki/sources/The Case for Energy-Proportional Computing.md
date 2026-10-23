@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-046
 kind: reference
 title: The Case for Energy-Proportional Computing
@@ -11,16 +11,10 @@ summary: 서버가 자주 머무는 중간 부하에서 전력 효율이 가장 
 domains:
   - computer-architecture
   - computer-history
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-16
-updated: 2026-08-29
-review:
-  mode: attested
-  revision: sha256:e2d951472d83b23b301858d4c2bbe00892bab65e13aca1f17e682bb4f94a13a6
-  reviewed_at: 2026-08-29
-  reviewed_by: codex
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - resource-efficiency

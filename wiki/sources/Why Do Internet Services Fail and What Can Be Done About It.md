@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-064
 kind: reference
 title: Why Do Internet Services Fail and What Can Be Done About It
@@ -11,16 +11,10 @@ summary: 세 대형 인터넷 서비스의 장애 보고를 분석해 하드웨�
 domains:
   - systems
   - internet
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-24
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:fa3e71008e35b594756757ea99fb2816db88244dde9784153dee56ffd4d3fcf5
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - reliable-results

@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-125
 kind: reference
 title: SLSA Build Provenance Specification
@@ -12,16 +12,10 @@ domains:
   - software-engineering
   - security
   - systems
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-08-05
-updated: 2026-08-05
-review:
-  mode: attested
-  revision: sha256:1a56af3423329400f2f5b31b6b82079c4f25896b4c69f404fdcd2c8742267ff3
-  reviewed_at: 2026-08-05
-  reviewed_by: codex-research-097
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - reliable-results

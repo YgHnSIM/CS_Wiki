@@ -7,7 +7,6 @@ import { fileURLToPath } from "node:url";
 import { promisify } from "node:util";
 import test from "node:test";
 import { collectWikiLintIssues, runWikiLint } from "../scripts/wiki_lint.mjs";
-import { revisionFor } from "../scripts/wiki_manifest.mjs";
 
 const exec = promisify(execFile);
 const projectRoot = fileURLToPath(new URL("..", import.meta.url));
@@ -16,14 +15,7 @@ const lintModuleUrl = new URL("../scripts/wiki_lint.mjs", import.meta.url).href;
 function makePage(overrides = {}) {
   const id = overrides.id || "concept-test";
   const body = overrides.body || "테스트 본문\n\n## 출처\n\n- 테스트 근거\n\n## 관련 항목\n";
-  const rawFrontmatter = overrides.rawFrontmatter || {
-    review: {
-      mode: "pending",
-      revision: null,
-      reviewed_at: null,
-      reviewed_by: null
-    }
-  };
+  const rawFrontmatter = overrides.rawFrontmatter || {};
   return {
     id,
     kind: "concept",
@@ -32,11 +24,6 @@ function makePage(overrides = {}) {
     updated: "2026-07-26",
     body,
     rawFrontmatter,
-    review: {
-      mode: "pending",
-      revision: revisionFor(body, rawFrontmatter)
-    },
-    editorialStatus: "review",
     url: `/docs/${id}/`,
     targets: [],
     plannedLinks: [],
@@ -137,12 +124,6 @@ test("local access rejects raw escapes and directories without reading or hashin
       origin: "local",
       works: {
         primary: [{ citation: "테스트 원문" }]
-      },
-      review: {
-        mode: "pending",
-        revision: null,
-        reviewed_at: null,
-        reviewed_by: null
       }
     };
     const page = makePage({
@@ -203,12 +184,6 @@ test("local access rejects a symlink that resolves outside raw", async (context)
       origin: "local",
       works: {
         primary: [{ citation: "테스트 원문" }]
-      },
-      review: {
-        mode: "pending",
-        revision: null,
-        reviewed_at: null,
-        reviewed_by: null
       }
     };
     const page = makePage({

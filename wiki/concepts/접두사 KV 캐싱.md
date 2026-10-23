@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept-prefix-kv-caching
 kind: concept
 title: 접두사 KV 캐싱
@@ -12,16 +12,10 @@ summary: 같은 모델 실행 조건에서 토큰 단위로 동일한 프롬프�
 domains:
   - machine-learning
   - systems
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-25
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:e50a4a07d2d262172a0013584b4a318533e6ac2c8cd83a79819add8bece5570d
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids:
   - ref-080
   - ref-076

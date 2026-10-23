@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-063
 kind: reference
 title: The Byzantine Generals Problem
@@ -10,16 +10,10 @@ summary: 서로 다른 정보를 보내는 결함 구성요소가 있어도 분�
 domains:
   - computer-science
   - systems
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-24
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:45354f274b589b90423d459717b9d9c38d77784a46e78e7383009ed397617b48
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - scalability

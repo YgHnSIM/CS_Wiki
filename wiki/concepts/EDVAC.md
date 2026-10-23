@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept-4ac13a0d4fe8ec32
 kind: concept
 title: EDVAC
@@ -9,16 +9,10 @@ summary: 저장 프로그램 컴퓨터의 논리 구조를 문서화하고 후�
 domains:
   - computer-history
   - computer-architecture
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-10
-updated: 2026-09-17
-review:
-  mode: attested
-  revision: sha256:d58167c45f9aeb53c44f83221b31b7ae68684233d2ecb49b28a783f6eaef6e98
-  reviewed_at: 2026-09-17
-  reviewed_by: grok
+updated: 2026-10-24
 evidence_ids:
   - ref-006
 capability_layers:

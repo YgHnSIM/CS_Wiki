@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-090
 kind: reference
 title: CWE-20 Improper Input Validation
@@ -13,16 +13,10 @@ domains:
   - security
   - software-engineering
   - systems
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-25
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:45934a86952ca77f1ad01023f4779f79f06d441f46bf581c0d925f1c4aea5b2d
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - reliable-results

@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-103
 kind: reference
 title: The Google File System
@@ -13,16 +13,10 @@ domains:
   - distributed-systems
   - operating-systems
   - systems
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-25
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:be84adf73e8ded0e5ecf830111426676dec63087c62542b2d98e879fea2954a6
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - scalability

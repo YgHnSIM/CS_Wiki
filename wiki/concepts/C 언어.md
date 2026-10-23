@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept-f438fd4127b48dbb
 kind: concept
 title: C 언어
@@ -12,16 +12,10 @@ domains:
   - programming-languages
   - software-engineering
   - computer-history
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-10
-updated: 2026-09-17
-review:
-  mode: attested
-  revision: sha256:55d20daed75bd314bd21ffe2a8f74bcc9465f3de52ebbf995f1a90fe582581d4
-  reviewed_at: 2026-09-17
-  reviewed_by: grok
+updated: 2026-10-24
 evidence_ids:
   - ref-019
   - ref-020

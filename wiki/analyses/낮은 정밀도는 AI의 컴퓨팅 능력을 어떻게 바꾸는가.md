@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: analysis-low-precision-ai-result-contract
 kind: analysis
 title: 낮은 정밀도는 AI의 컴퓨팅 능력을 어떻게 바꾸는가
@@ -12,16 +12,10 @@ domains:
   - machine-learning
   - computer-architecture
   - computer-science
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-24
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:139805a5b89c55597503ebe0493793d201368ff70b80fbf90370dc64b3001365
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids:
   - ref-069
   - ref-070

@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-109
 kind: reference
 title: "Chasing Carbon: The Elusive Environmental Footprint of Computing"
@@ -12,16 +12,10 @@ summary: 컴퓨팅의 운영 에너지와 하드웨어 제조·인프라에서 �
 domains:
   - computer-architecture
   - systems
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-25
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:742c2ccad104401db5f3df7d0d7f79d91f43f3ef10897b58882ec5b1f5ab28d0
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - resource-efficiency

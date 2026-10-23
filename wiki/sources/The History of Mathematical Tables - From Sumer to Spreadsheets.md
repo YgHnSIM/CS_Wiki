@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-052
 kind: reference
 title: "The History of Mathematical Tables: From Sumer to Spreadsheets"
@@ -12,16 +12,10 @@ summary: 2003년 Oxford University Press 연구서와 Eleanor Robson의 고대 �
 domains:
   - computer-history
   - mathematics
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-20
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:b475b61594530ba5c3b10aa4093ba7713513528b487b286b8bcf247ec290013e
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - resource-efficiency

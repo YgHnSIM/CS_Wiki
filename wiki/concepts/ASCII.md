@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept-6a0c16a9841c87e8
 kind: concept
 title: ASCII
@@ -10,16 +10,10 @@ summary: 문자에 숫자 값을 대응시키는 7비트 문자 인코딩 표준
 domains:
   - computer-science
   - systems
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-05-12
-updated: 2026-09-17
-review:
-  mode: attested
-  revision: sha256:c28173cde6a86fd15339f42dd2037259f79d33a48024b1dbdac8e3b75816f1cd
-  reviewed_at: 2026-09-17
-  reviewed_by: grok
+updated: 2026-10-24
 evidence_ids:
   - src-006
   - ref-022

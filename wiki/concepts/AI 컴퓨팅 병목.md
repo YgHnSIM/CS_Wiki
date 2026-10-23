@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept-ai-computing-bottlenecks
 kind: concept
 title: AI 컴퓨팅 병목
@@ -11,16 +11,10 @@ domains:
   - machine-learning
   - computer-architecture
   - systems
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-08-04
-updated: 2026-09-18
-review:
-  mode: attested
-  revision: sha256:ee9ede553b169e32002d61a3690cc142a8f1632be593720bd3ef7c2a1854d0b7
-  reviewed_at: 2026-09-18
-  reviewed_by: grok
+updated: 2026-10-24
 evidence_ids:
   - ref-034
   - ref-039

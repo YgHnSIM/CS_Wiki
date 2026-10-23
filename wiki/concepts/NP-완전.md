@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept-np-completeness
 kind: concept
 title: NP-완전
@@ -10,16 +10,10 @@ aliases:
 summary: 지정한 다항 시간 환원 아래 NP에 속하고 NP의 모든 문제를 그 문제로 환원할 수 있을 때 부여하는, 문제 클래스 안의 대표 난이도 개념.
 domains:
   - computer-science
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-24
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:a7d8feb660bfc903e0e3e7504c2d34664a8489cb2c41f9cd082f7b041a920697
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids:
   - ref-066
   - ref-067

@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-058
 kind: reference
 title: Human Computer Project
@@ -11,16 +11,10 @@ summary: 전자식 컴퓨터가 널리 보급되기 전과 초기의 computer라
 domains:
   - computer-history
   - software-engineering
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-20
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:d1164c109c70a51df51676e98061303824881bfc6195fec652aafc2c443058ec
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - programmability

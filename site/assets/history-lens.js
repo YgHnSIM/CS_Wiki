@@ -1057,8 +1057,7 @@ export async function initializeHistoryLens(root, dependencies = {}) {
       const pairs = [
         ["날짜 근거", event.time.status === "publication" ? "출판 연도" : event.time.status === "event" ? "사건 연도" : "연도 미기록"],
         ["역사 층위", LANE_LABELS[event.lane] || event.lane],
-        ["능력 층위", event.capabilityLayers.join(", ") || "미분류"],
-        ["검증 상태", event.status || "미기록"]
+        ["능력 층위", event.capabilityLayers.join(", ") || "미분류"]
       ];
       for (const [term, detail] of pairs) {
         const row = make("div");

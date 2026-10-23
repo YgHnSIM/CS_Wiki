@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-108
 kind: reference
 title: GHG Protocol Product Life Cycle Accounting and Reporting Standard
@@ -11,16 +11,10 @@ summary: 제품의 원료·제조·사용·폐기 단계를 포괄하는 온실�
 domains:
   - systems
   - software-engineering
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-25
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:c93692483ae77b1c23063b793639c8c93a0fe60278b2cab030203b139c977f88
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - resource-efficiency

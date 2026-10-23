@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-110
 kind: reference
 title: Carbon Emissions and Large Neural Network Training
@@ -11,16 +11,10 @@ summary: 대형 신경망 학습의 에너지와 CO₂e를 모델 구조, 프로
 domains:
   - machine-learning
   - systems
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-25
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:222bb356a0de1c55ed143331af0319ac2f2a873b1827d6cdbed1b83f9330dfd2
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - resource-efficiency

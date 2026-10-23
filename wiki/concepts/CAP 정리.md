@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept-cap-theorem
 kind: concept
 title: CAP 정리
@@ -13,16 +13,10 @@ domains:
   - computer-science
   - distributed-systems
   - systems
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-25
-updated: 2026-09-18
-review:
-  mode: attested
-  revision: sha256:80f5f726d74c43bd283db3e429593302e096ecbf3e4d0bde4cdc3319a3f0abed
-  reviewed_at: 2026-09-18
-  reviewed_by: grok
+updated: 2026-10-24
 evidence_ids:
   - ref-087
   - ref-089

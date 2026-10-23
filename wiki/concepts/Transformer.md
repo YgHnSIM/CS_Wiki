@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept-transformer
 kind: concept
 title: Transformer
@@ -11,16 +11,10 @@ summary: 순환 상태 대신 자기 주의와 위치별 피드포워드 층을 
 domains:
   - machine-learning
   - computer-architecture
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-24
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:fa62cd6e54a09cd188f0769a49349a1a5f4c3269185f9386b934dcd06d3402cd
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids:
   - ref-073
   - ref-074

@@ -182,13 +182,7 @@ if (map) {
     copy.append(heading, element("p", "", station.summary));
     const flags = element("div", "learning-station-flags");
     flags.append(
-      element("span", "", memberships.length > 1 ? `환승역 · ${memberships.length}개 노선` : "일반역"),
-      element("span", "", {
-        active: "검증됨",
-        review: "검토 중",
-        draft: "초안",
-        archived: "보관"
-      }[station.status] || station.status || "상태 미기록")
+      element("span", "", memberships.length > 1 ? `환승역 · ${memberships.length}개 노선` : "일반역")
     );
     const actions = element("div", "learning-station-actions");
     const read = element("a", "", "문서 읽기 →");

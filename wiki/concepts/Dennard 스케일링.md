@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept-3b07c7d6f11aed09
 kind: concept
 title: Dennard 스케일링
@@ -12,16 +12,10 @@ summary: MOSFET의 치수와 전압을 함께 축소해 회로 속도와 집적�
 domains:
   - computer-history
   - computer-architecture
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-16
-updated: 2026-09-17
-review:
-  mode: attested
-  revision: sha256:8a86f5ac65dded215f74e7fd8bd66861e944970024bd12fc75e0e5eb95085528
-  reviewed_at: 2026-09-17
-  reviewed_by: grok
+updated: 2026-10-24
 evidence_ids:
   - ref-038
   - ref-037

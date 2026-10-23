@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-150
 kind: reference
 title: Irreversibility and Heat Generation in the Computing Process
@@ -10,16 +10,10 @@ summary: 롤프 란다우어가 1961년 IBM Journal of Research and Development�
 domains:
   - computer-science
   - computer-history
-editorial_status: draft
 publication_visibility: unlisted
 graph_visibility: public
 created: 2026-10-19
-updated: 2026-10-23
-review:
-  mode: pending
-  revision: sha256:e3ab0d37130dfe52b7ca20d599370f827c34033629392b10826b79e18eb55b00
-  reviewed_at: null
-  reviewed_by: null
+updated: 2026-10-24
 evidence_ids: []
 capability_layers: []
 history:

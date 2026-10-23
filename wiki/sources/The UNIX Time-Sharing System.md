@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-018
 kind: reference
 title: The UNIX Time-Sharing System
@@ -12,16 +12,10 @@ domains:
   - computer-history
   - operating-systems
   - software-engineering
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-10
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:2ca499b92438355734ec14ec84f0b52c67d562632f7b2a15cfb2c7b5f762ff24
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - programmability

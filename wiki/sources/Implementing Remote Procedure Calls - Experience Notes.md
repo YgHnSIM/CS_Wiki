@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-140
 kind: reference
 title: Remote Procedure Call protocols in historical perspective
@@ -13,16 +13,10 @@ domains:
   - distributed-systems
   - systems
   - computer-science
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-09-18
-updated: 2026-09-18
-review:
-  mode: attested
-  revision: sha256:bb90c9fba89761928e0a9878459fa4e9f24565e3f46d77aa38c4f09607ffc56a
-  reviewed_at: 2026-09-18
-  reviewed_by: grok
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - programmability

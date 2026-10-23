@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: analysis-stablehlo-mlir-abi-boundary
 kind: analysis
 title: 표현·IR·ABI 경계는 무엇을 보존하는가
@@ -12,16 +12,10 @@ domains:
   - software-engineering
   - programming-languages
   - computer-architecture
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-08-05
-updated: 2026-09-17
-review:
-  mode: attested
-  revision: sha256:87f45a354d01797ae33ccbe70b0ef14f9d1c515878f00617ae7c157120784904
-  reviewed_at: 2026-08-05
-  reviewed_by: codex-research-097
+updated: 2026-10-24
 evidence_ids:
   - ref-130
   - ref-131

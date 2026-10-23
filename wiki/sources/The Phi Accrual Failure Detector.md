@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-119
 kind: reference
 title: The Phi Accrual Failure Detector
@@ -12,16 +12,10 @@ domains:
   - distributed-systems
   - systems
   - computer-science
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-08-05
-updated: 2026-08-05
-review:
-  mode: attested
-  revision: sha256:ada87774edd3323b092b21a514f5e031d222bb65995dde00593ca393017666ab
-  reviewed_at: 2026-08-05
-  reviewed_by: codex
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - reliable-results

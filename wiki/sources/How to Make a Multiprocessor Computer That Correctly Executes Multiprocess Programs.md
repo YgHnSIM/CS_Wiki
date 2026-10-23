@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-094
 kind: reference
 title: How to Make a Multiprocessor Computer That Correctly Executes Multiprocess Programs
@@ -12,16 +12,10 @@ domains:
   - computer-architecture
   - computer-science
   - operating-systems
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-25
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:3b225c47bacc29c1bef2bf20aa57f20be8ce3e294a53525fac857c280d775047
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - reliable-results

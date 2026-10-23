@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-025
 kind: reference
 title: Unicode Text Segmentation
@@ -11,16 +11,10 @@ summary: "UAX #29를 바탕으로 그래핌 클러스터, 단어·문장 경계,
 domains:
   - computer-science
   - text-processing
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-10
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:be2835425d4e729268a3368ea53143b730d8535e27df0bde29f218f76be4d3bc
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids: []
 capability_layers: []
 history:

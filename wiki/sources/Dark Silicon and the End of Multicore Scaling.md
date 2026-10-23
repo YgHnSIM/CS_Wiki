@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-048
 kind: reference
 title: Dark Silicon and the End of Multicore Scaling
@@ -11,16 +11,10 @@ summary: 전압과 전력의 축소가 트랜지스터 면적 축소를 따라�
 domains:
   - computer-architecture
   - computer-history
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-16
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:26edc5f6be0f4761bea0b17b99f944c074a703e00962487dc4dffa236e82009d
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - scalability

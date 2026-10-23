@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-102
 kind: reference
 title: Implementing Remote Procedure Calls
@@ -13,16 +13,10 @@ domains:
   - software-engineering
   - distributed-systems
   - systems
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-25
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:10502a3762b15488c21232b513754c01e0e44c136a1a21ae9164ef165a1b448d
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - programmability

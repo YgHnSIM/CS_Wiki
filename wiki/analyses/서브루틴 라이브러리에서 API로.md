@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: analysis-4095b0c80dbee408
 kind: analysis
 title: 서브루틴 라이브러리에서 API로
@@ -11,16 +11,10 @@ summary: EDSAC 서브루틴 라이브러리의 카탈로그, 사용 규약, 비�
 domains:
   - software-engineering
   - computer-history
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-09
-updated: 2026-09-18
-review:
-  mode: attested
-  revision: sha256:d50426dd05f562b2b33644a50746c68ce7ca5e965bd264629e3f6809d08ee839
-  reviewed_at: 2026-09-17
-  reviewed_by: grok
+updated: 2026-10-24
 evidence_ids:
   - ref-001
   - ref-003

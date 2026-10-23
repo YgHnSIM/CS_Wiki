@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-015
 kind: reference
 title: FORTRAN Automatic Coding System for the IBM 704 EDPM
@@ -12,16 +12,10 @@ domains:
   - programming-languages
   - software-engineering
   - computer-history
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-10
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:4ef85cc7358399bf7ad57850e71508cab448545420f84950b76ee02fe02ac9a3
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids: []
 capability_layers: []
 history:

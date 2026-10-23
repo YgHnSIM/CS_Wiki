@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-148
 kind: reference
 title: Computational Life
@@ -11,16 +11,10 @@ summary: 무작위 프로그램의 원시 수프에서 적합도 함수 없이 �
 domains:
   - computer-science
   - machine-learning
-editorial_status: draft
 publication_visibility: unlisted
 graph_visibility: public
 created: 2026-10-19
-updated: 2026-10-23
-review:
-  mode: pending
-  revision: sha256:a9d05f7da17479d66dde3bacc288ffe937df2692f815dfac843a9a16e26097e8
-  reviewed_at: null
-  reviewed_by: null
+updated: 2026-10-24
 evidence_ids: []
 capability_layers: []
 history:

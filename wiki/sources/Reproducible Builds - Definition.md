@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-123
 kind: reference
 title: Reproducible Builds - Definition
@@ -11,16 +11,10 @@ domains:
   - software-engineering
   - systems
   - security
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-08-05
-updated: 2026-08-05
-review:
-  mode: attested
-  revision: sha256:0075e66a77cfb9d3ff602f0036464c68b2723eb3eef49d527346bbdd6a5780b2
-  reviewed_at: 2026-08-05
-  reviewed_by: codex-research-097
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - reliable-results

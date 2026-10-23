@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-095
 kind: reference
 title: "Linearizability: A Correctness Condition for Concurrent Objects"
@@ -14,16 +14,10 @@ domains:
   - computer-science
   - software-engineering
   - distributed-systems
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-25
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:b2f72ca029a5be1aa1a249692476f37913e24557621f4899dd9ac2b8b948f707
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - reliable-results

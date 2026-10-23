@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept-2ff6633d43e61407
 kind: concept
 title: API
@@ -10,16 +10,10 @@ aliases:
 summary: 기능 제공자와 사용자 사이의 동작, 호출 규약, 비용, 전제 조건을 정리한 프로그래밍 인터페이스.
 domains:
   - software-engineering
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-09
-updated: 2026-09-17
-review:
-  mode: attested
-  revision: sha256:c13a86c2c7e29d72fc6804eae1f0d99bb54eee76c24647b61de2c3ec20f53785
-  reviewed_at: 2026-09-17
-  reviewed_by: grok
+updated: 2026-10-24
 evidence_ids:
   - ref-001
   - ref-018

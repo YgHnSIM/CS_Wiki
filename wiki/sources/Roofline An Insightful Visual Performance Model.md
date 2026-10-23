@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-034
 kind: reference
 title: Roofline An Insightful Visual Performance Model
@@ -10,16 +10,10 @@ summary: 연산 집약도와 메모리 대역폭을 결합해 프로그램의 �
 domains:
   - computer-architecture
   - computer-science
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-15
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:e276ccb7fbc4559c8c6beed9867fe9426cb2684da1578475e18a933d936adeba
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - realized-performance

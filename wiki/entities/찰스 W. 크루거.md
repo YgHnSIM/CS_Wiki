@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: entity-1a2d36f59369083d
 kind: entity
 title: 찰스 W. 크루거
@@ -11,16 +11,10 @@ summary: 소프트웨어 재사용을 추상화, 선택, 특수화, 통합의 �
 domains:
   - software-engineering
   - computer-history
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-10
-updated: 2026-09-17
-review:
-  mode: attested
-  revision: sha256:42e607f3035e7440edb5865c671095b9558f4c2c0adfc393ea06372f773638eb
-  reviewed_at: 2026-09-17
-  reviewed_by: grok
+updated: 2026-10-24
 evidence_ids:
   - ref-004
 capability_layers:

@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: analysis-866096c7a9c8c715
 kind: analysis
 title: Fortran과 컴파일러
@@ -12,16 +12,10 @@ domains:
   - programming-languages
   - software-engineering
   - computer-history
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-10
-updated: 2026-09-17
-review:
-  mode: attested
-  revision: sha256:c8720bd66b8cca283302db7de6b1a2394c3e43cc4b936c49464823979efad679
-  reviewed_at: 2026-09-17
-  reviewed_by: grok
+updated: 2026-10-24
 evidence_ids:
   - ref-001
   - ref-015

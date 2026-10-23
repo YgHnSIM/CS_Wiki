@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-106
 kind: reference
 title: "The Impact of AI on Developer Productivity: Evidence from GitHub Copilot"
@@ -12,16 +12,10 @@ summary: JavaScript HTTP 서버 구현 과제에서 GitHub Copilot 접근 여부
 domains:
   - software-engineering
   - machine-learning
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-25
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:b04ff5f6f42b69bf3859d4da81813015d44661b303a5ef6105e3e8f9be4af819
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - programmability

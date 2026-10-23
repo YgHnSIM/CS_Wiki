@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-128
 kind: reference
 title: GitHub Artifact Attestations
@@ -10,16 +10,10 @@ summary: GitHub Actions가 바이너리·컨테이너 이미지의 subject diges
 domains:
   - software-engineering
   - security
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-08-05
-updated: 2026-08-05
-review:
-  mode: attested
-  revision: sha256:26513deac373e008c977abd43de89dd0519e280b25b93ddf9649e2a5788bb7dc
-  reviewed_at: 2026-08-05
-  reviewed_by: codex-research-097
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - reliable-results

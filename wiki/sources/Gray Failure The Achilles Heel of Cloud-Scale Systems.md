@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-120
 kind: reference
 title: "Gray Failure: The Achilles' Heel of Cloud-Scale Systems"
@@ -11,16 +11,10 @@ summary: 구성 요소가 완전히 죽지 않고 일부 요청·경로·관찰�
 domains:
   - distributed-systems
   - systems
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-08-05
-updated: 2026-08-05
-review:
-  mode: attested
-  revision: sha256:06581576351a4d0428946e7dc2dde0d6e0ea68407784032f58580cec6e5d5d1f
-  reviewed_at: 2026-08-05
-  reviewed_by: codex
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - reliable-results

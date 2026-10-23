@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-009
 kind: reference
 title: On Computable Numbers with an Application to the Entscheidungsproblem
@@ -11,16 +11,10 @@ summary: Turing의 1936년 논문을 바탕으로 튜링 기계, 보편 튜링 �
 domains:
   - computer-history
   - computer-science
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-10
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:209e8783d611dd8b1abdbea4df6c6abc051397f4231964957a991a0d878470cb
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - computability

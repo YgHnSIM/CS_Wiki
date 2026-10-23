@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-041
 kind: reference
 title: The Datacenter as a Computer
@@ -11,16 +11,10 @@ summary: 대규모 인터넷 서비스의 데이터센터를 독립 서버들의
 domains:
   - computer-architecture
   - systems
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-16
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:812ba361e72c8ba5fb508e1fa8931e128c8edfd0b40d963d5c79b47b5368bf38
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - scalability

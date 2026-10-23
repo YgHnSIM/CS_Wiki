@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: analysis-llm-reuse-speculation-work
 kind: analysis
 title: 재사용과 추측은 LLM 추론 작업량을 어떻게 바꾸는가
@@ -12,16 +12,10 @@ domains:
   - machine-learning
   - systems
   - performance
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-25
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:f70ec2afbb5bbf45bbd9c286b77146970ef038a5e65708e7e7614378e0b05ec3
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids:
   - ref-073
   - ref-076

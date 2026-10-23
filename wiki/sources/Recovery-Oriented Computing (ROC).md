@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-065
 kind: reference
 title: Recovery-Oriented Computing (ROC)
@@ -11,16 +11,10 @@ summary: 하드웨어 고장, 소프트웨어 버그와 운영자 오류를 전�
 domains:
   - systems
   - software-engineering
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-24
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:bf300af5ff2a99824618783328e66c4eea181557e947850b7b32defbae22f016
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - reliable-results

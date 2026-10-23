@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-121
 kind: reference
 title: Metastable Failures
@@ -11,16 +11,10 @@ summary: 장애가 단순히 사라지지 않고 부하·재시도·복구 상�
 domains:
   - distributed-systems
   - systems
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-08-05
-updated: 2026-08-05
-review:
-  mode: attested
-  revision: sha256:e23c3e2aaf5ed6345d2b07713ea6c38a165f749b47f000ed161e2e72770d3737
-  reviewed_at: 2026-08-05
-  reviewed_by: codex
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - reliable-results

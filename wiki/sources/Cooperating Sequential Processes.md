@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-092
 kind: reference
 title: Cooperating Sequential Processes
@@ -13,16 +13,10 @@ domains:
   - computer-science
   - operating-systems
   - software-engineering
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-25
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:492a8d26e835d845c90a7bef4bb2241407ad6a0870c9aeab50bcc044f4a1dcb7
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - scalability

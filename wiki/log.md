@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: meta-log
 kind: meta
 title: 작업 로그
@@ -9,16 +9,10 @@ aliases:
   - 작업 기록
 summary: CS Wiki의 소스 수집, 질의, 점검, 콘텐츠·웹사이트 변경을 시간순으로 남긴 운영 기록.
 domains: []
-editorial_status: active
 publication_visibility: public
 graph_visibility: hidden
 created: 2026-05-03
-updated: 2026-10-23
-review:
-  mode: attested
-  revision: sha256:881e50aa532bcde0e704e524cec6cc537fb3f5e3ba4c0148d332535d0e740126
-  reviewed_at: 2026-08-31
-  reviewed_by: antigravity
+updated: 2026-10-24
 evidence_ids: []
 capability_layers: []
 redirect_from:
@@ -163,6 +157,7 @@ redirect_from:
 - [2026-10-23 update | 역사 렌즈 회귀 수정과 검증·운영 체계 정비](logs/log-2026-10-23-131-audit-fixes-and-verification.md)
 - [2026-10-23 update | P1 로그 색인 생성기와 웹폰트 커버리지 검사](logs/log-2026-10-23-132-p1-log-index-and-webfont-check.md)
 - [2026-10-23 update | unlisted 공개 범위 구현과 초안 43건 전환](logs/log-2026-10-23-133-unlisted-visibility-and-draft-conversion.md)
+- [2026-10-24 update | 스키마 v3 전환과 review·editorial_status·private 제거](logs/log-2026-10-24-134-schema-v3-removal.md)
 
 ## 출처
 

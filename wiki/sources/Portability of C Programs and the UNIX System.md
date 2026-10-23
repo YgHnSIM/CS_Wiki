@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-021
 kind: reference
 title: Portability of C Programs and the UNIX System
@@ -11,16 +11,10 @@ domains:
   - software-engineering
   - programming-languages
   - operating-systems
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-10
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:d432e9ffede5c2594aa6251e1e86437410203fdd35184096472f5c5bdd1ae92a
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids: []
 capability_layers: []
 history:

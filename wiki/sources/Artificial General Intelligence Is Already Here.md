@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-151
 kind: reference
 title: Artificial General Intelligence Is Already Here
@@ -10,16 +10,10 @@ summary: 아구에라 이 아르카스와 피터 노빅이 2023년 Noema에 쓴 
 domains:
   - machine-learning
   - computer-science
-editorial_status: draft
 publication_visibility: unlisted
 graph_visibility: public
 created: 2026-10-19
-updated: 2026-10-23
-review:
-  mode: pending
-  revision: sha256:271b6fe4f2e0cb43507f019807fdac19a67d80d420f7e9e8eb4ed9575f18a7c4
-  reviewed_at: null
-  reviewed_by: null
+updated: 2026-10-24
 evidence_ids: []
 capability_layers: []
 history:

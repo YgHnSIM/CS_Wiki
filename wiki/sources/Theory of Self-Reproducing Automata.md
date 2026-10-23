@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-152
 kind: reference
 title: Theory of Self-Reproducing Automata
@@ -10,16 +10,10 @@ summary: 존 폰 노이만의 자기복제 오토마타 연구를 아서 벅스�
 domains:
   - computer-science
   - mathematics
-editorial_status: draft
 publication_visibility: unlisted
 graph_visibility: public
 created: 2026-10-19
-updated: 2026-10-23
-review:
-  mode: pending
-  revision: sha256:5b03a68c093fbc1318d7e66c097b63060e703cfa7bac0549d6aaa763252141cd
-  reviewed_at: null
-  reviewed_by: null
+updated: 2026-10-24
 evidence_ids: []
 capability_layers: []
 history:

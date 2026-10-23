@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-124
 kind: reference
 title: SOURCE_DATE_EPOCH Specification
@@ -10,16 +10,10 @@ summary: 빌드 시스템 사이에서 결정적인 timestamp를 교환하기 �
 domains:
   - software-engineering
   - systems
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-08-05
-updated: 2026-08-05
-review:
-  mode: attested
-  revision: sha256:6c3f659eb17bb9093ebb079c93e30ace8b8205b1807ea2ada2af37949582406f
-  reviewed_at: 2026-08-05
-  reviewed_by: codex-research-097
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - reliable-results

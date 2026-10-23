@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: analysis-token-rate-service-capability
 kind: analysis
 title: 초당 토큰 수는 왜 LLM 서비스 능력을 설명하지 못하는가
@@ -12,16 +12,10 @@ domains:
   - machine-learning
   - performance
   - systems
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-24
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:bb597f124f7368808e61714bf99b6d9578bbba396c4bd037bf8b11e3d58d0227
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids:
   - ref-075
   - ref-076

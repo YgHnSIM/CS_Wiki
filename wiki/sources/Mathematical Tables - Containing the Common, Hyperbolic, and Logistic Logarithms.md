@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-055
 kind: reference
 title: "Mathematical Tables: Containing the Common, Hyperbolic, and Logistic Logarithms"
@@ -12,16 +12,10 @@ summary: Charles Hutton의 로그·삼각함수표를 Olinthus Gregory의 보충
 domains:
   - computer-history
   - mathematics
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-20
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:833a8484cb817ac5fa12ac3d49435286529e17ac615e6cdcccb7d659b7e6481a
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - resource-efficiency

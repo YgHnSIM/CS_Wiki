@@ -26,10 +26,6 @@
   --amber-line: rgba(255, 176, 0, 0.45);
   --type-meta: 11px;
   --type-ui: 12px;
-  --status-active: var(--phosphor);
-  --status-review: var(--amber);
-  --status-draft: var(--muted);
-  --status-archived: #6f8173;
   --page: min(1520px, calc(100vw - 48px));
   --mono: "D2Coding", "IBM Plex Mono", "Nanum Gothic Coding", ui-monospace, monospace;
   --display: "Space Mono", "D2Coding", ui-monospace, monospace;
@@ -1004,42 +1000,27 @@ kbd {
   margin: 0;
 }
 
-.status-dot {
-  display: inline-block;
-  width: 8px;
-  height: 8px;
-  margin-right: 7px;
-  border: 1px dashed var(--status-draft);
-  background: transparent;
-  vertical-align: middle;
+.article-notice {
+  margin: 0 0 24px;
+  padding: 14px 18px;
+  border: 1px solid var(--line-strong);
+  border-left: 4px solid var(--phosphor);
+  background: rgba(0, 255, 65, 0.05);
+  color: var(--muted);
+  line-height: 1.65;
 }
 
-.status-dot.active {
-  border: 0;
-  border-radius: 50%;
-  background: var(--status-active);
-  box-shadow: 0 0 8px rgba(0, 255, 65, 0.65);
+.article-notice strong {
+  margin-right: 8px;
+  color: var(--text);
 }
 
-.status-dot.review {
-  border: 0;
-  background: var(--status-review);
-  box-shadow: 0 0 8px rgba(255, 176, 0, 0.55);
-  transform: rotate(45deg);
+.article-notice a {
+  color: var(--phosphor);
 }
 
-.status-dot.draft {
-  border-color: var(--status-draft);
-}
-
-.status-dot.archived {
-  border: 1px dotted var(--status-archived);
-  border-radius: 50%;
-}
-
-.status-dot.retired {
-  border: 1px dotted var(--status-archived);
-  border-radius: 50%;
+.article-notice-superseded {
+  border-left-color: var(--amber);
 }
 
 .source-file {

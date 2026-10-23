@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-080
 kind: reference
 title: "SGLang: Efficient Execution of Structured Language Model Programs"
@@ -12,16 +12,10 @@ domains:
   - machine-learning
   - systems
   - software-engineering
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-25
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:8bf8f878caa8d94c2b05abd259ec3e964185e7befeccdc5a6c06cc276b6f5db2
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - programmability

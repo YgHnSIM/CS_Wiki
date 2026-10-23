@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-112
 kind: reference
 title: Serializable Isolation for Snapshot Databases
@@ -12,16 +12,10 @@ domains:
   - database
   - systems
   - distributed-systems
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-08-05
-updated: 2026-08-05
-review:
-  mode: attested
-  revision: sha256:a89fd448441b18f8bc240c63342f0e7b07690613b0a72fd2818553fa9fb187ad
-  reviewed_at: 2026-08-05
-  reviewed_by: codex
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - reliable-results

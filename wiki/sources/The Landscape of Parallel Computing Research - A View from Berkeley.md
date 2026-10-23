@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-040
 kind: reference
 title: The Landscape of Parallel Computing Research - A View from Berkeley
@@ -11,16 +11,10 @@ summary: 전력·명령 수준 병렬성·메모리 병목으로 단일 프로�
 domains:
   - computer-architecture
   - computer-science
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-16
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:9c1a8785d1924936494c15f9014de5dbd843412c0e24ef7223e69e8a565e7da9
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - scalability

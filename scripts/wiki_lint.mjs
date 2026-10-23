@@ -2,7 +2,7 @@ import { createHash } from "node:crypto";
 import { readFile, realpath, stat } from "node:fs/promises";
 import { isAbsolute, relative, resolve, sep } from "node:path";
 import { fileURLToPath } from "node:url";
-import { loadWikiManifest, revisionFor } from "./wiki_manifest.mjs";
+import { loadWikiManifest } from "./wiki_manifest.mjs";
 import { key } from "../site/core.mjs";
 import { domainMeta } from "../site/catalog.mjs";
 import { CAPABILITY_LAYERS, HISTORICAL_LAYERS } from "../site/graph/schema.mjs";
@@ -123,8 +123,6 @@ export async function collectWikiLintIssues({ root = process.cwd(), manifest: su
     const headings = [...page.body.matchAll(/^##\s+(.+?)\s*$/gm)].map((match) => match[1].trim());
     const relatedIndex = headings.lastIndexOf("관련 항목");
     if (relatedIndex >= 0 && relatedIndex !== headings.length - 1) add("error", "sections.related_last", page.relativePath, "관련 항목 섹션은 마지막이어야 한다.");
-    if (page.review.revision !== revisionFor(page.body, page.rawFrontmatter)) add("error", "review.revision", page.relativePath, "review.revision이 현재 본문·메타데이터와 일치하지 않는다.");
-    if (page.editorialStatus === "active" && page.review.mode === "pending") add("error", "review.pending_active", page.relativePath, "active 문서에는 pending 검토 상태를 사용할 수 없다.");
     if (page.url !== `/docs/${page.id}/`) add("error", "route.id", page.relativePath, `ID 기반 URL이 아니다: ${page.url}`);
     const related = page.body.split(/^##\s+/m).find((section) => section.startsWith("관련 항목\n") || section.startsWith("관련 항목\r\n")) || "";
     const relatedItems = [...related.matchAll(/^[-*]\s+\[\[([^\]]+)\]\](.*)$/gm)];
@@ -135,6 +133,15 @@ export async function collectWikiLintIssues({ root = process.cwd(), manifest: su
     for (const evidenceId of page.evidenceIds) {
       const evidence = byId.get(evidenceId);
       if (!evidence || !["source", "reference"].includes(evidence.kind)) add("error", "provenance.evidence", page.relativePath, `유효하지 않은 근거 ID: ${evidenceId}`);
+    }
+    if (page.publicationVisibility === "public" && ["concept", "entity", "analysis"].includes(page.kind) && !page.evidenceIds.length) {
+      add("error", "provenance.public_evidence", page.relativePath, "공개 지식 문서에는 근거 ID가 하나 이상 필요하다.");
+    }
+    if (page.supersededBy) {
+      const successor = byId.get(page.supersededBy);
+      if (!successor) add("error", "superseded.missing", page.relativePath, `대체 문서가 없다: ${page.supersededBy}`);
+      if (successor?.id === page.id) add("error", "superseded.self", page.relativePath, "문서가 자기 자신을 대체할 수 없다.");
+      if (page.publicationVisibility !== "unlisted") add("error", "superseded.visibility", page.relativePath, "대체된 문서는 unlisted여야 한다.");
     }
     for (const domain of page.domains || []) {
       if (!allowedDomains.has(domain)) add("error", "ontology.domain", page.relativePath, `허용 목록에 없는 도메인: ${domain}`);

@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-016
 kind: reference
 title: The FORTRAN Automatic Coding System
@@ -11,16 +11,10 @@ domains:
   - programming-languages
   - software-engineering
   - computer-history
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-10
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:4e14261dce80c402377dcb7c8e731a217bfc093d067ab93c950d1655c4671e21
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - programmability

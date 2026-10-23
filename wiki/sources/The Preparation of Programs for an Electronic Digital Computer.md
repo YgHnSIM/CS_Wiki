@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-001
 kind: reference
 title: The Preparation of Programs for an Electronic Digital Computer
@@ -12,16 +12,10 @@ summary: Wilkes, Wheeler, Gill의 EDSAC 프로그래밍 문헌을 바탕으로 �
 domains:
   - computer-history
   - software-engineering
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-09
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:07145f17782943c4dc930c3f6fe84a4421a99db1d1e4d1f654e0caa07f72beac
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - programmability

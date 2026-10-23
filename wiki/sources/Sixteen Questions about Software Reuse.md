@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-005
 kind: reference
 title: Sixteen Questions about Software Reuse
@@ -11,16 +11,10 @@ summary: Frakes와 Fox의 1995년 논문을 바탕으로 재사용과 이식성�
 domains:
   - software-engineering
   - computer-history
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-10
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:a60218067b96ac4dc2dbd18b2b742cf1b36035e21645040f11d58cb2284e978e
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids: []
 capability_layers: []
 history:

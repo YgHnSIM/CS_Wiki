@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: src-005
 kind: source
 title: 폐쇄형 서브루틴과 Wheeler Jump
@@ -9,16 +9,10 @@ summary: EDSAC의 폐쇄형 서브루틴과 Wheeler Jump의 호출·복귀 구�
 domains:
   - computer-history
   - software-engineering
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-05-04
-updated: 2026-10-20
-review:
-  mode: attested
-  revision: sha256:4afbf528a3492d579f9ffcd121e2227fe0f08ddb8f5e07974e775b78c5d1eba0
-  reviewed_at: 2026-10-20
-  reviewed_by: grok
+updated: 2026-10-24
 evidence_ids: []
 capability_layers: []
 redirect_from:

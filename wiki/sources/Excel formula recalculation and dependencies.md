@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-062
 kind: reference
 title: Excel formula recalculation and dependencies
@@ -11,16 +11,10 @@ summary: Excel의 선행·종속 셀, 자동·수동 재계산, 순환 참조, �
 domains:
   - software-engineering
   - mathematics
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-20
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:eec5d62d0dba8bfba9a3bd434d251d38a5779c8be74711dc415702f7f908f55f
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - programmability

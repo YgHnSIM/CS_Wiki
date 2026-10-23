@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-139
 kind: reference
 title: Design and Implementation of the Sun Network Filesystem
@@ -13,16 +13,10 @@ domains:
   - distributed-systems
   - operating-systems
   - systems
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-09-18
-updated: 2026-09-18
-review:
-  mode: attested
-  revision: sha256:3174bc7b17b3ef7736d4cccabe988189072e3a557db25d6b315738ba15f9d9dc
-  reviewed_at: 2026-09-18
-  reviewed_by: grok
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - scalability

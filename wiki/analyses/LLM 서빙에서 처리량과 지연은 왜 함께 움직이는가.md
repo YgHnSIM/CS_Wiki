@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: analysis-llm-throughput-latency-queueing
 kind: analysis
 title: LLM 서빙에서 처리량과 지연은 왜 함께 움직이는가
@@ -12,16 +12,10 @@ domains:
   - machine-learning
   - performance
   - systems
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-25
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:c8461d883742f478034ea7d8703c91a26adfc4a399396c9b17c0f6d6604e603c
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids:
   - ref-085
   - ref-086

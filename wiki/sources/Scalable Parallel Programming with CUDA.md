@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-097
 kind: reference
 title: Scalable Parallel Programming with CUDA
@@ -14,16 +14,10 @@ domains:
   - programming-languages
   - computer-architecture
   - performance
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-25
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:3958bc74a6874cc885bd60535acf4ffb3795944ac50c65b78817d92c1929f8f6
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - programmability

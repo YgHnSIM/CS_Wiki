@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-133
 kind: reference
 title: LLVM Language Reference
@@ -11,16 +11,10 @@ domains:
   - software-engineering
   - programming-languages
   - computer-architecture
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-08-05
-updated: 2026-08-05
-review:
-  mode: attested
-  revision: sha256:3343fe22134e5c58321163e01ef377dc3756108bee53d083aa599456b30aa69d
-  reviewed_at: 2026-08-05
-  reviewed_by: codex-research-097
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - reliable-results

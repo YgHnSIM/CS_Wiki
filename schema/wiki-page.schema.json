@@ -12,17 +12,15 @@
     "aliases",
     "summary",
     "domains",
-    "editorial_status",
     "publication_visibility",
     "graph_visibility",
     "created",
     "updated",
-    "review",
     "evidence_ids",
     "capability_layers"
   ],
   "properties": {
-    "schema_version": { "const": 2 },
+    "schema_version": { "const": 3 },
     "id": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
     "kind": { "enum": ["source", "reference", "entity", "concept", "analysis", "meta"] },
     "title": { "type": "string", "minLength": 1 },
@@ -53,22 +51,11 @@
       },
       "uniqueItems": true
     },
-    "editorial_status": { "enum": ["draft", "review", "active", "retired"] },
-    "publication_visibility": { "enum": ["public", "unlisted", "private"] },
+    "publication_visibility": { "enum": ["public", "unlisted"] },
     "graph_visibility": { "enum": ["public", "context", "hidden"] },
     "created": { "type": "string", "format": "date" },
     "updated": { "type": "string", "format": "date" },
-    "review": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["mode", "revision", "reviewed_at", "reviewed_by"],
-      "properties": {
-        "mode": { "enum": ["legacy-baseline", "attested", "pending"] },
-        "revision": { "type": ["string", "null"], "pattern": "^sha256:[a-f0-9]{64}$" },
-        "reviewed_at": { "type": ["string", "null"], "format": "date" },
-        "reviewed_by": { "type": ["string", "null"], "minLength": 1 }
-      }
-    },
+    "superseded_by": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
     "evidence_ids": { "type": "array", "items": { "type": "string", "pattern": "^(?:src|ref)-[0-9]{3,}$" }, "uniqueItems": true },
     "capability_layers": {
       "type": "array",

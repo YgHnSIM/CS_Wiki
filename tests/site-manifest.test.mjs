@@ -1,15 +1,18 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { loadWikiManifest, revisionFor } from "../scripts/wiki_manifest.mjs";
+import { loadWikiManifest } from "../scripts/wiki_manifest.mjs";
 import { buildKnowledgeGraph } from "../site/graph/model.mjs";
 
-test("the checked-in wiki is fully represented by the strict v2 manifest", async () => {
+test("the checked-in wiki is fully represented by the strict v3 manifest", async () => {
   const manifest = await loadWikiManifest({ root: process.cwd(), strict: true });
   assert.ok(manifest.pages.length >= 340);
   assert.equal(manifest.unresolved.length, 0);
   assert.equal(new Set(manifest.pages.map((page) => page.id)).size, manifest.pages.length);
   assert.ok(manifest.pages.every((page) => page.url === `/docs/${page.id}/`));
-  assert.ok(manifest.pages.every((page) => page.review.revision === revisionFor(page.body, page.rawFrontmatter)));
+  assert.ok(manifest.pages.every((page) => page.rawFrontmatter.schema_version === 3));
+  assert.ok(manifest.pages.every((page) => ["public", "unlisted"].includes(page.publicationVisibility)));
+  assert.ok(manifest.pages.every((page) => page.rawFrontmatter.review === undefined));
+  assert.ok(manifest.pages.every((page) => page.rawFrontmatter.editorial_status === undefined));
 });
 
 test("source provenance separates works from access records", async () => {
@@ -22,7 +25,7 @@ test("source provenance separates works from access records", async () => {
   assert.ok(sources.some((page) => page.access.some((access) => access.kind === "url")));
 });
 
-test("v2 history metadata reaches the site graph through the flat page shape", async () => {
+test("history metadata reaches the site graph through the flat page shape", async () => {
   const manifest = await loadWikiManifest({ root: process.cwd(), strict: true });
   const graph = buildKnowledgeGraph(manifest.pages, [], { lookup: manifest.lookup, urlFor: (url) => url });
   const dated = graph.nodes.filter((node) => node.historical.eventStart !== null || node.historical.publicationYear !== null);

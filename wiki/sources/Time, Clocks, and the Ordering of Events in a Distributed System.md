@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-100
 kind: reference
 title: Time, Clocks, and the Ordering of Events in a Distributed System
@@ -13,16 +13,10 @@ domains:
   - computer-science
   - distributed-systems
   - systems
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-25
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:daf42e753c3bad7db36a31e3784aeeec323853ff81e851229afa45871c587845
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - scalability

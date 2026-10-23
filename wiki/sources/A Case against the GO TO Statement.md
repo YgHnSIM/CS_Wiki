@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-011
 kind: reference
 title: A Case against the GO TO Statement
@@ -11,16 +11,10 @@ summary: Dijkstra의 goto 비판을 바탕으로 프로그램 텍스트와 실�
 domains:
   - software-engineering
   - programming-languages
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-10
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:c7451c8aad9520be56a29f718416e4cbf23bc8578f27ebf9ad2d535625f490ae
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids: []
 capability_layers: []
 history:

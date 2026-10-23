@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept-72af5ee2350eff99
 kind: concept
 title: Fortran
@@ -11,16 +11,10 @@ summary: 수학적 수식과 과학 계산 표현을 IBM 704 목적 프로그램
 domains:
   - programming-languages
   - computer-history
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-05-04
-updated: 2026-09-17
-review:
-  mode: attested
-  revision: sha256:eddeb24cf71cef2c1c49a5b8e8848650e63649d41d50fff28dfb955dcf1026d9
-  reviewed_at: 2026-09-17
-  reviewed_by: grok
+updated: 2026-10-24
 evidence_ids:
   - src-002
   - ref-015

@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-068
 kind: reference
 title: There's Plenty of Room at the Top
@@ -11,16 +11,10 @@ summary: 반도체 미세화 둔화 이후 성능 향상의 주요 여지를 소
 domains:
   - computer-architecture
   - computer-science
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-24
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:5d5ac459b516ae5624de76d4387e30e8e626bb5519ec31b54110703fb5867d55
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - complexity

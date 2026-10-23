@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-036
 kind: reference
 title: Power Measurement Tutorial for the Green500 List
@@ -9,16 +9,10 @@ summary: LINPACK 달성 성능과 같은 실행 구간의 평균 전력을 결�
 domains:
   - computer-architecture
   - computer-science
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-15
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:1f9d1f5d1cd4d2bc4ec8b2569c88f2cf133bf512cc769d8d9c20d4f3bf4642f9
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - resource-efficiency

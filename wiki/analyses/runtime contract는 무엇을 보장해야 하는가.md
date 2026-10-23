@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: analysis-runtime-contract
 kind: analysis
 title: runtime contract는 무엇을 보장해야 하는가
@@ -11,16 +11,10 @@ domains:
   - machine-learning
   - systems
   - software-engineering
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-08-05
-updated: 2026-09-17
-review:
-  mode: attested
-  revision: sha256:4646420bbaedc5c090f2251c68039f9ecba2130c971435d832721fc3ab429838
-  reviewed_at: 2026-08-05
-  reviewed_by: codex-research-097
+updated: 2026-10-24
 evidence_ids:
   - ref-125
   - ref-134

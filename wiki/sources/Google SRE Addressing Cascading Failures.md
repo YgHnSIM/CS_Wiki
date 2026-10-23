@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-117
 kind: reference
 title: Google SRE Addressing Cascading Failures
@@ -11,16 +11,10 @@ summary: 과부하와 긍정적 피드백이 장애를 확산시키는 경로를
 domains:
   - systems
   - distributed-systems
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-08-05
-updated: 2026-08-05
-review:
-  mode: attested
-  revision: sha256:9c9a55e31675f853fedb31e055614c6f953168f691fc3ed2b0228710193c75aa
-  reviewed_at: 2026-08-05
-  reviewed_by: codex
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - reliable-results

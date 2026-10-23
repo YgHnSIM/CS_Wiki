@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-043
 kind: reference
 title: Slave Memories and Dynamic Storage Allocation
@@ -11,16 +11,10 @@ summary: 빠른 소용량 기억장치에 최근 사용한 명령과 데이터�
 domains:
   - computer-architecture
   - computer-history
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-16
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:0a3d2dc052b814c14cc431fbecdbbd16e1b2db76a0891b1ba202b0e2d07547c3
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - realized-performance

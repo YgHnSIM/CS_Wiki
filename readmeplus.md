@@ -54,7 +54,7 @@ GitHub Pages 공개 사이트
 |---|---|---|---|
 | `raw/` | 원본 자료와 첨부 자산 보관 | 나중에 요약을 다시 대조할 수 있는 기준점 | 원칙적으로 수정하지 않음 |
 | `wiki/` | 사람이 읽는 Markdown 지식 문서 | 사이트의 실제 지식 원천 | 새 문서와 수정은 이곳에서 수행 |
-| `wiki/sources/` | 소스·참고 자료 요약 | 문헌의 내용과 접근 방법을 분리해 기록 | frontmatter v2 준수 |
+| `wiki/sources/` | 소스·참고 자료 요약 | 문헌의 내용과 접근 방법을 분리해 기록 | frontmatter v3 준수 |
 | `wiki/entities/` | 인물·조직·장소 | 이름이 다른 자료를 하나의 개체로 연결 | 내부 링크로 교차참조 |
 | `wiki/concepts/` | 개념·이론·프레임워크 | 학습자가 재사용할 정의와 관계 제공 | 근거와 관계를 함께 기록 |
 | `wiki/analyses/` | 비교·분석·종합 | 여러 문서를 연결한 해석 보존 | 주장과 근거를 분리 |
@@ -81,23 +81,17 @@ Markdown 파일의 맨 위에 있는 `---` 사이의 YAML 블록을 frontmatter�
 
 ```yaml
 ---
-schema_version: 2
+schema_version: 3
 id: concept-computing-capability
 kind: concept
 title: 컴퓨팅 능력
 aliases: [계산 능력]
 summary: 계산 장치가 문제를 표현하고 해결하는 능력을 설명하는 개념이다.
 domains: [computer-science]
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-01-01
 updated: 2026-07-26
-review:
-  mode: attested
-  revision: sha256:...
-  reviewed_at: 2026-07-26
-  reviewed_by: editor
 evidence_ids: [src-001, ref-002]
 capability_layers: [computability]
 ---
@@ -107,27 +101,26 @@ capability_layers: [computability]
 
 | 필드 | 쉬운 의미 | 이 프로젝트에서의 역할 |
 |---|---|---|
-| `schema_version` | 문서 작성 규칙의 판 | v2 형식으로 해석할지 결정 |
+| `schema_version` | 문서 작성 규칙의 판 | v3 형식으로 해석할지 결정 |
 | `id` | 문서의 주민등록번호 | 제목·파일명이 바뀌어도 `/docs/{id}/` 주소 유지 |
 | `kind` | 문서 종류 | source, reference, concept, entity, analysis, meta 구분 |
 | `title`, `aliases` | 대표 이름과 다른 이름 | 검색과 위키링크 별칭 처리 |
 | `summary` | 목록만 읽어도 이해되는 요약 | 색인·검색 결과·웹 메타 설명에 사용 |
 | `domains` | 주제 분류 | 컴퓨터 역사·아키텍처 같은 군집을 제공 |
-| `editorial_status` | 편집 진행 상태 | draft → review → active → retired 흐름 표현 |
-| `publication_visibility` | 공개 범위 | 공개 사이트에 내보낼지 결정 |
+| `publication_visibility` | 공개 범위 | `public` 또는 `unlisted`. unlisted는 링크로만 접근하고 검색·목록에서 제외 |
 | `graph_visibility` | 그래프 표시 범위 | public/context/hidden으로 지도 노출 제어 |
 | `evidence_ids` | 연결된 근거 묶음 | 문서가 어떤 소스·참고 자료를 사용하는지 표시 |
-| `review` | 검토 상태와 revision | 내용이 검토된 버전을 식별 |
+| `superseded_by` | 대체 문서 ID | 퇴역 문서를 `unlisted`로 두고 후속 문서를 안내 |
 | `history` | 검증된 연도·시대 | 작성일이 아닌 역사적 사건을 시간축에 배치 |
 | `capability_layers` | 컴퓨팅 능력의 층 | 계산 가능성·확장성 등 주제별 필터 제공 |
 
 `kind: source`와 `kind: reference`는 `works`와 `access`를 추가로 가집니다. `works`는 실제 문헌의 계보(원 출판물·보조 문헌)를, `access`는 URL·로컬 파일·snapshot처럼 그 문헌을 어떻게 확인했는지를 기록합니다. 문헌 자체와 접근 수단을 분리해야 “무엇을 인용했는가”와 “어디서 다시 확인할 수 있는가”를 혼동하지 않습니다.
 
-### 4.3 안정 ID와 revision
+### 4.3 안정 ID와 메타데이터
 
 파일명은 사람이 읽기 좋게 바뀔 수 있지만 문서 ID는 바뀌지 않아야 합니다. 그래서 사이트의 정식 주소는 `/docs/{id}/`입니다. 이전 주소가 있으면 `redirect_from`으로 정적 리디렉션을 만들어 오래된 링크도 보존합니다.
 
-`revision`은 문서의 핵심 메타데이터와 본문에서 계산한 SHA-256 해시입니다. 해시는 원문을 복원하는 암호화가 아니라, “검토한 내용과 지금 내용이 같은가”를 빠르게 확인하는 지문입니다. `review.mode: attested`와 함께 사용하면 검토 이후 본문이 몰래 바뀌었는지 탐지할 수 있습니다.
+검토 이력은 문서별 `review` 필드가 아니라 PR 리뷰·`wiki/logs/` 작업 기록·Git 히스토리로 관리합니다. 문서의 공개 여부는 `publication_visibility`가, 최신성은 `updated`가 담당합니다.
 
 ## 5. 전문용어 해설
 
@@ -147,7 +140,7 @@ capability_layers: [computability]
 - **일반적인 용도**: 설정 파일, 배포 정보, 문서 속성, 자동화 입력값을 표현합니다.
 - **의의**: 본문과 기계가 읽는 분류·상태를 분리하여 검색과 검증을 가능하게 합니다.
 - **CS_Wiki의 필요성**: 440개 안팎의 문서를 같은 규칙으로 색인하고 상태·근거·공개 범위를 자동 처리해야 합니다.
-- **사용 위치**: 모든 v2 위키 페이지의 `---` 블록, 특히 `schema/`의 예시입니다.
+- **사용 위치**: 모든 v3 위키 페이지의 `---` 블록, 특히 `schema/`의 예시입니다.
 
 ### JSON Schema
 
@@ -203,7 +196,7 @@ capability_layers: [computability]
 - **일반적인 용도**: JSON은 API·설정·검색 데이터, SHA-256은 무결성·캐시·파일 식별에 사용합니다.
 - **의의**: 브라우저가 필요한 데이터를 작고 예측 가능한 형식으로 읽고, snapshot이 바뀌었는지 확인할 수 있습니다.
 - **CS_Wiki의 필요성**: 그래프·역사·검색 인덱스를 정적 파일로 제공하고 로컬 원본의 재현 조건을 보존합니다.
-- **사용 위치**: `dist/data/`, manifest의 revision, `access`의 snapshot 해시입니다.
+- **사용 위치**: `dist/data/`, 문서의 `updated`·`history`, `access`의 snapshot 해시입니다.
 
 ### GitHub Actions와 GitHub Pages
 
@@ -289,7 +282,7 @@ dist/docs/{stable-id}/
 ### 콘텐츠와 매니페스트
 
 - `site/content.mjs`는 매니페스트가 읽은 위키 페이지를 사이트용 페이지 모델로 바꿉니다.
-- `scripts/wiki_manifest.mjs`는 YAML, ID, 별칭, 본문 링크, 근거, revision을 해석하는 단일 기준입니다.
+- `scripts/wiki_manifest.mjs`는 YAML, ID, 별칭, 본문 링크, 근거를 해석하는 단일 기준입니다.
 - `scripts/wiki_lint.mjs`는 이 매니페스트를 사용해 스키마·링크·섹션·중복을 검사합니다.
 
 ### 빌드와 검증
@@ -344,7 +337,7 @@ dist/docs/{stable-id}/
 
 ### 원본과 검토 상태
 
-`raw/`는 불변입니다. 요약이 틀렸다면 원본을 덮어쓰지 않고 `wiki/` 문서를 수정하여 무엇을 다르게 해석했는지 기록합니다. `editorial_status`와 `review.mode`는 작성 중인 내용과 검토가 끝난 내용을 구분합니다. 내용 변경으로 기존 revision이 무효가 되면 `active`에서 `review`로 되돌리고 새 attestation을 남깁니다.
+`raw/`는 불변입니다. 요약이 틀렸다면 원본을 덮어쓰지 않고 `wiki/` 문서를 수정하여 무엇을 다르게 해석했는지 기록합니다. `publication_visibility`는 작성 중인 문서(`unlisted`)와 공개 문서(`public`)를 구분하며, 검토 이력은 PR·작업 로그·Git에 남깁니다.
 
 ### 자동 점검 항목
 
@@ -490,7 +483,7 @@ Markdown은 사람이 직접 읽고 편집할 수 있고 Git은 줄 단위 변�
 | 라우트(route) | URL과 실제 페이지를 연결하는 규칙 |
 | 그래프(graph) | 문서와 문서 사이의 관계 지도 |
 | provenance | 정보가 어느 자료에서 왔는지 나타내는 계보 |
-| revision | 검토한 문서 버전을 나타내는 지문 |
+| superseded_by | 대체된 문서를 가리키는 참조 |
 | snapshot | 특정 시점에 보존한 로컬 자료 복사본 |
 | CI | 커밋·PR마다 자동으로 검증하는 작업 흐름 |
 | 접근성(accessibility) | 다양한 사용자가 키보드·보조기술로 이용할 수 있는 정도 |

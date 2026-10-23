@@ -1,10 +1,9 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://cs-wiki.local/schema/vocabulary.json",
-  "schema_version": 2,
+  "schema_version": 3,
   "kinds": ["source", "reference", "entity", "concept", "analysis", "meta"],
-  "editorial_statuses": ["draft", "review", "active", "retired"],
-  "publication_visibilities": ["public", "unlisted", "private"],
+  "publication_visibilities": ["public", "unlisted"],
   "graph_visibilities": ["public", "context", "hidden"],
   "source_origins": ["local", "external"],
   "access_kinds": ["url", "local", "snapshot"],

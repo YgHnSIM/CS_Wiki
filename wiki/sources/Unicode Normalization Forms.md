@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-024
 kind: reference
 title: Unicode Normalization Forms
@@ -12,16 +12,10 @@ domains:
   - computer-science
   - text-processing
   - security
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-10
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:b19fa6954d0f0b3b139bbd94b78b12b56954e00ceaabd39f67a7e2f19a1c4ea6
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids: []
 capability_layers: []
 history:

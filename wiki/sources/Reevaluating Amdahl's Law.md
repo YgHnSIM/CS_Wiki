@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-045
 kind: reference
 title: Reevaluating Amdahl's Law
@@ -12,16 +12,10 @@ summary: 고정된 문제를 더 빨리 푸는 대신 병렬 자원에 맞춰 �
 domains:
   - computer-architecture
   - computer-history
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-16
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:b28a113d2c42deb7bade382dc38a1df7c2f67337621d1c9fde117e711632d2e9
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - scalability

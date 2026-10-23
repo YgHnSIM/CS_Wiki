@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-137
 kind: reference
 title: ASLR 1차 자료 묶음
@@ -11,16 +11,10 @@ domains:
   - security
   - operating-systems
   - software-engineering
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-08-24
-updated: 2026-08-25
-review:
-  mode: attested
-  revision: sha256:63babb0dc8aa745cdc7a0fcb5d76b18498d9410bb6290129dbc8abc5fdb0dbda
-  reviewed_at: 2026-08-25
-  reviewed_by: codex
+updated: 2026-10-24
 evidence_ids: []
 capability_layers: []
 origin: external

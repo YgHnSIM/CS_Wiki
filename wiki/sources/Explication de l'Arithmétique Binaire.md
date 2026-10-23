@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-145
 kind: reference
 title: Explication de l'Arithmétique Binaire
@@ -12,16 +12,10 @@ domains:
   - computer-history
   - computer-science
   - mathematics
-editorial_status: draft
 publication_visibility: unlisted
 graph_visibility: public
 created: 2026-10-18
-updated: 2026-10-23
-review:
-  mode: pending
-  revision: sha256:6a449bfa5e80554a3b0dbdf94871c6263803873bd67475d34677f768c7f5e290
-  reviewed_at: null
-  reviewed_by: null
+updated: 2026-10-24
 evidence_ids: []
 capability_layers: []
 history:

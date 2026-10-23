@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: meta-index
 kind: meta
 title: 위키 색인
@@ -9,16 +9,10 @@ aliases:
   - 카탈로그
 summary: 위키 전체 페이지를 유형별로 정리하고 각 페이지의 근거 수를 표시하는 카탈로그.
 domains: []
-editorial_status: active
 publication_visibility: public
 graph_visibility: hidden
 created: 2026-05-03
-updated: 2026-10-23
-review:
-  mode: attested
-  revision: sha256:5f08f2609e2eeb9b30b1ed035813159a547075ba84061d37e9b0802efc65e4dd
-  reviewed_at: 2026-08-03
-  reviewed_by: codex
+updated: 2026-10-24
 evidence_ids: []
 capability_layers: []
 redirect_from:

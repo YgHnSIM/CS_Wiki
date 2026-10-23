@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-134
 kind: reference
 title: TensorFlow SavedModel Signatures
@@ -12,16 +12,10 @@ domains:
   - machine-learning
   - systems
   - software-engineering
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-08-05
-updated: 2026-08-05
-review:
-  mode: attested
-  revision: sha256:ff9ab4381c0b66bef30669fb7e399f5489f986845d5b2e1b80f5ac625aa5cf6a
-  reviewed_at: 2026-08-05
-  reviewed_by: codex-research-097
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - reliable-results

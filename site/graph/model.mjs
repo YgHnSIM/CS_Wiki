@@ -280,7 +280,6 @@ export function buildKnowledgeGraph(pages, learningPaths, { lookup, urlFor = (ur
     category: page.category,
     tags: page.tags,
     domains: page.tags.filter((tag) => tag.startsWith("domain/")),
-    status: page.status,
     summary: page.summary,
     created: page.created || null,
     updated: page.updated || null,
@@ -467,7 +466,6 @@ export function buildKnowledgeGraph(pages, learningPaths, { lookup, urlFor = (ur
     facets: {
       categories: [...new Set(nodes.map((node) => node.category))].sort(),
       domains: [...new Set(nodes.flatMap((node) => node.domains))].sort(),
-      statuses: [...new Set(nodes.map((node) => node.status))].sort(),
       historicalLayers: [...new Set(nodes.map((node) => node.historical.layer).filter(Boolean))].sort(),
       capabilityLayers: [...new Set(nodes.flatMap((node) => node.capabilityLayers))].sort()
     },

@@ -21,9 +21,9 @@ npm run build
 
 결과물은 `dist/`에 생성됩니다. `main` 브랜치에 푸시하면 `.github/workflows/pages.yml`이 빌드와 GitHub Pages 배포를 수행합니다.
 
-## 스키마 v2
+## 스키마 v3
 
-위키 문서는 `schema_version: 2`와 안정 `id`를 사용하며, 정식 주소는 `/docs/{id}/`입니다. 기존 유형별 주소는 정적 리디렉션으로 유지됩니다. 소스·참고 자료는 문헌(`works`)과 접근 수단(`access`)을 분리하고, 일반 문서는 `evidence_ids`로 근거를 연결합니다.
+위키 문서는 `schema_version: 3`와 안정 `id`를 사용하며, 정식 주소는 `/docs/{id}/`입니다. 기존 유형별 주소는 정적 리디렉션으로 유지됩니다. 소스·참고 자료는 문헌(`works`)과 접근 수단(`access`)을 분리하고, 일반 문서는 `evidence_ids`로 근거를 연결합니다. `publication_visibility`는 `public`과 `unlisted`만 지원하며, `unlisted` 문서는 `noindex`로 목록·검색·사이트맵에서 제외됩니다.
 
 ```bash
 npm run manifest
@@ -33,7 +33,7 @@ npm run maintenance:generate
 npm run validate:changes
 ```
 
-`wiki/logs/`에는 작업별 로그 원본이 저장되고 `wiki/log.md`는 생성 목록입니다. v1 자료를 새로 변환해야 할 때는 `node scripts/migrate_wiki_v2.mjs`를 실행합니다. 이 명령은 이미 v2인 저장소에서는 변경 없이 종료하며 `raw/`를 수정하지 않습니다.
+`wiki/logs/`에는 작업별 로그 원본이 저장되고 `wiki/log.md`는 생성 목록입니다. 현재 스키마는 v3이며, v2 문서를 변환해야 할 때는 `node scripts/migrate_wiki_v3.mjs`를 실행합니다. 이 명령은 `raw/`를 수정하지 않습니다.
 
 ## 웹 탐색
 

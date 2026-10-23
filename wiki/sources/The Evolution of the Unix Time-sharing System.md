@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-020
 kind: reference
 title: The Evolution of the Unix Time-sharing System
@@ -12,16 +12,10 @@ domains:
   - computer-history
   - operating-systems
   - software-engineering
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-10
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:51c844315e36ca8b113c3a05b0a56730d0331fd319472dafc27675852d5b22f0
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids: []
 capability_layers: []
 history:

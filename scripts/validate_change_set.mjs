@@ -101,7 +101,7 @@ async function main() {
     if (!path.startsWith("wiki/") || !path.endsWith(".md")) continue;
     if (path.startsWith("wiki/logs/")) continue;
     if (change.status === "D") {
-      add("page.no_delete", path, "페이지 삭제 대신 editorial_status: retired로 보존해야 한다.");
+      add("page.no_delete", path, "페이지 삭제 대신 publication_visibility: unlisted 또는 superseded_by로 보존해야 한다.");
       continue;
     }
     const currentText = await readFile(join(root, path), "utf8").catch(() => "");
@@ -111,7 +111,7 @@ async function main() {
     } catch (error) {
       add("page.frontmatter", path, `current frontmatter is not valid YAML: ${error.message}`);
       // Keep the schema check from adding a duplicate error for the same parse failure.
-      current = { schema_version: 2 };
+      current = { schema_version: 3 };
     }
     let previous = null;
     const previousText = await oldFile(targetBase, path);
@@ -123,12 +123,9 @@ async function main() {
         legacyFrontmatterSkips += 1;
       }
     }
-    if (!current || current.schema_version !== 2) add("page.schema", path, "변경된 위키 페이지는 schema_version: 2여야 한다.");
+    if (!current || current.schema_version !== 3) add("page.schema", path, "변경된 위키 페이지는 schema_version: 3이어야 한다.");
     if (previous?.id && current?.id && previous.id !== current.id) add("identity.immutable", path, `페이지 ID를 ${previous.id}에서 ${current.id}로 바꿀 수 없다.`);
-    if (current?.editorial_status === "active" && current.updated !== today) add("updated.required", path, `active 페이지의 updated는 변경일(${today})이어야 한다.`);
-    if (previous?.review?.mode === "legacy-baseline" && current?.editorial_status === "active" && current?.review?.mode !== "attested") {
-      add("review.attestation", path, "기존 active 페이지를 실질 변경할 때 review.mode: attested가 필요하다.");
-    }
+    if (current?.updated !== today) add("updated.required", path, `변경된 위키 페이지의 updated는 변경일(${today})이어야 한다.`);
   }
   const changedVisiblePage = changes.some((change) => change.path.startsWith("wiki/") && change.path.endsWith(".md") && !change.path.startsWith("wiki/logs/") && !["wiki/index.md", "wiki/overview.md", "wiki/log.md"].includes(change.path));
   if (changedVisiblePage && !changedLogs) add("log.coverage", "wiki/log.md", "문서 변경을 설명하는 새 로그 항목이 필요하다.");

@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-033
 kind: reference
 title: The Linpack Benchmark
@@ -10,16 +10,10 @@ summary: 고밀도 선형방정식 풀이를 통해 부동소수점 실행률을
 domains:
   - computer-architecture
   - computer-science
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-15
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:e48d9a8e054114844733c573ded3fe207d9bdca2f88c8cc4ebc4ea18528bbd33
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids: []
 capability_layers: []
 redirect_from:

@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-047
 kind: reference
 title: Implications of Historical Trends in the Electrical Efficiency of Computing
@@ -11,16 +11,10 @@ summary: 1946–2009년 여러 종류의 컴퓨터에서 최고 부하의 계산
 domains:
   - computer-history
   - computer-architecture
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-16
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:f636766d0a1f3344415cea3a2cdebe6a811f1cab287d042feb5a83aa9932be1f
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - resource-efficiency

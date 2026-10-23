@@ -14,7 +14,7 @@ async function git(root, ...args) {
   return run("git", args, { cwd: root, maxBuffer: 2 * 1024 * 1024 });
 }
 
-test("change-set validation tolerates invalid legacy YAML while checking the v2 page", async () => {
+test("change-set validation tolerates invalid legacy YAML while checking the v3 page", async () => {
   const root = await mkdtemp(join(tmpdir(), "cs-wiki-change-set-"));
   const pagePath = join(root, "wiki", "sources", "Unicode Normalization Forms.md");
   try {
@@ -40,23 +40,17 @@ Legacy body
     await writeFile(
       pagePath,
       `---
-schema_version: 2
+schema_version: 3
 id: ref-001
 kind: reference
 title: Unicode Normalization Forms
 aliases: []
-summary: A v2 reference page.
+summary: A v3 reference page.
 domains: [text-processing]
-editorial_status: review
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-26
 updated: 2026-07-26
-review:
-  mode: pending
-  revision: null
-  reviewed_at: null
-  reviewed_by: null
 evidence_ids: []
 capability_layers: []
 ---
@@ -132,21 +126,15 @@ test("change-set validation accepts the project date across the UTC-to-KST bound
     await mkdir(join(root, "wiki"), { recursive: true });
     const page = [
       "---",
-      "schema_version: 2",
+      "schema_version: 3",
       "id: wiki-index",
       "kind: meta",
       "title: Wiki Index",
       "summary: Index",
-      "editorial_status: active",
       "publication_visibility: public",
       "graph_visibility: public",
       "created: 2026-01-01",
       "updated: 2026-08-05",
-      "review:",
-      "  mode: attested",
-      "  revision: sha256:base",
-      "  reviewed_at: 2026-01-01",
-      "  reviewed_by: test",
       "evidence_ids: []",
       "capability_layers: []",
       "---",

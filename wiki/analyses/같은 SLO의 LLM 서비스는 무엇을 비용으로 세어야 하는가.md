@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: analysis-llm-slo-resource-cost
 kind: analysis
 title: 같은 SLO의 LLM 서비스는 무엇을 비용으로 세어야 하는가
@@ -12,16 +12,10 @@ domains:
   - machine-learning
   - performance
   - systems
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-25
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:92358c12e2c34344cb701ebf151d7ee811c3026738ee5a85069619393ac4e7ff
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids:
   - ref-083
   - ref-084

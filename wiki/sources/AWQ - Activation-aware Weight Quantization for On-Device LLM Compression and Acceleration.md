@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-082
 kind: reference
 title: "AWQ: Activation-aware Weight Quantization for On-Device LLM Compression and Acceleration"
@@ -12,16 +12,10 @@ domains:
   - machine-learning
   - computer-architecture
   - edge-computing
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-25
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:a1c6742bd1fa324e7730a85debec8fc858b2ee6b6be3192b6357c5d292dfc96e
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - realized-performance

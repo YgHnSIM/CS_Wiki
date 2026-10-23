@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-031
 kind: reference
 title: On the Computational Complexity of Algorithms
@@ -10,16 +10,10 @@ summary: 계산 가능한 대상들 사이에도 필요한 시간 자원에 따�
 domains:
   - computer-science
   - computer-history
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-15
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:4b5cee8e6e613d43b55fc59c2410e7ea94572426878e2495661b1fdcd111749d
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - complexity

@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: src-003
 kind: source
 title: EDSAC과 Initial Orders
@@ -9,16 +9,10 @@ summary: Initial Orders를 초기 로더·어셈블러·재배치 로더·원시
 domains:
   - computer-history
   - software-engineering
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-05-04
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:15270b61a203753b1c967c5ad5690959f616b6eb05c550a8223ff34cc7c022a3
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids: []
 capability_layers: []
 redirect_from:

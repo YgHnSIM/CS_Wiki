@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept-2397a193cf79979b
 kind: concept
 title: Wheeler Jump
@@ -10,16 +10,10 @@ summary: 호출부 명령을 이용해 복귀 점프를 만들어내는 EDSAC의
 domains:
   - computer-history
   - software-engineering
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-05-04
-updated: 2026-09-17
-review:
-  mode: attested
-  revision: sha256:3295ad86a82cd9dc1fceee446953d549563411cdb65d106b6f6c14ac7faffa18
-  reviewed_at: 2026-09-17
-  reviewed_by: grok
+updated: 2026-10-24
 evidence_ids:
   - src-002
   - src-003

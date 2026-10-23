@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept-c854e2f6358212d1
 kind: concept
 title: UTF-16
@@ -11,16 +11,10 @@ summary: Unicode scalar value를 16비트 코드 유닛 하나 또는 surrogate 
 domains:
   - computer-science
   - text-processing
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-10
-updated: 2026-09-17
-review:
-  mode: attested
-  revision: sha256:86377791136bc197641c028c7ddcd7565fc6e5c6fa8883ea5ff056c23ef3cbd4
-  reviewed_at: 2026-09-17
-  reviewed_by: grok
+updated: 2026-10-24
 evidence_ids:
   - ref-022
   - ref-026

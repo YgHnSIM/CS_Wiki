@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept-145622bcdc913103
 kind: concept
 title: Entscheidungsproblem
@@ -12,16 +12,10 @@ summary: 수학 명제의 증명 가능성을 일반 기계 절차로 판정할 
 domains:
   - computer-science
   - computer-history
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-10
-updated: 2026-09-17
-review:
-  mode: attested
-  revision: sha256:e00df6f58d43d5d0ef43653f346e1e1ba04b6e8d49de04ed627db00a782702c2
-  reviewed_at: 2026-09-17
-  reviewed_by: grok
+updated: 2026-10-24
 evidence_ids:
   - ref-009
   - ref-010

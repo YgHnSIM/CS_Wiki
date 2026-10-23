@@ -3,7 +3,7 @@ import { createHash } from "node:crypto";
 import { readFile, readdir } from "node:fs/promises";
 import { join } from "node:path";
 import { gzipSync } from "node:zlib";
-import { categoryMeta, domainMeta, historyPeriods, learningPaths, statusMeta } from "./catalog.mjs";
+import { categoryMeta, domainMeta, historyPeriods, learningPaths } from "./catalog.mjs";
 import { escapeHtml, isDiscoverablePage, key, selectSiteDiscoveryPages, withBase } from "./core.mjs";
 import { loadWikiContent } from "./content.mjs";
 import { buildKnowledgeGraph } from "./graph/model.mjs";
@@ -811,7 +811,7 @@ function assertExactlyOnce(actualIds, expectedIds, label) {
 
 function assertEvidenceProvenance(record, label) {
   assert.ok(record && typeof record === "object", label + " is missing evidence metadata");
-  for (const key of ["id", "sourceId", "title", "summary", "url", "category", "status", "visibility", "usedByCount", "shardId", "provenance"]) {
+  for (const key of ["id", "sourceId", "title", "summary", "url", "category", "visibility", "usedByCount", "shardId", "provenance"]) {
     assert.ok(Object.hasOwn(record, key), label + " is missing '" + key + "'");
   }
   assert.ok(EVIDENCE_SOURCE_CATEGORIES.has(record.category), label + " is not a source/reference document");
@@ -829,7 +829,7 @@ function assertEvidenceAssertion(record, graphNodesById, label) {
   assert.ok(record && typeof record === "object", label + " is missing assertion metadata");
   assert.ok(["document", "relation"].includes(record.scope), label + " has an unsupported scope");
   if (record.scope === "document") {
-    for (const key of ["id", "nodeId", "title", "summary", "url", "category", "domains", "status", "evidenceCount", "shardId"]) {
+    for (const key of ["id", "nodeId", "title", "summary", "url", "category", "domains", "evidenceCount", "shardId"]) {
       assert.ok(Object.hasOwn(record, key), label + " is missing '" + key + "'");
     }
     assert.ok(graphNodesById.has(record.nodeId), label + " references a missing document");
@@ -906,15 +906,18 @@ for (const record of searchIndex) {
   assert.ok(node, "global search contains undiscoverable article '" + record.url + "'");
   assert.equal(record.title, node.title, "global search article '" + node.id + "' has a conflicting title");
   assert.equal(record.categoryKey, node.category, "global search article '" + node.id + "' has a conflicting category");
-  assert.equal(record.status, node.status, "global search article '" + node.id + "' has a conflicting status");
-  assert.ok(statusMeta[node.status], "global search article '" + node.id + "' uses an unknown status '" + node.status + "'");
-  assert.equal(
-    record.statusLabel,
-    statusMeta[node.status].label,
-    "global search article '" + node.id + "' has a stale status label"
-  );
   assert.equal(record.description, node.summary, "global search article '" + node.id + "' has a conflicting summary");
   assert.deepEqual(record.aliases, node.aliases, "global search article '" + node.id + "' has conflicting aliases");
+  assert.equal(Object.hasOwn(record, "status"), false, "global search article '" + node.id + "' still exposes editorial status");
+  assert.equal(Object.hasOwn(record, "statusLabel"), false, "global search article '" + node.id + "' still exposes a status label");
+}
+
+const unlistedPages = wikiPages.filter((page) => page.publicationVisibility === "unlisted");
+assert.ok(unlistedPages.length > 0, "the fixture must contain at least one unlisted page");
+for (const page of unlistedPages.slice(0, 5)) {
+  const html = await read(join("docs", page.id, "index.html"));
+  assert.match(html, /<meta name="robots" content="noindex">/, "unlisted page '" + page.id + "' must be noindex");
+  assert.match(html, /class="article-notice"/, "unlisted page '" + page.id + "' must show its unlisted notice");
 }
 
 function cleanDiscoveryArticlePath(url, label) {

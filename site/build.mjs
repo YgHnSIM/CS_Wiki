@@ -7,7 +7,7 @@ import anchor from "markdown-it-anchor";
 import { createAssetHash } from "./asset-fingerprint.mjs";
 import { connectionSummary, createConnectionIndex, findConnectionPaths } from "./assets/connection-paths.js";
 import { buildLearningMap } from "./assets/learning-lines.js";
-import { categoryMeta, domainMeta, historyPeriods, learningPaths, navCategories, statusMeta } from "./catalog.mjs";
+import { categoryMeta, domainMeta, historyPeriods, learningPaths, navCategories } from "./catalog.mjs";
 import { loadWikiContent } from "./content.mjs";
 import { buildKnowledgeGraph } from "./graph/model.mjs";
 import { buildHistoricalLens } from "./graph/history.mjs";
@@ -191,7 +191,6 @@ function buildConnectionGraph(graph) {
     url: node.url,
     category: node.category,
     domains: node.domains,
-    status: node.status,
     summary: node.summary,
     visibility: node.visibility
   }));
@@ -334,11 +333,6 @@ const counts = Object.fromEntries(Object.keys(categoryMeta).map((category) => [
   siteDiscoveryPages.filter((page) => page.category === category).length
 ]));
 
-const statusCounts = siteDiscoveryPages.reduce((acc, page) => {
-  acc[page.status] = (acc[page.status] || 0) + 1;
-  return acc;
-}, {});
-
 const domainCounts = siteDiscoveryPages.reduce((acc, page) => {
   page.tags.filter((tag) => tag.startsWith("domain/")).forEach((tag) => {
     acc[tag] = (acc[tag] || 0) + 1;
@@ -411,7 +405,7 @@ function layout({ title, description, content, canonicalPath = "/", bodyClass = 
   <main id="content" tabindex="-1">${content}</main>
   <footer class="footer">
     <p>원본 소스에 근거해 연결하는 컴퓨터 과학 위키</p>
-    <div><a href="${withBase("/meta/")}">운영 정보</a><a href="${repositoryUrl}">GitHub 저장소</a><span>${siteDiscoveryPages.length}개 문서</span><span>원문 대조 완료 ${statusCounts.active || 0}</span></div>
+    <div><a href="${withBase("/meta/")}">운영 정보</a><a href="${repositoryUrl}">GitHub 저장소</a><span>${siteDiscoveryPages.length}개 공개 문서</span></div>
   </footer>
   <dialog class="mobile-nav" id="mobile-menu" aria-labelledby="mobile-menu-title" data-mobile-menu>
     <header><h2 id="mobile-menu-title">주요 탐색</h2><button type="button" data-close-menu aria-label="메뉴 닫기">닫기</button></header>
@@ -428,10 +422,6 @@ function layout({ title, description, content, canonicalPath = "/", bodyClass = 
       <label>자료 유형<select data-search-category>
         <option value="">전체</option>
         ${Object.entries(categoryMeta).map(([value, meta]) => `<option value="${value}">${meta.label}</option>`).join("")}
-      </select></label>
-      <label>상태<select data-search-status>
-        <option value="">전체</option>
-        ${Object.entries(statusMeta).map(([value, meta]) => `<option value="${value}">${meta.label}</option>`).join("")}
       </select></label>
       <output id="site-search-status" data-search-count role="status" aria-live="polite" aria-atomic="true"></output>
     </div>
@@ -458,10 +448,6 @@ function domainLabel(domain) {
   return label;
 }
 
-function statusLabel(status) {
-  return statusMeta[status]?.label || status;
-}
-
 function sourceTarget(value) {
   return resolveSourceTarget(lookup, value);
 }
@@ -476,10 +462,10 @@ function pageCard(page, { compact = false, step = "" } = {}) {
   const connectionCount = Number(page.score) || 0;
   return `<article class="document-card${compact ? " compact" : ""}"
     data-document-card data-title="${escapeHtml(page.title)}" data-summary="${escapeHtml(page.summary)}"
-    data-status="${escapeHtml(page.status)}" data-domains="${escapeHtml(domains.join(","))}"
+    data-domains="${escapeHtml(domains.join(","))}"
     data-updated="${escapeHtml(page.updated || page.created || "")}" data-score="${connectionCount}"
     data-connection-count="${connectionCount}" data-evidence-count="${sourceCount}">
-    <div class="card-meta"><span>${step || categoryMeta[page.category].label}</span><span class="status-label ${escapeHtml(page.status)}">${escapeHtml(statusLabel(page.status))}</span></div>
+    <div class="card-meta"><span>${step || categoryMeta[page.category].label}</span></div>
     <h3><a href="${withBase(page.url)}">${escapeHtml(page.title)}</a></h3>
     ${compact ? "" : `<p>${escapeHtml(page.summary)}</p>`}
     ${compact || !domains.length ? "" : `<div class="card-domains">${domains.slice(0, 2).map((tag) => `<span>${escapeHtml(domainLabel(tag))}</span>`).join("")}</div>`}
@@ -588,7 +574,7 @@ function homePage() {
   const content = `
   <section class="hero section-frame">
     <div class="hero-copy">
-      <p class="eyebrow">정규 소스 ${counts.sources} · 참고 자료 ${counts.references} · 원문 대조 완료 문서 ${statusCounts.active || 0}</p>
+      <p class="eyebrow">정규 소스 ${counts.sources} · 참고 자료 ${counts.references} · 공개 문서 ${siteDiscoveryPages.length}</p>
       <h1><span class="hero-title-line hero-title-primary">컴퓨팅의 역사를</span><span class="hero-title-line hero-title-accent">연결해서 읽는다.</span></h1>
       <p class="hero-intro">배비지와 러브레이스에서 저장 프로그램 컴퓨터, 구조적 프로그래밍, Unix와 C, 유니코드까지. 원본 문헌에서 출발해 개념과 분석을 잇는 기술 위키입니다.</p>
       <div class="hero-actions">
@@ -717,7 +703,7 @@ function evidenceTrace(page) {
   return `<details class="evidence-trace">
     <summary><span>근거 추적</span><strong>${sourceSummary}</strong></summary>
     <div class="trace-grid">
-      <section class="trace-stage"><span>01</span><div><h2>현재 문서</h2><p>${escapeHtml(page.title)} · ${escapeHtml(statusLabel(page.status))}</p></div></section>
+      <section class="trace-stage"><span>01</span><div><h2>현재 문서</h2><p>${escapeHtml(page.title)}</p></div></section>
       <section class="trace-stage"><span>02</span><div><h2>${evidenceLabel}</h2>${direct.length ? `<ul>${direct.map(evidenceItem).join("")}</ul>` : "<p>메타 문서에는 연결된 근거가 없습니다.</p>"}</div></section>
       ${supporting.length ? `<section class="trace-stage"><span>03</span><div><h2>보조·접근 자료</h2><ul>${supporting.map(evidenceItem).join("")}</ul></div></section>` : ""}
       ${isSource ? `<section class="trace-stage"><span>${supporting.length ? "04" : "03"}</span><div><h2>재현 정보</h2><dl>
@@ -974,6 +960,7 @@ function articlePage(page) {
   const sourceLabel = page.sources.length ? `등록 근거 ${sources.length || page.sources.length}` : "메타 문서";
   const headings = pageHeadings(page);
   const toc = articleTocHtml(headings);
+  const successor = page.supersededBy ? lookup.get(key(page.supersededBy)) : null;
   const content = `
   <div class="article-layout section-frame">
     <aside class="article-rail">
@@ -981,7 +968,6 @@ function articlePage(page) {
       <details class="article-meta" data-article-meta open>
         <summary>문서 정보</summary>
         <dl>
-          <div><dt>상태</dt><dd><span class="status-dot ${escapeHtml(page.status)}"></span>${escapeHtml(statusLabel(page.status))}</dd></div>
           <div><dt>갱신</dt><dd>${page.updated || "날짜 미기록"}</dd></div>
           <div><dt>근거</dt><dd>${sourceLabel}</dd></div>
           <div><dt>검토 관계</dt><dd>${local.counts.core}</dd></div>
@@ -990,8 +976,10 @@ function articlePage(page) {
       </details>
     </aside>
     <article class="article">
+      ${page.publicationVisibility === "unlisted" ? `<aside class="article-notice" role="note"><strong>미등록 문서</strong> 이 문서는 아직 공개 목록에 등록되지 않았습니다. 검색·사이트맵에는 노출되지 않으며, 링크로만 접근할 수 있습니다.</aside>` : ""}
+      ${successor ? `<aside class="article-notice article-notice-superseded" role="note"><strong>대체된 문서</strong> 이 문서는 <a href="${withBase(successor.url)}">${escapeHtml(successor.title)}</a>로 대체되었습니다.</aside>` : ""}
       <header class="article-header">
-        <div class="article-category">${categoryMeta[page.category].label} / ${escapeHtml(statusLabel(page.status))}</div>
+        <div class="article-category">${categoryMeta[page.category].label}</div>
         <h1>${escapeHtml(page.title)}</h1>
         ${page.aliases.length ? `<div class="aliases"><span>다른 이름</span>${page.aliases.map((alias) => `<span>${escapeHtml(alias)}</span>`).join("")}</div>` : ""}
       </header>
@@ -1027,9 +1015,7 @@ function listingFacetCounts(categoryPages) {
   const domains = Object.fromEntries([...new Set(categoryPages.flatMap(pageDomains))]
     .sort((a, b) => domainLabel(a).localeCompare(domainLabel(b), "ko"))
     .map((domain) => [domain, categoryPages.filter((page) => pageDomains(page).includes(domain)).length]));
-  const statuses = Object.fromEntries(Object.keys(statusMeta)
-    .map((status) => [status, categoryPages.filter((page) => page.status === status).length]));
-  return { domains, statuses };
+  return { domains };
 }
 
 function staticPageNumbers(page, pageCount) {
@@ -1060,8 +1046,6 @@ function listingData(category, categoryPages) {
       summary: page.summary,
       url: withBase(page.url),
       category: categoryMeta[page.category].label,
-      status: page.status,
-      statusLabel: statusLabel(page.status),
       domains: pageDomains(page),
       updated: page.updated || page.created || "",
       connectionCount: Number(page.score) || 0,
@@ -1093,7 +1077,6 @@ function listingPage(category, page = 1) {
         <summary>필터 및 정렬</summary>
         <div class="listing-filter-fields">
           <label class="listing-filter-domain">주제<select data-list-domain><option value="">전체</option>${domains.map((domain) => `<option value="${domain}"${facets.domains[domain] ? "" : " disabled"}>${escapeHtml(domainLabel(domain))} ${facets.domains[domain]}</option>`).join("")}</select></label>
-          <label class="listing-filter-status">상태<select data-list-status><option value="">전체</option>${Object.entries(statusMeta).map(([value, meta]) => `<option value="${value}"${facets.statuses[value] ? "" : " disabled"}>${escapeHtml(meta.label)} ${facets.statuses[value]}</option>`).join("")}</select></label>
           <label class="listing-filter-sort">정렬<select data-list-sort><option value="score">연결 많은 순</option><option value="title">가나다순</option><option value="updated">최근 갱신순</option></select></label>
           <button type="button" class="listing-filter-reset" data-list-reset hidden>필터 초기화</button>
         </div>
@@ -1306,7 +1289,7 @@ function learningInspectorHtml(path, station) {
       <span data-learning-station-category>${escapeHtml(categoryMeta[station.category]?.label || station.category)}</span>
       <h2 id="learning-station-title" data-learning-station-title>${escapeHtml(station.title)}</h2>
       <p data-learning-station-summary>${escapeHtml(station.summary)}</p>
-      <div class="learning-station-flags" data-learning-station-flags><span>${memberships.length > 1 ? `환승역 · ${memberships.length}개 노선` : "일반역"}</span><span>${escapeHtml(statusLabel(station.status))}</span></div>
+      <div class="learning-station-flags" data-learning-station-flags><span>${memberships.length > 1 ? `환승역 · ${memberships.length}개 노선` : "일반역"}</span></div>
       <div class="learning-station-actions"><a data-learning-station-read href="${withBase(station.url)}">문서 읽기 →</a><a data-learning-station-connect href="${connectionHref}">이 역에서 연결 찾기 ↔</a></div>
     </div>
     <nav class="learning-adjacent" aria-label="현재 노선의 이전·다음 역">
@@ -1565,7 +1548,7 @@ function evidenceSourceCardHtml(node, { selected = false } = {}) {
 function evidenceDocumentCardHtml(node, { selected = false, sharedCount = 0, evidenceCount = null } = {}) {
   const count = evidenceCount ?? evidenceEdgesByDocument.get(node.id)?.length ?? 0;
   return `<article class="evidence-document-card${selected ? " is-selected" : ""}">
-    <div class="evidence-card-kicker"><span>${escapeHtml(categoryMeta[node.category]?.label || node.category)}</span><span>${escapeHtml(statusLabel(node.status))}</span></div>
+    <div class="evidence-card-kicker"><span>${escapeHtml(categoryMeta[node.category]?.label || node.category)}</span></div>
     <h3><a href="${withBase(evidenceRouteForNode(node))}"${selected ? ' aria-current="page"' : ""}>${escapeHtml(node.title)}</a></h3>
     <p>${escapeHtml(node.summary)}</p>
     <dl><div><dt>등록 근거</dt><dd>${count}</dd></div>${sharedCount ? `<div><dt>현재 문서와 공유</dt><dd>${sharedCount}</dd></div>` : ""}</dl>
@@ -1881,8 +1864,6 @@ const searchIndex = siteDiscoveryPages.map((page) => ({
   url: withBase(page.url),
   category: categoryMeta[page.category].label,
   categoryKey: page.category,
-  status: page.status,
-  statusLabel: statusLabel(page.status),
   updated: page.updated,
   description: page.summary,
   aliases: page.aliases,

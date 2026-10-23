@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: analysis-agi-criteria-shift
 kind: analysis
 title: AGI 판정 기준은 누가 옮기는가
@@ -11,16 +11,10 @@ summary: ANI와 AGI의 구분이 생긴 맥락, LLM 이후 판정 기준이 옮�
 domains:
   - machine-learning
   - computer-science
-editorial_status: draft
 publication_visibility: unlisted
 graph_visibility: public
 created: 2026-10-19
-updated: 2026-10-23
-review:
-  mode: pending
-  revision: sha256:4d0cc5586607067f06b2c4d9eb9beed9a9f0660e1d07289a2736feb457d2652d
-  reviewed_at: null
-  reviewed_by: null
+updated: 2026-10-24
 evidence_ids:
   - ref-147
   - ref-151

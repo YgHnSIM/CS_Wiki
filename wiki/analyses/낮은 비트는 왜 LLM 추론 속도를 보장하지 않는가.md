@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: analysis-low-bit-llm-inference
 kind: analysis
 title: 낮은 비트는 왜 LLM 추론 속도를 보장하지 않는가
@@ -12,16 +12,10 @@ domains:
   - machine-learning
   - computer-architecture
   - performance
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-25
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:e79451d1708f40c2819de1b96fde546092624a408f6127d2d54f31385e7322d0
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids:
   - ref-039
   - ref-069

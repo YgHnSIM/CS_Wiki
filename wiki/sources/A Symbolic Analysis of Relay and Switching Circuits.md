@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-008
 kind: reference
 title: A Symbolic Analysis of Relay and Switching Circuits
@@ -12,16 +12,10 @@ domains:
   - computer-history
   - computer-architecture
   - computer-science
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-10
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:d4adbd0c1fb844cbaefa9ca7c9cfe23af6f06aa84e1d2452d8e4683c072bef14
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids: []
 capability_layers: []
 history:

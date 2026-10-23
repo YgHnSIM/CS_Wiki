@@ -5,7 +5,6 @@ const dialog = document.querySelector("[data-search-dialog]");
 const searchInput = document.querySelector("[data-search-input]");
 const searchResults = document.querySelector("[data-search-results]");
 const searchCategory = document.querySelector("[data-search-category]");
-const searchStatus = document.querySelector("[data-search-status]");
 const searchCount = document.querySelector("[data-search-count]");
 const openSearchButtons = document.querySelectorAll("[data-open-search]");
 const menuButton = document.querySelector(".menu-trigger");
@@ -156,9 +155,7 @@ function resultElement(item, index, terms) {
   meta.className = "search-result-meta";
   const category = document.createElement("span");
   category.textContent = item.category;
-  const status = document.createElement("span");
-  status.textContent = item.statusLabel;
-  meta.append(category, status);
+  meta.append(category);
 
   const body = document.createElement("div");
   const title = document.createElement("strong");
@@ -223,10 +220,8 @@ async function renderSearch(query) {
     if (renderVersion !== searchRenderVersion) return;
     const terms = value.split(/\s+/).filter(Boolean);
     const categoryValue = searchCategory?.value || "";
-    const statusValue = searchStatus?.value || "";
     const matches = index
       .filter((item) => !categoryValue || item.categoryKey === categoryValue)
-      .filter((item) => !statusValue || item.status === statusValue)
       .map((item) => ({ item, score: rankItem(item, terms) }))
       .filter(({ score }) => score >= 0)
       .sort((a, b) => b.score - a.score || a.item.title.localeCompare(b.item.title, "ko"));
@@ -258,7 +253,6 @@ async function openSearch({ query = "", preserveFilters = false } = {}) {
   searchInput.value = query;
   if (!preserveFilters) {
     searchCategory.value = "";
-    searchStatus.value = "";
   }
   if (query) await renderSearch(query);
   else clearResults("검색어를 입력하세요.");
@@ -271,7 +265,7 @@ async function openSearch({ query = "", preserveFilters = false } = {}) {
 openSearchButtons.forEach((button) => button.addEventListener("click", () => openSearch()));
 searchInput?.addEventListener("input", (event) => renderSearch(event.target.value));
 searchCategory?.addEventListener("change", () => renderSearch(searchInput.value));
-searchStatus?.addEventListener("change", () => renderSearch(searchInput.value));
+searchCategory?.addEventListener("change", () => renderSearch(searchInput.value));
 
 searchInput?.addEventListener("keydown", (event) => {
   const results = [...searchResults.querySelectorAll("[role=option]")];
@@ -531,7 +525,6 @@ function initializeListings() {
   document.querySelectorAll("[data-listing]").forEach((listing) => {
     const queryInput = listing.querySelector("[data-list-query]");
     const domainSelect = listing.querySelector("[data-list-domain]");
-    const statusSelect = listing.querySelector("[data-list-status]");
     const sortSelect = listing.querySelector("[data-list-sort]");
     const count = listing.querySelector("[data-list-count]");
     const empty = listing.querySelector("[data-list-empty]");
@@ -539,7 +532,7 @@ function initializeListings() {
     const pagination = listing.querySelector("[data-list-pagination]");
     const reset = listing.querySelector("[data-list-reset]");
     const emptyReset = listing.querySelector("[data-list-empty-reset]");
-    if (!queryInput || !domainSelect || !statusSelect || !sortSelect || !count || !empty || !grid) return;
+    if (!queryInput || !domainSelect || !sortSelect || !count || !empty || !grid) return;
 
     const staticCards = [...grid.querySelectorAll("[data-document-card]")];
     const staticCount = count.textContent;
@@ -552,7 +545,6 @@ function initializeListings() {
 
     queryInput.value = url.searchParams.get("filter") || "";
     domainSelect.value = url.searchParams.get("domain") || "";
-    statusSelect.value = url.searchParams.get("status") || "";
     const requestedSort = url.searchParams.get("sort") || "score";
     sortSelect.value = ["score", "title", "updated"].includes(requestedSort) ? requestedSort : "score";
 
@@ -560,7 +552,6 @@ function initializeListings() {
       return Boolean(
         queryInput.value.trim()
         || domainSelect.value
-        || statusSelect.value
         || sortSelect.value !== "score"
       );
     }
@@ -570,7 +561,6 @@ function initializeListings() {
       const values = {
         filter: queryInput.value.trim(),
         domain: domainSelect.value,
-        status: statusSelect.value,
         sort: sortSelect.value === "score" ? "" : sortSelect.value
       };
       Object.entries(values).forEach(([name, value]) => value ? next.searchParams.set(name, value) : next.searchParams.delete(name));
@@ -597,7 +587,6 @@ function initializeListings() {
       card.dataset.documentCard = "";
       card.dataset.title = item.title || "";
       card.dataset.summary = item.summary || "";
-      card.dataset.status = item.status || "";
       card.dataset.domains = Array.isArray(item.domains) ? item.domains.join(",") : "";
       card.dataset.updated = item.updated || "";
       card.dataset.score = String(Number(item.connectionCount) || 0);
@@ -608,11 +597,7 @@ function initializeListings() {
       meta.className = "card-meta";
       const category = document.createElement("span");
       category.textContent = item.category || "";
-      const state = document.createElement("span");
-      state.className = "status-label";
-      if (item.status) state.classList.add(item.status);
-      state.textContent = item.statusLabel || item.status || "";
-      meta.append(category, state);
+      meta.append(category);
 
       const heading = document.createElement("h3");
       const link = document.createElement("a");
@@ -678,14 +663,12 @@ function initializeListings() {
     function matchingItems(items) {
       const term = normalize(queryInput.value.trim());
       const domain = domainSelect.value;
-      const status = statusSelect.value;
       const sort = sortSelect.value;
       return items
         .filter((item) => {
           const matchesQuery = !term || normalize(`${item.title || ""} ${item.summary || ""}`).includes(term);
           const matchesDomain = !domain || (item.domains || []).includes(domain);
-          const matchesStatus = !status || item.status === status;
-          return matchesQuery && matchesDomain && matchesStatus;
+          return matchesQuery && matchesDomain;
         })
         .sort((left, right) => {
           if (sort === "title") return String(left.title).localeCompare(String(right.title), "ko");
@@ -728,7 +711,6 @@ function initializeListings() {
         const visible = matchingItems(staticCards.map((card) => ({
           title: card.dataset.title,
           summary: card.dataset.summary,
-          status: card.dataset.status,
           domains: card.dataset.domains.split(",").filter(Boolean),
           updated: card.dataset.updated,
           connectionCount: Number(card.dataset.connectionCount || card.dataset.score),
@@ -744,12 +726,10 @@ function initializeListings() {
     listing.querySelector("[data-list-controls]")?.addEventListener("submit", (event) => event.preventDefault());
     queryInput.addEventListener("input", () => void applyFilters());
     domainSelect.addEventListener("change", () => void applyFilters());
-    statusSelect.addEventListener("change", () => void applyFilters());
     sortSelect.addEventListener("change", () => void applyFilters());
     const resetFilters = () => {
       queryInput.value = "";
       domainSelect.value = "";
-      statusSelect.value = "";
       sortSelect.value = "score";
       void applyFilters();
       queryInput.focus();

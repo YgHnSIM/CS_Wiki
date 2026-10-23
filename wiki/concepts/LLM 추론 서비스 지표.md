@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept-llm-inference-service-metrics
 kind: concept
 title: LLM 추론 서비스 지표
@@ -14,16 +14,10 @@ domains:
   - machine-learning
   - performance
   - systems
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-24
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:b0168e560935c8169d1c93de48d822fd958c35b5dd6c4b4a9594eeb338e9b082
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids:
   - ref-077
   - ref-078

@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-098
 kind: reference
 title: Decoupling Algorithms from Schedules for Easy Optimization of Image Processing Pipelines
@@ -13,16 +13,10 @@ domains:
   - software-engineering
   - programming-languages
   - performance
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-25
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:011c99622a753bf8671d092fbfeff77eea98c823f5a2f65e8cce944f1cfedb35
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - programmability

@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-028
 kind: reference
 title: Cambridge Computer Laboratory - The History of the Computer Lab
@@ -10,16 +10,10 @@ summary: EDSAC I의 운영과 EDSAC II의 마이크로프로그램 제어부 계
 domains:
   - computer-history
   - computer-architecture
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-10
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:364459cf5182a2280bce0de28eb414a7abf18735b5a1e8e9fcedcbbbb6cbb8ae
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids: []
 capability_layers: []
 redirect_from:

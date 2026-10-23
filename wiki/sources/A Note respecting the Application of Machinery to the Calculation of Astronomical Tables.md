@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-053
 kind: reference
 title: A Note respecting the Application of Machinery to the Calculation of Astronomical Tables
@@ -11,16 +11,10 @@ summary: 찰스 배비지가 1822년 차분법 기반 기계로 수학 표를 �
 domains:
   - computer-history
   - mathematics
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-20
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:2a350a6c0e1fbb58f7b795f9d8a4325c41b4f7196a7f155ba230d1e52bd50665
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - resource-efficiency

@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-070
 kind: reference
 title: MLPerf Training Benchmark
@@ -11,16 +11,10 @@ summary: 서로 다른 하드웨어·소프트웨어 구성의 기계 학습 학
 domains:
   - machine-learning
   - computer-architecture
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-24
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:560aa0a0f6439796fc3efd4b65e96a928dfe0ff46bafa2964d77dcbd9a16e271
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - realized-performance

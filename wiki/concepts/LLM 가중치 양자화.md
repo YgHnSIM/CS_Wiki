@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept-llm-weight-quantization
 kind: concept
 title: LLM 가중치 양자화
@@ -12,16 +12,10 @@ summary: 학습된 LLM 가중치를 보정 데이터와 스케일·제로포인�
 domains:
   - machine-learning
   - computer-architecture
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-25
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:e118932d22737a4c310a6f553bad73c6dbac2f0b56dc8e91c0ccdf8e224bc967
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids:
   - ref-081
   - ref-082

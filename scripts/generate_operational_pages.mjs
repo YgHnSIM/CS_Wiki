@@ -1,7 +1,7 @@
 import { readFile, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import YAML from "yaml";
-import { loadWikiManifest, revisionFor } from "./wiki_manifest.mjs";
+import { loadWikiManifest } from "./wiki_manifest.mjs";
 import { runDate } from "./wiki_date.mjs";
 import { loadLogEntries, renderLogPageBody } from "./log_index.mjs";
 import { CAPABILITY_LAYERS, HISTORICAL_LAYERS } from "../site/graph/schema.mjs";
@@ -13,7 +13,6 @@ const evidenceBlock = "<!-- wiki-v2:evidence-start -->\n### 근거 ID\n- 없음\
 
 function render(data, body) {
   data.updated = today;
-  data.review.revision = revisionFor(body, data);
   return `---\n${YAML.stringify(data, { lineWidth: 0 }).trimEnd()}\n---\n\n${body.trim()}\n`;
 }
 
@@ -22,9 +21,7 @@ async function writeGenerated(page, body) {
   const filePath = join(root, page.relativePath);
   const existing = await readFile(filePath, "utf8").catch(() => "");
   const existingBody = existing.replace(/^---\r?\n[\s\S]*?\r?\n---(?:\r?\n|$)/, "").trim();
-  if (existingBody === body.trim() && page.review.revision === revisionFor(body, structuredClone(page.rawFrontmatter))) {
-    return false;
-  }
+  if (existingBody === body.trim()) return false;
   await writeFile(filePath, render(structuredClone(page.rawFrontmatter), body), "utf8");
   return true;
 }
@@ -68,7 +65,7 @@ const curatedRelations = publicKnowledge.reduce((sum, page) => sum + page.relati
 const capabilityCounts = CAPABILITY_LAYERS.map((layer) => `${capabilityLabels[layer]} ${publicKnowledge.filter((page) => page.capabilityLayers.includes(layer)).length}개`).join(" · ");
 const historicalCounts = HISTORICAL_LAYERS.map((layer) => `${historicalLabels[layer]} ${publicKnowledge.filter((page) => page.history.historicalLayer === layer).length}개`).join(" · ");
 const overviewPage = manifest.pages.find((page) => page.relativePath === "wiki/overview.md");
-const overviewBody = `<!-- wiki-v2:generated overview -->\n# CS Wiki 개요\n\n운영 스키마 v2로 관리되는 지식 베이스다. 공개 목록에는 \`publication_visibility: public\` 문서만 포함되며, \`unlisted\` 문서는 URL과 링크로 접근할 수 있지만 목록·검색·사이트맵·그래프 렌즈에서 제외한다.\n\n## 현재 규모\n\n- 전체 페이지: ${pages.length}개\n- 공개 목록: ${publicPages.length}개\n- 정규 소스: ${counts.sources}개\n- 참고 자료: ${counts.references}개\n- 개념: ${counts.concepts}개\n- 개체: ${counts.entities}개\n- 분석: ${counts.analyses}개\n- 메타: ${counts.meta}개\n\n## 온톨로지 상태\n\n그래프에 공개하는 개념·개체·분석의 층위와 검토된 의미 관계다. 빈 능력 층위나 역사 층위는 린트가 거부한다. 연도는 원전 대조 없이 채우지 않는다.\n\n- 공개 지식 문서: ${publicKnowledge.length}개\n- 능력 층위 부여: ${publicKnowledge.filter((page) => page.capabilityLayers.length).length}/${publicKnowledge.length}\n- 역사 층위 부여: ${publicKnowledge.filter((page) => page.history.historicalLayer).length}/${publicKnowledge.length}\n- 검토된 의미 관계: ${curatedRelations}개 (${curatedPages.length}개 문서)\n- 능력 층위: ${capabilityCounts}\n- 역사 층위: ${historicalCounts}\n\n## 주요 항목\n\n- [[위키 색인]] — 문서 전체의 자동 색인.\n- [[작업 로그]] — 작업별 상세 기록의 목록.\n- [[지식 그래프 관계 스키마]] — 의미 관계와 층위 어휘의 작성 규칙.\n\n## 출처\n\n${evidenceBlock}\n\n## 관련 항목\n\n- [[위키 색인]] — 전체 문서를 유형별로 탐색한다.\n- [[지식 그래프 관계 스키마]] — 관계 종류와 근거 채널을 확인한다.`;
+const overviewBody = `<!-- wiki-v2:generated overview -->\n# CS Wiki 개요\n\n운영 스키마 v3로 관리되는 지식 베이스다. 공개 목록에는 \`publication_visibility: public\` 문서만 포함되며, \`unlisted\` 문서는 URL과 링크로 접근할 수 있지만 목록·검색·사이트맵·그래프 렌즈에서 제외한다.\n\n## 현재 규모\n\n- 전체 페이지: ${pages.length}개\n- 공개 목록: ${publicPages.length}개\n- 미등록 문서: ${pages.length - publicPages.length}개\n- 정규 소스: ${counts.sources}개\n- 참고 자료: ${counts.references}개\n- 개념: ${counts.concepts}개\n- 개체: ${counts.entities}개\n- 분석: ${counts.analyses}개\n- 메타: ${counts.meta}개\n\n## 온톨로지 상태\n\n그래프에 공개하는 개념·개체·분석의 층위와 검토된 의미 관계다. 빈 능력 층위나 역사 층위는 린트가 거부한다. 연도는 원전 대조 없이 채우지 않는다.\n\n- 공개 지식 문서: ${publicKnowledge.length}개\n- 공개 지식 근거 커버리지: ${publicKnowledge.filter((page) => page.evidenceIds.length).length}/${publicKnowledge.length}\n- 능력 층위 부여: ${publicKnowledge.filter((page) => page.capabilityLayers.length).length}/${publicKnowledge.length}\n- 역사 층위 부여: ${publicKnowledge.filter((page) => page.history.historicalLayer).length}/${publicKnowledge.length}\n- 검토된 의미 관계: ${curatedRelations}개 (${curatedPages.length}개 문서)\n- 능력 층위: ${capabilityCounts}\n- 역사 층위: ${historicalCounts}\n\n## 주요 항목\n\n- [[위키 색인]] — 문서 전체의 자동 색인.\n- [[작업 로그]] — 작업별 상세 기록의 목록.\n- [[지식 그래프 관계 스키마]] — 의미 관계와 층위 어휘의 작성 규칙.\n\n## 출처\n\n${evidenceBlock}\n\n## 관련 항목\n\n- [[위키 색인]] — 전체 문서를 유형별로 탐색한다.\n- [[지식 그래프 관계 스키마]] — 관계 종류와 근거 채널을 확인한다.`;
 if (await writeGenerated(overviewPage, overviewBody)) changed.push(overviewPage.relativePath);
 
 const logEntries = await loadLogEntries(root);

@@ -11,41 +11,32 @@ import {
   fixWikiEol
 } from "../scripts/wiki_maintenance.mjs";
 import {
-  loadWikiManifest,
-  revisionFor
+  loadWikiManifest
 } from "../scripts/wiki_manifest.mjs";
 
 const maintenanceScript = resolve("scripts", "wiki_maintenance.mjs");
 
 function pageData(id, title) {
   return {
-    schema_version: 2,
+    schema_version: 3,
     id,
     kind: "meta",
     title,
     aliases: [],
     summary: `${title} maintenance fixture summary.`,
     domains: ["computer-science"],
-    editorial_status: "active",
     publication_visibility: "public",
     graph_visibility: "hidden",
     created: "2000-01-01",
     updated: "2000-01-01",
-    review: {
-      mode: "attested",
-      revision: null,
-      reviewed_at: "2000-01-01",
-      reviewed_by: "test"
-    },
     evidence_ids: [],
     capability_layers: []
   };
 }
 
-async function writeV2Page(path, { id, title, body }) {
+async function writeV3Page(path, { id, title, body }) {
   const data = pageData(id, title);
   const normalizedBody = body.trim();
-  data.review.revision = revisionFor(normalizedBody, data);
   const frontmatter = YAML.stringify(data, { lineWidth: 0 }).trimEnd();
   await writeFile(path, `---\n${frontmatter}\n---\n\n${normalizedBody}\n`, "utf8");
 }
@@ -54,14 +45,14 @@ function pageBody(marker, extra = "") {
   return `${marker}
 
 <!-- wiki-v2:evidence-start -->
-근거 없음
+洹쇨굅 ?놁쓬
 <!-- wiki-v2:evidence-end -->
 ${extra}
-## 출처
+## 異쒖쿂
 
-- 없음
+- ?놁쓬
 
-## 관련 항목`;
+## 愿????ぉ`;
 }
 
 async function createWikiFixture(t) {
@@ -75,17 +66,17 @@ async function createWikiFixture(t) {
     overview: join(wiki, "overview.md"),
     log: join(wiki, "log.md")
   };
-  await writeV2Page(paths.index, {
+  await writeV3Page(paths.index, {
     id: "meta-index",
     title: "Index",
     body: pageBody("<!-- wiki-v2:generated index -->")
   });
-  await writeV2Page(paths.overview, {
+  await writeV3Page(paths.overview, {
     id: "meta-overview",
     title: "Overview",
     body: pageBody("<!-- wiki-v2:generated overview -->")
   });
-  await writeV2Page(paths.log, {
+  await writeV3Page(paths.log, {
     id: "meta-log",
     title: "Log",
     body: pageBody("<!-- wiki-v2:generated log -->", "\n- [entry](logs/entry.md)\n")
@@ -206,8 +197,8 @@ test("EOL fixing is explicit, idempotent, and refreshes the revision", async (t)
   const parsed = text.match(/^---\n([\s\S]*?)\n---\n\n([\s\S]*)$/);
   assert.ok(parsed);
   const data = YAML.parse(parsed[1]);
-  const body = parsed[2].trim();
-  assert.equal(data.review.revision, revisionFor(body, data));
+  assert.equal(data.schema_version, 3);
+  assert.equal(data.review, undefined);
   assert.equal(data.updated, "2000-01-01");
   assert.deepEqual(await fixWikiEol({ root: fixture.root, manifest }), {
     changed: 0,

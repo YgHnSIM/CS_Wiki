@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-066
 kind: reference
 title: The Complexity of Theorem-Proving Procedures
@@ -10,16 +10,10 @@ aliases:
 summary: 다항 시간 비결정적 튜링 기계가 푸는 인식 문제를 명제 논리의 항진식 판정 문제로 환원해 다항 환원과 완전 문제의 틀을 제시한 Stephen A. Cook의 1971년 논문.
 domains:
   - computer-science
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-24
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:a4e07be96adc1b4f3be0b7423b1f168e18773f0d954846eebcbb4da7c31fb917
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - complexity

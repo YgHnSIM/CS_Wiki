@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept-kv-cache
 kind: concept
 title: KV 캐시
@@ -13,16 +13,10 @@ domains:
   - machine-learning
   - systems
   - computer-architecture
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-24
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:85b4935622d541e42af17957b8fbbe9127c83c59e7a68c87450490c11aa98fb4
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids:
   - ref-075
   - ref-076

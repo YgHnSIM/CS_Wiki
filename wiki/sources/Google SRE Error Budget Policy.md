@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-118
 kind: reference
 title: Google SRE Error Budget Policy
@@ -11,16 +11,10 @@ summary: SLO에서 허용된 실패량을 error budget으로 계산하고, 예�
 domains:
   - systems
   - software-engineering
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-08-05
-updated: 2026-08-05
-review:
-  mode: attested
-  revision: sha256:39eeee876884f780a367aae8190c5522c5a109a337be8cedc9e61f9d2515a208
-  reviewed_at: 2026-08-05
-  reviewed_by: codex
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - reliable-results

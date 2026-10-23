@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: meta-overview
 kind: meta
 title: 위키 개요
@@ -9,16 +9,10 @@ aliases:
   - 전체 개요
 summary: CS Wiki의 지식 범위, 검증 상태, 핵심 주제와 웹 탐색 방법을 한눈에 보여주는 홈페이지.
 domains: []
-editorial_status: active
 publication_visibility: public
 graph_visibility: hidden
 created: 2026-05-03
-updated: 2026-10-23
-review:
-  mode: attested
-  revision: sha256:0c71d80a1381b4c27fac4af0a9118fdee253c37ea45927a0cefa9b8778da4525
-  reviewed_at: 2026-08-03
-  reviewed_by: codex
+updated: 2026-10-24
 evidence_ids: []
 capability_layers: []
 redirect_from:
@@ -28,12 +22,13 @@ redirect_from:
 <!-- wiki-v2:generated overview -->
 # CS Wiki 개요
 
-운영 스키마 v2로 관리되는 지식 베이스다. 공개 목록에는 `publication_visibility: public` 문서만 포함되며, `unlisted` 문서는 URL과 링크로 접근할 수 있지만 목록·검색·사이트맵·그래프 렌즈에서 제외한다.
+운영 스키마 v3로 관리되는 지식 베이스다. 공개 목록에는 `publication_visibility: public` 문서만 포함되며, `unlisted` 문서는 URL과 링크로 접근할 수 있지만 목록·검색·사이트맵·그래프 렌즈에서 제외한다.
 
 ## 현재 규모
 
 - 전체 페이지: 437개
 - 공개 목록: 394개
+- 미등록 문서: 43개
 - 정규 소스: 6개
 - 참고 자료: 141개
 - 개념: 164개
@@ -46,6 +41,7 @@ redirect_from:
 그래프에 공개하는 개념·개체·분석의 층위와 검토된 의미 관계다. 빈 능력 층위나 역사 층위는 린트가 거부한다. 연도는 원전 대조 없이 채우지 않는다.
 
 - 공개 지식 문서: 244개
+- 공개 지식 근거 커버리지: 244/244
 - 능력 층위 부여: 244/244
 - 역사 층위 부여: 244/244
 - 검토된 의미 관계: 616개 (244개 문서)

@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-143
 kind: reference
 title: Elementorum Philosophiae Sectio Prima De Corpore
@@ -12,16 +12,10 @@ summary: 토머스 홉스가 감각 기호를 개인 기억용 표지(Nota)와 �
 domains:
   - computer-history
   - computer-science
-editorial_status: draft
 publication_visibility: unlisted
 graph_visibility: public
 created: 2026-10-18
-updated: 2026-10-23
-review:
-  mode: pending
-  revision: sha256:f56ececf001f6661df0c5a2535a85dddca16d515c1516da48e50a6014ac2ea1f
-  reviewed_at: null
-  reviewed_by: null
+updated: 2026-10-24
 evidence_ids: []
 capability_layers: []
 history:

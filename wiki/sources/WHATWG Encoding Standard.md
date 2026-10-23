@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-026
 kind: reference
 title: WHATWG Encoding Standard
@@ -11,16 +11,10 @@ domains:
   - computer-science
   - web
   - text-processing
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-10
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:120a8240b9ec0373befe92fbb51deb2af43859c12dfbaf2f3bad6c9099353f8a
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids: []
 capability_layers: []
 history:

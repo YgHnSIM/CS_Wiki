@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept-ai-coding-assistance
 kind: concept
 title: AI 코딩 지원
@@ -12,16 +12,10 @@ summary: 자연어·코드·저장소 맥락을 바탕으로 구현 후보, 설�
 domains:
   - software-engineering
   - machine-learning
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-25
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:3780008a5940bbc89f5f005c3f31bb6faa66fa330c7c85bcffb3dca88e6642c5
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids:
   - ref-105
   - ref-106

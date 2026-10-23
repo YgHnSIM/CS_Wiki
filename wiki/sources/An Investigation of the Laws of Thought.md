@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-030
 kind: reference
 title: An Investigation of the Laws of Thought
@@ -11,16 +11,10 @@ summary: Boole의 1854년 저작을 바탕으로 논리를 기호와 연산의 �
 domains:
   - computer-history
   - computer-science
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-11
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:2eb1e79b76772d62d51e6f784b18b8032e2e2112e0da4961766d0c942c7c6a8a
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids: []
 capability_layers: []
 history:

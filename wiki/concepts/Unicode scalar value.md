@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept-be5e965404a672d3
 kind: concept
 title: Unicode scalar value
@@ -11,16 +11,10 @@ summary: Unicode 코드 포인트 가운데 surrogate 영역을 제외해 UTF �
 domains:
   - computer-science
   - text-processing
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-10
-updated: 2026-09-17
-review:
-  mode: attested
-  revision: sha256:b72d07d7f3e473c0de40de6f675473d8e4d8fca539780806ea20f04bfe50240c
-  reviewed_at: 2026-09-17
-  reviewed_by: grok
+updated: 2026-10-24
 evidence_ids:
   - ref-022
   - ref-023

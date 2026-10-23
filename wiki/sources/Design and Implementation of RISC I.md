@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-044
 kind: reference
 title: Design and Implementation of RISC I
@@ -11,16 +11,10 @@ summary: 초기 VLSI 제약에서 단순하고 규칙적인 명령어 집합, �
 domains:
   - computer-architecture
   - computer-history
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-16
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:055069d47147b3ac79a0a672663f92811a8cc9bd3bf7ae42c405342eb5e945ec
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - realized-performance

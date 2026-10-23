@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-067
 kind: reference
 title: Reducibility Among Combinatorial Problems
@@ -10,16 +10,10 @@ aliases:
 summary: 만족 가능성 문제에서 여러 조합적 결정 문제로의 다항시간 변환을 구성해 완전성 결과를 확장한 Richard M. Karp의 1972년 논문.
 domains:
   - computer-science
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-24
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:50fb94949db3769905cf0ae74fb8e6e8ec4977b273769c09d91a5776ff3aaca1
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - complexity

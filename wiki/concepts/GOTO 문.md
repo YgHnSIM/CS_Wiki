@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept-60bcdf34d9470eea
 kind: concept
 title: GOTO 문
@@ -12,16 +12,10 @@ summary: 프로그램 실행을 지정된 라벨이나 주소로 직접 이동�
 domains:
   - programming-languages
   - software-engineering
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-10
-updated: 2026-09-17
-review:
-  mode: attested
-  revision: sha256:81577d465b828353f6094c549eb3dd9db06925ddf3df06f07057b45b6410f7f9
-  reviewed_at: 2026-09-17
-  reviewed_by: grok
+updated: 2026-10-24
 evidence_ids:
   - ref-011
   - ref-014

@@ -50,7 +50,7 @@ function intermediatePenalty(index, nodeId, mode) {
   const categoryPenalty = node.category === "sources" || node.category === "references"
     ? 4
     : node.category === "meta" ? 2 : 0;
-  return degreePenalty + categoryPenalty + (node.status === "draft" ? 0.35 : 0);
+  return degreePenalty + categoryPenalty;
 }
 
 function labelFor(graph, edge, inverse) {

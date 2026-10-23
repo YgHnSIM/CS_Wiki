@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: analysis-dependency-provenance-registry
 kind: analysis
 title: registry는 의존성의 출처와 동일성을 어떻게 증명하는가
@@ -11,16 +11,10 @@ domains:
   - software-engineering
   - security
   - systems
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-08-05
-updated: 2026-09-17
-review:
-  mode: attested
-  revision: sha256:c3ae707b833b6b452cb105f2284bb68cb27fbb15352426ad4961d0c046a2a2fd
-  reviewed_at: 2026-08-05
-  reviewed_by: codex-research-097
+updated: 2026-10-24
 evidence_ids:
   - ref-125
   - ref-127

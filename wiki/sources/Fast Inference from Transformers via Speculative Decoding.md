@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-079
 kind: reference
 title: Fast Inference from Transformers via Speculative Decoding
@@ -11,16 +11,10 @@ summary: 작은 근사 모델이 제안한 여러 토큰을 큰 타깃 모델이
 domains:
   - machine-learning
   - systems
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-25
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:8e9edfd8513acdbc37989a2e54f76bd04a3fdea6eb72f1728ca3b070e3f5959f
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - realized-performance

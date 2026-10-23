@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-135
 kind: reference
 title: ONNX Runtime Execution Providers
@@ -12,16 +12,10 @@ domains:
   - machine-learning
   - systems
   - software-engineering
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-08-05
-updated: 2026-08-05
-review:
-  mode: attested
-  revision: sha256:327e9266d0869f97cfb2b9e00b86849919c63d6b33828bf3083a03aed0a14f78
-  reviewed_at: 2026-08-05
-  reviewed_by: codex-research-097
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - reliable-results

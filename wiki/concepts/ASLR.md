@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: aslr
 kind: concept
 title: ASLR (Address Space Layout Randomization)
@@ -11,16 +11,10 @@ domains:
   - security
   - operating-systems
   - computer-architecture
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-08-24
-updated: 2026-09-17
-review:
-  mode: attested
-  revision: sha256:39ee511d6f6dbbeaa300328bb6fbfc4523750838dad4d0b8afa8a7cbd4025e14
-  reviewed_at: 2026-08-25
-  reviewed_by: codex
+updated: 2026-10-24
 evidence_ids:
   - ref-137
   - src-004

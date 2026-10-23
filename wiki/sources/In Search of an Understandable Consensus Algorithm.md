@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-088
 kind: reference
 title: In Search of an Understandable Consensus Algorithm
@@ -13,16 +13,10 @@ domains:
   - computer-science
   - distributed-systems
   - systems
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-25
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:f78bb2c20a7bee7d65eb73cd1c15eae9023aa7e7528c565e086b1e0f0c33fe2f
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - scalability

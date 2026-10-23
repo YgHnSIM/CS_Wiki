@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-014
 kind: reference
 title: Structured Programming with go to Statements
@@ -10,16 +10,10 @@ summary: Knuth의 1974년 논문을 바탕으로 goto 논쟁의 균형, 오류 �
 domains:
   - software-engineering
   - programming-languages
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-10
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:6104ed9e90be7aecc19ecaae5a2deae92ff005afb8cb61cc37cba654a0dbd1fb
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids: []
 capability_layers: []
 history:

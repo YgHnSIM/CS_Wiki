@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-002
 kind: reference
 title: Mass Produced Software Components
@@ -11,16 +11,10 @@ summary: McIlroy의 1968년 발표를 바탕으로 소프트웨어 컴포넌트 
 domains:
   - software-engineering
   - computer-history
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-10
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:f4d7bb73fcb92842d339fadb31a572a4aab33199f49a37514b0dc656991ce968
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids: []
 capability_layers: []
 history:

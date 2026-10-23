@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-129
 kind: reference
 title: OCI Distribution Specification
@@ -12,16 +12,10 @@ domains:
   - software-engineering
   - systems
   - security
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-08-05
-updated: 2026-08-05
-review:
-  mode: attested
-  revision: sha256:823b565d96c8dd87ce49be2ee3a2bb0390081604e390bca0c15377a0eacb35c5
-  reviewed_at: 2026-08-05
-  reviewed_by: codex-research-097
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - reliable-results

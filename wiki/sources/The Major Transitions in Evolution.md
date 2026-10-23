@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-153
 kind: reference
 title: The Major Transitions in Evolution
@@ -9,16 +9,10 @@ aliases:
 summary: 존 메이너드 스미스와 외르슈 서트마리가 1995년 출간한 책으로, 생명 역사의 주요 진화적 전이를 정식화했다.
 domains:
   - computer-science
-editorial_status: draft
 publication_visibility: unlisted
 graph_visibility: public
 created: 2026-10-19
-updated: 2026-10-23
-review:
-  mode: pending
-  revision: sha256:18989712ec56ae5aee5631ab6db064c00e76d023554dff4eb5639eca94733653
-  reviewed_at: null
-  reviewed_by: null
+updated: 2026-10-24
 evidence_ids: []
 capability_layers: []
 history:

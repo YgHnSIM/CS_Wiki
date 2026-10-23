@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: src-004
 kind: source
 title: 서브루틴과 스택(Stack)의 원리
@@ -11,16 +11,10 @@ domains:
   - software-engineering
   - computer-architecture
   - computer-history
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-05-04
-updated: 2026-10-20
-review:
-  mode: attested
-  revision: sha256:f3169bc4873a66097513cc77af22ebe5508eb98185fdbe1d9e61375b8aa1f50e
-  reviewed_at: 2026-10-20
-  reviewed_by: grok
+updated: 2026-10-24
 evidence_ids: []
 capability_layers: []
 redirect_from:

@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-138
 kind: reference
 title: A New Golden Age for Computer Architecture
@@ -13,16 +13,10 @@ domains:
   - computer-architecture
   - computer-history
   - machine-learning
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-08-31
-updated: 2026-10-20
-review:
-  mode: attested
-  revision: sha256:e1e3545ea2d8e2a39f18f31d1d507135b529c9a54e320200fc41c190e63372f1
-  reviewed_at: 2026-08-31
-  reviewed_by: antigravity
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - realized-performance

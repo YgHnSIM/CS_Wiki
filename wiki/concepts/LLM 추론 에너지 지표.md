@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept-llm-inference-energy-metrics
 kind: concept
 title: LLM 추론 에너지 지표
@@ -13,16 +13,10 @@ domains:
   - machine-learning
   - performance
   - systems
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-25
-updated: 2026-08-28
-review:
-  mode: attested
-  revision: sha256:8f02329b277a08db72286632ac547562e117287859f4aa8b307e78433bc392d7
-  reviewed_at: 2026-08-28
-  reviewed_by: antigravity
+updated: 2026-10-24
 evidence_ids:
   - ref-083
   - ref-084

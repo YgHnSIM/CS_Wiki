@@ -2,7 +2,7 @@ import { readFile, writeFile } from "node:fs/promises";
 import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import YAML from "yaml";
-import { loadWikiManifest, revisionFor } from "./wiki_manifest.mjs";
+import { loadWikiManifest } from "./wiki_manifest.mjs";
 import { loadLogEntries, parseLogEntries } from "./log_index.mjs";
 import { runDate } from "./wiki_date.mjs";
 
@@ -93,7 +93,6 @@ export async function fixWikiEol({
 
     const body = page.body.replace(/\r\n?/g, "\n").trim();
     const data = structuredClone(page.rawFrontmatter);
-    data.review.revision = revisionFor(body, data);
     const frontmatter = YAML.stringify(data, { lineWidth: 0 }).trimEnd();
     await writeFile(page.filePath, `---\n${frontmatter}\n---\n\n${body}\n`, "utf8");
     files.push(page.relativePath);

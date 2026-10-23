@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-111
 kind: reference
 title: A Critique of ANSI SQL Isolation Levels
@@ -12,16 +12,10 @@ domains:
   - database
   - systems
   - distributed-systems
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-08-05
-updated: 2026-08-05
-review:
-  mode: attested
-  revision: sha256:4b8b8998686b15b799a2527136a398c692539354ba56977caa306c1a132885ec
-  reviewed_at: 2026-08-05
-  reviewed_by: codex
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - reliable-results

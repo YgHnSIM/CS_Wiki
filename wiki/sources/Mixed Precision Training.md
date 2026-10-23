@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-069
 kind: reference
 title: Mixed Precision Training
@@ -10,16 +10,10 @@ summary: 반정밀도 저장·연산과 단정밀도 마스터 가중치·손실
 domains:
   - machine-learning
   - computer-architecture
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-24
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:94fc241fe7cac54d40204bd6b3c57d337ab6fb1c5155fa9ae5b6c66db0072716
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - realized-performance

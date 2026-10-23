@@ -4,7 +4,6 @@ import { readFile, writeFile } from "node:fs/promises";
 import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import YAML from "yaml";
-import { revisionFor } from "./wiki_manifest.mjs";
 import { runDate } from "./wiki_date.mjs";
 
 const exec = promisify(execFile);
@@ -19,8 +18,7 @@ export function parseGitNulPaths(stdout = "") {
 export async function updateWikiUpdated({
   root = process.cwd(),
   base = process.env.BASE_SHA || "",
-  today = runDate(),
-  reviewer = process.env.WIKI_REVIEWER || "antigravity"
+  today = runDate()
 } = {}) {
   const source = base
     ? ["diff", "-z", "--name-only", "--diff-filter=ACMRT", `${base}...HEAD`]
@@ -34,17 +32,9 @@ export async function updateWikiUpdated({
     const match = text.match(/^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n|$)/);
     if (!match) continue;
     const data = YAML.parse(match[1], { uniqueKeys: false });
-    if (data?.schema_version !== 2) continue;
+    if (data?.schema_version !== 3) continue;
     const body = text.slice(match[0].length).replace(/\r\n?/g, "\n").trim();
     data.updated = today;
-    if (data.review) {
-      if (data.editorial_status === "active" && data.review.mode === "legacy-baseline") {
-        data.review.mode = "attested";
-        data.review.reviewed_at = today;
-        data.review.reviewed_by = reviewer;
-      }
-      data.review.revision = revisionFor(body, data);
-    }
     await writeFile(filePath, `---\n${YAML.stringify(data, { lineWidth: 0 }).trimEnd()}\n---\n\n${body}\n`, "utf8");
     changed += 1;
   }

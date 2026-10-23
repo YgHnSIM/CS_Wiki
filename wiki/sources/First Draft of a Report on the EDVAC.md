@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-006
 kind: reference
 title: First Draft of a Report on the EDVAC
@@ -11,16 +11,10 @@ summary: EDVAC 설계 보고서를 중심으로 저장 프로그램 컴퓨터의
 domains:
   - computer-history
   - computer-architecture
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-10
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:83dd215150ce38cdfe9f18f17b82d4a8de0bf366ea70d8bd0052df14e5c08fad
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - programmability

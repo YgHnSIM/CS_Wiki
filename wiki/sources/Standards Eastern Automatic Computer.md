@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-059
 kind: reference
 title: Standards Eastern Automatic Computer
@@ -11,16 +11,10 @@ summary: 1950년 NBS에서 유용한 계산을 시작해 수학 표 제작, 수�
 domains:
   - computer-history
   - computer-architecture
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-20
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:b5784a180757d7dab03820fbb4eddf42f19bafe329c81a5fc2b210c689232a21
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - programmability

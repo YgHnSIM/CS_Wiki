@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-146
 kind: reference
 title: Minds, Brains, and Programs
@@ -10,16 +10,10 @@ summary: 존 설이 중국어 방 사고실험을 통해 형식적 기호 조작
 domains:
   - computer-science
   - computer-history
-editorial_status: draft
 publication_visibility: unlisted
 graph_visibility: public
 created: 2026-10-18
-updated: 2026-10-23
-review:
-  mode: pending
-  revision: sha256:02b390b01d95d4db36bc3ef2793d7345695e6b205450fae8ff22a5a677c92ff1
-  reviewed_at: null
-  reviewed_by: null
+updated: 2026-10-24
 evidence_ids: []
 capability_layers: []
 history:

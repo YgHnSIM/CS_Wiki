@@ -11,7 +11,7 @@ CS_Wiki는 컴퓨터 과학 역사·이론·시스템 자료를 원본과 위키
 
 ```text
 raw/       불변 원본과 첨부 자료
-wiki/      schema v2 위키 문서 및 생성 운영 페이지
+wiki/      schema v3 위키 문서 및 생성 운영 페이지
 scripts/   매니페스트·린트·유지보수·링크 검사 도구
 site/      정적 사이트 생성·그래프·서버·산출물 검증
 schema/    페이지 스키마와 어휘
@@ -32,14 +32,16 @@ tests/     Node/Playwright 검증
 
 ## 문서 계약
 
-- 모든 위키 페이지는 `schema_version: 2`와 고유한 소문자 ASCII `id`를 가진다.
-- 공통 상태는 `editorial_status`, 공개 범위는 `publication_visibility`, 그래프 노출은 `graph_visibility`로 분리한다.
-- `publication_visibility: unlisted`는 URL·직접 링크로 접근할 수 있게 빌드하되 `noindex`를 붙이고 목록·검색·사이트맵·그래프 렌즈·학습 경로에서 제외한다. `private`는 아직 지원하지 않으며 빌드가 실패한다. 초안은 공개 범위를 자동으로 바꾸지 않는다.
+- 모든 위키 페이지는 `schema_version: 3`와 고유한 소문자 ASCII `id`를 가진다.
+- 공개 범위는 `publication_visibility`, 그래프 노출은 `graph_visibility`로 분리한다. `editorial_status`와 `review` 메타데이터는 사용하지 않는다.
+- `publication_visibility`는 `public`과 `unlisted`만 지원한다. `unlisted`는 URL·직접 링크로 접근할 수 있게 빌드하되 `noindex`를 붙이고 목록·검색·사이트맵·그래프 렌즈·학습 경로에서 제외한다. 새 문서는 `unlisted`로 시작하고 검토 후 `public`으로 승격한다.
+- 공개 지식 문서(`concept`·`entity`·`analysis`)는 `evidence_ids`가 하나 이상이어야 한다.
+- 대체된 문서는 `publication_visibility: unlisted`와 선택적 `superseded_by`로 표시한다.
 - 일반 지식 문서는 `evidence_ids`와 하단 `## 출처`, 마지막 `## 관련 항목`을 가진다.
 - 의미 관계는 본문의 `## 관계` 표에 방향·대상·설명·근거를 함께 기록한다. 대상은 위키링크여야 하고, 근거 칸은 소스·참고 자료 페이지만 받는다.
 - 그래프에 공개하는 개념·개체·분석은 비어 있지 않은 `capability_layers`와 `history.layer`를 가진다. 연도는 원전 대조 없이 추정하지 않는다.
 - 관련 항목은 다음 읽을거리 추천이며 이유를 붙여 최대 5개만 둔다.
-- 새 문서는 원칙적으로 `draft → review → active` 순서로 승격한다.
+- 새 문서는 원칙적으로 `unlisted → public` 순서로 승격한다.
 - `raw/`의 원본은 절대 수정하지 않는다. 줄바꿈은 LF, 텍스트는 UTF-8을 사용한다.
 - `index.md`, `overview.md`, `log.md`의 생성 블록은 유지보수 도구를 기준으로 갱신한다.
 
@@ -74,7 +76,7 @@ npm run test:browser
 - 모든 작업은 `wiki/logs/`에 원 기록을 남기고 생성 목록을 재생성한다.
 - 소스 페이지는 문헌 계보(`works`)와 접근 수단(`access`)을 분리한다.
 - 모순은 숨기지 말고 `> [!WARNING] 모순 발견`으로 기록한다.
-- 기존 `active` 페이지를 실질 변경하면 `review.mode`가 `legacy-baseline`인 문서는 `attested`로 승격한다. `scripts/update_wiki_updated.mjs`가 날짜·검토 모드·revision을 맞춘다.
+- 모든 변경 페이지는 `updated`를 변경일로 갱신하고 `wiki/logs/`에 작업 기록을 남긴다. 검토 이력은 문서별 `review` 필드가 아니라 PR·로그·Git 히스토리로 관리한다.
 - 푸시 전 변경 집합 검사는 커밋한 뒤 `BASE_SHA`를 직전 원격 HEAD로 두고 실행한다. `BASE_SHA`가 없거나 `HEAD`와 같으면 게이트가 비거나 워킹 트리 변경을 보지 못한다.
 
 ```bash

@@ -201,7 +201,6 @@ function canonicalNodeBase(node) {
     url: String(node.url || ""),
     category: String(node.category || ""),
     domains: uniqueSorted(node.domains),
-    status: String(node.status || "draft"),
     summary: String(node.summary || ""),
     visibility: String(node.visibility || "public")
   };
@@ -255,7 +254,6 @@ function assertionStub(assertion) {
       url: assertion.url,
       category: assertion.category,
       domains: assertion.domains,
-      status: assertion.status,
       evidenceCount: assertion.evidenceCount,
       shardId: assertion.shardId
     };
@@ -283,7 +281,6 @@ function evidenceStub(evidence) {
     summary: evidence.summary,
     url: evidence.url,
     category: evidence.category,
-    status: evidence.status,
     visibility: evidence.visibility,
     provenance: evidence.provenance,
     usedByCount: evidence.usedByCount,
@@ -516,7 +513,6 @@ function searchEntry(record, level, prefix) {
     aliases: record.aliases,
     url: record.url,
     category: record.category,
-    status: record.status,
     shardId: record.shardId
   };
 }
@@ -700,7 +696,6 @@ export function buildEvidenceLens(graph = {}, options = {}) {
       aliases: [],
       url: "",
       category: "relations",
-      status: "active",
       kind: String(edge.kind || "related"),
       directed: edge.directed !== false,
       source: endpointStub(source),
@@ -882,7 +877,6 @@ export function buildEvidenceLens(graph = {}, options = {}) {
       url: assertion.url,
       category: assertion.category,
       domains: assertion.domains,
-      status: assertion.status,
       evidenceCount: assertion.evidenceCount,
       shardId: assertion.shardId
     })),
@@ -896,7 +890,6 @@ export function buildEvidenceLens(graph = {}, options = {}) {
       url: "",
       category: "relations",
       domains: [],
-      status: "active",
       evidenceCount: assertion.evidenceCount,
       shardId: assertion.shardId
     })),
@@ -909,7 +902,6 @@ export function buildEvidenceLens(graph = {}, options = {}) {
       url: evidence.url,
       category: evidence.category,
       domains: evidence.domains,
-      status: evidence.status,
       sourceId: evidence.sourceId,
       sourceKind: evidence.provenance.sourceKind,
       snapshotStatus: evidence.provenance.snapshotStatus,
@@ -999,7 +991,6 @@ export function buildEvidenceLens(graph = {}, options = {}) {
     facets: {
       domains: domainFacet,
       categories: buildFacet(documentAssertions.map((assertion) => assertion.category), limits.overviewDomains),
-      statuses: buildFacet(documentAssertions.map((assertion) => assertion.status), limits.overviewDomains),
       sourceKinds: buildFacet(publicEvidence.map((evidence) => evidence.provenance.sourceKind), limits.overviewDomains),
       snapshotStatuses: buildFacet(publicEvidence.map((evidence) => evidence.provenance.snapshotStatus), limits.overviewDomains),
       assertionScopes: { values: [

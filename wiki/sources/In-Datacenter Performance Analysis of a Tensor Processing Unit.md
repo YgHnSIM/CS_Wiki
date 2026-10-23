@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-042
 kind: reference
 title: In-Datacenter Performance Analysis of a Tensor Processing Unit
@@ -11,16 +11,10 @@ summary: Google의 1세대 TPU를 실제 데이터센터 신경망 추론 작업
 domains:
   - computer-architecture
   - machine-learning
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-16
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:1a71a36f2456695957bdde312eefd94dc9cfd6b0e03bdf3be2d85c418aeb2c22
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - realized-performance

@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { readFile } from "node:fs/promises";
-import { domainMeta, statusMeta } from "../site/catalog.mjs";
+import { domainMeta } from "../site/catalog.mjs";
 
 const vocabulary = JSON.parse(await readFile(new URL("../schema/vocabulary.json", import.meta.url), "utf8"));
 
@@ -24,12 +24,4 @@ test("catalog labels every domain currently used by the wiki", () => {
     Object.keys(domainMeta).sort(),
     vocabulary.domains.map((domain) => `domain/${domain}`).sort()
   );
-});
-
-test("active status explains the completed editorial checks without a generic verification claim", () => {
-  assert.equal(statusMeta.active.label, "원문 대조 완료");
-  assert.match(statusMeta.active.description, /원문 대조/);
-  assert.match(statusMeta.active.description, /출처/);
-  assert.match(statusMeta.active.description, /내부 링크/);
-  assert.match(statusMeta.active.description, /색인 검사/);
 });

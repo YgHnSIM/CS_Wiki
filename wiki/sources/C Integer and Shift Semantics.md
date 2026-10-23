@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-029
 kind: reference
 title: C Integer and Shift Semantics
@@ -12,16 +12,10 @@ domains:
   - programming-languages
   - systems
   - security
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-10
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:1a764c1acca653c2034f64b4e160820da260df77a70bf7b0559bd80d756e6f9c
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids: []
 capability_layers: []
 history:

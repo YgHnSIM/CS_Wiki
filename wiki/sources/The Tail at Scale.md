@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: ref-049
 kind: reference
 title: The Tail at Scale
@@ -10,16 +10,10 @@ aliases:
 summary: 대규모 온라인 서비스에서 드문 구성요소 지연이 모든 응답을 기다리는 팬아웃을 통해 흔한 서비스 지연으로 증폭되는 원리와 꼬리 내성 기법을 정리한 2013년 논문.
 domains:
   - systems
-editorial_status: active
 publication_visibility: public
 graph_visibility: public
 created: 2026-07-16
-updated: 2026-07-26
-review:
-  mode: legacy-baseline
-  revision: sha256:464c8a6b92b8c90d4ecae0c0d3b1ab647ecd2b3d802817d0b369d757ddd2c289
-  reviewed_at: null
-  reviewed_by: legacy-baseline
+updated: 2026-10-24
 evidence_ids: []
 capability_layers:
   - realized-performance
