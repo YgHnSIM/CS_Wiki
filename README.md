@@ -88,6 +88,7 @@ npm run test:browser
 ```bash
 pip install fonttools brotli
 npm run fonts:subset
+npm run fonts:check
 ```
 
-위키에 새 문자권이나 특수 기호가 추가되면 서브셋을 다시 만든 뒤 `npm run build`를 실행합니다.
+위키·사이트에 새 문자권이나 특수 기호가 추가되면 서브셋을 다시 만든 뒤 `npm run build`를 실행합니다. `npm run fonts:check`는 현재 말뭉치의 모든 코드포인트가 배포 폰트에 들어 있는지 검사하며, CI에서도 실행됩니다.

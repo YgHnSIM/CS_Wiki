@@ -1,7 +1,8 @@
-"""Build a corpus-based D2Coding webfont subset for the static site."""
+"""Build or verify a corpus-based D2Coding webfont subset for the static site."""
 
 from __future__ import annotations
 
+import sys
 from pathlib import Path
 
 from fontTools import subset
@@ -14,18 +15,53 @@ OUTPUT_DIR = ROOT / "site" / "assets" / "fonts"
 FONT_NAMES = ("D2Coding.woff2", "D2Coding-Bold.woff2")
 
 
-def corpus_text() -> str:
-    paths = [
-        *sorted((ROOT / "wiki").rglob("*.md")),
-        *sorted((ROOT / "site").glob("*.mjs")),
-        *sorted((ROOT / "site" / "assets").glob("*.js")),
-        *sorted((ROOT / "site" / "assets").glob("*.css")),
+def corpus_paths() -> list[Path]:
+    return [
+        *sorted(path for path in (ROOT / "wiki").rglob("*.md") if path.parent.name != "logs"),
+        *sorted((ROOT / "site").rglob("*.mjs")),
+        *sorted((ROOT / "site" / "assets").rglob("*.js")),
+        *sorted((ROOT / "site" / "styles").rglob("*.css")),
         ROOT / "README.md",
         ROOT / "AGENTS.md",
     ]
-    text = "\n".join(path.read_text(encoding="utf-8") for path in paths if path.exists())
+
+
+def corpus_text() -> str:
+    text = "\n".join(path.read_text(encoding="utf-8") for path in corpus_paths() if path.exists())
     ascii_and_controls = "".join(chr(codepoint) for codepoint in range(0x20, 0x7F))
     return text + ascii_and_controls + "\n\t"
+
+
+def required_codepoints(text: str) -> set[int]:
+    return {ord(character) for character in text if character not in "\r\n\t"}
+
+
+def missing_codepoints(font_path: Path, codepoints: set[int]) -> list[int]:
+    font = TTFont(font_path)
+    try:
+        cmap = font.getBestCmap() or {}
+        return sorted(codepoint for codepoint in codepoints if codepoint not in cmap)
+    finally:
+        font.close()
+
+
+def check_fonts(text: str) -> int:
+    codepoints = required_codepoints(text)
+    failed = False
+    for name in FONT_NAMES:
+        target = OUTPUT_DIR / name
+        if not target.exists():
+            print(f"{name}: missing output font at {target}; run `npm run fonts:subset`")
+            failed = True
+            continue
+        missing = missing_codepoints(target, codepoints)
+        if missing:
+            failed = True
+            sample = " ".join(f"U+{codepoint:04X}" for codepoint in missing[:20])
+            print(f"{name}: {len(missing)} required codepoints are missing: {sample}")
+        else:
+            print(f"{name}: all {len(codepoints)} required codepoints are covered")
+    return 1 if failed else 0
 
 
 def subset_font(source: Path, target: Path, text: str) -> tuple[int, int]:
@@ -48,12 +84,15 @@ def subset_font(source: Path, target: Path, text: str) -> tuple[int, int]:
 
 
 def main() -> int:
+    text = corpus_text()
+    if "--check" in sys.argv:
+        return check_fonts(text)
+
     missing = [name for name in FONT_NAMES if not (SOURCE_DIR / name).exists()]
     if missing:
         print(f"Missing source fonts in {SOURCE_DIR}: {', '.join(missing)}")
         return 1
 
-    text = corpus_text()
     before = 0
     after = 0
     for name in FONT_NAMES:
@@ -64,7 +103,7 @@ def main() -> int:
 
     reduction = 100 * (1 - after / before)
     print(f"Total: {before:,} -> {after:,} bytes ({reduction:.1f}% smaller)")
-    return 0
+    return check_fonts(text)
 
 
 if __name__ == "__main__":

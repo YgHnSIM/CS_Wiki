@@ -24,14 +24,17 @@ capability_layers: []
 
 ## 변경
 
-- [[AI 컴퓨팅 병목]], [[계산-통신 중첩]], [[메모리 이동과 병목 이동]]을 draft에서 ctive로 승격했다.
+- [[AI 컴퓨팅 병목]], [[계산-통신 중첩]], [[메모리 이동과 병목 이동]]을 draft에서 active로 승격했다.
 - [[AI 인프라의 병목 계보]], [[AI 시스템은 병목을 어떻게 이동시키는가]]를 같은 기준으로 승격했다.
-- 공개 지식 요건에 맞게 publication_visibility: public, graph_visibility: public, eview.mode: attested를 설정했다.
-- history.layer를 개념·분석에 맞게 rchitecture 또는 system으로 부여했다.
+- 공개 지식 요건에 맞게 publication_visibility: public, graph_visibility: public, review.mode: attested를 설정했다.
+- history.layer를 개념·분석에 맞게 architecture 또는 system으로 부여했다.
 
 ## 검증
 
-- pm run maintenance:updated- pm run lint:wiki- pm run maintenance:check
+- npm run maintenance:updated
+- npm run lint:wiki
+- npm run maintenance:check
+
 ## 출처
 
 <!-- wiki-v2:evidence-start -->

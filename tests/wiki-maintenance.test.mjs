@@ -159,6 +159,35 @@ test("check preserves generated marker, log count, and EOL diagnostics", async (
   ]));
 });
 
+test("check flags log order and title drift", async (t) => {
+  const fixture = await createWikiFixture(t);
+  await writeFile(join(fixture.root, "wiki", "logs", "second.md"), "# Second\n", "utf8");
+  const original = await readFile(fixture.paths.log, "utf8");
+
+  const wrongOrder = original.replace(
+    "- [entry](logs/entry.md)",
+    "- [second](logs/second.md)\n- [entry](logs/entry.md)"
+  );
+  await writeFile(fixture.paths.log, wrongOrder, "utf8");
+  const orderResult = await checkWikiMaintenance({
+    root: fixture.root,
+    manifest: fixture.manifest
+  });
+  assert.ok(orderResult.issues.some((issue) => issue.code === "generated.log_order"));
+
+  const wrongTitle = original.replace(
+    "- [entry](logs/entry.md)",
+    "- [entry](logs/entry.md)\n- [Wrong title](logs/second.md)"
+  );
+  await writeFile(fixture.paths.log, wrongTitle, "utf8");
+  const titleResult = await checkWikiMaintenance({
+    root: fixture.root,
+    manifest: fixture.manifest
+  });
+  assert.ok(titleResult.issues.some((issue) => issue.code === "generated.log_title"));
+  assert.equal(titleResult.issues.some((issue) => issue.code === "generated.log_count"), false);
+});
+
 test("EOL fixing is explicit, idempotent, and refreshes the revision", async (t) => {
   const fixture = await createWikiFixture(t);
   const crlf = (await readFile(fixture.paths.overview, "utf8")).replaceAll("\n", "\r\n");

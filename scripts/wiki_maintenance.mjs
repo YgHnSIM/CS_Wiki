@@ -1,8 +1,9 @@
-import { readFile, readdir, writeFile } from "node:fs/promises";
+import { readFile, writeFile } from "node:fs/promises";
 import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import YAML from "yaml";
 import { loadWikiManifest, revisionFor } from "./wiki_manifest.mjs";
+import { loadLogEntries, parseLogEntries } from "./log_index.mjs";
 import { runDate } from "./wiki_date.mjs";
 
 async function resolveManifest({ root, manifest }) {
@@ -56,17 +57,23 @@ export async function checkWikiMaintenance({
     }
   }
 
-  const logFiles = (
-    await readdir(join(root, "wiki", "logs"), { withFileTypes: true }).catch(() => [])
-  ).filter((entry) => entry.isFile() && entry.name.endsWith(".md"));
   const logText = await readFile(join(root, "wiki", "log.md"), "utf8").catch(() => "");
-  const listed = [...logText.matchAll(/\(logs\/([^\)]+\.md)\)/g)].map((match) => match[1]);
-  if (listed.length !== logFiles.length) {
+  const logEntries = await loadLogEntries(root);
+  const listed = parseLogEntries(logText);
+  if (listed.length !== logEntries.length) {
     add(
       "generated.log_count",
       "wiki/log.md",
-      `로그 목록 ${listed.length}개와 항목 파일 ${logFiles.length}개가 다르다.`
+      `로그 목록 ${listed.length}개와 항목 파일 ${logEntries.length}개가 다르다.`
     );
+  } else {
+    for (let index = 0; index < logEntries.length; index += 1) {
+      if (listed[index].file !== logEntries[index].file) {
+        add("generated.log_order", "wiki/log.md", `로그 목록 ${index + 1}번째 항목은 ${logEntries[index].file}이어야 한다.`);
+      } else if (listed[index].title !== logEntries[index].title) {
+        add("generated.log_title", "wiki/log.md", `로그 목록 ${index + 1}번째 항목의 제목이 ${logEntries[index].title}와 다르다.`);
+      }
+    }
   }
 
   return { errors: issues.length, issues };

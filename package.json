@@ -10,6 +10,7 @@
     "build": "node site/build.mjs",
     "dev": "npm run build && node site/serve.mjs",
     "fonts:subset": "python scripts/subset_fonts.py",
+    "fonts:check": "python scripts/subset_fonts.py --check",
     "manifest": "node scripts/wiki_manifest.mjs",
     "validate:changes": "node scripts/validate_change_set.mjs",
     "lint:wiki": "node scripts/wiki_lint.mjs",
