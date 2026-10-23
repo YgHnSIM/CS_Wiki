@@ -16,7 +16,8 @@ import { graphNodeId } from "./graph/schema.mjs";
 import { describeRelationship, indexGraphEdges, relationLabel, selectLocalGraph } from "./graph/selectors.mjs";
 import { createDataOutputPath, createOutputWriter } from "./output.mjs";
 import { loadSiteCss } from "./styles/index.mjs";
-import { prepareWikiMarkdown } from "./markdown.mjs";
+import { prepareWikiMarkdown, resolveRenderedFileLinks } from "./markdown.mjs";
+import { assertPublishablePages } from "./visibility.mjs";
 import { mathPlugin } from "./math.mjs";
 import {
   cleanInline,
@@ -77,6 +78,8 @@ function mapModeNav(activeMode) {
 }
 
 const { pages, lookup } = await loadWikiContent({ root, wikiRoot });
+assertPublishablePages(pages);
+const pagesByRelativePath = new Map(pages.map((page) => [page.relativePath, page]));
 
 const resolvedLearningPaths = learningPaths.map((path) => ({
   ...path,
@@ -298,7 +301,15 @@ function renderWikiLinks(body) {
 function renderMarkdown(page) {
   headingSlugs.clear();
   const body = page.body.replace(/\r?\n## 관련 항목\s*[\s\S]*$/m, "").trim();
-  return md.render(renderWikiLinks(prepareWikiMarkdown(body)));
+  const html = md.render(renderWikiLinks(prepareWikiMarkdown(body)));
+  return resolveRenderedFileLinks(html, {
+    pagePath: page.relativePath,
+    repositoryUrl,
+    pageUrlFor: (target) => {
+      const targetPage = pagesByRelativePath.get(target);
+      return targetPage ? withBase(targetPage.url) : "";
+    }
+  });
 }
 
 function pageHeadings(page) {

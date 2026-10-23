@@ -25,6 +25,7 @@ import {
   evidenceStaticPageNumbers
 } from "./graph/evidence.mjs";
 import { verifyOutputEnvelope } from "./verify-output.mjs";
+import { verifyInternalLinks } from "./verify-links.mjs";
 
 const root = process.cwd();
 const dist = join(root, "dist");
@@ -1764,6 +1765,15 @@ console.log(
 );
 
 const outputTotals = await verifyOutputEnvelope(dist);
+
+const linkReport = await verifyInternalLinks(dist, { base: process.env.SITE_BASE || "" });
+assert.ok(linkReport.checked > 100_000, `internal link scan covered only ${linkReport.checked} references`);
+assert.deepEqual(
+  linkReport.broken,
+  [],
+  `broken internal links: ${linkReport.broken.slice(0, 20).map((item) => `${item.page} -> ${item.href} (${item.reason})`).join("; ")}`
+);
+console.log(`Verified internal links: ${linkReport.checked} references across ${linkReport.pages} HTML pages`);
 
 // raw/assets HTML is a preserved original copied through unchanged. It is not rendered wiki output, so an author's own callout text is not a generator leak.
 const publicHtmlFiles = (await relativeFiles(dist)).filter((file) => file.endsWith(".html") && !file.startsWith("assets/raw/"));

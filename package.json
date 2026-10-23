@@ -16,13 +16,12 @@
     "maintenance:check": "node scripts/wiki_maintenance.mjs",
     "maintenance:updated": "node scripts/update_wiki_updated.mjs",
     "maintenance:generate": "node scripts/generate_operational_pages.mjs",
-    "check:links": "node scripts/check_external_links.mjs --fail-on-broken",
+    "check:links": "node scripts/check_external_links.mjs --fail-on-broken --fail-on-error",
     "verify:site": "node site/verify-build.mjs",
     "test:site": "node --test tests/*.test.mjs",
-    "test:python": "python -m unittest discover -s tests -p \"test_*.py\"",
     "test:browser": "node scripts/run_browser_tests.mjs",
     "test:browser:install": "playwright install chromium",
-    "test": "npm run test:site && npm run test:python",
+    "test": "npm run test:site",
     "check": "npm run validate:changes && npm run lint:wiki && npm run maintenance:check && npm test && npm run build && npm run verify:site && npm run test:browser"
   },
   "dependencies": {

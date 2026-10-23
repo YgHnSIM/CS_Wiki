@@ -7,6 +7,7 @@ on:
 
 permissions:
   contents: read
+  issues: write
 
 jobs:
   links:
@@ -25,4 +26,42 @@ jobs:
         run: npm ci
 
       - name: Check source URLs
-        run: npm run check:links
+        run: |
+          set -o pipefail
+          npm run check:links 2>&1 | tee link-report.txt
+
+      - name: Upload link report
+        if: always()
+        uses: actions/upload-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5
+        with:
+          name: external-link-report
+          path: link-report.txt
+          retention-days: 14
+          if-no-files-found: ignore
+
+      - name: Open or update an issue
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          title="External link check failed"
+          {
+            echo "The scheduled external link check failed."
+            echo
+            echo "- Run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+            echo "- Threshold: \`WIKI_LINK_ERROR_THRESHOLD\` (default 20%)"
+            echo
+            if [ -f link-report.txt ]; then
+              echo '```'
+              tail -n 40 link-report.txt
+              echo '```'
+            else
+              echo "No link report was produced; the job failed before the check completed."
+            fi
+          } > issue-body.md
+          number="$(gh issue list --state open --search "$title in:title" --json number --jq '.[0].number')"
+          if [ -n "$number" ]; then
+            gh issue comment "$number" --body-file issue-body.md
+          else
+            gh issue create --title "$title" --body-file issue-body.md
+          fi

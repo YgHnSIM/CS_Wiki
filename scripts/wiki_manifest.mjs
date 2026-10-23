@@ -169,6 +169,14 @@ function v2Record(data, category, filePath) {
       historicalLayer: history.layer || "",
       historicalNote: history.note || ""
     },
+    // Site graph consumers read the historical fields from the flat page shape
+    // shared by legacy records.  Mirror the v2 `history` block here so a v2
+    // page does not silently lose its dated event and historical layer.
+    publicationYear: history.publication_year ?? "",
+    eventStart: event.start ?? "",
+    eventEnd: event.end ?? "",
+    historicalLayer: history.layer || "",
+    historicalNote: history.note || "",
     sourceId: source ? data.id : "",
     graphId: source ? "" : data.id,
     sourceKind: data.origin || "",

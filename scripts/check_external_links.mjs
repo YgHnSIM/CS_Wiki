@@ -75,10 +75,22 @@ const workers = Array.from({ length: Math.min(8, queue.length || 1) }, async () 
 });
 await Promise.all(workers);
 results.sort((a, b) => b.usedBy - a.usedBy || a.url.localeCompare(b.url));
+const counts = Object.fromEntries(["ok", "restricted", "broken", "error"].map((state) => [state, results.filter((r) => r.state === state).length]));
+const errorRate = results.length ? counts.error / results.length : 0;
+const configuredThreshold = Number(process.env.WIKI_LINK_ERROR_THRESHOLD ?? 0.2);
+const errorThreshold = Number.isFinite(configuredThreshold)
+  ? Math.min(Math.max(configuredThreshold, 0), 1)
+  : 0.2;
 if (process.argv.includes("--json")) console.log(JSON.stringify(results, null, 2));
 else {
-  const counts = Object.fromEntries(["ok", "restricted", "broken", "error"].map((state) => [state, results.filter((r) => r.state === state).length]));
-  console.log(`External links: ${results.length} total, ${counts.ok} ok, ${counts.restricted} restricted, ${counts.broken} broken, ${counts.error} transient/error`);
+  console.log(`External links: ${results.length} total, ${counts.ok} ok, ${counts.restricted} restricted, ${counts.broken} broken, ${counts.error} transient/error (${(errorRate * 100).toFixed(1)}%)`);
   for (const result of results) console.log(`[${result.state.toUpperCase()}] ${result.status || "-"} used-by=${result.usedBy} snapshot=${result.snapshotStatus} ${result.sources.join(", ")} → ${result.url}`);
 }
-if (process.argv.includes("--fail-on-broken") && results.some((result) => result.state === "broken")) process.exitCode = 1;
+if (process.argv.includes("--fail-on-broken") && counts.broken > 0) {
+  console.error(`External links: ${counts.broken} broken URL(s)`);
+  process.exitCode = 1;
+}
+if (process.argv.includes("--fail-on-error") && (results.length === 0 || errorRate > errorThreshold)) {
+  console.error(`External links: transient/error rate ${(errorRate * 100).toFixed(1)}% exceeds ${(errorThreshold * 100).toFixed(1)}% (${counts.error}/${results.length})`);
+  process.exitCode = 1;
+}

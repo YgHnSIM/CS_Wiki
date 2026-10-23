@@ -13,10 +13,10 @@ editorial_status: active
 publication_visibility: public
 graph_visibility: hidden
 created: 2026-05-03
-updated: 2026-10-22
+updated: 2026-10-23
 review:
   mode: attested
-  revision: sha256:efdba228fb47891485027924d8d261cc8f657aa627949506f7b175a774abf0eb
+  revision: sha256:d8717c680bc094f95969f4dfba2b59005342c2f239560e6136adf4ab7117aeb4
   reviewed_at: 2026-08-31
   reviewed_by: antigravity
 evidence_ids: []
@@ -160,6 +160,7 @@ redirect_from:
 - [2026-10-21 update | 머메이드 차트의 SVG 벡터 그래픽 전면 전환](logs/log-2026-10-21-128-convert-mermaid-diagrams-to-svg.md)
 - [2026-10-21 update | KaTeX 기반 수식 정적 빌드 렌더링 파이프라인 구축](logs/log-2026-10-21-129-support-latex-math-rendering-katex.md)
 - [2026-10-22 refactor | 17세기 해석기하학 디스플레이 및 지도 분석 대중적 리팩토링](logs/log-2026-10-22-130-refactor-analytic-geometry-to-pixels-and-maps.md)
+- [2026-10-23 update | 역사 렌즈 회귀 수정과 검증·운영 체계 정비](logs/log-2026-10-23-131-audit-fixes-and-verification.md)
 
 ## 출처
 

@@ -4,7 +4,7 @@
 
 ## 로컬 실행
 
-Node.js 22 이상과 Python 3.12 이상을 사용합니다. 저장소의 잠금 파일과 동일한 의존성을 설치한 뒤 개발 서버를 시작합니다.
+Node.js 22 이상을 사용합니다. 글꼴 서브셋을 다시 만들 때만 Python 3.12와 `fonttools`·`brotli`가 필요합니다. 저장소의 잠금 파일과 동일한 의존성을 설치한 뒤 개발 서버를 시작합니다.
 
 ```bash
 npm ci
@@ -50,7 +50,7 @@ npm run validate:changes
 - 내부 링크는 Obsidian의 `[[위키링크]]` 문법을 그대로 사용합니다.
 - 콘텐츠 작업 규칙과 검증 절차는 `AGENTS.md`를 따릅니다.
 
-전체 검증은 저장소 루트에서 한 번에 실행합니다. 위키 구조 검사, 유지보수 dry-run, 사이트·Python 테스트와 정적 사이트 빌드를 순서대로 수행합니다.
+전체 검증은 저장소 루트에서 한 번에 실행합니다. 위키 구조 검사, 유지보수 dry-run, 사이트 테스트와 정적 사이트 빌드를 순서대로 수행합니다.
 
 ```bash
 npm run check
@@ -62,12 +62,11 @@ npm run check
 npm run lint:wiki
 npm run maintenance:check
 npm run test:site
-npm run test:python
 npm test
 npm run check:links
 ```
 
-외부 링크 검사는 네트워크가 필요한 별도 점검이며 매주 GitHub Actions에서도 실행됩니다. 404·410은 깨진 링크로 실패시키고, 출판사 봇 차단과 속도 제한은 별도 상태로 보고합니다.
+외부 링크 검사는 네트워크가 필요한 별도 점검이며 매주 GitHub Actions에서도 실행됩니다. 404·410은 깨진 링크로 실패시키고, 출판사 봇 차단과 속도 제한은 별도 상태로 보고합니다. 타임아웃·5xx·DNS 오류가 전체의 20%를 넘으면 실패하며, 실패 시 워크플로가 이슈를 열거나 갱신합니다.
 
 Windows PowerShell에서 로컬 실행 정책이 `npm.ps1`을 막는 경우 같은 명령을 `npm.cmd run check`처럼 실행할 수 있습니다.
 

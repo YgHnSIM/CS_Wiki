@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import MarkdownIt from "markdown-it";
 import test from "node:test";
-import { prepareWikiMarkdown, stripWikiOperationalMarkers } from "../site/markdown.mjs";
+import { prepareWikiMarkdown, resolveRenderedFileLinks, stripWikiOperationalMarkers } from "../site/markdown.mjs";
 import { mathPlugin } from "../site/math.mjs";
 
 test("wiki operational comments stay out of public Markdown", () => {
@@ -71,4 +71,26 @@ test("inline and block math are rendered via KaTeX into accessible HTML and Math
   assert.match(html, /<div class="math-block" tabindex="0" role="region" aria-label="수식">/);
   assert.match(html, /가격은 \$100입니다\./);
   assert.doesNotMatch(html, /\$\$\\text\{Address\}/);
+});
+
+test("relative Markdown file links become site routes or repository blobs", () => {
+  const html = [
+    '<a href="logs/log-2026-10-22-130-한글%20로그.md#작업-배경">log</a>',
+    '<a href="concepts/API.md">API</a>',
+    '<a href="https://example.com/a.md">external</a>',
+    '<a href="/docs/concept-api/">absolute</a>',
+    '<a href="../README.md">outside</a>'
+  ].join("\n");
+
+  const resolved = resolveRenderedFileLinks(html, {
+    pagePath: "wiki/log.md",
+    repositoryUrl: "https://github.com/owner/repo",
+    pageUrlFor: (target) => target === "wiki/concepts/API.md" ? "/docs/concept-api/" : ""
+  });
+
+  assert.match(resolved, /href="https:\/\/github\.com\/owner\/repo\/blob\/main\/wiki\/logs\/log-2026-10-22-130-%ED%95%9C%EA%B8%80%20%EB%A1%9C%EA%B7%B8\.md#작업-배경"/);
+  assert.match(resolved, /href="\/docs\/concept-api\/"/);
+  assert.match(resolved, /href="https:\/\/example\.com\/a\.md"/);
+  assert.match(resolved, /href="\/docs\/concept-api\/"/);
+  assert.match(resolved, /href="\.\.\/README\.md"/);
 });

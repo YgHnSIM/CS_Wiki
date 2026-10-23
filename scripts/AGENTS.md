@@ -7,7 +7,7 @@
 ## 기준과 실행 순서
 
 - `wiki_manifest.mjs`가 YAML·ID·출처·위키링크를 해석하는 단일 기준이다.
-- Node.js `.mjs` 도구를 기준으로 사용하고 Python 도구는 호환성·보조 검사로 취급한다.
+- Node.js `.mjs` 도구가 단일 기준이다. Python은 `subset_fonts.py`(글꼴 서브셋)에만 사용한다.
 - 문서 변경 후 `npm run lint:wiki`와 `npm run maintenance:check`를 먼저 실행한다.
 - 생성 블록을 갱신할 때는 `npm run maintenance:generate`를 사용한다.
 - EOL 수선은 `node scripts/wiki_maintenance.mjs --fix-eol`로 수행한다.
