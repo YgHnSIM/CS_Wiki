@@ -11,13 +11,13 @@ summary: 린 세이건(후일 린 마굴리스)이 1967년 Journal of Theoretica
 domains:
   - computer-history
 editorial_status: draft
-publication_visibility: public
+publication_visibility: unlisted
 graph_visibility: public
 created: 2026-10-19
-updated: 2026-10-19
+updated: 2026-10-23
 review:
   mode: pending
-  revision: sha256:4bac7ba42f73277355f9713e42bdc4b59d0e08e86aa22dcde2ecf8e01c324dcb
+  revision: sha256:9658c62c4a48a649b27c6b0bb735642b1ffad78b2e2b5b69e6df8f5f51fbdcb0
   reviewed_at: null
   reviewed_by: null
 evidence_ids: []

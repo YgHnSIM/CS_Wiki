@@ -154,10 +154,14 @@ export function resolvePageLinks(pages, lookup) {
   return pages;
 }
 
+export function isDiscoverablePage(page) {
+  return (page.publicationVisibility || "public") === "public";
+}
+
 export function selectSiteDiscoveryPages(pages, { visibilityFor = (page) => page.graphVisibility || "public" } = {}) {
   if (!Array.isArray(pages)) throw new Error("Site discovery pages must be an array");
   if (typeof visibilityFor !== "function") throw new Error("Site discovery visibility resolver must be a function");
-  return pages.filter((page) => visibilityFor(page) !== "context");
+  return pages.filter((page) => isDiscoverablePage(page) && visibilityFor(page) !== "context");
 }
 
 export function safeExternalUrl(value) {

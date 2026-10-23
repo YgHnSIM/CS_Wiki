@@ -87,6 +87,14 @@ test("curated relation tables preserve wiki-link aliases containing pipes", () =
   assert.deepEqual(parseCuratedRelations("```markdown\n## 관계\n\n| 관계 | 대상 | 설명 |\n|---|---|---|\n| enables | [[Target]] | 예시 |\n```"), []);
 });
 
+test("unlisted pages keep a node but are hidden from graph discovery", () => {
+  const draft = page("Draft", { graphVisibility: "public", publicationVisibility: "unlisted" });
+  const result = graph([draft]);
+  const node = result.nodes.find((item) => item.title === "Draft");
+  assert.equal(node.publicationVisibility, "unlisted");
+  assert.equal(node.visibility, "hidden");
+});
+
 test("the normalized graph distinguishes four connection channels and bundles each document pair once", () => {
   const evidence = page("Evidence", { category: "references", sourceId: "ref-001" });
   const alpha = page("Alpha", {

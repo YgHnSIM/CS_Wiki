@@ -68,11 +68,12 @@ test("links are fully aggregated before scoring and self-links are excluded", ()
   assert.equal(gamma.score, 1);
 });
 
-test("context pages stay out of global site discovery while direct and operational pages remain addressable", () => {
+test("context and unlisted pages stay out of global site discovery while direct and operational pages remain addressable", () => {
   const publicPage = page("Public", [], { graphVisibility: "public" });
   const contextPage = page("Context", [], { graphVisibility: "context" });
   const hiddenPage = page("Hidden", [], { graphVisibility: "hidden" });
-  const selected = selectSiteDiscoveryPages([publicPage, contextPage, hiddenPage]);
+  const unlistedPage = page("Unlisted", [], { graphVisibility: "public", publicationVisibility: "unlisted" });
+  const selected = selectSiteDiscoveryPages([publicPage, contextPage, hiddenPage, unlistedPage]);
   assert.deepEqual(selected.map((item) => item.title), ["Public", "Hidden"]);
   assert.throws(() => selectSiteDiscoveryPages(null), /must be an array/);
 });

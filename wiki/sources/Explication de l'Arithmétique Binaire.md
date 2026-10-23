@@ -13,13 +13,13 @@ domains:
   - computer-science
   - mathematics
 editorial_status: draft
-publication_visibility: public
+publication_visibility: unlisted
 graph_visibility: public
 created: 2026-10-18
-updated: 2026-10-18
+updated: 2026-10-23
 review:
   mode: pending
-  revision: sha256:170590fb7734f72c8b8ae7b0a1cd11e8a34d1aed858e2e8f879aa25bc9b23f79
+  revision: sha256:6a449bfa5e80554a3b0dbdf94871c6263803873bd67475d34677f768c7f5e290
   reviewed_at: null
   reviewed_by: null
 evidence_ids: []

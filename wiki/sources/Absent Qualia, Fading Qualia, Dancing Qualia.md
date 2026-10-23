@@ -10,13 +10,13 @@ summary: 데이비드 차머스가 뇌를 기능적으로 동일한 부품으로
 domains:
   - computer-science
 editorial_status: draft
-publication_visibility: public
+publication_visibility: unlisted
 graph_visibility: public
 created: 2026-10-19
-updated: 2026-10-19
+updated: 2026-10-23
 review:
   mode: pending
-  revision: sha256:d1dc98f0206c0ef43b636afaab6d51192d00fb922f5640abce2e6c85883ab1e7
+  revision: sha256:afd0bb118cc4614d6a40b603570b2f0892cad0028538301a7a012497824846db
   reviewed_at: null
   reviewed_by: null
 evidence_ids: []

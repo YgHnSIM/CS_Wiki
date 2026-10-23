@@ -10,13 +10,13 @@ summary: 존 메이너드 스미스와 외르슈 서트마리가 1995년 출간�
 domains:
   - computer-science
 editorial_status: draft
-publication_visibility: public
+publication_visibility: unlisted
 graph_visibility: public
 created: 2026-10-19
-updated: 2026-10-19
+updated: 2026-10-23
 review:
   mode: pending
-  revision: sha256:8cbad79545b76eed3b68a1eaae7fd60ab6e0eeb0ac385ae5e739a8375aa0f1d6
+  revision: sha256:18989712ec56ae5aee5631ab6db064c00e76d023554dff4eb5639eca94733653
   reviewed_at: null
   reviewed_by: null
 evidence_ids: []

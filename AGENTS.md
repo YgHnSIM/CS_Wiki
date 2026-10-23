@@ -34,6 +34,7 @@ tests/     Node/Playwright 검증
 
 - 모든 위키 페이지는 `schema_version: 2`와 고유한 소문자 ASCII `id`를 가진다.
 - 공통 상태는 `editorial_status`, 공개 범위는 `publication_visibility`, 그래프 노출은 `graph_visibility`로 분리한다.
+- `publication_visibility: unlisted`는 URL·직접 링크로 접근할 수 있게 빌드하되 `noindex`를 붙이고 목록·검색·사이트맵·그래프 렌즈·학습 경로에서 제외한다. `private`는 아직 지원하지 않으며 빌드가 실패한다. 초안은 공개 범위를 자동으로 바꾸지 않는다.
 - 일반 지식 문서는 `evidence_ids`와 하단 `## 출처`, 마지막 `## 관련 항목`을 가진다.
 - 의미 관계는 본문의 `## 관계` 표에 방향·대상·설명·근거를 함께 기록한다. 대상은 위키링크여야 하고, 근거 칸은 소스·참고 자료 페이지만 받는다.
 - 그래프에 공개하는 개념·개체·분석은 비어 있지 않은 `capability_layers`와 `history.layer`를 가진다. 연도는 원전 대조 없이 추정하지 않는다.

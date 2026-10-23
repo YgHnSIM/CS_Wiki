@@ -4,6 +4,8 @@
 
 그래프에 공개하는 개념·개체·분석 문서는 빈 `capability_layers`와 빈 `history.layer`를 허용하지 않는다. 연도는 원전 대조 없이 추정하지 않으며, 층위만 있는 문서는 역사 렌즈의 `undated` 구간에 남는다.
 
+`publication_visibility: public` 문서만 목록·검색·사이트맵·홈·그래프 렌즈·학습 경로에 노출한다. `unlisted` 문서는 URL과 직접 링크로 접근할 수 있도록 빌드하되 `noindex`를 붙이고 위 발견 경로에서 제외한다. `private`는 라우팅·제거 의미가 아직 없으므로 공개 빌드가 실패한다. 초안(`editorial_status: draft`)은 공개 범위를 자동으로 바꾸지 않으므로, 비공개로 운영하려면 `unlisted`를 명시한다.
+
 ## 검증과 생성
 
 ```powershell

@@ -25,6 +25,7 @@ import {
   key,
   normalizeBase,
   safeExternalUrl,
+  isDiscoverablePage,
   selectSiteDiscoveryPages,
   slugify,
   sourceTarget as resolveSourceTarget,
@@ -87,7 +88,7 @@ const resolvedLearningPaths = learningPaths.map((path) => ({
     const page = lookup.get(key(title));
     if (!page) throw new Error(`Learning path '${path.title}' references missing page '${title}'`);
     return page;
-  })
+  }).filter(isDiscoverablePage)
 }));
 
 const pathsByPage = new Map();
@@ -368,7 +369,7 @@ function navLinks(canonicalPath) {
   </a>`;
 }
 
-function layout({ title, description, content, canonicalPath = "/", bodyClass = "", localGraphData = null, pageModules = [] }) {
+function layout({ title, description, content, canonicalPath = "/", bodyClass = "", localGraphData = null, pageModules = [], noindex = false }) {
   const fullTitle = title === "CS Wiki" ? title : `${title} · CS Wiki`;
   const canonical = siteUrl ? `${siteUrl}${canonicalPath}` : "";
   const nav = navLinks(canonicalPath);
@@ -379,6 +380,7 @@ function layout({ title, description, content, canonicalPath = "/", bodyClass = 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="dark">
   <meta name="theme-color" content="#0A0014">
+  ${noindex ? '<meta name="robots" content="noindex">' : ""}
   <title>${escapeHtml(fullTitle)}</title>
   <meta name="description" content="${escapeHtml(description)}">
   <meta property="og:title" content="${escapeHtml(fullTitle)}">
@@ -1010,7 +1012,8 @@ function articlePage(page) {
     content,
     canonicalPath: page.url,
     bodyClass: "article-page",
-    localGraphData: typeof relationships === "string" ? null : relationships.data
+    localGraphData: typeof relationships === "string" ? null : relationships.data,
+    noindex: page.publicationVisibility === "unlisted"
   });
 }
 

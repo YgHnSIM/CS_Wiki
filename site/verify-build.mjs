@@ -4,7 +4,7 @@ import { readFile, readdir } from "node:fs/promises";
 import { join } from "node:path";
 import { gzipSync } from "node:zlib";
 import { categoryMeta, domainMeta, historyPeriods, learningPaths, statusMeta } from "./catalog.mjs";
-import { escapeHtml, key, selectSiteDiscoveryPages, withBase } from "./core.mjs";
+import { escapeHtml, isDiscoverablePage, key, selectSiteDiscoveryPages, withBase } from "./core.mjs";
 import { loadWikiContent } from "./content.mjs";
 import { buildKnowledgeGraph } from "./graph/model.mjs";
 import {
@@ -871,7 +871,7 @@ const verifiedLearningPaths = learningPaths.map((path) => ({
     const page = wikiLookup.get(key(title));
     if (!page) throw new Error(`Verification learning path '${path.title}' references missing page '${title}'`);
     return page;
-  })
+  }).filter(isDiscoverablePage)
 }));
 const evidenceGraph = buildKnowledgeGraph(wikiPages, verifiedLearningPaths, {
   lookup: wikiLookup,
@@ -884,12 +884,13 @@ assert.ok(!knowledgeGraphRedirectHtml.includes("knowledge-graph-data"), "legacy 
 const syntheticDiscoveryPages = [
   { id: "synthetic-public", graphVisibility: "public" },
   { id: "synthetic-context", graphVisibility: "context" },
-  { id: "synthetic-hidden", graphVisibility: "hidden" }
+  { id: "synthetic-hidden", graphVisibility: "hidden" },
+  { id: "synthetic-unlisted", graphVisibility: "public", publicationVisibility: "unlisted" }
 ];
 assert.deepEqual(
   selectSiteDiscoveryPages(syntheticDiscoveryPages).map((page) => page.id),
   ["synthetic-public", "synthetic-hidden"],
-  "site discovery must exclude context while retaining directly addressable public/operational pages"
+  "site discovery must exclude context and unlisted pages while retaining directly addressable public/operational pages"
 );
 const expectedSiteDiscoveryNodes = selectSiteDiscoveryPages(evidenceGraph.nodes, {
   visibilityFor: (node) => node.visibility || "public"

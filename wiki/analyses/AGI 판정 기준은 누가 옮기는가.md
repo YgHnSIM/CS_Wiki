@@ -12,13 +12,13 @@ domains:
   - machine-learning
   - computer-science
 editorial_status: draft
-publication_visibility: public
+publication_visibility: unlisted
 graph_visibility: public
 created: 2026-10-19
-updated: 2026-10-19
+updated: 2026-10-23
 review:
   mode: pending
-  revision: sha256:7134683a8ef072b488316be33ccb5c9094fae74f96ff83330a391400a28faeb0
+  revision: sha256:4d0cc5586607067f06b2c4d9eb9beed9a9f0660e1d07289a2736feb457d2652d
   reviewed_at: null
   reviewed_by: null
 evidence_ids:

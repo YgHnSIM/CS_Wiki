@@ -11,13 +11,13 @@ domains:
   - computer-science
   - computer-history
 editorial_status: draft
-publication_visibility: public
+publication_visibility: unlisted
 graph_visibility: public
 created: 2026-10-18
-updated: 2026-10-18
+updated: 2026-10-23
 review:
   mode: pending
-  revision: sha256:a739ed00f9f8d8dba9c8b312d3cd422aee4ed31b0d8bf66f583e28361d3633ea
+  revision: sha256:02b390b01d95d4db36bc3ef2793d7345695e6b205450fae8ff22a5a677c92ff1
   reviewed_at: null
   reviewed_by: null
 evidence_ids: []

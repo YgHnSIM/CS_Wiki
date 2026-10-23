@@ -287,7 +287,10 @@ export function buildKnowledgeGraph(pages, learningPaths, { lookup, urlFor = (ur
     attachments: attachmentTargets(page),
     unresolved: unresolvedTargets(page, lookup),
     sourceId: page.sourceId || null,
-    visibility: page.graphVisibility || (["index.md", "overview.md", "log.md"].includes(basename(page.filePath).toLowerCase()) ? "hidden" : "public"),
+    publicationVisibility: page.publicationVisibility || "public",
+    visibility: page.publicationVisibility === "unlisted"
+      ? "hidden"
+      : (page.graphVisibility || (["index.md", "overview.md", "log.md"].includes(basename(page.filePath).toLowerCase()) ? "hidden" : "public")),
     pathMemberships: memberships.get(page) || [],
     historical: {
       publicationYear: parseYear(page.publicationYear),
