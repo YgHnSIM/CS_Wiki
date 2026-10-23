@@ -46,6 +46,11 @@ access:
     url: https://www.unicode.org/reports/tr29/
     retrieved: 2026-07-10
     version: Unicode 17.0.0 / Revision 47
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20261015223749/https://www.unicode.org/reports/tr29/tr29-47.html
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-10-15
 ---
 
 ## 개요

@@ -32,6 +32,11 @@ access:
     url: https://reproducible-builds.org/docs/definition/
     retrieved: 2026-08-05
     version: current page at access time
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20261023163028/https://reproducible-builds.org/docs/definition/
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-10-23
 ---
 
 ## 개요

@@ -51,6 +51,11 @@ access:
     url: https://www.usenix.org/system/files/osdi20-gujarati.pdf
     retrieved: 2026-07-25
     version: OSDI '20 proceedings, pp. 443–462
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/https://www.usenix.org/conference/osdi20/presentation/gujarati/200
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot http-s:-//
 ---
 
 ## 개요

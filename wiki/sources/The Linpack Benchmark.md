@@ -50,6 +50,11 @@ access:
     url: https://www.top500.org/resources/frequently-asked-questions/
     retrieved: 2026-07-15
     version: null
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20261016165618/https://top500.org/project/linpack/
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-10-16
 ---
 
 ## 개요

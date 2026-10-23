@@ -48,6 +48,11 @@ access:
     url: https://www2.eecs.berkeley.edu/Pubs/TechRpts/2006/EECS-2006-183.html
     retrieved: 2026-07-16
     version: EECS-2006-183, December 2006
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20260510015503/https://www2.eecs.berkeley.edu/Pubs/TechRpts/2006/EECS-2006-183.pdf
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-05-10
 ---
 
 ## 개요

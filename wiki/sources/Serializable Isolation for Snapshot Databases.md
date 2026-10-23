@@ -37,6 +37,11 @@ access:
     url: https://www.cs.cornell.edu/~sowell/dbpapers/serializable_isolation.pdf
     retrieved: 2026-08-05
     version: SIGMOD 2008 paper PDF
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/http://www.cs.cornell.edu/~sowell/dbpapers/serializable_isolation.pdf/200
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot http-:/-/w
 ---
 
 ## 개요

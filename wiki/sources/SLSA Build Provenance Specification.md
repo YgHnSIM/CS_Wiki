@@ -33,6 +33,11 @@ access:
     url: https://slsa.dev/spec/v1.2/build-provenance
     retrieved: 2026-08-05
     version: v1.2 at access time
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/https://slsa.dev/spec/v1.2/build-provenance/200
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot http-s:-//
 ---
 
 ## 개요

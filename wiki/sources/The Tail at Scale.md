@@ -62,6 +62,11 @@ access:
     url: https://users.cs.utah.edu/~stutsman/cs6450/public/papers/tail-at-scale.pdf
     retrieved: 2026-07-16
     version: Communications of the ACM 56(2), February 2013, pp. 74-80
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20260925164637/https://research.google/pubs/the-tail-at-scale/
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-09-25
 ---
 
 ## 개요

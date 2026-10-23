@@ -64,9 +64,12 @@ npm run maintenance:check
 npm run test:site
 npm test
 npm run check:links
+npm run preservation:audit
 ```
 
-외부 링크 검사는 네트워크가 필요한 별도 점검이며 매주 GitHub Actions에서도 실행됩니다. 404·410은 깨진 링크로 실패시키고, 출판사 봇 차단과 속도 제한은 별도 상태로 보고합니다. 타임아웃·5xx·DNS 오류가 전체의 20%를 넘으면 실패하며, 실패 시 워크플로가 이슈를 열거나 갱신합니다.
+외부 링크 검사는 네트워크가 필요한 별도 점검이며 매주 GitHub Actions에서도 실행됩니다. 404·410은 깨진 링크로 실패시키고, 출판사 봇 차단과 속도 제한은 별도 상태로 보고합니다. 타임아웃·5xx·DNS 오류가 전체의 20%를 넘으면 실패하며, 실패 시 워크플로가 이슈를 열거나 갱신합니다. Wayback `role: archive` URL은 기본 점검에서 제외해 아카이브 서비스에 부담을 주지 않습니다.
+
+`npm run preservation:audit`는 소스·참고 자료의 로컬 보존·아카이브·외부 링크 의존 수를 집계하고, 남은 external-only 문서를 나열합니다. `--json`으로 기계 판독 출력을 얻을 수 있습니다.
 
 Windows PowerShell에서 로컬 실행 정책이 `npm.ps1`을 막는 경우 같은 명령을 `npm.cmd run check`처럼 실행할 수 있습니다.
 

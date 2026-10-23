@@ -44,6 +44,11 @@ access:
     url: https://top500.org/files/green500/tutorial.pdf
     retrieved: 2026-07-15
     version: 2007-06-27
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20231224150626/https://top500.org/files/green500/tutorial.pdf
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2023-12-24
 ---
 
 ## 개요

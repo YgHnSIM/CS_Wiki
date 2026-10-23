@@ -54,6 +54,11 @@ access:
     url: https://www.cs.cmu.edu/~18742/papers/Amdahl1967.pdf
     retrieved: 2026-07-15
     version: null
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20261006133735/https://www.cs.cmu.edu/~18742/papers/Amdahl1967.pdf
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-10-06
 ---
 
 ## 개요

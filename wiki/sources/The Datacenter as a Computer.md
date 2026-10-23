@@ -48,6 +48,11 @@ access:
     url: https://research.google/pubs/the-datacenter-as-a-computer-an-introduction-to-the-design-of-warehouse-scale-machines/
     retrieved: 2026-07-16
     version: First edition, 2009
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20260909234207/https://research.google/pubs/the-datacenter-as-a-computer-an-introduction-to-the-design-of-warehouse-scale-machines/
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-09-09
 ---
 
 ## 개요

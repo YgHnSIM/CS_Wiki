@@ -35,6 +35,11 @@ access:
     url: https://www.microsoft.com/en-us/research/publication/gray-failure-achilles-heel-cloud-scale-systems/
     retrieved: 2026-08-05
     version: null
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20261010191819/https://www.microsoft.com/en-us/research/publication/gray-failure-achilles-heel-cloud-scale-systems/
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-10-10
 ---
 
 ## 개요

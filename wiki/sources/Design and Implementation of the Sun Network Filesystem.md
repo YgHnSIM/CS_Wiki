@@ -41,6 +41,11 @@ access:
     url: https://www.rfc-editor.org/rfc/rfc1094
     retrieved: 2026-09-18
     version: USENIX Summer 1985 proceedings
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20260505150313/https://www.rfc-editor.org/rfc/rfc1094
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-05-05
 ---
 
 ## 개요

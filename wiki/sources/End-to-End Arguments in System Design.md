@@ -53,6 +53,11 @@ access:
     url: https://doi.org/10.1145/357401.357402
     retrieved: 2026-07-25
     version: ACM Transactions on Computer Systems 2(4), November 1984, pp. 277–288
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20260520063005/https://web.mit.edu/saltzer/www/publications/endtoend/endtoendA4.pdf
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-05-20
 ---
 
 ## 개요

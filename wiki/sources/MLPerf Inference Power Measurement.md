@@ -69,6 +69,11 @@ access:
     url: https://mlcommons.org/2021/04/mlperf-inference-v1-0-results-with-first-power-measurements/
     retrieved: 2026-07-25
     version: MLPerf Inference v1.0 first power methodology; current v6.0-era documentation and master rules as retrieved
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20261016131236/https://docs.mlcommons.org/inference/power/
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-10-16
 ---
 
 ## 개요

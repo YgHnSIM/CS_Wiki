@@ -67,7 +67,7 @@ access:
     version: null
   - kind: url
     role: mirror
-    url: https://www.cs.virginia.edu/~robins/Turing_Paper_1936.pdf
+    url: https://web.archive.org/web/20261019143951/https://www.cs.virginia.edu/~robins/Turing_Paper_1936.pdf
     retrieved: 2026-07-10
     version: null
 ---
@@ -107,7 +107,7 @@ access:
 - 로컬 보존본: `raw/assets/1936_Turing_On_Computable_Numbers.pdf`
 - Turing Digital Archive, [AMT/B/12](https://turingarchive.kings.cam.ac.uk/publications-lectures-and-talks-amtb/amt-b-12)
 - Wiley, [On Computable Numbers, with an Application to the Entscheidungsproblem](https://londmathsoc.onlinelibrary.wiley.com/doi/10.1112/plms/s2-42.1.230)
-- PDF copy, [On Computable Numbers, with an Application to the Entscheidungsproblem](https://www.cs.virginia.edu/~robins/Turing_Paper_1936.pdf)
+- PDF copy, [On Computable Numbers, with an Application to the Entscheidungsproblem](https://web.archive.org/web/20261019143951/https://www.cs.virginia.edu/~robins/Turing_Paper_1936.pdf)
 
 ## 관련 항목
 

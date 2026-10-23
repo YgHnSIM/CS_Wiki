@@ -35,6 +35,11 @@ access:
     url: https://docs.stripe.com/api/idempotent_requests
     retrieved: 2026-08-05
     version: null
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20261016135159/https://docs.stripe.com/api/idempotent_requests
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-10-16
 ---
 
 ## 개요

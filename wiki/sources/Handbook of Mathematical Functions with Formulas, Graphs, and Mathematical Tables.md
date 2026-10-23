@@ -50,6 +50,11 @@ access:
     url: https://www.nist.gov/mathematics-statistics/handbook-mathematical-functions-abramowitz-and-stegun
     retrieved: 2026-07-25
     version: NBS Applied Mathematics Series 55, June 1964, 1046 pages
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20260612092903/https://www.nist.gov/mathematics-statistics/handbook-mathematical-functions-abramowitz-and-stegun
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-06-12
 ---
 
 ## 개요

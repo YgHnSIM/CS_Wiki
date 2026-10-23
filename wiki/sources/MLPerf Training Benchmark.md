@@ -49,6 +49,11 @@ access:
     url: https://proceedings.mlsys.org/paper_files/paper/2020/file/411e39b117e885341f25efb8912945f7-Paper.pdf
     retrieved: 2026-07-24
     version: Proceedings of Machine Learning and Systems 2, 2020
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20260309183704/https://proceedings.mlsys.org/paper_files/paper/2020/hash/411e39b117e885341f25efb8912945f7-Abstract.html
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-03-09
 ---
 
 ## 개요

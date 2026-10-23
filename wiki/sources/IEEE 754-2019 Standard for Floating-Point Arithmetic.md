@@ -71,6 +71,11 @@ access:
     url: https://standards.ieee.org/ipr/stdspermission/
     retrieved: 2026-07-16
     version: IEEE Std 754-2019; P754 revision project active as of 2026-07-16
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20261022092729/https://standards.ieee.org/ieee/754/6210/
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-10-22
 ---
 
 ## 개요

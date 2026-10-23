@@ -30,6 +30,10 @@ jobs:
           set -o pipefail
           npm run check:links 2>&1 | tee link-report.txt
 
+      - name: Preservation audit
+        if: always()
+        run: npm run preservation:audit | tee -a link-report.txt
+
       - name: Upload link report
         if: always()
         uses: actions/upload-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5

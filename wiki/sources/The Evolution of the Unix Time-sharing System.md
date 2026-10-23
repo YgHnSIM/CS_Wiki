@@ -59,6 +59,11 @@ access:
     url: https://onlinelibrary.wiley.com/doi/abs/10.1002/j.1538-7305.1984.tb00054.x
     retrieved: 2026-07-10
     version: null
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20261009102331/https://www.nokia.com/bell-labs/about/dennis-m-ritchie/hist.pdf
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-10-09
 ---
 
 ## 개요

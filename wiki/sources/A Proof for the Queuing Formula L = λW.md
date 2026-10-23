@@ -50,6 +50,11 @@ access:
     url: https://doi.org/10.1287/opre.9.3.383
     retrieved: 2026-07-25
     version: Operations Research 9(3), pp. 383–387
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20260303161513/https://pubsonline.informs.org/doi/abs/10.1287/opre.9.3.383?journalCode=opre
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-03-03
 ---
 
 ## 개요

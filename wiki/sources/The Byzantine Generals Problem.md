@@ -56,6 +56,11 @@ access:
     url: https://www.microsoft.com/en-us/research/wp-content/uploads/2016/12/The-Byzantine-Generals-Problem.pdf
     retrieved: 2026-07-24
     version: ACM Transactions on Programming Languages and Systems 4(3), July 1982, pp. 382–401
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20220919074813/https://www.microsoft.com/en-us/research/?p=338450
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2022-09-19
 ---
 
 ## 개요

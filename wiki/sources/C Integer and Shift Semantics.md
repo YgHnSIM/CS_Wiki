@@ -47,6 +47,11 @@ access:
     url: https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2817.pdf
     retrieved: 2026-07-10
     version: N1570 / N2817
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20261017151304/https://www.open-std.org/jtc1/sc22/wg14/www/docs/n1570.pdf
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-10-17
 ---
 
 ## 개요

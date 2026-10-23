@@ -50,6 +50,11 @@ access:
     url: https://proceedings.mlsys.org/paper_files/paper/2024/file/42a452cbafa9dd64e9ba4aa95cc1ef21-Paper-Conference.pdf
     retrieved: 2026-07-25
     version: Proceedings of Machine Learning and Systems 6
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20260926174853/https://proceedings.mlsys.org/paper_files/paper/2024/hash/42a452cbafa9dd64e9ba4aa95cc1ef21-Abstract-Conference.html
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-09-26
 ---
 
 ## 개요

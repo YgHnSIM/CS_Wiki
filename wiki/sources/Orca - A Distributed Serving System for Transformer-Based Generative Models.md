@@ -52,6 +52,11 @@ access:
     url: https://www.usenix.org/system/files/osdi22-yu.pdf
     retrieved: 2026-07-24
     version: OSDI '22 proceedings, pp. 521-538
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20261001015413/https://www.usenix.org/conference/osdi22/presentation/yu
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-10-01
 ---
 
 ## 개요

@@ -50,6 +50,11 @@ access:
     url: https://openlibrary.org/books/OL7150849M/An_investigation_of_the_laws_of_thought
     retrieved: 2026-07-11
     version: 1854 first edition
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20260824033047/https://www.gutenberg.org/ebooks/15114
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-08-24
 ---
 
 ## 개요

@@ -52,6 +52,11 @@ access:
     url: https://doi.org/10.1145/1365490.1365500
     retrieved: 2026-07-25
     version: ACM Queue 6(2), March/April 2008
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20260919132917/https://research.nvidia.com/publication/2008-03_scalable-parallel-programming-cuda
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-09-19
 ---
 
 ## 개요

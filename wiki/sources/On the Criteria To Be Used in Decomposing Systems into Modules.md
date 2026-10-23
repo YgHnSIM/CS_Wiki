@@ -49,6 +49,11 @@ access:
     url: https://wstomv.win.tue.nl/edu/2ip30/references/criteria_for_modularization.pdf
     retrieved: 2026-07-10
     version: null
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20260510002131/https://dl.acm.org/doi/10.1145/361598.361623
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-05-10
 ---
 
 ## 개요

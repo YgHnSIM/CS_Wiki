@@ -34,6 +34,11 @@ access:
     url: https://sre.google/sre-book/addressing-cascading-failures/
     retrieved: 2026-08-05
     version: null
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20261001130414/https://sre.google/sre-book/addressing-cascading-failures/
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-10-01
 ---
 
 ## 개요

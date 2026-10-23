@@ -67,6 +67,11 @@ access:
     url: https://uruk-warka.dk/mathematics/ER6%20tables.pdf
     retrieved: 2026-07-20
     version: Oxford, 2003; Oxford Academic online edition, 2007; Robson chapter, pp. 19-48
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20260210141326/https://academic.oup.com/book/4975
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-02-10
 ---
 
 ## 개요

@@ -65,6 +65,11 @@ access:
     url: https://digicoll.lib.berkeley.edu/record/137942
     retrieved: 2026-07-24
     version: Technical Report UCB/CSD-02-1175, 2002
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20260926165007/https://www2.eecs.berkeley.edu/Pubs/TechRpts/2002/5574.html
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-09-26
 ---
 
 ## 개요

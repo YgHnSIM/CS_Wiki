@@ -53,6 +53,11 @@ access:
     url: https://doi.org/10.1145/564585.564601
     retrieved: 2026-07-25
     version: SIGACT News 33(2), 2002, pp. 51–59
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20230311114823/https://www.cs.princeton.edu/courses/archive/fall19/cos418/papers/cap.pdf
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2023-03-11
 ---
 
 ## 개요

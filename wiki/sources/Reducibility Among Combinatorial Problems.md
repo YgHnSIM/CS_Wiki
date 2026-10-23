@@ -55,6 +55,11 @@ access:
     url: https://www.cs.umd.edu/~gasarch/BLOGPAPERS/Karp.pdf
     retrieved: 2026-07-24
     version: Complexity of Computer Computations, 1972, pp. 85–103
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20260629141723/https://link.springer.com/chapter/10.1007/978-1-4684-2001-2_9
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-06-29
 ---
 
 ## 개요

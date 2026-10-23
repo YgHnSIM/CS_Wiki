@@ -37,9 +37,14 @@ works:
 access:
   - kind: url
     role: canonical
-    url: https://www.cs.dartmouth.edu/~doug/components.txt
+    url: https://ics.uci.edu/~taylor/ICS221/papers/McIlroyComponents.txt
     retrieved: 2026-07-10
     version: null
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20260704210757/https://www.cs.dartmouth.edu/~doug/components.txt
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-07-04
 ---
 
 ## 개요
@@ -67,7 +72,7 @@ McIlroy의 핵심 문제의식은 소프트웨어 생산이 하드웨어나 기�
 - 없음
 <!-- wiki-v2:evidence-end -->
 
-- Douglas McIlroy, [Mass Produced Software Components](https://www.cs.dartmouth.edu/~doug/components.txt)
+- Douglas McIlroy, [Mass Produced Software Components](https://ics.uci.edu/~taylor/ICS221/papers/McIlroyComponents.txt)
 
 ## 관련 항목
 

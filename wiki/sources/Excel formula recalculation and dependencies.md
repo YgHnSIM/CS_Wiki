@@ -65,6 +65,11 @@ access:
     url: https://support.microsoft.com/en-us/excel/get-help-with-show-changes-in-excel
     retrieved: 2026-07-20
     version: Continuously updated Microsoft Support pages; common scope Microsoft 365 / Excel 2024 / Excel 2021, retrieved 2026-07-20
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20260926023104/https://support.microsoft.com/en-us/excel/change-formula-recalculation-iteration-or-precision-in-excel
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-09-26
 ---
 
 ## 자료 개요

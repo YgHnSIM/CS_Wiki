@@ -34,6 +34,11 @@ access:
     url: https://www.postgresql.org/docs/17/transaction-iso.html
     retrieved: 2026-08-05
     version: PostgreSQL 17
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20260902174124/https://www.postgresql.org/docs/17/transaction-iso.html
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-09-02
 ---
 
 ## 개요

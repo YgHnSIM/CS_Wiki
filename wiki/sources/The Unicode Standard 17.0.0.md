@@ -45,6 +45,11 @@ access:
     url: https://www.unicode.org/versions/Unicode17.0.0/core-spec/chapter-3/
     retrieved: 2026-07-10
     version: 17.0.0
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20261023103756/https://www.unicode.org/versions/Unicode17.0.0/
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-10-23
 ---
 
 ## 개요

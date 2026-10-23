@@ -49,6 +49,11 @@ access:
     url: https://grosskurth.ca/bib/1992/krueger.pdf
     retrieved: 2026-07-10
     version: null
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20231209182405/https://dl.acm.org/doi/10.1145/130844.130856
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2023-12-09
 ---
 
 ## 개요

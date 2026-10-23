@@ -40,6 +40,11 @@ access:
     url: https://dl.acm.org/doi/10.1145/52324.52336
     retrieved: 2026-09-18
     version: ACM SIGCOMM Computer Communication Review / SIGCOMM 1988
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20240427062457/https://dl.acm.org/doi/10.1145/52324.52336
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2024-04-27
 ---
 
 ## 개요

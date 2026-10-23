@@ -57,6 +57,11 @@ access:
     url: https://digicoll.lib.berkeley.edu/record/136008
     retrieved: 2026-07-16
     version: UCB/CSD-82-106, October 1982
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20260809231033/https://www2.eecs.berkeley.edu/Pubs/TechRpts/1982/5449.html
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-08-09
 ---
 
 ## 개요

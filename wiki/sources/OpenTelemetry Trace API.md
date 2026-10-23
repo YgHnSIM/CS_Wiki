@@ -32,6 +32,11 @@ access:
     url: https://github.com/open-telemetry/opentelemetry-specification/blob/main/specification/trace/api.md
     retrieved: 2026-08-05
     version: main branch at access time
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20261013222023/https://github.com/open-telemetry/opentelemetry-specification/blob/main/specification/trace/api.md
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-10-13
 ---
 
 ## 개요

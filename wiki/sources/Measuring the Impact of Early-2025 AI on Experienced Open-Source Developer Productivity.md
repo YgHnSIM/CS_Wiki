@@ -53,6 +53,11 @@ access:
     url: https://metr.org/blog/2026-02-24-uplift-update/
     retrieved: 2026-07-25
     version: early-2025 tool setting; 2026 methodology update recorded as supporting material
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20261017154818/https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-10-17
 ---
 
 ## 개요

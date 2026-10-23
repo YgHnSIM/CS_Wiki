@@ -45,6 +45,11 @@ access:
     url: https://www.cambridge.org/core/books/mathematical-tables/37FE51CE8B66A078A8DFA3C895FFA457
     retrieved: 2026-07-20
     version: Seventh edition, 1858; Cambridge Library Collection paperback reissue 2012 and digital edition 2013
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20240619191353/https://www.cambridge.org/core/books/mathematical-tables/37FE51CE8B66A078A8DFA3C895FFA457
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2024-06-19
 ---
 
 ## 개요

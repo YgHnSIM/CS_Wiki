@@ -58,6 +58,11 @@ access:
     url: https://vtda.org/pubs/BSTJ/vol57-1978/articles/bstj57-6-2021.pdf
     retrieved: 2026-07-10
     version: null
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20260116073937/https://www.nokia.com/bell-labs/about/dennis-m-ritchie/portpap.pdf
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-01-16
 ---
 
 ## 개요

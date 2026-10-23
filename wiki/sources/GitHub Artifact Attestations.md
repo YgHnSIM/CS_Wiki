@@ -31,6 +31,11 @@ access:
     url: https://docs.github.com/en/actions/how-tos/secure-your-work/use-artifact-attestations/use-artifact-attestations
     retrieved: 2026-08-05
     version: current page at access time
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20261016122727/https://docs.github.com/en/actions/how-tos/secure-your-work/use-artifact-attestations/use-artifact-attestations
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-10-16
 ---
 
 ## 개요

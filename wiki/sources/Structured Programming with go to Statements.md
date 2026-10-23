@@ -53,6 +53,11 @@ access:
     url: https://pic.plover.com/knuth-GOTO.pdf
     retrieved: 2026-07-10
     version: null
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20250804020838/https://dl.acm.org/doi/10.1145/356635.356640
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2025-08-04
 ---
 
 ## 개요

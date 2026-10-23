@@ -50,6 +50,11 @@ access:
     url: https://cdn.amazon.science/ac/1d/eb50c4064c538c8ac440ce6a1d91/dynamo-amazons-highly-available-key-value-store.pdf
     retrieved: 2026-07-25
     version: SOSP 2007 proceedings, pp. 205–220
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20261011233915/https://www.amazon.science/publications/dynamo-amazons-highly-available-key-value-store
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-10-11
 ---
 
 ## 개요

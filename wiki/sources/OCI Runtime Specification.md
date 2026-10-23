@@ -33,6 +33,11 @@ access:
     url: https://specs.opencontainers.org/runtime-spec/
     retrieved: 2026-08-05
     version: current specification at access time
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20261005112249/https://specs.opencontainers.org/runtime-spec/
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-10-05
 ---
 
 ## 개요

@@ -59,6 +59,11 @@ access:
     url: https://brent.hailpern.com/wp-content/uploads/2020/02/p671-ritchie.pdf
     retrieved: 2026-07-10
     version: null
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20261011020032/https://www.nokia.com/bell-labs/about/dennis-m-ritchie/chist.html
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-10-11
 ---
 
 ## 개요

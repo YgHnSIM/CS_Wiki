@@ -67,7 +67,7 @@ access:
     version: Apple II Version 1.0, 1979
   - kind: url
     role: mirror
-    url: https://www.bricklin.com/visicalc.htm
+    url: https://web.archive.org/web/20261010191535/http://www.bricklin.com/visicalc.htm
     retrieved: 2026-07-20
     version: Apple II Version 1.0, 1979
   - kind: url
@@ -85,6 +85,11 @@ access:
     url: https://americanhistory.si.edu/collections/object/nmah_1696121
     retrieved: 2026-07-20
     version: Apple II Version 1.0, 1979
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20181103092952/http://mirrors.apple2.org.za/ftp.apple.asimov.net/documentation/applications/misc/personalsoftware_visicalc_v1.0_manual_ocr.pdf
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2018-11-03
 ---
 
 ## 자료 개요
@@ -141,7 +146,7 @@ VisiCalc가 고대나 인쇄 수학 표에서 직접 기술적으로 파생되�
 
 - Personal Software / Software Arts, [VisiCalc Apple II Version 1.0 Manual](https://mirrors.apple2.org.za/ftp.apple.asimov.net/documentation/applications/misc/personalsoftware_visicalc_v1.0_manual_ocr.pdf), 1979.
 - Bitsavers, [VisiCalc Apple II Version 1.0 Manual 접근용 사본](https://bitsavers.org/pdf/visicorp/apple2/VisiCalc_Apple_2_Ver_1.0_1979.pdf).
-- Dan Bricklin, [VisiCalc: Information from its creators](https://www.bricklin.com/visicalc.htm).
+- Dan Bricklin, [VisiCalc: Information from its creators](https://web.archive.org/web/20261010191535/http://www.bricklin.com/visicalc.htm).
 - Computer History Museum, [The Origins and Impact of VisiCalc](https://computerhistory.org/events/origins-impact-visicalc/).
 - Computer History Museum, [Bob Frankston](https://computerhistory.org/profile/bob-frankston/).
 - National Museum of American History, [Software and Documentation, Software Arts, Inc., VisiCalc](https://americanhistory.si.edu/collections/object/nmah_1696121).

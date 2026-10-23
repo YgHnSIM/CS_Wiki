@@ -59,6 +59,11 @@ access:
     url: https://www.gresham.ac.uk/watch-now/babbage-and-lovelace
     retrieved: 2026-07-20
     version: Oxford University Press, 2003, chapter 4, pp. 105-122, DOI 10.1093/acprof:oso/9780198508410.003.0005; Gresham lecture transcript, 2016-01-19
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20260210141326/https://academic.oup.com/book/4975
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-02-10
 ---
 
 ## 개요

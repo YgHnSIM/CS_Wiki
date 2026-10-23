@@ -32,7 +32,7 @@ works:
 access:
   - kind: url
     role: mirror
-    url: https://sigops.org/s/conferences/hotos/2021/papers/hotos21-bronson.pdf
+    url: https://doi.org/10.1145/3458336.3465286
     retrieved: 2026-08-05
     version: HotOS 2021 paper PDF
 ---
@@ -61,7 +61,7 @@ access:
 - 없음
 <!-- wiki-v2:evidence-end -->
 
-- HotOS, [Metastable Failures](https://sigops.org/s/conferences/hotos/2021/papers/hotos21-bronson.pdf)
+- HotOS, [Metastable Failures](https://doi.org/10.1145/3458336.3465286)
 
 ## 관련 항목
 

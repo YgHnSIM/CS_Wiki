@@ -33,6 +33,11 @@ access:
     url: https://www.noemamag.com/artificial-general-intelligence-is-already-here/
     retrieved: 2026-10-19
     version: null
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20261015072931/https://www.noemamag.com/artificial-general-intelligence-is-already-here/
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-10-15
 ---
 
 ## 개요

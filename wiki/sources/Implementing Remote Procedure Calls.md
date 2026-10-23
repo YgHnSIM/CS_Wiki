@@ -46,7 +46,7 @@ works:
 access:
   - kind: url
     role: canonical
-    url: https://birrell.org/andrew/papers/ImplementingRPC.pdf
+    url: https://web.archive.org/web/20261012103606/http://birrell.org/andrew/papers/ImplementingRPC.pdf
     retrieved: 2026-07-25
     version: ACM Transactions on Computer Systems 2(1), February 1984, pp. 39–59
   - kind: url
@@ -99,7 +99,7 @@ RPC의 목적은 네트워크를 없애는 것이 아니라, 프로그램이 원
 - 없음
 <!-- wiki-v2:evidence-end -->
 
-- Andrew Birrell, [paper PDF](https://birrell.org/andrew/papers/ImplementingRPC.pdf)
+- Andrew Birrell, [paper PDF](https://web.archive.org/web/20261012103606/http://birrell.org/andrew/papers/ImplementingRPC.pdf)
 - ACM, [DOI: 10.1145/2080.357392](https://doi.org/10.1145/2080.357392)
 
 ## 관련 항목

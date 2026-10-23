@@ -55,6 +55,11 @@ access:
     url: https://www.cs.ox.ac.uk/publications/publication8229-abstract.html
     retrieved: 2026-07-25
     version: Communications of the ACM 17(10), October 1974, pp. 549–557
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20250309155009/https://dl.acm.org/doi/10.1145/355620.361161
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2025-03-09
 ---
 
 ## 개요

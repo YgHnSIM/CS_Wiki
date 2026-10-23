@@ -65,6 +65,11 @@ access:
     url: https://www.nist.gov/mathematics-statistics/mathematics-and-statistics-nist-timeline
     retrieved: 2026-07-20
     version: MTP page created 2022-03-11, updated 2022-06-19; NIST timeline updated 2022-06-08
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20260608153118/https://www.nist.gov/mathematics-statistics/prehistory-math-tables-project
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-06-08
 ---
 
 ## 개요

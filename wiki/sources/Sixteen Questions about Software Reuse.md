@@ -49,6 +49,11 @@ access:
     url: https://www.researchgate.net/publication/220425619_Sixteen_Questions_About_Software_Reuse
     retrieved: 2026-07-10
     version: null
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20240811083306/https://dl.acm.org/doi/10.1145/203241.203260
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2024-08-11
 ---
 
 ## 개요

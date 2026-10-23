@@ -36,6 +36,11 @@ access:
     url: https://www.microsoft.com/en-us/research/publication/a-critique-of-ansi-sql-isolation-levels/
     retrieved: 2026-08-05
     version: null
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20260308210021/https://www.microsoft.com/en-us/research/publication/a-critique-of-ansi-sql-isolation-levels/
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-03-08
 ---
 
 ## 개요

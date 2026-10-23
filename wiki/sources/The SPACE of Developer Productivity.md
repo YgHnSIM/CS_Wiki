@@ -49,6 +49,11 @@ access:
     url: https://queue.acm.org/detail.cfm?id=3454124
     retrieved: 2026-07-24
     version: ACM Queue 19(1), February 2021, pp. 20–48
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20260912005333/https://www.microsoft.com/en-us/research/publication/the-space-of-developer-productivity-theres-more-to-it-than-you-think/
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-09-12
 ---
 
 ## 개요

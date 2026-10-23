@@ -46,6 +46,11 @@ access:
     url: https://research.google/pubs/the-google-file-system/
     retrieved: 2026-07-25
     version: SOSP 2003 proceedings, pp. 20–43
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20261016064935/https://research.google/pubs/the-google-file-system/
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-10-16
 ---
 
 ## 개요

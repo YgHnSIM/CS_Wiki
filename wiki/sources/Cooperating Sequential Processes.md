@@ -55,6 +55,11 @@ access:
     url: https://www.cs.utexas.edu/~EWD/indexBibTeX.html
     retrieved: 2026-07-25
     version: "Programming Languages: NATO Advanced Study Institute, 1968, pp. 43–112"
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20261013190746/https://www.cs.utexas.edu/~EWD/transcriptions/EWD01xx/EWD123.html
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-10-13
 ---
 
 ## 개요

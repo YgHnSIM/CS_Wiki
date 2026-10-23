@@ -31,6 +31,11 @@ access:
     url: https://reproducible-builds.org/specs/source-date-epoch/
     retrieved: 2026-08-05
     version: Revision 1.1 at access time
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/https://reproducible-builds.org/specs/source-date-epoch//200
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot http-s:-//
 ---
 
 ## 개요

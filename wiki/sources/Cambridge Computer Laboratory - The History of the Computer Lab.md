@@ -33,6 +33,11 @@ access:
     url: https://www.cl.cam.ac.uk/relics/history.html
     retrieved: 2026-07-10
     version: null
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20260410181813/https://www.cl.cam.ac.uk/relics/history.html
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-04-10
 ---
 
 ## 개요

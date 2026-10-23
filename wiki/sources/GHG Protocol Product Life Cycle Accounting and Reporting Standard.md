@@ -48,6 +48,11 @@ access:
     url: https://ghgprotocol.org/sites/default/files/standards/Product-Life-Cycle-Accounting-Reporting-Standard-EReader_041613_0.pdf
     retrieved: 2026-07-25
     version: 2011 Product Life Cycle Accounting and Reporting Standard
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20261006134040/https://ghgprotocol.org/product-standard
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-10-06
 ---
 
 ## 개요

@@ -56,6 +56,11 @@ access:
     url: https://www.usenix.org/legacy/events/usits03/tech/full_papers/oppenheimer/oppenheimer.pdf
     retrieved: 2026-07-24
     version: USITS '03, 2003
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20250829174446/https://www.usenix.org/conference/usits-03/why-do-internet-services-fail-and-what-can-be-done-about-it
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2025-08-29
 ---
 
 ## 개요

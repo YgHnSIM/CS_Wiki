@@ -33,6 +33,11 @@ access:
     url: https://bazel.build/concepts/build-files
     retrieved: 2026-08-05
     version: nightly documentation at access time
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20260917021307/https://bazel.build/concepts/build-files
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-09-17
 ---
 
 ## 개요

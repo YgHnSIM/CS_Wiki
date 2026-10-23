@@ -47,6 +47,11 @@ access:
     url: https://proceedings.neurips.cc/paper_files/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf
     retrieved: 2026-07-24
     version: NIPS 2017 proceedings
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20261016223242/https://proceedings.neurips.cc/paper_files/paper/2017/hash/3f5ee243547dee91fbd053c1c4a845aa-Abstract.html
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-10-16
 ---
 
 ## 개요

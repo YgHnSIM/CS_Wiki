@@ -47,6 +47,11 @@ access:
     url: https://www.spec.org/cpu2026/docs/runrules.html#rule_2.3.3
     retrieved: 2026-07-15
     version: SPEC CPU 2026 overview and run rules retrieved 2026-07-16
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20261007145819/https://www.spec.org/cpu2026/docs/overview.html
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-10-07
 ---
 
 ## 개요

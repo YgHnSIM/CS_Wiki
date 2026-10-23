@@ -54,6 +54,11 @@ access:
     url: https://doi.org/10.1145/359545.359563
     retrieved: 2026-07-25
     version: Communications of the ACM 21(7), July 1978, pp. 558–565
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20261001144218/https://www.microsoft.com/en-us/research/publication/time-clocks-ordering-events-distributed-system/
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-10-01
 ---
 
 ## 개요

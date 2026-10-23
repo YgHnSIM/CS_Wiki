@@ -54,6 +54,11 @@ access:
     url: https://www.cs.cmu.edu/~wing/publications/HerlihyWing90.pdf
     retrieved: 2026-07-25
     version: ACM Transactions on Programming Languages and Systems 12(3), July 1990, pp. 463–492
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20250414144918/https://dl.acm.org/doi/10.1145/78969.78972
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2025-04-14
 ---
 
 ## 개요

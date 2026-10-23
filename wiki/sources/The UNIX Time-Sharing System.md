@@ -53,7 +53,7 @@ access:
     version: null
   - kind: url
     role: mirror
-    url: https://dsf.berkeley.edu/cs262/unix.pdf
+    url: https://web.archive.org/web/20260907165751/https://dsf.berkeley.edu/cs262/unix.pdf
     retrieved: 2026-07-10
     version: null
   - kind: url
@@ -61,6 +61,11 @@ access:
     url: https://onlinelibrary.wiley.com/doi/abs/10.1002/j.1538-7305.1978.tb02136.x
     retrieved: 2026-07-10
     version: null
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20260508004703/https://dl.acm.org/doi/10.1145/361011.361061
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-05-08
 ---
 
 ## 개요
@@ -89,7 +94,7 @@ access:
 <!-- wiki-v2:evidence-end -->
 
 - ACM Digital Library, [The UNIX time-sharing system](https://dl.acm.org/doi/10.1145/361011.361061)
-- PDF copy, [The UNIX Time-Sharing System](https://dsf.berkeley.edu/cs262/unix.pdf)
+- PDF copy, [The UNIX Time-Sharing System](https://web.archive.org/web/20260907165751/https://dsf.berkeley.edu/cs262/unix.pdf)
 - Wiley Online Library, [The UNIX Time-Sharing System](https://onlinelibrary.wiley.com/doi/abs/10.1002/j.1538-7305.1978.tb02136.x)
 
 ## 관련 항목

@@ -52,6 +52,11 @@ access:
     url: https://dlmf.nist.gov/help/errors
     retrieved: 2026-07-25
     version: NISTIR 8056, April 2015; supporting DLMF error page Version 1.2.7, 2026-06-15
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20260613070000/https://www.nist.gov/publications/applied-and-computational-mathematics-division-summary-activities-fiscal-year-2014-0
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-06-13
 ---
 
 ## 자료 개요

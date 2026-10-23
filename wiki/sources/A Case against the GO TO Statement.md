@@ -54,6 +54,11 @@ access:
     url: https://homepages.cwi.nl/~storm/teaching/reader/Dijkstra68.pdf
     retrieved: 2026-07-10
     version: null
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20261011112318/https://www.cs.utexas.edu/~EWD/transcriptions/EWD02xx/EWD215.html
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-10-11
 ---
 
 ## 개요

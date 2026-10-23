@@ -60,6 +60,11 @@ access:
     url: https://doi.org/10.1609/aaai.v40i38.40535
     retrieved: 2026-07-25
     version: AAAI-26, vol. 40 no. 38, pp. 32582-32590
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20260510220918/https://ojs.aaai.org/index.php/AAAI/article/view/40535
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-05-10
 ---
 
 ## 개요

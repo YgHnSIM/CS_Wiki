@@ -50,6 +50,11 @@ access:
     url: https://proceedings.neurips.cc/paper_files/paper/2022/file/67d57c32e20fd0a7a302cb81d36e40d5-Paper-Conference.pdf
     retrieved: 2026-07-24
     version: NeurIPS 2022 main conference
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20260105034037/https://proceedings.neurips.cc/paper_files/paper/2022/hash/67d57c32e20fd0a7a302cb81d36e40d5-Abstract.html
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-01-05
 ---
 
 ## 개요

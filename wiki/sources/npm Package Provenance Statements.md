@@ -31,6 +31,11 @@ access:
     url: https://docs.npmjs.com/generating-provenance-statements/
     retrieved: 2026-08-05
     version: current page at access time
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20261019190653/https://docs.npmjs.com/generating-provenance-statements/
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-10-19
 ---
 
 ## 개요

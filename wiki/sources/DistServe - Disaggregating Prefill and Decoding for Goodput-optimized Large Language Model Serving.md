@@ -52,6 +52,11 @@ access:
     url: https://www.usenix.org/system/files/osdi24-zhong-yinmin.pdf
     retrieved: 2026-07-24
     version: OSDI '24 proceedings, pp. 193–210
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20261009014809/https://www.usenix.org/conference/osdi24/presentation/zhong-yinmin
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-10-09
 ---
 
 ## 개요

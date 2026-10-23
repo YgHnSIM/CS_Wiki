@@ -66,6 +66,11 @@ access:
     url: https://www.microsoft.com/en-us/research/publication/retrospective-dark-silicon-and-the-end-of-multicore-scaling/
     retrieved: 2026-07-16
     version: ISCA '11, June 4–8, 2011, pp. 365–376
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20251203185845/https://research.cs.wisc.edu/vertical/papers/2011/isca11-darksilicon.pdf
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2025-12-03
 ---
 
 ## 개요

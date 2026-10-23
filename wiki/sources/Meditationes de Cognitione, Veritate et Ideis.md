@@ -39,7 +39,7 @@ works:
 access:
   - kind: url
     role: canonical
-    url: https://archive.org/details/actaeruditorum168400fran
+    url: https://archive.org/details/actaeruditorum00mencgoog
     retrieved: 2026-10-18
     version: null
 ---
@@ -89,7 +89,7 @@ access:
 - 없음
 <!-- wiki-v2:evidence-end -->
 
-- G. W. Leibniz, *Meditationes de cognitione, veritate et ideis*, *Acta Eruditorum*, Nov. 1684, pp. 537–542, [Internet Archive](https://archive.org/details/actaeruditorum168400fran)
+- G. W. Leibniz, *Meditationes de cognitione, veritate et ideis*, *Acta Eruditorum*, Nov. 1684, pp. 537–542, [Internet Archive](https://archive.org/details/actaeruditorum00mencgoog)
 - G. W. Leibniz, *Quid sit idea* (1678), Akademie-Ausgabe VI, 4, p. 1370.
 - 이상명, 〈홉스와 라이프니츠: 기호의 기능〉, 《가톨릭철학》 제27호, 2016년, pp. 113–140.
 

@@ -49,6 +49,11 @@ access:
     url: https://proceedings.mlr.press/v202/leviathan23a/leviathan23a.pdf
     retrieved: 2026-07-25
     version: PMLR 202, pp. 19274-19286
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20261012083245/https://proceedings.mlr.press/v202/leviathan23a.html
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-10-12
 ---
 
 ## 개요

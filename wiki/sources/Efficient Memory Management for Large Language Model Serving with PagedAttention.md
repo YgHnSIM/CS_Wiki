@@ -51,6 +51,11 @@ access:
     url: https://arxiv.org/abs/2309.06180
     retrieved: 2026-07-24
     version: SOSP '23 proceedings; arXiv 2309.06180
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20261021061051/https://arxiv.org/abs/2309.06180
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-10-21
 ---
 
 ## 개요

@@ -36,7 +36,7 @@ works:
 access:
   - kind: url
     role: canonical
-    url: https://archive.org/details/elementorumphil00hobbgoog
+    url: https://books.google.com/books?id=ZPFawjXAjuYC
     retrieved: 2026-10-18
     version: null
 ---
@@ -86,7 +86,7 @@ access:
 - 없음
 <!-- wiki-v2:evidence-end -->
 
-- Thomas Hobbes, *Elementorum Philosophiae Sectio Prima De Corpore* (1655), [Internet Archive](https://archive.org/details/elementorumphil00hobbgoog)
+- Thomas Hobbes, *Elementorum Philosophiae Sectio Prima De Corpore* (1655), [Internet Archive](https://books.google.com/books?id=ZPFawjXAjuYC)
 - 이상명, 〈홉스와 라이프니츠: 기호의 기능〉, 《가톨릭철학》 제27호, 2016년, pp. 113–140.
 
 ## 관련 항목

@@ -66,6 +66,11 @@ access:
     url: https://mlcommons.org/2026/04/mlperf-inference-v6-0-results/
     retrieved: 2026-07-24
     version: ISCA 2020 / arXiv v2; MLPerf Inference v6.0 rules and suite
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20260930153116/https://arxiv.org/abs/1911.02549
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-09-30
 ---
 
 ## 개요

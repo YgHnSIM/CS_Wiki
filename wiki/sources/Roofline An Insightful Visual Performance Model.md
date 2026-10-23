@@ -60,6 +60,11 @@ access:
     url: https://amcr.lbl.gov/departments/computer-science-department/ppan/roofline-performance-model/
     retrieved: 2026-07-15
     version: Revised October 2008
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20261001004823/https://people.eecs.berkeley.edu/~kubitron/cs252/handouts/papers/RooflineVyNoYellow.pdf
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-10-01
 ---
 
 ## 개요

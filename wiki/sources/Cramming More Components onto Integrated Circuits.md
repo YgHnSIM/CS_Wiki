@@ -52,6 +52,11 @@ access:
     url: https://www.intel.com/content/www/us/en/history/virtual-vault/articles/moores-law.html
     retrieved: 2026-07-16
     version: Electronics 38(8), 19 April 1965
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20240615110720/https://www.cs.cmu.edu/afs/cs/academic/class/15740-f18/www/papers/moore.pdf
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2024-06-15
 ---
 
 ## 개요

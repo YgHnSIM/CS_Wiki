@@ -18,12 +18,13 @@
     "maintenance:updated": "node scripts/update_wiki_updated.mjs",
     "maintenance:generate": "node scripts/generate_operational_pages.mjs",
     "check:links": "node scripts/check_external_links.mjs --fail-on-broken --fail-on-error",
+    "preservation:audit": "node scripts/audit_preservation.mjs",
     "verify:site": "node site/verify-build.mjs",
     "test:site": "node --test tests/*.test.mjs",
     "test:browser": "node scripts/run_browser_tests.mjs",
     "test:browser:install": "playwright install chromium",
     "test": "npm run test:site",
-    "check": "npm run validate:changes && npm run lint:wiki && npm run maintenance:check && npm test && npm run build && npm run verify:site && npm run test:browser"
+    "check": "npm run validate:changes && npm run lint:wiki && npm run maintenance:check && npm run preservation:audit && npm test && npm run build && npm run verify:site && npm run test:browser"
   },
   "dependencies": {
     "ajv": "^8.17.1",

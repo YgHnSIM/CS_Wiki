@@ -39,6 +39,11 @@ access:
     url: https://womenshistory.si.edu/human-computer-project
     retrieved: 2026-07-20
     version: null
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20260312003713/https://womenshistory.si.edu/human-computer-project
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-03-12
 ---
 
 ## 개요

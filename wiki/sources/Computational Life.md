@@ -36,6 +36,11 @@ access:
     url: https://arxiv.org/abs/2406.19108
     retrieved: 2026-10-19
     version: v2
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20261012015103/https://arxiv.org/abs/2406.19108
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-10-12
 ---
 
 ## 개요

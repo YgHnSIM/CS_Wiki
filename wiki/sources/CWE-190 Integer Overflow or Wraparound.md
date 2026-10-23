@@ -42,7 +42,7 @@ works:
 access:
   - kind: url
     role: canonical
-    url: https://cwe.mitre.org/data/definitions/190.html
+    url: https://web.archive.org/web/20261012142831/https://cwe.mitre.org/data/definitions/190.html
     retrieved: 2026-07-25
     version: CWE 4.20
 ---
@@ -88,7 +88,7 @@ access:
 - 없음
 <!-- wiki-v2:evidence-end -->
 
-- MITRE, [CWE-190: Integer Overflow or Wraparound](https://cwe.mitre.org/data/definitions/190.html)
+- MITRE, [CWE-190: Integer Overflow or Wraparound](https://web.archive.org/web/20261012142831/https://cwe.mitre.org/data/definitions/190.html)
 
 ## 관련 항목
 

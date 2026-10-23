@@ -35,6 +35,11 @@ access:
     url: https://apple.github.io/foundationdb/developer-guide.html#transactions-with-unknown-results
     retrieved: 2026-08-05
     version: null
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20260925124802/https://apple.github.io/foundationdb/developer-guide.html
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-09-25
 ---
 
 ## 개요

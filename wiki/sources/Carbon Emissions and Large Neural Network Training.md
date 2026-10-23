@@ -46,9 +46,14 @@ access:
     version: arXiv v1, 2021-04-21
   - kind: url
     role: mirror
-    url: https://research.google/people/jeff/
+    url: https://web.archive.org/web/20260809170922/https://research.google/people/jeff/
     retrieved: 2026-07-25
     version: arXiv v1, 2021-04-21
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20261015004229/https://arxiv.org/abs/2104.10350
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-10-15
 ---
 
 ## 개요
@@ -87,7 +92,7 @@ access:
 <!-- wiki-v2:evidence-end -->
 
 - arXiv, [paper record](https://arxiv.org/abs/2104.10350)
-- Google Research, [author publication record](https://research.google/people/jeff/)
+- Google Research, [author publication record](https://web.archive.org/web/20260809170922/https://research.google/people/jeff/)
 
 ## 관련 항목
 

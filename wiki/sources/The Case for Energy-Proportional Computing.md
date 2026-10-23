@@ -56,6 +56,11 @@ access:
     url: https://research.google.com/pubs/archive/33387.pdf
     retrieved: 2026-07-16
     version: Computer 40(12), December 2007, pp. 33–37
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20261008132417/https://research.google/pubs/the-case-for-energy-proportional-computing/
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-10-08
 ---
 
 ## 개요

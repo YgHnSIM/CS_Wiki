@@ -58,6 +58,11 @@ access:
     url: https://www.cin.ufpe.br/~phmb/ip/MaterialDeEnsino/BrooksNoSilverBullet.html
     retrieved: 2026-07-24
     version: Computer 20(4), April 1987; earlier IFIP 1986 invited-paper version
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20260930010456/https://ieeexplore.ieee.org/document/1663532/
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-09-30
 ---
 
 ## 개요

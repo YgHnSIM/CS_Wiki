@@ -136,7 +136,11 @@ function v3Record(data, category, filePath) {
   const event = history.event || {};
   const source = data.kind === "source" || data.kind === "reference";
   const localAccess = source && data.access.some((item) => item.kind === "local");
-  const archivedAccess = source && data.access.some((item) => item.kind === "snapshot");
+  const archivedAccess = source && data.access.some((item) =>
+    item.kind === "snapshot"
+    || item.role === "archive"
+    || /^https?:\/\/(?:web\.)?archive\.org\//i.test(item.url || "")
+  );
   return {
     schemaVersion: 3,
     id: data.id,

@@ -52,6 +52,11 @@ access:
     url: https://www.microsoft.com/en-us/research/wp-content/uploads/2016/12/How-to-Make-a-Multiprocessor-Computer-That-Correctly-Executes-Multiprocess-Programs.pdf
     retrieved: 2026-07-25
     version: IEEE Transactions on Computers C-28(9), September 1979, pp. 690–691
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20261010155206/https://www.microsoft.com/en-us/research/publication/make-multiprocessor-computer-correctly-executes-multiprocess-programs/
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-10-10
 ---
 
 ## 개요

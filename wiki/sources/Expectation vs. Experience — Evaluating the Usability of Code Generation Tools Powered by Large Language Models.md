@@ -49,6 +49,11 @@ access:
     url: https://glassmanlab.seas.harvard.edu/papers/copilot_lbw_chi22.pdf
     retrieved: 2026-07-25
     version: CHI '22 Extended Abstracts, Article 332
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20260115065627/https://dl.acm.org/doi/10.1145/3491101.3519665
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-01-15
 ---
 
 ## 개요

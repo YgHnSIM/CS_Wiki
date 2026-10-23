@@ -38,9 +38,14 @@ works:
 access:
   - kind: url
     role: canonical
-    url: https://bitsavers.trailing-edge.com/pdf/xerox/courier/
+    url: https://www.bitsavers.org/pdf/xerox/xns/standards/XSIS_038112_Courier_The_Remote_Procedure_Call_Protocol_Dec1981.pdf
     retrieved: 2026-09-18
     version: CMU-CS-81-127 / Xerox PARC Courier context
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20240605130045/http://bitsavers.org/pdf/xerox/xns/standards/XSIS_038112_Courier_The_Remote_Procedure_Call_Protocol_Dec1981.pdf
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2024-06-05
 ---
 
 ## 개요

@@ -49,6 +49,11 @@ access:
     url: https://www.cambridge.org/core/journals/journal-of-symbolic-logic/article/alonzo-church-an-unsolvable-problem-of-elementary-number-theory-american-journal-of-mathematics-vol-58-1936-pp-345363/CF193EF55C779CCD1D42C3333721E166
     retrieved: 2026-07-10
     version: null
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20260921000340/https://ics.uci.edu/~lopes/teaching/inf212W12/readings/church.pdf
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-09-21
 ---
 
 ## 개요

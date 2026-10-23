@@ -58,6 +58,11 @@ access:
     url: https://www.tnmoc.org/edsac
     retrieved: 2026-07-10
     version: null
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20260918043708/https://curation.cs.manchester.ac.uk/computer50/www.computer50.org/mark1/new.baby.html
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-09-18
 ---
 
 ## 개요

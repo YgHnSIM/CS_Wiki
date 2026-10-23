@@ -38,6 +38,11 @@ access:
     url: https://www.rfc-editor.org/rfc/rfc9110.html
     retrieved: 2026-08-05
     version: RFC 9110
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20261017191309/https://www.rfc-editor.org/rfc/rfc9110.html
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-10-17
 ---
 
 ## 개요

@@ -37,6 +37,11 @@ access:
     url: https://datatracker.ietf.org/doc/html/rfc3629
     retrieved: 2026-07-10
     version: RFC 3629
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20261016043631/https://datatracker.ietf.org/doc/html/rfc3629
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-10-16
 ---
 
 ## 개요

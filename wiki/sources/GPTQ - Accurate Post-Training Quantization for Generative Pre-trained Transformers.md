@@ -46,10 +46,10 @@ access:
     retrieved: 2026-07-25
     version: arXiv v2, ICLR 2023
   - kind: url
-    role: mirror
-    url: https://www.research-collection.ethz.ch/items/00736213-37b2-4e99-b015-141349b71413
-    retrieved: 2026-07-25
-    version: arXiv v2, ICLR 2023
+    role: archive
+    url: https://web.archive.org/web/20261012174050/https://arxiv.org/abs/2210.17323
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-10-12
 ---
 
 ## 개요
@@ -97,7 +97,6 @@ GPTQ가 학습 중 정밀도를 혼합하는 방법이 아니라, 이미 학습�
 <!-- wiki-v2:evidence-end -->
 
 - arXiv, [paper record and version history](https://arxiv.org/abs/2210.17323)
-- ETH Zurich Research Collection, [ICLR 2023 bibliographic record](https://www.research-collection.ethz.ch/items/00736213-37b2-4e99-b015-141349b71413)
 
 ## 관련 항목
 

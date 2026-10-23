@@ -36,6 +36,11 @@ access:
     url: https://dspace.jaist.ac.jp/dspace/bitstream/10119/4784/1/IS-RR-2004-010.pdf
     retrieved: 2026-08-05
     version: IS-RR-2004-010
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20261016092527/https://dspace.jaist.ac.jp/dspace/bitstream/10119/4784/1/IS-RR-2004-010.pdf
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-10-16
 ---
 
 ## 개요

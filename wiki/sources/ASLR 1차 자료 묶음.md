@@ -49,6 +49,11 @@ access:
     url: https://docs.kernel.org/security/self-protection.html#kernel-address-space-layout-randomization-kaslr
     retrieved: 2026-08-24
     version: null
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20261013120042/http://pax.grsecurity.net/docs/aslr.txt
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-10-13
 ---
 
 ## 개요

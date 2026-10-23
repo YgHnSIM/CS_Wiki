@@ -49,12 +49,12 @@ access:
     version: Communications of the ACM 31(5), May 1988, pp. 532–533
   - kind: url
     role: mirror
-    url: https://course.ece.cmu.edu/~ece600/fall16/references/gustafson.pdf
+    url: https://users.cs.utah.edu/~hari/teaching/paralg/Gustafson88.pdf
     retrieved: 2026-07-16
     version: Communications of the ACM 31(5), May 1988, pp. 532–533
   - kind: url
     role: mirror
-    url: https://www.johngustafson.net/glaw.html
+    url: https://web.archive.org/web/20260508153521/http://johngustafson.net/glaw.html
     retrieved: 2026-07-16
     version: Communications of the ACM 31(5), May 1988, pp. 532–533
 ---
@@ -132,8 +132,8 @@ Gustafson은 원문에서 암달 식의 오용이 대규모 병렬성에 대한 
 <!-- wiki-v2:evidence-end -->
 
 - ACM, [DOI record](https://doi.org/10.1145/42411.42415)
-- Carnegie Mellon University, [access copy](https://course.ece.cmu.edu/~ece600/fall16/references/gustafson.pdf)
-- John L. Gustafson, [Gustafson's Law](https://www.johngustafson.net/glaw.html)
+- Carnegie Mellon University, [access copy](https://users.cs.utah.edu/~hari/teaching/paralg/Gustafson88.pdf)
+- John L. Gustafson, [Gustafson's Law](https://web.archive.org/web/20260508153521/http://johngustafson.net/glaw.html)
 
 ## 관련 항목
 

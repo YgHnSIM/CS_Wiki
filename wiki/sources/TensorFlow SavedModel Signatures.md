@@ -33,6 +33,11 @@ access:
     url: https://www.tensorflow.org/guide/saved_model
     retrieved: 2026-08-05
     version: current guide at access time
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20261005083459/https://www.tensorflow.org/guide/saved_model
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-10-05
 ---
 
 ## 개요

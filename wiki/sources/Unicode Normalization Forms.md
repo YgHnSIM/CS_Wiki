@@ -47,6 +47,11 @@ access:
     url: https://www.unicode.org/reports/tr15/
     retrieved: 2026-07-10
     version: Unicode 17.0.0 / Revision 57
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20261013145911/https://www.unicode.org/reports/tr15/tr15-57.html
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-10-13
 ---
 
 ## 개요

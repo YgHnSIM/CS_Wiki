@@ -58,6 +58,11 @@ access:
     url: https://www.cs.toronto.edu/~bor/199y08/backus-fortran-copy.pdf
     retrieved: 2026-07-10
     version: null
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20260616032349/https://research.ibm.com/publications/the-history-of-fortran-i-ii-and-iii
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-06-16
 ---
 
 ## 개요

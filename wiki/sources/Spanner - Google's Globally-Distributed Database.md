@@ -50,6 +50,11 @@ access:
     url: https://www.usenix.org/system/files/conference/osdi12/osdi12-final-16.pdf
     retrieved: 2026-07-25
     version: OSDI '12 proceedings, pp. 251–264
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20261003154630/https://www.usenix.org/conference/osdi12/technical-sessions/presentation/corbett
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-10-03
 ---
 
 ## 개요

@@ -158,6 +158,7 @@ redirect_from:
 - [2026-10-23 update | P1 로그 색인 생성기와 웹폰트 커버리지 검사](logs/log-2026-10-23-132-p1-log-index-and-webfont-check.md)
 - [2026-10-23 update | unlisted 공개 범위 구현과 초안 43건 전환](logs/log-2026-10-23-133-unlisted-visibility-and-draft-conversion.md)
 - [2026-10-24 update | 스키마 v3 전환과 review·editorial_status·private 제거](logs/log-2026-10-24-134-schema-v3-removal.md)
+- [2026-10-24 update | P0 원본 보존과 외부 링크 부패 복구](logs/log-2026-10-24-135-preservation-and-link-rot.md)
 
 ## 출처
 

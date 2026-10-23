@@ -60,6 +60,11 @@ access:
     url: https://ieeexplore.ieee.org/document/5057767/
     retrieved: 2026-07-10
     version: null
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20260930070604/https://dspace.mit.edu/entities/publication/2dffdeb7-2862-4575-8a8e-b29fb59319e5
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-09-30
 ---
 
 ## 개요

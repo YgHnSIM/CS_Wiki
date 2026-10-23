@@ -56,6 +56,11 @@ access:
     url: https://doi.org/10.1109/MM.2022.3163226
     retrieved: 2026-07-25
     version: HPCA 2021; IEEE Micro 2022 expanded version
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20261001073014/https://arxiv.org/abs/2011.02839
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-10-01
 ---
 
 ## 개요

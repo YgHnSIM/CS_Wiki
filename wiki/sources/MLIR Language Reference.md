@@ -31,6 +31,11 @@ access:
     url: https://mlir.llvm.org/docs/LangRef/
     retrieved: 2026-08-05
     version: current documentation at access time
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20260905220639/https://mlir.llvm.org/docs/LangRef/
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-09-05
 ---
 
 ## 개요

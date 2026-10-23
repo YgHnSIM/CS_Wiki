@@ -32,6 +32,11 @@ access:
     url: https://consc.net/papers/qualia.html
     retrieved: 2026-10-19
     version: null
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20261005092657/https://consc.net/papers/qualia.html
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-10-05
 ---
 
 ## 개요

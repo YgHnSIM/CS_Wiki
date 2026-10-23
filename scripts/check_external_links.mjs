@@ -52,14 +52,20 @@ async function check(target) {
 }
 
 const manifest = await loadWikiManifest({ root: process.cwd(), strict: true });
+const checkArchives = process.argv.includes("--check-archives");
 const sourcePages = manifest.pages.filter((page) => ["source", "reference"].includes(page.kind));
 const publicPages = manifest.pages.filter((page) => page.publicationVisibility === "public" && !["source", "reference"].includes(page.kind));
 const usage = new Map(sourcePages.map((page) => [page.id, 0]));
 for (const page of publicPages) for (const id of page.evidenceIds) if (usage.has(id)) usage.set(id, usage.get(id) + 1);
 const records = new Map();
+let archivedSkipped = 0;
 for (const page of sourcePages) {
   for (const access of page.access || []) {
     if (access.kind !== "url" || !access.url) continue;
+    if (access.role === "archive" && !checkArchives) {
+      archivedSkipped += 1;
+      continue;
+    }
     const record = records.get(access.url) || { url: access.url, sources: [], usedBy: 0, snapshotStatus: page.snapshotStatus };
     if (!record.sources.includes(page.id)) record.sources.push(page.id);
     record.usedBy = Math.max(record.usedBy, usage.get(page.id) || 0);
@@ -83,7 +89,7 @@ const errorThreshold = Number.isFinite(configuredThreshold)
   : 0.2;
 if (process.argv.includes("--json")) console.log(JSON.stringify(results, null, 2));
 else {
-  console.log(`External links: ${results.length} total, ${counts.ok} ok, ${counts.restricted} restricted, ${counts.broken} broken, ${counts.error} transient/error (${(errorRate * 100).toFixed(1)}%)`);
+  console.log(`External links: ${results.length} total, ${counts.ok} ok, ${counts.restricted} restricted, ${counts.broken} broken, ${counts.error} transient/error (${(errorRate * 100).toFixed(1)}%), ${archivedSkipped} archived skipped`);
   for (const result of results) console.log(`[${result.state.toUpperCase()}] ${result.status || "-"} used-by=${result.usedBy} snapshot=${result.snapshotStatus} ${result.sources.join(", ")} → ${result.url}`);
 }
 if (process.argv.includes("--fail-on-broken") && counts.broken > 0) {

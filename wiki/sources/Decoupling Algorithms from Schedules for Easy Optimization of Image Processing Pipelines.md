@@ -51,6 +51,11 @@ access:
     url: https://people.csail.mit.edu/jrk/halide12/halide12.pdf
     retrieved: 2026-07-25
     version: ACM Transactions on Graphics 31(4), SIGGRAPH 2012
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20260710111336/https://people.csail.mit.edu/jrk/halide12/
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-07-10
 ---
 
 ## 개요

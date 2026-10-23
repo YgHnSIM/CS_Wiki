@@ -50,6 +50,11 @@ access:
     url: https://llvm.org/pubs/2004-01-30-CGO-LLVM.pdf
     retrieved: 2026-07-25
     version: CGO '04, pp. 75–88
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20261012175813/https://llvm.org/pubs/2004-01-30-CGO-LLVM.html
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-10-12
 ---
 
 ## 개요

@@ -52,6 +52,11 @@ access:
     url: https://www.usenix.org/system/files/osdi18-chen.pdf
     retrieved: 2026-07-25
     version: OSDI '18, pp. 578–594
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20260926190300/https://www.usenix.org/conference/osdi18/presentation/chen
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-09-26
 ---
 
 ## 개요

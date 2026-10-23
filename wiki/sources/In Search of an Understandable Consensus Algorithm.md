@@ -50,6 +50,11 @@ access:
     url: https://www.usenix.org/system/files/conference/atc14/atc14-paper-ongaro.pdf
     retrieved: 2026-07-25
     version: USENIX ATC '14 proceedings, pp. 305–319
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20260929234557/https://www.usenix.org/conference/atc14/technical-sessions/presentation/ongaro
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-09-29
 ---
 
 ## 개요

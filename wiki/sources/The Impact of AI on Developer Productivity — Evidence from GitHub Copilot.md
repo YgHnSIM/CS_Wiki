@@ -40,6 +40,11 @@ access:
     url: https://arxiv.org/abs/2302.06590
     retrieved: 2026-07-25
     version: arXiv v1, 2023-02-13
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20261022213536/https://arxiv.org/abs/2302.06590
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-10-22
 ---
 
 ## 개요

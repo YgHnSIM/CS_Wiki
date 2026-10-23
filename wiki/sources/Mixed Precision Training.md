@@ -52,6 +52,11 @@ access:
     url: https://openreview.net/forum?id=r1gs9JgRZ
     retrieved: 2026-07-24
     version: arXiv v3, 15 February 2018; ICLR 2018
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20260930084119/https://arxiv.org/abs/1710.03740
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-09-30
 ---
 
 ## 개요

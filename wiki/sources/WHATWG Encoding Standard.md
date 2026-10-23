@@ -46,6 +46,11 @@ access:
     url: https://encoding.spec.whatwg.org/commit-snapshots/a985b62a9b45c17da3e17a9f0a0b4e30c34c4a8a/
     retrieved: 2026-07-10
     version: Living Standard / snapshot 2026-05-21 (a985b62a)
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20261013041925/https://encoding.spec.whatwg.org/
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-10-13
 ---
 
 ## 개요

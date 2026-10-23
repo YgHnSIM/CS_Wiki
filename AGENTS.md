@@ -75,6 +75,7 @@ npm run test:browser
 - 작업 전 원본·기존 페이지·생성 블록을 읽고, 큰 변경은 사용자에게 범위를 알린다.
 - 모든 작업은 `wiki/logs/`에 원 기록을 남기고 생성 목록을 재생성한다.
 - 소스 페이지는 문헌 계보(`works`)와 접근 수단(`access`)을 분리한다.
+- 외부 자료는 `role: archive` Wayback URL이나 로컬 snapshot을 우선 보존하고, `npm run preservation:audit`로 남은 external-only를 확인한다.
 - 모순은 숨기지 말고 `> [!WARNING] 모순 발견`으로 기록한다.
 - 모든 변경 페이지는 `updated`를 변경일로 갱신하고 `wiki/logs/`에 작업 기록을 남긴다. 검토 이력은 문서별 `review` 필드가 아니라 PR·로그·Git 히스토리로 관리한다.
 - 푸시 전 변경 집합 검사는 커밋한 뒤 `BASE_SHA`를 직전 원격 HEAD로 두고 실행한다. `BASE_SHA`가 없거나 `HEAD`와 같으면 게이트가 비거나 워킹 트리 변경을 보지 못한다.

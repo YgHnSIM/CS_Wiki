@@ -51,6 +51,11 @@ access:
     url: https://dl.acm.org/doi/10.1145/3282307
     retrieved: 2026-08-31
     version: CACM 62(2), February 2019
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20250223200420/https://dl.acm.org/doi/10.1145/3282307
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2025-02-23
 ---
 
 ## 개요

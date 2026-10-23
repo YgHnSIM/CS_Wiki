@@ -52,6 +52,11 @@ access:
     url: https://www.cs.unibo.it/~martini/PP/bohm-jac.pdf
     retrieved: 2026-07-10
     version: null
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20251011033653/https://cacm.acm.org/research/flow-diagrams-turing-machines-and-languages-with-only-two-formation-rules/
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2025-10-11
 ---
 
 ## 개요

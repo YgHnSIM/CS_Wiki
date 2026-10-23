@@ -67,6 +67,11 @@ access:
     url: https://www.nist.gov/mathematics-statistics/mathematics-and-statistics-nist-timeline
     retrieved: 2026-07-20
     version: NBS Circular 551, issued 1955-01-25; NIST history page created 2022-03-14, updated 2022-04-21
+  - kind: url
+    role: archive
+    url: https://web.archive.org/web/20260617142715/https://www.nist.gov/mathematics-statistics/standards-eastern-automatic-computer
+    retrieved: 2026-10-24
+    version: Internet Archive snapshot 2026-06-17
 ---
 
 ## 개요
